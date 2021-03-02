@@ -13,19 +13,6 @@ app.use(cors());
 const mongoose = require("mongoose");
 const db = require("./db");
 
-// TODO:
-// 0) do work to connect server to mongoDB
-// 2) make route for GET all massives from PM
-// 3) make route for GET all massives from specific user
-// 4) make route for POST massive to PM, associated with specific user
-// 5) associate time
-// 6) make massives have likes, amps & comment count
-// 7)
-
-// todo: connect server to mongodb
-
-// HOW DO I MAKE THE SERVER CONNECT TO MONGODB?
-
 const user = "user";
 const massive = "massive";
 const message = "message";
@@ -52,13 +39,37 @@ app.post("/massive/post", (req, res) => {
             console.log(err);
         }
     });
+    res.status(200).send();
 });
 
 // GET all massives from the server
-app.get("/massive/get", (req, res) => {});
+app.get("/massive/get", (req, res) => {
+    const filter = {};
+    db.Massive.find(filter, function (err, massives) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(massives);
+            res.json(massives);
+        }
+    });
+
+    // res.send(allMassives);
+});
 
 // GET a user's massives
-app.get("/massive/get/:id", (req, res) => {});
+app.get("/massive/get/:username", (req, res) => {
+    const filter = { postedByUser: req.params.username };
+    console.log(filter);
+    db.Massive.find(filter, function (err, massives) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(massives);
+            res.json(massives);
+        }
+    });
+});
 
 app.get(user + "", (req, res) => {});
 
