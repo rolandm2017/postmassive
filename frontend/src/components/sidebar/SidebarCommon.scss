@@ -1,0 +1,95 @@
+@import "../../styles/breakpoints";
+@import "../../styles/colors";
+
+/* Keep stuff responsible for both sidebars in here. */
+/* Keep stuff responsible for resizing sidebars in here. */
+
+aside {
+    // width: auto;
+    // border: 1px solid red;
+    color: $white;
+    background: $dark-blue;
+    height: 100vh;
+    flex: 1;
+    position: sticky;
+    top: 0;
+}
+
+#sidebar {
+    display: none;
+    height: 100vh;
+    // flex-basis: calc((100% - 600px) / 2);
+    border-right: 1px solid #888;
+}
+
+#rightbar {
+    display: none; /* mobile first: rightbar has display: none until 700px width; */
+    height: 100vh;
+    // flex-basis: calc(100% - 690px);
+    border-left: 1px solid #888;
+}
+
+@media (max-width: $rightbar-shows) {
+    #rightbar * {
+        display: none;
+    }
+}
+
+@media (min-width: $full-sidebar) {
+    #sidebar {
+        flex-basis: calc((100% - 675) / 2 + 275);
+    }
+
+    #rightbar {
+        flex-basis: calc((100% - 675) / 2 + 400);
+    }
+}
+
+@media (min-width: $thin-rightbar) and (max-width: $full-sidebar - 1) {
+    #sidebar {
+        flex-basis: calc(100px + 80 * (100% - 1100px) / 180);
+    }
+
+    #rightbar {
+        flex-basis: calc(400px + 100 * (100% - 1100px) / 180);
+    }
+}
+
+@media (min-width: $rightbar-shows) and (max-width: $thin-rightbar - 1) {
+    #sidebar {
+        // flex-basis: calc(80px + 45 * (100% - 1000px) / 100) !important;
+        flex-basis: auto;
+    }
+
+    #rightbar {
+        flex-basis: calc(320px + 55 * (100% - 1000px) / 100) !important;
+    }
+}
+
+@media (min-width: $shrink-feed) and (max-width: $rightbar-shows - 1) {
+    #sidebar {
+        flex-basis: calc(100 * ((100% - 400px) / 300)) !important;
+    }
+
+    #rightbar {
+        flex-basis: calc((100% - 700px) * (2 / 3)) !important;
+    }
+}
+
+@media (min-width: $shrink-feed) {
+    #rightbar {
+        display: block;
+    }
+}
+
+@media (min-width: $mobile-sized) and (max-width: $shrink-feed - 1) {
+    #sidebar {
+        flex-basis: 100px !important;
+    }
+}
+
+@media (min-width: $mobile-sized) {
+    #sidebar {
+        display: block;
+    }
+}

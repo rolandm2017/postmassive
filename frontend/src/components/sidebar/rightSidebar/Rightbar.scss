@@ -1,0 +1,61 @@
+@import "../../../styles/breakpoints";
+
+#rightbar_main {
+    max-width: 350px;
+}
+
+@media (min-width: $thin-rightbar) and (max-width: $full-sidebar - 1) {
+    /* todo - 2020/11/13 update: what was supposed to go in here? */
+}
+
+@media (min-width: $rightbar-shows) and (max-width: $thin-rightbar - 1) {
+    #rightbar_main {
+        max-width: calc(320px - 55px);
+    }
+}
+
+#rightbar_follow-recs h2 {
+    font-size: 22px;
+}
+
+#rightbar_popular-massivs {
+    border: 1px solid #888;
+}
+
+#rightbar_search-container {
+    max-width: 350px;
+}
+
+#rightbar_search-container input {
+    border-radius: 18px;
+    padding-left: 13px;
+    height: 40px;
+    width: 100%;
+}
+
+.rightbar_follow-rec h3 {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.rightbar_follow-rec p {
+    font-size: 14px;
+}
+
+.rightbar_headline {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.rightbar_rounded {
+    border-top: 1px solid #888;
+}
+
+.rightbar_show-more {
+    border: none;
+}
+
+.rounded-border {
+    border-radius: 15px;
+    border: 1px solid #888;
+}

@@ -1,0 +1,27 @@
+@import "../../styles/colors";
+
+.generic-btn {
+    height: 40px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 20px;
+    border: 1px solid $sea-blue !important;
+}
+
+.blue-bg {
+    /* background-color: #00bbff; */
+    background-color: $sea-blue !important;
+}
+
+.clear-bg {
+    background-color: Transparent !important;
+    color: $sea-blue !important;
+}
+
+.thin-btn {
+    height: 30px !important;
+}
+
+.no-outline {
+    outline: none;
+}

@@ -1,0 +1,22 @@
+.container {
+    width: calc(100% - 56px - 110px);
+    margin-top: -8px;
+    flex-shrink: 0;
+    /* border: 1px solid red; */
+}
+
+.followRec {
+    height: 70px;
+    border-top: 1px solid #888;
+}
+
+.heightAdjustment {
+    margin-top: 0px !important;
+}
+
+.text {
+    margin: 0;
+    text-align: left;
+    font-size: 16px;
+    line-height: 1.2;
+}

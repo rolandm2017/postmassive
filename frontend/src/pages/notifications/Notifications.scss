@@ -1,0 +1,26 @@
+@import "../../styles/colors";
+
+img {
+    margin: 3px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+#notifications_headline {
+    text-align: center;
+    font-size: 22px;
+}
+
+#notifications_main {
+    /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+    transition: margin-left 0.5s; /* If you want a transition effect */
+}
+
+#notifications {
+    background-color: $dark-blue;
+}
+
+.notifications_container {
+    position: relative;
+}

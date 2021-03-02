@@ -1,0 +1,38 @@
+@import "../../styles/colors";
+@import "../../styles/breakpoints";
+
+article {
+    width: 100%;
+    display: flex !important;
+}
+
+// article {
+//     display: flex;
+//     justify-content: space-between;
+//   }
+
+section {
+    width: 100%;
+}
+
+.background-blue {
+    background-color: $dark-blue;
+}
+
+.mobile_bar-spacer {
+    // i skipped converting this to a bootstrap mt-0 class because
+    // a) it performs a descriptive purpose b) it is used in a media query
+    margin-top: 55px;
+}
+
+@media (min-width: $shrink-feed) {
+    section {
+        width: 600px;
+    }
+}
+
+@media (min-width: $mobile-sized) {
+    .mobile_bar-spacer {
+        margin-top: 0px;
+    }
+}

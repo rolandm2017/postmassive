@@ -1,0 +1,53 @@
+@import "../../styles/colors";
+@import "../../styles/breakpoints";
+
+#sidebar-profile {
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+}
+
+#sidebar-profile:hover {
+    background-color: lighten($dark-blue, 10%);
+}
+
+#sidebar-profile_display-name {
+    font-size: 15px;
+}
+
+#sidebar-profile_dropdown-container {
+    display: none;
+}
+
+#sidebar-profile_names-container {
+    width: 150px;
+    display: none;
+    // mobile first
+}
+
+#sidebar-profile_profile-pic {
+    width: 48px;
+    height: 48px;
+}
+
+#sidebar-profile_username {
+    font-size: 15px;
+}
+
+@media (min-width: $full-sidebar) {
+    #sidebar-profile {
+        width: 255px;
+    }
+
+    #sidebar-profile_dropdown-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #sidebar-profile_names-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}

@@ -1,0 +1,52 @@
+@import "../../styles/breakpoints";
+
+#mobile_top-bar {
+    background-color: rgb(6, 5, 39);
+    border-bottom: 1px solid #999;
+    height: 55px;
+    width: 100%;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+}
+
+#mobile_top-bar h3 {
+    font-size: 18px;
+    color: #eee;
+    position: relative;
+    top: 18px;
+    left: -105px;
+}
+
+#mobile_top-bar img {
+    height: 41px;
+    width: 41px;
+    position: absolute;
+    right: 30px;
+    top: 5px;
+    z-index: 1;
+}
+
+#mobile_star-container {
+    height: 41px;
+    width: 41px;
+}
+
+/*                    */
+/* For the search bar */
+/*                    */
+
+#search_bar-container-mobile input {
+    padding: 3px; /* padding: 3px; is superior to bootstrap's p-1 by a few pixels */
+    width: 50%;
+    font-size: 16px;
+    border-radius: 10px;
+    border: 1px solid #bbb;
+}
+
+@media (min-width: $mobile-sized) {
+    #mobile_top-bar {
+        display: none;
+    }
+}

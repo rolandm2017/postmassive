@@ -1,0 +1,25 @@
+.profile-pic {
+    background-color: darkblue;
+    margin-right: 20px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.massiv-btn-container img {
+    height: 30px;
+    width: 30px;
+}
+
+.width-control {
+    max-width: 80%;
+}
+
+@media screen and (max-width: 335px) {
+    .mr-5 {
+        margin-right: 5px;
+    }
+
+    .profile-pic {
+        margin-right: 10px;
+    }
+}

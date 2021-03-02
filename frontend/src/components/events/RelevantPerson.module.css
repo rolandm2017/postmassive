@@ -1,0 +1,50 @@
+.border {
+    border-top: 1px solid #888;
+    display: flex;
+    flex-direction: row;
+}
+
+.bio {
+    line-height: 1.3;
+}
+
+.displayName {
+    width: fit-content;
+    font-weight: bold;
+}
+
+.followsYou {
+    width: 78px;
+    height: 20px;
+    padding-top: 2px;
+    background-color: #666;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+}
+
+.followsYouText {
+    font-size: 14px;
+    font-weight: 300;
+    color: #ccc;
+}
+
+.fontSizing {
+    font-size: 16px;
+}
+
+.names {
+    margin-right: 10px;
+    width: 62%;
+}
+
+.profilePic {
+    width: 70px;
+    flex-shrink: 0;
+    /* border: 1px solid red; */
+}
+
+.username {
+    width: fit-content;
+    color: #bbb;
+}

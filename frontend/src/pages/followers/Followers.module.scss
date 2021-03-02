@@ -1,0 +1,31 @@
+#options {
+    border-bottom: 1px solid #444;
+}
+
+#options div {
+    width: 25%;
+    padding-top: 10px;
+    text-align: center;
+}
+
+#options div p {
+    font-weight: bold;
+    color: #aaa;
+}
+
+.flexOne {
+    flex: 1;
+}
+
+.followerCard {
+    border-top: 1px solid #aaa;
+}
+
+// .followerCard div {
+//     border: 2px solid red;
+// }
+
+.followerCard h3,
+h4 {
+    margin: 0;
+}

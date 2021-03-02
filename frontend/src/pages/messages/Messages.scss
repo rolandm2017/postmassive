@@ -1,0 +1,125 @@
+@import "../../styles/breakpoints";
+
+#inbox {
+    width: 100%;
+    height: 100vh;
+    border-right: 1px solid #888;
+    display: flex;
+    flex-direction: column;
+}
+
+#inbox-items {
+    // flex: 1 1 auto;
+    flex-grow: 1;
+    overflow-y: scroll;
+}
+
+.inbox-header {
+    flex: 0 1 70px;
+    border-bottom: 1px solid #888;
+}
+
+#inbox-search {
+    width: 100%;
+    height: 40px;
+    border-radius: 15px;
+}
+
+#messages_page {
+    width: auto; /* mobile first! */
+}
+
+#messages_aside {
+    display: none; /* mobile first! */
+}
+
+#chat-display {
+    display: none; /* mobile first! */
+    border-right: 1px solid #888;
+}
+
+@media (min-width: $full-sidebar) {
+    #messages_page {
+        width: 990px;
+    }
+
+    #inbox {
+        width: 390px;
+    }
+
+    #messages_aside {
+        flex-basis: auto;
+        width: auto;
+    }
+}
+
+@media (min-width: $thin-rightbar) and (max-width: $full-sidebar - 1) {
+    #messages_page {
+        width: 990px;
+    }
+
+    #inbox {
+        width: 390px;
+    }
+
+    #messages_aside {
+        flex-basis: calc(10px + 100 * (100% - 1100px) / 180);
+        width: calc(10px + 100 * (100% - 1100px) / 180);
+    }
+}
+
+@media (min-width: $rightbar-shows) and (max-width: $thin-rightbar - 1) {
+    #main {
+        overflow: hidden;
+        // there is some bogus bug with calc() going on.
+        // I swear the calc() for #sidebar and #messages_aside is perfect.
+    }
+
+    #messages_page {
+        width: 920px;
+    }
+
+    #inbox {
+        width: 320px;
+    }
+
+    #messages_aside {
+        flex-basis: calc(55 * (100% - 1000px) / 100);
+        width: calc(55 * (100% - 1000px) / 100);
+    }
+}
+
+@media (min-width: $rightbar-shows) {
+    #chat-display {
+        width: 600px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media (min-width: $shrink-feed) and (max-width: $rightbar-shows - 1) {
+    #messages_page {
+        width: 600px;
+    }
+
+    #messages_aside {
+        flex-basis: calc(200 * ((100% - 700px) / 300));
+        width: calc(200 * ((100% - 700px) / 300));
+    }
+}
+
+@media (min-width: $shrink-feed) {
+    #messages_aside {
+        display: block;
+        flex-basis: auto;
+    }
+}
+
+@media (min-width: $mobile-sized) and (max-width: $shrink-feed - 1) {
+    #messages_page {
+        width: calc(100% - 100px);
+        border: 2px solid yellow;
+    }
+}

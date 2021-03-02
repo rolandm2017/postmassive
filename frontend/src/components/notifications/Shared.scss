@@ -1,0 +1,42 @@
+@import "../../styles/spacing";
+
+/* for CSS shared by all notification types */
+
+.notification {
+    /* global notification class*/
+    border-top: 1px solid #bbbbbb;
+    position: relative;
+}
+
+.notification-img-lg {
+    width: 45px;
+    height: 45px;
+}
+
+.notification-img-sml {
+    width: 30px;
+    height: 30px;
+}
+
+.notification_type-img-container {
+    width: $spacing-left;
+    height: 60px;
+    // border: 2px solid green;
+}
+
+.flex-basis-80 {
+    flex-basis: calc(100% - 80px);
+}
+
+.spacer {
+    margin-left: $spacing-left;
+    margin-right: 20px;
+}
+
+.text-grey {
+    color: #bcc;
+}
+
+.mid-line-height {
+    line-height: 1.3;
+}

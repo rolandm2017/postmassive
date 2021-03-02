@@ -1,0 +1,16 @@
+@import "../../styles/colors";
+
+$gap: 50px;
+
+.quote_background {
+    background-color: lighten($dark-blue, 5%);
+}
+
+.quote_margin {
+    margin-left: $gap;
+}
+
+.quote_spacer {
+    width: $gap !important;
+    // border: 1px solid red;
+}

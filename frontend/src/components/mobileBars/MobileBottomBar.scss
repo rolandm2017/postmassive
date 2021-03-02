@@ -1,0 +1,23 @@
+@import "../../styles/breakpoints";
+@import "../../styles/colors";
+
+#mobile_bottom-bar-container {
+    border-top: 1px solid #666;
+    justify-content: space-evenly;
+    background-color: $dark-blue;
+    height: 50px;
+    width: 100% !important;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.img-container {
+    width: 20%;
+}
+
+.img-sizing {
+    width: 36px;
+    height: 36px;
+}

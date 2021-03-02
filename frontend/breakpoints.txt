@@ -1,0 +1,14 @@
+it appears that all mobile devices thinner than 415 pixels display the mobile bar.
+
+devices wider than 415 pixels display the sidebar.
+
+
+If you go to Twitter and log in, you'll notice there is a sidebar on the left and a sidebar on the right. 
+
+Below 1280px, the left sidebar collapses. When you shrink the page down below 1000px, the right sidebar disappears. 
+
+Finally below about 420px (in my dev tools anyway), the left sidebar disapperas to be replaced by a bar on the 
+top and bottom of the screen providing similar functionality.
+
+** ## ** ## ** ## **
+Twitter's profile pg, feed, search pg, are all max-width: 600px;

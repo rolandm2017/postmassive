@@ -1,0 +1,111 @@
+@import "../../styles/colors";
+
+#backButton {
+    width: 36px;
+    height: 36px;
+}
+
+#backButtonContainer {
+    width: 60px;
+}
+
+#biography {
+    font-size: 16px;
+}
+
+#coverPhoto {
+    background-image: url("../../images/mountain-top.jpg");
+    height: 200px;
+}
+
+#details span {
+    margin-right: 12px;
+    font-size: 15px;
+}
+
+#headline {
+    height: 60px;
+}
+
+#interactionButtons {
+    width: 50%;
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-around;
+    // border: 2px solid red;
+}
+
+#options {
+    border-bottom: 1px solid #444;
+}
+
+#options div {
+    width: 25%;
+    padding-top: 10px;
+    text-align: center;
+}
+
+#options div p {
+    font-weight: bold;
+    color: #aaa;
+}
+
+#picAndOptions {
+    height: 60px;
+    // border: 2px solid red;
+}
+
+#profilePic {
+    width: 134px;
+    height: 134px;
+    border: 3px solid black;
+    border-radius: 50%;
+    margin-top: -32%;
+}
+
+#profilePicContainer {
+    width: 50%;
+}
+
+#totalMassivs {
+    font-size: 12px;
+    color: #aaa;
+}
+
+.normalSizeFont {
+    font-size: 16px;
+}
+
+.boldText {
+    font-weight: bold;
+}
+
+.genericFontWeight {
+    font-weight: 400;
+}
+
+.greyText {
+    color: #aaa;
+}
+
+.interactionButton {
+    width: 42px;
+    height: 42px;
+    // margin: 5px;
+    border: 1px solid $sea-blue;
+    background-color: transparent;
+}
+
+.interactionImg {
+    width: 24px;
+    height: 24px;
+}
+
+.lightText {
+    font-weight: 400;
+}
+
+.username {
+    font-size: 18px;
+    font-weight: 900;
+}

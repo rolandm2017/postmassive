@@ -1,0 +1,31 @@
+@import "../../styles/colors";
+
+#roundButton {
+    background-color: $soft-blue;
+    // margin-top: 0px !important;
+    width: 35px;
+    height: 35px;
+    // border-radius: 10px;
+    border: 10px solid #0065a6;
+    outline: none;
+    transition: all 0.2s cubic-bezier(0, 1.26, 0.8, 1.28);
+    position: absolute;
+    top: 8px;
+    left: 30px;
+    z-index: 2;
+    padding: 10px;
+    // border-radius: 20px !important;
+    // border: 1px solid $sea-blue;
+}
+
+#roundButton:hover {
+    background-color: $soft-blue;
+    cursor: pointer;
+    border-color: #003557;
+    transform: scale(1.2, 1.2);
+}
+
+#roundButton:active {
+    border-color: #003557;
+    background-color: #fff;
+}

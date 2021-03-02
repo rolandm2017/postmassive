@@ -1,0 +1,111 @@
+@import "../../../styles/breakpoints";
+@import "../../../styles/colors";
+
+#sidebar_btn-container {
+    margin-left: 20px;
+    margin-right: 20px;
+    float: right;
+}
+
+#sidebar_container {
+    height: 100vh;
+}
+
+#sidebar_logo {
+    display: flex;
+    justify-content: flex-start;
+}
+
+#sidebar_logo-wide img {
+    position: relative;
+    left: -70px;
+}
+
+#sidebar_profile-container {
+    // border: 3px solid green;
+    width: 60px;
+    height: 60px;
+    position: relative; /* so the modal can be position: absolute; relative to this parent container */
+}
+
+#sidebar_spacer-container {
+    // border: 2px solid red;
+    height: calc(100vh - 475px);
+}
+
+.sidebar_width-mgmt {
+    width: 50px;
+}
+
+@media (min-width: $full-sidebar) {
+    #sidebar_btn-container {
+        margin-right: 0px;
+    }
+
+    #sidebar_profile-container {
+        width: 255px;
+        height: 60px;
+        position: relative;
+    }
+
+    .sidebar_width-mgmt {
+        width: 200px;
+    }
+}
+
+/* *** *** *** */
+/* Logout Modal */
+/* *** *** *** */
+
+/* The Modal (background) */
+// .sidebar_modal {
+//     display: block; /* Hidden by default */
+//     position: fixed; /* Stay in place */
+//     z-index: 1; /* Sit on top */
+//     left: 0;
+//     top: 0;
+//     width: 100%; /* Full width */
+//     height: 100%; /* Full height */
+//     overflow: auto; /* Enable scroll if needed */
+//     background-color: rgb(0, 0, 0); /* Fallback color */
+//     background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+// }
+
+/* Modal Content/Box */
+.sidebar_logout-text:hover {
+    width: calc(100% - 50px);
+    background-color: $sea-blue;
+    border-radius: 5px;
+}
+
+.sidebar_modal-content {
+    // display: none; /* Hidden by default */
+    margin: 20px;
+    border: 1px solid #888;
+    width: 200px; /* Could be more or less, depending on screen size */
+    position: absolute; /* Stay in place */
+    left: 0;
+    bottom: 50px;
+    z-index: 1; /* Sit on top */
+    border-radius: 10px;
+    background-color: darken($dark-blue, 10%);
+}
+
+/* The Close Button */
+.sidebar_close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.sidebar_close:hover,
+.sidebar_close:focus {
+    color: $sea-blue;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.sidebar_close-container {
+    width: 50px;
+}

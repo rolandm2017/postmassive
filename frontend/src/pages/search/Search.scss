@@ -1,0 +1,48 @@
+@import "../../styles/colors";
+
+#search_bar-container input {
+    width: 100%;
+    font-size: 16px;
+    border-radius: 10px;
+    border: 1px solid #bbb;
+}
+
+#search_main {
+    background-color: $dark-blue;
+    height: 100vh;
+    /* width is auto for mobile, changes to 43% for desktop */
+    // width: auto;
+    /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+    transition: margin-left 0.5s; /* If you want a transition effect */
+    // overflow-y: auto;
+}
+
+#search_main-article-container {
+    width: auto;
+    height: 400px;
+    background-image: url("../../images/lavender-fields.jpg");
+    background-size: cover;
+    position: relative;
+}
+
+#search_main-article-container div {
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+    font-weight: bold;
+    color: $white;
+    text-align: left;
+}
+
+#search_main-article-container h1 {
+    font-weight: 24px;
+}
+
+#search_main-article-container span {
+    font-weight: 14px;
+}
+
+#search_recommendations {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
