@@ -8,7 +8,7 @@ const sendEmail = require("../_helpers/send-email");
 // const db = require("../_helpers/db");
 const Role = require("../_helpers/roles");
 
-const db = require("../_helpers/db");
+const db = require("../_helpers/authenticationDb");
 
 module.exports = {
     authenticate,

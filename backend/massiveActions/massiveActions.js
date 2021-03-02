@@ -1,24 +1,23 @@
 const express = require("express");
-const cors = require("cors");
+// const cors = require("cors");
 
-const port = 8080;
+// const bodyParser = require("body-parser");
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded());
+// app.use(cors());
 
-const app = express();
+const router = express.Router();
 
-const bodyParser = require("body-parser");
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
-app.use(cors());
+module.exports = router;
 
-const mongoose = require("mongoose");
 const db = require("./db");
 
-const user = "user";
-const massive = "massive";
-const message = "message";
+const user = "/user";
+const massive = "/massive";
+const message = "/message";
 
 // POST a massive to the server
-app.post("/massive/post", (req, res) => {
+router.post("/massive/post", (req, res) => {
     console.log("55555555");
     const user = req.body.user;
     const text = req.body.text;
@@ -43,7 +42,7 @@ app.post("/massive/post", (req, res) => {
 });
 
 // GET all massives from the server
-app.get("/massive/get", (req, res) => {
+router.get("/massive/get", (req, res) => {
     const filter = {};
     db.Massive.find(filter, function (err, massives) {
         if (err) {
@@ -56,7 +55,7 @@ app.get("/massive/get", (req, res) => {
 });
 
 // GET a user's massives
-app.get("/massive/get/:username", (req, res) => {
+router.get("/massive/get/:username", (req, res) => {
     const filter = { postedByUser: req.params.username };
     console.log(filter);
     db.Massive.find(filter, function (err, massives) {
@@ -67,8 +66,4 @@ app.get("/massive/get/:username", (req, res) => {
             res.json(massives);
         }
     });
-});
-
-app.listen(port, () => {
-    console.log(`Example app listening at http://127.0.0.1:${port}`);
 });

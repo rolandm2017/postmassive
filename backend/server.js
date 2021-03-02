@@ -44,6 +44,23 @@ app.use(api + "/auth", require("./authentication/authentication"));
 
 app.use(api + "/signup/validate", require("./accountCreation/accountCreation"));
 
+// *** *** ***
+// *** *** ***
+// CRUD for User account info, including their bio & user settings
+
+app.use(api + "/user", require("./userActions/userActions"));
+
+// *** *** ***
+// *** *** ***
+// CRUD for Massives
+app.use(api + "/massives", require("./massiveActions/massiveActions"));
+
+// *** *** ***
+// *** *** ***
+// CRUD for DMs
+
+// todo: implement later...
+
 app.listen(port, () => {
     console.log(`Example app listening at http://127.0.0.1:${port}`);
 });
