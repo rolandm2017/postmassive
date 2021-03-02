@@ -1,11 +1,14 @@
 const express = require("express");
+const cors = require("cors");
 
 const port = 8080;
 
 const app = express();
 
 const bodyParser = require("body-parser");
-app.use(bodyParser);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
+app.use(cors());
 
 // TODO:
 // 0) do work to connect server to mongoDB
@@ -27,6 +30,7 @@ const message = "message";
 
 // POST a massive to the server
 app.post("/massive/post", (req, res) => {
+    console.log("55555555");
     console.log(req.body);
 });
 
@@ -36,7 +40,7 @@ app.get("/massive/get", (req, res) => {});
 // GET a user's massives
 app.get("/massive/get/:id", (req, res) => {});
 
-app.get(user + "", "asdf");
+app.get(user + "", (req, res) => {});
 
 app.listen(port, () => {
     console.log(`Example app listening at http://127.0.0.1:${port}`);
