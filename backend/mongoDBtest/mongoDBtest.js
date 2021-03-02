@@ -10,9 +10,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cors());
 
+const mongoose = require("mongoose");
+const db = require("./db");
+
 // TODO:
 // 0) do work to connect server to mongoDB
-// 1) make route for POST massive to PM
 // 2) make route for GET all massives from PM
 // 3) make route for GET all massives from specific user
 // 4) make route for POST massive to PM, associated with specific user
@@ -31,7 +33,25 @@ const message = "message";
 // POST a massive to the server
 app.post("/massive/post", (req, res) => {
     console.log("55555555");
-    console.log(req.body);
+    const user = req.body.user;
+    const text = req.body.text;
+    const datePosted = Date.now();
+
+    const newMassive = db.Massive({
+        postedByUser: user,
+        text: text,
+        date: datePosted,
+        replies: 0,
+        amps: 0,
+        likes: 0,
+        hasImage: false,
+        quotesSomeone: false,
+    });
+    newMassive.save(function (err) {
+        if (err) {
+            console.log(err);
+        }
+    });
 });
 
 // GET all massives from the server

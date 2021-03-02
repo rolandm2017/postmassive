@@ -5,8 +5,8 @@ const ObjectId = Schema.ObjectId;
 
 const massiveSchema = new Schema({
     postedByUser: { type: String, required: true },
-    date: { type: String, required: true },
     text: { type: String, required: true },
+    date: { type: String, required: true },
     // engagement
     replies: { type: Number, required: true },
     amps: { type: Number, required: true },

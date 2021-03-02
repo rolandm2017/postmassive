@@ -7,12 +7,14 @@ const connectionOptions = {
     useUnifiedTopology: true,
     useFindAndModify: false,
 };
+
 mongoose.connect(config.connectionString, connectionOptions);
+console.log("mongoose is connected to db");
 
 module.exports = {
-    Massive: require("./massive.model"),
-    User: require("./user.model"),
-    Message: require("./message.model"),
+    Massive: require("./models/massive.model"),
+    User: require("./models/user.model"),
+    Message: require("./models/message.model"),
     isValidId,
 };
 
