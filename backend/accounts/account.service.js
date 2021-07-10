@@ -32,7 +32,10 @@ async function authenticate({ username, email, password, ipAddress }) {
     // console.log(await db.Account.findOne());
     let account;
     if (username) {
-        console.log("awaiting based on Username");
+        console.log("awaiting based on Username", username);
+        // FIXME: its not fetching the account for Crono even tho Crono is input
+        // ok so theres straight up no accounts retrieved. seems the one in the coll isnt registering
+        console.log("TEST:", await db.Account.find({}));
         account = await db.Account.findOne({ username });
     } else if (email) {
         console.log("awaiting based on email");
@@ -40,7 +43,8 @@ async function authenticate({ username, email, password, ipAddress }) {
     } else {
         console.log("you shouldn't be able to get here you know");
     }
-    console.log("asdfdsf:", account, account.passwordHash);
+    console.log("asdfdsf:", account);
+    console.log("FURTHER adhsfaksdfds", account.passwordHash);
     if (
         !account ||
         !account.isVerified ||
