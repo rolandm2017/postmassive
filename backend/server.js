@@ -48,12 +48,12 @@ app.use(api + "/signup/validate", require("./accountCreation/accountCreation"));
 // *** *** ***
 // CRUD for User account info, including their bio & user settings
 
-app.use(api + "/user", require("./userActions/userActions"));
+// app.use(api + "/user", require("./userActions/userActions")); // TODO: add these
 
 // *** *** ***
 // *** *** ***
 // CRUD for Massives
-app.use(api + "/massives", require("./massiveActions/massiveActions"));
+// app.use(api + "/massives", require("./massiveActions/massiveActions"));
 
 // *** *** ***
 // *** *** ***

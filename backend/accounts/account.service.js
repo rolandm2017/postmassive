@@ -29,11 +29,18 @@ module.exports = {
 async function authenticate({ username, email, password, ipAddress }) {
     console.log("999999999999999999999999999999999");
     console.log(username, email, password);
-    console.log(await db.Account.findOne());
-    const account = username
-        ? await db.Account.findOne({ username })
-        : await db.Account.findOne({ email });
-    console.log(account.passwordHash);
+    // console.log(await db.Account.findOne());
+    let account;
+    if (username) {
+        console.log("awaiting based on Username");
+        account = await db.Account.findOne({ username });
+    } else if (email) {
+        console.log("awaiting based on email");
+        account = await db.Account.findOne({ email });
+    } else {
+        console.log("you shouldn't be able to get here you know");
+    }
+    console.log("asdfdsf:", account.passwordHash);
     if (
         !account ||
         !account.isVerified ||

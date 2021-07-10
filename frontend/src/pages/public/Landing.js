@@ -30,6 +30,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./Landing.scss";
 import Axios from "axios";
 
+import DEMO from "../../config.json";
+
 function Landing(props) {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -143,7 +145,9 @@ function Landing(props) {
         }
     };
 
-    const handleLogIn = () => setLogIn(true);
+    const handleLogIn = () => {
+        setLogIn(true);
+    };
     const handleCloseLogIn = () => {
         setLogIn(false);
     };
@@ -178,6 +182,20 @@ function Landing(props) {
 
     const handleClose = () => setShowPage({ show: false });
     const handleShow = () => {
+        // if (DEMO) {
+        //     // TODO: fwd to logged in with fake auth
+        //     auth.signIn("Crono", "", "ilovemarle", {
+        //         pathname: "/home",
+        //     }).catch((err) => {
+        //         console.log("math!", err);
+        //         if (false) {
+        //             setError(err);
+        //         } else {
+        //             setDesktopLoginError(err);
+        //         }
+        //     });
+        //     return;
+        // }
         setShowPage(1);
     };
     const handlePageOne = () => {

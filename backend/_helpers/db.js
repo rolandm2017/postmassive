@@ -7,7 +7,7 @@ const connectionOptions = {
     useUnifiedTopology: true,
     useFindAndModify: false,
 };
-
+console.log(config.connectionString);
 mongoose.connect(config.connectionString, connectionOptions);
 console.log("mongoose is connected to db");
 
