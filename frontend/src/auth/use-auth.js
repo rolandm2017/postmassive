@@ -256,7 +256,9 @@ export function refreshToken() {
             // a promise
             // whereas mine is a promise inside of a promise.
             .then((res) => {
+                // console.log(res.json());
                 return res.json().then((refreshedUser) => {
+                    console.log(refreshedUser);
                     return refreshedUser;
                 });
             })

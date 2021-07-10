@@ -70,7 +70,7 @@ async function authenticate({ username, email, password, ipAddress }) {
 }
 
 async function refreshToken({ incomingRefreshToken, ipAddress }) {
-    console.log(57, incomingRefreshToken);
+    console.log(57775757575, incomingRefreshToken);
     const usersOldRefreshTokenFromDatabase = await getRefreshToken(
         incomingRefreshToken
     );
