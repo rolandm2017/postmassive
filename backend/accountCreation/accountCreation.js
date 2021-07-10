@@ -105,6 +105,7 @@ router.post("/usernameAndPassword", (req, res) => {
         ) {
             res.send("banned_word_detected");
         } else {
+            console.log("108108108_________108-_____108");
             // when the username is accepted...
             // check the password and then...
             // Look into the db for any user account using the email the user just signed up with
@@ -128,6 +129,10 @@ router.post("/usernameAndPassword", (req, res) => {
                                 if (err) throw err;
                                 const verificationCode =
                                     generateUserVerificationCode();
+                                console.log(
+                                    "here is the code:",
+                                    verificationCode
+                                );
                                 new User({
                                     fullName: req.body.name,
                                     email: req.body.email,
@@ -150,6 +155,7 @@ router.post("/usernameAndPassword", (req, res) => {
                                         );
                                         // TODO: send email to user's supplied email with the verificationCode
                                         // TEMP:
+
                                         res.send(verificationCode);
                                         res.send("verification_code_sent");
                                     })

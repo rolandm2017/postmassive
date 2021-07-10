@@ -167,18 +167,22 @@ function Landing(props) {
             password: password,
         };
         return new Promise((resolve, reject) => {
-            Axios.post(
-                process.env.REACT_APP_API_URL +
-                    "/signup/validate/createAccountAndSendVerification",
-                data
-            )
-                .then((response) => resolve(response))
-                .catch((err) => {
-                    // TODO: we are here
-                    console.log("THIS IS PROBABLY NOT WORKING", err);
-                    reject(err);
-                });
+            resolve(true);
         });
+        // disabled this promise just for the demo
+        // return new Promise((resolve, reject) => {
+        //     Axios.post(
+        //         process.env.REACT_APP_API_URL +
+        //             "/signup/validate/createAccountAndSendVerification",
+        //         data
+        //     )
+        //         .then((response) => resolve(response))
+        //         .catch((err) => {
+        //             // TODO: we are here
+        //             console.log("THIS IS PROBABLY NOT WORKING", err);
+        //             reject(err);
+        //         });
+        // });
     };
 
     const handleClose = () => setShowPage({ show: false });
