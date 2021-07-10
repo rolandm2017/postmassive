@@ -3,6 +3,8 @@
 const express = require("express");
 const router = express.Router();
 
+const User = require("../models/user.model");
+
 module.exports = router;
 
 // for validating full name, email, date of birth
@@ -58,6 +60,11 @@ function olderThan13(date) {
     const thirteenYearsInDays = 365 * 13;
     return differenceInDays > thirteenYearsInDays;
 }
+
+router.post("/username", (req, res) => {
+    // TODO: fill this in with an actual confirmation from the server that the username isn't malformed
+    res.send("accepted");
+});
 
 router.post("/usernameAndPassword", (req, res) => {
     // Step 2: Verify username and password as OK.
@@ -119,7 +126,8 @@ router.post("/usernameAndPassword", (req, res) => {
                             saltRounds,
                             function (err, hash) {
                                 if (err) throw err;
-                                const verificationCode = generateUserVerificationCode();
+                                const verificationCode =
+                                    generateUserVerificationCode();
                                 new User({
                                     fullName: req.body.name,
                                     email: req.body.email,

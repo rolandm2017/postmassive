@@ -196,8 +196,7 @@ export const verifyUsernameAndPassword = (usernameInput, password) => {
             return true;
         } else {
             return {
-                msg:
-                    "Password invalid. Only alphanumeric & special characters. Between 7 and 29 characters in length.",
+                msg: "Password invalid. Only alphanumeric & special characters. Between 7 and 29 characters in length.",
             };
         }
     } else {

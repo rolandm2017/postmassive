@@ -10,7 +10,7 @@ console.log(config.connectionString);
 mongoose.connect(config.connectionString, connectionOptions);
 
 module.exports = {
-    Account: require("../accounts/account.model"),
+    User: require("../models/user.model"),
     RefreshToken: require("../accounts/refresh-token.model"),
     isValidId,
 };

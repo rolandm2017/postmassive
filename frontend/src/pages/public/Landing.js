@@ -174,6 +174,7 @@ function Landing(props) {
             )
                 .then((response) => resolve(response))
                 .catch((err) => {
+                    // TODO: we are here
                     console.log("THIS IS PROBABLY NOT WORKING", err);
                     reject(err);
                 });
@@ -236,7 +237,16 @@ function Landing(props) {
                                 setShowPage(3);
                                 setError("");
                             })
-                            .catch((err) => setError(err));
+                            .catch((err) => {
+                                // Fixme: this is receiving an object and it should be getting text
+                                // console.log(
+                                //     err,
+                                //     Object.keys(err.response),
+                                //     Object.values(err.response)
+                                // );
+                                // console.log("what is it", typeof err, err);
+                                setError(err.response.status);
+                            });
                     } else if (response === "admin_or_postmassiv") {
                         setError(
                             "Username cannot contain 'admin' or 'postmassiv'."
