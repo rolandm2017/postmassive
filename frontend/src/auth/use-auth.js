@@ -34,7 +34,7 @@ export const userValue = () => {
 const authContext = createContext();
 
 // const baseURL = process.env.REACT_APP_API_URL + "/auth";
-const baseURL = process.env.REACT_APP_API_URL + "/auth";
+const baseURL = "http://localhost:3000/api" + "/auth";
 
 // Provider component that wraps your app and makes auth object ...
 // ... available to any child component that calls useAuth().
@@ -247,7 +247,8 @@ export function useProvideAuth() {
 // helper functions
 
 export function refreshToken() {
-    const url = process.env.REACT_APP_API_URL + "/auth/refreshToken";
+    // const url = process.env.REACT_APP_API_URL + "/auth/refreshToken";
+    const url = "http://localhost:3000/api/auth/refreshToken";
     console.log("Attempting to refresh token...");
     return (
         fetch(url, postOptions(url))
