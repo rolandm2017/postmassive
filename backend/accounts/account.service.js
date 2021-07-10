@@ -29,17 +29,17 @@ module.exports = {
 async function authenticate({ username, email, password, ipAddress }) {
     console.log("999999999999999999999999999999999");
     console.log(username, email, password);
-    // console.log(await db.Account.findOne());
+    // console.log(await db.User.findOne());
     let account;
     if (username) {
         console.log("awaiting based on Username", username);
         // FIXME: its not fetching the account for Crono even tho Crono is input
         // ok so theres straight up no accounts retrieved. seems the one in the coll isnt registering
-        console.log("TEST:", await db.Account.find({}));
-        account = await db.Account.findOne({ username });
+        console.log("TEST:", await db.User.find({}));
+        account = await db.User.findOne({ username });
     } else if (email) {
         console.log("awaiting based on email");
-        account = await db.Account.findOne({ email });
+        account = await db.User.findOne({ email });
     } else {
         console.log("you shouldn't be able to get here you know");
     }
@@ -112,16 +112,16 @@ async function revokeToken({ token, ipAddress }) {
 
 async function register(params, origin) {
     // validate
-    if (await db.Account.findOne({ email: params.email })) {
+    if (await db.User.findOne({ email: params.email })) {
         // send already registered error in email to prevent account enumeration
         return await sendAlreadyRegisteredEmail(params.email, origin);
     }
 
     // create account object
-    const account = new db.Account(params);
+    const account = new db.User(params);
 
     // first registered account is an admin
-    const isFirstAccount = (await db.Account.countDocuments({})) === 0;
+    const isFirstAccount = (await db.User.countDocuments({})) === 0;
     account.role = isFirstAccount ? Role.Admin : Role.User;
     account.verificationToken = randomTokenString();
 
@@ -136,7 +136,7 @@ async function register(params, origin) {
 }
 
 async function verifyEmail({ token }) {
-    const account = await db.Account.findOne({ verificationToken: token });
+    const account = await db.User.findOne({ verificationToken: token });
 
     if (!account) throw "Verification failed";
 
@@ -146,7 +146,7 @@ async function verifyEmail({ token }) {
 }
 
 async function forgotPassword({ email }, origin) {
-    const account = await db.Account.findOne({ email });
+    const account = await db.User.findOne({ email });
 
     // always return ok response to prevent email enumeration
     if (!account) return;
@@ -163,7 +163,7 @@ async function forgotPassword({ email }, origin) {
 }
 
 async function validateResetToken({ token }) {
-    const account = await db.Account.findOne({
+    const account = await db.User.findOne({
         "resetToken.token": token,
         "resetToken.expires": { $gt: Date.now() },
     });
@@ -172,7 +172,7 @@ async function validateResetToken({ token }) {
 }
 
 async function resetPassword({ token, password }) {
-    const account = await db.Account.findOne({
+    const account = await db.User.findOne({
         "resetToken.token": token,
         "resetToken.expires": { $gt: Date.now() },
     });
@@ -187,7 +187,7 @@ async function resetPassword({ token, password }) {
 }
 
 async function getAll() {
-    const accounts = await db.Account.find();
+    const accounts = await db.User.find();
     return accounts.map((x) => basicDetails(x));
 }
 
@@ -198,11 +198,11 @@ async function getById(id) {
 
 async function create(params) {
     // validate
-    if (await db.Account.findOne({ email: params.email })) {
+    if (await db.User.findOne({ email: params.email })) {
         throw 'Email "' + params.email + '" is already registered';
     }
 
-    const account = new db.Account(params);
+    const account = new db.User(params);
     account.verified = Date.now();
 
     // hash password
@@ -221,7 +221,7 @@ async function update(id, params) {
     if (
         params.email &&
         account.email !== params.email &&
-        (await db.Account.findOne({ email: params.email }))
+        (await db.User.findOne({ email: params.email }))
     ) {
         throw 'Email "' + params.email + '" is already taken';
     }
@@ -248,7 +248,7 @@ async function _delete(id) {
 
 async function getAccount(id) {
     if (!db.isValidId(id)) throw "Account not found";
-    const account = await db.Account.findById(id);
+    const account = await db.User.findById(id);
     if (!account) throw "Account not found";
     return account;
 }
