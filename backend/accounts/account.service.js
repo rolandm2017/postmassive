@@ -40,7 +40,7 @@ async function authenticate({ username, email, password, ipAddress }) {
     } else {
         console.log("you shouldn't be able to get here you know");
     }
-    console.log("asdfdsf:", account.passwordHash);
+    console.log("asdfdsf:", account, account.passwordHash);
     if (
         !account ||
         !account.isVerified ||
