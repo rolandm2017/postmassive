@@ -118,10 +118,27 @@ export function usernameServerCheck(username) {
     });
 }
 
-export const verifyCode = (code, setVerifiable) => {
+export const verifyCode = (code, email, setVerifiable) => {
     const onlyAlphanumerical = /^[A-Za-z0-9]*$/;
     if (code.length === 6 && onlyAlphanumerical.test(code)) {
         setVerifiable(true);
+        axios
+            .post(
+                "localhost:3000/api/signup/validate/validateVerificationCodeAndSignUp",
+                { verificationCode: code, email: email },
+                {
+                    headers: {
+                        "content-type": "application/json; charset=UTF-8",
+                    },
+                }
+            )
+            .then((res) => {
+                if (res.status === 200) {
+                    setVerifiable(true);
+                } else {
+                    // todo: what if the verification code is entered wrong? handle that case here
+                }
+            });
         // send code to backend, receive "code is correct" or "nope, verification fail" response.
         return true; // returns true so the test suite knows what happened
     } else {

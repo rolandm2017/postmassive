@@ -34,7 +34,7 @@ export const userValue = () => {
 const authContext = createContext();
 
 // const baseURL = process.env.REACT_APP_API_URL + "/auth";
-const baseURL = "http://localhost:3000/api" + "/auth";
+const baseURL = "http://localhost:3000/api/auth";
 
 // Provider component that wraps your app and makes auth object ...
 // ... available to any child component that calls useAuth().

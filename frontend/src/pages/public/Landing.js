@@ -28,9 +28,6 @@ import Chat from "../../images/icons8-chat-50.png";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "./Landing.scss";
-import Axios from "axios";
-
-import DEMO from "../../config.json";
 
 function Landing(props) {
     const [username, setUsername] = useState("");
