@@ -114,6 +114,7 @@ router.post("/refreshToken", (req, res, next) => {
             res.cookie("jwt", account.jwtToken, {
                 expires: new Date(Date.now() + 15 * 60 * 1000),
             });
+            console.log("TEST:", account);
             res.json(account);
         })
         .catch(next);

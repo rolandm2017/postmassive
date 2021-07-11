@@ -167,7 +167,7 @@ async function validateResetToken({ token }) {
         "resetToken.token": token,
         "resetToken.expires": { $gt: Date.now() },
     });
-
+    console.log("at 107");
     if (!account) throw "Invalid token";
 }
 
@@ -257,8 +257,9 @@ async function getRefreshToken(token) {
     const refreshToken = await db.RefreshToken.findOne({ token }).populate(
         "account"
     );
-    // console.log("59:", refreshToken._id);
+    console.log("59:", refreshToken);
     if (!refreshToken || !refreshToken.isActive) throw "Invalid token";
+    console.log(262);
     return refreshToken;
 }
 

@@ -5,11 +5,12 @@ import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
-import { refreshToken } from "./auth/refreshToken";
+// import { refreshToken } from "./auth/refreshToken";
+import { refreshToken } from "./auth/use-auth";
 
 // attempt silent token refresh on page load
 refreshToken().finally((x) => {
-    console.log("rendering");
+    console.log("rendering!!!!!!!!!!!!!!!!!!!!");
     ReactDOM.render(
         <React.StrictMode>
             <Router>

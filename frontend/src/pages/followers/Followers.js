@@ -2,8 +2,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 
-// import { userValue } from "../../auth/use-auth";
-
 import Wrapper from "../helper/Wrapper";
 
 import BackButton from "../../images/icons8-back-arrow-48-wh.png";
