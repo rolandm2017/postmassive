@@ -5,7 +5,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
-import { refreshToken } from "./auth/use-auth";
+import { refreshToken } from "./auth/refreshToken";
 
 // attempt silent token refresh on page load
 refreshToken().finally((x) => {

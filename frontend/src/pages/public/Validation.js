@@ -124,7 +124,7 @@ export const verifyCode = (code, email, setVerifiable) => {
         setVerifiable(true);
         axios
             .post(
-                "localhost:3000/api/signup/validate/validateVerificationCodeAndSignUp",
+                "localhost:3000/api`/signup/validate/validateVerificationCodeAndSignUp",
                 { verificationCode: code, email: email },
                 {
                     headers: {

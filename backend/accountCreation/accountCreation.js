@@ -15,8 +15,6 @@ const {
     offensiveWord,
 } = require("./qualifiers");
 
-// for validating full name, email, date of birth
-
 router.post("/personal", (req, res) => {
     // Step 1: Verify name, email, date of birth
     console.log(req.body);
@@ -59,18 +57,6 @@ router.post("/username", (req, res) => {
 router.post("/usernameAndPassword", (req, res) => {
     // Step 2: Verify username and password as OK.
     // If username & pw are OK, create account in DB, send a verification code to user's email
-
-    // if string contains only alphanumeric and underscore: enter nested if block; else, return "bad username"
-    // if length > 16, return false
-    // if length === 0, return false
-    // if string has >50% numbers, return false
-    // if string contains "Admin" or "PostMassiv", return false
-    // if string contains the n word return false
-    // if string contains more than two underscores, return false
-    // if string has only a-z, A-Z, 0-9, or _, return true
-    // else: store string in db
-
-    // ...
     const username = req.body.username.trim();
     let totalUnderscores = 0;
     if (alphanumeric.test(username)) {
