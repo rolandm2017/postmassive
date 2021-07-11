@@ -219,6 +219,7 @@ export function useProvideAuth() {
     // meaning that if there is a user already, the page sets the user as the current user. else, it
     // makes the user "false".
     useEffect(() => {
+        console.log("is this rendering");
         const unsubscribe = (user) => {
             if (user) {
                 userSubject.next(user);

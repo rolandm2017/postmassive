@@ -233,13 +233,15 @@ function Landing(props) {
                     <p className="landing_error black-text">{error}</p>
                     <BootstrapButton
                         variant="primary"
-                        onClick={handlePageOne(
-                            name,
-                            email,
-                            date,
-                            setShowPage,
-                            setError
-                        )}
+                        onClick={() => {
+                            handlePageOne(
+                                name,
+                                email,
+                                date,
+                                setShowPage,
+                                setError
+                            );
+                        }}
                         disabled={false}
                     >
                         Next
@@ -277,15 +279,17 @@ function Landing(props) {
                     <p className="landing_error black-text">{error}</p>
                     <BootstrapButton
                         variant="primary"
-                        onClick={handlePageTwo(
-                            username,
-                            email,
-                            password,
-                            name,
-                            date,
-                            setShowPage,
-                            setError
-                        )}
+                        onClick={() => {
+                            handlePageTwo(
+                                username,
+                                email,
+                                password,
+                                name,
+                                date,
+                                setShowPage,
+                                setError
+                            );
+                        }}
                         disabled={false}
                     >
                         Next
@@ -317,13 +321,15 @@ function Landing(props) {
                     <p className="landing_error">{error}</p>
                     <BootstrapButton
                         variant="primary"
-                        onClick={handlePageThree(
-                            verificationCode,
-                            email,
-                            setVerifiable,
-                            setShowPage,
-                            setError
-                        )}
+                        onClick={() => {
+                            handlePageThree(
+                                verificationCode,
+                                email,
+                                setVerifiable,
+                                setShowPage,
+                                setError
+                            );
+                        }}
                         disabled={false}
                     >
                         Next
@@ -349,7 +355,9 @@ function Landing(props) {
                     </p>
                     <BootstrapButton
                         variant="primary"
-                        onClick={handleFinish}
+                        onClick={() => {
+                            handleFinish();
+                        }}
                         disabled={false}
                     >
                         Next
@@ -435,12 +443,16 @@ function Landing(props) {
                                 <Button
                                     text="Sign Up"
                                     blueBg={true}
-                                    onClick={handleShow}
+                                    onClick={() => {
+                                        handleShow();
+                                    }}
                                 ></Button>
                                 <Button
                                     text="Log In"
                                     blueBg={false}
-                                    onClick={handleLogIn}
+                                    onClick={() => {
+                                        handleLogIn();
+                                    }}
                                 ></Button>
                             </div>
                         </div>
@@ -486,14 +498,18 @@ function Landing(props) {
                         <BootstrapButton
                             className="landing_button landing_sign-up d-flex force-sea-blue justify-content-center align-items-center"
                             variant="primary"
-                            onClick={handleShow}
+                            onClick={() => {
+                                handleShow();
+                            }}
                         >
                             {/* // FIXME: these 2 btns handleShow and handleLogIn definitely need to be updated */}
                             Sign Up
                         </BootstrapButton>
                         <button
                             className="d-flex justify-content-center align-items-center"
-                            onClick={handleLogIn}
+                            onClick={() => {
+                                handleLogIn();
+                            }}
                         >
                             Log In
                         </button>

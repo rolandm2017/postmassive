@@ -204,16 +204,16 @@ const handlePageTwo = (
     }
 };
 
-const handlePageThree = (
+function handlePageThree(
     verificationCode,
     email,
     setVerifiable,
     setShowPage,
     setError
-) => {
+) {
     // TODO: turn this into a live version. something like "sendCodeToServer()" then "if success, login & redirect to /home"
     verifyCode(verificationCode, email, setVerifiable, setShowPage, setError);
-};
+}
 
 // TODO: the finishing click is not finished. finish it.
 const handleFinish = () => {

@@ -8,6 +8,7 @@ export const usernamePattern = /^[a-zA-Z0-9_]*$/;
 export const emailPattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 
 export function emailIsValid(email) {
+    console.log(11);
     if (emailPattern.test(email)) {
         return true;
     }
@@ -15,6 +16,7 @@ export function emailIsValid(email) {
 }
 
 export function formCheck(name, email, date) {
+    console.log("18 18       18 18181818");
     const validName = verifyName(name);
     const validEmail = emailIsValid(email);
     const validDob = verifyDateOfBirth(date);
@@ -60,6 +62,7 @@ export function formCheck(name, email, date) {
 }
 
 export function usernameIsValid(usernameInput) {
+    console.log("63 63 63 63");
     const username = usernameInput.trim();
 
     const brandName = /([Pp][Oo][Ss][Tt][Mm][Aa][Ss]{2}[Ii][Vv])/;
@@ -85,6 +88,7 @@ export function usernameIsValid(usernameInput) {
 }
 
 export function usernameServerCheck(username) {
+    console.log("88        88      88");
     // This function goes to the server, asks "is this username valid?" and returns a response.
     const url = process.env.REACT_APP_API_URL + "/signup/validate/username";
     const data = { username: username };
@@ -121,6 +125,7 @@ export const verifyCode = (
     setShowPage,
     setError
 ) => {
+    console.log(1244444444);
     const onlyAlphanumerical = /^[A-Za-z0-9]*$/;
     if (code.length === 6 && onlyAlphanumerical.test(code)) {
         setVerifiable(true);
@@ -153,6 +158,7 @@ export const verifyCode = (
 };
 
 export const verifyDateOfBirth = (date) => {
+    console.log(161);
     // return true if person is older than 13
     const currentDate = new Date();
     const diff = Math.abs(currentDate - date);

@@ -106,6 +106,7 @@ router.post("/refreshToken", (req, res, next) => {
     // the refresh token.
     const incomingRefreshToken = req.cookies.refreshToken;
     const ipAddress = req.ip;
+    console.log("109, yes, 109");
     accountService
         .refreshToken({ incomingRefreshToken, ipAddress })
         .then(({ newRefreshToken, ...account }) => {
