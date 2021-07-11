@@ -1,3 +1,5 @@
+import axios from "axios";
+
 import {
     formCheck,
     usernameServerCheck,
@@ -13,7 +15,7 @@ import { useAuth } from "../../auth/use-auth";
 export {
     handleAddUsernameOrEmail,
     sendLogInIfInfoIsValid,
-    bundleAcceptedAccountInfoAndSendVerificationCode,
+    // bundleAcceptedAccountInfoAndSendVerificationCode,
     handlePageOne,
     handlePageTwo,
     handlePageThree,
@@ -82,38 +84,30 @@ const sendLogInIfInfoIsValid = (
     }
 };
 
-const bundleAcceptedAccountInfoAndSendVerificationCode = (
-    name,
-    email,
-    date,
-    username,
-    password
-) => {
-    const data = {
-        fullName: name,
-        email: email,
-        birthdate: date,
-        username: username,
-        password: password,
-    };
-    return new Promise((resolve, reject) => {
-        resolve(true);
-    });
-    // disabled this promise just for the demo
-    // return new Promise((resolve, reject) => {
-    //     Axios.post(
-    //         process.env.REACT_APP_API_URL +
-    //             "/signup/validate/createAccountAndSendVerification",
-    //         data
-    //     )
-    //         .then((response) => resolve(response))
-    //         .catch((err) => {
-    //             // TODO: we are here
-    //             console.log("THIS IS PROBABLY NOT WORKING", err);
-    //             reject(err);
-    //         });
-    // });
-};
+// const bundleAcceptedAccountInfoAndSendVerificationCode = (
+//     name,
+//     email,
+//     date,
+//     username,
+//     password
+// ) => {
+
+//     // return new Promise((resolve, reject) => {
+//     //     resolve(true);
+//     // });
+//     // disabled this promise just for the demo
+//     return new Promise((resolve, reject) => {
+
+//             .then((responseIncludingVerificationCode) =>
+//                 resolve(responseIncludingVerificationCode)
+//             )
+//             .catch((err) => {
+//                 // TODO: we are here
+//                 console.log("THIS IS PROBABLY NOT WORKING", err);
+//                 reject(err);
+//             });
+//     });
+// };
 
 const handlePageOne = (name, email, date, setShowPage, setError) => {
     // TODO: display error msg "server is down" if net::ERR_CONNECTION_REFUSED. Utilize a timer?
@@ -157,26 +151,26 @@ const handlePageTwo = (
             .then((response) => {
                 console.log("204:", response); // FIXME: input "postmassiv" threw up the "else" condition. wrong condition
                 if (response === "accepted") {
-                    bundleAcceptedAccountInfoAndSendVerificationCode(
-                        name,
-                        email,
-                        date,
-                        username,
-                        password
-                    )
+                    const data = {
+                        fullName: name,
+                        email: email,
+                        birthdate: date,
+                        username: username,
+                        password: password,
+                    };
+                    axios
+                        .post(
+                            process.env.REACT_APP_API_URL +
+                                "/signup/validate/createAccountAndReturnVerificationCode",
+                            data
+                        )
                         .then((response) => {
+                            // console.log(response);
                             setShowPage(3);
                             setError("");
                         })
                         .catch((err) => {
-                            // Fixme: this is receiving an object and it should be getting text
-                            // console.log(
-                            //     err,
-                            //     Object.keys(err.response),
-                            //     Object.values(err.response)
-                            // );
-                            // console.log("what is it", typeof err, err);
-                            setError(err.response.status);
+                            setError(err);
                         });
                 } else if (response === "admin_or_postmassiv") {
                     setError(

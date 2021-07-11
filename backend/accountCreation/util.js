@@ -80,6 +80,7 @@ function hashPasswordCreateUserAccountAndSendVerificationCode(
     saltRounds,
     res
 ) {
+    console.log("crypting...");
     bcrypt.hash(password, saltRounds, function (err, hash) {
         if (err) throw err;
         const verificationCode = generateUserVerificationCode();
@@ -104,6 +105,7 @@ function hashPasswordCreateUserAccountAndSendVerificationCode(
                 console.log("Added an account to the database!");
                 // TODO: send email to user's supplied email with the verificationCode
                 // TEMP: send it to the frontend for whatever reason
+                console.log(verificationCode);
                 res.send("verification_code_sent");
             })
             .catch((err) => {

@@ -8,12 +8,6 @@ const User = require("../models/user.model");
 module.exports = router;
 
 const validation = require("./util");
-const {
-    alphanumeric,
-    brandName,
-    offensiveSlang,
-    offensiveWord,
-} = require("./qualifiers");
 
 router.post("/personal", (req, res) => {
     // Step 1: Verify name, email, date of birth
@@ -54,11 +48,16 @@ router.post("/username", (req, res) => {
     res.send("accepted");
 });
 
-router.post("/usernameAndPassword", (req, res) => {
+router.post("/createAccountAndReturnVerificationCode", (req, res) => {
     // Step 2: Verify username and password as OK.
     // If username & pw are OK, create account in DB, send a verification code to user's email
+    const alphanumeric = /^[a-zA-Z0-9_]*$/;
+    const brandName = /([Pp][Oo][Ss][Tt][Mm][Aa][Ss]{2}[Ii][Vv])/;
+    const offensiveWord = /([Nn][Ii][Gg]{2}[Ee][Rr])/;
+    const offensiveSlang = /([Nn][Ii][Gg]{2}[Aa])/;
     const username = req.body.username.trim();
     let totalUnderscores = 0;
+    console.log(req.body);
     if (alphanumeric.test(username)) {
         for (let i = 0; i < username.length; i++) {
             if (username[i] === "_") {
@@ -79,23 +78,27 @@ router.post("/usernameAndPassword", (req, res) => {
         } else if (bannedWordDetected) {
             res.send("banned_word_detected");
         } else {
-            console.log("108108108_________108-_____108");
             // when the username is accepted...
             // check the password and then...
             // Look into the db for any user account using the email the user just signed up with
             // to prevent signing up with the same email twice
-            const passwordValidator = /^[A-Za-z0-9!@#$%^&*()_+]{6, 30}$/;
+            const passwordValidator = /^[A-Za-z0-9!@#$%^&*()_+]{6,60}$/;
+
+            console.log("108108108_________108-_____108");
             if (passwordValidator.test(req.body.password)) {
                 User.find({ email: req.body.email }, function (err, users) {
+                    console.log(900000000);
                     if (err) throw err;
                     const theresAlreadyAnAccountSignedUpWithThatEmail =
                         users.filter((user) => user.finishedSignUp === true)
                             .length > 0;
+                    console.log("don't judge me");
                     if (theresAlreadyAnAccountSignedUpWithThatEmail) {
                         // TODO: log this error to the database if it ever happens. record time,
                         // date, data, "doc" and payload
                         throw "Trying to sign up with an email that's already taken";
                     } else {
+                        console.log("99, 99, 99");
                         verification.hashPasswordCreateUserAccountAndSendVerificationCode(
                             req.body.password,
                             saltRounds,
@@ -104,6 +107,7 @@ router.post("/usernameAndPassword", (req, res) => {
                     }
                 });
             } else {
+                console.log("did this happen");
                 res.send("invalid_password");
             }
         }
