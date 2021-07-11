@@ -114,7 +114,13 @@ export function usernameServerCheck(username) {
     });
 }
 
-export const verifyCode = (code, email, setVerifiable) => {
+export const verifyCode = (
+    code,
+    email,
+    setVerifiable,
+    setShowPage,
+    setError
+) => {
     const onlyAlphanumerical = /^[A-Za-z0-9]*$/;
     if (code.length === 6 && onlyAlphanumerical.test(code)) {
         setVerifiable(true);
@@ -131,8 +137,11 @@ export const verifyCode = (code, email, setVerifiable) => {
             .then((res) => {
                 if (res.status === 200) {
                     setVerifiable(true);
+                    setShowPage(4);
+                    setError("");
                 } else {
                     // todo: what if the verification code is entered wrong? handle that case here
+                    setError("Wrong code. Try again.");
                 }
             });
         // send code to backend, receive "code is correct" or "nope, verification fail" response.

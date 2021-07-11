@@ -106,7 +106,15 @@ function Landing(props) {
 
     const logInIfEnterKeyIsPressed = (event) => {
         if (event.key === "Enter") {
-            sendLogInIfInfoIsValid(true);
+            sendLogInIfInfoIsValid(
+                username,
+                email,
+                password,
+                true,
+                setError,
+                setDesktopLoginError,
+                auth
+            );
         }
     };
 
@@ -175,7 +183,8 @@ function Landing(props) {
                                 password,
                                 true,
                                 setError,
-                                setDesktopLoginError
+                                setDesktopLoginError,
+                                auth
                             )
                         }
                         disabled={false}
@@ -388,9 +397,13 @@ function Landing(props) {
                             <Button
                                 onClick={() =>
                                     sendLogInIfInfoIsValid(
-                                        false,
+                                        username,
+                                        email,
+                                        password,
+                                        true,
                                         setError,
-                                        setDesktopLoginError
+                                        setDesktopLoginError,
+                                        auth
                                     )
                                 }
                                 text="Log In"

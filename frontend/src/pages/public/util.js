@@ -20,8 +20,6 @@ export {
     handleFinish,
 };
 
-const auth = useAuth();
-
 function handleAddUsernameOrEmail(usernameOrEmail, setUsername, setEmail) {
     // accepts username || email, verifies valid input on frontend, displays err msg if it is invalid.
     // stores username || email if valid so its ready to be sent to server when user clicks Log In.
@@ -46,7 +44,8 @@ const sendLogInIfInfoIsValid = (
     password,
     displayErrorInModal,
     setError,
-    setDesktopLoginError
+    setDesktopLoginError,
+    auth
 ) => {
     // if email/username && pw are valid, log into PM. else, display error.
     let errMsg;
@@ -213,14 +212,7 @@ const handlePageThree = (
     setError
 ) => {
     // TODO: turn this into a live version. something like "sendCodeToServer()" then "if success, login & redirect to /home"
-    verifyCode(verificationCode, email, setVerifiable).then((response) => {
-        if (response.status === 200) {
-            setShowPage(4);
-            setError("");
-        } else {
-            setError("Wrong code. Try again.");
-        }
-    });
+    verifyCode(verificationCode, email, setVerifiable, setShowPage, setError);
 };
 
 // TODO: the finishing click is not finished. finish it.
