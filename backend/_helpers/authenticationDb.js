@@ -11,7 +11,7 @@ mongoose.connect(config.connectionString, connectionOptions);
 
 module.exports = {
     User: require("../models/user.model"),
-    RefreshToken: require("../accounts/refresh-token.model"),
+    RefreshToken: require("../models/refresh-token.model"),
     isValidId,
 };
 

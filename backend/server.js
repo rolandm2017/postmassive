@@ -35,14 +35,10 @@ app.use(api, require("./pages/pages"));
 // *** *** ***
 // Auth stuff
 
-app.use(api + "/auth", require("./accountCreation/accountCreation"));
-app.use(api + "/auth", require("./authentication/authentication"));
-
-// *** *** ***
-// *** *** ***
-// Sign Up Validation
-
 app.use(api + "/signup/validate", require("./accountCreation/accountCreation"));
+app.use(api + "/auth", require("./accountCreation/accountCreation"));
+
+app.use(api + "/auth", require("./authentication/authentication"));
 
 // *** *** ***
 // *** *** ***

@@ -7,15 +7,23 @@ const User = require("../models/user.model");
 
 module.exports = router;
 
+const validation = require("./util");
+const {
+    alphanumeric,
+    brandName,
+    offensiveSlang,
+    offensiveWord,
+} = require("./qualifiers");
+
 // for validating full name, email, date of birth
 
 router.post("/personal", (req, res) => {
     // Step 1: Verify name, email, date of birth
     console.log(req.body);
     const emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    const nameIsOk = checkIfAllCharsAreAcceptedInName(req.body.name);
+    const nameIsOk = validation.checkIfAllCharsAreAcceptedInName(req.body.name);
     const emailIsOk = emailPattern.test(req.body.email);
-    const ageIsOk = olderThan13(req.body.date);
+    const ageIsOk = validation.userIsOlderThan13(req.body.date);
     if (nameIsOk && emailIsOk && ageIsOk) {
         User.find({ email: req.body.email }, function (err, users) {
             if (err) throw err;
@@ -43,24 +51,6 @@ router.post("/personal", (req, res) => {
     }
 });
 
-function checkIfAllCharsAreAcceptedInName(fullName) {
-    const pattern = /^[a-zA-Z]{2,40}( [a-zA-Z]{2,40})+$/;
-    if (pattern.test(fullName)) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-function olderThan13(date) {
-    // same check as frontend code, just harder to hack 'cuz its from the server side, i guess
-    const currentDate = new Date();
-    const diff = Math.abs(currentDate - new Date(date));
-    const differenceInDays = Math.ceil(diff / (1000 * 60 * 60 * 24));
-    const thirteenYearsInDays = 365 * 13;
-    return differenceInDays > thirteenYearsInDays;
-}
-
 router.post("/username", (req, res) => {
     // TODO: fill this in with an actual confirmation from the server that the username isn't malformed
     res.send("accepted");
@@ -82,27 +72,25 @@ router.post("/usernameAndPassword", (req, res) => {
 
     // ...
     const username = req.body.username.trim();
-    const pattern2 = /^[a-zA-Z0-9_]*$/;
-    const brandName = /([Pp][Oo][Ss][Tt][Mm][Aa][Ss]{2}[Ii][Vv])/;
-    const offensiveWord = /([Nn][Ii][Gg]{2}[Ee][Rr])/;
-    const offensiveSlang = /([Nn][Ii][Gg]{2}[Aa])/;
     let totalUnderscores = 0;
-    if (pattern2.test(username)) {
+    if (alphanumeric.test(username)) {
         for (let i = 0; i < username.length; i++) {
             if (username[i] === "_") {
                 totalUnderscores++;
             }
         }
-        if (totalUnderscores > 2 || username.includes(" ")) {
-            res.send("error");
-        } else if (username.length > 16 || username.length === 0) {
-            res.send("error");
-        } else if (
+        const invalidCharCombo = totalUnderscores > 2 || username.includes(" ");
+        const invalidNameLength = username.length > 16 || username.length === 0;
+        const bannedWordDetected =
             brandName.test(username) ||
             username.includes("Admin") ||
             offensiveWord.test(username) ||
-            offensiveSlang.test(username)
-        ) {
+            offensiveSlang.test(username);
+        if (invalidCharCombo) {
+            res.send("error");
+        } else if (invalidNameLength) {
+            res.send("error");
+        } else if (bannedWordDetected) {
             res.send("banned_word_detected");
         } else {
             console.log("108108108_________108-_____108");
@@ -122,47 +110,10 @@ router.post("/usernameAndPassword", (req, res) => {
                         // date, data, "doc" and payload
                         throw "Trying to sign up with an email that's already taken";
                     } else {
-                        bcrypt.hash(
+                        verification.hashPasswordCreateUserAccountAndSendVerificationCode(
                             req.body.password,
                             saltRounds,
-                            function (err, hash) {
-                                if (err) throw err;
-                                const verificationCode =
-                                    generateUserVerificationCode();
-                                console.log(
-                                    "here is the code:",
-                                    verificationCode
-                                );
-                                new User({
-                                    fullName: req.body.name,
-                                    email: req.body.email,
-                                    dateOfBirth: req.body.date,
-                                    username: username,
-                                    passwordHash: hash, // password is hashed by bcrypt
-                                    createdAt: new Date(),
-                                    verificationCode: verificationCode,
-                                    failedAttempts: 0,
-                                    activeAccount: false,
-                                    accountType: "user",
-                                })
-                                    .save()
-                                    .then((success) => {
-                                        // Step 3: Create account with email, username, pw, send verification code.
-                                        // Await step 4 before activating account.
-                                        // if account is not verified within 24 hrs, delete it.
-                                        console.log(
-                                            "Added an account to the database!"
-                                        );
-                                        // TODO: send email to user's supplied email with the verificationCode
-                                        // TEMP:
-
-                                        res.send(verificationCode);
-                                        res.send("verification_code_sent");
-                                    })
-                                    .catch((err) => {
-                                        throw err;
-                                    });
-                            }
+                            res
                         );
                     }
                 });
@@ -175,90 +126,22 @@ router.post("/usernameAndPassword", (req, res) => {
     }
 });
 
-function generateUserVerificationCode() {
-    const possibleChars =
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    let code = "";
-    for (let i = 0; i < 7; i++) {
-        code += possibleChars[Math.floor(Math.random() * possibleChars.length)];
-    }
-    return code;
-}
-
 router.post("/validateVerificationCodeAndSignUp", (req, res) => {
     // Step 4: Awaiting verification code. After it is accepted, the db goes,
     // "Ok, the username/account associated with this email is good to go. User can log in & use PM now"
     // this route is used when the user finally gets past name,email,dob,username,pw,verification code
-    const failedAttempts = getAttemptsByEmail(req.body.email);
+    const failedAttempts = validation.getAttemptsByEmail(req.body.email);
     if (failedAttempts >= 3) {
         res.send("too_many_fails");
     } else {
         const receivedCode = req.body.verificationCode;
-        const generatedPassword = getUserCode(req.body.email);
+        const generatedPassword = validation.getUserCode(req.body.email);
         if (receivedCode === generatedPassword) {
-            approveAccountCreation(req.body.email);
+            validation.approveAccountCreation(req.body.email);
             res.send("code_accepted");
         } else {
-            increaseFailedVerificationAttempts(req.body.email);
+            validation.increaseFailedVerificationAttempts(req.body.email);
             res.send("wrong_code");
         }
     }
 });
-
-function getAttemptsByEmail(email) {
-    // check how many times this user has tried to send their verification code
-    return User.find({ email: email }, "failedAttempts", function (err, user) {
-        if (err) throw err;
-        return user.failedAttempts;
-    });
-}
-
-function getUserCode(email) {
-    // retrieves verification code created for this email
-    return User.find(
-        { email: email },
-        "verificationCode",
-        function (err, user) {
-            if (err) throw err;
-            console.log(user.verificationCode);
-            return user.verificationCode;
-        }
-    );
-}
-
-function approveAccountCreation(email) {
-    // approves account creation. basically removes auto-delete timer for this user's user doc
-    User.findOne({ email: email }, function (err, user) {
-        if (err) throw err;
-        user.finishedSignUp = true;
-        user.activeAccount = true;
-
-        user.save(function (err) {
-            if (err) {
-                console.log("ERROR:", err);
-            }
-        });
-    });
-}
-
-function increaseFailedVerificationAttempts(email) {
-    // increment counter for failed verifications.
-    // limit is 3 but that limiting is handled outside of func
-    User.findOne({ email: email }, function (err, user) {
-        if (err) throw err;
-        user.failedAttempts = user.failedAttempts + 1;
-        // TODO: test whether this func really increments failedAttempts like it says it does
-
-        user.save(function (err) {
-            if (err) {
-                console.log("ERROR:", err);
-            }
-        });
-    });
-}
-
-// const emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-// const patternForUsernames = /^[a-zA-Z0-9_]*$/;
-// const brandName = /([Pp][Oo][Ss][Tt][Mm][Aa][Ss]{2}[Ii][Vv])/;
-// const offensiveWord = /([Nn][Ii][Gg]{2}[Ee][Rr])/;
-// const offensiveSlang = /([Nn][Ii][Gg]{2}[Aa])/;
