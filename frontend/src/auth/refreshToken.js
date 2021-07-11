@@ -1,3 +1,8 @@
+import { postOptions } from "../_helper/authHeader";
+import { BehaviorSubject } from "rxjs";
+
+const userSubject = new BehaviorSubject(null);
+
 // helper functions
 
 export function refreshToken() {

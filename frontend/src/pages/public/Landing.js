@@ -17,7 +17,6 @@ import {
 import {
     handleAddUsernameOrEmail,
     sendLogInIfInfoIsValid,
-    // bundleAcceptedAccountInfoAndSendVerificationCode,
     handlePageOne,
     handlePageTwo,
     handlePageThree,
@@ -171,6 +170,9 @@ function Landing(props) {
                         variant="primary"
                         onClick={() =>
                             sendLogInIfInfoIsValid(
+                                username,
+                                email,
+                                password,
                                 true,
                                 setError,
                                 setDesktopLoginError
@@ -306,7 +308,13 @@ function Landing(props) {
                     <p className="landing_error">{error}</p>
                     <BootstrapButton
                         variant="primary"
-                        onClick={handlePageThree(setShowPage, setError)}
+                        onClick={handlePageThree(
+                            verificationCode,
+                            email,
+                            setVerifiable,
+                            setShowPage,
+                            setError
+                        )}
                         disabled={false}
                     >
                         Next

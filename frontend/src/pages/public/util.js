@@ -5,9 +5,12 @@ import {
     emailIsValid,
     validPassword,
     verifyUsernameAndPassword,
+    verifyCode,
 } from "./Validation";
 
-module.exports = {
+import { useAuth } from "../../auth/use-auth";
+
+export {
     handleAddUsernameOrEmail,
     sendLogInIfInfoIsValid,
     bundleAcceptedAccountInfoAndSendVerificationCode,
@@ -17,7 +20,9 @@ module.exports = {
     handleFinish,
 };
 
-const handleAddUsernameOrEmail = (usernameOrEmail, setUsername, setEmail) => {
+const auth = useAuth();
+
+function handleAddUsernameOrEmail(usernameOrEmail, setUsername, setEmail) {
     // accepts username || email, verifies valid input on frontend, displays err msg if it is invalid.
     // stores username || email if valid so its ready to be sent to server when user clicks Log In.
     if (usernameOrEmail.indexOf("@") === -1) {
@@ -33,9 +38,12 @@ const handleAddUsernameOrEmail = (usernameOrEmail, setUsername, setEmail) => {
         setUsername("");
         setEmail(usernameOrEmail);
     }
-};
+}
 
 const sendLogInIfInfoIsValid = (
+    username,
+    email,
+    password,
     displayErrorInModal,
     setError,
     setDesktopLoginError
@@ -197,14 +205,22 @@ const handlePageTwo = (
     }
 };
 
-const handlePageThree = (setShowPage, setError) => {
+const handlePageThree = (
+    verificationCode,
+    email,
+    setVerifiable,
+    setShowPage,
+    setError
+) => {
     // TODO: turn this into a live version. something like "sendCodeToServer()" then "if success, login & redirect to /home"
-    if (verificationCode === mockCode) {
-        setShowPage(4);
-        setError("");
-    } else {
-        setError("Wrong code. Try again.");
-    }
+    verifyCode(verificationCode, email, setVerifiable).then((response) => {
+        if (response.status === 200) {
+            setShowPage(4);
+            setError("");
+        } else {
+            setError("Wrong code. Try again.");
+        }
+    });
 };
 
 // TODO: the finishing click is not finished. finish it.

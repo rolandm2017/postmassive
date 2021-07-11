@@ -9,16 +9,16 @@ import { BehaviorSubject } from "rxjs";
 
 import { startRefreshTokenTimer, stopRefreshTokenTimer } from "./refreshToken";
 
-// // mock server login section
-// export const mockingServer = true;
+// mock server login section
+export const mockingServer = true;
 
-// const frontendOnly = false; // if true, client doesn't even bother requesting to the mockServer, just assumes serverside works.
-// // these mock things are used when the frontendOnly flag is up
-// export const mockUser = "RolyPoly"; // TODO: make mockUser more like the object we get back from the backend
-// export const mockPassword = "battleships";
-// export const mockEmail = "test@gmail.com";
-// export const mockCode = "qwerty";
-// export const mockJWT = "its4w3btok3n";
+const frontendOnly = false; // if true, client doesn't even bother requesting to the mockServer, just assumes serverside works.
+// these mock things are used when the frontendOnly flag is up
+export const mockUser = "RolyPoly"; // TODO: make mockUser more like the object we get back from the backend
+export const mockPassword = "battleships";
+export const mockEmail = "test@gmail.com";
+export const mockCode = "qwerty";
+export const mockJWT = "its4w3btok3n";
 
 const userSubject = new BehaviorSubject(null);
 

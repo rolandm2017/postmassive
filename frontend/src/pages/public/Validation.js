@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { mockingServer } from "../../auth/use-auth";
+// import { mockingServer } from "../../auth/use-auth";
 
 // Form Validation Below
 
@@ -20,9 +20,7 @@ export function formCheck(name, email, date) {
     const validDob = verifyDateOfBirth(date);
 
     if (validName && validEmail && validDob) {
-        const url = mockingServer
-            ? process.env.REACT_APP_API_URL + "/signup/validate/personal"
-            : "the_actual_development_server_when_its_ready";
+        const url = process.env.REACT_APP_API_URL + "/signup/validate/personal";
         const data = {
             name: name,
             email: email,
@@ -88,9 +86,7 @@ export function usernameIsValid(usernameInput) {
 
 export function usernameServerCheck(username) {
     // This function goes to the server, asks "is this username valid?" and returns a response.
-    const url = mockingServer
-        ? process.env.REACT_APP_API_URL + "/signup/validate/username"
-        : "the_actual_development_server_when_its_ready";
+    const url = process.env.REACT_APP_API_URL + "/signup/validate/username";
     const data = { username: username };
     return new Promise((resolve, reject) => {
         axios
@@ -124,7 +120,7 @@ export const verifyCode = (code, email, setVerifiable) => {
         setVerifiable(true);
         axios
             .post(
-                "localhost:3000/api`/signup/validate/validateVerificationCodeAndSignUp",
+                "localhost:3000/api/signup/validate/validateVerificationCodeAndSignUp",
                 { verificationCode: code, email: email },
                 {
                     headers: {
