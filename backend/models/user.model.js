@@ -27,11 +27,11 @@ const accountSchema = new Schema({
     suspended: { type: Boolean, required: true },
 
     displayName: { type: String, required: true },
-    bio: { type: String, required: true },
+    bio: { type: String, required: false },
     location: { type: String, required: false },
     url: { type: String, required: false },
-    followers: { type: Number, required: true },
-    following: { type: Number, required: true },
+    followers: { type: Array, required: true },
+    following: { type: Array, required: true },
     DMsAreOpen: { type: Boolean, required: true },
     postCount: { type: Number, required: true },
 });

@@ -9,6 +9,8 @@ module.exports = router;
 
 const validation = require("./util");
 
+const saltRounds = require("../server").saltRounds;
+
 router.post("/personal", (req, res) => {
     // Step 1: Verify name, email, date of birth
     console.log(req.body);
@@ -99,9 +101,10 @@ router.post("/createAccountAndReturnVerificationCode", (req, res) => {
                         throw "Trying to sign up with an email that's already taken";
                     } else {
                         console.log("99, 99, 99");
-                        verification.hashPasswordCreateUserAccountAndSendVerificationCode(
+                        validation.hashPasswordCreateUserAccountAndSendVerificationCode(
                             req.body.password,
                             saltRounds,
+                            req,
                             res
                         );
                     }

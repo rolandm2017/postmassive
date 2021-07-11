@@ -62,9 +62,9 @@ const sendLogInIfInfoIsValid = (
             }).catch((err) => {
                 console.log("math!", err);
                 if (displayErrorInModal) {
-                    setError(err);
+                    setError(err.toString());
                 } else {
-                    setDesktopLoginError(err);
+                    setDesktopLoginError(err.toString());
                 }
             });
         } else {
@@ -130,7 +130,7 @@ const handlePageOne = (name, email, date, setShowPage, setError) => {
                 );
             }
         })
-        .catch((err) => setError(err));
+        .catch((err) => setError(err.toString()));
 };
 
 const handlePageTwo = (
@@ -170,7 +170,7 @@ const handlePageTwo = (
                             setError("");
                         })
                         .catch((err) => {
-                            setError(err);
+                            setError(err.toString());
                         });
                 } else if (response === "admin_or_postmassiv") {
                     setError(
@@ -194,7 +194,7 @@ const handlePageTwo = (
                     setError("Unacceptable username.");
                 }
             })
-            .catch((err) => setError(err));
+            .catch((err) => setError(err.toString()));
     }
 };
 

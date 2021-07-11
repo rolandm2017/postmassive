@@ -1,3 +1,4 @@
+const bcrypt = require("bcryptjs");
 const User = require("../models/user.model");
 
 module.exports = {
@@ -6,6 +7,7 @@ module.exports = {
     getAttemptsByEmail,
     getUserCode,
     generateUserVerificationCode,
+    hashPasswordCreateUserAccountAndSendVerificationCode,
     increaseFailedVerificationAttempts,
     approveAccountCreation,
 };
@@ -78,6 +80,7 @@ function increaseFailedVerificationAttempts(email) {
 function hashPasswordCreateUserAccountAndSendVerificationCode(
     password,
     saltRounds,
+    req,
     res
 ) {
     console.log("crypting...");
@@ -85,32 +88,45 @@ function hashPasswordCreateUserAccountAndSendVerificationCode(
         if (err) throw err;
         const verificationCode = generateUserVerificationCode();
         console.log("here is the code:", verificationCode);
-        new User({
-            fullName: req.body.name,
-            email: req.body.email,
-            dateOfBirth: req.body.date,
-            username: username,
-            passwordHash: hash, // password is hashed by bcrypt
-            createdAt: new Date(),
-            verificationCode: verificationCode,
-            failedAttempts: 0,
-            activeAccount: false,
-            accountType: "user",
-        })
-            .save()
-            .then((success) => {
-                // Step 3: Create account with email, username, pw, send verification code.
-                // Await step 4 before activating account.
-                // if account is not verified within 24 hrs, delete it.
-                console.log("Added an account to the database!");
-                // TODO: send email to user's supplied email with the verificationCode
-                // TEMP: send it to the frontend for whatever reason
-                console.log(verificationCode);
-                res.send("verification_code_sent");
+        try {
+            new User({
+                fullName: req.body.fullName,
+                email: req.body.email,
+                dateOfBirth: req.body.birthdate,
+                username: req.body.username.trim(),
+                passwordHash: hash, // password is hashed by bcrypt
+                accountCreatedAt: new Date(),
+                verificationCode: verificationCode,
+                failedAttempts: 0,
+                activeAccount: false,
+                accountType: "user",
+                postCount: 0,
+                DMsAreOpen: false,
+                following: [],
+                followers: [],
+                bio: "",
+                displayName: req.body.username.trim(),
+                suspended: false,
+                acceptsTermsAndConditions: false,
+                failedVerifications: 0,
             })
-            .catch((err) => {
-                throw err;
-            });
+                .save()
+                .then((success) => {
+                    // Step 3: Create account with email, username, pw, send verification code.
+                    // Await step 4 before activating account.
+                    // if account is not verified within 24 hrs, delete it.
+                    console.log("Added an account to the database!");
+                    // TODO: send email to user's supplied email with the verificationCode
+                    // TEMP: send it to the frontend for whatever reason
+                    console.log(verificationCode);
+                    res.send("verification_code_sent");
+                })
+                .catch((err) => {
+                    throw err;
+                });
+        } catch (error) {
+            throw error;
+        }
     });
 }
 

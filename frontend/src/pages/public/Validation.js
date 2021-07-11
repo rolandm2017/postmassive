@@ -1,7 +1,5 @@
-import axios from "axios";
-
 // import { mockingServer } from "../../auth/use-auth";
-
+import axios from "axios";
 // Form Validation Below
 
 export const usernamePattern = /^[a-zA-Z0-9_]*$/;

@@ -23,6 +23,10 @@ if (process.env.NODE_ENV === "development") {
     saltRounds = 17;
 }
 
+module.exports = {
+    saltRounds: saltRounds,
+};
+
 const api = "/api";
 
 // *** *** ***
