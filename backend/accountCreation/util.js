@@ -101,20 +101,25 @@ function hashPasswordCreateUserAccountAndSendVerificationCode(
                 dateOfBirth: req.body.birthdate,
                 username: req.body.username.trim(),
                 passwordHash: hash, // password is hashed by bcrypt
+                //account credentials
+                role: "user",
                 accountCreatedAt: new Date(),
-                verificationCode: verificationCode,
-                failedAttempts: 0,
+                // verification info
                 isVerified: false,
-                accountType: "user",
-                postCount: 0,
-                DMsAreOpen: false,
-                following: [],
-                followers: [],
-                bio: "",
-                displayName: req.body.username.trim(),
+                verificationCode: verificationCode,
+                failedVerifications: 0,
+                // misc
                 suspended: false,
                 acceptsTermsAndConditions: false,
-                failedVerifications: 0,
+                // public profile stuff
+                displayName: req.body.username.trim(),
+                bio: "",
+                location: "",
+                url: "",
+                followers: [],
+                following: [],
+                DMsAreOpen: false,
+                postCount: 0,
             })
                 .save()
                 .then((success) => {
