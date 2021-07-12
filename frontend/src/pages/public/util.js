@@ -212,6 +212,7 @@ function handlePageThree(
 }
 
 // TODO: the finishing click is not finished. finish it.
-const handleFinish = () => {
+const handleFinish = (goToHome) => {
     // authenticate user and send them to the home page
+    goToHome();
 };

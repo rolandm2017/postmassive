@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import { useHistory } from "react-router-dom";
+
 import { useAuth } from "../../auth/use-auth";
 
 import DatePicker from "react-datepicker";
@@ -11,7 +13,7 @@ import {
     // emailIsValid,
     validPassword,
     // verifyUsernameAndPassword,
-    verifyCode,
+    // verifyCode,
 } from "./Validation";
 
 import {
@@ -38,6 +40,8 @@ import Chat from "../../images/icons8-chat-50.png";
 import "react-datepicker/dist/react-datepicker.css";
 import "./Landing.scss";
 
+import LogInModal from "./modals/LogInModal";
+
 function Landing(props) {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -54,6 +58,7 @@ function Landing(props) {
     const [desktopLoginError, setDesktopLoginError] = useState("");
 
     const auth = useAuth();
+    const history = useHistory();
 
     useEffect(() => {
         document.title = "PostMassiv. Say it loud";
@@ -139,60 +144,25 @@ function Landing(props) {
 
     return (
         <div id="landing" className="main-container">
-            <Modal
-                show={logIn}
-                onHide={handleCloseLogIn}
-                centered
-                animation={false}
-            >
-                <Modal.Header closeButton className="black-button">
-                    <Modal.Title>Log in</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <InputGroup className="mb-3">
-                        <FormControl
-                            placeholder="Username or email"
-                            aria-label="Username or email"
-                            aria-describedby="basic-addon1"
-                            onChange={(value) =>
-                                handleAddUsernameOrEmail(value.target.value)
-                            }
-                        />
-                    </InputGroup>
-                    <InputGroup className="mb-3">
-                        <FormControl
-                            placeholder="Password"
-                            aria-label="Password"
-                            type="password"
-                            aria-describedby="basic-addon1"
-                            onChange={(value) => handlePassword(value)}
-                        />
-                    </InputGroup>
-                    {/* FIXME IMPORTANT: onKeyUp, if key is enter, submit form. will need this on login&signup modal */}
-                </Modal.Body>
-                <Modal.Footer>
-                    <p id="landing_error" className="black-text">
-                        {error}
-                    </p>
-                    <BootstrapButton
-                        variant="primary"
-                        onClick={() =>
-                            sendLogInIfInfoIsValid(
-                                username,
-                                email,
-                                password,
-                                true,
-                                setError,
-                                setDesktopLoginError,
-                                auth
-                            )
-                        }
-                        disabled={false}
-                    >
-                        Log In
-                    </BootstrapButton>
-                </Modal.Footer>
-            </Modal>
+            <PlainLogIn
+                logIn={logIn}
+                handleCloseLogIn={handleCloseLogIn}
+                handleAddUsernameOrEmail={(value) =>
+                    handleAddUsernameOrEmail(value.target.value)
+                }
+                handleAddPassword={(value) => handlePassword(value)}
+                sendLogInIfInfoIsValid={() =>
+                    sendLogInIfInfoIsValid(
+                        username,
+                        email,
+                        password,
+                        true,
+                        setError,
+                        setDesktopLoginError,
+                        auth
+                    )
+                }
+            />
             {/* sign up modal */}
             <Modal
                 show={showPage === 1}
@@ -361,7 +331,7 @@ function Landing(props) {
                     <BootstrapButton
                         variant="primary"
                         onClick={() => {
-                            handleFinish();
+                            handleFinish(history.push("/home"));
                         }}
                         disabled={false}
                     >
