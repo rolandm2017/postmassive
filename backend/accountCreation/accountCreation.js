@@ -143,7 +143,7 @@ router.post("/validateVerificationCodeAndSignUp", async (req, res) => {
         if (receivedValidationCode === theValidationCodeTheServerAssigned) {
             validation.approveAccountCreation(req.body.email);
             console.log("Account creation approved!");
-            res.send("code_accepted");
+            res.status(200).send("code_accepted");
         } else {
             validation.increaseFailedVerificationAttempts(req.body.email);
             console.log("WRong code detected!!!!");

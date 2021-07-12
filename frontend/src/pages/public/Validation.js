@@ -142,6 +142,7 @@ export const verifyCode = (
                 }
             )
             .then((res) => {
+                console.log("verification response received");
                 if (res.status === 200) {
                     // setVerifiable(true);
                     setShowPage(4);

@@ -40,15 +40,21 @@ function getAttemptsByEmail(email) {
 
 async function getUserVerificationCode(email) {
     // retrieves verification code created for this email
-    return await User.find(
+    const thing = await User.find(
         { email: email },
-        "verificationCode",
-        function (err, user) {
-            if (err) throw err;
-            console.log("was it retrieved", user, user[0].verificationCode);
-            return user[0].verificationCode;
-        }
-    );
+        "verificationCode"
+        // function (err, user) {
+        //     if (err) throw err;
+        //     console.log("was it retrieved", user, user[0].verificationCode);
+        //     const verificationCode = user[0].verificationCode;
+        //     console.log("but was it really??", verificationCode);
+        //     return verificationCode;
+        // }
+    ).exec();
+    console.log("thing", thing, thing[0]);
+    const verificationCode = thing[0].verificationCode;
+    console.log("55,", verificationCode, typeof verificationCode);
+    return verificationCode;
 }
 
 function generateUserVerificationCode() {
