@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import Massive from "../../components/massive/Massive";
 
-import Wrapper from "../helper/Wrapper";
+import Wrapper from "../_helper/Wrapper";
 
 import { getOptions } from "../../_helper/authHeader";
 

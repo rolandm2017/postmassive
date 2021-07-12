@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Button from "../../components/parts/Button";
 import Massive from "../../components/massive/Massive";
 
-import Wrapper from "../helper/Wrapper";
+import Wrapper from "../_helper/Wrapper";
 
 import BackButton from "../../images/icons8-back-arrow-48-wh.png";
 import More from "../../images/important-mail-48.png";
@@ -35,7 +35,7 @@ class Profile extends Component {
                 this.setState({ profile: profile });
             });
         });
-        // TODO IMPORTANT: upgrade fetching "/feed" to fetching the user's actual massivs. (as in "/feed/:username")
+        // TODO IMPORTANT: upgrade fetching "/feed" to fetching the user's actual massives. (as in "/feed/:username")
         const userSpecificFeedUrl =
             process.env.REACT_APP_API_URL + "/feed" + username;
         fetch(userSpecificFeedUrl).then((res) => {

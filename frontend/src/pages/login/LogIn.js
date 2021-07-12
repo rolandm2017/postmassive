@@ -12,6 +12,7 @@ import { handleAddUsernameOrEmail } from "../../loginTools/util";
 import { validPassword } from "../../loginTools/Validation";
 
 function LogIn(props) {
+    // TODO: finish this page!!! it is unfinished
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");

@@ -42,7 +42,7 @@ function Amp(props) {
                 {/* TODO: make the amplifier's name bold */}
                 <p className="my-1">
                     {props.amplifier} and {props.others} others amplified your
-                    massiv!
+                    massive!
                 </p>
             </div>
             <div className="spacer">

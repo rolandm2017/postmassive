@@ -52,12 +52,18 @@ export function _deleteOptions(url) {
 function authHeader(url) {
     // return auth header with jwt if user is logged in and request is to the api url
     const user = userValue();
+    console.log("got to here", user);
     if (!user) {
         return {};
     }
     const isLoggedIn = user && user.jwtToken;
     const isApiUrl = url.startsWith(process.env.REACT_APP_API_URL);
     if (isLoggedIn && isApiUrl) {
+        console.log(
+            `asdfadsfadsfdsfasdfadsfasdfads fadsf adsfads fadsfadsfasdsdfsdfasdf ${Cookies.get(
+                "jwt"
+            )}`
+        );
         return { Authorization: `Bearer ${Cookies.get("jwt")}` };
     } else {
         return {};

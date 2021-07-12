@@ -4,7 +4,7 @@ import InboxItem from "../../components/inboxItem/InboxItem";
 
 import profilePicPlaceholder3 from "../../images/cat3.jpg";
 
-import Wrapper from "../helper/Wrapper";
+import Wrapper from "../_helper/Wrapper";
 
 import "./Messages.scss";
 

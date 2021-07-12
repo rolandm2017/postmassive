@@ -1,6 +1,33 @@
 @import "styles/colors";
 @import "styles/breakpoints";
 
+// ** ** ** ** ** ** **
+// for making the waterfall scroll properly
+
+article {
+    // border: 1px solid black;
+    // width: 600px !important;
+}
+
+aside {
+    position: sticky !important;
+    flex: 1 !important;
+    top: 0 !important;
+    height: 100vh !important;
+}
+
+main {
+    display: flex !important;
+    justify-content: space-between !important;
+    position: relative !important;
+}
+
+section {
+}
+
+// ** ** ** **
+// ** ** ** **
+
 body {
     background-color: #eee;
     font-family: sans-serif;

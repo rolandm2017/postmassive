@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import Wrapper from "../helper/Wrapper";
+import Wrapper from "../_helper/Wrapper";
 
 import "./Search.scss";
 

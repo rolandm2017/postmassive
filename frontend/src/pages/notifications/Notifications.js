@@ -10,10 +10,12 @@ import profilePicPlaceholder from "../../images/cat1.jpg";
 import profilePicPlaceholder2 from "../../images/cat2.jpg";
 import profilePicPlaceholder3 from "../../images/cat3.jpg";
 
-import Wrapper from "../helper/Wrapper";
+import Wrapper from "../_helper/Wrapper";
 
 import "./Notifications.scss";
 import "../../components/notifications/Shared.scss";
+
+import { getOptions } from "../../_helper/authHeader";
 
 class Notifications extends Component {
     state = {
@@ -21,12 +23,15 @@ class Notifications extends Component {
     };
 
     componentDidMount() {
-        fetch(process.env.REACT_APP_API_URL + "/mock/notifications", {
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-            },
-        }).then((res) => {
+        const notificationsUrl =
+            process.env.REACT_APP_API_URL + "/mock/notifications";
+        // const prevHeaders = {
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //         Accept: "application/json",
+        //     },
+        // };
+        fetch(notificationsUrl, getOptions(notificationsUrl)).then((res) => {
             res.json().then((notifications) => {
                 // console.log(notifications);
                 this.setState({ notifications: notifications });
