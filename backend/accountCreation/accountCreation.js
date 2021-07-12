@@ -25,7 +25,9 @@ router.post("/personal", (req, res) => {
                 users.length > 0;
             if (theresAlreadyAnAccountSignedUpWithThatEmail) {
                 res.send("email_is_taken");
-                throw "Trying to sign up with an email that's already taken";
+                console.log(
+                    "Trying to sign up with an email that's already taken"
+                );
             } else {
                 res.send("personal_accepted");
             }
@@ -98,7 +100,9 @@ router.post("/createAccountAndReturnVerificationCode", (req, res) => {
                     if (theresAlreadyAnAccountSignedUpWithThatEmail) {
                         // TODO: log this error to the database if it ever happens. record time,
                         // date, data, "doc" and payload
-                        throw "Trying to sign up with an email that's already taken";
+                        console.log(
+                            "Trying to sign up with an email that's already taken"
+                        );
                     } else {
                         console.log("99, 99, 99");
                         validation.hashPasswordCreateUserAccountAndSendVerificationCode(
@@ -123,17 +127,22 @@ router.post("/validateVerificationCodeAndSignUp", (req, res) => {
     // Step 4: Awaiting verification code. After it is accepted, the db goes,
     // "Ok, the username/account associated with this email is good to go. User can log in & use PM now"
     // this route is used when the user finally gets past name,email,dob,username,pw,verification code
+    console.log("AYY LMAO:", req.body);
     const failedAttempts = validation.getAttemptsByEmail(req.body.email);
     if (failedAttempts >= 3) {
         res.send("too_many_fails");
     } else {
-        const receivedCode = req.body.verificationCode;
-        const generatedPassword = validation.getUserCode(req.body.email);
-        if (receivedCode === generatedPassword) {
+        const receivedValidationCode = req.body.verificationCode;
+        const theValidationCodeTheServerAssigned =
+            validation.getUserVerificationCode(req.body.email);
+        console.log(receivedValidationCode, theValidationCodeTheServerAssigned);
+        if (receivedValidationCode === theValidationCodeTheServerAssigned) {
             validation.approveAccountCreation(req.body.email);
+            console.log("Account creation approved!");
             res.send("code_accepted");
         } else {
             validation.increaseFailedVerificationAttempts(req.body.email);
+            console.log("WRong code detected!!!!");
             res.send("wrong_code");
         }
     }

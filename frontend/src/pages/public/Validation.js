@@ -123,13 +123,17 @@ export const verifyCode = (
     setShowPage,
     setError
 ) => {
-    console.log(1244444444);
+    console.log(1244444444, setVerifiable, code);
     const onlyAlphanumerical = /^[A-Za-z0-9]*$/;
-    if (code.length === 6 && onlyAlphanumerical.test(code)) {
-        setVerifiable(true);
+    const validCode = code.length === 7 && onlyAlphanumerical.test(code);
+    console.log(validCode, code.length, onlyAlphanumerical.test(code));
+    if (validCode) {
+        // setVerifiable(true); // what does this even do? what ist he point of this? I wrote it and idk what it does
+        console.log("SENDING VERIFICATION");
         axios
             .post(
-                "localhost:3000/api/signup/validate/validateVerificationCodeAndSignUp",
+                process.env.REACT_APP_API_URL +
+                    "/signup/validate/validateVerificationCodeAndSignUp",
                 { verificationCode: code, email: email },
                 {
                     headers: {
@@ -139,7 +143,7 @@ export const verifyCode = (
             )
             .then((res) => {
                 if (res.status === 200) {
-                    setVerifiable(true);
+                    // setVerifiable(true);
                     setShowPage(4);
                     setError("");
                 } else {
@@ -150,7 +154,7 @@ export const verifyCode = (
         // send code to backend, receive "code is correct" or "nope, verification fail" response.
         return true; // returns true so the test suite knows what happened
     } else {
-        setVerifiable(false);
+        // setVerifiable(false);
         return false;
     }
 };

@@ -210,6 +210,7 @@ function Landing(props) {
                             aria-label="Name"
                             aria-describedby="basic-addon1"
                             onChange={(value) => handleName(value)}
+                            defaultValue={"Marle Guardia"}
                         />
                     </InputGroup>
                     <InputGroup className="mb-3">
@@ -218,6 +219,7 @@ function Landing(props) {
                             aria-label="Email"
                             aria-describedby="basic-addon1"
                             onChange={(value) => handleEmail(value)}
+                            defaultValue={"marle@guardia.gov"}
                         />
                     </InputGroup>
                     <h6 className="lightmode-text">
@@ -264,6 +266,7 @@ function Landing(props) {
                             aria-label="Username"
                             aria-describedby="basic-addon1"
                             onChange={(value) => handleUsername(value)}
+                            defaultValue={"marle"}
                         />
                     </InputGroup>
                     <InputGroup className="mb-3">
@@ -272,6 +275,7 @@ function Landing(props) {
                             id="exampleInputPassword1"
                             placeholder="Password"
                             onChange={(value) => handlePassword(value)}
+                            defaultValue={"ilovecrono"}
                         />
                     </InputGroup>
                 </Modal.Body>
@@ -311,9 +315,10 @@ function Landing(props) {
                             placeholder="Verification"
                             aria-label="Verification"
                             aria-describedby="basic-addon1"
-                            onChange={(value) =>
-                                verifyCode(value, setVerifiable)
-                            }
+                            onChange={(event) => {
+                                console.log("code is now:", event.target.value);
+                                setVerificationCode(event.target.value);
+                            }}
                         />
                     </InputGroup>
                 </Modal.Body>

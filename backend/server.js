@@ -61,6 +61,10 @@ app.use(api + "/auth", require("./authentication/authentication"));
 
 // todo: implement later...
 
+// ********
+// get fake data for timeline
+app.use(api + "/timeline", require("./data/index"));
+
 app.listen(port, () => {
     console.log(`Example app listening at http://127.0.0.1:${port}`);
 });

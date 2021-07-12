@@ -126,7 +126,7 @@ const handlePageOne = (name, email, date, setShowPage, setError) => {
                 setError("This email is already taken!");
             } else {
                 setError(
-                    "Unexpected error. Contact @rolypolyistaken on Twitter if the issue persists."
+                    "Unexpected error. Account may already exist. Contact @rolypolyistaken on Twitter if the issue persists."
                 );
             }
         })
@@ -151,6 +151,7 @@ const handlePageTwo = (
             .then((response) => {
                 console.log("204:", response); // FIXME: input "postmassiv" threw up the "else" condition. wrong condition
                 if (response === "accepted") {
+                    setError("Server is creating your account...");
                     const data = {
                         fullName: name,
                         email: email,
@@ -205,6 +206,7 @@ function handlePageThree(
     setShowPage,
     setError
 ) {
+    console.log("asdfadsf:", verificationCode);
     // TODO: turn this into a live version. something like "sendCodeToServer()" then "if success, login & redirect to /home"
     verifyCode(verificationCode, email, setVerifiable, setShowPage, setError);
 }

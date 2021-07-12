@@ -5,7 +5,7 @@ module.exports = {
     checkIfAllCharsAreAcceptedInName,
     userIsOlderThan13,
     getAttemptsByEmail,
-    getUserCode,
+    getUserVerificationCode,
     generateUserVerificationCode,
     hashPasswordCreateUserAccountAndSendVerificationCode,
     increaseFailedVerificationAttempts,
@@ -38,9 +38,9 @@ function getAttemptsByEmail(email) {
     });
 }
 
-function getUserCode(email) {
+function getUserVerificationCode(email) {
     // retrieves verification code created for this email
-    return User.find(
+    return await User.find(
         { email: email },
         "verificationCode",
         function (err, user) {
