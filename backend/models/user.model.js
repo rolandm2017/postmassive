@@ -13,7 +13,7 @@ const accountSchema = new Schema({
     verificationCode: { type: String, required: true },
     accountVerifiedAt: { type: Date },
     failedVerifications: { type: Number, required: true },
-    activeAccount: { type: Boolean, required: true }, // "finished signup?"
+    isVerified: { type: Boolean, required: true }, // "finished signup?"
     accountType: { type: String, required: true }, // user, moderator, admin,
     resetToken: {
         token: String,

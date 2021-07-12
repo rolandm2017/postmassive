@@ -104,7 +104,7 @@ function hashPasswordCreateUserAccountAndSendVerificationCode(
                 accountCreatedAt: new Date(),
                 verificationCode: verificationCode,
                 failedAttempts: 0,
-                activeAccount: false,
+                isVerified: false,
                 accountType: "user",
                 postCount: 0,
                 DMsAreOpen: false,
@@ -140,8 +140,8 @@ function approveAccountCreation(email) {
     // approves account creation. basically removes auto-delete timer for this user's user doc
     User.findOne({ email: email }, function (err, user) {
         if (err) throw err;
-        user.finishedSignUp = true;
-        user.activeAccount = true;
+        // user.finishedSignUp = true; // zombied 07-11
+        user.isVerified = true;
 
         user.save(function (err) {
             if (err) {

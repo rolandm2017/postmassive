@@ -5,14 +5,13 @@ import FormControl from "react-bootstrap/FormControl";
 import Modal from "react-bootstrap/Modal";
 import BootstrapButton from "react-bootstrap/Button";
 
-import Button from "../../components/parts/Button";
-
 function LogInModal({
     logIn,
     handleCloseLogIn,
     handleAddUsernameOrEmail,
     handleAddPassword,
     sendLogInIfInfoIsValid,
+    error,
 }) {
     return (
         <Modal

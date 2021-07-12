@@ -144,11 +144,15 @@ function Landing(props) {
 
     return (
         <div id="landing" className="main-container">
-            <PlainLogIn
+            <LogInModal
                 logIn={logIn}
                 handleCloseLogIn={handleCloseLogIn}
                 handleAddUsernameOrEmail={(value) =>
-                    handleAddUsernameOrEmail(value.target.value)
+                    handleAddUsernameOrEmail(
+                        value.target.value,
+                        setUsername,
+                        setEmail
+                    )
                 }
                 handleAddPassword={(value) => handlePassword(value)}
                 sendLogInIfInfoIsValid={() =>
@@ -162,6 +166,7 @@ function Landing(props) {
                         auth
                     )
                 }
+                error={error}
             />
             {/* sign up modal */}
             <Modal
