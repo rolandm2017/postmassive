@@ -35,7 +35,7 @@ if (extreme) {
     }
 }
 
-const ids = [...Array(999).keys()];
+const ids = [...Array(9999).keys()];
 const authors = [
     { displayName: "Crono", username: "LegendaryHero" },
     { displayName: "Lucca", username: "geniusInventor99" },
@@ -186,8 +186,7 @@ const events = {
         {
             displayName: "Marle",
             when: "Yesterday",
-            offer:
-                "get to 1 million followers in a year or less and get paid to do it",
+            offer: "get to 1 million followers in a year or less and get paid to do it",
         },
     ],
 };
@@ -216,7 +215,7 @@ const locations = [
 ];
 
 const websites = [
-    "www.postmassiv.com",
+    "www.postmassive.com",
     "www.twitter.com",
     "google.ca",
     null,

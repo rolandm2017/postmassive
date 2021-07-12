@@ -21,7 +21,7 @@ class Notifications extends Component {
     };
 
     componentDidMount() {
-        fetch(process.env.REACT_APP_API_URL + "/notifications", {
+        fetch(process.env.REACT_APP_API_URL + "/mock/notifications", {
             headers: {
                 "Content-Type": "application/json",
                 Accept: "application/json",

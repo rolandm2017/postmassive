@@ -124,7 +124,7 @@ Notifications. One of them needed author().display. So in that situation, should
 
 Reserved names:
 
-1. anything with Admin or PostMassiv.
+1. anything with Admin or Postmassive.
 2. "home", "messages", "inbox", "explore", "search", "lists", "settings", "analytics", "i"
 
 This is because these names are needed as routes.

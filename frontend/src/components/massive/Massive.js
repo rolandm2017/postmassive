@@ -4,7 +4,7 @@ import EngagementContainer from "../engagementContainer/EngagementContainer";
 
 import Logo from "../../images/gps-searching.png";
 
-import "./Massiv.css";
+import "./massive.css";
 
 class Massiv extends Component {
     render() {

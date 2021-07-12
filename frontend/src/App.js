@@ -12,7 +12,7 @@ import Messages from "./pages/messages/Messages";
 import Post from "./pages/post/Post";
 import Profile from "./pages/profile/Profile";
 import Landing from "./pages/public/Landing";
-import Massiv from "./pages/massiv/Massiv";
+import Massive from "./pages/massive/Massive";
 import Followers from "./pages/followers/Followers";
 
 import "./App.scss";
@@ -103,8 +103,8 @@ function App() {
                         {/* <Route path="/landing">
                             <Landing />
                         </Route> */}
-                        <Route path="/massiv">
-                            <Massiv />
+                        <Route path="/massive">
+                            <Massive />
                         </Route>
                         <Route exact path="/:username">
                             <Profile />
@@ -178,7 +178,7 @@ export default App;
 // TODO: add a PostMassiv loading screen, like what Twitter has, while Feed/Notification/Messages etc loads.
 // TODO: Present Explore differently based on whether user is logged in or not.
 // TODO: Make a Bookmarks page.
-// TODO: Allow user to bookmark a Massiv.
+// TODO: Allow user to bookmark a massive.
 
 // *** *** *** ***
 // TODO IMPORTANT but LATER: Detect user actions. Mouse clicks, how long they look at a Massiv, etc. Record these in a database. (Do what Twtr does)

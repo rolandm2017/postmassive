@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 import Button from "../../components/parts/Button";
-import Massiv from "../../components/massiv/Massiv";
+import Massive from "../../components/massive/Massive";
 
 import Wrapper from "../helper/Wrapper";
 
@@ -20,7 +20,7 @@ import styles from "./Profile.module.scss";
 class Profile extends Component {
     state = {
         profile: null,
-        massivs: null,
+        massives: null,
     };
 
     componentDidMount() {
@@ -39,9 +39,9 @@ class Profile extends Component {
         const userSpecificFeedUrl =
             process.env.REACT_APP_API_URL + "/feed" + username;
         fetch(userSpecificFeedUrl).then((res) => {
-            res.json().then((massivs) => {
-                console.log("setting massivs");
-                this.setState({ massivs: massivs });
+            res.json().then((massives) => {
+                console.log("setting massives");
+                this.setState({ massives: massives });
             });
         });
     }
@@ -263,10 +263,10 @@ class Profile extends Component {
                 </header>
                 <div id={`${styles.options}`} className="d-flex">
                     <div>
-                        <p>Massivs</p>
+                        <p>Massives</p>
                     </div>
                     <div>
-                        <p>Massivs & replies</p>
+                        <p>Massives & replies</p>
                     </div>
                     <div>
                         <p>Amplifies</p>
@@ -275,19 +275,19 @@ class Profile extends Component {
                         <p>Likes</p>
                     </div>
                 </div>
-                <div id={`${styles.massivsContainer}`}>
-                    {this.state.massivs
-                        ? this.state.massivs.map((massiv) => {
+                <div id={`${styles.massivesContainer}`}>
+                    {this.state.massives
+                        ? this.state.massives.map((massive) => {
                               return (
-                                  <Massiv
-                                      key={massiv.id}
-                                      author={massiv.author}
-                                      content={massiv.content}
-                                      replies={massiv.replies}
-                                      amplifies={massiv.amplifies}
-                                      likes={massiv.likes}
-                                      views={massiv.views}
-                                      cap={massiv.cap}
+                                  <Massive
+                                      key={massive.id}
+                                      author={massive.author}
+                                      content={massive.content}
+                                      replies={massive.replies}
+                                      amplifies={massive.amplifies}
+                                      likes={massive.likes}
+                                      views={massive.views}
+                                      cap={massive.cap}
                                   />
                               );
                           })

@@ -121,7 +121,7 @@ function handlePageOne(name, email, date, setShowPage, setError) {
             } else if (res === "bad_email") {
                 setError("You wrote your email incorrectly.");
             } else if (res === "bad_age") {
-                setError("You must be at least 13 to use PostMassiv.");
+                setError("You must be at least 13 to use Postmassive.");
             } else if (res === "email_already_taken") {
                 setError("This email is already taken!");
             } else {

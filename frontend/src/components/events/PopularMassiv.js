@@ -2,7 +2,7 @@ import React from "react";
 
 import ProcessAmount from "../ProcessAmount";
 
-import styles from "./PopularMassiv.module.css";
+import styles from "./Popularmassive.module.css";
 
 function PopularMassiv(props) {
     return (

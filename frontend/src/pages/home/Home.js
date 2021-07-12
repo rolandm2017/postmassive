@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import Massiv from "../../components/massiv/Massiv";
+import Massive from "../../components/massive/Massive";
 
 import Wrapper from "../helper/Wrapper";
 
@@ -24,7 +24,7 @@ class Home extends Component {
 
         // getJwt();
 
-        const feedUrl = process.env.REACT_APP_API_URL + "/feed";
+        const feedUrl = process.env.REACT_APP_API_URL + "/mock/feed";
         fetch(feedUrl, getOptions(feedUrl)).then((res) => {
             res.json().then((massivs) => {
                 console.log(massivs[0]);
@@ -41,18 +41,18 @@ class Home extends Component {
                 onSearchPage={false}
                 breakpoints={this.props.breakpoints}
             >
-                {this.state.massivs
-                    ? this.state.massivs.map((massiv) => {
+                {this.state.massives
+                    ? this.state.massives.map((massive) => {
                           return (
-                              <Massiv
-                                  key={massiv.id}
-                                  author={massiv.author}
-                                  content={massiv.content}
-                                  replies={massiv.replies}
-                                  amplifies={massiv.amplifies}
-                                  likes={massiv.likes}
-                                  views={massiv.views}
-                                  cap={massiv.cap}
+                              <Massive
+                                  key={massive.id}
+                                  author={massive.author}
+                                  content={massive.content}
+                                  replies={massive.replies}
+                                  amplifies={massive.amplifies}
+                                  likes={massive.likes}
+                                  views={massive.views}
+                                  cap={massive.cap}
                               />
                           );
                       })

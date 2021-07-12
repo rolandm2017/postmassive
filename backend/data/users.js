@@ -11,7 +11,7 @@ const users = {
             tweets: 33094,
             bio: "a chrono trigger fan",
             location: "vancouver",
-            website: "www.postmassiv.com",
+            website: "www.postmassive.com",
             birthday: new Date(1990, 3, 23).toString().slice(4, 11),
             joinDate: new Date(2008, 7, 29).toString().slice(4, 11),
             following: 783,
@@ -49,8 +49,7 @@ const users = {
             username: "Lucca",
             displayName: "geniusInventorg1r1uwu",
             tweets: 7073,
-            bio:
-                "lorem ipsum doloret si here is some text. I am reading text. George Bush was POTUS for eight years. I support tea.",
+            bio: "lorem ipsum doloret si here is some text. I am reading text. George Bush was POTUS for eight years. I support tea.",
             location: "also La Guardia",
             website: "www.notarealwebsitebylucca.com",
             birthday: new Date(1997, 12, 22).toString().slice(4, 11),
@@ -70,8 +69,7 @@ const users = {
             username: "Marle",
             displayName: "don't call me princess",
             tweets: 230,
-            bio:
-                "mostly just looking for another adventure. Wife of Crono. Mother of 3 kids and future queen of Guardia",
+            bio: "mostly just looking for another adventure. Wife of Crono. Mother of 3 kids and future queen of Guardia",
             location: "la guardia",
             website: "www.marleprojects.guardia.gov",
             birthday: new Date(1991, 2, 24).toString().slice(4, 11),
