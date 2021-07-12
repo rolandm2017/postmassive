@@ -4,8 +4,6 @@ import { useHistory } from "react-router-dom";
 
 import { useAuth } from "../../auth/use-auth";
 
-import DatePicker from "react-datepicker";
-
 import {
     // formCheck,
     // usernameServerCheck,
@@ -27,7 +25,6 @@ import {
 
 import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
-import Modal from "react-bootstrap/Modal";
 import BootstrapButton from "react-bootstrap/Button";
 
 import Button from "../../components/parts/Button";
@@ -41,6 +38,12 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./Landing.scss";
 
 import LogInModal from "./modals/LogInModal";
+import NameEmailBirthdayModal from "./modals/signUpFlow/NameEmailBirthdayModal";
+import UsernamePasswordModal from "./modals/signUpFlow/UsernamePasswordModal";
+import ValidationCodeModal from "./modals/signUpFlow/ValidationCodeModal";
+import AllSetModal from "./modals/signUpFlow/AllSetModal";
+// import ValidationCodeModal from "./modals/signUpFlow/ValidationCodeModal";
+// import AllSetModal from "./modals/signUpFlow/AllSetModal";
 
 function Landing(props) {
     const [username, setUsername] = useState("");
@@ -61,11 +64,11 @@ function Landing(props) {
     const history = useHistory();
 
     useEffect(() => {
-        document.title = "PostMassiv. Say it loud";
+        document.title = "PostMassive. Say it loud";
     }, []);
 
     useEffect(() => {
-        document.title = "PostMassiv";
+        document.title = "PostMassive";
     }, []);
 
     const handleDate = (date) => {
@@ -169,181 +172,63 @@ function Landing(props) {
                 error={error}
             />
             {/* sign up modal */}
-            <Modal
-                show={showPage === 1}
-                onHide={handleClose}
-                centered
-                animation={false}
-            >
-                <Modal.Header closeButton className="black-button">
-                    <Modal.Title>Create your account</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <InputGroup className="mb-3">
-                        <FormControl
-                            placeholder="Name"
-                            aria-label="Name"
-                            aria-describedby="basic-addon1"
-                            onChange={(value) => handleName(value)}
-                            defaultValue={"Marle Guardia"}
-                        />
-                    </InputGroup>
-                    <InputGroup className="mb-3">
-                        <FormControl
-                            placeholder="Email"
-                            aria-label="Email"
-                            aria-describedby="basic-addon1"
-                            onChange={(value) => handleEmail(value)}
-                            defaultValue={"marle@guardia.gov"}
-                        />
-                    </InputGroup>
-                    <h6 className="lightmode-text">
-                        Type in your date of birth
-                    </h6>
-                    {/* // FIXME: The DatePicker SUCKS. Replace it. It shows a calendar dropdown BUT there is no year selector. */}
-                    <DatePicker
-                        selected={date}
-                        onChange={(value) => handleDate(value)}
-                    />
-                </Modal.Body>
-                <Modal.Footer>
-                    <p className="landing_error black-text">{error}</p>
-                    <BootstrapButton
-                        variant="primary"
-                        onClick={() => {
-                            handlePageOne(
-                                name,
-                                email,
-                                date,
-                                setShowPage,
-                                setError
-                            );
-                        }}
-                        disabled={false}
-                    >
-                        Next
-                    </BootstrapButton>
-                </Modal.Footer>
-            </Modal>
-            <Modal
-                show={showPage === 2}
-                onHide={handleClose}
-                centered
-                animation={false}
-            >
-                <Modal.Header closeButton className="black-button">
-                    <Modal.Title>Select your username and password</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <InputGroup className="mb-3">
-                        <FormControl
-                            placeholder="Username"
-                            aria-label="Username"
-                            aria-describedby="basic-addon1"
-                            onChange={(value) => handleUsername(value)}
-                            defaultValue={"marle"}
-                        />
-                    </InputGroup>
-                    <InputGroup className="mb-3">
-                        <FormControl
-                            type="password"
-                            id="exampleInputPassword1"
-                            placeholder="Password"
-                            onChange={(value) => handlePassword(value)}
-                            defaultValue={"ilovecrono"}
-                        />
-                    </InputGroup>
-                </Modal.Body>
-                <Modal.Footer>
-                    <p className="landing_error black-text">{error}</p>
-                    <BootstrapButton
-                        variant="primary"
-                        onClick={() => {
-                            handlePageTwo(
-                                username,
-                                email,
-                                password,
-                                name,
-                                date,
-                                setShowPage,
-                                setError
-                            );
-                        }}
-                        disabled={false}
-                    >
-                        Next
-                    </BootstrapButton>
-                </Modal.Footer>
-            </Modal>
-            <Modal
-                show={showPage === 3}
-                onHide={handleClose}
-                centered
-                animation={false}
-            >
-                <Modal.Header closeButton className="black-button">
-                    <Modal.Title>We sent you a verification code</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <InputGroup className="mb-3">
-                        <FormControl
-                            placeholder="Verification"
-                            aria-label="Verification"
-                            aria-describedby="basic-addon1"
-                            onChange={(event) => {
-                                console.log("code is now:", event.target.value);
-                                setVerificationCode(event.target.value);
-                            }}
-                        />
-                    </InputGroup>
-                </Modal.Body>
-                <Modal.Footer>
-                    <p className="landing_error">{error}</p>
-                    <BootstrapButton
-                        variant="primary"
-                        onClick={() => {
-                            handlePageThree(
-                                verificationCode,
-                                email,
-                                setVerifiable,
-                                setShowPage,
-                                setError
-                            );
-                        }}
-                        disabled={false}
-                    >
-                        Next
-                    </BootstrapButton>
-                </Modal.Footer>
-            </Modal>
-            <Modal
-                show={showPage === 4}
-                onHide={handleClose}
-                centered
-                animation={false}
-            >
-                <Modal.Header closeButton className="black-button">
-                    <Modal.Title>You're all set!</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    Click below to be redirected to all the fun stuff :-)
-                </Modal.Body>
-                <Modal.Footer>
-                    <p className="landing_error">
-                        {error ? <p>Error:</p> : null}
-                        {error}
-                    </p>
-                    <BootstrapButton
-                        variant="primary"
-                        onClick={() => {
-                            handleFinish(history.push("/home"));
-                        }}
-                        disabled={false}
-                    >
-                        Start the Party
-                    </BootstrapButton>
-                </Modal.Footer>
-            </Modal>
+            <NameEmailBirthdayModal
+                showPage={showPage === 1}
+                handleClose={handleClose}
+                handleName={(value) => handleName(value)}
+                handleEmail={(value) => handleEmail(value)}
+                handleDate={(value) => handleDate(value)}
+                handlePageOne={() => {
+                    handlePageOne(name, email, date, setShowPage, setError);
+                }}
+                error={error}
+                date={date}
+            />
+            <UsernamePasswordModal
+                showPage={showPage === 2}
+                handleClose={handleClose}
+                handleUsername={(value) => handleUsername(value)}
+                handlePassword={(value) => handlePassword(value)}
+                handlePageTwo={() => {
+                    handlePageTwo(
+                        username,
+                        email,
+                        password,
+                        name,
+                        date,
+                        setShowPage,
+                        setError
+                    );
+                }}
+                error={error}
+            />
+            <ValidationCodeModal
+                showPage={showPage === 3}
+                handleClose={handleClose}
+                setVerificationCode={(event) => {
+                    console.log("code is now:", event.target.value);
+                    setVerificationCode(event.target.value);
+                }}
+                handlePageThree={() => {
+                    handlePageThree(
+                        verificationCode,
+                        email,
+                        setVerifiable,
+                        setShowPage,
+                        setError
+                    );
+                }}
+                error={error}
+            />
+            <AllSetModal
+                showPage={showPage === 4}
+                handleClose={handleClose}
+                handleFinish={() => {
+                    handleFinish(history.push("/home"));
+                }}
+                error={error}
+            />
+
             <div id="landing_main" className="d-flex">
                 <div
                     id="landing_right-and-header"

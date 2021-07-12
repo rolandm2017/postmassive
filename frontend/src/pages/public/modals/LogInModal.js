@@ -49,7 +49,9 @@ function LogInModal({
                 </p>
                 <BootstrapButton
                     variant="primary"
-                    onClick={sendLogInIfInfoIsValid}
+                    onClick={() => {
+                        sendLogInIfInfoIsValid();
+                    }}
                     disabled={false}
                 >
                     Log In

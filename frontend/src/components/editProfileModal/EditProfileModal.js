@@ -51,7 +51,7 @@ function EditProfile() {
                 </p>
                 <BootstrapButton
                     variant="primary"
-                    onClick={() => sendLogInIfInfoIsValid(true)}
+                    onClick={() => sendLogInIfInfoIsValid(true)} // FIXME: totally borked, it takes numerous args now
                     disabled={false}
                 >
                     Save

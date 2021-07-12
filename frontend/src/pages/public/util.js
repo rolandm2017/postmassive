@@ -10,7 +10,7 @@ import {
     verifyCode,
 } from "./Validation";
 
-import { useAuth } from "../../auth/use-auth";
+// import { useAuth } from "../../auth/use-auth";
 
 export {
     handleAddUsernameOrEmail,
@@ -40,7 +40,7 @@ function handleAddUsernameOrEmail(usernameOrEmail, setUsername, setEmail) {
     }
 }
 
-const sendLogInIfInfoIsValid = (
+function sendLogInIfInfoIsValid(
     username,
     email,
     password,
@@ -48,7 +48,7 @@ const sendLogInIfInfoIsValid = (
     setError,
     setDesktopLoginError,
     auth
-) => {
+) {
     // if email/username && pw are valid, log into PM. else, display error.
     let errMsg;
     // console.log("NINETY EIGHT", validPassword(password), password);
@@ -82,7 +82,7 @@ const sendLogInIfInfoIsValid = (
             setDesktopLoginError(errMsg);
         }
     }
-};
+}
 
 // const bundleAcceptedAccountInfoAndSendVerificationCode = (
 //     name,
@@ -109,7 +109,7 @@ const sendLogInIfInfoIsValid = (
 //     });
 // };
 
-const handlePageOne = (name, email, date, setShowPage, setError) => {
+function handlePageOne(name, email, date, setShowPage, setError) {
     // TODO: display error msg "server is down" if net::ERR_CONNECTION_REFUSED. Utilize a timer?
     formCheck(name, email, date, setError)
         .then((res) => {
@@ -131,9 +131,9 @@ const handlePageOne = (name, email, date, setShowPage, setError) => {
             }
         })
         .catch((err) => setError(err.toString()));
-};
+}
 
-const handlePageTwo = (
+function handlePageTwo(
     username,
     email,
     password,
@@ -141,7 +141,7 @@ const handlePageTwo = (
     date,
     setShowPage,
     setError
-) => {
+) {
     const clientSideCheck = verifyUsernameAndPassword(username, password);
     if (clientSideCheck.hasOwnProperty("msg")) {
         setError(clientSideCheck.msg);
@@ -197,7 +197,7 @@ const handlePageTwo = (
             })
             .catch((err) => setError(err.toString()));
     }
-};
+}
 
 function handlePageThree(
     verificationCode,
@@ -212,7 +212,7 @@ function handlePageThree(
 }
 
 // TODO: the finishing click is not finished. finish it.
-const handleFinish = (goToHome) => {
+function handleFinish(goToHome) {
     // authenticate user and send them to the home page
     goToHome();
-};
+}
