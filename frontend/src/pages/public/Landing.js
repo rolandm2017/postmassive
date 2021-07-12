@@ -12,7 +12,7 @@ import {
     validPassword,
     // verifyUsernameAndPassword,
     // verifyCode,
-} from "./Validation";
+} from "../../loginTools/Validation";
 
 import {
     handleAddUsernameOrEmail,
@@ -21,7 +21,7 @@ import {
     handlePageTwo,
     handlePageThree,
     handleFinish,
-} from "./util";
+} from "../../loginTools/util";
 
 import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
@@ -56,7 +56,7 @@ function Landing(props) {
     // FIXME: what should initial state for verificationCode be? empty string? im not so sure the logic works.
     const [verificationCode, setVerificationCode] = useState("");
     // FIXME: what is "verifiable"? name it better, u dunno what it does now
-    const [verifiable, setVerifiable] = useState("");
+    const [verifiable, setVerifiable] = useState(""); // todo: delete this, it doesn't do anything
     const [error, setError] = useState("");
     const [desktopLoginError, setDesktopLoginError] = useState("");
 
