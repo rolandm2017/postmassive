@@ -351,7 +351,7 @@ function Landing(props) {
                     <Modal.Title>You're all set!</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    (TODO: figure out what Twitter does after verification)
+                    Click below to be redirected to all the fun stuff :-)
                 </Modal.Body>
                 <Modal.Footer>
                     <p className="landing_error">
@@ -365,7 +365,7 @@ function Landing(props) {
                         }}
                         disabled={false}
                     >
-                        Next
+                        Start the Party
                     </BootstrapButton>
                 </Modal.Footer>
             </Modal>

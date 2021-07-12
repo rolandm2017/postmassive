@@ -123,7 +123,7 @@ router.post("/createAccountAndReturnVerificationCode", (req, res) => {
     }
 });
 
-router.post("/validateVerificationCodeAndSignUp", (req, res) => {
+router.post("/validateVerificationCodeAndSignUp", async (req, res) => {
     // Step 4: Awaiting verification code. After it is accepted, the db goes,
     // "Ok, the username/account associated with this email is good to go. User can log in & use PM now"
     // this route is used when the user finally gets past name,email,dob,username,pw,verification code
@@ -134,8 +134,12 @@ router.post("/validateVerificationCodeAndSignUp", (req, res) => {
     } else {
         const receivedValidationCode = req.body.verificationCode;
         const theValidationCodeTheServerAssigned =
-            validation.getUserVerificationCode(req.body.email);
-        console.log(receivedValidationCode, theValidationCodeTheServerAssigned);
+            await validation.getUserVerificationCode(req.body.email);
+        console.log(
+            "138",
+            receivedValidationCode,
+            theValidationCodeTheServerAssigned
+        );
         if (receivedValidationCode === theValidationCodeTheServerAssigned) {
             validation.approveAccountCreation(req.body.email);
             console.log("Account creation approved!");

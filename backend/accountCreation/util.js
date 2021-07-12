@@ -38,15 +38,15 @@ function getAttemptsByEmail(email) {
     });
 }
 
-function getUserVerificationCode(email) {
+async function getUserVerificationCode(email) {
     // retrieves verification code created for this email
     return await User.find(
         { email: email },
         "verificationCode",
         function (err, user) {
             if (err) throw err;
-            console.log(user.verificationCode);
-            return user.verificationCode;
+            console.log("was it retrieved", user, user[0].verificationCode);
+            return user[0].verificationCode;
         }
     );
 }
