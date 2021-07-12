@@ -2,7 +2,7 @@ import React from "react";
 
 import Button from "../../parts/Button";
 
-import PopularMassiv from "../../events/PopularMassiv";
+import PopularMassive from "../../events/PopularMassive";
 import FollowRec from "../../events/FollowRec";
 import RelevantPerson from "../../events/RelevantPerson";
 import NewsStory from "../../events/NewsStory";
@@ -16,7 +16,7 @@ function Rightbar(props) {
 
         return (
             <div id="rightbar_search-container" className="mb-3">
-                <input placeholder="Search Postmassiv"></input>
+                <input placeholder="Search Postmassive"></input>
             </div>
         );
     }
@@ -47,11 +47,11 @@ function Rightbar(props) {
         if (onSearchPage) return null;
 
         return (
-            <div id="rightbar_popular-massivs" className="rounded-border mb-3">
+            <div id="rightbar_popular-massives" className="rounded-border mb-3">
                 <h2 className="rightbar_headline my-2 ml-3">
                     What's happening
                 </h2>
-                <PopularMassiv
+                <PopularMassive
                     headline="Placeholder - this morning"
                     content="Ipsum pariatur minim consectetur irure excepteur nostrud
                         occaecat exercitation do duis."

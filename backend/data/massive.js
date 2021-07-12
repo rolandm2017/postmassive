@@ -1,6 +1,6 @@
 const data = require("./data");
 
-function generateRandomMassiv() {
+function generateRandomMassive() {
     return {
         id: data.id(),
         author: data.author(),
@@ -13,4 +13,4 @@ function generateRandomMassiv() {
     };
 }
 
-module.exports = generateRandomMassiv;
+module.exports = generateRandomMassive;

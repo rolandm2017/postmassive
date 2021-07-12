@@ -11,21 +11,21 @@ import "./EngagementContainer.css";
 
 function EngagementContainer(props) {
     return (
-        <div className="massiv-btn-container mb-2">
+        <div className="massive-btn-container mb-2">
             <div className="statistic d-flex">
-                <img className="massiv-btn" src={Reply} alt="reply"></img>
+                <img className="massive-btn" src={Reply} alt="reply"></img>
                 <p className="m-engagement-txt mx-1 mt-2">{props.replies}</p>
             </div>
             <div className="statistic d-flex">
-                <img className="massiv-btn" src={Amplify} alt="amplify"></img>
+                <img className="massive-btn" src={Amplify} alt="amplify"></img>
                 <p className="m-engagement-txt mx-1 mt-2">{props.amplifies}</p>
             </div>
             <div className="statistic d-flex">
-                <img className="massiv-btn" src={Fave} alt="fave"></img>
+                <img className="massive-btn" src={Fave} alt="fave"></img>
                 <p className="m-engagement-txt mx-1 mt-2">{props.likes}</p>
             </div>
             <div className="statistic d-flex">
-                <img className="massiv-btn" src={View} alt="views"></img>
+                <img className="massive-btn" src={View} alt="views"></img>
                 <p className="m-engagement-txt mx-1 mt-2">
                     {ProcessAmount(props.views, props.inFeed)}
                 </p>

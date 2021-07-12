@@ -33,7 +33,7 @@ const api = "/api";
 // *** *** ***
 // Page Stuff
 
-app.use(api, require("./pages/pages"));
+app.use(api, require("./data/pages/pages"));
 
 // *** *** ***
 // *** *** ***
@@ -63,7 +63,7 @@ app.use(api + "/auth", require("./authentication/authentication"));
 
 // ********
 // get fake data for timeline
-app.use(api + "/mock", require("./data/index"));
+app.use(api + "/mock", require("./data/pages/pages"));
 
 app.listen(port, () => {
     console.log(`Example app listening at http://127.0.0.1:${port}`);

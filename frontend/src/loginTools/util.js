@@ -149,7 +149,7 @@ function handlePageTwo(
         // only do the server side check if the client side tests were passed
         usernameServerCheck(username)
             .then((response) => {
-                console.log("204:", response); // FIXME: input "postmassiv" threw up the "else" condition. wrong condition
+                console.log("204:", response); // FIXME: input "postmassive" threw up the "else" condition. wrong condition
                 if (response === "accepted") {
                     setError("Server is creating your account...");
                     const data = {
@@ -173,9 +173,9 @@ function handlePageTwo(
                         .catch((err) => {
                             setError(err.toString());
                         });
-                } else if (response === "admin_or_postmassiv") {
+                } else if (response === "admin_or_postmassive") {
                     setError(
-                        "Username cannot contain 'admin' or 'postmassiv'."
+                        "Username cannot contain 'admin' or 'postmassive'."
                     );
                 } else if (response === "banned_chars_detected") {
                     setError("Only A-Z, a-z, 0-9 and underscores, please.");

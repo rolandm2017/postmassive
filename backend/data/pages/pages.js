@@ -1,33 +1,33 @@
 const express = require("express");
 const router = express.Router();
 // const jwtShield = require("../_middleware/jwtShield");
-const authorize = require("../_middleware/authorize");
+const authorize = require("../../_middleware/authorize");
 
-const users = require("../data/users").users;
-const massiv = require("../data/massiv");
-const notification = require("../data/notification");
-const message = require("../data/message");
-const profile = require("../data/profile");
+const users = require("../users").users;
+const massive = require("../massive");
+const notification = require("../notification");
+const message = require("../message");
+const profile = require("../profile");
 
 module.exports = router;
 
 router.get("/feed", authorize(), (req, res) => {
-    console.log("Sending massivs");
-    const massivs = [];
+    console.log("Sending massives");
+    const massives = [];
     for (let i = 0; i < 20; i++) {
-        massivs.push(massiv());
+        massives.push(massive());
     }
-    res.json(massivs);
+    res.json(massives);
 });
 
 router.get("/feed/:username", (req, res) => {
     // route for getting user specific feed
-    console.log("Sending massivs for", req.params.username);
-    const massivs = [];
+    console.log("Sending massives for", req.params.username);
+    const massives = [];
     for (let i = 0; i < 20; i++) {
-        massivs.push(massiv());
+        massives.push(massive());
     }
-    res.json(massivs);
+    res.json(massives);
 });
 
 router.get("/notifications", authorize(), (req, res) => {

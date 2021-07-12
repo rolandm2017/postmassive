@@ -79,7 +79,7 @@ describe("client side input validation functions", () => {
     it("rejects the malformed username", () => {
         expect(VALIDATION.usernameIsValid("otherwise__fine__a")).toBe(false);
         expect(VALIDATION.usernameIsValid("abcdefghijklmnopqrs")).toBe(false);
-        expect(VALIDATION.usernameIsValid("postmassiv")).toBe(false);
+        expect(VALIDATION.usernameIsValid("postmassive")).toBe(false);
         expect(
             VALIDATION.verifyUsernameAndPassword(
                 "otherwise__fine__a",
@@ -93,16 +93,16 @@ describe("client side input validation functions", () => {
             )
         ).toHaveProperty("msg", "Name must be 1 to 16 characters in length.");
         expect(
-            VALIDATION.verifyUsernameAndPassword("postmassiv", "jibberish")
+            VALIDATION.verifyUsernameAndPassword("postmassive", "jibberish")
         ).toHaveProperty(
             "msg",
-            `Cannot use "Admin" or any form of "PostMassiv".`
+            `Cannot use "Admin" or any form of "PostMassive".`
         );
         expect(
             VALIDATION.verifyUsernameAndPassword("cantUseAdmin", "jibberish")
         ).toHaveProperty(
             "msg",
-            `Cannot use "Admin" or any form of "PostMassiv".`
+            `Cannot use "Admin" or any form of "PostMassive".`
         );
         expect(
             VALIDATION.verifyUsernameAndPassword("roly poly", "jibberish")

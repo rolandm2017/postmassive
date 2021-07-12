@@ -4,11 +4,11 @@ import Wrapper from "../helper/Wrapper";
 
 // TODO: make each Massiv have a custom URL based on Poster Username + MassivID
 
-function Massiv(props) {
+function Massive(props) {
     return (
         <Wrapper
-            pageName="massiv"
-            sectionName="massiv_viewer"
+            pageName="massive"
+            sectionName="massive_viewer"
             onSearchPage={false}
             onMessagePgae={false}
             breakpoints={props.breakpoints}
@@ -18,4 +18,4 @@ function Massiv(props) {
     );
 }
 
-export default Massiv;
+export default Massive;

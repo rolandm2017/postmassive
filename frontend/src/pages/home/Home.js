@@ -8,7 +8,7 @@ import { getOptions } from "../../_helper/authHeader";
 
 class Home extends Component {
     state = {
-        massivs: null,
+        massives: null,
         jwt: null,
     };
 
@@ -26,9 +26,9 @@ class Home extends Component {
 
         const feedUrl = process.env.REACT_APP_API_URL + "/mock/feed";
         fetch(feedUrl, getOptions(feedUrl)).then((res) => {
-            res.json().then((massivs) => {
-                console.log(massivs[0]);
-                this.setState({ massivs: massivs });
+            res.json().then((massives) => {
+                console.log(massives[0]);
+                this.setState({ massives: massives });
             });
         });
     }

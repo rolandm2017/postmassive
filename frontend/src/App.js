@@ -189,8 +189,8 @@ export default App;
 
 // TODO: make light mode, figure out how to convert from dark to light via account settings.
 
-// TAGLINE: PostMassiv: Get your word out.
-// TAGLINE: PostMassiv: Say it loud.
+// TAGLINE: PostMassive: Get your word out.
+// TAGLINE: PostMassive: Say it loud.
 
 // TODO-RELEASE: before the site is put up for public use, replace all icons with paid icons8 icons.
-// TODO-release: cry because you have to set up postmassiv on digitalocean
+// TODO-release: cry because you have to set up postmassive on digitalocean

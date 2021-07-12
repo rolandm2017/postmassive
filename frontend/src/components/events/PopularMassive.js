@@ -2,11 +2,11 @@ import React from "react";
 
 import ProcessAmount from "../ProcessAmount";
 
-import styles from "./Popularmassive.module.css";
+import styles from "./PopularMassive.module.css";
 
-function PopularMassiv(props) {
+function PopularMassive(props) {
     return (
-        <div className={`${styles.popularMassivContainer} pl-2 pt-1`}>
+        <div className={`${styles.popularMassiveContainer} pl-2 pt-1`}>
             <h3 className={`${styles.headline} mt-1`}>{props.headline}</h3>
             <p className={`${styles.text}`}>{props.content}</p>
             <p className={`${styles.text}`}>
@@ -16,4 +16,4 @@ function PopularMassiv(props) {
     );
 }
 
-export default PopularMassiv;
+export default PopularMassive;

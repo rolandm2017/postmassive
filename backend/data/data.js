@@ -84,7 +84,7 @@ const deliveryDates = [
     "Dec 15",
 ];
 
-// massiv stuff
+// massive stuff
 const id = () => {
     return ids[Math.floor(Math.random() * ids.length)];
 };

@@ -2,13 +2,13 @@
     font-size: 13px;
 }
 
-.massiv-btn {
+.massive-btn {
     background-color: white;
     width: 15%;
     height: auto;
 }
 
-.massiv-btn-container {
+.massive-btn-container {
     height: 30px;
     display: flex;
     flex-direction: row;

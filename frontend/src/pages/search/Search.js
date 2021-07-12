@@ -48,42 +48,42 @@ class Search extends Component {
                         </div>
                     </div>
                 </div>
-                <div id="rightbar_popular-massivs">
+                <div id="rightbar_popular-massives">
                     {/* TODO: make into its own component. dynamically generated. reuse components where possible */}
                     <h2>What's happening</h2>
-                    <div className="rightbar_popular-massiv">
-                        <h3 className="rightbar_massiv-headline">
+                    <div className="rightbar_popular-massive">
+                        <h3 className="rightbar_massive-headline">
                             Placeholder - this morning
                         </h3>
-                        <p className="rightbar_massiv-text">
+                        <p className="rightbar_massive-text">
                             Ipsum pariatur minim consectetur irure excepteur
                             nostrud occaecat exercitation do duis enim.
                         </p>
                     </div>
-                    <div className="rightbar_popular-massiv">
-                        <h3 className="rightbar_massiv-headline">
+                    <div className="rightbar_popular-massive">
+                        <h3 className="rightbar_massive-headline">
                             Trending in the USA
                         </h3>
-                        <p className="rightbar_massiv-text">
+                        <p className="rightbar_massive-text">
                             Pariatur incididunt fugiat ipsum proident.
                         </p>
-                        <p>2,707 Massivs</p>
+                        <p>2,707 Massives</p>
                     </div>
-                    <div className="rightbar_popular-massiv">
-                        <h3 className="rightbar_massiv-headline">
+                    <div className="rightbar_popular-massive">
+                        <h3 className="rightbar_massive-headline">
                             Politics - Trending
                         </h3>
-                        <p className="rightbar_massiv-text">
+                        <p className="rightbar_massive-text">
                             Voluptate veniam mollit aute proident non commodo
                             magna non aliquip esse sit laborum adipisicing.
                         </p>
                         <p>306K Amplifies</p>
                     </div>
-                    <div className="rightbar_popular-massiv">
-                        <h3 className="rightbar_massiv-headline">
+                    <div className="rightbar_popular-massive">
+                        <h3 className="rightbar_massive-headline">
                             Canadian News - LIVE
                         </h3>
-                        <p className="rightbar_massiv-text">
+                        <p className="rightbar_massive-text">
                             Enim aliqua sint et occaecat dolore ipsum est aute
                             excepteur.
                         </p>

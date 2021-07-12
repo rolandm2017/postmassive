@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const getMassive = require("./massiv");
+const getMassive = require("./massive");
 
 module.exports = router;
 
