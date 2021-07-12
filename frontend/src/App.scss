@@ -4,26 +4,22 @@
 // ** ** ** ** ** ** **
 // for making the waterfall scroll properly
 
-article {
-    // border: 1px solid black;
-    // width: 600px !important;
-}
+// https://stackoverflow.com/questions/64310947/how-to-keep-the-left-and-right-flex-elements-sidebars-fixed-while-the-middle-e
+// https://codepen.io/rolandmackintosh/pen/ZEOGorB
+// ^^^ KEEP THESE LINKS HERE ^^^
 
-aside {
-    position: sticky !important;
-    flex: 1 !important;
-    top: 0 !important;
-    height: 100vh !important;
-}
+// aside {
+//     position: sticky !important;
+//     flex: 1 !important;
+//     top: 0 !important;
+//     height: 100vh !important;
+// }
 
-main {
-    display: flex !important;
-    justify-content: space-between !important;
-    position: relative !important;
-}
-
-section {
-}
+// main {
+//     display: flex !important;
+//     justify-content: space-between !important;
+//     position: relative !important;
+// }
 
 // ** ** ** **
 // ** ** ** **
