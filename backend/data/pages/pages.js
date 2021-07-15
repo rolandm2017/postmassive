@@ -52,6 +52,7 @@ router.get("/messages", authorize(), (req, res) => {
 });
 
 router.get("/profile/:username", (req, res) => {
+    console.log(55, req.params.username);
     // console.log("Received SPECIFIC user:", req.params.username);
     // want to get the object that has req.body.username as the value of the object's "username" key and return its profile
     for (let i = 0; i < Object.keys(users).length; i++) {
