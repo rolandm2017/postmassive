@@ -44,7 +44,7 @@ async function authenticate({ username, email, password, ipAddress }) {
         console.log("you shouldn't be able to get here you know");
     }
     console.log("asdfdsf:", account);
-    console.log("FURTHER adhsfaksdfds", account.passwordHash);
+    console.log("acount pw hash", account.passwordHash);
     if (
         !account ||
         !account.isVerified ||

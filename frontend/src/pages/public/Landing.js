@@ -65,6 +65,7 @@ function Landing(props) {
 
     useEffect(() => {
         document.title = "PostMassive. Say it loud";
+        console.log("is this var worthless?", verifiable);
     }, []);
 
     useEffect(() => {

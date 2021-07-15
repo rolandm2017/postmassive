@@ -1,5 +1,5 @@
 // doubles as the page for "Following"
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 
 import Wrapper from "../_helper/Wrapper";
@@ -27,13 +27,7 @@ function Following(props) {
     // or do i want to just retrieve their displayName? its a difference of a few bytes... at the cost of
     // writing an entirely new route on the server...
 
-    console.log("aaaaaaaa", userAndLocation);
-    useEffect(() => {
-        fetchPageOwnerDisplayName();
-        fetchUsers(userAndLocation[1], userAndLocation[2]);
-    }, [fetchPageOwnerDisplayName, userAndLocation]);
-
-    function fetchPageOwnerDisplayName() {
+    const fetchPageOwnerDisplayName = useCallback(() => {
         const profileUrl =
             process.env.REACT_APP_API_URL + "/profile/" + userAndLocation[1];
         console.log(profileUrl);
@@ -43,7 +37,14 @@ function Following(props) {
                 setPageOwnerInfo(profile);
             });
         });
-    }
+    }, [userAndLocation]);
+
+    console.log("aaaaaaaa", userAndLocation);
+    useEffect(() => {
+        fetchPageOwnerDisplayName();
+        fetchUsers(userAndLocation[1], userAndLocation[2]);
+    }, [fetchPageOwnerDisplayName, userAndLocation]);
+
     function fetchUsers(username, type) {
         // pretend fetch list of followers/following/suggested ... until a real dev server is avail
         console.log(username, type);

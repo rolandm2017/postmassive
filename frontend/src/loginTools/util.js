@@ -51,11 +51,12 @@ function sendLogInIfInfoIsValid(
 ) {
     // if email/username && pw are valid, log into PM. else, display error.
     let errMsg;
+    console.log("54 in sendLogInIf...");
     // console.log("NINETY EIGHT", validPassword(password), password);
     if (usernameIsValid(username) || emailIsValid(email)) {
         // console.log("one oh four");
         if (validPassword(password)) {
-            console.log("TEST:", username, email);
+            console.log("sendLogInIf... works:", username, email);
             // console.log("level two:", );
             auth.signIn(username, email, password, {
                 pathname: "/home",

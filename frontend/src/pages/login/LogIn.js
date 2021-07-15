@@ -8,7 +8,12 @@ import Logo from "../../images/gps-searching.png";
 
 import "./LogIn.scss";
 
-import { handleAddUsernameOrEmail } from "../../loginTools/util";
+import { useAuth } from "../../auth/use-auth";
+
+import {
+    sendLogInIfInfoIsValid,
+    handleAddUsernameOrEmail,
+} from "../../loginTools/util";
 import { validPassword } from "../../loginTools/Validation";
 
 function LogIn(props) {
@@ -16,6 +21,11 @@ function LogIn(props) {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+    const [desktopLoginError, setDesktopLoginError] = useState(""); // todo; remove this desktoPLogInerror universally, p sure its worthless
+
+    const auth = useAuth();
+    // import login func
 
     const handlePassword = (pass) => {
         // validates password and sets pw if it is valid so its ready to be sent to server
@@ -63,7 +73,21 @@ function LogIn(props) {
                                 aria-describedby="passwordHelpBlock"
                                 onChange={(value) => handlePassword(value)}
                             />
-                            <Button>Log in</Button>
+                            <Button
+                                onClick={() =>
+                                    sendLogInIfInfoIsValid(
+                                        username,
+                                        email,
+                                        password,
+                                        true,
+                                        setError,
+                                        setDesktopLoginError,
+                                        auth
+                                    )
+                                }
+                            >
+                                Log in
+                            </Button>
                         </Form>
                     </div>
                 </div>

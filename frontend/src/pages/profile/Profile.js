@@ -29,20 +29,30 @@ class Profile extends Component {
         const profileUrl =
             process.env.REACT_APP_API_URL + "/profile" + username;
         console.log(profileUrl);
+        // fixme-now: get profile bio...
         fetch(profileUrl).then((res) => {
-            res.json().then((profile) => {
-                console.log("setting profile,", profile);
-                this.setState({ profile: profile });
-            });
+            console.log("profile was fetched");
+            res.json()
+                .then((profile) => {
+                    console.log("setting profile,", profile);
+                    this.setState({ profile: profile });
+                })
+                .catch((err) => {
+                    console.log("????", err);
+                });
         });
         // TODO IMPORTANT: upgrade fetching "/feed" to fetching the user's actual massives. (as in "/feed/:username")
         const userSpecificFeedUrl =
             process.env.REACT_APP_API_URL + "/feed" + username;
         fetch(userSpecificFeedUrl).then((res) => {
-            res.json().then((massives) => {
-                console.log("setting massives");
-                this.setState({ massives: massives });
-            });
+            res.json()
+                .then((massives) => {
+                    console.log("setting massives");
+                    this.setState({ massives: massives });
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
         });
     }
 

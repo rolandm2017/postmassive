@@ -19,7 +19,7 @@ module.exports = router;
 
 router.post("/signIn", (req, res, next) => {
     console.log(
-        "received:",
+        "RE-ceived in /signIn:",
         req.query.username,
         req.query.email,
         req.query.password
@@ -33,6 +33,7 @@ router.post("/signIn", (req, res, next) => {
     // const emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     //  match submitted combo against fake db
     // const { user, jwt } = req.query.username
+    console.log("AT /signIn");
     accountService
         .authenticate({ username, email, password, ipAddress })
         .then(({ refreshToken, ...account }) => {

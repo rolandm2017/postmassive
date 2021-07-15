@@ -24,7 +24,7 @@ const userSubject = new BehaviorSubject(null);
 
 export const user = userSubject.asObservable();
 export const userValue = () => {
-    console.log(userSubject.value);
+    // console.log(userSubject.value);
     // FIXME: this userValue func is stil getting called WAY TOO OFTEN
     return userSubject.value;
 };
@@ -66,10 +66,11 @@ export function useProvideAuth() {
                 email +
                 "&password=" +
                 password;
+            console.log("Wwill thos print:", signInUrl);
             return new Promise((resolve, reject) => {
                 fetch(signInUrl, postOptions(signInUrl))
                     .then((res) => {
-                        console.log("this again");
+                        console.log("this again ");
                         res.json()
                             .then((userObject) => {
                                 console.log(

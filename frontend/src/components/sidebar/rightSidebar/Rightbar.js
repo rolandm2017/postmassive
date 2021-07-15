@@ -21,27 +21,33 @@ function Rightbar(props) {
         );
     }
 
-    function outputRelevantPeople(onSearchPage) {
-        if (onSearchPage) return null;
+    // *****************
+    // this is NOT zombie code. It is useful for later. I am simply disabling it to avoid a warning.
+    // *****************
+    // function outputRelevantPeople(onSearchPage) {
+    //     if (onSearchPage) return null;
 
-        return (
-            <div id="rightbar_relevant-people" className="rounded-border mb-3">
-                <h2 className="rightbar_headline my-2 ml-3">Relevant people</h2>
-                <RelevantPerson
-                    username="LincolnVoter"
-                    displayName="Just Another Ex-Republican Biden Voter"
-                    bio="One more Ex republican. I am not alone.This account helps @joebiden supporters trend. It also snarks Joe's opposition with a moderate's perspective."
-                    followsYou={true}
-                />
-                <RelevantPerson
-                    username="RationalMale"
-                    displayName="Rollo Tomassi"
-                    bio="#1 Bestselling author of The Rational Male book series https://amazon.com/Rollo-Tomassi/e/B00J2165RA"
-                    followsYou={false}
-                />
-            </div>
-        );
-    }
+    //     return (
+    //         <div id="rightbar_relevant-people" className="rounded-border mb-3">
+    //             <h2 className="rightbar_headline my-2 ml-3">Relevant people</h2>
+    //             <RelevantPerson
+    //                 username="LincolnVoter"
+    //                 displayName="Just Another Ex-Republican Biden Voter"
+    //                 bio="One more Ex republican. I am not alone.This account helps @joebiden supporters trend. It also snarks Joe's opposition with a moderate's perspective."
+    //                 followsYou={true}
+    //             />
+    //             <RelevantPerson
+    //                 username="RationalMale"
+    //                 displayName="Rollo Tomassi"
+    //                 bio="#1 Bestselling author of The Rational Male book series https://amazon.com/Rollo-Tomassi/e/B00J2165RA"
+    //                 followsYou={false}
+    //             />
+    //         </div>
+    //     );
+    // }
+    // *****************
+    // this is NOT zombie code.
+    // *****************
 
     function outputWhatsHappening(onSearchPage) {
         if (onSearchPage) return null;
