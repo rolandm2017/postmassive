@@ -12,7 +12,7 @@ const port = 8080;
 const app = express();
 
 // misc stuff
-app.use(cors());
+app.use(cors({ origin: true }));
 app.use(cookieParser());
 app.use(bodyParser.json());
 
@@ -26,6 +26,10 @@ if (process.env.NODE_ENV === "development") {
 module.exports = {
     saltRounds: saltRounds,
 };
+
+// ****
+// TODO: Make MongoDb set up when the server is set up, NOT when the first request comes in!
+// ****
 
 const api = "/api";
 
