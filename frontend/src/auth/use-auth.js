@@ -24,7 +24,7 @@ const userSubject = new BehaviorSubject(null);
 
 export const user = userSubject.asObservable();
 export const userValue = () => {
-    // console.log(userSubject.value);
+    console.log(userSubject.value);
     // FIXME: this userValue func is stil getting called WAY TOO OFTEN
     return userSubject.value;
 };

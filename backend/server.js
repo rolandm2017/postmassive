@@ -2,8 +2,14 @@ const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
+const production = require("./config.json").production;
 
-const port = 8080;
+let port;
+if (production) {
+    port = 5007;
+} else {
+    port = 8080;
+}
 
 // TODO: Make a list of code to keep from this server to use in the real dev server.
 // TODO: make a list of code to keep from the other server.js file to use in the real dev server.
@@ -86,6 +92,12 @@ app.use(api + "/auth", require("./authentication/authentication"));
 // get fake data for timeline
 app.use(api + "/mock", require("./data/pages/pages"));
 
-app.listen(port, () => {
-    console.log(`Example app listening at http://127.0.0.1:${port}`);
-});
+if (production) {
+    app.listen(port, () => {
+        console.log(`Example app listening at http://165.227.78.120:${port}`);
+    });
+} else {
+    app.listen(port, () => {
+        console.log(`Example app listening at http://127.0.0.1:${port}`);
+    });
+}
