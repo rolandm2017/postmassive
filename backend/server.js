@@ -11,8 +11,25 @@ const port = 8080;
 
 const app = express();
 
+const whitelist = [
+    "http://www.postmassive.com",
+    "www.postmassive.com",
+    "http://localhost:3000",
+];
+const corsOptions = {
+    credentials: true, // This is important.
+    origin: (origin, callback) => {
+        if (whitelist.includes(origin)) {
+            console.log("accepted:", origin);
+            return callback(null, true);
+        }
+
+        callback(new Error("Not allowed by CORS"));
+    },
+};
+
 // misc stuff
-app.use(cors({ origin: true }));
+app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(bodyParser.json());
 

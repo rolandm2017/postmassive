@@ -10,6 +10,7 @@ const validateRequest = require("../_middleware/validate-request");
 const Role = require("../_helpers/roles");
 const accountService = require("../accounts/account.service");
 const { jwtSecret } = require("../config.json");
+// const cors = require("cors");
 
 // TODO: Split auth server into a microservice (even just for dev). !important !backend
 
