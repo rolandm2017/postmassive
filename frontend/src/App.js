@@ -19,7 +19,7 @@ import "./App.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
-    const isLoggedIn = userValue() !== null;
+    // const isLoggedIn = ;
 
     function LandingOrRedirectToHome({ authed, ...rest }) {
         return (
@@ -41,23 +41,55 @@ function App() {
         );
     }
 
-    function PrivateRoute({ component: Component, authed, ...rest }) {
-        console.log("are you authed?", authed);
+    // function PrivateRoute({ component: Component, authed, ...rest }) {
+    //     console.log("are you authed?", authed);
+    //     return (
+    //         <Route
+    //             {...rest}
+    //             render={(props) =>
+    //                 authed === true ? (
+    //                     <Component {...props} />
+    //                 ) : (
+    //                     <Redirect
+    //                         to={{
+    //                             pathname: "/login",
+    //                             state: { from: props.location },
+    //                         }}
+    //                     />
+    //                 )
+    //             }
+    //         />
+    //     );
+    // }
+
+    function PrivateRoute({ component: Component, roles, ...rest }) {
         return (
             <Route
                 {...rest}
-                render={(props) =>
-                    authed === true ? (
-                        <Component {...props} />
-                    ) : (
-                        <Redirect
-                            to={{
-                                pathname: "/login",
-                                state: { from: props.location },
-                            }}
-                        />
-                    )
-                }
+                render={(props) => {
+                    // evaluate whether user is authed when component is created, NOT when App is rendered.
+                    const user = userValue() !== null;
+                    if (!user) {
+                        // not logged in so redirect to login page with the return url
+                        return (
+                            <Redirect
+                                to={{
+                                    pathname: "/account/login",
+                                    state: { from: props.location },
+                                }}
+                            />
+                        );
+                    }
+
+                    // check if route is restricted by role
+                    if (roles && roles.indexOf(user.role) === -1) {
+                        // role not authorized so redirect to home page
+                        return <Redirect to={{ pathname: "/" }} />;
+                    }
+
+                    // authorized so return component
+                    return <Component {...props} />;
+                }}
             />
         );
     }
@@ -70,7 +102,7 @@ function App() {
                         <LandingOrRedirectToHome
                             exact
                             path="/"
-                            authed={isLoggedIn}
+                            // authed={isLoggedIn}
                         />
                         <Route path="/login">
                             <LogIn />
@@ -81,19 +113,21 @@ function App() {
                         <PrivateRoute
                             exact
                             path="/home"
-                            authed={isLoggedIn}
+                            // authed={isLoggedIn}
                             component={Home}
                         />
                         <PrivateRoute
                             path="/notifications"
-                            authed={isLoggedIn}
+                            // authed={isLoggedIn}
                             component={Notifications}
                         />
                         <PrivateRoute
                             path="/messages"
-                            authed={isLoggedIn}
+                            // authed={isLoggedIn}
+
                             component={Messages}
                         />
+                        {/* <PrivateRoute path="/admin" roles={[Role.Admin]} component={Admin} /> */}
                         <Route path="/explore">
                             <Search />
                         </Route>

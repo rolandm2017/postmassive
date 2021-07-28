@@ -300,7 +300,7 @@ function Landing(props) {
                         </div>
                         <div id="landing_join">
                             <h5 className="lightmode-text">
-                                Join PostMassiv today.
+                                Join PostMassive today.
                             </h5>
                         </div>
                         <div id="landing_buttons">

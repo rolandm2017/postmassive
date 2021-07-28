@@ -20,19 +20,35 @@ export const mockEmail = "test@gmail.com";
 export const mockCode = "qwerty";
 export const mockJWT = "its4w3btok3n";
 
+// initialize the userSubject to hold the user obj once s/he logs in
 const userSubject = new BehaviorSubject(null);
 
-export const user = userSubject.asObservable();
+export const user = userSubject.asObservable(); // fixme: confusing ... what is this doing? name the variable better.
+// fixme: cant const user just be disabled?
+// "An observable can be created from both Subject and BehaviorSubject using subject.asObservable().
+
+// The only difference being you can't send values to an observable using next() method."
+// via: https://stackoverflow.com/questions/39494058/behaviorsubject-vs-observable
+
 export const userValue = () => {
-    console.log(userSubject.value);
     // FIXME: this userValue func is stil getting called WAY TOO OFTEN
-    return userSubject.value;
+    const isCurrentUserOrNull = userSubject.getValue();
+    console.log(
+        "userValue:",
+        userSubject,
+        userSubject.value,
+        isCurrentUserOrNull
+    );
+    // fixme: issue is, userValue() is run once after user sends login() request. then userSubject receives a new val.
+    // but userValue is not updated, so app.js has no way to know about the logged in user.
+    return isCurrentUserOrNull;
 };
 
+// authContext will inject the auth methods into their appropriate components
 const authContext = createContext();
 
-// const baseURL = process.env.REACT_APP_API_URL + "/auth";
-const baseURL = "http://localhost:3000/api/auth";
+const baseURL = process.env.REACT_APP_API_URL + "/auth";
+// const baseURL = "http://localhost:3000/api/auth";
 
 // Provider component that wraps your app and makes auth object ...
 // ... available to any child component that calls useAuth().
@@ -53,6 +69,7 @@ export function useProvideAuth() {
 
     const signIn = (username, email, password, location) => {
         if (frontendOnly) {
+            // TODO: remove "frontend only" YAGNI
             userSubject.next(mockUser);
             // setJWT(mockJWT);
             history.push(location);
@@ -77,14 +94,16 @@ export function useProvideAuth() {
                                     "Received user object:",
                                     userObject,
 
-                                    userObject.user
+                                    userObject.username
                                 );
                                 console.log(
                                     "The JWT:",
                                     userObject.jwtToken,
                                     location
-                                );
+                                ); // fixme: am expecting userObject to be fwded to yield app.js:45 "true"
+                                console.log("hello", userSubject);
                                 userSubject.next(userObject);
+                                console.log("hello", userSubject);
                                 startRefreshTokenTimer();
 
                                 history.push(location);
