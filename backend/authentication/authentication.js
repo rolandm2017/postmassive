@@ -142,7 +142,8 @@ function setRefreshTokenCookie(res, newlyMintedRefreshToken) {
     };
     console.log(
         "202 this is being set as refreshToken,",
-        newlyMintedRefreshToken
+        newlyMintedRefreshToken,
+        new Date().getSeconds()
     );
     res.cookie("refreshToken", newlyMintedRefreshToken, cookieOptions);
 }

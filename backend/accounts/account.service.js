@@ -66,7 +66,8 @@ async function authenticate({ username, email, password, ipAddress }) {
     console.log(
         "this is nothing && what are those scary noises??",
         refreshToken.token,
-        jwtToken
+        jwtToken,
+        new Date().getSeconds()
     );
 
     // return basic details and tokens
