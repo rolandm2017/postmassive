@@ -60,10 +60,8 @@ function authHeader(url) {
     const isApiUrl = url.startsWith(process.env.REACT_APP_API_URL);
     if (isLoggedIn && isApiUrl) {
         console.log(
-            `asdfadsfadsfdsfasdfadsfasdfads fadsf adsfads fadsfadsfasdsdfsdfasdf ${Cookies.get(
-                "jwt"
-            )}`
-        );
+            `setting JWT into Authorization Bearer header ${Cookies.get("jwt")}`
+        ); // fixme: Cookies.get("jwt") is undefined; how is the jwt supposed to enter the cookie storage?
         return { Authorization: `Bearer ${Cookies.get("jwt")}` };
     } else {
         return {};

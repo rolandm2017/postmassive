@@ -99,11 +99,7 @@ function App() {
             <ProvideAuth>
                 <main id="main" className="d-flex justify-content-center">
                     <Switch>
-                        <LandingOrRedirectToHome
-                            exact
-                            path="/"
-                            // authed={isLoggedIn}
-                        />
+                        <LandingOrRedirectToHome exact path="/" />
                         <Route path="/login">
                             <LogIn />
                         </Route>

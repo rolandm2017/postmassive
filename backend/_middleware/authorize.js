@@ -23,6 +23,7 @@ function authorize(roles = []) {
             algorithms: ["HS256"],
             getToken: function fromHeaderOrQuerystring(req) {
                 if (
+                    // authorizationContainsBearerToken
                     req.headers.authorization &&
                     req.headers.authorization.split(" ")[0] === "Bearer"
                 ) {

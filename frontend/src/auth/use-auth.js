@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import { postOptions } from "../_helper/authHeader";
 
 import { BehaviorSubject } from "rxjs";
+import Cookies from "js-cookie";
 
 // import { startRefreshTokenTimer, stopRefreshTokenTimer } from "./refreshToken";
 
@@ -33,12 +34,7 @@ export const user = userSubject.asObservable(); // fixme: confusing ... what is 
 export const userValue = () => {
     // FIXME: this userValue func is stil getting called WAY TOO OFTEN
     const isCurrentUserOrNull = userSubject.getValue();
-    console.log(
-        "userValue:",
-        userSubject,
-        userSubject.value,
-        isCurrentUserOrNull
-    );
+    console.log("userValue:", userSubject, isCurrentUserOrNull);
     // fixme: issue is, userValue() is run once after user sends login() request. then userSubject receives a new val.
     // but userValue is not updated, so app.js has no way to know about the logged in user.
     return isCurrentUserOrNull;
@@ -105,7 +101,7 @@ export function useProvideAuth() {
                                 userSubject.next(userObject);
                                 console.log("hello", userSubject);
                                 startRefreshTokenTimer();
-
+                                console.log("Pushing location to stack...");
                                 history.push(location);
                                 resolve(userObject);
                             })
@@ -157,6 +153,7 @@ export function useProvideAuth() {
                                 userObject.user.jwtToken
                             );
                             userSubject.next(userObject);
+                            Cookies.set("jwt", userObject.jwtToken);
                             startRefreshTokenTimer();
                             history.push(location);
                             resolve(userObject);
@@ -172,9 +169,10 @@ export function useProvideAuth() {
 
     const signOut = (location) => {
         if (frontendOnly) {
-            userSubject.next(null);
+            // userSubject.next(null);
             // setJWT(null);
-            history.push(location);
+            // history.push(location);
+            // we don't go to Ravenholm
         } else {
             console.log("Attempting to sign out ...");
             const revokeURL = baseURL + "/signOut";
@@ -242,9 +240,11 @@ export function useProvideAuth() {
         console.log("is this rendering");
         const unsubscribe = (user) => {
             if (user) {
+                Cookies.set("jwt", user.jwtToken);
                 userSubject.next(user);
             } else {
                 console.log("line 195");
+                Cookies.remove("jwt");
                 userSubject.next(null);
             }
         };
@@ -291,6 +291,7 @@ export function refreshToken() {
                 // console.log("response of refresh token:", refreshedUser);
                 console.log("edc, balaji");
                 userSubject.next(refreshedUser);
+                Cookies.set("jwt", refreshedUser.jwtToken);
                 startRefreshTokenTimer();
             })
             .catch((err) => {
