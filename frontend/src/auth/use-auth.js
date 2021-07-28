@@ -1,6 +1,5 @@
 // Hook (use-auth.js) based off of https://usehooks.com/useAuth/
 import React, { useEffect, useContext, createContext } from "react";
-import Cookie from "js-cookie";
 
 import { useHistory } from "react-router-dom";
 import { postOptions } from "../_helper/authHeader";
@@ -66,10 +65,6 @@ export function useProvideAuth() {
     const signIn = (username, email, password, location) => {
         if (frontendOnly) {
             // TODO: remove "frontend only" YAGNI
-            userSubject.next(mockUser);
-            // setJWT(mockJWT);
-            history.push(location);
-            return mockUser;
         } else {
             const signInUrl =
                 baseURL +
@@ -127,10 +122,10 @@ export function useProvideAuth() {
 
     const signUp = (email, password, location) => {
         if (frontendOnly) {
-            userSubject.next(mockUser);
+            // userSubject.next(mockUser);
             // setJWT(mockJWT);
-            history.push(location);
-            return mockUser;
+            // history.push(location);
+            // return mockUser;
         } else {
             return new Promise((resolve, reject) => {
                 const signUpUrl =
@@ -179,7 +174,7 @@ export function useProvideAuth() {
             fetch(revokeURL, postOptions(revokeURL))
                 .then((res) => {
                     userSubject.next(null);
-                    Cookie.remove("jwt"); // TODO: test that this removes the jwt cookie on log out
+                    Cookies.remove("jwt"); // TODO: test that this removes the jwt cookie on log out
                     stopRefreshTokenTimer();
                     console.log("revoked token successfully");
                     history.push(location);

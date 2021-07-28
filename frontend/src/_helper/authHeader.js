@@ -64,6 +64,7 @@ function authHeader(url) {
         ); // fixme: Cookies.get("jwt") is undefined; how is the jwt supposed to enter the cookie storage?
         return { Authorization: `Bearer ${Cookies.get("jwt")}` };
     } else {
+        console.log("setting header as blank");
         return {};
     }
 }
