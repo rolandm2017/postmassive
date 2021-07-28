@@ -27,7 +27,7 @@ module.exports = {
 };
 
 async function authenticate({ username, email, password, ipAddress }) {
-    console.log("999999999999999999999999999999999");
+    console.log("999999999999999999999999999999999", new Date().getSeconds());
     console.log(username, email, password);
     // console.log(await db.User.findOne());
     let account;
@@ -35,7 +35,7 @@ async function authenticate({ username, email, password, ipAddress }) {
         console.log("awaiting based on Username", username);
         // FIXME: its not fetching the account for Crono even tho Crono is input
         // ok so theres straight up no accounts retrieved. seems the one in the coll isnt registering
-        console.log("TEST:", await db.User.find({}));
+        // console.log("TEST:", await db.User.find({}), new Date().getSeconds());
         account = await db.User.findOne({ username });
     } else if (email) {
         console.log("awaiting based on email");
@@ -44,7 +44,11 @@ async function authenticate({ username, email, password, ipAddress }) {
         console.log("you shouldn't be able to get here you know");
     }
     console.log("asdfdsf:", account);
-    console.log("acount pw hash", account.passwordHash);
+    console.log(
+        "acount pw hash",
+        account.passwordHash,
+        new Date().getSeconds()
+    );
     if (
         !account ||
         !account.isVerified ||
