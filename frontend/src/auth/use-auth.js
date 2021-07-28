@@ -78,23 +78,20 @@ export function useProvideAuth() {
             return new Promise((resolve, reject) => {
                 fetch(signInUrl, postOptions(signInUrl))
                     .then((res) => {
-                        console.log("this again ");
+                        console.log("this again ", new Date().getSeconds());
                         res.json()
                             .then((userObject) => {
                                 console.log(
                                     "Received user object:",
                                     userObject,
-
-                                    userObject.username
-                                );
-                                console.log(
+                                    userObject.username,
                                     "The JWT:",
                                     userObject.jwtToken,
                                     location
-                                ); // fixme: am expecting userObject to be fwded to yield app.js:45 "true"
-                                console.log("hello", userSubject);
+                                );
+                                // console.log("hello", userSubject);
                                 userSubject.next(userObject);
-                                console.log("hello", userSubject);
+                                // console.log("hello", userSubject);
                                 startRefreshTokenTimer();
                                 console.log("Pushing location to stack...");
                                 history.push(location);
@@ -108,6 +105,7 @@ export function useProvideAuth() {
                                 );
                                 // FIXME: these errors often show up when the server has a problem.
                                 // this is a problem because "username email or pw?" has nothing to do w/ the src of err. Fix.
+                                // low priority tho
                             });
                     })
                     .catch((err) => {
@@ -122,10 +120,6 @@ export function useProvideAuth() {
 
     const signUp = (email, password, location) => {
         if (frontendOnly) {
-            // userSubject.next(mockUser);
-            // setJWT(mockJWT);
-            // history.push(location);
-            // return mockUser;
         } else {
             return new Promise((resolve, reject) => {
                 const signUpUrl =
@@ -164,9 +158,6 @@ export function useProvideAuth() {
 
     const signOut = (location) => {
         if (frontendOnly) {
-            // userSubject.next(null);
-            // setJWT(null);
-            // history.push(location);
             // we don't go to Ravenholm
         } else {
             console.log("Attempting to sign out ...");
