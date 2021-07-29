@@ -2,6 +2,8 @@ import React from "react";
 
 import EngagementContainer from "../engagementContainer/EngagementContainer";
 
+import LargeNumberProcessor from "./LargeNumberProcessor";
+
 import "./Quote.scss";
 
 // FIXME: the d-flex on line 14 breaks the css and I don't know why. specificially the width and height of

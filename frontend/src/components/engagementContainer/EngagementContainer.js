@@ -1,6 +1,6 @@
 import React from "react";
 
-import processAmount from "./processAmount";
+import processAmount from "../ProcessAmount";
 
 import Reply from "../../images/twit_reply.png";
 import Amplify from "../../images/amplify.png";

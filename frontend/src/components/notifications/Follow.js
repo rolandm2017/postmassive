@@ -2,6 +2,8 @@ import React from "react";
 
 import Follower from "../../images/icons8-user-48.png";
 
+import LargeNumberProcessor from "./LargeNumberProcessor";
+
 import "./Follow.css";
 
 function Follow(props) {
@@ -40,8 +42,8 @@ function Follow(props) {
     if (moreThanOneFollow) {
         followText = (
             <span>
-                <strong>{props.user}</strong> and {props.others} others followed
-                you
+                <strong>{props.user}</strong> and{" "}
+                {LargeNumberProcessor(props.others)} others followed you
             </span>
         );
     }

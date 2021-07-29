@@ -30,7 +30,7 @@ class Notifications extends Component {
         //         "Content-Type": "application/json",
         //         Accept: "application/json",
         //     },
-        // };
+        // }; // zombie sighting 2021-07-29, delete if still here in 2021/10
         fetch(notificationsUrl, getOptions(notificationsUrl)).then((res) => {
             res.json().then((notifications) => {
                 // console.log(notifications);

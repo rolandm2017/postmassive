@@ -2,6 +2,8 @@ import React from "react";
 
 import Fave from "../../images/twit_fave.png";
 
+import LargeNumberProcessor from "./LargeNumberProcessor";
+
 import "./Like.scss";
 
 function Like(props) {
@@ -36,8 +38,9 @@ function Like(props) {
             </div>
             <div className="like_text-container spacer">
                 <p className="mt-2 mb-1">
-                    <strong>{props.headliner}</strong> and {props.likes} others
-                    liked your Massiv
+                    <strong>{props.headliner}</strong> and{" "}
+                    {LargeNumberProcessor(props.likes)} others liked your
+                    Massive
                 </p>
                 <p className="text-grey mid-line-height mt-2">{props.text}</p>
             </div>

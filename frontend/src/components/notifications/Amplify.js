@@ -4,6 +4,8 @@ import EngagementContainer from "../engagementContainer/EngagementContainer";
 
 import Amplify from "../../images/cat2.jpg";
 
+import LargeNumberProcessor from "./LargeNumberProcessor";
+
 import "./Amplify.css";
 
 // TODO: Implement 4 line max for the content area
@@ -41,8 +43,8 @@ function Amp(props) {
             <div className="spacer">
                 {/* TODO: make the amplifier's name bold */}
                 <p className="my-1">
-                    {props.amplifier} and {props.others} others amplified your
-                    massive!
+                    {props.amplifier} and {LargeNumberProcessor(props.others)}{" "}
+                    others amplified your massive!
                 </p>
             </div>
             <div className="spacer">

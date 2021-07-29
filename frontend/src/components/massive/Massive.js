@@ -14,37 +14,46 @@ class Massive extends Component {
         const lengthOfSingleDigitThousands = String(1000).length;
         const lengthOfSingleDigitMillions = String(1000 * 1000).length;
         const stringVer = String(inputNum);
-        switch (
-            inputNum // i am totally anticipating switch evaluating in order...
-        ) {
-            case inputNum < 1000:
-                return String(inputNum);
-            case inputNum < 1000000: // thousands
-                if (stringVer.length === lengthOfSingleDigitThousands) {
-                    // single digit thousands, special case
-                    return stringVer.slice(0, 1) + "." + stringVer.slice(1, 2);
-                }
-                const lengthPreDecimal = stringVer.length - 3;
-                const decimal = stringVer.slice(
-                    lengthPreDecimal,
-                    lengthPreDecimal + 1
-                );
-                return lengthPreDecimal + "." + decimal + "k";
-            case inputNum < 1000000000: // millions
-                if (stringVer.length === lengthOfSingleDigitMillions) {
-                    // single digit millions, special case
-                    return stringVer.slice(0, 1) + "." + stringVer.slice(1, 2);
-                }
-                const lengthPreDecimal = stringVer.length - 6; // 6: slice off the 0's in 13,000,000, for instance
-                const decimal = stringVer.slice(
-                    lengthPreDecimal,
-                    lengthPreDecimal + 1
-                );
-                return lengthPreDecimal + "." + decimal + "m";
-            default:
-                // if ever launch, replace this w/ a bug reporting mechanism
-                console.log("oops:", inputNum);
-                return inputNum;
+
+        if (inputNum < 1000) {
+            return String(inputNum);
+        } else if (inputNum < 1000000) {
+            // thousands
+            if (stringVer.length === lengthOfSingleDigitThousands) {
+                // single digit thousands, special case
+                return stringVer.slice(0, 1) + "." + stringVer.slice(1, 2);
+            }
+            const lengthPreDecimal = stringVer.length - 3;
+            const decimal = stringVer.slice(
+                lengthPreDecimal,
+                lengthPreDecimal + 1
+            );
+            return (
+                stringVer.slice(0, lengthPreDecimal) +
+                "." +
+                stringVer.slice(lengthPreDecimal, decimal) +
+                "k"
+            );
+        } else if (inputNum < 1000000000) {
+            if (stringVer.length === lengthOfSingleDigitMillions) {
+                // single digit millions, special case
+                return stringVer.slice(0, 1) + "." + stringVer.slice(1, 2);
+            }
+            const lengthPreDecimal = stringVer.length - 6; // 6: slice off the 0's in 13,000,000, for instance
+            const decimal = stringVer.slice(
+                lengthPreDecimal,
+                lengthPreDecimal + 1
+            );
+            return (
+                stringVer.slice(0, lengthPreDecimal) +
+                "." +
+                stringVer.slice(lengthPreDecimal, decimal) +
+                "m"
+            );
+        } else {
+            // don't ever expect a billion but maybe some day...
+            console.log("wow!");
+            return stringVer.slice(0, 1) + "." + stringVer.slice(1, 3) + "b";
         }
     }
 
