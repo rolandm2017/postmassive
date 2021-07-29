@@ -47,7 +47,7 @@ async function authenticate({ username, email, password, ipAddress }) {
     console.log(
         "acount pw hash",
         account.passwordHash,
-        new Date().getSeconds()
+        new Date().getSeconds() // fixme: 15 sec from here to next measurement. how?
     );
     if (
         !account ||
@@ -56,7 +56,7 @@ async function authenticate({ username, email, password, ipAddress }) {
     ) {
         throw "Username, email or password is incorrect";
     }
-
+    console.log("next:", new Date().getSeconds());
     // authentication successful so generate jwt and refresh tokens
     const jwtToken = generateJwtToken(account);
     const refreshToken = generateRefreshToken(account, ipAddress);
