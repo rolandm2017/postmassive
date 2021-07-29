@@ -34,6 +34,7 @@ class Notifications extends Component {
         fetch(notificationsUrl, getOptions(notificationsUrl)).then((res) => {
             res.json().then((notifications) => {
                 // console.log(notifications);
+                console.log("json inspection", notifications);
                 this.setState({ notifications: notifications });
             });
         });

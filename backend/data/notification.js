@@ -39,7 +39,7 @@ function getLike() {
         type: "like",
         data: {
             id: data.id(),
-            headliner: data.author().display,
+            headliner: data.author().displayName,
             likes: data.likes(),
             text: data.content(),
         },
@@ -51,7 +51,7 @@ function getFollow() {
         type: "follow",
         data: {
             id: data.id(),
-            user: data.author().display,
+            user: data.author().displayName,
             others: data.others(),
         },
     };

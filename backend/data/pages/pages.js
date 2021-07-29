@@ -35,9 +35,10 @@ router.get("/notifications", authorize(), (req, res) => {
     const keys = Object.keys(notification);
     const notifications = [];
     for (let i = 0; i < 20; i++) {
-        notifications.push(
-            notification[keys[(keys.length * Math.random()) << 0]]()
-        );
+        const chosenNotification =
+            notification[keys[(keys.length * Math.random()) << 0]]();
+        console.log(i, chosenNotification);
+        notifications.push(chosenNotification);
     }
     res.json(notifications);
 });
