@@ -41,9 +41,9 @@ app.use(bodyParser.json());
 
 let saltRounds;
 if (process.env.NODE_ENV === "development") {
-    saltRounds = 5;
+    saltRounds = 3;
 } else {
-    saltRounds = 10; // previously 5
+    saltRounds = 7; // was once like 20
 }
 
 module.exports = {

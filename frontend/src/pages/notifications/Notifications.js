@@ -6,9 +6,9 @@ import Like from "../../components/notifications/Like";
 import Follow from "../../components/notifications/Follow";
 import Quote from "../../components/notifications/Quote";
 
-import profilePicPlaceholder from "../../images/cat1.jpg";
-import profilePicPlaceholder2 from "../../images/cat2.jpg";
-import profilePicPlaceholder3 from "../../images/cat3.jpg";
+import profilePicPlaceholder from "../../images/profilePics/cat1.jpg";
+import profilePicPlaceholder2 from "../../images/profilePics/cat2.jpg";
+import profilePicPlaceholder3 from "../../images/profilePics/cat3.jpg";
 
 import Wrapper from "../_helper/Wrapper";
 

@@ -19,6 +19,10 @@ section {
     background-color: $dark-blue;
 }
 
+.bg-blue-highlight:hover {
+    background-color: lighten($dark-blue, 7%);
+}
+
 .mobile_bar-spacer {
     // i skipped converting this to a bootstrap mt-0 class because
     // a) it performs a descriptive purpose b) it is used in a media query

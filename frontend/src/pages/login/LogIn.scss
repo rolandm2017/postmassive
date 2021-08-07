@@ -1,0 +1,10 @@
+#log-in-screen_container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#log-in_input-container form * {
+    margin: 6px 0;
+}

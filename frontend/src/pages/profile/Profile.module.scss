@@ -45,6 +45,10 @@
     text-align: center;
 }
 
+#options div:hover {
+    background-color: lighten($dark-blue, 7%);
+}
+
 #options div p {
     font-weight: bold;
     color: #aaa;

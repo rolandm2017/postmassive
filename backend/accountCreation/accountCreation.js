@@ -57,8 +57,7 @@ router.post("/createAccountAndReturnVerificationCode", (req, res) => {
     // If username & pw are OK, create account in DB, send a verification code to user's email
     const alphanumeric = /^[a-zA-Z0-9_]*$/;
     const brandName = /([Pp][Oo][Ss][Tt][Mm][Aa][Ss]{2}[Ii][Vv])/;
-    const offensiveWord = /([Nn][Ii][Gg]{2}[Ee][Rr])/;
-    const offensiveSlang = /([Nn][Ii][Gg]{2}[Aa])/;
+    const offensiveWord = /([Nn][Ii][Gg]{2})/;
     const username = req.body.username.trim();
     let totalUnderscores = 0;
     console.log(req.body);
@@ -73,8 +72,7 @@ router.post("/createAccountAndReturnVerificationCode", (req, res) => {
         const bannedWordDetected =
             brandName.test(username) ||
             username.includes("Admin") ||
-            offensiveWord.test(username) ||
-            offensiveSlang.test(username);
+            offensiveWord.test(username);
         if (invalidCharCombo) {
             res.send("error");
         } else if (invalidNameLength) {
@@ -151,3 +149,41 @@ router.post("/validateVerificationCodeAndSignUp", async (req, res) => {
         }
     }
 });
+
+var caesarShift = function (str, amount) {
+    // Wrap the amount
+    if (amount < 0) {
+        return caesarShift(str, amount + 26);
+    }
+
+    // Make an output variable
+    var output = "";
+
+    // Go through each character
+    for (var i = 0; i < str.length; i++) {
+        // Get the character we'll be appending
+        var c = str[i];
+
+        // If it's a letter...
+        if (c.match(/[a-z]/i)) {
+            // Get its code
+            var code = str.charCodeAt(i);
+
+            // Uppercase letters
+            if (code >= 65 && code <= 90) {
+                c = String.fromCharCode(((code - 65 + amount) % 26) + 65);
+            }
+
+            // Lowercase letters
+            else if (code >= 97 && code <= 122) {
+                c = String.fromCharCode(((code - 97 + amount) % 26) + 97);
+            }
+        }
+
+        // Append
+        output += c;
+    }
+
+    // All done!
+    return output;
+};

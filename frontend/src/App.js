@@ -74,7 +74,7 @@ function App() {
                         return (
                             <Redirect
                                 to={{
-                                    pathname: "/account/login",
+                                    pathname: "/login",
                                     state: { from: props.location },
                                 }}
                             />
@@ -97,7 +97,10 @@ function App() {
     return (
         <div className="App">
             <ProvideAuth>
-                <main id="main" className="d-flex justify-content-center">
+                <main
+                    id="main"
+                    className="d-flex justify-content-center background-blue"
+                >
                     <Switch>
                         <LandingOrRedirectToHome exact path="/" />
                         <Route path="/login">

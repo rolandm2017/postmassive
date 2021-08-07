@@ -1,20 +1,18 @@
 import React, { useState } from "react";
+import { useAuth } from "../../auth/use-auth";
 
 import Form from "react-bootstrap/Form";
-
 import Button from "react-bootstrap/Button";
 
 import Logo from "../../images/gps-searching.png";
-
-import "./LogIn.scss";
-
-import { useAuth } from "../../auth/use-auth";
 
 import {
     sendLogInIfInfoIsValid,
     handleAddUsernameOrEmail,
 } from "../../loginTools/util";
 import { validPassword } from "../../loginTools/Validation";
+
+import "./LogIn.scss";
 
 function LogIn(props) {
     // TODO: finish this page!!! it is unfinished
@@ -36,14 +34,14 @@ function LogIn(props) {
     };
 
     return (
-        <div>
+        <div id="log-in-screen_container" className="background-blue">
             <div id="log-in_main">
                 <div id="log-in_container">
                     <div id="log-in_logo-container">
                         <img src={Logo} alt="PostMassiv Logo" />
                     </div>
                     <div id="log-in_headline-container">
-                        <h1>Log in to PostMassiv</h1>
+                        <h1>Log in to PostMassive</h1>
                     </div>
                     <div id="log-in_input-container">
                         <Form>
@@ -74,6 +72,7 @@ function LogIn(props) {
                                 onChange={(value) => handlePassword(value)}
                             />
                             <Button
+                                className="mt-4"
                                 onClick={() =>
                                     sendLogInIfInfoIsValid(
                                         username,

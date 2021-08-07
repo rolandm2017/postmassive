@@ -2,7 +2,7 @@ import React from "react";
 
 import EngagementContainer from "../engagementContainer/EngagementContainer";
 
-import Amplify from "../../images/cat2.jpg";
+import Amplify from "../../images/profilePics/cat2.jpg";
 
 import LargeNumberProcessor from "./LargeNumberProcessor";
 
@@ -12,7 +12,7 @@ import "./Amplify.css";
 
 function Amp(props) {
     return (
-        <div className="notification">
+        <div className="notification bg-blue-highlight pb-2">
             <div className="d-flex">
                 <div className="notification_type-img-container d-flex justify-content-center align-items-end">
                     <img

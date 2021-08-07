@@ -59,8 +59,8 @@ class Massive extends Component {
 
     render() {
         return (
-            <div className="background-blue">
-                <div className="massive-container d-flex flex-column border-top">
+            <div className="background-blue bg-blue-highlight">
+                <div className="massive-container py-2 d-flex flex-column border-top ">
                     <div className="d-flex">
                         <div className="m-profile-pic-container">
                             <img

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import InboxItem from "../../components/inboxItem/InboxItem";
 
-import profilePicPlaceholder3 from "../../images/cat3.jpg";
+import profilePicPlaceholder3 from "../../images/profilePics/cat3.jpg";
 
 import Wrapper from "../_helper/Wrapper";
 

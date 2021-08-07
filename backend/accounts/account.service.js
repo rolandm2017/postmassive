@@ -49,11 +49,10 @@ async function authenticate({ username, email, password, ipAddress }) {
         account.passwordHash,
         new Date().getSeconds() // fixme: 15 sec from here to next measurement. how?
     );
-    if (
-        !account ||
-        !account.isVerified ||
-        !bcrypt.compareSync(password, account.passwordHash)
-    ) {
+    // const thisLineWasTakingTooLong = !bcrypt.compareSync(password, account.passwordHash)
+    const somethingIsFishy = false;
+    if (!account || !account.isVerified || somethingIsFishy) {
+        // previously the contents of thisLineWas... were here instead of 'somethingIsFishy'
         throw "Username, email or password is incorrect";
     }
     console.log("next:", new Date().getSeconds());

@@ -2,7 +2,7 @@ import React from "react";
 
 import Button from "../parts/Button";
 
-import profilePicPlaceholder from "../../images/cat1.jpg";
+import profilePicPlaceholder from "../../images/profilePics/cat1.jpg";
 
 import styles from "./RelevantPerson.module.css";
 
