@@ -33,7 +33,7 @@
     display: none; /* mobile first! */
 }
 
-#chat-display {
+#chat-display-container {
     display: none; /* mobile first! */
     border-right: 1px solid #888;
 }
@@ -89,7 +89,7 @@
 }
 
 @media (min-width: $rightbar-shows) {
-    #chat-display {
+    #chat-display-container {
         width: 600px;
         display: flex;
         flex-direction: column;
