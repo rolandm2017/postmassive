@@ -5,6 +5,7 @@ function getMessage() {
         author: data.author(),
         content: data.content(),
         deliveryDate: data.deliveryDate(),
+        id: Math.floor(Math.random() * 100000),
     };
 }
 

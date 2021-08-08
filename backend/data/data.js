@@ -78,6 +78,8 @@ const nineMinsAgo = 9; // 9 min ago
 const fiftyThreeMinsAgo = 53; // 53 min ago
 const sixHrsAgo = 60 * 6; // 6h ago
 const nineteenHrsAgo = 60 * 19; // 19h ago
+const sixDaysAgo = 60 * 24 * 5;
+const fiveDaysAgo = 60 * 24 * 4;
 
 const currentDate = new Date();
 
@@ -86,6 +88,8 @@ const deliveryDates = [
     new Date(currentDate.getTime() - fiftyThreeMinsAgo * 60000),
     new Date(currentDate.getTime() - sixHrsAgo * 60000),
     new Date(currentDate.getTime() - nineteenHrsAgo * 60000),
+    new Date(currentDate.getTime() - sixDaysAgo * 60000),
+    new Date(currentDate.getTime() - fiveDaysAgo * 60000),
     // "10/23",
     // "10/29",
     new Date("2020-10-03"),
@@ -124,8 +128,9 @@ const cap = () => {
 const others = () => Math.floor(Math.random() * maxFollows);
 
 // messages unique stuff
-const deliveryDate = () =>
-    deliveryDates[Math.floor(Math.random() * deliveryDates.length)];
+const deliveryDate = () => {
+    return deliveryDates[Math.floor(Math.random() * deliveryDates.length)];
+};
 
 // events
 const randInt = () => Math.floor(Math.random() * 20);

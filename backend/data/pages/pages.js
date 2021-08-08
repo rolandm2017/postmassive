@@ -49,8 +49,10 @@ router.get("/messages", authorize(), (req, res) => {
     for (let i = 0; i < 20; i++) {
         msgs.push(message());
     }
-
-    res.json(msgs);
+    const orderedMsgs = msgs.sort((a, b) => {
+        return new Date(b.deliveryDate) - new Date(a.deliveryDate);
+    });
+    res.json(orderedMsgs);
 });
 
 router.get("/profile/:username", (req, res) => {
