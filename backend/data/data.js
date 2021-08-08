@@ -74,15 +74,24 @@ const text = [
     "Ut dolor commodo adipisicing veniam.Dolore dolore voluptate excepteur Lorem adipisicing excepteur dolore excepteur est sint pariatur eiusmod.Esse pariatur anim nostrud quis consequat exercitation dolore occaecat ipsum.Minim fugiat incididunt enim duis consectetur aute enim proident ea minim incididunt.Laboris labore enim nulla pariatur est fugiat ex eu aute quis exercitation.Anim culpa quis excepteur consequat voluptate aute cillum labore.",
 ];
 
+const nineMinsAgo = 9; // 9 min ago
+const fiftyThreeMinsAgo = 53; // 53 min ago
+const sixHrsAgo = 60 * 6; // 6h ago
+const nineteenHrsAgo = 60 * 19; // 19h ago
+
+const currentDate = new Date();
+
 const deliveryDates = [
-    "9m",
-    "53m",
-    "6h",
-    "19h",
-    "Oct 23",
-    "Oct 29",
-    "Dec 1",
-    "Dec 15",
+    new Date(currentDate.getTime() - nineMinsAgo * 60000),
+    new Date(currentDate.getTime() - fiftyThreeMinsAgo * 60000),
+    new Date(currentDate.getTime() - sixHrsAgo * 60000),
+    new Date(currentDate.getTime() - nineteenHrsAgo * 60000),
+    // "10/23",
+    // "10/29",
+    new Date("2020-10-03"),
+    new Date("2020-10-13"),
+    new Date("2020-12-15"),
+    new Date("2020-12-29"),
 ];
 
 // massive stuff

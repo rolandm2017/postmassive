@@ -4,7 +4,11 @@ import InboxItem from "../../components/inboxItem/InboxItem";
 
 import profilePicPlaceholder3 from "../../images/profilePics/cat3.jpg";
 
+import Button from "../../components/parts/Button";
+
 import Wrapper from "../_helper/Wrapper";
+
+import { getOptions } from "../../_helper/authHeader";
 
 import "./Messages.scss";
 
@@ -14,12 +18,8 @@ class Messages extends Component {
     };
 
     componentDidMount() {
-        fetch(process.env.REACT_APP_API_URL + "/messages", {
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-            },
-        }).then((res) => {
+        const messagesUrl = process.env.REACT_APP_API_URL + "/messages";
+        fetch(messagesUrl, getOptions(messagesUrl)).then((res) => {
             res.json().then((messages) => {
                 console.log(messages);
                 this.setState({ messages: messages });
@@ -38,14 +38,14 @@ class Messages extends Component {
             >
                 <div className="d-flex">
                     <div id="inbox">
-                        <div className="inbox-header pl-2 d-flex justify-content-start align-items-center">
-                            <h1>Messages Page</h1>
+                        <div className="inbox-header pl-2 py-1 d-flex justify-content-start align-items-center">
+                            <h1 className="pl-2">Messages Page</h1>
                         </div>
-                        <div className="inbox-header pl-2 d-flex justify-content-start align-items-center">
+                        <div className="inbox-header pl-2 py-2 d-flex justify-content-start align-items-center">
                             {/* TODO: make the search input have larger margins top/bot */}
                             <input
                                 id="inbox-search"
-                                className="ml-2 mr-5"
+                                className="ml-2 mr-5 pl-2 dark-mode-input"
                                 placeholder="Search for people or message content"
                             ></input>
                         </div>
@@ -78,7 +78,15 @@ class Messages extends Component {
                             Choose from your existing messages, or start a new
                             one.
                         </p>
-                        <button>New message</button>
+
+                        <Button
+                            text={"New message"}
+                            blueBg={false}
+                            authed={true}
+                            onClick={() => {
+                                // this.openNewMsg();
+                            }}
+                        ></Button>
                     </div>
                 </div>
             </Wrapper>

@@ -49,6 +49,7 @@ router.get("/messages", authorize(), (req, res) => {
     for (let i = 0; i < 20; i++) {
         msgs.push(message());
     }
+
     res.json(msgs);
 });
 
