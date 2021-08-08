@@ -46,7 +46,7 @@ function LogIn(props) {
                     <div id="log-in_input-container">
                         <Form>
                             <Form.Label htmlFor="log-in_email-input">
-                                Email
+                                Email or Username
                             </Form.Label>
                             <Form.Control
                                 type="email"
@@ -71,22 +71,25 @@ function LogIn(props) {
                                 aria-describedby="passwordHelpBlock"
                                 onChange={(value) => handlePassword(value)}
                             />
-                            <Button
-                                className="mt-4"
-                                onClick={() =>
-                                    sendLogInIfInfoIsValid(
-                                        username,
-                                        email,
-                                        password,
-                                        true,
-                                        setError,
-                                        setDesktopLoginError,
-                                        auth
-                                    )
-                                }
-                            >
-                                Log in
-                            </Button>
+                            <div className="d-flex align-items-center justify-content-left">
+                                <Button
+                                    className="mt-4"
+                                    onClick={() =>
+                                        sendLogInIfInfoIsValid(
+                                            username,
+                                            email,
+                                            password,
+                                            false, // displayErrInModal = false, so it will be DesktopLoginError
+                                            setError,
+                                            setDesktopLoginError,
+                                            auth
+                                        )
+                                    }
+                                >
+                                    Log in
+                                </Button>
+                                <p className="mt-4 pl-3">{desktopLoginError}</p>
+                            </div>
                         </Form>
                     </div>
                 </div>

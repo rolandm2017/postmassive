@@ -8,7 +8,9 @@ function Trending(props) {
     //
 
     return (
-        <div className={`${styles.trendingContainer} pl-2 pt-1`}>
+        <div
+            className={`${styles.trendingContainer} bg-blue-highlight pl-2 pt-1`}
+        >
             <h3 className={`${styles.headline} mt-1`}>
                 {props.headline} {"\u2022"} Trending
             </h3>

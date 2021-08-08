@@ -99,7 +99,11 @@ function App() {
             <ProvideAuth>
                 <main
                     id="main"
-                    className="d-flex justify-content-center background-blue"
+                    className={
+                        window.location.pathname.includes("/login")
+                            ? "d-flex justify-content-center background-blue"
+                            : "d-flex justify-content-center"
+                    }
                 >
                     <Switch>
                         <LandingOrRedirectToHome exact path="/" />
