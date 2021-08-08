@@ -9,7 +9,7 @@ import styles from "./FollowRec.module.css";
 function FollowRec(props) {
     return (
         <div
-            className={`${styles.followRec} d-flex justify-content-between align-items-center`}
+            className={`${styles.followRec} d-flex justify-content-between align-items-center bg-blue-highlight`}
         >
             <div className="mx-2 d-flex justify-content-center align-items-center">
                 <img src={profilePicPlaceholder2} alt="profile pic" />

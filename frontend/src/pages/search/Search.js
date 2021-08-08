@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import { Link } from "react-router-dom";
+
 import Wrapper from "../_helper/Wrapper";
 
 import "./Search.scss";
@@ -19,7 +21,7 @@ class Search extends Component {
                     className="m-1 d-flex justify-content-center align-items-center"
                 >
                     <input
-                        className="mx-5 my-2 p-1"
+                        className="mx-5 my-2 p-1 dark-mode-input"
                         type="text"
                         name="search-bar"
                         id="search-bar"
@@ -30,13 +32,41 @@ class Search extends Component {
                     {/* have the user press enter to search, or click on the (future) dropdown */}
                 </div>
                 <div id="search_recommendations" className="d-flex">
-                    <button className="search_width-fix">For you</button>
-                    <button className="search_width-fix">Trending</button>
-                    <button className="search_width-fix">News</button>
-                    <button className="search_width-fix">Influencers</button>
-                    <button className="search_width-fix">Art</button>
-                    <button className="search_width-fix">Entertainment</button>
-                    <button className="search_width-fix">Commerce</button>
+                    <div>
+                        <div></div>
+                        <Link className="search_width-fix">For you</Link>
+                        <div></div>
+                    </div>
+                    <div>
+                        <div></div>
+                        <Link className="search_width-fix">Trending</Link>
+                        <div></div>
+                    </div>
+                    <div>
+                        <div></div>
+                        <Link className="search_width-fix">News</Link>
+                        <div></div>
+                    </div>
+                    <div>
+                        <div></div>
+                        <Link className="search_width-fix">Influencers</Link>
+                        <div></div>
+                    </div>
+                    <div>
+                        <div></div>
+                        <Link className="search_width-fix">Art</Link>
+                        <div></div>
+                    </div>
+                    <div>
+                        <div></div>
+                        <Link className="search_width-fix">Entertainment</Link>
+                        <div></div>
+                    </div>
+                    <div>
+                        <div></div>
+                        <Link className="search_width-fix">Commerce</Link>
+                        <div></div>
+                    </div>
                 </div>
                 <div id="search_main-article">
                     <div id="search_main-article-container">

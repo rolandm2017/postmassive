@@ -122,6 +122,10 @@ class Profile extends Component {
             >
                 <div className="d-flex">
                     <div
+                        onClick={() => {
+                            // history.push("/home");
+                            // todo: push previous url to stack
+                        }}
                         id={`${styles.backButtonContainer}`}
                         className="d-flex justify-content-center align-items-center"
                     >
@@ -161,21 +165,27 @@ class Profile extends Component {
                             id={`${styles.interactionButtons}`}
                             className="d-flex"
                         >
-                            <button className={`${styles.interactionButton}`}>
+                            <button
+                                className={`${styles.interactionButton} bg-blue-highlight`}
+                            >
                                 <img
                                     className={`${styles.interactionImg}`}
                                     src={More}
                                     alt="More options"
                                 ></img>
                             </button>
-                            <button className={`${styles.interactionButton}`}>
+                            <button
+                                className={`${styles.interactionButton} bg-blue-highlight`}
+                            >
                                 <img
                                     className={`${styles.interactionImg}`}
                                     src={Mail}
                                     alt="Send mail"
                                 ></img>
                             </button>
-                            <button className={`${styles.interactionButton}`}>
+                            <button
+                                className={`${styles.interactionButton} bg-blue-highlight`}
+                            >
                                 <img
                                     className={`${styles.interactionImg}`}
                                     src={Bell}
@@ -184,7 +194,7 @@ class Profile extends Component {
                             </button>
                             {/* </div> */}
                             {/* <div className="d-flex justify-content-center align-items-center"> */}
-                            <Button text="Edit Profile" />
+                            <Button text="Edit Profile" authed={true} />
                             {/* // TODO: set options on Button */}
                         </div>
                     </div>

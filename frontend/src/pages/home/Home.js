@@ -26,12 +26,16 @@ class Home extends Component {
 
         const feedUrl = process.env.REACT_APP_API_URL + "/mock/feed";
         console.log("inspect:", getOptions(feedUrl));
-        fetch(feedUrl, getOptions(feedUrl)).then((res) => {
-            res.json().then((massives) => {
-                console.log(massives[0]);
-                this.setState({ massives: massives });
+        fetch(feedUrl, getOptions(feedUrl))
+            .then((res) => {
+                res.json().then((massives) => {
+                    console.log(massives[0]);
+                    this.setState({ massives: massives });
+                });
+            })
+            .catch((err) => {
+                console.log(err);
             });
-        });
     }
 
     render() {

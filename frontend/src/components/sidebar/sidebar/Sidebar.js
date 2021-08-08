@@ -76,6 +76,7 @@ function Sidebar(props) {
                             onClick={() =>
                                 history.push("/" + props.user.username)
                             }
+                            // state={ prevPath: window.location.pathname }
                         />
                         <SidebarButton src={More} alt="More" text="More" />
                     </div>

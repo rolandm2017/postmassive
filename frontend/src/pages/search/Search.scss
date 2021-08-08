@@ -45,4 +45,34 @@
 #search_recommendations {
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
+    padding: 0 14px;
+}
+
+#search_recommendations div {
+    height: 50px;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+}
+
+#search_recommendations div div {
+    width: 20px;
+}
+
+#search_recommendations div:hover {
+    background-color: lighten($dark-blue, 12%);
+    // background-color: red;
+}
+
+#search_recommendations div a {
+    width: fit-content;
+    text-decoration: none;
+}
+
+#search_recommendations div a:hover {
+    text-decoration: underline;
+}
+
+.search_width-fix {
+    min-width: fit-content;
 }
