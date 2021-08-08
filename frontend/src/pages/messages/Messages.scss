@@ -25,6 +25,9 @@
     border-radius: 15px;
 }
 
+.inbox-show-msg {
+}
+
 #messages_page {
     width: auto; /* mobile first! */
 }
@@ -36,6 +39,13 @@
 #chat-display-container {
     display: none; /* mobile first! */
     border-right: 1px solid #888;
+}
+
+#chat-display-inner-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 @media (min-width: $full-sidebar) {

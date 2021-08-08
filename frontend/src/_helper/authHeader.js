@@ -51,7 +51,7 @@ export function _deleteOptions(url) {
 function authHeader(url) {
     // return auth header with jwt if user is logged in and request is to the api url
     const user = userValue(); // fixme: this isnt being updated properly. when authHeader fires, it should update w/ user info.
-    console.log("inside authHeader (1):", user);
+    // console.log("inside authHeader (1):", user);
     if (!user) {
         console.log("setting header as blank", new Date().getSeconds());
         return {};
@@ -60,9 +60,7 @@ function authHeader(url) {
     const isApiUrl = url.startsWith(process.env.REACT_APP_API_URL);
     console.log(61);
     if (isLoggedIn && isApiUrl) {
-        console.log(
-            `setting JWT into Authorization Bearer header ${user.jwtToken}`
-        );
+        console.log(`auth Bearer header ${user.jwtToken}`);
         return { Authorization: `Bearer ${user.jwtToken}` };
     } else {
         return {};

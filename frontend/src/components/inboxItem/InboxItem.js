@@ -49,7 +49,7 @@ function InboxItem(props) {
     };
 
     return (
-        <div className={`${styles.itemBox} d-flex`}>
+        <div className={`${styles.itemBox} d-flex`} onClick={props.showMsg}>
             <div
                 className={`${styles.profilePicContainer} d-flex justify-content-center align-items-center`}
             >

@@ -8,6 +8,8 @@ import * as serviceWorker from "./serviceWorker";
 // import { refreshToken } from "./auth/refreshToken";
 import { refreshToken } from "./auth/use-auth";
 
+// FIXME PRIORITY: refreshing PM sends u to the login page. FIX.
+
 // attempt silent token refresh on page load
 refreshToken().finally((x) => {
     console.log("rendering!!!!!!!!!!!!!!!!!!!!");

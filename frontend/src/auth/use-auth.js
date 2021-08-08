@@ -31,9 +31,9 @@ export const user = userSubject.asObservable(); // fixme: confusing ... what is 
 // via: https://stackoverflow.com/questions/39494058/behaviorsubject-vs-observable
 
 export const userValue = () => {
-    // FIXME: this userValue func is stil getting called WAY TOO OFTEN
+    // FIXME: this userValue func is still getting called WAY TOO OFTEN
     const isCurrentUserOrNull = userSubject.getValue();
-    console.log("userValue:", userSubject, isCurrentUserOrNull);
+    // console.log("userValue:", userSubject, isCurrentUserOrNull);
     // fixme: issue is, userValue() is run once after user sends login() request. then userSubject receives a new val.
     // but userValue is not updated, so app.js has no way to know about the logged in user.
     return isCurrentUserOrNull;
@@ -248,16 +248,11 @@ export function useProvideAuth() {
     };
 }
 
-// import { postOptions } from "../_helper/authHeader";
-// import { BehaviorSubject } from "rxjs";
-
-// const userSubject = new BehaviorSubject(null);
-
 // helper functions
 
 export function refreshToken() {
     const url = process.env.REACT_APP_API_URL + "/auth/refreshToken";
-    // const url = "http://localhost:3000/api/auth/refreshToken";
+
     console.log("Attempting to refresh token...");
     return (
         fetch(url, postOptions(url))
@@ -290,16 +285,19 @@ let refreshTokenTimeout;
 
 export function startRefreshTokenTimer() {
     // parse json object from base64 encoded jwt token
-    // console.log(userSubject.value, userSubject);
-    // console.log("inside startRefreshTokenTimer()");
     const jwtToken = JSON.parse(atob(userSubject.value.jwtToken.split(".")[1]));
-    // console.log("30:", jwtToken);
 
     // set a timeout to refresh the token a minute before it expires
     const expires = new Date(jwtToken.exp * 1000);
-    const timeout = expires.getTime() - Date.now() - 60 * 1000;
-    console.log(30, timeout);
-    refreshTokenTimeout = setTimeout(refreshToken, timeout);
+    const timeout = expires - Date.now();
+    console.log(300, expires, timeout, new Date(timeout), jwtToken);
+    refreshTokenTimeout = setTimeout(() => {
+        refreshToken();
+    }, timeout);
+    // fixme PRIORITY
+    // either: jwtToken isnt getting it from jetToken.split properly
+    // or: the expires value is messed up
+    // or: timeout is not calling refreshToken() correctly
 }
 
 export function stopRefreshTokenTimer() {
