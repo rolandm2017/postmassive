@@ -7,59 +7,30 @@ import BootstrapButton from "react-bootstrap/Button";
 import "./Button.scss";
 
 function Button(props) {
+    let usedClasses = "generic-btn";
     if (props.blueBg) {
-        if (props.thin) {
-            return (
-                <div>
-                    <BootstrapButton
-                        style={{ width: `${props.width}` }}
-                        className="generic-btn blue-bg thin-btn"
-                        onClick={props.onClick}
-                    >
-                        {props.text}
-                    </BootstrapButton>
-                </div>
-            );
-        } else {
-            return (
-                <div>
-                    <BootstrapButton
-                        style={{ width: `${props.width}` }}
-                        className="generic-btn blue-bg"
-                        onClick={props.onClick}
-                    >
-                        {props.text}
-                    </BootstrapButton>
-                </div>
-            );
-        }
+        usedClasses = usedClasses + " blue-bg";
     } else {
-        if (props.thin) {
-            return (
-                <div>
-                    <BootstrapButton
-                        style={{ width: `${props.width}` }}
-                        className="generic-btn clear-bg thin-btn"
-                        onClick={props.onClick}
-                    >
-                        {props.text}
-                    </BootstrapButton>
-                </div>
-            );
-        } else {
-            return (
-                <div>
-                    <BootstrapButton
-                        style={{ width: `${props.width}` }}
-                        className="generic-btn clear-bg"
-                        onClick={props.onClick}
-                    >
-                        {props.text}
-                    </BootstrapButton>
-                </div>
-            );
-        }
+        usedClasses = usedClasses + " clear-bg";
     }
+    if (props.thin) {
+        usedClasses = usedClasses + " thin-btn";
+    }
+    if (props.authed) {
+        usedClasses = usedClasses + " authed-btn";
+    }
+
+    return (
+        <div>
+            <BootstrapButton
+                style={{ width: `${props.width}` }}
+                className={usedClasses}
+                onClick={props.onClick}
+            >
+                {props.text}
+            </BootstrapButton>
+        </div>
+    );
 }
 
 export default Button;

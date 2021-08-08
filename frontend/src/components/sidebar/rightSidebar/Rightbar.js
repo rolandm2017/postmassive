@@ -79,7 +79,12 @@ function Rightbar(props) {
                     statistic={{ amount: 65903000, type: "Likes" }}
                 />
                 <div className="rightbar_rounded my-2 pl-2 pt-2">
-                    <Button text="Show more" blueBg={false} thin={false} />
+                    <Button
+                        text="Show more"
+                        blueBg={false}
+                        thin={false}
+                        authed={true}
+                    />
                 </div>
             </div>
         );
@@ -106,7 +111,12 @@ function Rightbar(props) {
                     {/* #*#*#*#**#*#*# */}
                     {/* note: not a generic button */}
                     <div className="rightbar_rounded mb-2 pl-2 pt-2">
-                        <Button text="Show more" blueBg={false} thin={false} />
+                        <Button
+                            text="Show more"
+                            blueBg={false}
+                            thin={false}
+                            authed={true}
+                        />
                     </div>
                 </div>
             </div>

@@ -5,8 +5,6 @@
 // The authHeader() function is used to automatically add a JWT auth token to
 // the HTTP Authorization header of the request if the user is logged in and
 // the request is to the application api url.
-import Cookies from "js-cookie";
-
 import { userValue } from "../auth/use-auth";
 
 export function getOptions(url) {
@@ -64,7 +62,7 @@ function authHeader(url) {
     if (isLoggedIn && isApiUrl) {
         console.log(
             `setting JWT into Authorization Bearer header ${user.jwtToken}`
-        ); // fixme: Cookies.get("jwt") is undefined; how is the jwt supposed to enter the cookie storage?
+        );
         return { Authorization: `Bearer ${user.jwtToken}` };
     } else {
         return {};

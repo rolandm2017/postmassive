@@ -56,7 +56,8 @@ router.get("/profile/:username", (req, res) => {
     console.log(55, req.params.username);
     // console.log("Received SPECIFIC user:", req.params.username);
     // want to get the object that has req.body.username as the value of the object's "username" key and return its profile
-    for (let i = 0; i < Object.keys(users).length; i++) {
+    const numberOfUsers = Object.keys(users).length;
+    for (let i = 0; i < numberOfUsers; i++) {
         if (users[i].username === req.params.username) {
             console.log("Fetching profile for", req.params.username);
             res.json(users[i].profile);

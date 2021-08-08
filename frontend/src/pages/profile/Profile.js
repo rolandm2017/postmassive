@@ -90,7 +90,9 @@ class Profile extends Component {
             ) : null;
         const displayWebsite = (site) =>
             site ? (
-                <span className={`${styles.link} ${styles.genericFontWeight}`}>
+                <span
+                    className={`${styles.link} ${styles.genericFontWeight} ${styles.underlineCancel}`}
+                >
                     <a href={this.state.profile.website}>{site}</a>
                 </span>
             ) : null;
@@ -227,7 +229,7 @@ class Profile extends Component {
                     </div>
                     <div>
                         {this.state.profile ? (
-                            <h4>
+                            <h4 className={`${styles.underlineCancel}`}>
                                 <Link
                                     to={{
                                         pathname: `${this.state.profile.username}/following`,

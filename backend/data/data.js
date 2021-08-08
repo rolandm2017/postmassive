@@ -40,6 +40,7 @@ const authors = [
     { displayName: "Crono", username: "LegendaryHero" },
     { displayName: "Lucca", username: "geniusInventor99" },
     { displayName: "Marle", username: "princessAnonymous" },
+    { displayName: "Marle", username: "marle" },
     { displayName: "Frog", username: "ribbitWarrior" },
     { displayName: "Robo", username: "madeByMan" },
     { displayName: "Ayla", username: "queen" },

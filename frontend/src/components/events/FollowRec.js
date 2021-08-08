@@ -19,7 +19,12 @@ function FollowRec(props) {
                 <p className={`${styles.text}`}>@{props.username}</p>
             </div>
             <div className={`${styles.heightAdjustment} ml-1 mr-3 d-flex`}>
-                <Button text="Follow" blueBg={false} thin={true} />
+                <Button
+                    text="Follow"
+                    blueBg={false}
+                    thin={true}
+                    authed={true}
+                />
             </div>
         </div>
     );

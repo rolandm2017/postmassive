@@ -2,7 +2,7 @@ import React from "react";
 
 import EngagementContainer from "../engagementContainer/EngagementContainer";
 
-import LargeNumberProcessor from "./LargeNumberProcessor";
+// import LargeNumberProcessor from "./LargeNumberProcessor";
 
 import "./Quote.scss";
 
