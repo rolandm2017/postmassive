@@ -113,8 +113,8 @@ function Messages(props) {
                             className="inbox-show-msg"
                         >
                             <div>
-                                @{selectedMsg.username}{" "}
-                                <span>{selectedMsg.displayName}</span>
+                                @{selectedMsg.author.username}{" "}
+                                <span>{selectedMsg.author.displayName}</span>
                             </div>
                             <div>
                                 <p>{selectedMsg.content} </p>

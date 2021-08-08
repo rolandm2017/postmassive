@@ -12,13 +12,12 @@ import Cookies from "js-cookie";
 // mock server login section
 export const mockingServer = true;
 
-const frontendOnly = false; // if true, client doesn't even bother requesting to the mockServer, just assumes serverside works.
-// these mock things are used when the frontendOnly flag is up
-export const mockUser = "RolyPoly"; // TODO: make mockUser more like the object we get back from the backend
-export const mockPassword = "battleships";
-export const mockEmail = "test@gmail.com";
-export const mockCode = "qwerty";
-export const mockJWT = "its4w3btok3n";
+// const frontendOnly = false; // if true, client doesn't even bother requesting to the mockServer, just assumes serverside works.
+// // these mock things are used when the frontendOnly flag is up
+// export const mockUser = "RolyPoly"; // TODO: make mockUser more like the object we get back from the backend
+// export const mockPassword = "battleships";
+// export const mockEmail = "test@gmail.com";
+// export const mockCode = "qwerty";
 
 // initialize the userSubject to hold the user obj once s/he logs in
 const userSubject = new BehaviorSubject(null);
@@ -63,125 +62,94 @@ export function useProvideAuth() {
     const history = useHistory();
 
     const signIn = (username, email, password, location) => {
-        if (frontendOnly) {
-            // TODO: remove "frontend only" YAGNI
-        } else {
-            const signInUrl =
-                baseURL +
-                "/signIn?username=" +
-                username +
-                "&email=" +
-                email +
-                "&password=" +
-                password;
-            console.log("Wwill thos print:", signInUrl);
-            return new Promise((resolve, reject) => {
-                fetch(signInUrl, postOptions(signInUrl))
-                    .then((res) => {
-                        console.log("this again ", new Date().getSeconds());
-                        res.json()
-                            .then((userObject) => {
-                                console.log(
-                                    "Received user object:",
-                                    userObject,
-                                    userObject.username,
-                                    "The JWT:",
-                                    userObject.jwtToken,
-                                    location
-                                );
-                                // console.log("hello", userSubject);
-                                userSubject.next(userObject);
-                                // console.log("hello", userSubject);
-                                startRefreshTokenTimer();
-                                console.log("Pushing location to stack...");
-                                history.push(location);
-                                resolve(userObject);
-                            })
-                            .catch((err) => {
-                                console.log(err);
-                                // happens if there is no json in the response.
-                                reject(
-                                    "Error! Wrong username, email or password?"
-                                );
-                                // FIXME: these errors often show up when the server has a problem.
-                                // this is a problem because "username email or pw?" has nothing to do w/ the src of err. Fix.
-                                // low priority tho
-                            });
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                        reject("Error. Wrong username, email or password?");
-                        // FIXME: these errors often show up when the server has a problem.
-                        // this is a problem because "username email or pw?" has nothing to do w/ the src of err. Fix.
-                    });
-            });
-        }
-    };
-
-    const signUp = (email, password, location) => {
-        if (frontendOnly) {
-        } else {
-            return new Promise((resolve, reject) => {
-                const signUpUrl =
-                    baseURL +
-                    "/signIn?email=" +
-                    email +
-                    "&password=" +
-                    password;
-                fetch(signUpUrl, postOptions(signUpUrl))
-                    .then((res) => {
-                        res.json().then((userObject) => {
+        const signInUrl =
+            baseURL +
+            "/signIn?username=" +
+            username +
+            "&email=" +
+            email +
+            "&password=" +
+            password;
+        console.log("Wwill thos print:", signInUrl);
+        return new Promise((resolve, reject) => {
+            fetch(signInUrl, postOptions(signInUrl))
+                .then((res) => {
+                    console.log("this again ", new Date().getSeconds());
+                    res.json()
+                        .then((userObject) => {
                             console.log(
                                 "Received user object:",
                                 userObject,
-                                userObject.user
-                            );
-                            console.log(
+                                userObject.username,
                                 "The JWT:",
                                 userObject.jwtToken,
-                                userObject.user.jwtToken
+                                location
                             );
                             userSubject.next(userObject);
+                            console.log("setting jwt...", userObject.jwtToken);
                             Cookies.set("jwt", userObject.jwtToken);
                             startRefreshTokenTimer();
+                            console.log("Pushing location to stack...");
                             history.push(location);
                             resolve(userObject);
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                            // happens if there is no json in the response.
+                            reject("Error! Wrong username, email or password?");
+                            // FIXME: these errors often show up when the server has a problem.
+                            // this is a problem because "username email or pw?" has nothing to do w/ the src of err. Fix.
+                            // low priority tho
                         });
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                        reject(err);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    reject("Error. Wrong username, email or password?");
+                    // FIXME: these errors often show up when the server has a problem.
+                    // this is a problem because "username email or pw?" has nothing to do w/ the src of err. Fix.
+                });
+        });
+    };
+
+    const signUp = (email, password, location) => {
+        return new Promise((resolve, reject) => {
+            const signUpUrl =
+                baseURL + "/signIn?email=" + email + "&password=" + password;
+            fetch(signUpUrl, postOptions(signUpUrl))
+                .then((res) => {
+                    res.json().then((userObject) => {
+                        userSubject.next(userObject);
+                        console.log("setting jwt...", userObject.jwtToken);
+                        Cookies.set("jwt", userObject.jwtToken);
+                        startRefreshTokenTimer();
+                        history.push(location);
+                        resolve(userObject);
                     });
-            });
-        }
+                })
+                .catch((err) => {
+                    console.log(err);
+                    reject(err);
+                });
+        });
     };
 
     const signOut = (location) => {
-        if (frontendOnly) {
-            // we don't go to Ravenholm
-        } else {
-            console.log("Attempting to sign out ...");
-            const revokeURL = baseURL + "/signOut";
-            fetch(revokeURL, postOptions(revokeURL))
-                .then((res) => {
-                    userSubject.next(null);
-                    Cookies.remove("jwt"); // TODO: test that this removes the jwt cookie on log out
-                    stopRefreshTokenTimer();
-                    console.log("revoked token successfully");
-                    history.push(location);
-                })
-                .catch((err) => console.log(err));
-        }
+        console.log("Attempting to sign out ...");
+        const revokeURL = baseURL + "/signOut";
+        fetch(revokeURL, postOptions(revokeURL))
+            .then((res) => {
+                userSubject.next(null);
+
+                stopRefreshTokenTimer();
+                console.log("revoked token successfully");
+                history.push(location);
+            })
+            .catch((err) => console.log(err));
     };
 
     const sendPasswordResetEmail = (email) => {
-        // forgot password!
-        if (frontendOnly) {
-            // TODO: ??? how to mock this?
-        } else {
-            return fetch(
-                baseURL + "/sendPasswordResetEmail?email=" + email
-            ).then((res) => {
+        return fetch(baseURL + "/sendPasswordResetEmail?email=" + email).then(
+            (res) => {
                 res.json().then((response) => {
                     if (response.emailSent) {
                         return true;
@@ -189,27 +157,23 @@ export function useProvideAuth() {
                         return false;
                     }
                 });
-            });
-        }
+            }
+        );
     };
 
     const confirmPasswordReset = (code, password) => {
-        if (frontendOnly) {
-            return true;
-        } else {
-            return fetch(
-                baseURL + "/confirmReset?code=" + code + "&password=" + password
-                // baseURL + "/confirmReset/" + code + "/" + password
-            ).then((res) => {
-                res.json().then((response) => {
-                    if (response.confirmed) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                });
+        return fetch(
+            baseURL + "/confirmReset?code=" + code + "&password=" + password
+            // baseURL + "/confirmReset/" + code + "/" + password
+        ).then((res) => {
+            res.json().then((response) => {
+                if (response.confirmed) {
+                    return true;
+                } else {
+                    return false;
+                }
             });
-        }
+        });
     };
 
     // Comment from the page I got this code from:
@@ -225,6 +189,7 @@ export function useProvideAuth() {
     useEffect(() => {
         const unsubscribe = (user) => {
             if (user) {
+                console.log("setting jwt in unsubscribe...", user.jwtToken);
                 Cookies.set("jwt", user.jwtToken);
                 userSubject.next(user);
             } else {
@@ -249,6 +214,11 @@ export function useProvideAuth() {
 }
 
 // helper functions
+
+export function getRefreshToken() {
+    // get refresh token from cookie
+    return Cookies.get("jwt");
+}
 
 export function refreshToken() {
     const url = process.env.REACT_APP_API_URL + "/auth/refreshToken";

@@ -4,7 +4,7 @@ import styles from "./InboxItem.module.css";
 
 function InboxItem(props) {
     const formatDate = (date) => {
-        console.log("formatting...", date);
+        // console.log("formatting...", date);
         var d = new Date(date),
             month = "" + (d.getMonth() + 1),
             day = "" + d.getDate();
@@ -44,7 +44,7 @@ function InboxItem(props) {
             console.log("aa");
             output = formatDate(parsedInput);
         }
-        console.log(output);
+        // console.log(output);
         return output;
     };
 

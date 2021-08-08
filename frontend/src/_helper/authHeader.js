@@ -5,7 +5,7 @@
 // The authHeader() function is used to automatically add a JWT auth token to
 // the HTTP Authorization header of the request if the user is logged in and
 // the request is to the application api url.
-import { userValue } from "../auth/use-auth";
+import { userValue, getRefreshToken } from "../auth/use-auth";
 
 export function getOptions(url) {
     console.log("further test:", authHeader(url));
@@ -61,7 +61,9 @@ function authHeader(url) {
     console.log(61);
     if (isLoggedIn && isApiUrl) {
         console.log(`auth Bearer header ${user.jwtToken}`);
-        return { Authorization: `Bearer ${user.jwtToken}` };
+        // the jwtToken is stored on the user object & the user object ONLY.
+        // as in React State as per Ryan Chenkie's suggestions
+        return { Authorization: `Bearer ${getRefreshToken()}` };
     } else {
         return {};
     }

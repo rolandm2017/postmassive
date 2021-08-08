@@ -79,6 +79,7 @@ function Sidebar(props) {
                             // state={ prevPath: window.location.pathname }
                         />
                         <SidebarButton src={More} alt="More" text="More" />
+                        {/* TODO: add settings */}
                     </div>
                     <PostButton mini={props.shrink} />
                 </div>
