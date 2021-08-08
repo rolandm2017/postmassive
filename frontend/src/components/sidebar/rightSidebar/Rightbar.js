@@ -4,7 +4,7 @@ import Button from "../../parts/Button";
 
 import PopularMassive from "../../events/PopularMassive";
 import FollowRec from "../../events/FollowRec";
-import RelevantPerson from "../../events/RelevantPerson";
+// import RelevantPerson from "../../events/RelevantPerson"; // DO NOT DELETE, this is NOT zombie code, will be used LATER
 import NewsStory from "../../events/NewsStory";
 import Trending from "../../events/Trending";
 

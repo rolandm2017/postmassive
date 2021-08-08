@@ -70,8 +70,9 @@ function App() {
                 {...rest}
                 render={(props) => {
                     // evaluate whether user is authed when component is created, NOT when App is rendered.
-                    const user = userValue() !== null;
-                    if (!user) {
+                    const userIsLoggedIn = userValue() !== null;
+                    console.log("status", 74, userIsLoggedIn);
+                    if (!userIsLoggedIn) {
                         // not logged in so redirect to login page with the return url
                         return (
                             <Redirect
@@ -82,6 +83,8 @@ function App() {
                             />
                         );
                     }
+
+                    const user = userIsLoggedIn;
 
                     // check if route is restricted by role
                     if (roles && roles.indexOf(user.role) === -1) {
@@ -99,6 +102,7 @@ function App() {
     return (
         <div className="App">
             <ProvideAuth>
+                {/* todo: test if I can just remove ProvideAuth */}
                 <main
                     id="main"
                     className={

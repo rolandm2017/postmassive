@@ -90,7 +90,10 @@ function LogIn(props) {
                                 >
                                     Log in
                                 </Button>
-                                <p className="mt-4 pl-3">{desktopLoginError}</p>
+                                <p className="mt-4 pl-3">
+                                    {desktopLoginError} {error}
+                                    {/* // remove error if it shwos double */}
+                                </p>
                             </div>
                         </Form>
                     </div>

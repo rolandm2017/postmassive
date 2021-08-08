@@ -9,16 +9,6 @@ import Cookies from "js-cookie";
 
 // import { startRefreshTokenTimer, stopRefreshTokenTimer } from "./refreshToken";
 
-// mock server login section
-export const mockingServer = true;
-
-// const frontendOnly = false; // if true, client doesn't even bother requesting to the mockServer, just assumes serverside works.
-// // these mock things are used when the frontendOnly flag is up
-// export const mockUser = "RolyPoly"; // TODO: make mockUser more like the object we get back from the backend
-// export const mockPassword = "battleships";
-// export const mockEmail = "test@gmail.com";
-// export const mockCode = "qwerty";
-
 // initialize the userSubject to hold the user obj once s/he logs in
 const userSubject = new BehaviorSubject(null);
 
@@ -32,17 +22,18 @@ export const user = userSubject.asObservable(); // fixme: confusing ... what is 
 export const userValue = () => {
     // FIXME: this userValue func is still getting called WAY TOO OFTEN
     const isCurrentUserOrNull = userSubject.getValue();
+
     // console.log("userValue:", userSubject, isCurrentUserOrNull);
     // fixme: issue is, userValue() is run once after user sends login() request. then userSubject receives a new val.
     // but userValue is not updated, so app.js has no way to know about the logged in user.
     return isCurrentUserOrNull;
 };
 
-// authContext will inject the auth methods into their appropriate components
-const authContext = createContext();
-
 const baseURL = process.env.REACT_APP_API_URL + "/auth";
 // const baseURL = "http://localhost:3000/api/auth";
+
+// authContext will inject the auth methods into their appropriate components
+const authContext = createContext();
 
 // Provider component that wraps your app and makes auth object ...
 // ... available to any child component that calls useAuth().
@@ -77,17 +68,22 @@ export function useProvideAuth() {
                     console.log("this again ", new Date().getSeconds());
                     res.json()
                         .then((userObject) => {
-                            console.log(
-                                "Received user object:",
-                                userObject,
-                                userObject.username,
-                                "The JWT:",
-                                userObject.jwtToken,
-                                location
-                            );
+                            // console.log(
+                            //     "Received user object:",
+                            //     userObject,
+                            //     userObject.username,
+                            //     "The JWT:",
+                            //     userObject.jwtToken,
+                            //     location
+                            // );
                             userSubject.next(userObject);
-                            console.log("setting jwt...", userObject.jwtToken);
+                            console.log(
+                                "setting jwt...",
+                                userObject.jwtToken,
+                                userObject
+                            );
                             Cookies.set("jwt", userObject.jwtToken);
+                            Cookies.set("user", userObject);
                             startRefreshTokenTimer();
                             console.log("Pushing location to stack...");
                             history.push(location);
@@ -119,8 +115,13 @@ export function useProvideAuth() {
                 .then((res) => {
                     res.json().then((userObject) => {
                         userSubject.next(userObject);
-                        console.log("setting jwt...", userObject.jwtToken);
+                        console.log(
+                            "setting jwt...",
+                            userObject.jwtToken,
+                            userObject
+                        );
                         Cookies.set("jwt", userObject.jwtToken);
+                        Cookies.set("user", userObject);
                         startRefreshTokenTimer();
                         history.push(location);
                         resolve(userObject);

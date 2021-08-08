@@ -5,6 +5,8 @@
 // The authHeader() function is used to automatically add a JWT auth token to
 // the HTTP Authorization header of the request if the user is logged in and
 // the request is to the application api url.
+import Cookies from "js-cookie";
+
 import { userValue, getRefreshToken } from "../auth/use-auth";
 
 export function getOptions(url) {
@@ -50,17 +52,25 @@ export function _deleteOptions(url) {
 
 function authHeader(url) {
     // return auth header with jwt if user is logged in and request is to the api url
-    const user = userValue(); // fixme: this isnt being updated properly. when authHeader fires, it should update w/ user info.
+    let user = userValue() !== null; // fixme: this isnt being updated properly. when authHeader fires, it should update w/ user info.
+    if (!user) {
+        user = { jwtToken: Cookies.get("jwt") };
+        // fixme: ok but why do I have to have user object in here? is the jwt from the user object's refresh token really important?
+        // or can i just skip checking if the user is in the behaviorSubject?
+        // the probl is that when index.js refreshToken()s, there's nothing in userSubject.
+        // so in that particular case of index.js refreshing, I want to refreshToken successfully.
+        // so user has to get user && user.jwtToken from the cookie.
+    }
     // console.log("inside authHeader (1):", user);
     if (!user) {
-        console.log("setting header as blank", new Date().getSeconds());
+        console.log("setting header as blank", new Date().getSeconds(), user); // fixme: have to get user value into 'user'
         return {};
     }
     const isLoggedIn = user && user.jwtToken;
     const isApiUrl = url.startsWith(process.env.REACT_APP_API_URL);
-    console.log(61);
+    console.log(61, user, url.startsWith(process.env.REACT_APP_API_URL));
     if (isLoggedIn && isApiUrl) {
-        console.log(`auth Bearer header ${user.jwtToken}`);
+        console.log(`auth Bearer header ${getRefreshToken()}`);
         // the jwtToken is stored on the user object & the user object ONLY.
         // as in React State as per Ryan Chenkie's suggestions
         return { Authorization: `Bearer ${getRefreshToken()}` };
