@@ -7,6 +7,10 @@
     border: 1px solid #bbb;
 }
 
+#search_explore-massives {
+    margin-top: 10px;
+}
+
 #search_main {
     background-color: $dark-blue;
     height: 100vh;
@@ -75,4 +79,19 @@
 
 .search_width-fix {
     min-width: fit-content;
+}
+
+.search_popular-massive {
+    padding: 10px 10px 0 10px;
+    border: 1px solid #ddd;
+}
+
+.search_popular-massive h3 {
+    font-size: 16px;
+    color: $light-grey;
+}
+
+.search_popular-massive p {
+    font-size: 13px;
+    color: white;
 }

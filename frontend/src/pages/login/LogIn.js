@@ -52,6 +52,7 @@ function LogIn(props) {
                                 type="email"
                                 id="log-in_email-input"
                                 placeholder="Your email"
+                                className="dark-mode-input"
                                 aria-describedby="emailHelpBlock"
                                 onChange={(value) =>
                                     handleAddUsernameOrEmail(
@@ -67,6 +68,7 @@ function LogIn(props) {
                             <Form.Control
                                 type="password"
                                 id="log-in_password-input"
+                                className="dark-mode-input"
                                 placeholder="Your password"
                                 aria-describedby="passwordHelpBlock"
                                 onChange={(value) => handlePassword(value)}
