@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Switch, Route, Redirect } from "react-router-dom";
+import { useLocation, Switch, Route, Redirect } from "react-router-dom";
 
 import { ProvideAuth, userValue } from "./auth/use-auth";
 
@@ -20,6 +20,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
     // const isLoggedIn = ;
+    const currentLocation = useLocation().pathname;
+    console.log("HERE:", currentLocation);
 
     function LandingOrRedirectToHome({ authed, ...rest }) {
         return (
@@ -100,13 +102,17 @@ function App() {
                 <main
                     id="main"
                     className={
-                        window.location.pathname.includes("/login")
+                        currentLocation.includes("/login")
                             ? "d-flex justify-content-center background-blue"
                             : "d-flex justify-content-center"
                     }
                 >
                     <Switch>
-                        <LandingOrRedirectToHome exact path="/" />
+                        <LandingOrRedirectToHome
+                            authed={userValue() !== null}
+                            exact
+                            path="/"
+                        />
                         <Route path="/login">
                             <LogIn />
                         </Route>

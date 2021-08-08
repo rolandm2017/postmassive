@@ -12,7 +12,7 @@ import "./Amplify.css";
 
 function Amp(props) {
     return (
-        <div className="notification bg-blue-highlight pb-2">
+        <div className="notification bg-blue-highlight pb-2 pr-2">
             <div className="d-flex">
                 <div className="notification_type-img-container d-flex justify-content-center align-items-end">
                     <img
