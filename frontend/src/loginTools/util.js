@@ -27,7 +27,7 @@ function handleAddUsernameOrEmail(usernameOrEmail, setUsername, setEmail) {
     // stores username || email if valid so its ready to be sent to server when user clicks Log In.
     if (usernameOrEmail.indexOf("@") === -1) {
         // its a username in this case
-        console.log("setting username...", usernameOrEmail);
+        // console.log("setting username...", usernameOrEmail);
         setUsername(usernameOrEmail);
         // empty out the email in case it was set before the code learned user is using their username
         setEmail("");

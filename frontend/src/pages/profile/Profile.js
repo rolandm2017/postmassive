@@ -123,6 +123,9 @@ class Profile extends Component {
                 <div className="d-flex">
                     <div
                         onClick={() => {
+                            console.log(
+                                "btn isn't set up to push /home, go do it"
+                            );
                             // history.push("/home");
                             // todo: push previous url to stack
                         }}

@@ -14,8 +14,12 @@ import { refreshToken } from "./auth/use-auth";
 // for survive page refresh, need refreshToken() to work on its own, just w/ jwt in cookies.
 
 // attempt silent token refresh on page load
-refreshToken().finally((x) => {
+refreshToken(true).finally((x) => {
     console.log("rendering!!!!!!!!!!!!!!!!!!!!");
+    const condition = "successful refresh token";
+    if (condition) {
+        console.log("success");
+    }
     ReactDOM.render(
         <React.StrictMode>
             <Router>

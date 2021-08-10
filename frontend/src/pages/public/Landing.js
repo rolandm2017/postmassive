@@ -86,7 +86,7 @@ function Landing(props) {
 
     const handlePassword = (pass) => {
         // validates password and sets pw if it is valid so its ready to be sent to server
-        console.log(pass.target.value, validPassword(pass.target.value));
+        // console.log(pass.target.value, validPassword(pass.target.value));
         if (validPassword(pass.target.value)) {
             setPassword(pass.target.value);
         }

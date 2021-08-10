@@ -83,7 +83,12 @@ export function useProvideAuth() {
                                 userObject
                             );
                             Cookies.set("jwt", userObject.jwtToken);
-                            Cookies.set("user", userObject);
+                            console.log(
+                                "setting user object...\n****",
+                                userObject,
+                                JSON.stringify(userObject)
+                            );
+                            Cookies.set("user", JSON.stringify(userObject));
                             startRefreshTokenTimer();
                             console.log("Pushing location to stack...");
                             history.push(location);
@@ -140,7 +145,9 @@ export function useProvideAuth() {
         fetch(revokeURL, postOptions(revokeURL))
             .then((res) => {
                 userSubject.next(null);
-
+                // fixme: should i not delete the jwt cooie?
+                Cookies.remove("user");
+                Cookies.remove("jwt");
                 stopRefreshTokenTimer();
                 console.log("revoked token successfully");
                 history.push(location);
@@ -221,12 +228,12 @@ export function getRefreshToken() {
     return Cookies.get("jwt");
 }
 
-export function refreshToken() {
+export function refreshToken(isExternal) {
     const url = process.env.REACT_APP_API_URL + "/auth/refreshToken";
 
     console.log("Attempting to refresh token...");
     return (
-        fetch(url, postOptions(url))
+        fetch(url, postOptions(url, isExternal))
             // todo: copy watmore's refreshTOken() func in that it only has one then(), so his is
             // a promise
             // whereas mine is a promise inside of a promise.

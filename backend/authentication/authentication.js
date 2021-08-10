@@ -101,14 +101,13 @@ router.get("/confirmReset", (req, res) => {
 // THE MAGIC BABY:
 
 router.post("/refreshToken", (req, res, next) => {
-    console.log("incoming cookies:", req.cookies);
     // to generate a new refresh token, you need the previous refresh token, which contains ip and a unique string.
     // so if the attacker takes your refresh token, the ip he sends it from will be different.
     // if the attacker takes your jwt, he can't get a new refresh token because the *refresh token* is needed for refreshing
     // the refresh token.
     const incomingRefreshToken = req.cookies.refreshToken;
     const ipAddress = req.ip;
-    console.log("109, yes, 109");
+    console.log(109, "incoming refreshToken:", incomingRefreshToken);
     accountService
         .refreshToken({ incomingRefreshToken, ipAddress })
         .then(({ newRefreshToken, ...account }) => {
