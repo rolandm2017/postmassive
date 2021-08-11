@@ -10,7 +10,7 @@ import Cookies from "js-cookie";
 // import { startRefreshTokenTimer, stopRefreshTokenTimer } from "./refreshToken";
 
 // initialize the userSubject to hold the user obj once s/he logs in
-const userSubject = new BehaviorSubject(null);
+export const userSubject = new BehaviorSubject(null);
 
 export const user = userSubject.asObservable(); // fixme: confusing ... what is this doing? name the variable better.
 // fixme: cant const user just be disabled?
@@ -68,20 +68,7 @@ export function useProvideAuth() {
                     console.log("this again ", new Date().getSeconds());
                     res.json()
                         .then((userObject) => {
-                            // console.log(
-                            //     "Received user object:",
-                            //     userObject,
-                            //     userObject.username,
-                            //     "The JWT:",
-                            //     userObject.jwtToken,
-                            //     location
-                            // );
                             userSubject.next(userObject);
-                            console.log(
-                                "setting jwt...",
-                                userObject.jwtToken,
-                                userObject
-                            );
                             Cookies.set("jwt", userObject.jwtToken);
                             console.log(
                                 "setting user object...\n****",
@@ -90,7 +77,7 @@ export function useProvideAuth() {
                             );
                             Cookies.set("user", JSON.stringify(userObject));
                             startRefreshTokenTimer();
-                            console.log("Pushing location to stack...");
+                            // console.log("Pushing location to stack...");
                             history.push(location);
                             resolve(userObject);
                         })

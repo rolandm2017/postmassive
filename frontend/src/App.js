@@ -21,7 +21,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 function App() {
     // const isLoggedIn = ;
     const currentLocation = useLocation().pathname;
-    console.log("HERE:", currentLocation);
+    console.log("593:", currentLocation);
 
     function LandingOrRedirectToHome({ authed, ...rest }) {
         return (
@@ -71,7 +71,12 @@ function App() {
                 render={(props) => {
                     // evaluate whether user is authed when component is created, NOT when App is rendered.
                     const userIsLoggedIn = userValue() !== null;
-                    console.log("status", 74, userIsLoggedIn);
+                    console.log(
+                        "status",
+                        74,
+                        userIsLoggedIn,
+                        userValue().username
+                    );
                     if (!userIsLoggedIn) {
                         // not logged in so redirect to login page with the return url
                         return (

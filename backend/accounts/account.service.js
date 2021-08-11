@@ -43,7 +43,7 @@ async function authenticate({ username, email, password, ipAddress }) {
     } else {
         console.log("you shouldn't be able to get here you know");
     }
-    console.log("asdfdsf:", account);
+    // console.log("asdfdsf:", account);
     console.log(
         "acount pw hash",
         account.passwordHash,
@@ -79,6 +79,7 @@ async function authenticate({ username, email, password, ipAddress }) {
 
 async function refreshToken({ incomingRefreshToken, ipAddress }) {
     console.log(575757, "incoming refresh token:", incomingRefreshToken);
+    //fixme: getting undefined Rtoken
     const usersOldRefreshTokenFromDatabase = await getRefreshToken(
         incomingRefreshToken
     );

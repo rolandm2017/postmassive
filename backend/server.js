@@ -23,7 +23,7 @@ const whitelist = [
     "http://localhost:3000",
 ];
 const corsOptions = {
-    credentials: true, // This is important.
+    credentials: true, // This is important. // ugh, what does credentials: true do?
     origin: (origin, callback) => {
         if (whitelist.includes(origin)) {
             console.log("accepted:", origin);
@@ -35,8 +35,8 @@ const corsOptions = {
 };
 
 // misc stuff
-app.use(cors(corsOptions));
 app.use(cookieParser());
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 let saltRounds;

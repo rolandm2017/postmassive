@@ -7,6 +7,7 @@ const jsonwebtoken = require("jsonwebtoken");
 const authorize = require("../_middleware/authorize");
 const Joi = require("joi");
 const validateRequest = require("../_middleware/validate-request");
+
 const Role = require("../_helpers/roles");
 const accountService = require("../accounts/account.service");
 const { jwtSecret } = require("../config.json");
@@ -39,6 +40,7 @@ router.post("/signIn", (req, res, next) => {
         .authenticate({ username, email, password, ipAddress })
         .then(({ refreshToken, ...account }) => {
             console.log(
+                551,
                 "attempting to set cookie and send user info",
                 refreshToken,
                 account.username,
@@ -106,8 +108,9 @@ router.post("/refreshToken", (req, res, next) => {
     // if the attacker takes your jwt, he can't get a new refresh token because the *refresh token* is needed for refreshing
     // the refresh token.
     const incomingRefreshToken = req.cookies.refreshToken;
+    console.log("Cookies: ", req.cookies); //fixme: cors error, WHY
     const ipAddress = req.ip;
-    console.log(109, "incoming refreshToken:", incomingRefreshToken);
+    console.log(109, "incoming refreshToken:", incomingRefreshToken); //fixme:undefined rToken
     accountService
         .refreshToken({ incomingRefreshToken, ipAddress })
         .then(({ newRefreshToken, ...account }) => {
