@@ -257,6 +257,8 @@ export function startRefreshTokenTimer() {
     const timeout = expires - Date.now();
     console.log(300, expires, timeout, new Date(timeout), jwtToken);
     refreshTokenTimeout = setTimeout(() => {
+        console.log("timeout expired, refreshing token\n***or trying to\n***");
+        console.error("#######\n#######\n########refreshing rToken ");
         refreshToken();
     }, timeout);
     // fixme PRIORITY

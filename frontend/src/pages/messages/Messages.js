@@ -11,10 +11,12 @@ import Wrapper from "../_helper/Wrapper";
 import { getOptions } from "../../_helper/authHeader";
 
 import "./Messages.scss";
+import SelectedUserDisplay from "./components/SelectedUserDisplay";
 
 function Messages(props) {
     const [messages, setMessages] = useState(null);
     const [selectedMsg, setSelectedMsg] = useState(null);
+    const [targetName, setTargetName] = useState(null);
 
     useEffect(() => {
         const messagesUrl = process.env.REACT_APP_API_URL + "/messages";
@@ -39,8 +41,21 @@ function Messages(props) {
                     <div className="inbox-header pl-2 py-1 d-flex justify-content-start align-items-center">
                         <h1 className="pl-2">Messages Page</h1>
                         <div>
-                            <img alt="settings for msgs" />
-                            <img alt="new msg" />
+                            <img
+                                alt="settings for msgs"
+                                onClick={() => {
+                                    console.error(
+                                        "you shouldn't have clicked me, feature not installed"
+                                    );
+                                    setSelectedMsg("settings"); // i know this is bad but, convenience
+                                }}
+                            />
+                            <img
+                                onClick={() => {
+                                    setSelectedMsg("new");
+                                }}
+                                alt="new msg"
+                            />
                         </div>
                     </div>
                     <div>
@@ -79,50 +94,14 @@ function Messages(props) {
                 </div>
                 <div id="chat-display-container">
                     {selectedMsg === null ? (
-                        <div id="chat-display-inner-container">
-                            {" "}
-                            <h2>You don't have a message selected</h2>
-                            <p>
-                                Choose from your existing messages, or start a
-                                new one.
-                            </p>
-                            <Button
-                                text={"New message"}
-                                blueBg={false}
-                                authed={true}
-                                onClick={() => {
-                                    console.log("a");
-                                    setSelectedMsg("new");
-                                }}
-                            ></Button>
-                        </div>
+                        <NoMsgSelected
+                            setSelectedMsg={() => setSelectedMsg("new")}
+                        />
                     ) : selectedMsg === "new" ? (
-                        <div
-                            id="chat-display-inner-container"
-                            className="inbox-show-msg"
-                        >
-                            <div>
-                                <input placeholder="username..." />
-                            </div>
-                            <div>{/* empty div */}</div>
-                            <div>Input</div>
-                        </div>
+                        <SelectedUserDisplay selectedMsg={selectedMsg} /> // this one handles when a msg is open but no user is selected. tis "new".
                     ) : (
-                        <div
-                            id="chat-display-inner-container"
-                            className="inbox-show-msg"
-                        >
-                            <div>
-                                @{selectedMsg.author.username}{" "}
-                                <span>{selectedMsg.author.displayName}</span>
-                            </div>
-                            <div>
-                                <p>{selectedMsg.content} </p>
-                            </div>
-                            <div>
-                                <input placeholder="say what?" />
-                            </div>
-                        </div>
+                        <SelectedUserDisplay selectedMsg={selectedMsg} />
+                        // this 1 handles after a user is selected.
                     )}
                 </div>
             </div>

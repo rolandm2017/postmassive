@@ -13,19 +13,8 @@ class Home extends Component {
     };
 
     componentDidMount() {
-        // const getJwt = async () => {
-        //     const { data } = await axios.get(
-        //         process.env.REACT_APP_API_URL + `/jwt`
-        //     );
-        //     // .catch((err) => console.log(err));
-        //     this.setState({ jwt: data.token });
-        //     console.log(data, data.token);
-        // };
-
-        // getJwt();
-
         const feedUrl = process.env.REACT_APP_API_URL + "/mock/feed";
-        console.log("inspect:", getOptions(feedUrl));
+        console.log("inspect:", getOptions(feedUrl)); //fixme:bad auth header. Sus its bc rToken timer isnt refreshing after 13m
         fetch(feedUrl, getOptions(feedUrl))
             .then((res) => {
                 res.json().then((massives) => {

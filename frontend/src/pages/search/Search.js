@@ -70,7 +70,10 @@ const articlesList = [
         </p>
         <p>306K Amplifies</p>
     </div>,
-    <div className="search_popular-massive">
+    <div
+        id={Math.floor(Math.random * 10000)}
+        className="search_popular-massive"
+    >
         <h3 className="search_massive-headline">Canadian News - LIVE</h3>
         <p className="search_massive-text">
             Enim aliqua sint et occaecat dolore ipsum est aute excepteur.
@@ -127,37 +130,51 @@ class Search extends Component {
                 <div id="search_recommendations" className="d-flex">
                     <div>
                         <div></div>
-                        <Link className="search_width-fix">For you</Link>
+                        <Link className="search_width-fix" to={"/todo"}>
+                            For you
+                        </Link>
                         <div></div>
                     </div>
                     <div>
                         <div></div>
-                        <Link className="search_width-fix">Trending</Link>
+                        <Link className="search_width-fix" to={"/todo"}>
+                            Trending
+                        </Link>
                         <div></div>
                     </div>
                     <div>
                         <div></div>
-                        <Link className="search_width-fix">News</Link>
+                        <Link className="search_width-fix" to={"/todo"}>
+                            News
+                        </Link>
                         <div></div>
                     </div>
                     <div>
                         <div></div>
-                        <Link className="search_width-fix">Influencers</Link>
+                        <Link className="search_width-fix" to={"/todo"}>
+                            Influencers
+                        </Link>
                         <div></div>
                     </div>
                     <div>
                         <div></div>
-                        <Link className="search_width-fix">Art</Link>
+                        <Link className="search_width-fix" to={"/todo"}>
+                            Art
+                        </Link>
                         <div></div>
                     </div>
                     <div>
                         <div></div>
-                        <Link className="search_width-fix">Entertainment</Link>
+                        <Link className="search_width-fix" to={"/todo"}>
+                            Entertainment
+                        </Link>
                         <div></div>
                     </div>
                     <div>
                         <div></div>
-                        <Link className="search_width-fix">Commerce</Link>
+                        <Link className="search_width-fix" to={"/todo"}>
+                            Commerce
+                        </Link>
                         <div></div>
                     </div>
                 </div>

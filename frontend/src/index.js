@@ -8,11 +8,6 @@ import * as serviceWorker from "./serviceWorker";
 // import { refreshToken } from "./auth/refreshToken";
 import { refreshToken } from "./auth/use-auth";
 
-// FIXME PRIORITY: refreshing PM sends u to the login page. FIX.
-// so. the jwt has to go in a cookie. has to. or else when the jwt is pulled out by refreshtoken(), it ... can't be?
-// TODO: PUT THE JWT INTO THE COOKIE.
-// for survive page refresh, need refreshToken() to work on its own, just w/ jwt in cookies.
-
 // attempt silent token refresh on page load
 refreshToken(true).finally((x) => {
     console.log("rendering!!!!!!!!!!!!!!!!!!!!");
