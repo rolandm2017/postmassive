@@ -4,15 +4,25 @@ function SelectedUserDisplay(props) {
     return (
         <div id="chat-display-inner-container" className="inbox-show-msg">
             <div>
-                @{props.SelectedUserDisplay.author.username}{" "}
-                <span>{props.SelectedUserDisplay.author.displayName}</span>
+                @{props.selectedMsg.author.username}{" "}
+                <span>{props.selectedMsg.author.displayName}</span>
             </div>
             <div>
-                <p>{props.SelectedUserDisplay.content} </p>
+                <p>{props.selectedMsg.content} </p>
             </div>
             <div>
                 <input placeholder="say what?" />
             </div>
+        </div>
+    );
+
+    return (
+        <div id="chat-display-inner-container" className="inbox-show-msg">
+            <div>
+                <input placeholder="username..." />
+            </div>
+            <div>{/* empty div */}</div>
+            <div>Input</div>
         </div>
     );
 }
