@@ -53,7 +53,7 @@ export function _deleteOptions(url) {
 function authHeader(url, isExternal) {
     // return auth header with jwt if user is logged in and request is to the api url
     let user = userValue() !== null ? userValue() : false;
-    console.log(56, user.username, isExternal);
+    console.log(56, "see url:", user, isExternal, url);
     if (isExternal) {
         console.log("********\nyou refreshed\n*********");
         user = Cookies.get("user");
@@ -80,10 +80,6 @@ function authHeader(url, isExternal) {
     // i am formally against && unnamed bools
     const isApiUrl = url.startsWith(process.env.REACT_APP_API_URL);
     if (isLoggedIn && isApiUrl) {
-        // console.log(
-        //     `**((**((** auth Bearer header ${refreshToken}`,
-        //     "\n*\n*expecting login success"
-        // );
         console.log("Auth bearer trrying to add rToken");
         return { Authorization: `Bearer ${getRefreshToken()}` };
     } else {

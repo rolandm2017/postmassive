@@ -1,5 +1,7 @@
 import React from "react";
 
+import Button from "../../../components/parts/Button";
+
 import "../Messages.scss";
 
 function NoMsgSelected(props) {

@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
 
 import InboxItem from "../../components/inboxItem/InboxItem";
+import SelectedUserDisplay from "./components/SelectedUserDisplay";
+import NoMsgSelected from "./components/NoMsgSelected";
+import Wrapper from "../_helper/Wrapper";
 
 import profilePicPlaceholder3 from "../../images/profilePics/cat3.jpg";
-
-import Button from "../../components/parts/Button";
-
-import Wrapper from "../_helper/Wrapper";
 
 import { getOptions } from "../../_helper/authHeader";
 
 import "./Messages.scss";
-import SelectedUserDisplay from "./components/SelectedUserDisplay";
 
 function Messages(props) {
     const [messages, setMessages] = useState(null);

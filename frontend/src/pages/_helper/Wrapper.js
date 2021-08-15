@@ -17,6 +17,7 @@ function Wrapper(props) {
     const [width, setWidth] = useState(window.innerWidth);
 
     const user = userValue();
+    console.log("wrapper props", props, user);
 
     // TODO IMPORTANT: add "if cookie, use cookied user + jwt. else, redirect to login where appropriate; or display page"
 

@@ -71,7 +71,8 @@ function App() {
                 {...rest}
                 render={(props) => {
                     // evaluate whether user is authed when component is created, NOT when App is rendered.
-                    const userIsLoggedIn = userValue() !== null;
+                    const userIsLoggedIn =
+                        userValue() !== null && userValue() !== undefined;
                     console.log("status", 74, userIsLoggedIn, userValue());
                     if (!userIsLoggedIn) {
                         // not logged in so redirect to login page with the return url
