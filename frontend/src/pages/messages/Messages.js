@@ -6,6 +6,9 @@ import SelectedUserDisplay from "./components/SelectedUserDisplay";
 import NoMsgSelected from "./components/NoMsgSelected";
 import Wrapper from "../_helper/Wrapper";
 
+import RightArrow from "../../images/icons8-right-arrow-50.png";
+import Gear from "../../images/icons8-settings-50.png";
+import Mail from "../../images/icons8-mail-50.png";
 import profilePicPlaceholder3 from "../../images/profilePics/cat3.jpg";
 
 import { getOptions } from "../../_helper/authHeader";
@@ -81,19 +84,23 @@ function Messages(props) {
         >
             <div className="d-flex hacky-hider">
                 <div id="inbox">
-                    <div className="inbox-header pl-2 py-1 d-flex justify-content-start align-items-center">
+                    <div className="inbox-header pl-2 py-1 d-flex justify-content-between align-items-center">
                         <h1 className="pl-2">Messages Page</h1>
-                        <div>
+                        <div className="mr-3">
                             <img
-                                alt="settings for msgs"
+                                src={Gear}
+                                className="msgs-img-btn mr-2"
                                 onClick={() => {
                                     console.error(
                                         "you shouldn't have clicked me, feature not installed"
                                     );
                                     setSelectedMsg("settings"); // i know this is bad but, convenience
                                 }}
+                                alt="settings for msgs"
                             />
                             <img
+                                src={Mail}
+                                className="msgs-img-btn mr-2"
                                 onClick={() => {
                                     setSelectedMsg("new");
                                 }}
@@ -101,8 +108,14 @@ function Messages(props) {
                             />
                         </div>
                     </div>
-                    <div>
+                    <div id="inbox-msg-requests">
                         <p>Message requests</p>
+                        <img
+                            src={RightArrow}
+                            alt="to requests"
+                            height="30px"
+                            with="30px"
+                        />
                     </div>
                     <div className="inbox-header pl-2 py-2 d-flex justify-content-start align-items-center">
                         {/* TODO: make the search input have larger margins top/bot */}

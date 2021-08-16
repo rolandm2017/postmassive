@@ -106,6 +106,25 @@
     border-radius: 15px;
 }
 
+#inbox-msg-requests {
+    height: 50px;
+    // border: 1px solid green;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #888;
+}
+
+#inbox-msg-requests p {
+    margin: 0;
+    padding-left: 16px;
+    font-size: 16px;
+}
+
+#inbox-msg-requests img {
+    padding-right: 18px;
+}
+
 #messages_page {
     // width: auto; /* mobile first! */
 }
@@ -118,12 +137,9 @@
     display: none; /* mobile first! */
 }
 
-.right-side-chat {
-    // border: 3px solid springgreen;
-}
-
-.right-side-chat-inner {
-    // border: 2px solid blueviolet;
+.msgs-img-btn {
+    height: 30px;
+    width: 30px;
 }
 
 @media (min-width: $full-sidebar) {
