@@ -92,6 +92,7 @@
     // flex: 1 1 auto;
     flex-grow: 1;
     overflow-y: scroll;
+    height: 300px;
 }
 
 .inbox-header {
@@ -114,10 +115,11 @@
 }
 
 .right-side-chat {
-    display: flex;
-    flex-direction: column;
-    // justify-content: end;
-    align-items: flex-end;
+    // border: 3px solid springgreen;
+}
+
+.right-side-chat-inner {
+    // border: 2px solid blueviolet;
 }
 
 @media (min-width: $full-sidebar) {
@@ -201,6 +203,6 @@
 @media (min-width: $mobile-sized) and (max-width: $shrink-feed - 1) {
     #messages_page {
         width: calc(100% - 100px);
-        border: 2px solid yellow;
+        // border: 2px solid yellow;
     }
 }

@@ -48,22 +48,26 @@ function Messages(props) {
 
     function loadMessageSelect() {
         if (messages) {
-            return messages.map((message) => {
-                return (
-                    <InboxItem
-                        key={message.id}
-                        showMsg={() => {
-                            console.log("bbb");
-                            setSelectedMsg(message);
-                        }}
-                        displayName={message.author.displayName}
-                        username={message.author.username}
-                        profilePic={profilePicPlaceholder3}
-                        content={message.content}
-                        deliveryDate={message.deliveryDate}
-                    />
-                );
-            });
+            return (
+                <div id="inbox-items">
+                    {messages.map((message) => {
+                        return (
+                            <InboxItem
+                                key={message.id}
+                                showMsg={() => {
+                                    console.log("bbb");
+                                    setSelectedMsg(message);
+                                }}
+                                displayName={message.author.displayName}
+                                username={message.author.username}
+                                profilePic={profilePicPlaceholder3}
+                                content={message.content}
+                                deliveryDate={message.deliveryDate}
+                            />
+                        );
+                    })}
+                </div>
+            );
         }
     }
 
@@ -108,31 +112,35 @@ function Messages(props) {
                             placeholder="Search for people or content"
                         ></input>
                     </div>
-                    <div id="inbox-items">
-                        {/* // smallerload chat in left pane when chat is selected */}
-                        {/* // desktop: load chat in right pane when chat is
+
+                    {/* // smallerload chat in left pane when chat is selected */}
+                    {/* // desktop: load chat in right pane when chat is
                         selected */}
 
-                        {windowSize.width >= 1005 ? loadMessageSelect() : null}
-                        {windowSize.width < 1005 ? (
-                            selectedMsg === null ? (
-                                loadMessageSelect()
-                            ) : selectedMsg === "new" ? (
-                                <SelectedUserDisplay
-                                    selectedMsg={selectedMsg}
-                                    userIsSelected={targetName}
-                                    profilePic={profilePicPlaceholder3}
-                                /> // this one handles when a msg is open but no user is selected. tis "new".
-                            ) : (
+                    {windowSize.width >= 1005 ? loadMessageSelect() : null}
+                    {windowSize.width < 1005 ? (
+                        selectedMsg === null ? (
+                            loadMessageSelect()
+                        ) : selectedMsg === "new" ? (
+                            <div id="inbox-items">
                                 <SelectedUserDisplay
                                     selectedMsg={selectedMsg}
                                     userIsSelected={targetName}
                                     profilePic={profilePicPlaceholder3}
                                 />
-                                // this 1 handles after a user is selected.
-                            )
-                        ) : null}
-                    </div>
+                            </div>
+                        ) : (
+                            // this one handles when a msg is open but no user is selected. tis "new".
+                            <div id="inbox-items">
+                                <SelectedUserDisplay
+                                    selectedMsg={selectedMsg}
+                                    userIsSelected={targetName}
+                                    profilePic={profilePicPlaceholder3}
+                                />
+                            </div>
+                            // this 1 handles after a user is selected.
+                        )
+                    ) : null}
                 </div>
                 <div id="chat-display-container">
                     {selectedMsg === null ? (

@@ -6,7 +6,9 @@ function ChatBubble(props) {
     return (
         <div
             className={`generic-chat-bub-container ${
-                props.left ? "left-side-chat" : "right-side-chat"
+                props.left
+                    ? "left-side-chat"
+                    : "right-side-chat d-flex justify-content-end"
             }`}
         >
             {props.left ? (
@@ -19,10 +21,10 @@ function ChatBubble(props) {
                     <p>{props.msg}</p>
                 </div>
             ) : (
-                <div className="generic-chat-bub">
+                <div className="generic-chat-bub right-side-chat-inner d-flex justify-content-end">
                     <p>{props.msg}</p>
                     <img
-                        className="generic-chat-bub-pfp"
+                        className={`generic-chat-bub-pfp`}
                         alt="profile pic"
                         src={props.profilePic}
                     />
