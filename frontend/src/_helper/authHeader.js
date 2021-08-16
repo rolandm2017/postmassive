@@ -13,7 +13,11 @@ export function getOptions(url) {
     console.log("further test:", authHeader(url));
     return {
         method: "GET",
-        headers: authHeader(url),
+        headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Credentials": "true",
+            ...authHeader(url),
+        },
     };
 }
 
@@ -22,6 +26,7 @@ export function postOptions(url, isExternal) {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
+            "Access-Control-Allow-Credentials": "true",
             ...authHeader(url, isExternal),
         },
         credentials: "include",
@@ -34,6 +39,7 @@ export function putOptions(url, body) {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
+            "Access-Control-Allow-Credentials": "true",
             ...authHeader(url),
         },
         // body: JSON.stringify(body),

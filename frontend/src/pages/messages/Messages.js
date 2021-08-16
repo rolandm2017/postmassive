@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import InboxItem from "../../components/inboxItem/InboxItem";
 import SelectedUserDisplay from "./components/SelectedUserDisplay";
+
 import NoMsgSelected from "./components/NoMsgSelected";
 import Wrapper from "../_helper/Wrapper";
 
@@ -63,7 +64,7 @@ function Messages(props) {
                         {/* TODO: make the search input have larger margins top/bot */}
                         <input
                             id="inbox-search"
-                            className="ml-2 mr-5 pl-2 dark-mode-input"
+                            className="ml-2 mr-5 pl-2 dark-mode-input inbox-search"
                             placeholder="Search for people or content"
                         ></input>
                     </div>
@@ -96,9 +97,17 @@ function Messages(props) {
                             setSelectedMsg={() => setSelectedMsg("new")}
                         />
                     ) : selectedMsg === "new" ? (
-                        <SelectedUserDisplay selectedMsg={selectedMsg} /> // this one handles when a msg is open but no user is selected. tis "new".
+                        <SelectedUserDisplay
+                            selectedMsg={selectedMsg}
+                            userIsSelected={targetName}
+                            profilePic={profilePicPlaceholder3}
+                        /> // this one handles when a msg is open but no user is selected. tis "new".
                     ) : (
-                        <SelectedUserDisplay selectedMsg={selectedMsg} />
+                        <SelectedUserDisplay
+                            selectedMsg={selectedMsg}
+                            userIsSelected={targetName}
+                            profilePic={profilePicPlaceholder3}
+                        />
                         // this 1 handles after a user is selected.
                     )}
                 </div>

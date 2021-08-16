@@ -25,7 +25,7 @@ function Sidebar(props) {
     const auth = useAuth();
     const history = useHistory();
 
-    console.log("sidebar props", props);
+    // console.log("sidebar props", props);
 
     return (
         <aside id="sidebar">
