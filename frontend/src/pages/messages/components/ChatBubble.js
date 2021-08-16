@@ -13,6 +13,7 @@ function ChatBubble(props) {
                 <div className="generic-chat-bub">
                     <img
                         className="generic-chat-bub-pfp"
+                        alt="profile pic"
                         src={props.profilePic}
                     />
                     <p>{props.msg}</p>
@@ -22,6 +23,7 @@ function ChatBubble(props) {
                     <p>{props.msg}</p>
                     <img
                         className="generic-chat-bub-pfp"
+                        alt="profile pic"
                         src={props.profilePic}
                     />
                 </div>

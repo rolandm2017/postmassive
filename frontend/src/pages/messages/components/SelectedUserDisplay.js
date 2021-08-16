@@ -12,7 +12,7 @@ function SelectedUserDisplay(props) {
         return (
             <div
                 id="chat-display_outer-container"
-                className="inbox-show-msg h-100 w-100 hdebug"
+                className="inbox-show-msg h-100 w-100 "
             >
                 <div
                     id="cd-username-container"
@@ -65,7 +65,7 @@ function SelectedUserDisplay(props) {
         return (
             <div
                 id="chat-display_outer-container"
-                className="inbox-show-msg h-100 w-100 hdebug"
+                className="inbox-show-msg h-100 w-100 "
             >
                 <div
                     id="cd-username-container"
