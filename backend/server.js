@@ -26,17 +26,21 @@ const corsOptions = {
     credentials: true, // This is important. // ugh, what does credentials: true do?
     origin: (origin, callback) => {
         if (whitelist.includes(origin)) {
-            console.log("accepted:", origin);
+            console.log("SERVER REQUEST ACCEPTED:", origin);
             return callback(null, true);
         }
-
+        console.log(
+            "errrrrrrrrrrrrrrr\nrrrrrrrrrrr\nrrrrrrrr",
+            origin,
+            "\n-------"
+        );
         callback(new Error("Not allowed by CORS"));
     },
 };
 
 // misc stuff
-app.use(cookieParser());
 app.use(cors(corsOptions));
+app.use(cookieParser());
 app.use(bodyParser.json());
 
 let saltRounds;

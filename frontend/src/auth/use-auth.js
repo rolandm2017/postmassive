@@ -240,7 +240,8 @@ export function refreshToken(isExternal) {
                 startRefreshTokenTimer();
             })
             .catch((err) => {
-                console.log(err); // SyntaxError: Unexpected token < in JSON at position 0
+                //fixme: getting this on pg refresh
+                console.log("FAILED REFRESH_TOKEN:", err); // SyntaxError: Unexpected token < in JSON at position 0
                 // throw err;
             })
     );
@@ -254,6 +255,7 @@ export function startRefreshTokenTimer() {
 
     // set a timeout to refresh the token a minute before it expires
     const expires = new Date(jwtToken.exp * 1000);
+    console.log("HEY", expires);
     const timeout = expires - Date.now();
     console.log(300, expires, timeout, new Date(timeout), jwtToken);
     refreshTokenTimeout = setTimeout(() => {

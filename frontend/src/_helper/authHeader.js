@@ -80,7 +80,7 @@ function authHeader(url, isExternal) {
     // i am formally against && unnamed bools
     const isApiUrl = url.startsWith(process.env.REACT_APP_API_URL);
     if (isLoggedIn && isApiUrl) {
-        console.log("Auth bearer trrying to add rToken");
+        console.log("Auth bearer trrying to add rToken", getRefreshToken());
         return { Authorization: `Bearer ${getRefreshToken()}` };
     } else {
         console.log(
