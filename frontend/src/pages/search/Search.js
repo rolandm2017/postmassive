@@ -121,7 +121,7 @@ class Search extends Component {
                         type="text"
                         name="search-bar"
                         id="search-bar"
-                        placeholder="Search PostMassiv"
+                        placeholder="Search PostMassive"
                     ></input>
                     {/* TODO: give the search input a nice magnifying glass icon */}
                     {/* <Button text="Search"></Button> */}
