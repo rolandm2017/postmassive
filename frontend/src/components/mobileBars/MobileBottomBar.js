@@ -20,10 +20,10 @@ class MobileBottomBar extends Component {
                     id="mobile_bottom-bar-container"
                     className="d-flex align-items-center text-center"
                 >
-                    <Link to="/" className="img-container">
+                    <Link to="/home" className="img-container">
                         <img src={Home} alt="Home" className="img-sizing"></img>
                     </Link>
-                    <Link to="/search" className="img-container">
+                    <Link to="/explore" className="img-container">
                         <img
                             src={Explore}
                             alt="Search"
@@ -37,7 +37,7 @@ class MobileBottomBar extends Component {
                             className="img-sizing"
                         ></img>
                     </Link>
-                    <Link to="/inbox" className="img-container">
+                    <Link to="/messages" className="img-container">
                         <img
                             src={Messages}
                             alt="Messages"

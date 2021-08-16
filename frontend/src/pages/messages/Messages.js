@@ -79,7 +79,7 @@ function Messages(props) {
             breakpoints={props.breakpoints}
             onMessagePage={true}
         >
-            <div className="d-flex">
+            <div className="d-flex hacky-hider">
                 <div id="inbox">
                     <div className="inbox-header pl-2 py-1 d-flex justify-content-start align-items-center">
                         <h1 className="pl-2">Messages Page</h1>

@@ -22,13 +22,13 @@ class Menu extends Component {
                     <Link to="/">Home</Link>
                 </h2>
                 <h2>
-                    <a href="/search">Explore</a>
+                    <Link to="/explore">Explore</Link>
                 </h2>
                 <h2>
                     <Link to="/notifications">Notifications</Link>
                 </h2>
                 <h2>
-                    <Link to="/inbox">Inbox</Link>
+                    <Link to="/messages">Inbox</Link>
                 </h2>
                 <h2>
                     <a href="/bookmarks">Bookmarks</a>
