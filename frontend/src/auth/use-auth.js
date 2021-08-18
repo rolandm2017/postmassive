@@ -256,8 +256,8 @@ export function startRefreshTokenTimer() {
     // set a timeout to refresh the token a minute before it expires
     const expires = new Date(jwtToken.exp * 1000);
     console.log("HEY", expires);
-    const timeout = expires - Date.now();
-    console.log(300, expires, timeout, new Date(timeout), jwtToken);
+    const timeout = expires.getTime() - Date.now() - 60 * 1000; // this line was copied incorrectly for ages
+    console.log(300, expires, timeout, jwtToken, Date.now());
     refreshTokenTimeout = setTimeout(() => {
         console.log("timeout expired, refreshing token\n***or trying to\n***");
         console.error("#######\n#######\n########refreshing rToken ");
