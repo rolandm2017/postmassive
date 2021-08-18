@@ -3,6 +3,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const production = require("./config.json").production;
+const { createProxyMiddleware } = require("http-proxy-middleware");
 
 let port;
 if (production) {
@@ -37,6 +38,17 @@ const corsOptions = {
         callback(new Error("Not allowed by CORS"));
     },
 };
+
+if (!production) {
+    console.log("Proxy engaged, localhost:3000 -> 127.0.0.1");
+    app.use(
+        "/api",
+        createProxyMiddleware({
+            target: "http://localhost:3000/",
+            changeOrigin: true,
+        })
+    );
+}
 
 // misc stuff
 app.use(cors(corsOptions));
