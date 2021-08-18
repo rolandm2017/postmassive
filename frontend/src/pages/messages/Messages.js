@@ -86,7 +86,7 @@ function Messages(props) {
                 <div id="inbox">
                     <div className="inbox-header pl-2 py-1 d-flex justify-content-between align-items-center">
                         <h1 className="pl-2">Messages Page</h1>
-                        <div className="mr-3">
+                        <div className="mr-3 d-flex">
                             <img
                                 src={Gear}
                                 className="msgs-img-btn mr-2"

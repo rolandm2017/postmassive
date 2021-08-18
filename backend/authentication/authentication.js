@@ -108,13 +108,13 @@ router.post("/refreshToken", (req, res, next) => {
     // if the attacker takes your jwt, he can't get a new refresh token because the *refresh token* is needed for refreshing
     // the refresh token.
     const incomingRefreshToken = req.headers.authorization.split(" ")[1];
-    console.log(
-        "983 Cookies: ",
-        req.cookies,
-        req.headers.cookie,
-        req.headers,
-        new Date().getSeconds()
-    ); //fixme: cors error, WHY
+    // console.log(
+    //     "983 Cookies: ",
+    //     req.cookies,
+    //     req.headers.cookie,
+    //     req.headers,
+    //     new Date().getSeconds()
+    // );
 
     // YO the authorization header has the jwt lol. SMH roland
     const ipAddress = req.ip;
