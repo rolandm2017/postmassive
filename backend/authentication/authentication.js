@@ -107,6 +107,7 @@ router.post("/refreshToken", (req, res, next) => {
     // so if the attacker takes your refresh token, the ip he sends it from will be different.
     // if the attacker takes your jwt, he can't get a new refresh token because the *refresh token* is needed for refreshing
     // the refresh token.
+    console.log(110, req.headers.authorization);
     const incomingRefreshToken = req.headers.authorization.split(" ")[1];
     // console.log(
     //     "983 Cookies: ",

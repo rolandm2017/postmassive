@@ -25,6 +25,7 @@ function App() {
     console.log("593:", currentLocation);
 
     function LandingOrRedirectToHome({ authed, ...rest }) {
+        console.log("773", authed);
         return (
             <Route
                 {...rest}
@@ -115,7 +116,10 @@ function App() {
                 >
                     <Switch>
                         <LandingOrRedirectToHome
-                            authed={userValue() !== null}
+                            authed={
+                                userValue() !== null &&
+                                userValue() !== undefined
+                            }
                             exact
                             path="/"
                         />
@@ -152,9 +156,6 @@ function App() {
                         <Route path="/post">
                             <Post />
                         </Route>
-                        {/* <Route path="/landing">
-                            <Landing />
-                        </Route> */}
                         <Route path="/massive">
                             <Massive />
                         </Route>

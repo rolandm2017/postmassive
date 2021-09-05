@@ -23,6 +23,7 @@ function Messages(props) {
         width: undefined,
         height: undefined,
     });
+    const [showSettings, setShowSettings] = useState(false);
 
     useEffect(() => {
         const messagesUrl = process.env.REACT_APP_API_URL + "/messages";
@@ -94,7 +95,8 @@ function Messages(props) {
                                     console.error(
                                         "you shouldn't have clicked me, feature not installed"
                                     );
-                                    setSelectedMsg("settings"); // i know this is bad but, convenience
+                                    setShowSettings(true); // i know this is bad but, convenience
+                                    // open a div when openSettings===true;
                                 }}
                                 alt="settings for msgs"
                             />
