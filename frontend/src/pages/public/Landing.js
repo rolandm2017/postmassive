@@ -245,7 +245,9 @@ function Landing(props) {
                                     aria-describedby="basic-addon1"
                                     onChange={(value) =>
                                         handleAddUsernameOrEmail(
-                                            value.target.value
+                                            value.target.value,
+                                            setUsername,
+                                            setEmail
                                         )
                                     }
                                     onKeyUp={logInIfEnterKeyIsPressed}
