@@ -29,7 +29,7 @@ const ProcessAmount = (number, displayedInFeed) => {
         // "65,730,395" -> "65.7m"
         let mil = " million";
         if (displayedInFeed) {
-            mil = "mil";
+            mil = "m";
         }
         return (
             amtAsString.substring(0, amtAsString.length - 6) +

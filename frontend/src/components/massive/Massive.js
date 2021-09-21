@@ -85,16 +85,16 @@ class Massive extends Component {
                             <p className="mt-0 text-left">
                                 {this.props.content}
                             </p>
+                            <EngagementContainer
+                                replies={this.props.replies}
+                                amplifies={this.props.amplifies}
+                                likes={this.props.likes}
+                                views={this.props.views}
+                                cap={this.props.cap}
+                                inFeed={true}
+                            />
                         </div>
                     </div>
-                    <EngagementContainer
-                        replies={this.props.replies}
-                        amplifies={this.props.amplifies}
-                        likes={this.props.likes}
-                        views={this.props.views}
-                        cap={this.props.cap}
-                        inFeed={true}
-                    />
                 </div>
             </div>
         );

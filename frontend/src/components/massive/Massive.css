@@ -6,12 +6,13 @@
 }
 
 .massive-btn-container img {
-    height: 30px;
-    width: 30px;
+    height: 24px;
+    width: 24px;
 }
 
 .width-control {
-    max-width: 80%;
+    /* max-width: 80%; */
+    width: 80%;
 }
 
 @media screen and (max-width: 335px) {
