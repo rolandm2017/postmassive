@@ -76,11 +76,6 @@ function Rightbar(props) {
                     content="Voluptate veniam mollit"
                     statistic={{ amount: 306040, type: "Amplifies" }}
                 />
-                <Trending
-                    headline="Canadian News - LIVE"
-                    content="Enim aliqua sint"
-                    statistic={{ amount: 65903000, type: "Likes" }}
-                />
                 <div className="rightbar_rounded my-2 pl-2 pt-2">
                     <Button
                         text="Show more"
