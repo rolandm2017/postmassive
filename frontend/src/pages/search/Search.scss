@@ -12,7 +12,7 @@
 }
 
 #search_main {
-    background-color: $dark-blue;
+    background-color: $twtr-dark-grey;
     height: 100vh;
     /* width is auto for mobile, changes to 43% for desktop */
     // width: auto;
@@ -64,7 +64,7 @@
 }
 
 #search_recommendations div:hover {
-    background-color: lighten($dark-blue, 12%);
+    background-color: lighten($twtr-dark-grey, 12%);
     // background-color: red;
 }
 

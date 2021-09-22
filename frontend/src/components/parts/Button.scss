@@ -5,22 +5,23 @@
     font-size: 16px;
     font-weight: bold;
     border-radius: 20px;
-    border: 1px solid $sea-blue !important;
+    border: 1px solid $uxui-blue !important;
+    // border: 1px solid red !important;
 }
 
 .authed-btn:hover {
-    background-color: lighten($dark-blue, 11%) !important;
+    background-color: lighten($twtr-dark-grey, 11%) !important;
 }
 
 .blue-bg {
     /* background-color: #00bbff; */
-    background-color: $sea-blue !important;
+    background-color: $uxui-blue !important;
 }
 
 .clear-bg {
     background-color: Transparent !important;
 
-    color: $sea-blue !important;
+    color: $uxui-blue !important;
 }
 
 .thin-btn {

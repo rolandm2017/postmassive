@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import EngagementContainer from "../engagementContainer/EngagementContainer";
 
-import Logo from "../../images/gps-searching.png";
+import Logo from "../../images/bluePfp.png";
 
 import "./Massive.css";
 

@@ -74,7 +74,7 @@
 /* Modal Content/Box */
 .sidebar_logout-text:hover {
     width: calc(100% - 50px);
-    background-color: $sea-blue;
+    background-color: $uxui-blue;
     border-radius: 5px;
 }
 
@@ -88,7 +88,7 @@
     bottom: 50px;
     z-index: 1; /* Sit on top */
     border-radius: 10px;
-    background-color: darken($dark-blue, 10%);
+    background-color: darken($twtr-dark-grey, 10%);
 }
 
 /* The Close Button */
@@ -101,7 +101,7 @@
 
 .sidebar_close:hover,
 .sidebar_close:focus {
-    color: $sea-blue;
+    color: $uxui-blue;
     text-decoration: none;
     cursor: pointer;
 }

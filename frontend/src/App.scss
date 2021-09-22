@@ -33,11 +33,11 @@ body {
 button {
     // margin-top: 20px;
     padding: 10px;
-    color: $sea-blue;
+    color: $uxui-blue;
     height: 40px;
     font-size: 16px;
     border-radius: 20px !important;
-    border: 1px solid $sea-blue;
+    border: 1px solid $uxui-blue;
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
@@ -105,7 +105,7 @@ p {
 
 .standard-blue {
     @extend %standard-font;
-    color: $sea-blue;
+    color: $uxui-blue;
 }
 
 .standard-grey {

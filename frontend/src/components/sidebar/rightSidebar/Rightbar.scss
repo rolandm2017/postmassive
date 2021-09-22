@@ -1,4 +1,5 @@
 @import "../../../styles/breakpoints";
+@import "../../../styles/colors";
 
 #rightbar_main {
     max-width: 350px;
@@ -14,12 +15,17 @@
     }
 }
 
+#rightbar_follow-recs {
+    background-color: $uxui-lg;
+}
+
 #rightbar_follow-recs h2 {
     font-size: 22px;
 }
 
 #rightbar_popular-massives {
     border: 1px solid #888;
+    background-color: $uxui-lg;
 }
 
 #rightbar_search-container {

@@ -2,7 +2,7 @@ import React from "react";
 
 import Button from "../parts/Button";
 
-import profilePicPlaceholder2 from "../../images/profilePics/cat2.jpg";
+import profilePicPlaceholder2 from "../../images/bluePfp.png";
 
 import styles from "./FollowRec.module.css";
 

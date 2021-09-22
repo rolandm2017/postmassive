@@ -16,11 +16,11 @@ section {
 }
 
 .background-blue {
-    background-color: $dark-blue;
+    background-color: $twtr-dark-grey;
 }
 
 .bg-blue-highlight:hover {
-    background-color: lighten($dark-blue, 7%);
+    background-color: lighten($twtr-dark-grey, 7%);
 }
 
 .mobile_bar-spacer {
