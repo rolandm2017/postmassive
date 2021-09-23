@@ -21,7 +21,7 @@
 
 #details {
     display: flex;
-    flex: wrap;
+    flex-wrap: wrap;
 
     // border: 3px solid red;
     // overflow: auto;
@@ -148,7 +148,8 @@
     #details {
         max-width: 100%;
         display: flex !important;
-        flex: wrap !important;
+        flex-wrap: wrap !important;
+        flex-direction: row;
     }
 
     #interactionButtons {

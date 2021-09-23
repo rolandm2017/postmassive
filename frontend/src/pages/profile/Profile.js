@@ -234,19 +234,23 @@ class Profile extends Component {
                             {this.state.profile ? this.state.profile.bio : null}
                         </h4>
                     </div>
-                    <div id={`${styles.details}`} className="d-flex">
-                        {this.state.profile
-                            ? displayLocation(this.state.profile.location)
-                            : null}
-                        {this.state.profile
-                            ? displayWebsite(this.state.profile.website)
-                            : null}
-                        {this.state.profile
-                            ? displayBirthday(this.state.profile.birthday)
-                            : null}
-                        {this.state.profile
-                            ? displayJoinDate(this.state.profile.joinDate)
-                            : null}
+                    <div id={`${styles.details}`} className="">
+                        <div className="d-flex flex-row">
+                            {this.state.profile
+                                ? displayLocation(this.state.profile.location)
+                                : null}
+                            {this.state.profile
+                                ? displayWebsite(this.state.profile.website)
+                                : null}
+                        </div>
+                        <div className="d-flex flex-row">
+                            {this.state.profile
+                                ? displayBirthday(this.state.profile.birthday)
+                                : null}
+                            {this.state.profile
+                                ? displayJoinDate(this.state.profile.joinDate)
+                                : null}
+                        </div>
                     </div>
                     <div>
                         {this.state.profile ? (
