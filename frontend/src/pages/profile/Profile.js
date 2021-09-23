@@ -82,35 +82,43 @@ class Profile extends Component {
     render() {
         const displayLocation = (loc) =>
             loc ? (
-                <span
-                    className={`${styles.greyText} ${styles.genericFontWeight}`}
-                >
-                    {loc}
-                </span>
+                <div>
+                    <span
+                        className={`${styles.greyText} ${styles.genericFontWeight}`}
+                    >
+                        {loc}
+                    </span>
+                </div>
             ) : null;
         const displayWebsite = (site) =>
             site ? (
-                <span
-                    className={`${styles.link} ${styles.genericFontWeight} ${styles.underlineCancel}`}
-                >
-                    <a href={this.state.profile.website}>{site}</a>
-                </span>
+                <div>
+                    <span
+                        className={`${styles.link} ${styles.genericFontWeight} ${styles.underlineCancel}`}
+                    >
+                        <a href={this.state.profile.website}>{site}</a>
+                    </span>
+                </div>
             ) : null;
         const displayBirthday = (birthday) =>
             birthday ? (
-                <span
-                    className={`${styles.greyText} ${styles.genericFontWeight}`}
-                >
-                    Born {birthday}
-                </span>
+                <div>
+                    <span
+                        className={`${styles.greyText} ${styles.genericFontWeight}`}
+                    >
+                        Born {birthday}
+                    </span>
+                </div>
             ) : null;
         const displayJoinDate = (joinDate) =>
             joinDate ? (
-                <span
-                    className={`${styles.greyText} ${styles.genericFontWeight}`}
-                >
-                    Joined {joinDate}
-                </span>
+                <div>
+                    <span
+                        className={`${styles.greyText} ${styles.genericFontWeight}`}
+                    >
+                        Joined {joinDate}
+                    </span>
+                </div>
             ) : null;
 
         return (
@@ -168,7 +176,7 @@ class Profile extends Component {
                             id={`${styles.interactionButtons}`}
                             className="d-flex"
                         >
-                            <div className={`d-flex ${styles.hideOnSml}`}>
+                            <div className={`${styles.hideOnSml}`}>
                                 <button
                                     className={`${styles.interactionButton} bg-blue-highlight`}
                                 >
@@ -227,7 +235,6 @@ class Profile extends Component {
                         </h4>
                     </div>
                     <div id={`${styles.details}`} className="d-flex">
-                        >
                         {this.state.profile
                             ? displayLocation(this.state.profile.location)
                             : null}
