@@ -14,7 +14,8 @@
 }
 
 #coverPhoto {
-    background-image: url("../../images/mountain-top.jpg");
+    background-image: url("../../images/Replace me.jpg");
+    background-size: contain;
     height: 200px;
 }
 
@@ -120,4 +121,14 @@
 .username {
     font-size: 18px;
     font-weight: 900;
+}
+
+.hideOnSml {
+    // display: none;
+}
+
+@media screen and (max-width: 600px) {
+    .hideOnSml {
+        display: none !important;
+    }
 }

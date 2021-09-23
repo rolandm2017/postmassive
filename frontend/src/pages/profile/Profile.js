@@ -168,33 +168,35 @@ class Profile extends Component {
                             id={`${styles.interactionButtons}`}
                             className="d-flex"
                         >
-                            <button
-                                className={`${styles.interactionButton} bg-blue-highlight`}
-                            >
-                                <img
-                                    className={`${styles.interactionImg}`}
-                                    src={More}
-                                    alt="More options"
-                                ></img>
-                            </button>
-                            <button
-                                className={`${styles.interactionButton} bg-blue-highlight`}
-                            >
-                                <img
-                                    className={`${styles.interactionImg}`}
-                                    src={Mail}
-                                    alt="Send mail"
-                                ></img>
-                            </button>
-                            <button
-                                className={`${styles.interactionButton} bg-blue-highlight`}
-                            >
-                                <img
-                                    className={`${styles.interactionImg}`}
-                                    src={Bell}
-                                    alt="Notification options"
-                                ></img>
-                            </button>
+                            <div className={`d-flex ${styles.hideOnSml}`}>
+                                <button
+                                    className={`${styles.interactionButton} bg-blue-highlight`}
+                                >
+                                    <img
+                                        className={`${styles.interactionImg}`}
+                                        src={More}
+                                        alt="More options"
+                                    ></img>
+                                </button>
+                                <button
+                                    className={`${styles.interactionButton} bg-blue-highlight`}
+                                >
+                                    <img
+                                        className={`${styles.interactionImg}`}
+                                        src={Mail}
+                                        alt="Send mail"
+                                    ></img>
+                                </button>
+                                <button
+                                    className={`${styles.interactionButton} bg-blue-highlight`}
+                                >
+                                    <img
+                                        className={`${styles.interactionImg}`}
+                                        src={Bell}
+                                        alt="Notification options"
+                                    ></img>
+                                </button>
+                            </div>
                             {/* </div> */}
                             {/* <div className="d-flex justify-content-center align-items-center"> */}
                             <Button text="Edit Profile" authed={true} />
@@ -224,21 +226,20 @@ class Profile extends Component {
                             {this.state.profile ? this.state.profile.bio : null}
                         </h4>
                     </div>
-                    <div>
-                        <h5 id={`${styles.details}`} className="d-flex">
-                            {this.state.profile
-                                ? displayLocation(this.state.profile.location)
-                                : null}
-                            {this.state.profile
-                                ? displayWebsite(this.state.profile.website)
-                                : null}
-                            {this.state.profile
-                                ? displayBirthday(this.state.profile.birthday)
-                                : null}
-                            {this.state.profile
-                                ? displayJoinDate(this.state.profile.joinDate)
-                                : null}
-                        </h5>
+                    <div id={`${styles.details}`} className="d-flex">
+                        >
+                        {this.state.profile
+                            ? displayLocation(this.state.profile.location)
+                            : null}
+                        {this.state.profile
+                            ? displayWebsite(this.state.profile.website)
+                            : null}
+                        {this.state.profile
+                            ? displayBirthday(this.state.profile.birthday)
+                            : null}
+                        {this.state.profile
+                            ? displayJoinDate(this.state.profile.joinDate)
+                            : null}
                     </div>
                     <div>
                         {this.state.profile ? (
