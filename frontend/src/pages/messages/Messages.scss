@@ -86,6 +86,7 @@
     border-right: 1px solid #888;
     display: flex;
     flex-direction: column;
+    padding-top: 34px;
 }
 
 #inbox-items {
@@ -97,6 +98,13 @@
 
 .inbox-header {
     flex: 0 1 70px;
+}
+
+.inbox-header h1 {
+    font-size: 20px;
+}
+
+.inbox-header-border {
     border-bottom: 1px solid #888;
 }
 
@@ -112,7 +120,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #888;
 }
 
 #inbox-msg-requests p {

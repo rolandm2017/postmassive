@@ -1,5 +1,5 @@
-@import "styles/colors";
-@import "styles/breakpoints";
+@import "styles/_colors";
+@import "styles/_breakpoints";
 
 // ** ** ** ** ** ** **
 // for making the waterfall scroll properly
@@ -56,6 +56,22 @@ span {
 
 p {
     font-size: 16px;
+}
+
+input {
+    background-color: $search-bar-grey !important;
+    color: white;
+    border: none !important;
+    border-radius: 20px !important;
+    background-image: url("./images/unnamed.png") !important;
+    background-size: 18px 18px !important;
+    background-repeat: no-repeat !important;
+    background-position: 4% 50% !important;
+    padding-left: 44px !important;
+}
+
+::placeholder {
+    color: #888;
 }
 
 /* mobile bar stuff */
@@ -127,7 +143,6 @@ p {
 // site wide styling for inputs
 
 .dark-mode-input {
-    background-color: $uxui-dg !important;
     border-color: $light-grey;
-    color: white !important;
+    // color: white !important;
 }

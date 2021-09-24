@@ -33,11 +33,7 @@
     width: 41px;
 }
 
-/*                    */
-/* For the search bar */
-/*                    */
-
-#search_bar-container-mobile input {
+#search_bar-container-mobile {
     padding: 3px; /* padding: 3px; is superior to bootstrap's p-1 by a few pixels */
     width: 50%;
     font-size: 16px;

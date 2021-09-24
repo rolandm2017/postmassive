@@ -53,9 +53,13 @@ function InboxItem(props) {
             <div
                 className={`${styles.profilePicContainer} d-flex justify-content-center align-items-center`}
             >
-                <img src={props.profilePic} alt="profile pic"></img>
+                <img
+                    src={props.profilePic}
+                    className={`${styles.profilePicIsBlue}`}
+                    alt="profile pic"
+                ></img>
             </div>
-            <div className={`${styles.theNonProfilePicPart} d-flex`}>
+            <div className={`${styles.theNonProfilePicPart}`}>
                 <div className={`${styles.theTextPart} mt-3`}>
                     <div>
                         <h3 className={`${styles.truncateText} my-0`}>
@@ -72,13 +76,13 @@ function InboxItem(props) {
                             {props.content}
                         </p>
                     </div>
-                </div>
-                <div
-                    className={`${styles.deliveryDate} d-flex justify-content-center align-items-center`}
-                >
-                    <p className="my-0">
-                        {processDateToString(props.deliveryDate)}
-                    </p>
+                    <div
+                        className={`${styles.deliveryDate} d-flex justify-content-start align-items-center`}
+                    >
+                        <p className="my-0">
+                            {processDateToString(props.deliveryDate)}
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

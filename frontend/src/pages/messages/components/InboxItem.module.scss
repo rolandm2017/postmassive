@@ -1,7 +1,13 @@
 @import "../../../styles/colors";
 
 .deliveryDate {
+    margin-top: 10px;
     width: 60px;
+}
+
+.deliveryDate p {
+    color: $uxui-blue;
+    font-size: 14px;
 }
 
 .displayName {
@@ -9,7 +15,7 @@
 }
 
 .itemBox {
-    height: 80px;
+    height: 105px;
     background-color: $uxui-lg;
     border-radius: 10px;
     margin: 12px;
@@ -23,6 +29,8 @@
 .theNonProfilePicPart {
     width: calc(100% - 80px);
     height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .theTextPart {
@@ -30,12 +38,13 @@
 }
 
 .truncateText {
-    font-size: 16px;
+    font-size: 14px;
     color: #888;
     width: calc(100%);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    margin-bottom: 0 !important;
 }
 
 .usernameOrMessage {

@@ -9,7 +9,7 @@ import Wrapper from "../_helper/Wrapper";
 import RightArrow from "../../images/icons8-right-arrow-50.png";
 import Gear from "../../images/icons8-settings-50.png";
 import Mail from "../../images/icons8-mail-50.png";
-import profilePicPlaceholder3 from "../../images/profilePics/cat3.jpg";
+import bluePfp from "../../images/bluePfp.png";
 
 import { getOptions } from "../../_helper/authHeader";
 
@@ -64,7 +64,7 @@ function Messages(props) {
                                 }}
                                 displayName={message.author.displayName}
                                 username={message.author.username}
-                                profilePic={profilePicPlaceholder3}
+                                profilePic={bluePfp}
                                 content={message.content}
                                 deliveryDate={message.deliveryDate}
                             />
@@ -85,9 +85,17 @@ function Messages(props) {
         >
             <div className="d-flex hacky-hider">
                 <div id="inbox">
-                    <div className="inbox-header pl-2 py-1 d-flex justify-content-between align-items-center">
+                    <div className="inbox-header inbox-header-border pl-2 py-1 d-flex justify-content-between align-items-center">
                         <h1 className="pl-2">Messages Page</h1>
                         <div className="mr-3 d-flex">
+                            <img
+                                src={Mail}
+                                className="msgs-img-btn mr-2"
+                                onClick={() => {
+                                    setSelectedMsg("new");
+                                }}
+                                alt="new msg"
+                            />
                             <img
                                 src={Gear}
                                 className="msgs-img-btn mr-2"
@@ -99,14 +107,6 @@ function Messages(props) {
                                     // open a div when openSettings===true;
                                 }}
                                 alt="settings for msgs"
-                            />
-                            <img
-                                src={Mail}
-                                className="msgs-img-btn mr-2"
-                                onClick={() => {
-                                    setSelectedMsg("new");
-                                }}
-                                alt="new msg"
                             />
                         </div>
                     </div>
@@ -123,7 +123,7 @@ function Messages(props) {
                         {/* TODO: make the search input have larger margins top/bot */}
                         <input
                             id="inbox-search"
-                            className="ml-2 mr-5 pl-2 dark-mode-input inbox-search"
+                            className="ml-2 mr-5 dark-mode-input inbox-search messages-search"
                             placeholder="Search for people or content"
                         ></input>
                     </div>
@@ -141,7 +141,7 @@ function Messages(props) {
                                 <SelectedUserDisplay
                                     selectedMsg={selectedMsg}
                                     userIsSelected={targetName}
-                                    profilePic={profilePicPlaceholder3}
+                                    profilePic={bluePfp}
                                 />
                             </div>
                         ) : (
@@ -150,7 +150,7 @@ function Messages(props) {
                                 <SelectedUserDisplay
                                     selectedMsg={selectedMsg}
                                     userIsSelected={targetName}
-                                    profilePic={profilePicPlaceholder3}
+                                    profilePic={bluePfp}
                                 />
                             </div>
                             // this 1 handles after a user is selected.
@@ -166,13 +166,13 @@ function Messages(props) {
                         <SelectedUserDisplay
                             selectedMsg={selectedMsg}
                             userIsSelected={targetName}
-                            profilePic={profilePicPlaceholder3}
+                            profilePic={bluePfp}
                         /> // this one handles when a msg is open but no user is selected. tis "new".
                     ) : (
                         <SelectedUserDisplay
                             selectedMsg={selectedMsg}
                             userIsSelected={targetName}
-                            profilePic={profilePicPlaceholder3}
+                            profilePic={bluePfp}
                         />
                         // this 1 handles after a user is selected.
                     )}
