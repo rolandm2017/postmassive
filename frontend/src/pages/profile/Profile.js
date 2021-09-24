@@ -128,7 +128,9 @@ class Profile extends Component {
                 onSearchPage={false}
                 breakpoints={this.props.breakpoints}
             >
-                <div className="d-flex">
+                <div
+                    className={`${styles.profileGenericFlex} ${styles.changeHeaderToMobileView}`}
+                >
                     <div
                         onClick={() => {
                             console.log(
@@ -162,7 +164,47 @@ class Profile extends Component {
                         </h3>
                     </div>
                 </div>
-                <div id={`${styles.coverPhoto}`}></div>
+                <div id={`${styles.coverPhoto}`}>
+                    <div
+                        className={`${styles.profileGenericFlex} ${styles.showHeaderDuringMobile}`}
+                    >
+                        <div
+                            onClick={() => {
+                                console.log(
+                                    "btn isn't set up to push /home, go do it"
+                                );
+                                // history.push("/home");
+                                // todo: push previous url to stack
+                            }}
+                            id={`${styles.backButtonContainer}`}
+                            className={`d-flex justify-content-center align-items-center ${styles.pfpSideBox}`}
+                        >
+                            <img
+                                id={`${styles.backButton}`}
+                                src={BackButton}
+                                alt="go back"
+                            ></img>
+                        </div>
+                        <div
+                            id={`${styles.headline}`}
+                            className="d-flex justify-content-center flex-column"
+                        >
+                            <h2 className={`${styles.username} my-1`}>
+                                {this.state.profile
+                                    ? this.state.profile.displayName
+                                    : null}
+                            </h2>
+                            <h3 id={`${styles.totalMassivs}`}>
+                                {this.state.profile
+                                    ? `${this.state.profile.tweets} Massivs`
+                                    : null}
+                            </h3>
+                        </div>
+                        <div className={`${styles.pfpSideBox}`}>
+                            {/* // filler */}
+                        </div>
+                    </div>
+                </div>
                 <header id={`${styles.profileInfo}`} className="px-3 pt-2">
                     <div id={`${styles.picAndOptions}`} className="d-flex">
                         <div id={`${styles.profilePicContainer}`}>
@@ -207,7 +249,11 @@ class Profile extends Component {
                             </div>
                             {/* </div> */}
                             {/* <div className="d-flex justify-content-center align-items-center"> */}
-                            <Button text="Edit Profile" authed={true} />
+                            <Button
+                                text="Edit Profile"
+                                authed={true}
+                                wide={true}
+                            />
                             {/* // TODO: set options on Button */}
                         </div>
                     </div>

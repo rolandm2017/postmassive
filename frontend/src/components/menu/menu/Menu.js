@@ -31,12 +31,6 @@ class Menu extends Component {
                     <Link to="/messages">Inbox</Link>
                 </h2>
                 <h2>
-                    <a href="/bookmarks">Bookmarks</a>
-                </h2>
-                <h2>
-                    <a href="/lists">Lists</a>
-                </h2>
-                <h2>
                     <a href="/profile">Profile</a>
                 </h2>
                 <h2>

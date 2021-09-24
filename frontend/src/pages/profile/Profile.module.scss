@@ -135,12 +135,50 @@
     font-weight: 400;
 }
 
+.profileGenericFlex {
+    display: flex;
+}
+
 .username {
     font-size: 18px;
     font-weight: 900;
 }
 
-@media screen and (max-width: 600px) {
+.showHeaderDuringMobile {
+    display: none;
+}
+
+@media screen and (max-width: 650px) {
+    .changeHeaderToMobileView {
+        display: none;
+    }
+
+    .coverPhoto {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .pfpSideBox {
+        flex-basis: 25%;
+    }
+
+    .showHeaderDuringMobile {
+        padding-bottom: 40px;
+        display: flex;
+        flex-direction: row;
+        height: 100%;
+        width: 100%;
+        // flex: 0 0 auto;
+        justify-content: start;
+        align-items: center;
+    }
+
+    .showHeaderDuringMobile div {
+        // margin: 0 20px;
+    }
+
     .hideOnSml {
         display: none !important;
     }
@@ -154,5 +192,12 @@
 
     #interactionButtons {
         justify-content: end !important;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #interactionButtons div button {
+        font-size: 16px !important;
+        width: 90px;
     }
 }
