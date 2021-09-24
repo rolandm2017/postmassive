@@ -123,7 +123,7 @@ function Messages(props) {
                         {/* TODO: make the search input have larger margins top/bot */}
                         <input
                             id="inbox-search"
-                            className="ml-2 mr-5 dark-mode-input inbox-search messages-search"
+                            className="ml-2 mr-5 dark-mode-input inbox-search messages-search internal-input"
                             placeholder="Search for people or content"
                         ></input>
                     </div>

@@ -127,7 +127,7 @@ class Search extends Component {
                     className="m-1 d-flex justify-content-center align-items-center"
                 >
                     <input
-                        className="mx-5 my-2 dark-mode-input"
+                        className="mx-5 my-2 dark-mode-input internal-input"
                         type="text"
                         name="search-bar"
                         id="search-bar"

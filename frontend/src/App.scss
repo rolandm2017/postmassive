@@ -58,16 +58,20 @@ p {
     font-size: 16px;
 }
 
-input {
-    background-color: $search-bar-grey !important;
+.internal-input {
+    background-color: $search-bar-grey;
     color: white;
     border: none !important;
     border-radius: 20px !important;
-    background-image: url("./images/unnamed.png") !important;
+    background-image: url("./images/unnamed.png");
     background-size: 18px 18px !important;
     background-repeat: no-repeat !important;
     background-position: 4% 50% !important;
     padding-left: 44px !important;
+}
+
+#landing input {
+    background-image: none !important;
 }
 
 ::placeholder {
