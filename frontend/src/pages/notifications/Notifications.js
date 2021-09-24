@@ -6,9 +6,7 @@ import Like from "../../components/notifications/Like";
 import Follow from "../../components/notifications/Follow";
 import Quote from "../../components/notifications/Quote";
 
-import profilePicPlaceholder from "../../images/profilePics/cat1.jpg";
-import profilePicPlaceholder2 from "../../images/profilePics/cat2.jpg";
-import profilePicPlaceholder3 from "../../images/profilePics/cat3.jpg";
+import profilePicPlaceholder3 from "../../images/bluePfp.png";
 
 import Wrapper from "../_helper/Wrapper";
 
@@ -44,9 +42,9 @@ class Notifications extends Component {
         let profilePic;
         const choice = Math.floor(Math.random() * 3);
         if (choice === 0) {
-            profilePic = profilePicPlaceholder;
+            profilePic = profilePicPlaceholder3;
         } else if (choice === 1) {
-            profilePic = profilePicPlaceholder2;
+            profilePic = profilePicPlaceholder3;
         } else if (choice === 2) {
             profilePic = profilePicPlaceholder3;
         }
@@ -68,7 +66,7 @@ class Notifications extends Component {
             return (
                 <Amplify
                     key={data.data.id}
-                    amplifier={data.data.amplifier}
+                    amplifier={data.data.author.displayName}
                     profilePics={profilePic}
                     others={data.data.others}
                     author={data.data.author}

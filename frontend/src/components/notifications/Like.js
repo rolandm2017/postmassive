@@ -2,6 +2,8 @@ import React from "react";
 
 import Fave from "../../images/twit_fave.png";
 
+import LeftBox from "./components/LeftBox";
+
 import LargeNumberProcessor from "./LargeNumberProcessor";
 
 import "./Like.scss";
@@ -11,13 +13,7 @@ function Like(props) {
     return (
         <div className="notification bg-blue-highlight pb-2 pr-2">
             <div className="d-flex">
-                <div className="notification_type-img-container d-flex justify-content-center align-items-end">
-                    <img
-                        className="notification-img-lg mb-0"
-                        src={Fave}
-                        alt="fave"
-                    ></img>
-                </div>
+                <LeftBox />
                 <div className="d-flex align-items-end">
                     <img
                         className="notification-img-sml ml-0 mb-0"

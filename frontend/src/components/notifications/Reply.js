@@ -2,6 +2,8 @@ import React from "react";
 
 import EngagementContainer from "../engagementContainer/EngagementContainer";
 
+import LeftBox from "./components/LeftBox";
+
 import "./Reply.css";
 
 function Reply(props) {
@@ -32,14 +34,8 @@ function Reply(props) {
     return (
         <div className="notification bg-blue-highlight pb-2 pr-2">
             <div className="d-flex">
-                <div className="notification_type-img-container d-flex justify-content-center align-items-end">
-                    <img
-                        className="notification-img-lg mb-0"
-                        src={props.replierProfilePic}
-                        alt="dummy3"
-                    ></img>
-                </div>
-                <div className="flex-basis-80">
+                <LeftBox />
+                <div className="flex-basis-80 mr-4">
                     <div className="mt-3 mr-2">
                         {/* Todo: Make replier's display name bold */}
                         <p className="m-0">
@@ -53,15 +49,15 @@ function Reply(props) {
                         {/* TODO: implement 4 line max for content, 3 line max for
                         OPcontent */}
                     </p>
+                    <EngagementContainer
+                        replies={26}
+                        amplifies={133}
+                        likes={2311}
+                        views={110392}
+                        cap={140000}
+                    />
                 </div>
             </div>
-            <EngagementContainer
-                replies={26}
-                amplifies={133}
-                likes={2311}
-                views={110392}
-                cap={140000}
-            />
         </div>
     );
 }

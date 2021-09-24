@@ -45,9 +45,9 @@ const authors = [
     { displayName: "Robo", username: "madeByMan" },
     { displayName: "Ayla", username: "queen" },
     { displayName: "Magus", username: "misfitBoyFromZeal" },
-    { displayName: "Scott Adams", username: "ScottAdamsSays" },
-    { displayName: "Mike Cernovich", username: "Cernovich" },
-    { displayName: "Donald Trump", username: "realDonaldTrump" },
+    { displayName: "Captain kirk", username: "jamesTKirk" },
+    { displayName: "engineRoomGuy", username: "McCoy" },
+    { displayName: "mrVulcan", username: "spock" },
     { displayName: "Calvin Harris", username: "CalvinHarris" },
     {
         displayName: "Dimitri Vegas & Like Mike",
