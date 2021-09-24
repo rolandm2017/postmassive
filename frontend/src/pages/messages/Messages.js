@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import InboxItem from "../../components/inboxItem/InboxItem";
+import InboxItem from "./components/InboxItem";
 import SelectedUserDisplay from "./components/SelectedUserDisplay";
 
 import NoMsgSelected from "./components/NoMsgSelected";

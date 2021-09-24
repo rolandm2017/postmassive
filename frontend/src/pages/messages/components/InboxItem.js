@@ -1,6 +1,6 @@
 import React from "react";
 
-import styles from "./InboxItem.module.css";
+import styles from "./InboxItem.module.scss";
 
 function InboxItem(props) {
     const formatDate = (date) => {

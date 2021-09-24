@@ -39,7 +39,7 @@
 
 #cd-username-container {
     height: 66px;
-    background-color: lighten($color: $twtr-dark-grey, $amount: 0.2);
+    background-color: lighten($color: $uxui-dg, $amount: 0.2);
 }
 
 #cd-username-color {
@@ -140,6 +140,28 @@
 .msgs-img-btn {
     height: 30px;
     width: 30px;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 16px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 8px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 
 @media (min-width: $full-sidebar) {
