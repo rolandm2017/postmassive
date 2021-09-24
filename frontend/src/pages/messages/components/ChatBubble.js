@@ -12,16 +12,16 @@ function ChatBubble(props) {
             }`}
         >
             {props.left ? (
-                <div className="generic-chat-bub">
+                <div className="generic-chat-bub greyBackgroundForMessage">
                     <img
-                        className="generic-chat-bub-pfp"
+                        className="generic-chat-bub-pfp "
                         alt="profile pic"
                         src={props.profilePic}
                     />
                     <p>{props.msg}</p>
                 </div>
             ) : (
-                <div className="generic-chat-bub right-side-chat-inner d-flex justify-content-end">
+                <div className="generic-chat-bub right-side-chat-inner d-flex justify-content-end blueBackgroundForMessage">
                     <p>{props.msg}</p>
                     <img
                         className={`generic-chat-bub-pfp`}
