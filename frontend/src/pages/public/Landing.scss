@@ -17,7 +17,11 @@
 #landing_left-and-banner {
     padding-top: 20px;
     padding-bottom: 20px;
-    background-color: $sea-blue;
+    background-color: $uxui-lg;
+    background-image: url("../../images/Illustration WEB.svg");
+    background-repeat: no-repeat;
+    background-size: 70% 70%;
+    background-position: center;
 }
 
 /* #landing_left-and-banner div div {
@@ -61,6 +65,7 @@
 #landing_main {
     height: 87vh;
     flex-direction: column;
+    background-color: $uxui-lg;
 }
 
 #landing_repeat-buttons {
@@ -84,6 +89,7 @@
     padding-left: 15px;
     padding-right: 15px;
     /* border: 3px solid springgreen; */
+    background-color: $uxui-lg;
 }
 
 #landing_footer div {
@@ -153,6 +159,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
+
+        background-repeat: no-repeat;
     }
 
     #landing_right-and-header {

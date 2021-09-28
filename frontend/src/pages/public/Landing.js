@@ -4,15 +4,7 @@ import { useHistory } from "react-router-dom";
 
 import { useAuth } from "../../auth/use-auth";
 
-import {
-    // formCheck,
-    // usernameServerCheck,
-    // usernameIsValid,
-    // emailIsValid,
-    validPassword,
-    // verifyUsernameAndPassword,
-    // verifyCode,
-} from "../../loginTools/Validation";
+import { validPassword } from "../../loginTools/Validation";
 
 import {
     handleAddUsernameOrEmail,
@@ -42,8 +34,6 @@ import NameEmailBirthdayModal from "./modals/signUpFlow/NameEmailBirthdayModal";
 import UsernamePasswordModal from "./modals/signUpFlow/UsernamePasswordModal";
 import ValidationCodeModal from "./modals/signUpFlow/ValidationCodeModal";
 import AllSetModal from "./modals/signUpFlow/AllSetModal";
-// import ValidationCodeModal from "./modals/signUpFlow/ValidationCodeModal";
-// import AllSetModal from "./modals/signUpFlow/AllSetModal";
 
 function Landing(props) {
     const [username, setUsername] = useState("");
@@ -85,8 +75,6 @@ function Landing(props) {
     };
 
     const handlePassword = (pass) => {
-        // validates password and sets pw if it is valid so its ready to be sent to server
-        // console.log(pass.target.value, validPassword(pass.target.value));
         if (validPassword(pass.target.value)) {
             setPassword(pass.target.value);
         }
@@ -95,16 +83,6 @@ function Landing(props) {
     const handleUsername = (username) => {
         setUsername(username.target.value);
     };
-
-    // const handleVerification = (code) => {
-    //     // fixme: first, only allow user to click "send verification code" btn when code.length=6
-    //     // fixme: second, only tell the server to await completion of the signup process once the
-    //     // verification code has been received
-    //     // ...to prevent clever hackers from passing to the final modal without receiving the a-ok from the server.
-    //     // so really the verification code is partially a UX thing.
-    //     // fixme: third, discover what twitter does in the final step of signing up, and copy it!
-    //     setVerificationCode(code);
-    // };
 
     const handleLogIn = () => {
         setLogIn(true);
@@ -219,8 +197,13 @@ function Landing(props) {
             <div id="landing_main" className="d-flex">
                 <div
                     id="landing_right-and-header"
-                    className="landing_width-adjustment d-flex justify-content-center"
+                    className="landing_width-adjustment d-flex justify-content-center flex-column flex-column align-items-center"
                 >
+                    <div className="top-container-for-logo d-flex flex-column align-items-end w-100">
+                        <div>
+                            <p className="my-0">2021 Postmassive Inc.</p>
+                        </div>
+                    </div>
                     <div className="parent-container">
                         <div id="landing_logo">
                             <img
@@ -259,6 +242,7 @@ function Landing(props) {
                             </div>
                         </div>
                     </div>
+                    <div>{/* utility div */}</div>
                 </div>
                 <div
                     id="landing_left-and-banner"
