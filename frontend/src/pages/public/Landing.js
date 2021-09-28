@@ -129,20 +129,6 @@ function Landing(props) {
 
     const handleClose = () => setShowPage({ show: false });
     const handleShow = () => {
-        // if (DEMO) {
-        //     // TODO: fwd to logged in with fake auth
-        //     auth.signIn("Crono", "", "ilovemarle", {
-        //         pathname: "/home",
-        //     }).catch((err) => {
-        //         console.log("math!", err);
-        //         if (false) {
-        //             setError(err);
-        //         } else {
-        //             setDesktopLoginError(err);
-        //         }
-        //     });
-        //     return;
-        // }
         setShowPage(1);
     };
 
@@ -235,58 +221,6 @@ function Landing(props) {
                     id="landing_right-and-header"
                     className="landing_width-adjustment d-flex justify-content-center"
                 >
-                    <div id="landing_desktop-header">
-                        <div className="landing_input">
-                            <label>Email or Username</label>
-                            <InputGroup className="mb-3">
-                                <FormControl
-                                    placeholder="Username"
-                                    aria-label="Username"
-                                    aria-describedby="basic-addon1"
-                                    onChange={(value) =>
-                                        handleAddUsernameOrEmail(
-                                            value.target.value,
-                                            setUsername,
-                                            setEmail
-                                        )
-                                    }
-                                    onKeyUp={logInIfEnterKeyIsPressed}
-                                />
-                            </InputGroup>
-                        </div>
-                        <div className="landing_input">
-                            <label>Password</label>
-                            <InputGroup className="mb-3">
-                                <FormControl
-                                    placeholder="Password"
-                                    type="password"
-                                    aria-label="Password"
-                                    aria-describedby="basic-addon1"
-                                    onChange={(value) => handlePassword(value)}
-                                    onKeyUp={logInIfEnterKeyIsPressed}
-                                />
-                            </InputGroup>
-                            <h6 className="lightmode-text">Forgot password?</h6>
-                            <p className="black-text">{desktopLoginError}</p>
-                        </div>
-                        <div>
-                            <Button
-                                onClick={() =>
-                                    sendLogInIfInfoIsValid(
-                                        username,
-                                        email,
-                                        password,
-                                        true,
-                                        setError,
-                                        setDesktopLoginError,
-                                        auth
-                                    )
-                                }
-                                text="Log In"
-                                type="submit"
-                            ></Button>
-                        </div>
-                    </div>
                     <div className="parent-container">
                         <div id="landing_logo">
                             <img
@@ -329,32 +263,7 @@ function Landing(props) {
                 <div
                     id="landing_left-and-banner"
                     className="landing_width-adjustment d-flex justify-content-center"
-                >
-                    <div className="tagline">
-                        <div className="tagline d-flex align-items-center">
-                            <img src={Search} alt="Search" width="50px"></img>
-                            <h4 className="lightmode-text">
-                                Follow your interests.
-                            </h4>
-                        </div>
-                        <div className="tagline d-flex align-items-center">
-                            <img
-                                src={UserGroups}
-                                alt="People"
-                                width="50px"
-                            ></img>
-                            <h4 className="lightmode-text">
-                                Hear what people are saying.
-                            </h4>
-                        </div>
-                        <div className="tagline d-flex align-items-center">
-                            <img src={Chat} alt="Chat" width="50px"></img>
-                            <h4 className="lightmode-text">
-                                Get your word out.
-                            </h4>
-                        </div>
-                    </div>
-                </div>
+                ></div>
                 <div id="landing_repeat-buttons">
                     <div
                         id="landing_repeat-buttons-inline"
