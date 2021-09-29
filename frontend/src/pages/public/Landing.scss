@@ -4,6 +4,15 @@
     width: 100%;
 }
 
+.landing_bg-svg-div {
+    background-image: url("../../images/middleLayer.svg.svg");
+    background-size: 90% 90%;
+    background-repeat: no-repeat;
+    background-position: 100% 100%;
+    border: 2px solid red;
+    z-index: 2;
+}
+
 #landing_buttons button {
     margin-bottom: 15px;
     display: block;
@@ -17,11 +26,13 @@
 #landing_left-and-banner {
     padding-top: 20px;
     padding-bottom: 20px;
-    background-color: $uxui-lg;
-    background-image: url("../../images/Illustration WEB.svg");
+    background-color: $uxui-dg;
+    background-image: url("../../images/Illustration WEB - homme.svg");
     background-repeat: no-repeat;
     background-size: 70% 70%;
     background-position: center;
+    z-index: 100;
+    opacity: 0;
 }
 
 /* #landing_left-and-banner div div {
@@ -53,6 +64,8 @@
 #landing_logo-img {
     position: relative;
     left: -5px;
+    width: 100px !important;
+    height: 100px !important;
 }
 
 #landing_right-and-header {
@@ -65,7 +78,7 @@
 #landing_main {
     height: 87vh;
     flex-direction: column;
-    background-color: $uxui-lg;
+    background-color: $uxui-dg;
 }
 
 #landing_repeat-buttons {
@@ -84,16 +97,24 @@
     width: 25%;
 }
 
+.landing_svg-positioning {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 85vh;
+}
+
 /* footer stuff */
 #landing_footer {
     padding-left: 15px;
     padding-right: 15px;
     /* border: 3px solid springgreen; */
-    background-color: $uxui-lg;
+    background-color: $uxui-dg;
 }
 
 #landing_footer div {
-    font-size: 12px;
+    font-size: 14px;
     margin-top: 3px;
     margin-left: 7px;
     margin-right: 7px;
@@ -109,8 +130,22 @@
     color: black;
 }
 
+.darkmode-text {
+    color: white;
+}
+
 .force-sea-blue {
     background-color: $sea-blue !important;
+}
+
+.header-text-large {
+    font-size: 48px;
+    font-weight: 600;
+}
+
+.header-subtitle-text {
+    font-size: 24px;
+    font-weight: 400;
 }
 
 .landing_button {
@@ -130,10 +165,6 @@
     width: auto;
 }
 
-.lightmode-text {
-    color: black;
-}
-
 .parent-container {
     width: 50%;
     text-align: left;
@@ -141,6 +172,18 @@
 
 .tagline {
     width: fit-content;
+}
+
+.uxui-grey-text {
+    color: #999;
+}
+
+.uxui-landing-btn-width-mod {
+    width: 180px;
+}
+
+.uxui-landing-btn-width-mod * {
+    color: white !important;
 }
 
 @media screen and (max-height: 800px) and (max-width: 800px) {

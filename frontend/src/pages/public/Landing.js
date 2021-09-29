@@ -197,11 +197,13 @@ function Landing(props) {
             <div id="landing_main" className="d-flex">
                 <div
                     id="landing_right-and-header"
-                    className="landing_width-adjustment d-flex justify-content-center flex-column flex-column align-items-center"
+                    className="landing_width-adjustment d-flex justify-content-between flex-column flex-column align-items-center"
                 >
                     <div className="top-container-for-logo d-flex flex-column align-items-end w-100">
-                        <div>
-                            <p className="my-0">2021 Postmassive Inc.</p>
+                        <div className="pr-2 mr-5 mt-2">
+                            <p className="my-0 uxui-grey-text">
+                                2021 Postmassive Inc.
+                            </p>
                         </div>
                     </div>
                     <div className="parent-container">
@@ -213,41 +215,51 @@ function Landing(props) {
                             ></img>
                         </div>
                         <div id="landing_prompt">
-                            <h3 className="lightmode-text">
+                            <h3 className="darkmode-text header-text-large">
                                 Hear the world's loudest social media.
                             </h3>
                         </div>
                         <div id="landing_join">
-                            <h5 className="lightmode-text">
+                            <h5 className="darkmode-text header-subtitle-text">
                                 Join PostMassive today.
                             </h5>
                         </div>
                         <div id="landing_buttons">
                             {/* // FIXME: buttons need space between them again */}
-                            <div>
-                                <Button
-                                    text="Sign Up"
-                                    blueBg={true}
-                                    onClick={() => {
-                                        handleShow();
-                                    }}
-                                ></Button>
-                                <Button
-                                    text="Log In"
-                                    blueBg={false}
-                                    onClick={() => {
-                                        handleLogIn();
-                                    }}
-                                ></Button>
+                            <div className="d-flex mt-4 w-75 justify-content-start">
+                                <div className="uxui-landing-btn-width-mod mr-3">
+                                    <Button
+                                        text="Sign Up"
+                                        blueBg={true}
+                                        onClick={() => {
+                                            handleShow();
+                                        }}
+                                    ></Button>
+                                </div>
+                                <div className="uxui-landing-btn-width-mod">
+                                    <Button
+                                        text="Log In"
+                                        blueBg={false}
+                                        onClick={() => {
+                                            handleLogIn();
+                                        }}
+                                    ></Button>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div>{/* utility div */}</div>
                 </div>
-                <div
-                    id="landing_left-and-banner"
-                    className="landing_width-adjustment d-flex justify-content-center"
-                ></div>
+                <div className="d-flex justify-content-center">
+                    <div
+                        id="landing_left-and-banner"
+                        className="d-flex justify-content-center landing_width-adjustment landing_svg-positioning landing_bg-svg-div"
+                    ></div>
+                    <div
+                        id=""
+                        className="landing_width-adjustment landing_svg-positioning landing_bg-svg-div"
+                    ></div>
+                </div>
                 <div id="landing_repeat-buttons">
                     <div
                         id="landing_repeat-buttons-inline"
@@ -282,19 +294,18 @@ function Landing(props) {
                 id="landing_footer"
                 className="d-flex justify-content-around flex-row flex-wrap"
             >
-                <div>About</div>
-                <div>Help Center</div>
-                <div>Terms</div>
-                <div>Privacy Policy</div>
-                <div>Cookies</div>
-                <div>Ads Info</div>
-                <div>Blog</div>
-                <div>Status</div>
-                <div>Jobs</div>
-                <div>Brand</div>
-                <div>Advertise</div>
-                <div>Settings</div>
-                <div>2020 PostMassiv Inc.</div>
+                <div className="darkmode-text">About</div>
+                <div className="darkmode-text">Help Center</div>
+                <div className="darkmode-text">Terms</div>
+                <div className="darkmode-text">Privacy Policy</div>
+                <div className="darkmode-text">Cookies</div>
+                <div className="darkmode-text">Ads Info</div>
+                <div className="darkmode-text">Blog</div>
+                <div className="darkmode-text">Status</div>
+                <div className="darkmode-text">Jobs</div>
+                <div className="darkmode-text">Brand</div>
+                <div className="darkmode-text">Advertise</div>
+                <div className="darkmode-text">Settings</div>
             </footer>
         </div>
     );
