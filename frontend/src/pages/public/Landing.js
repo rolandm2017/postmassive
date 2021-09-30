@@ -35,6 +35,9 @@ import UsernamePasswordModal from "./modals/signUpFlow/UsernamePasswordModal";
 import ValidationCodeModal from "./modals/signUpFlow/ValidationCodeModal";
 import AllSetModal from "./modals/signUpFlow/AllSetModal";
 
+import BackgroundMan from "../../images/IllustrationForPortfolio.png";
+import Ellipse from "../../images/LetsHopeThisWorks.svg";
+
 function Landing(props) {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -250,15 +253,14 @@ function Landing(props) {
                     </div>
                     <div>{/* utility div */}</div>
                 </div>
-                <div className="d-flex justify-content-center">
+                <div className="d-flex justify-content-center" id="test">
+                    {/* <img id="ellipse" src={Ellipse} /> */}
                     <div
                         id="landing_left-and-banner"
-                        className="d-flex justify-content-center landing_width-adjustment landing_svg-positioning landing_bg-svg-div"
-                    ></div>
-                    <div
-                        id=""
-                        className="landing_width-adjustment landing_svg-positioning landing_bg-svg-div"
-                    ></div>
+                        className="d-flex justify-content-center landing_width-adjustment landing_svg-positioning"
+                    >
+                        <img id="background" src={BackgroundMan} />
+                    </div>
                 </div>
                 <div id="landing_repeat-buttons">
                     <div
