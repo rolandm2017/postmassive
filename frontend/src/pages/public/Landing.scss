@@ -201,6 +201,16 @@
 }
 
 @media screen and (max-width: 780px) {
+    #landing_main {
+        // the difficult blob thing
+        background-image: url("../../images/middleLayerBlobMobile.svg");
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position-x: 0%;
+        background-position-y: 0%;
+        border: 3px solid yellow;
+    }
+
     .landing_mobile-remover {
         display: none !important;
     }
