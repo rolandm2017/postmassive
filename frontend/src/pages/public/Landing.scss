@@ -52,6 +52,10 @@
     height: 100px !important;
 }
 
+#landing_mobile-lower-blob {
+    display: none;
+}
+
 #landing_right-and-header {
     width: 100%;
     height: fit-content;
@@ -201,6 +205,16 @@
 }
 
 @media screen and (max-width: 780px) {
+    #landing_mobile-lower-blob {
+        background-image: url("../../images/middleLayerBlobMobile.svg");
+        background-size: 30% 30%;
+        display: block;
+        border: 3px solid red;
+        height: 100%;
+        width: 100%;
+        z-index: -3;
+    }
+
     #landing_main {
         // the difficult blob thing
         background-image: url("../../images/middleLayerBlobMobile.svg");

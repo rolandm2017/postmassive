@@ -253,6 +253,7 @@ function Landing(props) {
                     </div>
                     <div>{/* utility div */}</div>
                 </div>
+                <div id="landing_mobile-lower-blob"></div>
                 <div
                     id="landing_width-adapter"
                     className="w-50 h-100 landing_mobile-remover"
