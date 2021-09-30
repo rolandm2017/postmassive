@@ -253,45 +253,21 @@ function Landing(props) {
                     </div>
                     <div>{/* utility div */}</div>
                 </div>
-                <div className="w-50 h-100">
+                <div
+                    id="landing_width-adapter"
+                    className="w-50 h-100 landing_mobile-remover"
+                    style={{ border: "5px dotted cyan" }}
+                >
                     <div
                         className="d-flex justify-content-start align-items-start"
                         id="landing_svg-container-outer"
                     >
                         <div
                             id="landing_left-and-banner"
-                            className="d-flex justify-content-start align-items-start landing_svg-positioning"
+                            className="d-flex justify-content-center align-items-center landing_svg-positioning"
                         >
                             <img id="background" src={BackgroundMan} />
                         </div>
-                    </div>
-                </div>
-                <div id="landing_repeat-buttons">
-                    <div
-                        id="landing_repeat-buttons-inline"
-                        className="d-flex justify-content-center align-items-center"
-                    >
-                        {/* <button className="landing_button landing_sign-up">
-                            Sign Up
-                        </button> */}
-                        <BootstrapButton
-                            className="landing_button landing_sign-up d-flex force-sea-blue justify-content-center align-items-center"
-                            variant="primary"
-                            onClick={() => {
-                                handleShow();
-                            }}
-                        >
-                            {/* // FIXME: these 2 btns handleShow and handleLogIn definitely need to be updated */}
-                            Sign Up
-                        </BootstrapButton>
-                        <button
-                            className="d-flex justify-content-center align-items-center"
-                            onClick={() => {
-                                handleLogIn();
-                            }}
-                        >
-                            Log In
-                        </button>
                     </div>
                 </div>
             </div>

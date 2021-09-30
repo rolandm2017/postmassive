@@ -177,6 +177,43 @@
     color: white !important;
 }
 
+@media screen and (max-width: 1280px) {
+    #landing_left-and-banner {
+        background-size: auto;
+        background-position-x: 80% !important;
+    }
+
+    #landing_svg-container-outer div {
+        width: 100%;
+    }
+
+    #landing_svg-container-outer div img {
+        height: 60% !important;
+        width: 60% !important;
+        border: 5px solid pink;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    #landing_svg-container-outer div img {
+        width: 100% !important;
+    }
+}
+
+@media screen and (max-width: 780px) {
+    .landing_mobile-remover {
+        display: none !important;
+    }
+
+    .header-text-large {
+        font-size: 34px !important;
+    }
+
+    .parent-container {
+        width: 85% !important;
+    }
+}
+
 @media screen and (max-height: 800px) and (max-width: 800px) {
     .tagline h4 {
         margin-top: 12px !important;
