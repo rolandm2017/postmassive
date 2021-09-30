@@ -1,9 +1,6 @@
 @import "../../styles/colors";
 
 #background {
-    height: 68% !important;
-    width: 68% !important;
-    border-radius: 0px !important;
 }
 
 #landing {
@@ -26,20 +23,9 @@
     padding-top: 20px;
     padding-bottom: 20px;
     background-image: url("../../images/LetsHopeThisWorks.svg");
-    background-position-x: 65%;
+    background-position-x: 60%;
     background-position-y: 60%;
-    // background-size: 95%;
-    // background-color: $uxui-dg;
-    // background-repeat: no-repeat;
-    // background-size: 100% 100%;
-    // background-position: center;
-    // z-index: 100;
 }
-
-/* #landing_left-and-banner div div {
-    display: flex;
-    align-items: center;
-} */
 
 #landing_left-and-banner div h4 {
     margin-top: 30px;
@@ -98,12 +84,24 @@
     width: 25%;
 }
 
+#landing_svg-container-outer {
+    background-origin: border-box;
+    border: 3px solid green;
+}
+
+#landing_svg-container-outer div {
+    width: auto;
+}
+
+#landing_svg-container-outer div img {
+    // id background
+    height: 100% !important;
+    width: 100% !important;
+    border-radius: 0px !important;
+}
+
 .landing_svg-positioning {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 85vh;
+    
 }
 
 /* footer stuff */
@@ -162,10 +160,6 @@
     color: #fff;
 }
 
-.landing_width-adjustment {
-    width: auto;
-}
-
 .parent-container {
     width: 50%;
     text-align: left;
@@ -198,7 +192,7 @@
 
 @media screen and (min-width: 800px) {
     #landing_left-and-banner {
-        width: 50vw;
+        width: 50%;
         height: 85vh;
         display: flex;
         justify-content: center;

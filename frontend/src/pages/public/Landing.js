@@ -253,11 +253,11 @@ function Landing(props) {
                     </div>
                     <div>{/* utility div */}</div>
                 </div>
-                <div className="d-flex justify-content-center" id="test">
+                <div className="d-flex justify-content-center" id="landing_svg-container-outer">
                     {/* <img id="ellipse" src={Ellipse} /> */}
                     <div
                         id="landing_left-and-banner"
-                        className="d-flex justify-content-center landing_width-adjustment landing_svg-positioning"
+                        className="d-flex justify-content-center landing_svg-positioning"
                     >
                         <img id="background" src={BackgroundMan} />
                     </div>
