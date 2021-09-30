@@ -15,16 +15,16 @@ import {
     handleFinish,
 } from "../../loginTools/util";
 
-import InputGroup from "react-bootstrap/InputGroup";
-import FormControl from "react-bootstrap/FormControl";
+// import InputGroup from "react-bootstrap/InputGroup";
+// import FormControl from "react-bootstrap/FormControl";
 import BootstrapButton from "react-bootstrap/Button";
 
 import Button from "../../components/parts/Button";
 
 import Logo from "../../images/gps-searching.png";
-import Search from "../../images/icons8-search-64.png";
-import UserGroups from "../../images/icons8-user-groups-50.png";
-import Chat from "../../images/icons8-chat-50.png";
+// import Search from "../../images/icons8-search-64.png";
+// import UserGroups from "../../images/icons8-user-groups-50.png";
+// import Chat from "../../images/icons8-chat-50.png";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "./Landing.scss";
@@ -36,7 +36,7 @@ import ValidationCodeModal from "./modals/signUpFlow/ValidationCodeModal";
 import AllSetModal from "./modals/signUpFlow/AllSetModal";
 
 import BackgroundMan from "../../images/IllustrationForPortfolio.png";
-import Ellipse from "../../images/LetsHopeThisWorks.svg";
+import Ellipse from "../../images/middleLayer.svg";
 
 function Landing(props) {
     const [username, setUsername] = useState("");
@@ -253,13 +253,17 @@ function Landing(props) {
                     </div>
                     <div>{/* utility div */}</div>
                 </div>
-                <div className="d-flex justify-content-center" id="landing_svg-container-outer">
-                    {/* <img id="ellipse" src={Ellipse} /> */}
+                <div className="w-50 h-100">
                     <div
-                        id="landing_left-and-banner"
-                        className="d-flex justify-content-center landing_svg-positioning"
+                        className="d-flex justify-content-start align-items-start"
+                        id="landing_svg-container-outer"
                     >
-                        <img id="background" src={BackgroundMan} />
+                        <div
+                            id="landing_left-and-banner"
+                            className="d-flex justify-content-start align-items-start landing_svg-positioning"
+                        >
+                            <img id="background" src={BackgroundMan} />
+                        </div>
                     </div>
                 </div>
                 <div id="landing_repeat-buttons">
