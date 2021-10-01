@@ -1,5 +1,9 @@
 @import "../../styles/colors";
 
+#main {
+    height: auto;
+}
+
 #landing {
     width: 100%;
 }
@@ -40,9 +44,12 @@
 }
 
 #landing_logo {
-    width: fit-content;
+    width: 100%;
     text-align: left;
     position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 #landing_logo-img {
@@ -64,7 +71,8 @@
 }
 
 #landing_main {
-    height: 87vh;
+    // height: calc(100% - 120px);
+    height: auto;
     flex-direction: column;
     background-color: $uxui-dg;
 }
@@ -106,6 +114,7 @@
 
 /* footer stuff */
 #landing_footer {
+    height: 120px;
     padding-left: 15px;
     padding-right: 15px;
     /* border: 3px solid springgreen; */
@@ -181,6 +190,10 @@
     color: white !important;
 }
 
+.mobile-hide-instead-of-flex {
+    display: flex !important;
+}
+
 @media screen and (max-width: 1280px) {
     #landing_left-and-banner {
         background-size: auto;
@@ -205,14 +218,24 @@
 }
 
 @media screen and (max-width: 780px) {
+    // for the uxui design
+    .uxui-mobile-hide {
+        display: none;
+    }
+    .mobile-hide-instead-of-flex {
+        display: none !important;
+        border: 5px solid red;
+    }
     #landing_mobile-lower-blob {
-        background-image: url("../../images/middleLayerBlobMobile.svg");
-        background-size: 30% 30%;
+        background-image: url("../../images/BottomLeftMobile.svg");
+        // background-size: 30% 30%;
+        background-position: bottom left;
+        background-repeat: no-repeat;
         display: block;
         border: 3px solid red;
-        height: 100%;
+        height: 460px;
         width: 100%;
-        z-index: -3;
+        // z-index: -3;
     }
 
     #landing_main {

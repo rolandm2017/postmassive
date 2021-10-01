@@ -202,7 +202,7 @@ function Landing(props) {
                     id="landing_right-and-header"
                     className="landing_width-adjustment d-flex justify-content-between flex-column flex-column align-items-center"
                 >
-                    <div className="top-container-for-logo d-flex flex-column align-items-end w-100">
+                    <div className="top-container-for-logo flex-column align-items-end w-100 mobile-hide-instead-of-flex">
                         <div className="pr-2 mr-5 mt-2">
                             <p className="my-0 uxui-grey-text">
                                 2021 Postmassive Inc.
@@ -211,12 +211,20 @@ function Landing(props) {
                     </div>
                     <div className="parent-container">
                         <div id="landing_logo">
-                            <img
-                                id="landing_logo-img"
-                                src={Logo}
-                                alt="PostMassiv Logo"
-                            ></img>
+                            <div>
+                                <img
+                                    id="landing_logo-img"
+                                    src={Logo}
+                                    alt="PostMassiv Logo"
+                                ></img>
+                            </div>
+                            <div className="pr-2 mt-2">
+                                <p className="my-0 uxui-grey-text">
+                                    2021 Postmassive Inc.
+                                </p>
+                            </div>
                         </div>
+
                         <div id="landing_prompt">
                             <h3 className="darkmode-text header-text-large">
                                 Hear the world's loudest social media.
@@ -229,7 +237,7 @@ function Landing(props) {
                         </div>
                         <div id="landing_buttons">
                             {/* // FIXME: buttons need space between them again */}
-                            <div className="d-flex mt-4 w-75 justify-content-start">
+                            <div className="d-flex mt-4 w-75 justify-content-between">
                                 <div className="uxui-landing-btn-width-mod mr-3">
                                     <Button
                                         text="Sign Up"
@@ -275,7 +283,7 @@ function Landing(props) {
 
             <footer
                 id="landing_footer"
-                className="d-flex justify-content-around flex-row flex-wrap"
+                className="justify-content-around flex-row flex-wrap mobile-hide-instead-of-flex"
             >
                 <div className="darkmode-text">About</div>
                 <div className="darkmode-text">Help Center</div>
