@@ -219,8 +219,8 @@ function Landing(props) {
                                     alt="PostMassiv Logo"
                                 ></img>
                             </div>
-                            <div className="pr-2 mt-2">
-                                <p className="my-0 uxui-grey-text">
+                            <div className="pr-2 mt-2 hide-on-desktop">
+                                <p className="my-0 uxui-grey-text ">
                                     2021 Postmassive Inc.
                                 </p>
                             </div>
@@ -284,7 +284,6 @@ function Landing(props) {
                 <div
                     id="landing_width-adapter"
                     className="w-50 h-100 landing_mobile-remover"
-                    style={{ border: "5px dotted cyan" }}
                 >
                     <div
                         className="d-flex justify-content-start align-items-start"
@@ -302,7 +301,7 @@ function Landing(props) {
 
             <footer
                 id="landing_footer"
-                className="justify-content-around flex-row flex-wrap mobile-hide-instead-of-flex"
+                className="justify-content-around flex-row flex-wrap mobile-hide-instead-of-flex landing_footer-desktop-color "
             >
                 <div className="darkmode-text">About</div>
                 <div className="darkmode-text">Help Center</div>

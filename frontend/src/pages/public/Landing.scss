@@ -95,7 +95,6 @@
 
 #landing_svg-container-outer {
     background-origin: border-box;
-    border: 3px solid green;
 }
 
 #landing_svg-container-outer div {
@@ -205,6 +204,14 @@
     display: none;
 }
 
+.display-only-on-desktop {
+    display: block;
+}
+
+.hide-on-desktop {
+    display: none;
+}
+
 @media screen and (max-width: 1280px) {
     #landing_left-and-banner {
         background-size: auto;
@@ -218,7 +225,6 @@
     #landing_svg-container-outer div img {
         height: 60% !important;
         width: 60% !important;
-        border: 5px solid pink;
     }
 }
 
@@ -232,6 +238,9 @@
 }
 
 @media screen and (max-width: 780px) {
+    .hide-on-desktop {
+        display: block;
+    }
     #landing_footer {
         background-color: none !important;
     }
