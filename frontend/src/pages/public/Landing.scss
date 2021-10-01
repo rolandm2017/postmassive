@@ -118,6 +118,9 @@
     padding-left: 15px;
     padding-right: 15px;
     /* border: 3px solid springgreen; */
+}
+
+.landing_footer-desktop-color {
     background-color: $uxui-dg;
 }
 
@@ -194,6 +197,14 @@
     display: flex !important;
 }
 
+.mobile-desktop-spacing-adjust {
+    width: 75%;
+}
+
+.mobile-show-instead-of-hide {
+    display: none;
+}
+
 @media screen and (max-width: 1280px) {
     #landing_left-and-banner {
         background-size: auto;
@@ -217,35 +228,65 @@
     }
 }
 
+@media screen and (max-width: 500px) {
+}
+
 @media screen and (max-width: 780px) {
+    #landing_footer {
+        background-color: none !important;
+    }
+
+    #landing_ui-man {
+        background-image: url("../../images/UIManMobile.svg");
+        background-repeat: no-repeat;
+        background-size: 300px 500px;
+        background-position: 50% 94%;
+        height: 800px;
+        width: 100%;
+        // border: 10px solid green;
+        position: absolute;
+    }
+
+    .mobile-show-instead-of-hide {
+        display: flex;
+    }
+
+    .insert-ui-man-here {
+        background-image: url("../../images/UIManMobile.svg");
+    }
+    .mobile-desktop-spacing-adjust {
+        width: 100%;
+    }
     // for the uxui design
     .uxui-mobile-hide {
         display: none;
     }
     .mobile-hide-instead-of-flex {
         display: none !important;
-        border: 5px solid red;
+        // border: 5px solid red;
     }
     #landing_mobile-lower-blob {
         background-image: url("../../images/BottomLeftMobile.svg");
-        // background-size: 30% 30%;
         background-position: bottom left;
         background-repeat: no-repeat;
-        display: block;
-        border: 3px solid red;
-        height: 460px;
+        display: flex;
+        align-items: flex-end;
+        height: 560px;
         width: 100%;
         // z-index: -3;
     }
 
     #landing_main {
-        // the difficult blob thing
+        // the strange blob thing
         background-image: url("../../images/middleLayerBlobMobile.svg");
         background-size: 100%;
         background-repeat: no-repeat;
         background-position-x: 0%;
         background-position-y: 0%;
-        border: 3px solid yellow;
+        // border: 3px solid yellow;
+        // so we can take a div out of document flow
+        position: absolute;
+        height: 900px;
     }
 
     .landing_mobile-remover {

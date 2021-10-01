@@ -197,7 +197,8 @@ function Landing(props) {
                 error={error}
             />
 
-            <div id="landing_main" className="d-flex">
+            <div id="landing_main" className="d-flex insert-ui-man-here">
+                <div id="landing_ui-man"></div>
                 <div
                     id="landing_right-and-header"
                     className="landing_width-adjustment d-flex justify-content-between flex-column flex-column align-items-center"
@@ -237,7 +238,7 @@ function Landing(props) {
                         </div>
                         <div id="landing_buttons">
                             {/* // FIXME: buttons need space between them again */}
-                            <div className="d-flex mt-4 w-75 justify-content-between">
+                            <div className="d-flex mt-4 mobile-desktop-spacing-adjust justify-content-between">
                                 <div className="uxui-landing-btn-width-mod mr-3">
                                     <Button
                                         text="Sign Up"
@@ -261,7 +262,25 @@ function Landing(props) {
                     </div>
                     <div>{/* utility div */}</div>
                 </div>
-                <div id="landing_mobile-lower-blob"></div>
+                <div id="landing_mobile-lower-blob">
+                    <div
+                        id="landing_footer"
+                        className="justify-content-around flex-row flex-wrap mobile-show-instead-of-hide"
+                    >
+                        <div className="darkmode-text">About</div>
+                        <div className="darkmode-text">Help Center</div>
+                        <div className="darkmode-text">Terms</div>
+                        <div className="darkmode-text">Privacy Policy</div>
+                        <div className="darkmode-text">Cookies</div>
+                        <div className="darkmode-text">Ads Info</div>
+                        <div className="darkmode-text">Blog</div>
+                        <div className="darkmode-text">Status</div>
+                        <div className="darkmode-text">Jobs</div>
+                        <div className="darkmode-text">Brand</div>
+                        <div className="darkmode-text">Advertise</div>
+                        <div className="darkmode-text">Settings</div>
+                    </div>
+                </div>
                 <div
                     id="landing_width-adapter"
                     className="w-50 h-100 landing_mobile-remover"
