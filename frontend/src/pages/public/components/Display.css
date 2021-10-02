@@ -1,0 +1,9 @@
+@media screen and (max-width: 450px) {
+    #display_join h5 {
+        font-size: 1.1rem;
+    }
+
+    #display_prompt h3 {
+        font-size: 1.55rem;
+    }
+}
