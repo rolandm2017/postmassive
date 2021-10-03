@@ -13,7 +13,7 @@ function Display(props) {
                 <div>
                     <img src={Logo} />
                 </div>
-                <div className="flex-centering">
+                <div id="display_copyright" className="flex-centering">
                     <p>2021 Postmassive Inc.</p>
                 </div>
             </div>
@@ -34,14 +34,18 @@ function Display(props) {
                         <Button
                             text="Sign Up"
                             blueBg={true}
-                            onClick={props.handleShow}
+                            onClick={() => {
+                                props.handleShow();
+                            }}
                         ></Button>
                     </div>
                     <div className="uxui-landing-btn-width-mod">
                         <Button
                             text="Log In"
                             blueBg={false}
-                            onClick={props.handleLogIn}
+                            onClick={() => {
+                                props.handleLogIn();
+                            }}
                         ></Button>
                     </div>
                 </div>

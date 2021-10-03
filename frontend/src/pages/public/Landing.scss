@@ -2,6 +2,7 @@
 
 #landing {
     width: 100%;
+    height: 100%;
 }
 
 #landing_desktop-copyright {
@@ -19,11 +20,21 @@
 
 #landing_main-container {
     display: flex;
-    height: 100%;
+    height: 1000px;
 }
 
-#landing_ui-man-left {
-    // *** //
+#landing_ui-man-left div {
+    height: 80%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#landing_ui-man-bg {
+    height: 80%;
+    width: 90%;
+    border-radius: 0%;
 }
 
 #landing_main {
@@ -31,7 +42,8 @@
 }
 
 #main {
-    height: 100vh;
+    // height: 100vh;
+    height: auto;
 }
 
 .dark-bg {
@@ -78,7 +90,19 @@
     }
 
     #main {
-        height: 800px;
+        // height: 1400px;
+        height: auto;
         // is like this so it is at least a minimum height for a mobile device
+    }
+
+    #landing_ui-man-left {
+        display: none;
+    }
+
+    #landing_display {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 }

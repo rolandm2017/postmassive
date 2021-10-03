@@ -18,8 +18,6 @@ import {
 import Display from "./components/Display";
 import Footer from "./components/Footer";
 
-
-
 import "react-datepicker/dist/react-datepicker.css";
 import "./Landing.scss";
 
@@ -197,7 +195,9 @@ function Landing(props) {
                         id="landing_ui-man-left"
                         className="desktop-splitter r-debug aa-debug"
                     >
-                        <img src={BackgroundMan} />
+                        <div>
+                            <img id="landing_ui-man-bg" src={BackgroundMan} />
+                        </div>
                     </div>
                     <div
                         id="landing_display"
@@ -207,7 +207,14 @@ function Landing(props) {
                             {/* // top display for desktop */}
                             <p>2021 Postmassive Inc.</p>
                         </div>
-                        <Display />
+                        <Display
+                            handleLogIn={() => {
+                                handleLogIn();
+                            }}
+                            handleShow={() => {
+                                handleShow();
+                            }}
+                        />
                     </div>
                 </div>
                 <footer id="landing_footer">
