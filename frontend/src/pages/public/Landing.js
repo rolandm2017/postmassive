@@ -191,71 +191,23 @@ function Landing(props) {
                 error={error}
             />
 
-            <div id="landing_main" className="d-flex insert-ui-man-here">
-                <div id="landing_ui-man"></div>
-                <div
-                    id="landing_right-and-header"
-                    className="landing_width-adjustment d-flex justify-content-between flex-column flex-column align-items-center"
-                >
-                    <div className="top-container-for-logo flex-column align-items-end w-100 mobile-hide-instead-of-flex">
-                        <div className="pr-2 mr-5 mt-2">
-                            <p className="my-0 uxui-grey-text">
-                                2021 Postmassive Inc.
-                            </p>
-                        </div>
+            <div id="landing_main" className="insert-ui-man-here">
+                <div className="dark-bg">
+                    <div id="landing_ui-man-left" className="r-debug aa-debug">
+                        <img src={BackgroundMan} />
                     </div>
-                    <div className="parent-container">
-                        <div id="landing_logo">
-                            <div>
-                                <img
-                                    id="landing_logo-img"
-                                    src={Logo}
-                                    alt="PostMassiv Logo"
-                                ></img>
-                            </div>
-                            <div className="pr-2 mt-2 hide-on-desktop">
-                                <p className="my-0 uxui-grey-text ">
-                                    2021 Postmassive Inc.
-                                </p>
-                            </div>
+                    <div id="landing_display" className="bb-debug">
+                        <div>
+                            {/* // top display for desktop */}
+                            <p>Postmassive Inc. 2021</p>
                         </div>
-                    </div>
-                    <Display
-                        handleShow={() => {
-                            handleShow();
-                        }}
-                        handleLogIn={() => {
-                            handleLogIn();
-                        }}
-                    />
-                    <div>
-                        {/* utility div - helps with organizing elements in flexbox */}
+                        <Display />
                     </div>
                 </div>
-                <div id="landing_mobile-lower-blob">
+                <footer id="landing_footer">
                     <Footer />
-                </div>
-                <div
-                    id="landing_width-adapter"
-                    className="w-50 h-100 landing_mobile-remover"
-                >
-                    <div
-                        className="d-flex justify-content-start align-items-start"
-                        id="landing_svg-container-outer"
-                    >
-                        <div
-                            id="landing_left-and-banner"
-                            className="d-flex justify-content-center align-items-center landing_svg-positioning"
-                        >
-                            <img id="background" src={BackgroundMan} />
-                        </div>
-                    </div>
-                </div>
+                </footer>
             </div>
-
-            <footer id="landing_footer">
-                <Footer />
-            </footer>
         </div>
     );
 }
