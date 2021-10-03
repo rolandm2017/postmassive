@@ -1,9 +1,63 @@
-@media screen and (max-width: 450px) {
+#display_logo {
+    display: flex;
+    justify-content: space-between;
+}
+
+#display_logo div {
+    margin: 0px 10px 0px 10px;
+}
+
+#display_logo div img {
+    height: 80px;
+    width: 80px;
+}
+
+#display_logo p {
+    margin: 25px;
+    font-size: 14px;
+    color: grey;
+}
+
+#display_prompt h3 {
+    font-size: 48px;
+    font-weight: 600;
+}
+
+#display_join h5 {
+    font-size: 24px;
+    font-weight: 400;
+}
+
+#landing_static-display {
+    margin: 30px;
+}
+
+.flex-centering {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.uxui-landing-btn-width-mod div {
+    margin-top: 10px;
+    margin-right: 20px;
+    width: 180px;
+}
+
+.uxui-landing-btn-width-mod div button {
+    width: 170px;
+}
+
+@media screen and (max-width: 700px) {
     #display_join h5 {
         font-size: 1.1rem;
     }
 
     #display_prompt h3 {
         font-size: 1.55rem;
+    }
+
+    #display_logo p {
+        display: none;
     }
 }

@@ -2,11 +2,21 @@ import React from "react";
 
 import Button from "../../../components/parts/Button";
 
+import Logo from "../../../images/gps-searching.png";
+
 import "./Display.css";
 
 function Display(props) {
     return (
         <div id="landing_static-display">
+            <div id="display_logo">
+                <div>
+                    <img src={Logo} />
+                </div>
+                <div className="flex-centering">
+                    <p>2021 Postmassive Inc.</p>
+                </div>
+            </div>
             <div id="display_prompt">
                 <h3 className="darkmode-text header-text-large">
                     Hear the world's loudest social media.
@@ -19,8 +29,8 @@ function Display(props) {
             </div>
             <div id="landing_buttons">
                 {/* // FIXME: buttons need space between them again */}
-                <div className="d-flex mt-4 mobile-desktop-spacing-adjust justify-content-between">
-                    <div className="uxui-landing-btn-width-mod mr-3">
+                <div className="generic-flex mobile-desktop-spacing-adjust">
+                    <div className="uxui-landing-btn-width-mod">
                         <Button
                             text="Sign Up"
                             blueBg={true}

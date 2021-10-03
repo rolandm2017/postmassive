@@ -18,7 +18,7 @@ import {
 import Display from "./components/Display";
 import Footer from "./components/Footer";
 
-import Logo from "../../images/gps-searching.png";
+
 
 import "react-datepicker/dist/react-datepicker.css";
 import "./Landing.scss";
@@ -108,7 +108,7 @@ function Landing(props) {
     };
 
     return (
-        <div id="landing" className="main-container">
+        <div id="landing" className="main-container w-100">
             <LogInModal
                 logIn={logIn}
                 handleCloseLogIn={handleCloseLogIn}
@@ -192,14 +192,20 @@ function Landing(props) {
             />
 
             <div id="landing_main" className="insert-ui-man-here">
-                <div className="dark-bg">
-                    <div id="landing_ui-man-left" className="r-debug aa-debug">
+                <div id="landing_main-container" className="dark-bg">
+                    <div
+                        id="landing_ui-man-left"
+                        className="desktop-splitter r-debug aa-debug"
+                    >
                         <img src={BackgroundMan} />
                     </div>
-                    <div id="landing_display" className="bb-debug">
-                        <div>
+                    <div
+                        id="landing_display"
+                        className="desktop-splitter bb-debug"
+                    >
+                        <div id="landing_desktop-copyright">
                             {/* // top display for desktop */}
-                            <p>Postmassive Inc. 2021</p>
+                            <p>2021 Postmassive Inc.</p>
                         </div>
                         <Display />
                     </div>
