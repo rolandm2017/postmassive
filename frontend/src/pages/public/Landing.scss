@@ -20,26 +20,28 @@
 
 #landing_main-container {
     display: flex;
-    height: 1000px;
+    height: 800px;
 }
 
 #landing_ui-man-left {
     display: flex;
     justify-content: center;
-    align-items: center;
+    // align-items: center;
     background-image: url("../../images/middleLayer-web.svg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    background-position: 20% 20%;
+    background-position: 20% 0%;
+    padding-top: 80px;
 }
 
 #landing_ui-man-left div {
-    height: 80%;
-    width: 80%;
-    padding-bottom: 50%;
+    height: 600px;
+    width: 600px;
+    // padding-bottom: 50%;
+    margin-top: 80px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    // align-items: center;
 }
 
 #landing_ui-man-bg {
@@ -93,6 +95,21 @@
 
 .bb-debug {
     background-color: $uxui-lg;
+}
+
+// midway resizing of uiMan
+@media screen and (max-width: 1000px) {
+    #landing_ui-man-left {
+        background-position: 0% 50%;
+    }
+    #landing_ui-man-left div {
+        height: 400px;
+        width: 400px;
+        // padding-bottom: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 @media screen and (max-width: 700px) {
