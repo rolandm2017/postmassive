@@ -1,3 +1,7 @@
+#display_copyright {
+    display: none;
+}
+
 #display_logo {
     display: flex;
     justify-content: space-between;
@@ -10,12 +14,6 @@
 #display_logo div img {
     height: 80px;
     width: 80px;
-}
-
-#display_logo p {
-    margin: 25px;
-    font-size: 14px;
-    color: grey;
 }
 
 #display_prompt h3 {
@@ -49,6 +47,13 @@
 }
 
 @media screen and (max-width: 700px) {
+    /* // TODO: make buttons wide and space-between when mobile */
+    #display_copyright {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     #display_join h5 {
         font-size: 1.1rem;
     }
@@ -58,11 +63,19 @@
     }
 
     #display_logo p {
-        display: none;
+        display: block;
+        margin: 0px;
+        font-size: 14px;
+        color: grey;
     }
 
-    #display_copyright {
-        display: none;
+    .mobile-desktop-spacing-adjust {
+        justify-content: space-between;
+    }
+
+    .uxui-landing-btn-width-mod {
+        width: calc(40%);
+        margin: 20px 0px;
     }
 }
 
