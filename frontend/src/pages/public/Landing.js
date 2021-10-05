@@ -199,10 +199,7 @@ function Landing(props) {
                             <img id="landing_ui-man-bg" src={BackgroundMan} />
                         </div>
                     </div>
-                    <div
-                        id="landing_display"
-                        className="desktop-splitter bb-debug"
-                    >
+                    <div id="landing_display" className="desktop-splitter">
                         <div id="landing_desktop-copyright">
                             {/* // top display for desktop */}
                             <p>2021 Postmassive Inc.</p>

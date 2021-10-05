@@ -18,6 +18,10 @@
     color: grey;
 }
 
+#landing_footer {
+    height: 120px;
+}
+
 #landing_main-container {
     display: flex;
     height: 800px;
@@ -117,20 +121,24 @@
         display: none;
     }
 
-    #main {
-        // height: 1400px;
-        height: auto;
-        // is like this so it is at least a minimum height for a mobile device
+    #landing_display {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #landing_footer {
+        // display: none;
     }
 
     #landing_ui-man-left {
         display: none;
     }
 
-    #landing_display {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+    #main {
+        // height: 1400px;
+        height: auto;
+        // is like this so it is at least a minimum height for a mobile device
     }
 }
