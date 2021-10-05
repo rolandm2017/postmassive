@@ -212,6 +212,15 @@ function Landing(props) {
                                 handleShow();
                             }}
                         />
+                        <div id="landing_mobile-only-show">
+                            <div id="landing_ui-man-container">
+                                <img
+                                    id="landing_mobile-ui-man"
+                                    src={BackgroundMan}
+                                />
+                            </div>
+                            <Footer />
+                        </div>
                     </div>
                 </div>
                 <footer id="landing_footer">

@@ -69,6 +69,10 @@
         color: grey;
     }
 
+    #landing_static-display {
+        margin-top: 60px;
+    }
+
     .mobile-desktop-spacing-adjust {
         justify-content: space-between;
     }
