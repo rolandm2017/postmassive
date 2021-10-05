@@ -2,8 +2,13 @@
 
 html,
 body {
-    height: 100% !important;
+    min-height: 100% !important;
+    // min-height: 2000px;
+    margin: 0 !important;
+    padding: 0 !important;
 }
+
+
 
 #landing {
     width: 100%;
@@ -39,7 +44,8 @@ body {
 
 #landing_main-container {
     display: flex;
-    height: 800px;
+    height: 1000px;
+    // potential src of bug
 }
 
 #landing_mobile-ui-man {
@@ -84,7 +90,7 @@ body {
     background-image: url("../../images/landingBlobs/Ellipse94.svg");
     background-repeat: no-repeat;
     background-size: 40% 52%;
-    background-position: 120% 90%;
+    background-position: 120% 100%;
     border: 5px solid yellow;
 }
 
