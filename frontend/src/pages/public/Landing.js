@@ -213,7 +213,7 @@ function Landing(props) {
                             }}
                         />
                         <div id="landing_mobile-only-show">
-                            <div id="landing_ui-man-container">
+                            <div id="landing_mobile-ui-man-container">
                                 <img
                                     id="landing_mobile-ui-man"
                                     src={BackgroundMan}
