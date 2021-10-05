@@ -103,7 +103,7 @@ function App() {
     }
 
     return (
-        <div className="App" style={{ border: "5px dotted orange" }}>
+        <div className="App">
             <ProvideAuth>
                 {/* todo: test if I can just remove ProvideAuth */}
                 <main

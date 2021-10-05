@@ -8,6 +8,7 @@
     justify-content: space-evenly;
     align-items: center;
     flex-wrap: wrap;
+    margin-bottom: 40px;
 }
 
 .mobile-center {
@@ -25,6 +26,7 @@
     #footer_general {
         height: 100%;
         padding: 0 30px 0 30px;
+        margin-bottom: 40px;
     }
 
     #footer_general div {
@@ -45,6 +47,6 @@
 
 @media screen and (max-width: 700px) {
     #footer_general {
-        height: 110px;
+        height: 200px;
     }
 }

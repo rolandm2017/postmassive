@@ -205,7 +205,6 @@ function Landing(props) {
                     </div>
                     <div id="landing_display" className="desktop-splitter">
                         <div id="landing_desktop-copyright">
-                            {/* // top display for desktop */}
                             <p>2021 Postmassive Inc.</p>
                         </div>
                         <Display
