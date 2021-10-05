@@ -4,7 +4,6 @@
 
 #footer_general {
     height: 100%;
-    background-color: rgb(23, 32, 42);
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -24,8 +23,8 @@
 
 @media screen and (max-width: 1000px) {
     #footer_general {
-        height: 110px;
-        margin: 0 30px 0 30px;
+        height: 100%;
+        padding: 0 30px 0 30px;
     }
 
     #footer_general div {
@@ -41,5 +40,11 @@
     .mobile-right {
         display: flex;
         justify-content: right;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    #footer_general {
+        height: 110px;
     }
 }

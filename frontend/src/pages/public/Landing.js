@@ -28,7 +28,7 @@ import ValidationCodeModal from "./modals/signUpFlow/ValidationCodeModal";
 import AllSetModal from "./modals/signUpFlow/AllSetModal";
 
 import BackgroundMan from "../../images/IllustrationForPortfolio.png";
-import Ellipse from "../../images/middleLayer.svg";
+import Ellipse from "../../images/landingBlobs/middleLayer.svg";
 
 function Landing(props) {
     const [username, setUsername] = useState("");
@@ -106,7 +106,7 @@ function Landing(props) {
     };
 
     return (
-        <div id="landing" className="main-container w-100">
+        <div id="landing" className="main-container w-100 dark-bg">
             <LogInModal
                 logIn={logIn}
                 handleCloseLogIn={handleCloseLogIn}
@@ -190,13 +190,17 @@ function Landing(props) {
             />
 
             <div id="landing_main" className="insert-ui-man-here">
-                <div id="landing_main-container" className="dark-bg">
+                <div id="landing_main-container" className="">
                     <div
                         id="landing_ui-man-left"
                         className="desktop-splitter r-debug aa-debug"
                     >
                         <div>
-                            <img id="landing_ui-man-bg" src={BackgroundMan} />
+                            <img
+                                id="landing_ui-man-bg"
+                                src={BackgroundMan}
+                                alt="man at desk"
+                            />
                         </div>
                     </div>
                     <div id="landing_display" className="desktop-splitter">
@@ -217,6 +221,7 @@ function Landing(props) {
                                 <img
                                     id="landing_mobile-ui-man"
                                     src={BackgroundMan}
+                                    alt="man at desk"
                                 />
                             </div>
                             <Footer />
