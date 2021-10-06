@@ -1,3 +1,10 @@
+@import "../../styles/colors";
+
+#log-in-button-container button {
+    width: 120px;
+    background-color: $uxui-blue !important;
+}
+
 #log-in-screen_container {
     height: 100vh;
     display: flex;
@@ -7,4 +14,16 @@
 
 #log-in_input-container form * {
     margin: 6px 0;
+}
+
+#log-in_input-container div input {
+    padding-left: 16px;
+    border-radius: 20px;
+    background-color: $search-bar-grey;
+    border: none;
+    height: 46px;
+    // width: 90%;
+    width: 100%;
+    color: #aaa;
+    font-size: 14px;
 }

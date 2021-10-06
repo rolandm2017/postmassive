@@ -185,7 +185,7 @@ function Landing(props) {
                 showPage={showPage === 4}
                 handleClose={handleClose}
                 handleFinish={() => {
-                    handleFinish(history.push("/home"));
+                    history.push("/home");
                 }}
                 error={error}
             />

@@ -15,11 +15,9 @@ import {
 export {
     handleAddUsernameOrEmail,
     sendLogInIfInfoIsValid,
-    // bundleAcceptedAccountInfoAndSendVerificationCode,
     handlePageOne,
     handlePageTwo,
     handlePageThree,
-    handleFinish,
 };
 
 function handleAddUsernameOrEmail(usernameOrEmail, setUsername, setEmail) {
@@ -218,7 +216,7 @@ function handlePageThree(
 }
 
 // TODO: the finishing click is not finished. finish it.
-function handleFinish(goToHome) {
-    // authenticate user and send them to the home page
-    goToHome();
-}
+// function handleFinish(goToHome) {
+//     // authenticate user and send them to the home page
+//     goToHome();
+// }

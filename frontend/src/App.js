@@ -22,7 +22,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 function App() {
     // const isLoggedIn = ;
     const currentLocation = useLocation().pathname;
-    console.log("593:", currentLocation);
+    console.log("currentLocation:", currentLocation);
 
     function LandingOrRedirectToHome({ authed, ...rest }) {
         console.log("773", authed);
