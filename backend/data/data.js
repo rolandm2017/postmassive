@@ -12,7 +12,7 @@ if (extreme) {
     maxReplies = 99999;
     maxAmps = 999999;
     maxLikes = 99999999;
-    maxViews = 9999999999;
+    maxViews = 199999999;
     maxCap = 9999999999;
     maxFollows = 99999;
 } else {
