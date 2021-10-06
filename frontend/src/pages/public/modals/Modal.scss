@@ -4,6 +4,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    margin-top: 8px;
 }
 
 .modal-button-mod button {
@@ -12,7 +13,7 @@
 }
 
 .modal-container {
-    border-radius: 10px;
+    // border-radius: 10px;
     background-color: $uxui-lg;
     height: 320px;
     width: auto;
@@ -21,9 +22,13 @@
     // justify-content: center;
 }
 
+.modal-w-90 {
+    width: 90%;
+}
+
 .modal-header-container {
     height: auto;
-    border: 3px solid red;
+    // border: 3px solid red;
 }
 
 .modal-header {
@@ -31,6 +36,7 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+    border-bottom: none !important;
 }
 
 .modal-header p {
@@ -49,7 +55,8 @@
     background-color: $search-bar-grey;
     border: none;
     height: 46px;
-    width: 90%;
+    // width: 90%;
+    width: 100%;
     color: #aaa;
     font-size: 14px;
 }
@@ -63,4 +70,53 @@
 
 .modal-message p {
     width: auto !important;
+}
+
+.modal-message p span {
+    color: $uxui-blue;
+    font-weight: bold;
+}
+
+.modal-message p span:hover {
+    color: $uxui-blue;
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+}
+
+#modal-signup-error-container {
+    display: flex;
+    justify-content: left !important;
+}
+
+#modal-signup-btn-container {
+    width: fit-content !important;
+}
+
+.react-datepicker__input-container input {
+    padding-left: 10px;
+    border-radius: 20px;
+    background-color: $search-bar-grey;
+    border: none;
+    height: 46px;
+    // width: 90%;
+    width: 100%;
+    color: #aaa !important;
+    font-size: 14px;
+}
+
+.react-datepicker__header {
+    background-color: $uxui-dg;
+    border: $uxui-dg;
+    color: #aaa !important;
+}
+
+.react-datepicker__month-container {
+    background-color: $uxui-lg;
+    border: $uxui-dg;
+    color: #aaa !important;
+}
+
+.react-datepicker__month-container * {
+    color: #aaa !important;
 }

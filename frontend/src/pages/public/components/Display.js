@@ -11,7 +11,7 @@ function Display(props) {
         <div id="landing_static-display">
             <div id="display_logo">
                 <div>
-                    <img src={Logo} />
+                    <img src={Logo} alt="broadcasting dish" />
                 </div>
                 <div id="display_copyright" className="flex-centering">
                     <p>2021 Postmassive Inc.</p>

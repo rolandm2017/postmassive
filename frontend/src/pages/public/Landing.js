@@ -28,7 +28,7 @@ import ValidationCodeModal from "./modals/signUpFlow/ValidationCodeModal";
 import AllSetModal from "./modals/signUpFlow/AllSetModal";
 
 import BackgroundMan from "../../images/IllustrationForPortfolio.png";
-import Ellipse from "../../images/landingBlobs/middleLayer.svg";
+// import Ellipse from "../../images/landingBlobs/middleLayer.svg";
 
 function Landing(props) {
     const [username, setUsername] = useState("");

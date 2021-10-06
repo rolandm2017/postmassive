@@ -1,7 +1,5 @@
 import React from "react";
 
-import InputGroup from "react-bootstrap/InputGroup";
-import FormControl from "react-bootstrap/FormControl";
 import Modal from "react-bootstrap/Modal";
 import BootstrapButton from "react-bootstrap/Button";
 
@@ -29,15 +27,22 @@ function LogInModal({
                         <p>Log into your account</p>
                     </div>
                 </div>
-                <div className="w-100">
+                <div className="modal-login-inputs w-100">
                     <div>
                         <div className="modal-input">
-                            <input placeholder="Username or email" />
+                            <input
+                                placeholder="Username or email"
+                                onChange={handleAddUsernameOrEmail}
+                            />
                         </div>
                     </div>
                     <div>
                         <div className="modal-input">
-                            <input placeholder="Password" />
+                            <input
+                                placeholder="Password"
+                                type="password"
+                                onChange={handleAddPassword}
+                            />
                         </div>
                     </div>
                 </div>
@@ -66,42 +71,6 @@ function LogInModal({
                     </div>
                 </div>
             </div>
-            {/* <Modal.Header closeButton className="bgColor fontSize textColor">
-                <Modal.Title>Log in</Modal.Title>
-            </Modal.Header>
-            <Modal.Body className="bgColor fontSize textColor">
-                <InputGroup className="mb-3">
-                    <FormControl
-                        placeholder="Username or email"
-                        aria-label="Username or email"
-                        aria-describedby="basic-addon1"
-                        onChange={handleAddUsernameOrEmail}
-                    />
-                </InputGroup>
-                <InputGroup className="mb-3">
-                    <FormControl
-                        placeholder="Password"
-                        aria-label="Password"
-                        type="password"
-                        aria-describedby="basic-addon1"
-                        onChange={handleAddPassword}
-                    />
-                </InputGroup>
-            </Modal.Body>
-            <Modal.Footer className="bgColor fontSize textColor">
-                <p id="landing_error" className="black-text">
-                    {error}
-                </p>
-                <BootstrapButton
-                    variant="primary"
-                    onClick={() => {
-                        sendLogInIfInfoIsValid();
-                    }}
-                    disabled={false}
-                >
-                    Log In
-                </BootstrapButton>
-            </Modal.Footer> */}
         </Modal>
     );
 }
