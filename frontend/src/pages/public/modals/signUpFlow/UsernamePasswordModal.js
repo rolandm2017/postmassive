@@ -15,14 +15,18 @@ function UsernamePasswordModal({
 }) {
     return (
         <Modal show={showPage} onHide={handleClose} centered animation={false}>
-            {" "}
             <div className="modal-container">
                 <div className="modal-header-container w-100">
                     <div className="modal-header">
-                        <h3>Select your username and password</h3>
+                        <h3 id="modal-user-pw-select">
+                            Select your username and password
+                        </h3>
                     </div>
                 </div>
-                <div className="modal-login-inputs w-100 d-flex align-items-center flex-column">
+                <div
+                    id="modal-user-pw-select-inputs-container"
+                    className="modal-login-inputs w-100 d-flex align-items-center flex-column"
+                >
                     <div className="modal-w-90">
                         <div className="modal-input">
                             <input
@@ -41,7 +45,7 @@ function UsernamePasswordModal({
                         </div>
                     </div>
                 </div>
-                <div className="w-100">
+                <div className="w-100 d-flex justify-content-center">
                     <div className="d-flex modal-w-90">
                         <div
                             id="modal-signup-error-container"

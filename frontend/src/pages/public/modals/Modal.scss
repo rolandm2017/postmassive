@@ -32,6 +32,7 @@
 }
 
 .modal-header {
+    margin-top: 6px;
     padding: 8px 10px !important;
     display: flex;
     justify-content: center;
@@ -84,13 +85,33 @@
     text-decoration-thickness: 2px;
 }
 
+#modal-validation-inputs-container {
+    height: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #modal-signup-error-container {
     display: flex;
     justify-content: left !important;
 }
 
+#modal-signup-error-container p {
+    font-size: 12px;
+}
+
 #modal-signup-btn-container {
     width: fit-content !important;
+}
+
+#modal-user-pw-select {
+    font-size: 26px;
+}
+
+#modal-user-pw-select-inputs-container {
+    height: 160px;
+    padding-top: 20px;
 }
 
 .react-datepicker__input-container input {

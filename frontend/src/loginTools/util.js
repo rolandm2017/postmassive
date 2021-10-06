@@ -167,7 +167,9 @@ function handlePageTwo(
                             data
                         )
                         .then((response) => {
-                            // console.log(response);
+                            response.json((res) => {
+                                setError(res.verificationCode);
+                            });
                             setShowPage(3);
                             setError("");
                         })
