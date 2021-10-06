@@ -12,9 +12,9 @@ function AllSetModal({ showPage, handleClose, handleFinish, error }) {
                         <h3>You're all set!</h3>
                     </div>
                 </div>
-                <div className="w-100">
-                    <div>
-                        <p>
+                <div className="w-100 h-50 d-flex justify-content-center align-items-center">
+                    <div id="modal-yay-container">
+                        <p id="modal-yay">
                             Click below to be redirected to all the fun stuff!
                         </p>
                     </div>

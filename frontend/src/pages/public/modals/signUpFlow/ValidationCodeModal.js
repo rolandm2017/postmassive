@@ -39,10 +39,21 @@ function ValidationCodeModal({
                     <div className="d-flex modal-w-90">
                         <div
                             id="modal-signup-error-container"
-                            className="modal-message w-100"
+                            className="modal-message w-100 modal-padding-reset"
                         >
                             {error ? (
-                                <p className="w-100">Error: {error} </p>
+                                <p className="w-100">
+                                    For demo purposes, the verification code is:
+                                    <span
+                                        style={{
+                                            fontFamily: "Courier New",
+                                            fontSize: "18px",
+                                        }}
+                                    >
+                                        {" "}
+                                        {error}{" "}
+                                    </span>
+                                </p>
                             ) : null}
                         </div>
                         <div

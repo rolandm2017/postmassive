@@ -167,11 +167,14 @@ function handlePageTwo(
                             data
                         )
                         .then((response) => {
-                            response.json((res) => {
-                                setError(res.verificationCode);
-                            });
+                            console.log(response);
+                            console.log(response);
+                            console.log(response);
+                            console.log(response);
+                            console.log(response);
+                            console.log(response);
                             setShowPage(3);
-                            setError("");
+                            setError(response.data);
                         })
                         .catch((err) => {
                             setError(err.toString());

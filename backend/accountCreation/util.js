@@ -130,7 +130,7 @@ function hashPasswordCreateUserAccountAndSendVerificationCode(
                     // TODO: send email to user's supplied email with the verificationCode
                     // TEMP: send it to the frontend for whatever reason
                     console.log(verificationCode);
-                    res.json({ verificationCode: verificationCode });
+                    res.send(verificationCode);
                 })
                 .catch((err) => {
                     throw err;
