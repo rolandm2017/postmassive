@@ -1,0 +1,66 @@
+@import "../../../styles/colors";
+
+.modal-button-mod {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.modal-button-mod button {
+    width: 140px !important;
+    background-color: $uxui-blue !important;
+}
+
+.modal-container {
+    border-radius: 10px;
+    background-color: $uxui-lg;
+    height: 320px;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+}
+
+.modal-header-container {
+    height: auto;
+    border: 3px solid red;
+}
+
+.modal-header {
+    padding: 8px 10px !important;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.modal-header p {
+    margin-bottom: 2px;
+}
+
+.modal-input {
+    height: 56px;
+    display: flex;
+    justify-content: center;
+}
+
+.modal-input input {
+    padding-left: 16px;
+    border-radius: 20px;
+    background-color: $search-bar-grey;
+    border: none;
+    height: 46px;
+    width: 90%;
+    color: #aaa;
+    font-size: 14px;
+}
+
+.modal-message {
+    padding-top: 16px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+}
+
+.modal-message p {
+    width: auto !important;
+}

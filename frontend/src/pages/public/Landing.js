@@ -108,6 +108,7 @@ function Landing(props) {
     return (
         <div id="landing" className="main-container w-100 dark-bg">
             <LogInModal
+                className="landing_modal-input landing_modal-font-size landing_modal-text-color"
                 logIn={logIn}
                 handleCloseLogIn={handleCloseLogIn}
                 handleAddUsernameOrEmail={(value) =>
