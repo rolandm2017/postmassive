@@ -72,9 +72,8 @@ const articlesList = [
     <div className="search_popular-massive">
         <h3 className="search_massive-headline">Entertainment - Trending</h3>
         <p className="search_massive-text">
-            Voluptate veniam mollit aute proident non commodo magna non aliquip
-            esse sit laborum adipisicing. Penn Badgley is the most charming
-            stalker ever in You. Great series. Wow. Much creep very stalk, wow.
+            Penn Badgley is the most charming stalker ever in You. Great series.
+            Not as good as Gossip Girl but still great.
         </p>
         <p>
             <span>306K Amplifies</span>
