@@ -28,16 +28,16 @@ function LogInModal({
                     </div>
                 </div>
                 <div className="modal-login-inputs w-100">
-                    <div>
-                        <div className="modal-input">
+                    <div className="d-flex justify-content-center">
+                        <div className="modal-input modal-login-width modal-w-90">
                             <input
                                 placeholder="Username or email"
                                 onChange={handleAddUsernameOrEmail}
                             />
                         </div>
                     </div>
-                    <div>
-                        <div className="modal-input">
+                    <div className="d-flex justify-content-center">
+                        <div className="modal-input modal-login-width modal-w-90">
                             <input
                                 placeholder="Password"
                                 type="password"
