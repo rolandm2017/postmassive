@@ -22,14 +22,6 @@
     // justify-content: center;
 }
 
-.modal-login-width {
-    
-}
-
-.modal-w-90 {
-    width: 90%;
-}
-
 .modal-header-container {
     height: auto;
     // border: 3px solid red;
@@ -133,6 +125,10 @@
 #modal-yay-container {
     display: flex;
     justify-content: center;
+}
+
+.modal-w-90 {
+    width: 90%;
 }
 
 .react-datepicker__input-container input {

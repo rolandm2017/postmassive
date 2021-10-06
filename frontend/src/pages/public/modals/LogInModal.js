@@ -29,7 +29,7 @@ function LogInModal({
                 </div>
                 <div className="modal-login-inputs w-100">
                     <div className="d-flex justify-content-center">
-                        <div className="modal-input modal-login-width modal-w-90">
+                        <div className="modal-input modal-w-90">
                             <input
                                 placeholder="Username or email"
                                 onChange={handleAddUsernameOrEmail}
@@ -37,7 +37,7 @@ function LogInModal({
                         </div>
                     </div>
                     <div className="d-flex justify-content-center">
-                        <div className="modal-input modal-login-width modal-w-90">
+                        <div className="modal-input modal-w-90">
                             <input
                                 placeholder="Password"
                                 type="password"

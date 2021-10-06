@@ -6,18 +6,18 @@ import { useAuth } from "../../../auth/use-auth";
 
 import "./Menu.css";
 
-function Menu() {
+function Menu(props) {
     const auth = useAuth();
     var visibility = "hide";
 
-    if (this.props.menuVisibility) {
+    if (props.menuVisibility) {
         visibility = "show";
     }
 
     return (
         <div
             id="flyoutMenu"
-            onMouseDown={this.props.handleMouseDown}
+            onMouseDown={props.handleMouseDown}
             className={visibility}
         >
             <h2>
@@ -40,6 +40,7 @@ function Menu() {
             </h2>
             <h2>
                 <span
+                    style={{ marginLeft: "15px" }}
                     onClick={() => {
                         auth.signOut({
                             pathname: "/",
