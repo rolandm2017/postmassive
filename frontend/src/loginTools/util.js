@@ -168,9 +168,7 @@ function handlePageTwo(
                             console.log(response);
                             console.log(response);
                             console.log(response);
-                            console.log(response);
-                            console.log(response);
-                            console.log(response);
+
                             setShowPage(3);
                             setError(response.data);
                         })

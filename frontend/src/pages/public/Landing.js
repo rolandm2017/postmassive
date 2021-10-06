@@ -86,19 +86,19 @@ function Landing(props) {
         setLogIn(false);
     };
 
-    const logInIfEnterKeyIsPressed = (event) => {
-        if (event.key === "Enter") {
-            sendLogInIfInfoIsValid(
-                username,
-                email,
-                password,
-                true,
-                setError,
-                setDesktopLoginError,
-                auth
-            );
-        }
-    };
+    // const logInIfEnterKeyIsPressed = (event) => {
+    //     if (event.key === "Enter") {
+    //         sendLogInIfInfoIsValid(
+    //             username,
+    //             email,
+    //             password,
+    //             true,
+    //             setError,
+    //             setDesktopLoginError,
+    //             auth
+    //         );
+    //     }
+    // };
 
     const handleClose = () => setShowPage({ show: false });
     const handleShow = () => {
@@ -185,7 +185,19 @@ function Landing(props) {
                 showPage={showPage === 4}
                 handleClose={handleClose}
                 handleFinish={() => {
-                    history.push("/home");
+                    // todo: put login with marle and her pw here to get cookie
+                    sendLogInIfInfoIsValid(
+                        "marle",
+                        email,
+                        "ilovecronoa",
+                        true,
+                        setError,
+                        setDesktopLoginError,
+                        auth
+                    );
+                    setTimeout(function () {
+                        history.push("/home");
+                    }, 1400);
                 }}
                 error={error}
             />

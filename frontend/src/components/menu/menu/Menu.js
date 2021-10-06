@@ -33,7 +33,7 @@ function Menu(props) {
                 <Link to="/messages">Inbox</Link>
             </h2>
             <h2>
-                <a href="/profile">Profile</a>
+                <Link to="/marle">Profile</Link>
             </h2>
             <h2>
                 <Link to="/post">Post</Link>
