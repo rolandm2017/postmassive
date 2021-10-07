@@ -6,9 +6,10 @@ const production = require("./config.json").production;
 const https = require("https");
 const fs = require("fs");
 
-const options = {
+const sslOptions = {
     key: fs.readFileSync("/srv/www/keys/my-site-key.pem"),
     cert: fs.readFileSync("/srv/www/keys/chain.pem"),
+    dhparam: fs.readFileSync("/var/www/example/sslcert/dh-strong.pem"),
 };
 
 let port;
@@ -107,7 +108,7 @@ if (production) {
     app.listen(8080, () => {
         console.log(`Example app listening at http://147.182.152.13:${port}`);
     });
-    https.createServer(options, app).listen(port);
+    https.createServer(sslOptions, app).listen(port);
     // copying from https://www.sitepoint.com/how-to-use-ssltls-with-node-js/
 } else {
     app.listen(port, () => {
