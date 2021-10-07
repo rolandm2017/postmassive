@@ -3,6 +3,13 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const production = require("./config.json").production;
+const https = require("https");
+const fs = require("fs");
+
+const options = {
+    key: fs.readFileSync("/srv/www/keys/my-site-key.pem"),
+    cert: fs.readFileSync("/srv/www/keys/chain.pem"),
+};
 
 let port;
 if (production) {
@@ -97,9 +104,11 @@ app.use(api + "/auth", require("./authentication/authentication"));
 app.use(api + "/mock", require("./data/pages/pages"));
 
 if (production) {
-    app.listen(port, () => {
+    app.listen(8080, () => {
         console.log(`Example app listening at http://147.182.152.13:${port}`);
     });
+    https.createServer(options, app).listen(port);
+    // copying from https://www.sitepoint.com/how-to-use-ssltls-with-node-js/
 } else {
     app.listen(port, () => {
         console.log(`Example app listening at http://127.0.0.1:${port}`);
