@@ -98,7 +98,7 @@ app.use(api + "/mock", require("./data/pages/pages"));
 
 if (production) {
     app.listen(port, () => {
-        console.log(`Example app listening at http://165.227.78.120:${port}`);
+        console.log(`Example app listening at http://147.182.152.13:${port}`);
     });
 } else {
     app.listen(port, () => {
