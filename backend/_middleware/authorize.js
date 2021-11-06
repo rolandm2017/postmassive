@@ -63,11 +63,3 @@ function authorize(roles = []) {
         },
     ];
 }
-
-// function mockFindById(userId) {
-//     for (let i = 0; i < Object.keys(usersDb).length; i++) {
-//         if (usersDb[i].id === userId) {
-//             return usersDb[i];
-//         }
-//     }
-// }

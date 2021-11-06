@@ -61,7 +61,8 @@ function generateUserVerificationCode() {
     const possibleChars =
         "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     let code = "";
-    for (let i = 0; i < 7; i++) {
+    VERIFICATION_CODE_LENGTH = 7; // fixme: import this from the same file as whats in the tests suite.
+    for (let i = 0; i < VERIFICATION_CODE_LENGTH; i++) {
         code += possibleChars[Math.floor(Math.random() * possibleChars.length)];
     }
     return code;

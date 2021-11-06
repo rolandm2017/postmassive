@@ -12,7 +12,7 @@ const massiveSchema = new Schema({
     amps: { type: Number, required: true },
     likes: { type: Number, required: true },
     // modifiers
-    hasImage: { type: Boolean, required: true },
+    hasImage: { type: Boolean, required: true }, // false ??
     imageURL: { type: String, required: false },
     // indicates whether the massive is a quote tweet.
     quotesSomeone: { type: Boolean, required: true },
