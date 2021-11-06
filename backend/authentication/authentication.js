@@ -109,13 +109,6 @@ router.post("/refreshToken", (req, res, next) => {
     // the refresh token.
     console.log(110, req.headers.authorization);
     const incomingRefreshToken = req.headers.authorization.split(" ")[1];
-    // console.log(
-    //     "983 Cookies: ",
-    //     req.cookies,
-    //     req.headers.cookie,
-    //     req.headers,
-    //     new Date().getSeconds()
-    // );
 
     // YO the authorization header has the jwt lol. SMH roland
     const ipAddress = req.ip;
