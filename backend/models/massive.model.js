@@ -28,9 +28,9 @@ const massiveSchema = new Schema({
     fontSize: { type: Number },
     upsizedFontRange: { type: Object },
     // flooring
-    viewsMin: { type: Number },
-    likesMin: { type: Number },
-    repliesMin: { type: Number },
+    viewsFloor: { type: Number, required: true },
+    likesFloor: { type: Number, required: true },
+    repliesFloor: { type: Number, required: true },
 });
 
 module.exports = mongoose.model("Massive", massiveSchema);
