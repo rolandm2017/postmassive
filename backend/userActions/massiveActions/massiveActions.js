@@ -10,7 +10,7 @@ const router = express.Router();
 
 module.exports = router;
 
-const db = require("./db"); // fixme?: isnt this broken?
+const db = require("../../_helpers/db"); // fixme?: isnt this broken?
 
 const user = "/user";
 const massive = "/massive";
