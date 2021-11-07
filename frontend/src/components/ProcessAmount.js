@@ -31,12 +31,15 @@ const ProcessAmount = (number, displayedInFeed) => {
         if (displayedInFeed) {
             mil = "m";
         }
-        return (
-            amtAsString.substring(0, amtAsString.length - 6) +
-            "." +
-            amtAsString[amtAsString.length - 6] +
-            mil
-        );
+
+        console.log(amtAsString);
+        let beforeDot = amtAsString.substring(0, amtAsString.length - 6);
+        if (beforeDot === "") {
+        }
+        let afterDot = amtAsString[amtAsString.length - 6];
+        let together = beforeDot + "." + afterDot + mil;
+        console.log(together);
+        return together;
     }
 };
 

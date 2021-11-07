@@ -18,9 +18,13 @@ img {
 }
 
 #notifications {
-    background-color: $twtr-dark-grey;
+    background-color: $uxui-dg;
 }
 
 .notifications_container {
     position: relative;
+}
+
+.notifications-height-spacer {
+    height: 60px !important;
 }

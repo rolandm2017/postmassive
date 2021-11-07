@@ -44,16 +44,9 @@ function LogIn(props) {
                         <h1>Log in to PostMassive</h1>
                     </div>
                     <div id="log-in_input-container">
-                        <Form>
-                            <Form.Label htmlFor="log-in_email-input">
-                                Email or Username
-                            </Form.Label>
-                            <Form.Control
-                                type="email"
-                                id="log-in_email-input"
-                                placeholder="Your email"
-                                className="dark-mode-input"
-                                aria-describedby="emailHelpBlock"
+                        <div>
+                            <h4>Email or Username</h4>
+                            <input
                                 onChange={(value) =>
                                     handleAddUsernameOrEmail(
                                         value.target.value,
@@ -62,40 +55,39 @@ function LogIn(props) {
                                     )
                                 }
                             />
-                            <Form.Label htmlFor="log-in_password-input">
-                                Password
-                            </Form.Label>
-                            <Form.Control
+                        </div>
+                        <div>
+                            <h4>Password</h4>
+                            <input
                                 type="password"
-                                id="log-in_password-input"
-                                className="dark-mode-input"
-                                placeholder="Your password"
-                                aria-describedby="passwordHelpBlock"
                                 onChange={(value) => handlePassword(value)}
                             />
-                            <div className="d-flex align-items-center justify-content-left">
-                                <Button
-                                    className="mt-4"
-                                    onClick={() =>
-                                        sendLogInIfInfoIsValid(
-                                            username,
-                                            email,
-                                            password,
-                                            false, // displayErrInModal = false, so it will be DesktopLoginError
-                                            setError,
-                                            setDesktopLoginError,
-                                            auth
-                                        )
-                                    }
-                                >
-                                    Log in
-                                </Button>
-                                <p className="mt-4 pl-3">
-                                    {desktopLoginError} {error}
-                                    {/* // remove error if it shwos double */}
-                                </p>
-                            </div>
-                        </Form>
+                        </div>
+                        <div
+                            id="log-in-button-container"
+                            className="d-flex align-items-center justify-content-left"
+                        >
+                            <Button
+                                className="mt-4"
+                                onClick={() =>
+                                    sendLogInIfInfoIsValid(
+                                        username,
+                                        email,
+                                        password,
+                                        false, // displayErrInModal = false, so it will be DesktopLoginError
+                                        setError,
+                                        setDesktopLoginError,
+                                        auth
+                                    )
+                                }
+                            >
+                                Log in
+                            </Button>
+                            <p className="mt-4 pl-3">
+                                {desktopLoginError} {error}
+                                {/* // remove error if it shwos double */}
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>

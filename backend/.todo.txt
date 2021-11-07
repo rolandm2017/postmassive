@@ -1,0 +1,21 @@
+### 1.
+
+Make it so I can list a bunch of posts. I guess I can already do that.
+
+### 2.
+
+Make user able to post into the DB.
+
+### 3. user CRUD for posts.
+
+### 4. Link Posts to actual Posts DB
+
+- make a dev only Posts db full of 100-200 generic posts.
+
+- posts should not be Twitter, or Instagram ish. Rather something in between.
+
+### 5. Implement payment system. People PAY to be in here.
+
+### 6. Implement blockchain db showing anonymous proof that the db really does only have N people posting at once.
+
+* this is a maybe.

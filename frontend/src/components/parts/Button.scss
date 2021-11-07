@@ -10,7 +10,7 @@
 }
 
 .authed-btn:hover {
-    background-color: lighten($twtr-dark-grey, 11%) !important;
+    background-color: lighten($uxui-dg, 11%) !important;
 }
 
 .blue-bg {
@@ -30,4 +30,8 @@
 
 .no-outline {
     outline: none;
+}
+
+.wide-btn {
+    width: 110px !important;
 }

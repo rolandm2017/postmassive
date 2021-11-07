@@ -5,6 +5,9 @@
     font-size: 16px;
     border-radius: 10px;
     border: 1px solid #bbb;
+    color: #bbb !important;
+    height: 40px;
+    padding-left: 50px !important;
 }
 
 #search_explore-massives {
@@ -12,7 +15,7 @@
 }
 
 #search_main {
-    background-color: $twtr-dark-grey;
+    background-color: $uxui-dg;
     height: 100vh;
     /* width is auto for mobile, changes to 43% for desktop */
     // width: auto;
@@ -24,7 +27,7 @@
 #search_main-article-container {
     width: auto;
     height: 400px;
-    background-image: url("../../images/lavender-fields.jpg");
+    background-image: url("../../images/Replace\ me-1.jpg");
     background-size: cover;
     position: relative;
 }
@@ -45,13 +48,18 @@
 }
 
 #search_main-article-container span {
-    font-weight: 14px;
+    font-size: 16px;
+    font-weight: 400;
 }
 
 #search_recommendations {
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #888;
+    border-bottom: 1px solid #888;
     padding: 0 14px;
+    width: auto;
+    // overflow-y: scroll;
+    overflow-x: scroll;
+    // white-space: nowrap;
 }
 
 #search_recommendations div {
@@ -66,7 +74,7 @@
 }
 
 #search_recommendations div:hover {
-    background-color: lighten($twtr-dark-grey, 12%);
+    background-color: lighten($uxui-dg, 12%);
     // background-color: red;
 }
 
@@ -86,15 +94,26 @@
 
 .search_popular-massive {
     padding: 10px 10px 0 10px;
-    border: 1px solid #ddd;
+    border-top: 1px solid #444;
 }
 
 .search_popular-massive h3 {
     font-size: 16px;
-    color: $light-grey;
+    color: $uxui-blue;
 }
 
 .search_popular-massive p {
-    font-size: 13px;
+    font-size: 16px;
     color: white;
+}
+
+.search_popular-massive span {
+    color: #aaa !important;
+    font-size: 14px;
+}
+
+@media screen and (min-width: 500px) and (max-width: 700px) {
+    #search_recommendations {
+        width: calc(100vw - 110px);
+    }
 }

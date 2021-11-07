@@ -1,0 +1,53 @@
+@import "../../../styles/colors";
+
+.deliveryDate {
+    margin-top: 10px;
+    width: 60px;
+}
+
+.deliveryDate p {
+    color: $uxui-blue;
+    font-size: 14px;
+}
+
+.displayName {
+    font-size: 16px;
+}
+
+.itemBox {
+    height: 105px;
+    background-color: $uxui-lg;
+    border-radius: 10px;
+    margin: 12px;
+}
+
+.profilePicContainer {
+    width: 80px;
+    height: 80px;
+}
+
+.theNonProfilePicPart {
+    width: calc(100% - 80px);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.theTextPart {
+    width: calc(100% - 60px);
+}
+
+.truncateText {
+    font-size: 14px;
+    color: #888;
+    width: calc(100%);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0 !important;
+}
+
+.usernameOrMessage {
+    font-size: 16px;
+    color: #888;
+}

@@ -18,7 +18,9 @@ function ToDo(props) {
         >
             <div className="d-flex flex-column justify-content-center align-items-center h-100 w-100 ">
                 <h1>TODO: fill in this page :- ) </h1>
-                <p>Doesn't look like part of a Portfolio MVP to me...</p>
+                <p>
+                    <em>Doesn't look like part of a portfolio MVP to me...</em>
+                </p>
                 <div>
                     <Button text="Go back" onClick={history.goBack}>
                         Go back

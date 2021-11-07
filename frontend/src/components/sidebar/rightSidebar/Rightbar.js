@@ -17,7 +17,7 @@ function Rightbar(props) {
         return (
             <div id="rightbar_search-container" className="mb-3">
                 <input
-                    className="dark-mode-input"
+                    className="dark-mode-input internal-input"
                     placeholder="Search Postmassive"
                 ></input>
             </div>

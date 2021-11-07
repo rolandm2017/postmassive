@@ -1,0 +1,52 @@
+massives can be posted, replied to, amplified, liked, and deleted.
+
+TODO:
+done 1) implement posting a massive, server side. It seems mostly done already.
+Later: Allow user to upload an image (up to 4 images) or quote another massive.
+done 2) Let users reply to a massive. Increment reply count by 1 on a massive when it receives a reply.
+done 3) Implement likes.
+done 4) Implement amplifies, including the optional "how many extra views?".
+done 5) Let the OP delete his/her massive. Keep the replies after it goes.
+
+6) Implement "get most recent N massives from users followed by authUser & organize into timeline" ***
+
+User stuff:
+1) Implement follow & unfollow
+2) Implement change bio, location, URL
+3) Add settings (simple stuff)
+
+DMs:
+1) Send a DM
+2) Load all received DMs
+3) Make DMs public, only followers, or only people you follow
+
+Moderation:
+1) Enable reporting massives
+
+2) Build Admin UI to view reported massives
+
+3) Enable 7 day suspensions and bans
+
+4) enable "send email explaining your first warning"
+
+payment:
+1) enable payment for views
+2) figure out how ur gonna distribute the user's content such that viewers will like seeing it & keep using the site
+
+data collection:
+?
+data will be collected for the purposes of customizing the user's timeline...
+
+NOTIFICATIONS:
+1) implement a function that sends a notification.
+2) grow the func to send different types of notifications.
+    - like
+    - amp
+    - quote
+    - reply
+    - progress towards a view quota on content
+3) ...
+
+TIMELINE/FEED:
+1) get the most recent 20 massives from everyone the user follows. If they follow 1000 people, that is 20,000 massives.
+Organize them. Display them. *** there must be a more efficient way to do this... ***

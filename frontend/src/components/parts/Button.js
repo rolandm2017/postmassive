@@ -19,6 +19,9 @@ function Button(props) {
     if (props.authed) {
         usedClasses = usedClasses + " authed-btn";
     }
+    if (props.wide) {
+        usedClasses = usedClasses + " wide-btn";
+    }
 
     return (
         <div>

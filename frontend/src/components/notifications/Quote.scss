@@ -3,7 +3,8 @@
 $gap: 50px;
 
 .quote_background {
-    background-color: lighten($twtr-dark-grey, 5%);
+    width: 100%;
+    background-color: lighten($uxui-dg, 5%);
 }
 
 .quote_margin {
@@ -11,6 +12,6 @@ $gap: 50px;
 }
 
 .quote_spacer {
-    width: $gap !important;
+    // width: $gap !important;
     // border: 1px solid red;
 }

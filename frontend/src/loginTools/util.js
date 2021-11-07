@@ -15,11 +15,9 @@ import {
 export {
     handleAddUsernameOrEmail,
     sendLogInIfInfoIsValid,
-    // bundleAcceptedAccountInfoAndSendVerificationCode,
     handlePageOne,
     handlePageTwo,
     handlePageThree,
-    handleFinish,
 };
 
 function handleAddUsernameOrEmail(usernameOrEmail, setUsername, setEmail) {
@@ -167,9 +165,12 @@ function handlePageTwo(
                             data
                         )
                         .then((response) => {
-                            // console.log(response);
+                            console.log(response);
+                            console.log(response);
+                            console.log(response);
+
                             setShowPage(3);
-                            setError("");
+                            setError(response.data);
                         })
                         .catch((err) => {
                             setError(err.toString());
@@ -213,7 +214,7 @@ function handlePageThree(
 }
 
 // TODO: the finishing click is not finished. finish it.
-function handleFinish(goToHome) {
-    // authenticate user and send them to the home page
-    goToHome();
-}
+// function handleFinish(goToHome) {
+//     // authenticate user and send them to the home page
+//     goToHome();
+// }

@@ -39,7 +39,7 @@
 
 #cd-username-container {
     height: 66px;
-    background-color: lighten($color: $twtr-dark-grey, $amount: 0.2);
+    background-color: lighten($color: $uxui-dg, $amount: 0.2);
 }
 
 #cd-username-color {
@@ -51,6 +51,7 @@
     margin: 6px 7px;
     padding: 2px 10px;
     // border: 3px solid coral !important;
+    border-radius: 10px;
 
     width: 75%;
     color: white;
@@ -58,13 +59,28 @@
     flex-direction: row !important;
 }
 
+.generic-chat-bub img {
+    height: 50px;
+    width: 50px;
+    margin: 0;
+}
+
+.blueBackgroundForMessage {
+    background-color: $uxui-blue;
+}
+
+.greyBackgroundForMessage {
+    background-color: $search-bar-grey;
+}
+
 .generic-chat-bub p {
     margin: 0 8px !important;
     padding: 3px 7px;
-    background-color: $light-grey;
+
     border-radius: 5px;
     height: auto;
     text-overflow: wrap;
+    font-size: 15px;
 }
 
 .generic-chat-bub-container {
@@ -86,6 +102,7 @@
     border-right: 1px solid #888;
     display: flex;
     flex-direction: column;
+    padding-top: 34px;
 }
 
 #inbox-items {
@@ -97,6 +114,13 @@
 
 .inbox-header {
     flex: 0 1 70px;
+}
+
+.inbox-header h1 {
+    font-size: 20px;
+}
+
+.inbox-header-border {
     border-bottom: 1px solid #888;
 }
 
@@ -112,7 +136,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #888;
 }
 
 #inbox-msg-requests p {
@@ -140,6 +163,28 @@
 .msgs-img-btn {
     height: 30px;
     width: 30px;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 16px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 8px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 
 @media (min-width: $full-sidebar) {

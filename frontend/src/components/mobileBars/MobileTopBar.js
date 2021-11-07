@@ -55,7 +55,7 @@ function MobileTopBar(props) {
             <h3>{customizeBar(props.path)}</h3>
             <div>{loadSearchBar(props.path)}</div>
             <div id="mobile_star-container">
-                <img src={Star} alt="star" />
+                {/* <img src={Star} alt="star" /> */}
                 {/* TODO-LATER: make this star container into a settings menu for organizing the timeline */}
                 {/* TODO: display Star if on "/", settings gear on Notifications page, else null */}
             </div>

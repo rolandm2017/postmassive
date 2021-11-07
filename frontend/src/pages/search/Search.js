@@ -23,7 +23,9 @@ const articlesList = [
         <p className="search_massive-text">
             Pariatur incididunt fugiat ipsum proident.
         </p>
-        <p>2,707 Massives</p>
+        <p>
+            <span>2,707 Massives</span>
+        </p>
     </div>,
     <div className="search_popular-massive">
         <h3 className="search_massive-headline">
@@ -34,7 +36,9 @@ const articlesList = [
             esse sit laborum adipisicing. Is that really Latin? Who knows. It
             could be Greek!
         </p>
-        <p>306K Amplifies</p>
+        <p>
+            <span>306K Amplifies</span>
+        </p>
     </div>,
     <div className="search_popular-massive">
         <h3 className="search_massive-headline">Canadian News - LIVE</h3>
@@ -44,7 +48,9 @@ const articlesList = [
             better text. Script writers, speech writers, authors, they're all
             saying it. All saying it. Longer text.
         </p>
-        <p>106K Amplifies</p>
+        <p>
+            <span>106K Amplifies</span>
+        </p>
     </div>,
     <div className="search_popular-massive">
         <h3 className="search_massive-headline">Placeholder - this morning</h3>
@@ -59,16 +65,19 @@ const articlesList = [
             Pariatur incididunt fugiat ipsum proident. I would like to play
             Pokemon.
         </p>
-        <p>2,707 Massives</p>
+        <p>
+            <span>2,707 Massives</span>
+        </p>
     </div>,
     <div className="search_popular-massive">
         <h3 className="search_massive-headline">Entertainment - Trending</h3>
         <p className="search_massive-text">
-            Voluptate veniam mollit aute proident non commodo magna non aliquip
-            esse sit laborum adipisicing. Penn Badgley is the most charming
-            stalker ever in You. Great series. Wow. Much creep very stalk, wow.
+            Penn Badgley is the most charming stalker ever in You. Great series.
+            Not as good as Gossip Girl but still great.
         </p>
-        <p>306K Amplifies</p>
+        <p>
+            <span>306K Amplifies</span>
+        </p>
     </div>,
     <div
         id={Math.floor(Math.random * 10000)}
@@ -117,7 +126,7 @@ class Search extends Component {
                     className="m-1 d-flex justify-content-center align-items-center"
                 >
                     <input
-                        className="mx-5 my-2 p-1 dark-mode-input"
+                        className="mx-5 my-2 dark-mode-input internal-input"
                         type="text"
                         name="search-bar"
                         id="search-bar"

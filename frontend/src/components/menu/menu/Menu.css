@@ -1,13 +1,14 @@
 #flyoutMenu {
     width: 100vw;
     height: 100vh;
-    background-color: #ffe600;
+    background-color: rgb(28, 39, 51);
     position: fixed;
     top: 0;
     left: 0;
     transition: transform 0.3s cubic-bezier(0, 0.52, 0, 1);
     overflow: scroll;
     z-index: 1000;
+    padding-top: 25px;
 }
 
 #flyoutMenu.hide {
@@ -20,8 +21,8 @@
 }
 
 #flyoutMenu h2 a {
-    color: #333;
-    /* margin-left: 15px; */
+    color: white;
+    margin-left: 15px;
     /* margin-left rule disabled on 2020-10-14; if it still isn't missed on 2020-11-14, kill it */
     text-decoration: none;
 }

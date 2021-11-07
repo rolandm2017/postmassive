@@ -82,35 +82,43 @@ class Profile extends Component {
     render() {
         const displayLocation = (loc) =>
             loc ? (
-                <span
-                    className={`${styles.greyText} ${styles.genericFontWeight}`}
-                >
-                    {loc}
-                </span>
+                <div>
+                    <span
+                        className={`${styles.greyText} ${styles.genericFontWeight}`}
+                    >
+                        {loc}
+                    </span>
+                </div>
             ) : null;
         const displayWebsite = (site) =>
             site ? (
-                <span
-                    className={`${styles.link} ${styles.genericFontWeight} ${styles.underlineCancel}`}
-                >
-                    <a href={this.state.profile.website}>{site}</a>
-                </span>
+                <div>
+                    <span
+                        className={`${styles.link} ${styles.genericFontWeight} ${styles.underlineCancel}`}
+                    >
+                        <a href={this.state.profile.website}>{site}</a>
+                    </span>
+                </div>
             ) : null;
         const displayBirthday = (birthday) =>
             birthday ? (
-                <span
-                    className={`${styles.greyText} ${styles.genericFontWeight}`}
-                >
-                    Born {birthday}
-                </span>
+                <div>
+                    <span
+                        className={`${styles.greyText} ${styles.genericFontWeight}`}
+                    >
+                        Born {birthday}
+                    </span>
+                </div>
             ) : null;
         const displayJoinDate = (joinDate) =>
             joinDate ? (
-                <span
-                    className={`${styles.greyText} ${styles.genericFontWeight}`}
-                >
-                    Joined {joinDate}
-                </span>
+                <div>
+                    <span
+                        className={`${styles.greyText} ${styles.genericFontWeight}`}
+                    >
+                        Joined {joinDate}
+                    </span>
+                </div>
             ) : null;
 
         return (
@@ -120,7 +128,9 @@ class Profile extends Component {
                 onSearchPage={false}
                 breakpoints={this.props.breakpoints}
             >
-                <div className="d-flex">
+                <div
+                    className={`${styles.profileGenericFlex} ${styles.changeHeaderToMobileView}`}
+                >
                     <div
                         onClick={() => {
                             console.log(
@@ -154,7 +164,47 @@ class Profile extends Component {
                         </h3>
                     </div>
                 </div>
-                <div id={`${styles.coverPhoto}`}></div>
+                <div id={`${styles.coverPhoto}`}>
+                    <div
+                        className={`${styles.profileGenericFlex} ${styles.showHeaderDuringMobile}`}
+                    >
+                        <div
+                            onClick={() => {
+                                console.log(
+                                    "btn isn't set up to push /home, go do it"
+                                );
+                                // history.push("/home");
+                                // todo: push previous url to stack
+                            }}
+                            id={`${styles.backButtonContainer}`}
+                            className={`d-flex justify-content-center align-items-center ${styles.pfpSideBox}`}
+                        >
+                            <img
+                                id={`${styles.backButton}`}
+                                src={BackButton}
+                                alt="go back"
+                            ></img>
+                        </div>
+                        <div
+                            id={`${styles.headline}`}
+                            className="d-flex justify-content-center flex-column"
+                        >
+                            <h2 className={`${styles.username} my-1`}>
+                                {this.state.profile
+                                    ? this.state.profile.displayName
+                                    : null}
+                            </h2>
+                            <h3 id={`${styles.totalMassivs}`}>
+                                {this.state.profile
+                                    ? `${this.state.profile.tweets} Massivs`
+                                    : null}
+                            </h3>
+                        </div>
+                        <div className={`${styles.pfpSideBox}`}>
+                            {/* // filler */}
+                        </div>
+                    </div>
+                </div>
                 <header id={`${styles.profileInfo}`} className="px-3 pt-2">
                     <div id={`${styles.picAndOptions}`} className="d-flex">
                         <div id={`${styles.profilePicContainer}`}>
@@ -168,36 +218,42 @@ class Profile extends Component {
                             id={`${styles.interactionButtons}`}
                             className="d-flex"
                         >
-                            <button
-                                className={`${styles.interactionButton} bg-blue-highlight`}
-                            >
-                                <img
-                                    className={`${styles.interactionImg}`}
-                                    src={More}
-                                    alt="More options"
-                                ></img>
-                            </button>
-                            <button
-                                className={`${styles.interactionButton} bg-blue-highlight`}
-                            >
-                                <img
-                                    className={`${styles.interactionImg}`}
-                                    src={Mail}
-                                    alt="Send mail"
-                                ></img>
-                            </button>
-                            <button
-                                className={`${styles.interactionButton} bg-blue-highlight`}
-                            >
-                                <img
-                                    className={`${styles.interactionImg}`}
-                                    src={Bell}
-                                    alt="Notification options"
-                                ></img>
-                            </button>
+                            <div className={`${styles.hideOnSml}`}>
+                                <button
+                                    className={`${styles.interactionButton} bg-blue-highlight`}
+                                >
+                                    <img
+                                        className={`${styles.interactionImg}`}
+                                        src={More}
+                                        alt="More options"
+                                    ></img>
+                                </button>
+                                <button
+                                    className={`${styles.interactionButton} bg-blue-highlight`}
+                                >
+                                    <img
+                                        className={`${styles.interactionImg}`}
+                                        src={Mail}
+                                        alt="Send mail"
+                                    ></img>
+                                </button>
+                                <button
+                                    className={`${styles.interactionButton} bg-blue-highlight`}
+                                >
+                                    <img
+                                        className={`${styles.interactionImg}`}
+                                        src={Bell}
+                                        alt="Notification options"
+                                    ></img>
+                                </button>
+                            </div>
                             {/* </div> */}
                             {/* <div className="d-flex justify-content-center align-items-center"> */}
-                            <Button text="Edit Profile" authed={true} />
+                            <Button
+                                text="Edit Profile"
+                                authed={true}
+                                wide={true}
+                            />
                             {/* // TODO: set options on Button */}
                         </div>
                     </div>
@@ -224,21 +280,23 @@ class Profile extends Component {
                             {this.state.profile ? this.state.profile.bio : null}
                         </h4>
                     </div>
-                    <div>
-                        <h5 id={`${styles.details}`} className="d-flex">
+                    <div id={`${styles.details}`} className="">
+                        <div className="d-flex flex-row">
                             {this.state.profile
                                 ? displayLocation(this.state.profile.location)
                                 : null}
                             {this.state.profile
                                 ? displayWebsite(this.state.profile.website)
                                 : null}
+                        </div>
+                        <div className="d-flex flex-row">
                             {this.state.profile
                                 ? displayBirthday(this.state.profile.birthday)
                                 : null}
                             {this.state.profile
                                 ? displayJoinDate(this.state.profile.joinDate)
                                 : null}
-                        </h5>
+                        </div>
                     </div>
                     <div>
                         {this.state.profile ? (

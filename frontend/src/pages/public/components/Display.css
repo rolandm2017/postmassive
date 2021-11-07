@@ -1,0 +1,86 @@
+#display_copyright {
+    display: none;
+}
+
+#display_logo {
+    display: flex;
+    justify-content: space-between;
+}
+
+#display_logo div {
+    margin: 0px 10px 0px 10px;
+}
+
+#display_logo div img {
+    height: 80px;
+    width: 80px;
+}
+
+#display_prompt h3 {
+    font-size: 48px;
+    font-weight: 600;
+}
+
+#display_join h5 {
+    font-size: 24px;
+    font-weight: 400;
+}
+
+#landing_static-display {
+    margin: 30px;
+}
+
+.flex-centering {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.uxui-landing-btn-width-mod {
+    width: calc(30%);
+    margin-right: 20px;
+    margin-top: 10px;
+}
+
+.uxui-landing-btn-width-mod div button {
+    width: calc(100%);
+}
+
+@media screen and (max-width: 700px) {
+    /* // TODO: make buttons wide and space-between when mobile */
+    #display_copyright {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #display_join h5 {
+        font-size: 1.1rem;
+    }
+
+    #display_prompt h3 {
+        font-size: 1.55rem;
+    }
+
+    #display_logo p {
+        display: block;
+        margin: 0px;
+        font-size: 14px;
+        color: grey;
+    }
+
+    #landing_static-display {
+        margin-top: 60px;
+    }
+
+    .mobile-desktop-spacing-adjust {
+        justify-content: space-between;
+    }
+
+    .uxui-landing-btn-width-mod {
+        width: calc(40%);
+        margin: 20px 0px;
+    }
+}
+
+/* // TODO: sub 420 px, make display way smaller for screens */
