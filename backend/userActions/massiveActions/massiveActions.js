@@ -10,11 +10,25 @@ const router = express.Router();
 
 module.exports = router;
 
-const db = require("./db");
+const db = require("./db"); // fixme?: isnt this broken?
 
 const user = "/user";
 const massive = "/massive";
 const message = "/message";
+
+// TODO: add in authorization
+// GET all massives from the server
+router.get("/massive/get", (req, res) => {
+    const filter = {};
+    db.Massive.find(filter, function (err, massives) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(massives);
+            res.json(massives);
+        }
+    });
+});
 
 // POST a massive to the server
 router.post("/massive/post", (req, res) => {
@@ -41,20 +55,8 @@ router.post("/massive/post", (req, res) => {
     res.status(200).send();
 });
 
-// GET all massives from the server
-router.get("/massive/get", (req, res) => {
-    const filter = {};
-    db.Massive.find(filter, function (err, massives) {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(massives);
-            res.json(massives);
-        }
-    });
-});
-
 // GET a user's massives
+// TODO: add in authorization
 router.get("/massive/get/:username", (req, res) => {
     const filter = { postedByUser: req.params.username };
     console.log(filter);
@@ -65,5 +67,20 @@ router.get("/massive/get/:username", (req, res) => {
             console.log(massives);
             res.json(massives);
         }
+    });
+});
+
+router.delete("/massive/del/:username/:postId", (req, res) => {
+    // NOTE: we don't delete posts from the db except manualy.
+    // If it has to get deleted, we just remove it from the pullable wall content
+
+    // TODO: pass authorization into the delete route.
+    const postIdToRemove = req.body.params.postId;
+    const authorizingUser = req.body.params.username;
+    db.Massive.findOneAndUpdate(
+        { _id: postIdToRemove, postedByUser: authorizingUser },
+        { postIsAccessible: false }
+    ).then((x) => {
+        res.json({ success: "postRemoved" });
     });
 });

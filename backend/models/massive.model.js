@@ -5,6 +5,8 @@ const ObjectId = Schema.ObjectId;
 
 const massiveSchema = new Schema({
     postNumber: { type: Number, required: true },
+    postIsAccessible: { type: Boolean, required: false }, // if this is ever False, its b/c a user 'deleted' their post.
+    //
     postedByUser: { type: String, required: true },
     text: { type: String, required: true },
     date: { type: String, required: true },

@@ -14,3 +14,5 @@ async function retrieve(username, marker) {
         .exec();
     return nextThirty;
 }
+
+export default retrieve;

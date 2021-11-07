@@ -84,7 +84,10 @@ app.use(api + "/auth", require("./authentication/authentication"));
 // *** *** ***
 // *** *** ***
 // CRUD for Massives
-// app.use(api + "/massives", require("./massiveActions/massiveActions"));
+app.use(
+    api + "/massives",
+    require("./userActions/massiveActions/massiveActions")
+);
 
 // *** *** ***
 // *** *** ***
