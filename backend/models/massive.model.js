@@ -20,6 +20,17 @@ const massiveSchema = new Schema({
     // indicates whether the massive is a quote tweet.
     quotesSomeone: { type: Boolean, required: true },
     quotedMassiveId: { type: String, required: false },
+    // markings for highlighting
+    highlightRange: { type: Object },
+    underlineRange: { type: Object },
+    italicsRange: { type: Object },
+    boldRange: { type: Object },
+    fontSize: { type: Number },
+    upsizedFontRange: { type: Object },
+    // flooring
+    viewsMin: { type: Number },
+    likesMin: { type: Number },
+    repliesMin: { type: Number },
 });
 
 module.exports = mongoose.model("Massive", massiveSchema);
