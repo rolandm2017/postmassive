@@ -13,8 +13,8 @@ console.log("mongoose is connected to db");
 
 module.exports = {
     Massive: require("../models/massive.model"),
-    User: require("./models/user.model"),
-    Message: require("./models/message.model"),
+    User: require("../models/user.model"),
+    Message: require("../models/message.model"),
     isValidId,
 };
 
