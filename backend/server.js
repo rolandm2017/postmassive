@@ -3,18 +3,15 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const production = require("./config.json").production;
-<<<<<<< HEAD
 const { createProxyMiddleware } = require("http-proxy-middleware");
-=======
-const https = require("https");
-const fs = require("fs");
+// const https = require("https");
+// const fs = require("fs");
 
-const sslOptions = {
-    key: fs.readFileSync("/srv/www/keys/my-site-key.pem"),
-    cert: fs.readFileSync("/srv/www/keys/chain.pem"),
-    dhparam: fs.readFileSync("/var/www/example/sslcert/dh-strong.pem"),
-};
->>>>>>> 10/07/installHttps
+// const sslOptions = {
+//     key: fs.readFileSync("/srv/www/keys/my-site-key.pem"),
+//     cert: fs.readFileSync("/srv/www/keys/chain.pem"),
+//     dhparam: fs.readFileSync("/var/www/example/sslcert/dh-strong.pem"),
+// };
 
 let port;
 if (production) {
