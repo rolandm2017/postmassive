@@ -220,7 +220,7 @@ export function refreshToken(isExternal) {
 
     console.log("Attempting to refresh token...");
     return (
-        fetch(url, postOptions(url, isExternal))
+        fetch(url, postOptions(url, isExternal, 223))
             // todo: copy watmore's refreshTOken() func in that it only has one then(), so his is
             // a promise
             // whereas mine is a promise inside of a promise.

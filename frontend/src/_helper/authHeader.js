@@ -21,13 +21,13 @@ export function getOptions(url) {
     };
 }
 
-export function postOptions(url, isExternal) {
+export function postOptions(url, isExternal, calledBy) {
     return {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
             "Access-Control-Allow-Credentials": "true",
-            ...authHeader(url, isExternal),
+            ...authHeader(url, isExternal, calledBy),
         },
         credentials: "include",
         // body: JSON.stringify(body),
@@ -56,7 +56,8 @@ export function _deleteOptions(url) {
 
 // helper functions
 
-function authHeader(url, isExternal) {
+function authHeader(url, isExternal, calledBy) {
+    console.log("authHeader calledBy:", calledBy);
     // return auth header with jwt if user is logged in and request is to the api url
     let user = userValue() !== null ? userValue() : false;
     if (isExternal) {
@@ -73,7 +74,7 @@ function authHeader(url, isExternal) {
     }
     if (!user) {
         console.log("setting header as blank", new Date().getSeconds(), user); // fixme: have to get user value into 'user'
-        return {};
+        return {}; // fixme: site is here and goes no further.
     }
     const userObjectHasAToken = user.jwtToken;
     const isLoggedIn = user && userObjectHasAToken;

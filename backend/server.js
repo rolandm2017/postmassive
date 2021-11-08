@@ -3,6 +3,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const production = require("./config.json").production;
+
 const { createProxyMiddleware } = require("http-proxy-middleware");
 
 let port;
@@ -25,21 +26,21 @@ const whitelist = [
     "https://www.postmassive.com",
 ];
 
-const corsOptions = {
-    credentials: true, // This is important. // ugh, what does credentials: true do?
-    origin: (origin, callback) => {
-        if (whitelist.includes(origin)) {
-            console.log("SERVER REQUEST ACCEPTED:", origin);
-            return callback(null, true);
-        }
-        console.log(
-            "errrrrrrrrrrrrrrr\nrrrrrrrrrrr\nrrrrrrrr",
-            origin,
-            "\n-------"
-        );
-        callback(new Error("Not allowed by CORS"));
-    },
-};
+// const corsOptions = {
+//     credentials: true, // This is important. // ugh, what does credentials: true do?
+//     origin: (origin, callback) => {
+//         if (whitelist.includes(origin)) {
+//             console.log("SERVER REQUEST ACCEPTED:", origin);
+//             return callback(null, true);
+//         }
+//         console.log(
+//             "errrrrrrrrrrrrrrr\nrrrrrrrrrrr\nrrrrrrrr",
+//             origin,
+//             "\n-------"
+//         );
+//         callback(new Error("Not allowed by CORS"));
+//     },
+// };
 
 // if (!production) {
 //     console.log("Proxy engaged, localhost:3000 -> 127.0.0.1");
@@ -53,7 +54,7 @@ const corsOptions = {
 // }
 
 // misc stuff
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(bodyParser.json());
 
@@ -128,6 +129,7 @@ if (production) {
     https.createServer(sslOptions, app).listen(port);
     // copying from https://www.sitepoint.com/how-to-use-ssltls-with-node-js/
 } else {
+    console.log("PORT:", port);
     app.listen(port, () => {
         console.log(`Example app listening at http://127.0.0.1:${port}`);
     });
