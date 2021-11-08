@@ -83,9 +83,7 @@ function Sidebar(props) {
                     </div>
                     <PostButton
                         mini={props.shrink}
-                        onClick={() =>
-                            history.push("/" + props.user.username + "/post/")
-                        }
+                        username={props.user.username}
                     />
                 </div>
                 <div

@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 
 import View from "../../images/PostMassiv-Satellite.png";
 
@@ -10,6 +11,8 @@ import "./PostButton.scss";
 // *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
 
 function PostButton(props) {
+    const history = useHistory();
+
     let btnStyle = {
         backgroundColor: `#00bbff`,
         color: "white",
@@ -34,6 +37,10 @@ function PostButton(props) {
             // show a button with image
             return (
                 <input
+                    onClick={() => {
+                        console.log("HEY");
+                        history.push("/" + props.username + "/post/");
+                    }}
                     id="post-btn"
                     style={btnStyle}
                     type="image"
