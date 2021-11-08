@@ -68,6 +68,12 @@ app.use(api, require("./data/pages/pages"));
 
 // *** *** ***
 // *** *** ***
+// Post
+
+app.use(api, require("./userActions/post"));
+
+// *** *** ***
+// *** *** ***
 // Auth stuff
 
 app.use(api + "/signup/validate", require("./accountCreation/accountCreation"));

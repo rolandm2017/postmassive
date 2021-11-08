@@ -11,93 +11,87 @@ import Wrapper from "../_helper/Wrapper";
 
 import "./Post.css";
 
-class Post extends Component {
-    render() {
-        return (
-            <Wrapper
-                pagename="post"
-                sectionName="post_main"
-                onSearchPage={false}
-                breakpoints={this.props.breakpoints}
-            >
-                <div id="post_headline" className="mt-2">
-                    <h3>Post A Massiv</h3>
+function Post() {
+    return (
+        <Wrapper
+            pagename="post"
+            sectionName="post_main"
+            onSearchPage={false}
+            breakpoints={this.props.breakpoints}
+        >
+            <div id="post_headline" className="mt-2">
+                <h3>Post A Massiv</h3>
+            </div>
+            <div id="post_back-button-container" className="d-flex p-1">
+                <img id="post_back-button" src={BackButton} alt="go back"></img>
+            </div>
+            <div className="mt-4 d-flex justify-content-center">
+                <div id="post_profile-pic" className="post_spacer">
+                    <img src={Nicolai} alt="profile pic"></img>
                 </div>
-                <div id="post_back-button-container" className="d-flex p-1">
-                    <img
-                        id="post_back-button"
-                        src={BackButton}
-                        alt="go back"
-                    ></img>
-                </div>
-                <div className="mt-4 d-flex justify-content-center">
-                    <div id="post_profile-pic" className="post_spacer">
-                        <img src={Nicolai} alt="profile pic"></img>
+                <div className="post_middle px-2">
+                    <div className="">
+                        <p>Audience Size:</p>
+                        <input
+                            type="radio"
+                            id="lowEnd"
+                            name="audienceSize"
+                            value="lowEnd"
+                        />
+                        <label htmlFor="lowEnd">100</label>
+                        <br />
+                        <input
+                            type="radio"
+                            id="midRange"
+                            name="audienceSize"
+                            value="midRange"
+                        />
+                        <label htmlFor="midRange">1000</label>
+                        <br />
+                        <input
+                            type="radio"
+                            id="highEnd"
+                            name="audienceSize"
+                            value="highEnd"
+                        />
+                        <label htmlFor="highEnd">10000</label>
+                        <br />
+                        <input
+                            type="radio"
+                            id="premium"
+                            name="audienceSize"
+                            value="premium"
+                        />
+                        <label htmlFor="premium">100000</label>
+                        <br />
+                        <label htmlFor="content">Content</label>
+                        <br />
+                        <textarea
+                            id="content"
+                            type="text"
+                            name="content"
+                        ></textarea>
                     </div>
-                    <div className="post_middle px-2">
-                        <div className="">
-                            <p>Audience Size:</p>
-                            <input
-                                type="radio"
-                                id="lowEnd"
-                                name="audienceSize"
-                                value="lowEnd"
-                            />
-                            <label htmlFor="lowEnd">100</label>
-                            <br />
-                            <input
-                                type="radio"
-                                id="midRange"
-                                name="audienceSize"
-                                value="midRange"
-                            />
-                            <label htmlFor="midRange">1000</label>
-                            <br />
-                            <input
-                                type="radio"
-                                id="highEnd"
-                                name="audienceSize"
-                                value="highEnd"
-                            />
-                            <label htmlFor="highEnd">10000</label>
-                            <br />
-                            <input
-                                type="radio"
-                                id="premium"
-                                name="audienceSize"
-                                value="premium"
-                            />
-                            <label htmlFor="premium">100000</label>
-                            <br />
-                            <label htmlFor="content">Content</label>
-                            <br />
-                            <textarea
-                                id="content"
-                                type="text"
-                                name="content"
-                            ></textarea>
-                        </div>
-                        <div id="post-targeting">
-                            <div>
-                                <img src={Photo} alt="upload a pic"></img>
-                                <img src={Gif} alt="select gif"></img>
-                                <img src={Poll} alt="start poll"></img>
-                                <img src={Emoji} alt="pick emoji"></img>
-                            </div>
-                            <p>
-                                {/* TODO: steal from Facebook's ad targeting. Allow
-                            targeting by age, gender. */}
-                            </p>
-                        </div>
+                    <div id="post-targeting">
                         <div>
-                            <p>Price: $1,039.83</p>
+                            <img src={Photo} alt="upload a pic"></img>
+                            <img src={Gif} alt="select gif"></img>
+                            <img src={Poll} alt="start poll"></img>
+                            <img src={Emoji} alt="pick emoji"></img>
                         </div>
+                        <p>
+                            {/* TODO: steal from Facebook's ad targeting. Allow
+                            targeting by age, gender. */}
+                        </p>
                     </div>
-                    <div className="post_spacer"></div>
+                    <div>
+                        <p>Price: $1,039.83</p>
+                    </div>
                 </div>
-            </Wrapper>
-        );
-    }
+                <div className="post_spacer"></div>
+            </div>
+        </Wrapper>
+    );
 }
 
 export default Post;
