@@ -5,10 +5,10 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
 const sendEmail = require("../_helpers/send-email");
-// const db = require("../_helpers/db");
+const db = require("../_helpers/db");
 const Role = require("../_helpers/roles");
 
-const db = require("../_helpers/authenticationDb");
+const accountsDb = require("../_helpers/authenticationDb");
 
 module.exports = {
     authenticate,
@@ -37,16 +37,18 @@ async function authenticate({ username, email, password, ipAddress }) {
         // ok so theres straight up no accounts retrieved. seems the one in the coll isnt registering
         // console.log("TEST:", await db.User.find({}), new Date().getSeconds());
         account = await db.User.findOne({ username });
+        console.log(account, "waited for....");
     } else if (email) {
         console.log("awaiting based on email");
         account = await db.User.findOne({ email });
+        console.log(account, "waited for....");
     } else {
         console.log("you shouldn't be able to get here you know");
     }
     // console.log("asdfdsf:", account);
     console.log(
         "acount pw hash",
-        account.passwordHash,
+        account.passwordHash, // fixme: cannot read property 'passwordHash' of null
         new Date().getSeconds() // fixme: 15 sec from here to next measurement. how?
     );
     // const thisLineWasTakingTooLong = !bcrypt.compareSync(password, account.passwordHash)
@@ -282,7 +284,7 @@ function generateJwtToken(account) {
 
 function generateRefreshToken(account, ipAddress) {
     // create a refresh token that expires in 7 days
-    return new db.RefreshToken({
+    return new accountsDb.RefreshToken({
         account: account.id,
         token: randomTokenString(),
         expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),

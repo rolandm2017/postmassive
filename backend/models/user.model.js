@@ -42,4 +42,4 @@ const userSchema = new Schema({
     postCount: { type: Number, required: true },
 });
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("Account", userSchema);

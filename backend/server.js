@@ -26,21 +26,22 @@ const whitelist = [
     "https://www.postmassive.com",
 ];
 
-// const corsOptions = {
-//     credentials: true, // This is important. // ugh, what does credentials: true do?
-//     origin: (origin, callback) => {
-//         if (whitelist.includes(origin)) {
-//             console.log("SERVER REQUEST ACCEPTED:", origin);
-//             return callback(null, true);
-//         }
-//         console.log(
-//             "errrrrrrrrrrrrrrr\nrrrrrrrrrrr\nrrrrrrrr",
-//             origin,
-//             "\n-------"
-//         );
-//         callback(new Error("Not allowed by CORS"));
-//     },
-// };
+const corsOptions = {
+    credentials: true, // This is important. // ugh, what does credentials: true do?
+    origin: (origin, callback) => {
+        if (whitelist.includes(origin)) {
+            console.log("SERVER REQUEST ACCEPTED:", origin);
+            return callback(null, true);
+        }
+        console.log(
+            "errrrrrrrrrrrrrrr\nrrrrrrrrrrr\nrrrrrrrr",
+            origin,
+            "\n-------"
+        );
+        callback(new Error("Not allowed by CORS"));
+    },
+};
+app.use(cors(corsOptions));
 
 // if (!production) {
 //     console.log("Proxy engaged, localhost:3000 -> 127.0.0.1");
@@ -54,7 +55,6 @@ const whitelist = [
 // }
 
 // misc stuff
-// app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(bodyParser.json());
 
