@@ -41,16 +41,16 @@ const corsOptions = {
     },
 };
 
-if (!production) {
-    console.log("Proxy engaged, localhost:3000 -> 127.0.0.1");
-    app.use(
-        "/api",
-        createProxyMiddleware({
-            target: "http://localhost:3000/",
-            changeOrigin: true,
-        })
-    );
-}
+// if (!production) {
+//     console.log("Proxy engaged, localhost:3000 -> 127.0.0.1");
+//     app.use(
+//         "/api",
+//         createProxyMiddleware({
+//             target: "http://localhost:3000/",
+//             changeOrigin: true,
+//         })
+//     );
+// }
 
 // misc stuff
 app.use(cors(corsOptions));
