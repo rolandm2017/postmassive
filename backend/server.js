@@ -68,9 +68,9 @@ app.use(api, require("./data/pages/pages"));
 
 // *** *** ***
 // *** *** ***
-// Post
+// The Post Page
 
-app.use(api, require("./userActions/post"));
+app.use(api, require("./userActions/post/post"));
 
 // *** *** ***
 // *** *** ***

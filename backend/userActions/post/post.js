@@ -96,3 +96,5 @@ function chooseStyling(styleType, startPosition, endPosition, substring) {
         throw "Not yet implemented!";
     }
 }
+
+module.exports = router;
