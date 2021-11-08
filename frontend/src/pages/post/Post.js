@@ -11,13 +11,13 @@ import Wrapper from "../_helper/Wrapper";
 
 import "./Post.css";
 
-function Post() {
+function Post(props) {
     return (
         <Wrapper
             pagename="post"
             sectionName="post_main"
             onSearchPage={false}
-            breakpoints={this.props.breakpoints}
+            breakpoints={props.breakpoints}
         >
             <div id="post_headline" className="mt-2">
                 <h3>Post A Massiv</h3>

@@ -81,7 +81,12 @@ function Sidebar(props) {
                         <SidebarButton src={More} alt="More" text="More" />
                         {/* TODO: add settings */}
                     </div>
-                    <PostButton mini={props.shrink} />
+                    <PostButton
+                        mini={props.shrink}
+                        onClick={() =>
+                            history.push("/" + props.user.username + "/post/")
+                        }
+                    />
                 </div>
                 <div
                     id="sidebar_spacer-container"

@@ -132,29 +132,16 @@ function App() {
                         <Route path="/landing">
                             <Redirect to="/" />
                         </Route>
-                        <PrivateRoute
-                            exact
-                            path="/home"
-                            // authed={isLoggedIn}
-                            component={Home}
-                        />
+                        <PrivateRoute exact path="/home" component={Home} />
                         <PrivateRoute
                             path="/notifications"
-                            // authed={isLoggedIn}
                             component={Notifications}
                         />
-                        <PrivateRoute
-                            path="/messages"
-                            // authed={isLoggedIn}
-
-                            component={Messages}
-                        />
+                        <PrivateRoute path="/messages" component={Messages} />
+                        <PrivateRoute path="/:username/post" component={Post} />
                         {/* <PrivateRoute path="/admin" roles={[Role.Admin]} component={Admin} /> */}
                         <Route path="/explore">
                             <Search />
-                        </Route>
-                        <Route path="/post">
-                            <Post />
                         </Route>
                         <Route path="/massive">
                             <Massive />
