@@ -3,7 +3,18 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const production = require("./config.json").production;
+<<<<<<< HEAD
 const { createProxyMiddleware } = require("http-proxy-middleware");
+=======
+const https = require("https");
+const fs = require("fs");
+
+const sslOptions = {
+    key: fs.readFileSync("/srv/www/keys/my-site-key.pem"),
+    cert: fs.readFileSync("/srv/www/keys/chain.pem"),
+    dhparam: fs.readFileSync("/var/www/example/sslcert/dh-strong.pem"),
+};
+>>>>>>> 10/07/installHttps
 
 let port;
 if (production) {
@@ -22,7 +33,9 @@ const whitelist = [
     "http://www.postmassive.com",
     "www.postmassive.com",
     "http://localhost:3000",
+    "https://www.postmassive.com",
 ];
+
 const corsOptions = {
     credentials: true, // This is important. // ugh, what does credentials: true do?
     origin: (origin, callback) => {
@@ -108,10 +121,17 @@ app.use(api + "/auth", require("./authentication/authentication"));
 // get fake data for timeline
 app.use(api + "/mock", require("./data/pages/pages"));
 
+app.get(api + "/test", (req, res) => {
+    // so you can see if going to the https://147.182.152.13:${port}/api/test returns 'foo' to confirm server runs on that ip
+    res.send("foo");
+});
+
 if (production) {
-    app.listen(port, () => {
-        console.log(`Example app listening at http://165.227.78.120:${port}`);
+    app.listen(8080, () => {
+        console.log(`Example app listening at https://147.182.152.13:${port}`);
     });
+    https.createServer(sslOptions, app).listen(port);
+    // copying from https://www.sitepoint.com/how-to-use-ssltls-with-node-js/
 } else {
     app.listen(port, () => {
         console.log(`Example app listening at http://127.0.0.1:${port}`);
