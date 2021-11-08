@@ -3,6 +3,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const production = require("./config.json").production;
+const { createProxyMiddleware } = require("http-proxy-middleware");
 
 let port;
 if (production) {
@@ -21,7 +22,9 @@ const whitelist = [
     "http://www.postmassive.com",
     "www.postmassive.com",
     "http://localhost:3000",
+    "https://www.postmassive.com",
 ];
+
 const corsOptions = {
     credentials: true, // This is important. // ugh, what does credentials: true do?
     origin: (origin, callback) => {
@@ -37,6 +40,17 @@ const corsOptions = {
         callback(new Error("Not allowed by CORS"));
     },
 };
+
+if (!production) {
+    console.log("Proxy engaged, localhost:3000 -> 127.0.0.1");
+    app.use(
+        "/api",
+        createProxyMiddleware({
+            target: "http://localhost:3000/",
+            changeOrigin: true,
+        })
+    );
+}
 
 // misc stuff
 app.use(cors(corsOptions));
@@ -68,18 +82,18 @@ app.use(api, require("./data/pages/pages"));
 
 // *** *** ***
 // *** *** ***
-// The Post Page
-
-app.use(api, require("./userActions/post/post"));
-
-// *** *** ***
-// *** *** ***
 // Auth stuff
 
 app.use(api + "/signup/validate", require("./accountCreation/accountCreation"));
 app.use(api + "/auth", require("./accountCreation/accountCreation"));
 
 app.use(api + "/auth", require("./authentication/authentication"));
+
+// *** *** ***
+// *** *** ***
+// The Post Page
+
+app.use(api + "/post", require("./userActions/post/post"));
 
 // *** *** ***
 // *** *** ***
@@ -90,10 +104,7 @@ app.use(api + "/auth", require("./authentication/authentication"));
 // *** *** ***
 // *** *** ***
 // CRUD for Massives
-app.use(
-    api + "/massives",
-    require("./userActions/massiveActions/massiveActions")
-);
+// app.use(api + "/massives", require("./massiveActions/massiveActions"));
 
 // *** *** ***
 // *** *** ***
@@ -105,10 +116,17 @@ app.use(
 // get fake data for timeline
 app.use(api + "/mock", require("./data/pages/pages"));
 
+app.get(api + "/test", (req, res) => {
+    // so you can see if going to the https://147.182.152.13:${port}/api/test returns 'foo' to confirm server runs on that ip
+    res.send("foo");
+});
+
 if (production) {
-    app.listen(port, () => {
-        console.log(`Example app listening at http://165.227.78.120:${port}`);
+    app.listen(8080, () => {
+        console.log(`Example app listening at https://147.182.152.13:${port}`);
     });
+    https.createServer(sslOptions, app).listen(port);
+    // copying from https://www.sitepoint.com/how-to-use-ssltls-with-node-js/
 } else {
     app.listen(port, () => {
         console.log(`Example app listening at http://127.0.0.1:${port}`);
