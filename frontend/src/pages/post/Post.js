@@ -1,4 +1,8 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
+
+import { useHistory } from "react-router-dom";
+
+import { postOptions } from "../../_helper/authHeader";
 
 import BackButton from "../../images/icons8-back-arrow-48-wh.png";
 import Photo from "../../images/mountain-32.png";
@@ -12,6 +16,33 @@ import Wrapper from "../_helper/Wrapper";
 import "./Post.css";
 
 function Post(props) {
+    const [content, setContent] = useState("");
+
+    const history = useHistory();
+
+    function getAuctioneerResponse() {
+        // talks to server's auctioneer to get price of post
+        return processIntToString(1050.13); // hardcoded for now
+    }
+
+    function processIntToString(integer) {
+        return "$1,050.13";
+    }
+
+    async function postPost(username, content) {
+        // send a post to the server to
+        let postingUrl = "/api/post=" + content;
+        await fetch(postingUrl, postOptions)
+            .then((x) => {
+                if (200) {
+                    return "success!";
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+
     return (
         <Wrapper
             pagename="post"
@@ -20,10 +51,17 @@ function Post(props) {
             breakpoints={props.breakpoints}
         >
             <div id="post_headline" className="mt-2">
-                <h3>Post A Massiv</h3>
+                <h3>Post A Massive</h3>
             </div>
             <div id="post_back-button-container" className="d-flex p-1">
-                <img id="post_back-button" src={BackButton} alt="go back"></img>
+                <img
+                    id="post_back-button"
+                    src={BackButton}
+                    alt="go back"
+                    onClick={() => {
+                        history.goBack();
+                    }}
+                ></img>
             </div>
             <div className="mt-4 d-flex justify-content-center">
                 <div id="post_profile-pic" className="post_spacer">
@@ -64,12 +102,17 @@ function Post(props) {
                         />
                         <label htmlFor="premium">100000</label>
                         <br />
-                        <label htmlFor="content">Content</label>
+                        <label htmlFor="content">
+                            What do you want to say?
+                        </label>
                         <br />
                         <textarea
                             id="content"
                             type="text"
                             name="content"
+                            onChange={(event) => {
+                                setContent(event.target.value);
+                            }}
                         ></textarea>
                     </div>
                     <div id="post-targeting">
@@ -85,7 +128,18 @@ function Post(props) {
                         </p>
                     </div>
                     <div>
-                        <p>Price: $1,039.83</p>
+                        <div>
+                            <p>Price: {getAuctioneerResponse()}</p>
+                        </div>
+                        <div>
+                            <button
+                                onClick={() => {
+                                    postPost(props.username, content);
+                                }}
+                            >
+                                Post
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div className="post_spacer"></div>

@@ -51,7 +51,14 @@ function PostButton(props) {
         } else {
             // show a button with text
             return (
-                <button id="post-btn" style={btnStyle}>
+                <button
+                    id="post-btn"
+                    style={btnStyle}
+                    onClick={() => {
+                        console.log("HEY");
+                        history.push("/" + props.username + "/post/");
+                    }}
+                >
                     Post
                 </button>
             );
