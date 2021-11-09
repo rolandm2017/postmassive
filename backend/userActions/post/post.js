@@ -38,13 +38,15 @@ router.post("/post", (req, res) => {
     let getCostOfPosting = createCostOfPosting(); // fixme: should be moved to the post screen
 
     console.log(38, username, content, datePosted);
-    const mostRecentPostNumber =
-        db.Massive.findOne({}, { $orderby: { created_at: -1 } }).limit(1)
-            .postNumber + 1;
+    // let mostRecentPostNumber = db.Massive.findOne(
+    //     {},
+    //     { $orderby: { created_at: -1 } }
+    // ).limit(1).postNumber;
+    // let newPostNumber = mostRecentPostNumber + 1;
 
     // throw "Success kinda"; // postNumber, postedByUser, text, date,
     const newMassive = new Massive({
-        postNumber: mostRecentPostNumber, // will have to autoincrement this somehow...
+        postNumber: 1, // will have to autoincrement this somehow...
         postedByUser: username,
         text: content,
         date: datePosted,
