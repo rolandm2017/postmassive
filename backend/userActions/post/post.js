@@ -28,15 +28,15 @@ function showCostOfPosting() {
 
 router.post("/post", (req, res) => {
     console.log("Posting a massive...");
-    const user = req.body.user;
-    const text = req.body.text;
+    const user = req.body.username;
+    const text = req.body.content;
     let priceIsAuthorizedByUser = req.body.authorization; // true/false
     const datePosted = Date.now();
 
     let getCostOfPosting = createCostOfPosting(); // fixme: should be moved to the post screen
 
     console.log(user, text, datePosted);
-    throw "Success kinda";
+    // throw "Success kinda";
     const newMassive = db.Massive({
         postedByUser: user,
         text: text,

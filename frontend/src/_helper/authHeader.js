@@ -89,7 +89,10 @@ function authHeader(url, isExternal, calledBy, postContent) {
         if (postContent) {
             return {
                 Authorization: `Bearer ${getRefreshToken()}`,
-                body: JSON.stringify(postContent),
+                body: JSON.stringify({
+                    username: user.username,
+                    content: postContent,
+                }),
             };
         } else {
             return {
