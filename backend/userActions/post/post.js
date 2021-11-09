@@ -8,6 +8,8 @@ const {
     HIGHLIGHTED,
 } = require("../../_helpers/textStyleConstants");
 
+const Massive = require("../../models/massive.model");
+
 const express = require("express");
 const router = express.Router();
 
@@ -28,18 +30,23 @@ function showCostOfPosting() {
 
 router.post("/post", (req, res) => {
     console.log("Posting a massive...");
-    const user = req.body.username;
-    const text = req.body.content;
+    const username = req.body.username;
+    const content = req.body.content;
     let priceIsAuthorizedByUser = req.body.authorization; // true/false
     const datePosted = Date.now();
 
     let getCostOfPosting = createCostOfPosting(); // fixme: should be moved to the post screen
 
-    console.log(user, text, datePosted);
-    // throw "Success kinda";
-    const newMassive = db.Massive({
-        postedByUser: user,
-        text: text,
+    console.log(38, username, content, datePosted);
+    const mostRecentPostNumber =
+        db.Massive.findOne({}, { $orderby: { created_at: -1 } }).limit(1)
+            .postNumber + 1;
+
+    // throw "Success kinda"; // postNumber, postedByUser, text, date,
+    const newMassive = new Massive({
+        postNumber: mostRecentPostNumber, // will have to autoincrement this somehow...
+        postedByUser: username,
+        text: content,
         date: datePosted,
         replies: 0,
         amps: 0,
@@ -49,7 +56,7 @@ router.post("/post", (req, res) => {
     });
     newMassive.save(function (err) {
         if (err) {
-            console.log(err);
+            console.log(53, err);
         }
     });
     res.status(200).send();

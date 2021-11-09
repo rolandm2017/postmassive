@@ -42,13 +42,8 @@ function Post(props) {
     async function postPost(username, content) {
         console.log("Sending ........", content);
         // send a post to the server to
-        let postingUrl =
-            process.env.REACT_APP_API_URL +
-            "/api/post/post/username=" +
-            username +
-            "&post=" +
-            content;
-        await fetch(postingUrl, postOptions(postingUrl, false, 51, content))
+        let postingUrl = process.env.REACT_APP_API_URL + "/api/post/post";
+        await fetch(postingUrl, postOptions(postingUrl, false, 51, content)) // todo: content packages stuff into json.
             .then((x) => {
                 if (200) {
                     return "success!";
