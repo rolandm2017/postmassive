@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 import { postOptions } from "../../_helper/authHeader";
 
@@ -17,7 +17,17 @@ import "./Post.css";
 
 function Post(props) {
     const [content, setContent] = useState("");
+    const [username, setUsername] = useState(null);
 
+    let currentUrl = useLocation().pathname;
+
+    useEffect(() => {
+        let usernameForState = currentUrl.split("/")[0];
+        console.log(currentUrl, usernameForState);
+        setUsername(usernameForState);
+    }, []);
+
+    // todo: on load, get username from slug.
     const history = useHistory();
 
     function getAuctioneerResponse() {
@@ -30,9 +40,15 @@ function Post(props) {
     }
 
     async function postPost(username, content) {
+        console.log("Sending ........", content);
         // send a post to the server to
-        let postingUrl = "/api/post=" + content;
-        await fetch(postingUrl, postOptions)
+        let postingUrl =
+            process.env.REACT_APP_API_URL +
+            "/api/post/post/username=" +
+            username +
+            "&post=" +
+            content;
+        await fetch(postingUrl, postOptions(postingUrl, false, 51, content))
             .then((x) => {
                 if (200) {
                     return "success!";
@@ -134,7 +150,7 @@ function Post(props) {
                         <div>
                             <button
                                 onClick={() => {
-                                    postPost(props.username, content);
+                                    postPost(username, content);
                                 }}
                             >
                                 Post

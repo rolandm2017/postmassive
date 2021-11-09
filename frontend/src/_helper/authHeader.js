@@ -21,13 +21,13 @@ export function getOptions(url) {
     };
 }
 
-export function postOptions(url, isExternal, calledBy) {
+export function postOptions(url, isExternal, calledBy, postContent) {
     return {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
             "Access-Control-Allow-Credentials": "true",
-            ...authHeader(url, isExternal, calledBy),
+            ...authHeader(url, isExternal, calledBy, postContent),
         },
         credentials: "include",
         // body: JSON.stringify(body),
@@ -56,8 +56,8 @@ export function _deleteOptions(url) {
 
 // helper functions
 
-function authHeader(url, isExternal, calledBy) {
-    console.log("authHeader calledBy:", calledBy);
+function authHeader(url, isExternal, calledBy, postContent) {
+    console.log("authHeader calledBy:", url, isExternal, calledBy);
     // return auth header with jwt if user is logged in and request is to the api url
     let user = userValue() !== null ? userValue() : false;
     if (isExternal) {
@@ -76,19 +76,30 @@ function authHeader(url, isExternal, calledBy) {
         console.log("setting header as blank", new Date().getSeconds(), user); // fixme: have to get user value into 'user'
         return {}; // fixme: site is here and goes no further.
     }
+
     const userObjectHasAToken = user.jwtToken;
     const isLoggedIn = user && userObjectHasAToken;
-    // i am formally against && unnamed bools
     const isApiUrl = url.startsWith(process.env.REACT_APP_API_URL);
+    console.log(83, isLoggedIn, isApiUrl, url);
     if (isLoggedIn && isApiUrl) {
         console.log(
             "Auth bearer trrying to add rToken",
             getRefreshToken().substring(0, 20)
         );
-        return { Authorization: `Bearer ${getRefreshToken()}` };
+        if (postContent) {
+            return {
+                Authorization: `Bearer ${getRefreshToken()}`,
+                body: JSON.stringify(postContent),
+            };
+        } else {
+            return {
+                Authorization: `Bearer ${getRefreshToken()}`,
+            };
+        }
     } else {
+        console.error("###############################");
         console.log(
-            "*****#%#%#%# did not set JWT into auth header\n#%#%#%# *******",
+            "*****#%#%#%# did not set JWT into auth header\n*******#%#%#%#",
             isLoggedIn,
             isApiUrl,
             userObjectHasAToken

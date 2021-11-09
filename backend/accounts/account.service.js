@@ -277,7 +277,7 @@ function hash(password) {
 function generateJwtToken(account) {
     // create a jwt token containing the account id that expires in 15 minutes
     return jwt.sign({ sub: account.id, id: account.id }, config.jwtSecret, {
-        expiresIn: "15m",
+        expiresIn: "59m",
     });
     // note this is NOT httpOnly because httpOnly would prevent the client from reading the expiresIn value.
 }
