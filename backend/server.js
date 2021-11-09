@@ -104,8 +104,8 @@ app.use(api + "/post", require("./userActions/post/post"));
 
 // *** *** ***
 // *** *** ***
-// CRUD for Massives
-// app.use(api + "/massives", require("./massiveActions/massiveActions"));
+// Retrieve Wall updates
+app.use(api + "/wall", require("./wall/index"));
 
 // *** *** ***
 // *** *** ***

@@ -15,4 +15,4 @@ async function retrieve(username, marker) {
     return nextThirty;
 }
 
-export default retrieve;
+module.exports = retrieve;

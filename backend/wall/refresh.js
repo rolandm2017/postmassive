@@ -15,4 +15,4 @@ async function refresh(username, marker) {
     return currentThirty;
 }
 
-export default refresh;
+module.exports = refresh;

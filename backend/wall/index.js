@@ -9,6 +9,7 @@ module.exports = router;
 
 router.get("/introduce", (req, res) => {
     let postsForWall = introduce(req.body.username);
+    console.log(12, postsForWall);
     res.json(postsForWall);
 });
 
