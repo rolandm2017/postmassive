@@ -28,24 +28,26 @@ function showCostOfPosting() {
     return 10;
 }
 
-router.post("/post", (req, res) => {
+router.post("/post", async (req, res) => {
     let username = req.body.username;
-    let displayName = req.body.displayName;
+    // let displayName = req.body.displayName;
     let content = req.body.content;
     console.log("Posting a massive...", content, req.body);
     let priceIsAuthorizedByUser = req.body.authorization; // true/false
     let datePosted = Date.now();
 
     let getCostOfPosting = createCostOfPosting(); // fixme: should be moved to the post screen
+    let userDoc = await db.User.findOne({ username: username });
+    let displayName = userDoc.displayName;
 
-    console.log(38, username, content, datePosted);
+    console.log(38, username, content, datePosted, displayName);
     // let mostRecentPostNumber = db.Massive.findOne(
     //     {},
     //     { $orderby: { created_at: -1 } }
     // ).limit(1).postNumber;
     // let newPostNumber = mostRecentPostNumber + 1;
     console.log(47, req.body);
-    throw "Success kinda"; // postNumber, postedByUser, text, date,
+    // throw "Success kinda"; // postNumber, postedByUser, text, date,
     let newMassive = new Massive({
         postNumber: 1, // will have to autoincrement this somehow...
         postedByUser: username,

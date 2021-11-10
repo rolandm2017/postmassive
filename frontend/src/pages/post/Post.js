@@ -27,8 +27,9 @@ function Post(props) {
     let currentUrl = useLocation().pathname;
 
     useEffect(() => {
-        let usernameForState = currentUrl.split("/")[0];
-        console.log(usernameForState);
+        console.log(30, currentUrl);
+        let usernameForState = currentUrl.split("/")[1];
+        console.log(31, usernameForState);
         setUsername(usernameForState);
         let price = getAuctioneerResponse();
         setPrice(price);
@@ -64,6 +65,7 @@ function Post(props) {
     }
 
     function postPost(username, content, price, floor) {
+        // let displayName = user.displayName; // todo: get displayName for data
         let data = {
             username: username,
             content: content,
@@ -90,7 +92,6 @@ function Post(props) {
     }
 
     const floors = FLOORS.map((floor, index) => (
-        // Only do this if items have no stable IDs
         <div key={floor}>
             <Flooring flooring={floor} />
         </div>

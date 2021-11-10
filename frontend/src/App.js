@@ -45,28 +45,8 @@ function App() {
         );
     }
 
-    // function PrivateRoute({ component: Component, authed, ...rest }) {
-    //     console.log("are you authed?", authed);
-    //     return (
-    //         <Route
-    //             {...rest}
-    //             render={(props) =>
-    //                 authed === true ? (
-    //                     <Component {...props} />
-    //                 ) : (
-    //                     <Redirect
-    //                         to={{
-    //                             pathname: "/login",
-    //                             state: { from: props.location },
-    //                         }}
-    //                     />
-    //                 )
-    //             }
-    //         />
-    //     );
-    // }
-
     function PrivateRoute({ component: Component, roles, ...rest }) {
+        // TODO: Make sure userValue() is exposed inside of PrivateRoutes
         return (
             <Route
                 {...rest}
