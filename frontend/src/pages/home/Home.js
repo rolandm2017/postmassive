@@ -11,23 +11,12 @@ function Home(props) {
     // const [jwt, setJwt] = useState("");
 
     useEffect(() => {
-        getMassivesFromServer(setMassives);
+        let massivesToSet = getMassivesFromServer();
+        massivesToSet.then((theMassives) => {
+            console.log("aaaaaaa:", theMassives);
+            setMassives(theMassives);
+        });
     }, []);
-
-    // componentDidMount() {
-    // const feedUrl = process.env.REACT_APP_API_URL + "/mock/feed";
-    // console.log("inspect:", getOptions(feedUrl)); //fixme:bad auth header. Sus its bc rToken timer isnt refreshing after 13m
-    // fetch(feedUrl, getOptions(feedUrl))
-    //     .then((res) => {
-    //         res.json().then((massives) => {
-    //             console.log(massives[0]);
-    //             this.setState({ massives: massives });
-    //         });
-    //     })
-    //     .catch((err) => {
-    //         console.log(err);
-    //     });
-    // }
 
     return (
         <Wrapper
@@ -47,7 +36,7 @@ function Home(props) {
                               amplifies={massive.amps}
                               likes={massive.likes}
                               views={massive.viewsFloor}
-                              cap={massive.cap}
+                              cap={massive.viewsFloor}
                           />
                       );
                   })

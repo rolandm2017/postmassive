@@ -61,31 +61,31 @@ function authHeader(url, isExternal, calledBy, postContent) {
     // return auth header with jwt if user is logged in and request is to the api url
     let user = userValue() !== null ? userValue() : false;
     if (isExternal) {
-        console.log("********\nyou refreshed\n*********");
+        // console.log("********\nyou refreshed\n*********");
         user = Cookies.get("user");
         const aUserWasStoredInCookies = typeof user !== "undefined";
         if (aUserWasStoredInCookies) {
-            console.log(user.substring(0, 80), typeof user);
+            // console.log(user.substring(0, 80), typeof user);
             user = JSON.parse(user);
         }
 
-        console.log("Came out as: ", user);
+        // console.log("Came out as: ", user);
         userSubject.next(user);
     }
     if (!user) {
-        console.log("setting header as blank", new Date().getSeconds(), user); // fixme: have to get user value into 'user'
+        // console.log("setting header as blank", new Date().getSeconds(), user); // fixme: have to get user value into 'user'
         return {}; // fixme: site is here and goes no further.
     }
 
     const userObjectHasAToken = user.jwtToken;
     const isLoggedIn = user && userObjectHasAToken;
     const isApiUrl = url.startsWith(process.env.REACT_APP_API_URL);
-    console.log(83, isLoggedIn, isApiUrl, url);
+    console.log(83, isLoggedIn.substring(0, 20), isApiUrl, url);
     if (isLoggedIn && isApiUrl) {
-        console.log(
-            "Auth bearer trrying to add rToken",
-            getRefreshToken().substring(0, 20)
-        );
+        // console.log(
+        //     "Auth bearer trrying to add rToken",
+        //     getRefreshToken().substring(0, 20)
+        // );
         if (postContent) {
             return {
                 Authorization: `Bearer ${getRefreshToken()}`,
