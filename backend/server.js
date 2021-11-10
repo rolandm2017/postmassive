@@ -33,16 +33,12 @@ const corsOptions = {
             console.log("SERVER REQUEST ACCEPTED:", origin);
             return callback(null, true);
         }
-        console.log(
-            "errrrrrrrrrrrrrrr\nrrrrrrrrrrr\nrrrrrrrr",
-            origin,
-            "\n-------"
-        );
+        console.log("\nrrrrrrrrrrr\nrrrrrrrr", origin, "\n-------");
         callback(new Error("Not allowed by CORS"));
     },
 };
-// app.use(cors(corsOptions));
-app.use(cors());
+app.use(cors(corsOptions));
+// app.use(cors());
 // if (!production) {
 //     console.log("Proxy engaged, localhost:3000 -> 127.0.0.1");
 //     app.use(
@@ -87,7 +83,6 @@ app.use(api, require("./data/pages/pages"));
 
 app.use(api + "/signup/validate", require("./accountCreation/accountCreation"));
 app.use(api + "/auth", require("./accountCreation/accountCreation"));
-
 app.use(api + "/auth", require("./authentication/authentication"));
 
 // *** *** ***

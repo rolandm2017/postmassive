@@ -25,7 +25,7 @@ function Post(props) {
         let usernameForState = currentUrl.split("/")[0];
         console.log(currentUrl, usernameForState);
         setUsername(usernameForState);
-    }, []);
+    }, [currentUrl]);
 
     // todo: on load, get username from slug.
     const history = useHistory();

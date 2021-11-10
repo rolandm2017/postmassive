@@ -16,6 +16,7 @@ const massiveSchema = new Schema({
     replies: { type: Number, required: true, default: 0 },
     amps: { type: Number, required: true, default: 0 },
     likes: { type: Number, required: true, default: 0 },
+    views: { type: Number, required: true, default: 0 },
     // modifiers
     hasImage: { type: Boolean, required: true, default: false }, // false ??
     imageURL: { type: String, required: false },

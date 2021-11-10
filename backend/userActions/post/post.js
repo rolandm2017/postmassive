@@ -55,6 +55,9 @@ router.post("/post", (req, res) => {
         likes: 0,
         hasImage: false,
         quotesSomeone: false,
+        views: Math.ceil(Math.random() * 1000),
+        replies: Math.ceil(Math.random() * 10),
+        amplifies: Math.ceil(Math.random() * 20),
     });
     newMassive.save(function (err) {
         if (err) {
