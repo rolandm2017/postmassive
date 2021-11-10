@@ -2,14 +2,16 @@ import React from "react";
 
 function Flooring({ flooring }) {
     return (
-        <div>
+        <div style={{ border: "2px solid red" }}>
             <input
                 type="radio"
                 id="highEnd"
                 name="audienceSize"
                 value="highEnd"
             />
-            <label htmlFor="highEnd">{flooring}</label>
+            <label style={{ color: "white" }} htmlFor="highEnd">
+                {flooring}
+            </label>
         </div>
     );
 }

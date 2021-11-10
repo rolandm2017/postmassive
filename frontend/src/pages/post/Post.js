@@ -18,6 +18,7 @@ import Flooring from "./Flooring";
 import "./Post.css";
 
 function Post(props) {
+    const FLOORS = [100, 1000, 10000, 100000];
     const [username, setUsername] = useState(null);
     const [content, setContent] = useState("");
     const [price, setPrice] = useState(null);
@@ -27,6 +28,7 @@ function Post(props) {
 
     useEffect(() => {
         let usernameForState = currentUrl.split("/")[0];
+        console.log(usernameForState);
         setUsername(usernameForState);
         let price = getAuctioneerResponse();
         setPrice(price);
@@ -87,6 +89,13 @@ function Post(props) {
         setFloor(floor);
     }
 
+    const floors = FLOORS.map((floor, index) => (
+        // Only do this if items have no stable IDs
+        <div key={floor}>
+            <Flooring flooring={floor} />
+        </div>
+    ));
+
     return (
         <Wrapper
             pagename="post"
@@ -115,33 +124,7 @@ function Post(props) {
                     <div className="">
                         <p>Audience Floor:</p>
 
-                        <Flooring
-                            onClick={() => {
-                                setFloor(100);
-                            }}
-                            flooring={100}
-                        />
-                        {/* <br /> */}
-                        <Flooring
-                            onClick={() => {
-                                setFloor(1000);
-                            }}
-                            flooring={1000}
-                        />
-                        {/* <br /> */}
-                        <Flooring
-                            onClick={() => {
-                                setFloor(10000);
-                            }}
-                            flooring={10000}
-                        />
-                        {/* <br /> */}
-                        <Flooring
-                            onClick={() => {
-                                setFloor(100000);
-                            }}
-                            flooring={100000}
-                        />
+                        {floors}
                         {/* <br /> */}
                         <label htmlFor="content">
                             What do you want to say?

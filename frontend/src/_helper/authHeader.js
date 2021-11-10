@@ -23,21 +23,30 @@ export function getOptions(url) {
 }
 
 export function postOptions(url, isExternal, calledBy, postContent) {
-    let contentType = "application/json";
     if (postContent) {
-        contentType = "text/json";
+        return {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Credentials": "true",
+                "Access-Control-Allow-Origin": "http://localhost:3000",
+                ...authHeader(url, isExternal, calledBy),
+            },
+            credentials: "include",
+            body: JSON.stringify(postContent),
+        };
+    } else {
+        return {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Credentials": "true",
+                "Access-Control-Allow-Origin": "http://localhost:3000",
+                ...authHeader(url, isExternal, calledBy),
+            },
+            credentials: "include",
+        };
     }
-    return {
-        method: "POST",
-        headers: {
-            "Content-Type": contentType,
-            "Access-Control-Allow-Credentials": "true",
-            "Access-Control-Allow-Origin": "http://localhost:3000",
-            ...authHeader(url, isExternal, calledBy, postContent),
-        },
-        credentials: "include",
-        // body: JSON.stringify(body),
-    };
 }
 
 export function putOptions(url, body) {
@@ -63,7 +72,7 @@ export function _deleteOptions(url) {
 
 // helper functions
 
-function authHeader(url, isExternal, calledBy, postContent) {
+function authHeader(url, isExternal, calledBy) {
     console.log("authHeader calledBy:", url, isExternal, calledBy);
     // return auth header with jwt if user is logged in and request is to the api url
     let user = userValue() !== null ? userValue() : false;
@@ -89,21 +98,21 @@ function authHeader(url, isExternal, calledBy, postContent) {
     const isApiUrl = url.startsWith(process.env.REACT_APP_API_URL);
     console.log(83, isLoggedIn.substring(0, 20), isApiUrl, url);
     if (isLoggedIn && isApiUrl) {
-        // console.log(
-        //     "Auth bearer trrying to add rToken",
-        //     getRefreshToken().substring(0, 20)
-        // );
-        if (postContent) {
-            let contentToStringify = JSON.stringify(postContent);
-            return {
-                Authorization: `Bearer ${getRefreshToken()}`,
-                body: contentToStringify,
-            };
-        } else {
-            return {
-                Authorization: `Bearer ${getRefreshToken()}`,
-            };
-        }
+        // // console.log(
+        // //     "Auth bearer trrying to add rToken",
+        // //     getRefreshToken().substring(0, 20)
+        // // );
+        // if (postContent) {
+        //     let contentToStringify = JSON.stringify(postContent);
+        //     return {
+        //         Authorization: `Bearer ${getRefreshToken()}`,
+        //         body: contentToStringify,
+        //     };
+        // } else {
+        return {
+            Authorization: `Bearer ${getRefreshToken()}`,
+        };
+        // }
     } else {
         console.error("###############################");
         console.log(
