@@ -13,18 +13,23 @@ import Nicolai from "../../images/markZuckerberg.jpeg";
 
 import Wrapper from "../_helper/Wrapper";
 
+import Flooring from "./Flooring";
+
 import "./Post.css";
 
 function Post(props) {
-    const [content, setContent] = useState("");
     const [username, setUsername] = useState(null);
+    const [content, setContent] = useState("");
+    const [price, setPrice] = useState(null);
+    const [floor, setFloor] = useState(NaN);
 
     let currentUrl = useLocation().pathname;
 
     useEffect(() => {
         let usernameForState = currentUrl.split("/")[0];
-        console.log(currentUrl, usernameForState);
         setUsername(usernameForState);
+        let price = getAuctioneerResponse();
+        setPrice(price);
     }, [currentUrl]);
 
     // todo: on load, get username from slug.
@@ -32,8 +37,16 @@ function Post(props) {
 
     function getAuctioneerResponse() {
         // talks to server's auctioneer to get price of post
-        let auctioneerSays = Math.random * 10000;
-        return processIntToString(auctioneerSays); // hardcoded for now
+        let auctioneerSays = Math.random() * 1000;
+        console.log(36, auctioneerSays);
+        let asMoney = auctioneerSays.toString().split(".")[0];
+        let decimalValue = Math.ceil(Math.random() * 99)
+            .toString()
+            .substring(0, 3);
+
+        let price = asMoney + "." + decimalValue;
+
+        return price;
     }
 
     function processIntToString(integer) {
@@ -44,22 +57,34 @@ function Post(props) {
             toBeMoney.slice(0, toBeMoney.length - 3) +
             "." +
             toBeMoney.slice(toBeMoney.length - 3);
+        console.log(48, processedIntoMoney);
         return processedIntoMoney;
     }
 
-    async function postPost(username, content) {
-        console.log("Sending ........", content);
+    function postPost(username, content, price, floor) {
+        let data = {
+            username: username,
+            content: content,
+            price: price,
+            floor: floor,
+        };
+        console.log("Sending ........", data);
         // send a post to the server to
-        let postingUrl = process.env.REACT_APP_API_URL + "/api/post/post";
-        await fetch(postingUrl, postOptions(postingUrl, false, 51, content)) // todo: content packages stuff into json.
+        let postingUrl = process.env.REACT_APP_API_URL + "/post/post";
+        fetch(postingUrl, postOptions(postingUrl, false, 51, data)) // todo: content packages stuff into json.
             .then((x) => {
                 if (200) {
+                    console.log("sent data to server successfully");
                     return "success!";
                 }
             })
             .catch((err) => {
                 console.log(err);
             });
+    }
+
+    function handler(floor) {
+        setFloor(floor);
     }
 
     return (
@@ -88,43 +113,40 @@ function Post(props) {
                 </div>
                 <div className="post_middle px-2">
                     <div className="">
-                        <p>Audience Size:</p>
-                        <input
-                            type="radio"
-                            id="lowEnd"
-                            name="audienceSize"
-                            value="lowEnd"
+                        <p>Audience Floor:</p>
+
+                        <Flooring
+                            onClick={() => {
+                                setFloor(100);
+                            }}
+                            flooring={100}
                         />
-                        <label htmlFor="lowEnd">100</label>
-                        <br />
-                        <input
-                            type="radio"
-                            id="midRange"
-                            name="audienceSize"
-                            value="midRange"
+                        {/* <br /> */}
+                        <Flooring
+                            onClick={() => {
+                                setFloor(1000);
+                            }}
+                            flooring={1000}
                         />
-                        <label htmlFor="midRange">1000</label>
-                        <br />
-                        <input
-                            type="radio"
-                            id="highEnd"
-                            name="audienceSize"
-                            value="highEnd"
+                        {/* <br /> */}
+                        <Flooring
+                            onClick={() => {
+                                setFloor(10000);
+                            }}
+                            flooring={10000}
                         />
-                        <label htmlFor="highEnd">10000</label>
-                        <br />
-                        <input
-                            type="radio"
-                            id="premium"
-                            name="audienceSize"
-                            value="premium"
+                        {/* <br /> */}
+                        <Flooring
+                            onClick={() => {
+                                setFloor(100000);
+                            }}
+                            flooring={100000}
                         />
-                        <label htmlFor="premium">100000</label>
-                        <br />
+                        {/* <br /> */}
                         <label htmlFor="content">
                             What do you want to say?
                         </label>
-                        <br />
+                        {/* <br /> */}
                         <textarea
                             id="content"
                             type="text"
@@ -148,12 +170,12 @@ function Post(props) {
                     </div>
                     <div>
                         <div>
-                            <p>Price: ${getAuctioneerResponse()}</p>
+                            <p>Price: ${price}</p>
                         </div>
                         <div>
                             <button
                                 onClick={() => {
-                                    postPost(username, content);
+                                    postPost(username, content, price, floor);
                                 }}
                             >
                                 Post

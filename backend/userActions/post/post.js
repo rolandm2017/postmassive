@@ -29,10 +29,10 @@ function showCostOfPosting() {
 }
 
 router.post("/post", (req, res) => {
-    console.log("Posting a massive...");
     let username = req.body.username;
     let displayName = req.body.displayName;
     let content = req.body.content;
+    console.log("Posting a massive...", content, req.body);
     let priceIsAuthorizedByUser = req.body.authorization; // true/false
     let datePosted = Date.now();
 
@@ -44,8 +44,8 @@ router.post("/post", (req, res) => {
     //     { $orderby: { created_at: -1 } }
     // ).limit(1).postNumber;
     // let newPostNumber = mostRecentPostNumber + 1;
-
-    // throw "Success kinda"; // postNumber, postedByUser, text, date,
+    console.log(47, req.body);
+    throw "Success kinda"; // postNumber, postedByUser, text, date,
     let newMassive = new Massive({
         postNumber: 1, // will have to autoincrement this somehow...
         postedByUser: username,

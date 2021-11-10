@@ -23,10 +23,14 @@ export function getOptions(url) {
 }
 
 export function postOptions(url, isExternal, calledBy, postContent) {
+    let contentType = "application/json";
+    if (postContent) {
+        contentType = "text/json";
+    }
     return {
         method: "POST",
         headers: {
-            "Content-Type": "application/json",
+            "Content-Type": contentType,
             "Access-Control-Allow-Credentials": "true",
             "Access-Control-Allow-Origin": "http://localhost:3000",
             ...authHeader(url, isExternal, calledBy, postContent),
@@ -90,12 +94,10 @@ function authHeader(url, isExternal, calledBy, postContent) {
         //     getRefreshToken().substring(0, 20)
         // );
         if (postContent) {
+            let contentToStringify = JSON.stringify(postContent);
             return {
                 Authorization: `Bearer ${getRefreshToken()}`,
-                body: JSON.stringify({
-                    username: user.username,
-                    content: postContent,
-                }),
+                body: contentToStringify,
             };
         } else {
             return {
