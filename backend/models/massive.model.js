@@ -10,6 +10,7 @@ const massiveSchema = new Schema({
     monetaryCost: { type: Number, required: true, default: 1 }, // postNumber, monetaryCost, postedByUser, text, date, replies, amps, likes,
     //
     postedByUser: { type: String, required: true },
+    displayName: { type: String, required: true },
     text: { type: String, required: true },
     date: { type: String, required: true },
     // engagement

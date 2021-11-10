@@ -30,10 +30,11 @@ function showCostOfPosting() {
 
 router.post("/post", (req, res) => {
     console.log("Posting a massive...");
-    const username = req.body.username;
-    const content = req.body.content;
+    let username = req.body.username;
+    let displayName = req.body.displayName;
+    let content = req.body.content;
     let priceIsAuthorizedByUser = req.body.authorization; // true/false
-    const datePosted = Date.now();
+    let datePosted = Date.now();
 
     let getCostOfPosting = createCostOfPosting(); // fixme: should be moved to the post screen
 
@@ -45,9 +46,10 @@ router.post("/post", (req, res) => {
     // let newPostNumber = mostRecentPostNumber + 1;
 
     // throw "Success kinda"; // postNumber, postedByUser, text, date,
-    const newMassive = new Massive({
+    let newMassive = new Massive({
         postNumber: 1, // will have to autoincrement this somehow...
         postedByUser: username,
+        displayName: displayName,
         text: content,
         date: datePosted,
         replies: 0,

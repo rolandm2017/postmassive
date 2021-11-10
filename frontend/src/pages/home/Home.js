@@ -31,6 +31,7 @@ function Home(props) {
                           <Massive
                               key={massive._id}
                               author={massive.postedByUser}
+                              displayName={massive.displayName}
                               content={massive.text}
                               replies={massive.replies}
                               amplifies={massive.amps}

@@ -72,13 +72,11 @@ class Massive extends Component {
                         <div className="width-control text-left">
                             <div className="m-author-container mt-1 d-flex">
                                 <p className="mr-2 mb-2">
-                                    <strong>
-                                        {this.props.author.displayName}
-                                    </strong>
+                                    <strong>{this.props.displayName}</strong>
                                 </p>
                                 <p className="m-author-handle mb-0">
                                     {" "}
-                                    @{this.props.author.username}{" "}
+                                    @{this.props.author}{" "}
                                 </p>
                             </div>
 
