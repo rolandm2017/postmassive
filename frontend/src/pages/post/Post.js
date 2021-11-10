@@ -32,11 +32,19 @@ function Post(props) {
 
     function getAuctioneerResponse() {
         // talks to server's auctioneer to get price of post
-        return processIntToString(1050.13); // hardcoded for now
+        let auctioneerSays = Math.random * 10000;
+        return processIntToString(auctioneerSays); // hardcoded for now
     }
 
     function processIntToString(integer) {
-        return "$1,050.13";
+        // whatever comes into the func, it leaves with its trailing 2 ints as decimals.
+        // 1003 --> 10.03; 20 => 0.20; 48320 => 483.20
+        let toBeMoney = integer.toString();
+        let processedIntoMoney =
+            toBeMoney.slice(0, toBeMoney.length - 3) +
+            "." +
+            toBeMoney.slice(toBeMoney.length - 3);
+        return processedIntoMoney;
     }
 
     async function postPost(username, content) {
@@ -140,7 +148,7 @@ function Post(props) {
                     </div>
                     <div>
                         <div>
-                            <p>Price: {getAuctioneerResponse()}</p>
+                            <p>Price: ${getAuctioneerResponse()}</p>
                         </div>
                         <div>
                             <button

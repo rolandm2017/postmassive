@@ -16,6 +16,7 @@ export function getOptions(url) {
         headers: {
             "Content-Type": "application/json",
             "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Origin": "http://localhost:3000",
             ...authHeader(url),
         },
     };
@@ -27,6 +28,7 @@ export function postOptions(url, isExternal, calledBy, postContent) {
         headers: {
             "Content-Type": "application/json",
             "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Origin": "http://localhost:3000",
             ...authHeader(url, isExternal, calledBy, postContent),
         },
         credentials: "include",
@@ -40,6 +42,7 @@ export function putOptions(url, body) {
         headers: {
             "Content-Type": "application/json",
             "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Origin": "http://localhost:3000",
             ...authHeader(url),
         },
         // body: JSON.stringify(body),
