@@ -87,7 +87,7 @@ class Massive extends Component {
                             </p>
                             <EngagementContainer
                                 replies={this.props.replies}
-                                amps={this.props.amplifies}
+                                amps={this.props.amps}
                                 likes={this.props.likes}
                                 views={this.props.views}
                                 cap={this.props.cap}

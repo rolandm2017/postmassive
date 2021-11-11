@@ -9,9 +9,9 @@ module.exports = router;
 
 router.get("/introduce", (req, res) => {
     let postsForWall = introduce(req.body.username);
-    console.log(12, postsForWall);
+    // console.log(12, postsForWall);
     postsForWall.then((posts) => {
-        console.log(14, posts);
+        console.log(14, posts[0]);
         let postsToSendOut = posts;
         res.json(postsToSendOut);
     });

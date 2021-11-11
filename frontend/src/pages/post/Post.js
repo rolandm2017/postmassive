@@ -82,9 +82,8 @@ function Post(props) {
         fetch(postingUrl, postOptions(postingUrl, false, 51, data)) // todo: content packages stuff into json.
             .then((x) => {
                 if (200) {
-                    handleClick(); // FIXME: why isnt this a redirect??
+                    handleClick(); // redirect to /home
                     console.log("sent data to server successfully");
-                    // TODO: tell user it was successful, redirect them to see their engagement pour in.
                 }
             })
             .catch((err) => {

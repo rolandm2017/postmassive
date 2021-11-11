@@ -12,10 +12,14 @@ function Home(props) {
 
     useEffect(() => {
         let massivesToSet = getMassivesFromServer();
-        massivesToSet.then((theMassives) => {
-            console.log("aaaaaaa:", theMassives);
-            setMassives(theMassives);
-        });
+        massivesToSet
+            .then((theMassives) => {
+                console.log("17", theMassives);
+                setMassives(theMassives);
+            })
+            .catch((err) => {
+                console.log(19, err);
+            });
     }, []);
 
     return (
@@ -30,11 +34,11 @@ function Home(props) {
                       return (
                           <Massive
                               key={massive._id}
-                              author={massive.author.username}
-                              displayName={massive.author.displayName}
+                              author={massive.postedByUser}
+                              displayName={massive.displayName}
                               content={massive.text}
                               replies={massive.replies}
-                              amps={massive.amplifies}
+                              amps={massive.amps}
                               likes={massive.likes}
                               views={massive.viewsFloor}
                               cap={massive.viewsFloor}

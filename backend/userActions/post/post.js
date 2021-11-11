@@ -32,6 +32,7 @@ router.post("/post", async (req, res) => {
     let username = req.body.username;
     // let displayName = req.body.displayName;
     let content = req.body.content;
+    let postFloor = req.body.floor;
     console.log("Posting a massive...", content, req.body);
     let priceIsAuthorizedByUser = req.body.authorization; // true/false
     let datePosted = Date.now();
@@ -40,7 +41,7 @@ router.post("/post", async (req, res) => {
     let userDoc = await db.User.findOne({ username: username });
     let displayName = userDoc.displayName;
 
-    console.log(38, username, content, datePosted, displayName);
+    console.log(38, username, content, postFloor, datePosted, displayName);
     // let mostRecentPostNumber = db.Massive.findOne(
     //     {},
     //     { $orderby: { created_at: -1 } }
@@ -54,9 +55,9 @@ router.post("/post", async (req, res) => {
         displayName: displayName,
         text: content,
         date: datePosted,
-        replies: 0,
-        amps: 0,
-        likes: 0,
+        replies: Math.ceil(Math.random() * 10),
+        amps: Math.ceil(Math.random() * 10),
+        likes: Math.ceil(Math.random() * 100),
         hasImage: false,
         quotesSomeone: false,
         views: Math.ceil(Math.random() * 1000),
