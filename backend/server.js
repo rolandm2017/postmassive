@@ -37,7 +37,8 @@ const corsOptions = {
         callback(new Error("Not allowed by CORS"));
     },
 };
-app.use(cors(corsOptions));
+app.use(cors(corsOptions)); // Disable for Postman, Enable for Dev Server
+
 // app.use(cors()); // has to be commented out for Postman to work, has to be uncommented for website to work.
 // if (!production) {
 //     console.log("Proxy engaged, localhost:3000 -> 127.0.0.1");

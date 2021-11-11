@@ -8,12 +8,10 @@ const refresh = require("./refresh");
 module.exports = router;
 
 router.get("/introduce", (req, res) => {
-    let postsForWall = introduce(req.body.username);
-    // console.log(12, postsForWall);
-    postsForWall.then((posts) => {
-        console.log(14, posts[0]);
-        let postsToSendOut = posts;
-        res.json(postsToSendOut);
+    // magic; there is a promise in Introduce that works magic.
+    introduce(req.body.username).then((massives) => {
+        console.log(res, 13, 13);
+        res.json(massives);
     });
 });
 
