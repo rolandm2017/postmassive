@@ -16,17 +16,6 @@ const message = "/message";
 
 // TODO: add in authorization
 // GET all massives from the server
-router.get("/massive/get", (req, res) => {
-    const filter = {};
-    db.Massive.find(filter, function (err, massives) {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(massives);
-            res.json(massives);
-        }
-    });
-});
 
 // GET a user's massives
 // TODO: add in authorization
@@ -42,5 +31,3 @@ router.get("/massive/get/:username", (req, res) => {
         }
     });
 });
-
-router.delete("/massive/del/:username/:postId", (req, res) => {});

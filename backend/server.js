@@ -75,7 +75,7 @@ const api = "/api";
 // *** *** ***
 // Page Stuff
 
-app.use(api, require("./data/pages/pages"));
+// app.use(api, require("./data/pages/pages"));
 
 // *** *** ***
 // *** *** ***
@@ -110,7 +110,7 @@ app.use(api + "/wall", require("./wall/index"));
 
 // ********
 // get fake data for timeline
-app.use(api + "/mock", require("./data/pages/pages"));
+// app.use(api + "/mock", require("./data/pages/pages"));
 
 app.get(api + "/test", (req, res) => {
     // so you can see if going to the https://147.182.152.13:${port}/api/test returns 'foo' to confirm server runs on that ip

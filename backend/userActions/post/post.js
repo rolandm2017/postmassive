@@ -23,10 +23,10 @@ router.get("/post", (req, res) => {
     res.json(dataForPotentialPost);
 });
 
-function showCostOfPosting() {
-    // access the auctioneer module.
-    return 10;
-}
+// function showCostOfPosting() {
+// access the auctioneer module.
+// return 10;
+// }
 
 router.post("/post", async (req, res) => {
     let username = req.body.username;
@@ -72,13 +72,11 @@ router.post("/post", async (req, res) => {
 });
 
 router.delete("/post", (req, res) => {
-    // maybe this will be like a 10 second "nvm lemme not say that" button available for 10 seconds
-
     // NOTE: we don't delete posts from the db except manualy.
     // If it has to get deleted, we just remove it from the pullable wall content
     // TODO: pass authorization into the delete route.
-    const postIdToRemove = req.body.params.postId;
-    const authorizingUser = req.body.params.username;
+    const postIdToRemove = req.body.postId;
+    const authorizingUser = req.body.username;
     db.Massive.findOneAndUpdate(
         { _id: postIdToRemove, postedByUser: authorizingUser },
         { postIsAccessible: false }
