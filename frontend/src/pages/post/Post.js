@@ -25,6 +25,7 @@ function Post(props) {
     const [floor, setFloor] = useState(NaN);
 
     let currentUrl = useLocation().pathname;
+    let history = useHistory();
 
     useEffect(() => {
         console.log(30, currentUrl);
@@ -36,7 +37,6 @@ function Post(props) {
     }, [currentUrl]);
 
     // todo: on load, get username from slug.
-    const history = useHistory();
 
     function getAuctioneerResponse() {
         // talks to server's auctioneer to get price of post
@@ -52,16 +52,20 @@ function Post(props) {
         return price;
     }
 
-    function processIntToString(integer) {
-        // whatever comes into the func, it leaves with its trailing 2 ints as decimals.
-        // 1003 --> 10.03; 20 => 0.20; 48320 => 483.20
-        let toBeMoney = integer.toString();
-        let processedIntoMoney =
-            toBeMoney.slice(0, toBeMoney.length - 3) +
-            "." +
-            toBeMoney.slice(toBeMoney.length - 3);
-        console.log(48, processedIntoMoney);
-        return processedIntoMoney;
+    // function processIntToString(integer) {
+    //     // whatever comes into the func, it leaves with its trailing 2 ints as decimals.
+    //     // 1003 --> 10.03; 20 => 0.20; 48320 => 483.20
+    //     let toBeMoney = integer.toString();
+    //     let processedIntoMoney =
+    //         toBeMoney.slice(0, toBeMoney.length - 3) +
+    //         "." +
+    //         toBeMoney.slice(toBeMoney.length - 3);
+    //     console.log(48, processedIntoMoney);
+    //     return processedIntoMoney;
+    // }
+
+    function handleClick() {
+        history.push("/home");
     }
 
     function postPost(username, content, price, floor) {
@@ -78,8 +82,9 @@ function Post(props) {
         fetch(postingUrl, postOptions(postingUrl, false, 51, data)) // todo: content packages stuff into json.
             .then((x) => {
                 if (200) {
+                    handleClick(); // FIXME: why isnt this a redirect??
                     console.log("sent data to server successfully");
-                    return "success!";
+                    // TODO: tell user it was successful, redirect them to see their engagement pour in.
                 }
             })
             .catch((err) => {
@@ -87,12 +92,17 @@ function Post(props) {
             });
     }
 
-    function handler(floor) {
-        setFloor(floor);
-    }
+    // function handler(floor) {
+    //     setFloor(floor);
+    // }
 
     const floors = FLOORS.map((floor, index) => (
-        <div key={floor}>
+        <div
+            key={floor}
+            onClick={() => {
+                setFloor(floor);
+            }}
+        >
             <Flooring flooring={floor} />
         </div>
     ));

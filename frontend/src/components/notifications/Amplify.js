@@ -56,7 +56,7 @@ function Amp(props) {
             </div>
             <EngagementContainer
                 replies={26}
-                amplifies={133}
+                amps={133}
                 likes={2311}
                 views={93887}
                 cap={"110932"}

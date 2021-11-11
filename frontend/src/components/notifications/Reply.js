@@ -57,7 +57,7 @@ function Reply(props) {
             </div>
             <EngagementContainer
                 replies={26}
-                amplifies={133}
+                amps={133}
                 likes={2311}
                 views={110392}
                 cap={140000}

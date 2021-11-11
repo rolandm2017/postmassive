@@ -30,11 +30,11 @@ function Home(props) {
                       return (
                           <Massive
                               key={massive._id}
-                              author={massive.postedByUser}
-                              displayName={massive.displayName}
+                              author={massive.author.username}
+                              displayName={massive.author.displayName}
                               content={massive.text}
                               replies={massive.replies}
-                              amplifies={massive.amps}
+                              amps={massive.amplifies}
                               likes={massive.likes}
                               views={massive.viewsFloor}
                               cap={massive.viewsFloor}

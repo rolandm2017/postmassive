@@ -24,7 +24,7 @@ function EngagementContainer(props) {
                 <img className="massive-btn" src={Amplify} alt="amplify"></img>
                 <div className="d-flex flex-col justify-content-center align-items-center">
                     <p className="m-engagement-txt mx-1 my-0">
-                        {processAmount(props.amplifies, props.inFeed)}
+                        {processAmount(props.amps, props.inFeed)}
                     </p>
                 </div>
             </div>

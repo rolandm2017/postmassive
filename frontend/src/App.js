@@ -156,16 +156,7 @@ export default App;
 // TODO: Make sure all the behaviors from Account Service on this page are in the app. CTRL + F "Account Service"
 // https://jasonwatmore.com/post/2020/04/22/react-email-sign-up-with-verification-authentication-forgot-password
 
-// *** *** *** ***
-// TODO IMPORTANT but LATER: Detect user actions. Mouse clicks, how long they look at a Massiv, etc. Record these in a database. (Do what Twtr does)
-// *** *** *** ***
-
 // TODO-MUCH-LATER: make the feed infinite scroll (this is a "much later" task)
-// TODO-LATER: make the home page save your position in the infinite scroll when you leave & come back to the page
-
-// TODO: make light mode, figure out how to convert from dark to light via account settings.
 
 // TAGLINE: PostMassive: Get your word out.
 // TAGLINE: PostMassive: Say it loud.
-
-// TODO-RELEASE: before the site is put up for public use, replace all icons with paid icons8 icons.
