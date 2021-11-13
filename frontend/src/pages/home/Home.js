@@ -2,20 +2,36 @@ import React, { useState, useEffect } from "react";
 
 import Massive from "../../components/massive/Massive";
 
-import Wrapper from "../_helper/Wrapper";
+import { getOptions } from "../../_helper/authHeader";
+
+import Wrapper from "../_pageHelper/Wrapper";
 
 function Home(props) {
     const [massives, setMassives] = useState([]);
-    // const [jwt, setJwt] = useState("");
+
+    // useEffect(() => {
+    //     let feedUrl = process.env.REACT_APP_API_URL + "/wall/introduce";
+
+    //     fetch(feedUrl, getOptions(feedUrl)).then((res) => {
+    //         console.log(res)
+
+    //     // res.json().then((massives) => {
+    //     // console.log(7, massives);
+    //     // setMassives(massives);}
+    //     // });
+    // }, []);
 
     useEffect(() => {
+        document.title = "AabbbbBbba";
         let feedUrl = process.env.REACT_APP_API_URL + "/wall/introduce";
-        fetch(feedUrl, getOptions(feedUrl)).then((res) => {
-            console.log(6, res); // fixme: successful, but
-            res.json().then((massives) => {
-                console.log(7, massives);
-                setMassives(massives);
-            });;
+        console.log(fetch(feedUrl, getOptions(feedUrl)));
+        fetch(feedUrl, getOptions(feedUrl))
+            .then((res) => {
+                return res.json();
+            })
+            .then((data) => {
+                setMassives(data);
+            });
     }, []);
 
     return (
@@ -43,6 +59,7 @@ function Home(props) {
                   })
                 : null}
         </Wrapper>
+        // <div>foo</div>
     );
 }
 

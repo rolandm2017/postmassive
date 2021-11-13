@@ -10,7 +10,7 @@ import profilePicPlaceholder from "../../images/profilePics/cat1.jpg";
 import profilePicPlaceholder2 from "../../images/profilePics/cat2.jpg";
 import profilePicPlaceholder3 from "../../images/profilePics/cat3.jpg";
 
-import Wrapper from "../_helper/Wrapper";
+import Wrapper from "../_pageHelper/Wrapper";
 
 import "./Notifications.scss";
 import "../../components/notifications/Shared.scss";

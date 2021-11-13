@@ -5,7 +5,7 @@ import { getOptions } from "../../_helper/authHeader";
 import Button from "../../components/parts/Button";
 import Massive from "../../components/massive/Massive";
 
-import Wrapper from "../_helper/Wrapper";
+import Wrapper from "../_pageHelper/Wrapper";
 
 import BackButton from "../../images/icons8-back-arrow-48-wh.png";
 import More from "../../images/important-mail-48.png";

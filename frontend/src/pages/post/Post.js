@@ -11,7 +11,7 @@ import Poll from "../../images/poll-48.png";
 import Emoji from "../../images/happy-48.png";
 import Nicolai from "../../images/markZuckerberg.jpeg";
 
-import Wrapper from "../_helper/Wrapper";
+import Wrapper from "../_pageHelper/Wrapper";
 
 import Flooring from "./Flooring";
 

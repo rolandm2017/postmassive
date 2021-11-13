@@ -14,7 +14,7 @@ import Profile from "./pages/profile/Profile";
 import Landing from "./pages/public/Landing";
 import Massive from "./pages/massive/Massive";
 import Followers from "./pages/followers/Followers";
-import ToDo from "./pages/_helper/ToDo";
+import ToDo from "./pages/_pageHelper/ToDo";
 
 import "./App.scss";
 import "bootstrap/dist/css/bootstrap.min.css";

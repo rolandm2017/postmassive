@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import Button from "../../components/parts/Button";
 
-import Wrapper from "../_helper/Wrapper";
+import Wrapper from "../_pageHelper/Wrapper";
 
 import "./Search.scss";
 

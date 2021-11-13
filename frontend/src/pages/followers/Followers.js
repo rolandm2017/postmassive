@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 
-import Wrapper from "../_helper/Wrapper";
+import Wrapper from "../_pageHelper/Wrapper";
 
 import BackButton from "../../images/icons8-back-arrow-48-wh.png";
 import Nicolai from "../../images/markZuckerberg.jpeg";

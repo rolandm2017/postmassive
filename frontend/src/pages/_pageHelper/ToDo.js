@@ -3,7 +3,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 
 import Button from "../../components/parts/Button";
-import Wrapper from "../_helper/Wrapper";
+import Wrapper from "./Wrapper";
 
 function ToDo(props) {
     const history = useHistory();
