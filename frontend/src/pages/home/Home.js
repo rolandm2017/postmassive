@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-import getMassivesFromServer from "./HomeLogic";
-
 import Massive from "../../components/massive/Massive";
 
 import Wrapper from "../_helper/Wrapper";
@@ -11,16 +9,13 @@ function Home(props) {
     // const [jwt, setJwt] = useState("");
 
     useEffect(() => {
-        let massivesToSet = getMassivesFromServer();
-        console.log(15, massivesToSet);
-        massivesToSet
-            .then((theMassives) => {
-                console.log("17", theMassives); // fixme: theMassives is undefined
-                setMassives(theMassives);
-            })
-            .catch((err) => {
-                console.log(19, err);
-            });
+        let feedUrl = process.env.REACT_APP_API_URL + "/wall/introduce";
+        fetch(feedUrl, getOptions(feedUrl)).then((res) => {
+            console.log(6, res); // fixme: successful, but
+            res.json().then((massives) => {
+                console.log(7, massives);
+                setMassives(massives);
+            });;
     }, []);
 
     return (

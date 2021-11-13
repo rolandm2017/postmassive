@@ -10,7 +10,7 @@ module.exports = router;
 router.get("/introduce", (req, res) => {
     // magic; there is a promise in Introduce that works magic.
     introduceWallForTheDay(req.body.username).then((massives) => {
-        console.log(13, 13, massives);
+        console.log(13, 13, massives.length, "massives.length");
         res.json(massives);
     });
 });

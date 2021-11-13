@@ -12,11 +12,11 @@ function introduceWallForTheDay(username) {
                     reject(err);
                 }
                 console.log(
-                    12,
-                    "12",
+                    151515,
+                    "161616",
                     posts[0],
                     posts.length,
-                    "posts.length",
+                    "posts.length****",
                     12
                 );
                 resolve(posts);

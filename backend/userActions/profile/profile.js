@@ -14,7 +14,7 @@ router.get("/:username", (req, res) => {
     let username = req.params.username;
     db.User.findOne({ username: username }, function (err, userData) {
         if (err) {
-            console.log(err);
+            console.log(171717, err);
         } else {
             let publiclyViewableData = safeguard(userData);
             res.json(publiclyViewableData);
