@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const introduce = require("./introduce");
+const introduceWallForTheDay = require("./introduce");
 const retrieve = require("./retrieve");
 const refresh = require("./refresh");
 
@@ -9,8 +9,8 @@ module.exports = router;
 
 router.get("/introduce", (req, res) => {
     // magic; there is a promise in Introduce that works magic.
-    introduce(req.body.username).then((massives) => {
-        console.log(res, 13, 13);
+    introduceWallForTheDay(req.body.username).then((massives) => {
+        console.log(13, 13, massives);
         res.json(massives);
     });
 });

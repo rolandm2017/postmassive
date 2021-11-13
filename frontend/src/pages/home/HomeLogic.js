@@ -3,7 +3,7 @@ import { getOptions } from "../../_helper/authHeader";
 export default function getMassivesFromServer(setMassives) {
     let feedUrl = process.env.REACT_APP_API_URL + "/wall/introduce";
     return fetch(feedUrl, getOptions(feedUrl)).then((res) => {
-        console.log(res, 6);
+        console.log(6, res); // fixme: successful, but
         res.json().then((massives) => {
             console.log(7, massives);
             return massives;

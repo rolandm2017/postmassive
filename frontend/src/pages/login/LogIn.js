@@ -16,9 +16,9 @@ import "./LogIn.scss";
 
 function LogIn(props) {
     // TODO: finish this page!!! it is unfinished
-    const [username, setUsername] = useState("");
+    const [username, setUsername] = useState("marle");
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [password, setPassword] = useState("ilovecronoa");
     const [error, setError] = useState("");
     const [desktopLoginError, setDesktopLoginError] = useState(""); // todo; remove this desktoPLogInerror universally, p sure its worthless
 

@@ -12,9 +12,10 @@ function Home(props) {
 
     useEffect(() => {
         let massivesToSet = getMassivesFromServer();
+        console.log(15, massivesToSet);
         massivesToSet
             .then((theMassives) => {
-                console.log("17", theMassives);
+                console.log("17", theMassives); // fixme: theMassives is undefined
                 setMassives(theMassives);
             })
             .catch((err) => {

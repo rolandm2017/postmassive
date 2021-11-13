@@ -11,7 +11,14 @@ function introduceWallForTheDay(username) {
                     console.log(7, err);
                     reject(err);
                 }
-                console.log(12, "12", posts[0], posts.length, 12, 12);
+                console.log(
+                    12,
+                    "12",
+                    posts[0],
+                    posts.length,
+                    "posts.length",
+                    12
+                );
                 resolve(posts);
             });
     });
