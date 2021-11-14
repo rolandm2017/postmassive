@@ -3,31 +3,6 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const production = require("./config.json").production;
-const { createProxyMiddleware } = require("http-proxy-middleware");
-// const https = require("https");
-// const fs = require("fs");
-
-// const sslOptions = {
-//     key: fs.readFileSync("/srv/www/keys/my-site-key.pem"),
-//     cert: fs.readFileSync("/srv/www/keys/chain.pem"),
-//     dhparam: fs.readFileSync("/var/www/example/sslcert/dh-strong.pem"),
-// };
-
-// **
-// ** show current branch if master
-const { exec } = require("child_process");
-exec("git rev-parse --abbrev-ref HEAD", (err, stdout, stderr) => {
-    if (err) {
-        // handle your error
-    }
-
-    if (typeof stdout === "string" && stdout.trim() === "master") {
-        console.log(`The branch is master`);
-        // Call your function here conditionally as per branch
-    } else {
-        console.log("branch is: ", stdout);
-    }
-});
 
 const { createProxyMiddleware } = require("http-proxy-middleware");
 
@@ -37,6 +12,10 @@ if (production) {
 } else {
     port = 8080;
 }
+
+// TODO: Make a list of code to keep from this server to use in the real dev server.
+// TODO: make a list of code to keep from the other server.js file to use in the real dev server.
+// TODO: copy this Mockserver.js file to a new server.js file and start fresh.
 
 const app = express();
 
@@ -54,13 +33,16 @@ const corsOptions = {
             console.log("SERVER REQUEST ACCEPTED:", origin);
             return callback(null, true);
         }
-        console.log("\nrrrrrrrrrrr\nrrrrrrrr", origin, "\n-------");
+        console.log(
+            "errrrrrrrrrrrrrrr\nrrrrrrrrrrr\nrrrrrrrr",
+            origin,
+            "\n-------"
+        );
         callback(new Error("Not allowed by CORS"));
     },
 };
-app.use(cors(corsOptions)); // Disable for Postman, Enable for Dev Server
-
-// app.use(cors()); // has to be commented out for Postman to work, has to be uncommented for website to work.
+app.use(cors(corsOptions));
+// app.use(cors());
 // if (!production) {
 //     console.log("Proxy engaged, localhost:3000 -> 127.0.0.1");
 //     app.use(
@@ -71,17 +53,6 @@ app.use(cors(corsOptions)); // Disable for Postman, Enable for Dev Server
 //         })
 //     );
 // }
-
-if (!production) {
-    console.log("Proxy engaged, localhost:3000 -> 127.0.0.1");
-    app.use(
-        "/api",
-        createProxyMiddleware({
-            target: "http://localhost:3000/",
-            changeOrigin: true,
-        })
-    );
-}
 
 // misc stuff
 app.use(cookieParser());

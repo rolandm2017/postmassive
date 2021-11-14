@@ -10,7 +10,6 @@
         "@testing-library/user-event": "^13.2.1",
         "axios": "^0.21.1",
         "bootstrap": "^5.0.2",
-        "emoji-picker-react": "^3.4.8",
         "fetch-mock": "^9.11.0",
         "http-proxy-middleware": "^0.19.2",
         "js-cookie": "^3.0.0",
