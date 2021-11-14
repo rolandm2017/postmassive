@@ -20,10 +20,6 @@ if (production) {
     port = 8080;
 }
 
-// TODO: Make a list of code to keep from this server to use in the real dev server.
-// TODO: make a list of code to keep from the other server.js file to use in the real dev server.
-// TODO: copy this Mockserver.js file to a new server.js file and start fresh.
-
 const app = express();
 
 const whitelist = [
@@ -113,10 +109,6 @@ app.use(api + "/auth", require("./authentication/authentication"));
 // CRUD for DMs
 
 // todo: implement later...
-
-// ********
-// get fake data for timeline
-app.use(api + "/mock", require("./data/pages/pages"));
 
 app.get(api + "/test", (req, res) => {
     // so you can see if going to the https://147.182.152.13:${port}/api/test returns 'foo' to confirm server runs on that ip

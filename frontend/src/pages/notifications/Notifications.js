@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 
 import Reply from "../../components/notifications/Reply";
 import Amplify from "../../components/notifications/Amplify";
@@ -15,30 +15,22 @@ import "../../components/notifications/Shared.scss";
 
 import { getOptions } from "../../_helper/authHeader";
 
-class Notifications extends Component {
-    state = {
-        notifications: null,
-    };
+function Notifications() {
+    const [notifications, setNotifications] = useState(null);
 
-    componentDidMount() {
+    useEffect(() => {
         const notificationsUrl =
-            process.env.REACT_APP_API_URL + "/mock/notifications";
-        // const prevHeaders = {
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //         Accept: "application/json",
-        //     },
-        // }; // zombie sighting 2021-07-29, delete if still here in 2021/10
+            process.env.REACT_APP_API_URL + "/notifications"; // todo: get based on username instead of generis
         fetch(notificationsUrl, getOptions(notificationsUrl)).then((res) => {
             res.json().then((notifications) => {
                 // console.log(notifications);
                 console.log("json inspection", notifications);
-                this.setState({ notifications: notifications });
+                setNotifications(notifications);
             });
         });
-    }
+    }, []);
 
-    generate(data) {
+    function generate(data) {
         let profilePic;
         const choice = Math.floor(Math.random() * 3);
         if (choice === 0) {
@@ -111,29 +103,25 @@ class Notifications extends Component {
         }
     }
 
-    render() {
-        return (
-            <Wrapper
-                pageName="notifications"
-                sectionName="notifications_main"
-                onSearchPage={false}
-                breakpoints={this.props.breakpoints}
-            >
-                <div className="notifications_container">
-                    <div className="pt-3 pb-2">
-                        <h2 id="notifications_headline">Notifications</h2>
-                    </div>
-                    {this.state.notifications
-                        ? this.state.notifications.map(
-                              (notification, index) => {
-                                  return this.generate(notification);
-                              }
-                          )
-                        : null}
+    return (
+        <Wrapper
+            pageName="notifications"
+            sectionName="notifications_main"
+            onSearchPage={false}
+            breakpoints={this.props.breakpoints}
+        >
+            <div className="notifications_container">
+                <div className="pt-3 pb-2">
+                    <h2 id="notifications_headline">Notifications</h2>
                 </div>
-            </Wrapper>
-        );
-    }
+                {this.state.notifications
+                    ? this.state.notifications.map((notification, index) => {
+                          return this.generate(notification);
+                      })
+                    : null}
+            </div>
+        </Wrapper>
+    );
 }
 
 export default Notifications;

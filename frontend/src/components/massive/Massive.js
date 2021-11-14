@@ -7,6 +7,12 @@ import Logo from "../../images/bluePfp.png";
 import "./Massive.css";
 
 class Massive extends Component {
+    // showMassiveAsPage(massiveId) {
+    //     // massiveId is slug
+    //     console.log(massiveId);
+    //     this.props.history.push("/massive/" + massiveId.toString());
+    // }
+
     convertEngagementText(inputNum) {
         // will receive views and likes in the millions.
         // convert 10,000-999,999 -> 10.0k - 999.9k
