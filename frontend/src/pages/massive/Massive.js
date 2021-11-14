@@ -1,6 +1,6 @@
 import React from "react";
 
-import Wrapper from "../_helper/Wrapper";
+import Wrapper from "../_pageHelper/Wrapper";
 
 // TODO: make each Massiv have a custom URL based on Poster Username + MassivID
 

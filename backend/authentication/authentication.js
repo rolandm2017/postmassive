@@ -110,8 +110,8 @@ router.post("/refreshToken", (req, res, next) => {
     console.log(110, req.headers.authorization);
     const incomingRefreshToken = req.headers.authorization.split(" ")[1];
 
+    let ipAddress = req.ip;
     // YO the authorization header has the jwt lol. SMH roland
-    const ipAddress = req.ip;
     console.log(109, "incoming refreshToken:", incomingRefreshToken); //fixme:undefined rToken
     accountService
         .refreshToken({ incomingRefreshToken, ipAddress })

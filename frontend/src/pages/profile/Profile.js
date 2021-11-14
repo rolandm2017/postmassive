@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
+import { getOptions } from "../../_helper/authHeader";
 import Button from "../../components/parts/Button";
 import Massive from "../../components/massive/Massive";
 
-import Wrapper from "../_helper/Wrapper";
+import Wrapper from "../_pageHelper/Wrapper";
 
 import BackButton from "../../images/icons8-back-arrow-48-wh.png";
 import More from "../../images/important-mail-48.png";
@@ -24,10 +25,10 @@ class Profile extends Component {
     };
 
     componentDidMount() {
-        console.log(window.location.pathname);
-        const username = window.location.pathname;
+        let username = window.location.pathname.slice(1);
+        console.log(29, username);
         const profileUrl =
-            process.env.REACT_APP_API_URL + "/profile" + username;
+            process.env.REACT_APP_API_URL + "/profile/" + username;
         console.log(profileUrl);
         // fixme-now: get profile bio...
         fetch(profileUrl).then((res) => {
@@ -43,17 +44,19 @@ class Profile extends Component {
         });
         // TODO IMPORTANT: upgrade fetching "/feed" to fetching the user's actual massives. (as in "/feed/:username")
         const userSpecificFeedUrl =
-            process.env.REACT_APP_API_URL + "/feed" + username;
-        fetch(userSpecificFeedUrl).then((res) => {
-            res.json()
-                .then((massives) => {
-                    console.log("setting massives");
-                    this.setState({ massives: massives });
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-        });
+            process.env.REACT_APP_API_URL + "/feed/" + username;
+        fetch(userSpecificFeedUrl, getOptions(userSpecificFeedUrl)).then(
+            (res) => {
+                res.json()
+                    .then((massives) => {
+                        console.log(50, "setting massives", massives);
+                        this.setState({ massives: massives });
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
+            }
+        );
     }
 
     convertToThreeDigits(integer) {
@@ -359,15 +362,16 @@ class Profile extends Component {
                     </div>
                 </div>
                 <div id={`${styles.massivesContainer}`}>
-                    {this.state.massives
-                        ? this.state.massives.map((massive) => {
+                    {this.state.massives !== null
+                        ? this.state.massives.map((massive, index) => {
                               return (
                                   <Massive
-                                      key={massive.id}
-                                      author={massive.author}
+                                      key={index}
+                                      author={massive.author.username}
+                                      displayName={massive.author.displayName}
                                       content={massive.content}
                                       replies={massive.replies}
-                                      amplifies={massive.amplifies}
+                                      amps={massive.amplifies}
                                       likes={massive.likes}
                                       views={massive.views}
                                       cap={massive.cap}

@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
-const accountSchema = new Schema({
+const userSchema = new Schema({
     // personal info & security, keep private!
     fullName: { type: String, required: true },
     email: { type: String, required: true },
@@ -42,4 +42,4 @@ const accountSchema = new Schema({
     postCount: { type: Number, required: true },
 });
 
-module.exports = mongoose.model("Account", accountSchema);
+module.exports = mongoose.model("Account", userSchema);

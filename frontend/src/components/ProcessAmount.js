@@ -13,7 +13,9 @@ const ProcessAmount = (number, displayedInFeed) => {
         return null;
     }
     if (typeof number !== "number" && number !== null) {
-        throw new Error("Wrong input type");
+        // console.log(16, number, displayedInFeed);
+        // throw new Error("Wrong input type");
+        console.error("Wrong input type:", number, displayedInFeed);
     }
     const amtAsString = parseInt(number, 10).toString();
     if (amtAsString.length <= 3) {

@@ -14,7 +14,7 @@ import Profile from "./pages/profile/Profile";
 import Landing from "./pages/public/Landing";
 import Massive from "./pages/massive/Massive";
 import Followers from "./pages/followers/Followers";
-import ToDo from "./pages/_helper/ToDo";
+import ToDo from "./pages/_pageHelper/ToDo";
 
 import "./App.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -45,28 +45,8 @@ function App() {
         );
     }
 
-    // function PrivateRoute({ component: Component, authed, ...rest }) {
-    //     console.log("are you authed?", authed);
-    //     return (
-    //         <Route
-    //             {...rest}
-    //             render={(props) =>
-    //                 authed === true ? (
-    //                     <Component {...props} />
-    //                 ) : (
-    //                     <Redirect
-    //                         to={{
-    //                             pathname: "/login",
-    //                             state: { from: props.location },
-    //                         }}
-    //                     />
-    //                 )
-    //             }
-    //         />
-    //     );
-    // }
-
     function PrivateRoute({ component: Component, roles, ...rest }) {
+        // TODO: Make sure userValue() is exposed inside of PrivateRoutes
         return (
             <Route
                 {...rest}
@@ -132,29 +112,16 @@ function App() {
                         <Route path="/landing">
                             <Redirect to="/" />
                         </Route>
-                        <PrivateRoute
-                            exact
-                            path="/home"
-                            // authed={isLoggedIn}
-                            component={Home}
-                        />
+                        <PrivateRoute exact path="/home" component={Home} />
                         <PrivateRoute
                             path="/notifications"
-                            // authed={isLoggedIn}
                             component={Notifications}
                         />
-                        <PrivateRoute
-                            path="/messages"
-                            // authed={isLoggedIn}
-
-                            component={Messages}
-                        />
+                        <PrivateRoute path="/messages" component={Messages} />
+                        <PrivateRoute path="/:username/post" component={Post} />
                         {/* <PrivateRoute path="/admin" roles={[Role.Admin]} component={Admin} /> */}
                         <Route path="/explore">
                             <Search />
-                        </Route>
-                        <Route path="/post">
-                            <Post />
                         </Route>
                         <Route path="/massive">
                             <Massive />
@@ -189,16 +156,7 @@ export default App;
 // TODO: Make sure all the behaviors from Account Service on this page are in the app. CTRL + F "Account Service"
 // https://jasonwatmore.com/post/2020/04/22/react-email-sign-up-with-verification-authentication-forgot-password
 
-// *** *** *** ***
-// TODO IMPORTANT but LATER: Detect user actions. Mouse clicks, how long they look at a Massiv, etc. Record these in a database. (Do what Twtr does)
-// *** *** *** ***
-
 // TODO-MUCH-LATER: make the feed infinite scroll (this is a "much later" task)
-// TODO-LATER: make the home page save your position in the infinite scroll when you leave & come back to the page
-
-// TODO: make light mode, figure out how to convert from dark to light via account settings.
 
 // TAGLINE: PostMassive: Get your word out.
 // TAGLINE: PostMassive: Say it loud.
-
-// TODO-RELEASE: before the site is put up for public use, replace all icons with paid icons8 icons.

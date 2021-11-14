@@ -23,7 +23,7 @@ export const userValue = () => {
     // FIXME: this userValue func is still getting called WAY TOO OFTEN
     const isCurrentUserOrNull = userSubject.getValue();
 
-    console.log("userValue:", userSubject, isCurrentUserOrNull);
+    // console.log("userValue:", userSubject, isCurrentUserOrNull);
     // fixme: issue is, userValue() is run once after user sends login() request. then userSubject receives a new val.
     // but userValue is not updated, so app.js has no way to know about the logged in user.
     return isCurrentUserOrNull;
@@ -220,7 +220,7 @@ export function refreshToken(isExternal) {
 
     console.log("Attempting to refresh token...");
     return (
-        fetch(url, postOptions(url, isExternal))
+        fetch(url, postOptions(url, isExternal, 223))
             // todo: copy watmore's refreshTOken() func in that it only has one then(), so his is
             // a promise
             // whereas mine is a promise inside of a promise.

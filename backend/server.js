@@ -29,6 +29,8 @@ exec("git rev-parse --abbrev-ref HEAD", (err, stdout, stderr) => {
     }
 });
 
+const { createProxyMiddleware } = require("http-proxy-middleware");
+
 let port;
 if (production) {
     port = 5007;
@@ -52,14 +54,23 @@ const corsOptions = {
             console.log("SERVER REQUEST ACCEPTED:", origin);
             return callback(null, true);
         }
-        console.log(
-            "errrrrrrrrrrrrrrr\nrrrrrrrrrrr\nrrrrrrrr",
-            origin,
-            "\n-------"
-        );
+        console.log("\nrrrrrrrrrrr\nrrrrrrrr", origin, "\n-------");
         callback(new Error("Not allowed by CORS"));
     },
 };
+app.use(cors(corsOptions)); // Disable for Postman, Enable for Dev Server
+
+// app.use(cors()); // has to be commented out for Postman to work, has to be uncommented for website to work.
+// if (!production) {
+//     console.log("Proxy engaged, localhost:3000 -> 127.0.0.1");
+//     app.use(
+//         "/api",
+//         createProxyMiddleware({
+//             target: "http://localhost:3000/",
+//             changeOrigin: true,
+//         })
+//     );
+// }
 
 if (!production) {
     console.log("Proxy engaged, localhost:3000 -> 127.0.0.1");
@@ -73,7 +84,6 @@ if (!production) {
 }
 
 // misc stuff
-app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(bodyParser.json());
 
@@ -98,7 +108,7 @@ const api = "/api";
 // *** *** ***
 // Page Stuff
 
-app.use(api, require("./data/pages/pages"));
+app.use(api + "/profile", require("./userActions/profile/profile"));
 
 // *** *** ***
 // *** *** ***
@@ -106,25 +116,32 @@ app.use(api, require("./data/pages/pages"));
 
 app.use(api + "/signup/validate", require("./accountCreation/accountCreation"));
 app.use(api + "/auth", require("./accountCreation/accountCreation"));
-
 app.use(api + "/auth", require("./authentication/authentication"));
 
 // *** *** ***
 // *** *** ***
-// CRUD for User account info, including their bio & user settings
+// The Post Page
+
+app.use(api + "/post", require("./userActions/post/post"));
+
+// *** *** ***
+// *** *** ***
+// CRUD for User profile info, their bio & user settings
 
 // app.use(api + "/user", require("./userActions/userActions")); // TODO: add these
 
 // *** *** ***
 // *** *** ***
-// CRUD for Massives
-// app.use(api + "/massives", require("./massiveActions/massiveActions"));
+// Retrieve Wall updates
+app.use(api + "/wall", require("./wall/index"));
 
 // *** *** ***
 // *** *** ***
 // CRUD for DMs
 
-// todo: implement later...
+// app.use(api + "?")
+
+//
 
 app.get(api + "/test", (req, res) => {
     // so you can see if going to the https://147.182.152.13:${port}/api/test returns 'foo' to confirm server runs on that ip
@@ -138,6 +155,7 @@ if (production) {
     https.createServer(sslOptions, app).listen(port);
     // copying from https://www.sitepoint.com/how-to-use-ssltls-with-node-js/
 } else {
+    console.log("PORT:", port);
     app.listen(port, () => {
         console.log(`Example app listening at http://127.0.0.1:${port}`);
     });

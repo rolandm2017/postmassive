@@ -1,59 +1,66 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 
 import Massive from "../../components/massive/Massive";
 
-import Wrapper from "../_helper/Wrapper";
-
 import { getOptions } from "../../_helper/authHeader";
 
-class Home extends Component {
-    state = {
-        massives: null,
-        jwt: null,
-    };
+import Wrapper from "../_pageHelper/Wrapper";
 
-    componentDidMount() {
-        const feedUrl = process.env.REACT_APP_API_URL + "/mock/feed";
-        console.log("inspect:", getOptions(feedUrl)); //fixme:bad auth header. Sus its bc rToken timer isnt refreshing after 13m
+function Home(props) {
+    const [massives, setMassives] = useState([]);
+
+    // useEffect(() => {
+    //     let feedUrl = process.env.REACT_APP_API_URL + "/wall/introduce";
+
+    //     fetch(feedUrl, getOptions(feedUrl)).then((res) => {
+    //         console.log(res)
+
+    //     // res.json().then((massives) => {
+    //     // console.log(7, massives);
+    //     // setMassives(massives);}
+    //     // });
+    // }, []);
+
+    useEffect(() => {
+        document.title = "AabbbbBbba";
+        let feedUrl = process.env.REACT_APP_API_URL + "/wall/introduce";
+        console.log(fetch(feedUrl, getOptions(feedUrl)));
         fetch(feedUrl, getOptions(feedUrl))
             .then((res) => {
-                res.json().then((massives) => {
-                    console.log(massives[0]);
-                    this.setState({ massives: massives });
-                });
+                return res.json();
             })
-            .catch((err) => {
-                console.log(err);
+            .then((data) => {
+                setMassives(data);
             });
-    }
+    }, []);
 
-    render() {
-        return (
-            <Wrapper
-                pageName="home"
-                sectionName="home_feed"
-                onSearchPage={false}
-                breakpoints={this.props.breakpoints}
-            >
-                {this.state.massives
-                    ? this.state.massives.map((massive) => {
-                          return (
-                              <Massive
-                                  key={massive.id}
-                                  author={massive.author}
-                                  content={massive.content}
-                                  replies={massive.replies}
-                                  amplifies={massive.amplifies}
-                                  likes={massive.likes}
-                                  views={massive.views}
-                                  cap={massive.cap}
-                              />
-                          );
-                      })
-                    : null}
-            </Wrapper>
-        );
-    }
+    return (
+        <Wrapper
+            pageName="home"
+            sectionName="home_feed"
+            onSearchPage={false}
+            breakpoints={props.breakpoints}
+        >
+            {massives.length > 0
+                ? massives.map((massive) => {
+                      return (
+                          <Massive
+                              key={massive._id}
+                              author={massive.postedByUser}
+                              displayName={massive.displayName}
+                              content={massive.text}
+                              replies={massive.replies}
+                              amps={massive.amps}
+                              likes={massive.likes}
+                              views={massive.viewsFloor}
+                              cap={massive.viewsFloor}
+                          />
+                      );
+                  })
+                : null}
+        </Wrapper>
+        // <div>foo</div>
+    );
 }
 
 export default Home;

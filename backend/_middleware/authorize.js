@@ -27,7 +27,10 @@ function authorize(roles = []) {
                     req.headers.authorization &&
                     req.headers.authorization.split(" ")[0] === "Bearer"
                 ) {
-                    console.log(req.headers.authorization.split(" ")[1]);
+                    console.log(
+                        "REQ.HEADERS.AUTH:",
+                        req.headers.authorization.split(" ")[1]
+                    );
                     return req.headers.authorization.split(" ")[1];
                 } else if (req.query && req.query.token) {
                     // i copied this code and have no idea when this condition would ever be met

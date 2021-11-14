@@ -4,7 +4,7 @@ import InboxItem from "./components/InboxItem";
 import SelectedUserDisplay from "./components/SelectedUserDisplay";
 
 import NoMsgSelected from "./components/NoMsgSelected";
-import Wrapper from "../_helper/Wrapper";
+import Wrapper from "../_pageHelper/Wrapper";
 
 import RightArrow from "../../images/icons8-right-arrow-50.png";
 import Gear from "../../images/icons8-settings-50.png";

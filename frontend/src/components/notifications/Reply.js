@@ -58,6 +58,16 @@ function Reply(props) {
                     />
                 </div>
             </div>
+<<<<<<< HEAD
+=======
+            <EngagementContainer
+                replies={26}
+                amps={133}
+                likes={2311}
+                views={110392}
+                cap={140000}
+            />
+>>>>>>> 11/06/wallCRUD
         </div>
     );
 }

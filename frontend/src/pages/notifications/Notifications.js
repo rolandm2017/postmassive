@@ -8,7 +8,7 @@ import Quote from "../../components/notifications/Quote";
 
 import profilePicPlaceholder3 from "../../images/bluePfp.png";
 
-import Wrapper from "../_helper/Wrapper";
+import Wrapper from "../_pageHelper/Wrapper";
 
 import "./Notifications.scss";
 import "../../components/notifications/Shared.scss";
