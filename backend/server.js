@@ -29,8 +29,6 @@ exec("git rev-parse --abbrev-ref HEAD", (err, stdout, stderr) => {
     }
 });
 
-const { createProxyMiddleware } = require("http-proxy-middleware");
-
 let port;
 if (production) {
     port = 5007;
