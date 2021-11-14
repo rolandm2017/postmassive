@@ -41,7 +41,7 @@ const corsOptions = {
         callback(new Error("Not allowed by CORS"));
     },
 };
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 // app.use(cors());
 // if (!production) {
 //     console.log("Proxy engaged, localhost:3000 -> 127.0.0.1");
@@ -69,19 +69,10 @@ module.exports = {
     saltRounds: saltRounds,
 };
 
-// ****
 // TODO: Make MongoDb set up when the server is set up, NOT when the first request comes in!
-// ****
 
 const api = "/api";
 
-// *** *** ***
-// *** *** ***
-// Page Stuff
-
-app.use(api + "/profile", require("./userActions/profile/profile"));
-
-// *** *** ***
 // *** *** ***
 // Auth stuff
 
@@ -89,22 +80,21 @@ app.use(api + "/signup/validate", require("./accountCreation/accountCreation"));
 app.use(api + "/auth", require("./accountCreation/accountCreation"));
 app.use(api + "/auth", require("./authentication/authentication"));
 
-// *** *** ***
-// *** *** ***
 // The Post Page
 
 app.use(api + "/post", require("./userActions/post/post"));
 
-// *** *** ***
-// *** *** ***
 // CRUD for User profile info, their bio & user settings
 
-// app.use(api + "/user", require("./userActions/userActions")); // TODO: add these
+app.use(api + "/profile", require("./userActions/profile/profile"));
+// app.use(api + "/settings", require("./userActions/settings/settings"));
 
-// *** *** ***
-// *** *** ***
 // Retrieve Wall updates
 app.use(api + "/wall", require("./wall/index"));
+
+// *** *** ***
+// notifications
+app.use(api + "/notifications", require("./notifications/index"));
 
 // *** *** ***
 // *** *** ***
