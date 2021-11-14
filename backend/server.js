@@ -94,7 +94,7 @@ app.use(api + "/wall", require("./wall/index"));
 
 // *** *** ***
 // notifications
-app.use(api + "/notifications", require("./notifications/index"));
+app.use(api + "/notifications", require("./notifications/notifications"));
 
 // *** *** ***
 // *** *** ***
