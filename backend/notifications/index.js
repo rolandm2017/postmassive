@@ -8,10 +8,11 @@ module.exports = router;
 
 router.get("/:username", (req, res) => {
     console.log(10, "notifications");
-    let whichUsersNotifications = req.params.username;
+    let whichUsersNotifications = req.body.username;
+    let numberToGet = req.body.amount;
     Notification.find({ username: whichUsersNotifications })
         .sort("-date")
-        .limit(10)
+        .limit(numberToGet)
         .exec((err, docs) => {
             if (err) {
                 console.log(18, err);
@@ -70,9 +71,21 @@ router.post("/:username", (req, res) => {
     // ****
 });
 
-router.put("/:username/:id", (req, res) => {
+router.patch("/:username/:id", (req, res) => {
     // for "update was seen".
-    let id = req.query.id;
+    let id = req.body.id;
     let grabbedNotification = Notification.find({ _id: id });
-    grabbedNotification.update({ $set: { seen: true } });
+    grabbedNotification.updateOne(
+        { $set: { seen: true } },
+        function (err, success) {
+            if (err) {
+                console.log(err);
+            }
+            if (success) {
+                res.status(200).send(
+                    "HYPOTHETICALLY set notification to 'seen': " + id
+                );
+            }
+        }
+    );
 });
