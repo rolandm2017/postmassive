@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 
 import Massive from "../../components/massive/Massive";
 
+import Poll from "../../components/poll/Poll";
+
 import { getOptions } from "../../_helper/authHeader";
 
 import Wrapper from "../_pageHelper/Wrapper";
@@ -30,6 +32,11 @@ function Home(props) {
                 return res.json();
             })
             .then((data) => {
+                let x = [];
+                data.forEach((a) => {
+                    let k = Poll;
+                    x.push(k);
+                });
                 setMassives(data);
             });
     }, []);

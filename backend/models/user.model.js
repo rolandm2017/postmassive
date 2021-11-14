@@ -31,6 +31,7 @@ const userSchema = new Schema({
     acceptsTermsAndConditions: { type: Boolean, required: true },
     suspended: { type: Boolean, required: true },
 
+    // ***
     // public profile
     displayName: { type: String, required: true },
     bio: { type: String, required: false },
@@ -40,6 +41,7 @@ const userSchema = new Schema({
     following: { type: Array, required: true },
     DMsAreOpen: { type: Boolean, required: true },
     postCount: { type: Number, required: true },
+    // ***
 });
 
 module.exports = mongoose.model("Account", userSchema);

@@ -13,24 +13,6 @@ const { createProxyMiddleware } = require("http-proxy-middleware");
 //     dhparam: fs.readFileSync("/var/www/example/sslcert/dh-strong.pem"),
 // };
 
-// **
-// ** show current branch if master
-const { exec } = require("child_process");
-exec("git rev-parse --abbrev-ref HEAD", (err, stdout, stderr) => {
-    if (err) {
-        // handle your error
-    }
-
-    if (typeof stdout === "string" && stdout.trim() === "master") {
-        console.log(`The branch is master`);
-        // Call your function here conditionally as per branch
-    } else {
-        console.log("branch is: ", stdout);
-    }
-});
-
-const { createProxyMiddleware } = require("http-proxy-middleware");
-
 let port;
 if (production) {
     port = 5007;

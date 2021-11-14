@@ -64,16 +64,6 @@ function Amp(props) {
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD
-=======
-            <EngagementContainer
-                replies={26}
-                amps={133}
-                likes={2311}
-                views={93887}
-                cap={"110932"}
-            />
->>>>>>> 11/06/wallCRUD
         </div>
     );
 }

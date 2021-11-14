@@ -12,7 +12,6 @@ import {
     handlePageOne,
     handlePageTwo,
     handlePageThree,
-    handleFinish,
 } from "../../loginTools/util";
 
 import Display from "./components/Display";
@@ -249,5 +248,3 @@ function Landing(props) {
 }
 
 export default Landing;
-
-// FIXME: modal error msg styling is off, improve.
