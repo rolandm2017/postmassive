@@ -8,7 +8,7 @@ module.exports = router;
 
 router.get("/:username", (req, res) => {
     console.log(10, "notifications");
-    let whichUsersNotifications = req.query.username;
+    let whichUsersNotifications = req.params.username;
     Notification.find({ username: whichUsersNotifications })
         .sort("-date")
         .limit(10)
@@ -28,7 +28,21 @@ router.post("/:username", (req, res) => {
     let text = req.body.text;
     let date = Date.now();
     let count = Math.ceil(Math.random() * 100);
+
     let byWho = req.body.byWho.split(",");
+    let randomChoice = [];
+
+    for (let i = 0; i < byWho.length; i++) {
+        let randomInt = Math.random();
+        if (randomInt > 0.5) {
+            let selection = byWho[i];
+            randomChoice.push(selection);
+        }
+    }
+    if (randomChoice.length === 0) {
+        randomChoice.push(byWho[Math.floor(Math.random() * byWho.length)]);
+    }
+    console.log(32, type, text, date, count, randomChoice);
 
     Notification.create(
         {
@@ -37,7 +51,7 @@ router.post("/:username", (req, res) => {
             text: text,
             date: date,
             count: count,
-            byWho: byWho,
+            byWho: randomChoice,
         },
         function (err) {
             if (err) {
@@ -48,7 +62,7 @@ router.post("/:username", (req, res) => {
                 "created notification for: " +
                 username +
                 "\n...with users: " +
-                byWho.toString();
+                randomChoice;
             res.status(200).send(successMsg);
         }
     );
