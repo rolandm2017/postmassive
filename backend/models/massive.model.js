@@ -35,6 +35,9 @@ const massiveSchema = new Schema({
     viewsFloor: { type: Number, required: true, default: 100 }, // default guaranteed engagement
     likesFloor: { type: Number, required: true, default: 3 }, // default guaranteed engagement
     repliesFloor: { type: Number, required: true, default: 1 }, // default guaranteed engagement
+    emoji: {
+        type: Object,
+    },
 });
 
 module.exports = mongoose.model("Massive", massiveSchema);

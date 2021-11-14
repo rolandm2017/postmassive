@@ -44,7 +44,6 @@ router.post("/:recipient", (req, res) => {
         }
         console.log(25, err);
     });
-    //recipient,sender,text,date,linksSomeonesMassive,linkedMassiveId,hasImage,imageURL
 });
 
 router.delete("/:recipient", (req, res) => {
