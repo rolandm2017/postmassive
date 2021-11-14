@@ -15,7 +15,7 @@ import "../../components/notifications/Shared.scss";
 
 import { getOptions } from "../../_helper/authHeader";
 
-function Notifications() {
+function Notifications(props) {
     const [notifications, setNotifications] = useState(null);
 
     useEffect(() => {
@@ -108,17 +108,17 @@ function Notifications() {
             pageName="notifications"
             sectionName="notifications_main"
             onSearchPage={false}
-            breakpoints={this.props.breakpoints}
+            breakpoints={props.breakpoints}
         >
             <div className="notifications_container">
                 <div className="pt-3 pb-2">
                     <h2 id="notifications_headline">Notifications</h2>
                 </div>
-                {this.state.notifications
-                    ? this.state.notifications.map((notification, index) => {
+                {notifications === null
+                    ? null
+                    : notifications.map((notification, index) => {
                           return this.generate(notification);
-                      })
-                    : null}
+                      })}
             </div>
         </Wrapper>
     );

@@ -26,6 +26,7 @@ function Messages(props) {
     const [showSettings, setShowSettings] = useState(false);
 
     useEffect(() => {
+        // TODO: expect this to be broken!
         const messagesUrl = process.env.REACT_APP_API_URL + "/messages";
         fetch(messagesUrl, getOptions(messagesUrl)).then((res) => {
             res.json().then((messages) => {
