@@ -72,6 +72,7 @@ router.post("/:username", (req, res) => {
 });
 
 router.patch("/:username/:id", (req, res) => {
+    // TODO: Convert to ARRAY of Ids instead of Singular Id so can batch see notifs
     // for "update was seen".
     let id = req.body.id;
     let grabbedNotification = Notification.find({ _id: id });

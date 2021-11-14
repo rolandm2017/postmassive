@@ -100,7 +100,7 @@ app.use(api + "/notifications", require("./notifications/index"));
 // *** *** ***
 // CRUD for DMs
 
-// app.use(api + "?")
+app.use(api + "/message", require("./userActions/message/message"));
 
 //
 
