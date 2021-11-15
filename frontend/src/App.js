@@ -123,7 +123,7 @@ function App() {
                         <Route path="/explore">
                             <Search />
                         </Route>
-                        <Route path="/massive">
+                        <Route path="/massive/:id">
                             <Massive />
                         </Route>
                         <Route exact path="/:username">

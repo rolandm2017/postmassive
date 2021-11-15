@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useHistory } from "react";
 
 import Wrapper from "../_pageHelper/Wrapper";
 
 // TODO: make each Massiv have a custom URL based on Poster Username + MassivID
 
 function Massive(props) {
+    const history = useHistory();
+    const { _id } = props.match.params;
+
     return (
         <Wrapper
             pageName="massive"
@@ -13,7 +16,7 @@ function Massive(props) {
             onMessagePgae={false}
             breakpoints={props.breakpoints}
         >
-            <div>foo</div>
+            <div></div>
         </Wrapper>
     );
 }
