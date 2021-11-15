@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useHistory } from "react";
+import React, { useState, useEffect } from "react";
 import { getOptions } from "../../_helper/authHeader";
-import { createSlice } from "@reduxjs/toolkit";
+
+import { useHistory } from "react-router-dom";
 
 import Massive from "../../components/massive/Massive";
 
@@ -9,7 +10,7 @@ import Wrapper from "../_pageHelper/Wrapper";
 function Home(props) {
     const [massives, setMassives] = useState([]);
 
-    const history = useHistory();
+    let history = useHistory();
 
     useEffect(() => {
         document.title = "AabbbbBbba";
@@ -36,8 +37,8 @@ function Home(props) {
                       return (
                           <div
                               onClick={() => {
-                                  // todo: use redux to put massive data to /massive/:id
-                                  history.push("/massive/" + massive._id);
+                                  let pathToGoTo = "/massive/" + massive._id;
+                                  history.push(pathToGoTo);
                               }}
                           >
                               <Massive

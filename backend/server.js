@@ -92,6 +92,8 @@ app.use(api + "/profile", require("./userActions/profile/profile"));
 // Retrieve Wall updates
 app.use(api + "/wall", require("./wall/index"));
 
+app.use(api + "/massive", require("./massive/massive"));
+
 // *** *** ***
 // notifications
 app.use(api + "/notifications", require("./notifications/notifications"));
