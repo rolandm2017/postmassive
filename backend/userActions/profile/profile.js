@@ -59,17 +59,6 @@ router.get("/profiles", (req, res) => {
 });
 
 function safeguard(privateData) {
-    // const publiclyViewableData = {
-    //     username: privateData.username,
-    //     privateData.displayName,
-    //     privateData.bio,
-    //     privateData.location,
-    //     privateData.url,
-    //     privateData.followers,
-    //     privateData.following,
-    //     privateData.DMsAreOpen,
-    //     privateData.postCount,
-    // };
     const {
         username,
         displayName,
@@ -132,27 +121,7 @@ router.post("/init", (req, res) => {
     );
 });
 
-router.put("/:username", (req, res) => {
-    // Oh my gosh, WET code? Why, yes!
-    // Repeat code on purpose, thanks!
-    let username = req.params.username;
-    const { displayName, bio, location, url } = req.body;
-
-    let query = { username: username };
-    User.findOneAndUpdate(query, {
-        $set: {
-            displayName: displayName,
-            bio: bio,
-            location: location,
-            url: url,
-        },
-    });
-    res.status(200).send();
-});
-
 router.patch("/:username", (req, res) => {
-    // Oh my gosh, WET code? Why, yes!
-    // Repeat code on purpose, thanks!
     let username = req.params.username;
     const { displayName, bio, location, url } = req.body;
     let query = { username: username };
@@ -167,6 +136,7 @@ router.patch("/:username", (req, res) => {
 });
 
 router.patch("/:username/dms", (req, res) => {
+    // flip value of DMs
     let username = req.params.username;
     let dmStatus = req.body.dmStatus;
     User.findOneAndUpdate(
@@ -175,10 +145,17 @@ router.patch("/:username/dms", (req, res) => {
     ).then((err, query) => {
         if (err) {
             console.log(115, err);
+        } else if (query) {
+            console.log(87, query);
+            let dmStatusPost;
+            if (dmStatus) {
+                dmStatusPost = "open";
+            } else {
+                dmStatusPost = "closed";
+            }
+            res.status(200).send("changed DM status to " + dmStatusPost, query);
+        } else {
+            throw "You shouldn't be able to get here you know...";
         }
-        console.log(87, query);
-        res.status(200).send("changed DM status to " + dmStatus);
-        // TODO: respond to user with success message, a brief popup saying "DMs are closed now."
-        // TODO: implement "close DMs for 3 days/week/month" & the Open version
     });
 });
