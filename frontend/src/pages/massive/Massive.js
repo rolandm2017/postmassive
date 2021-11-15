@@ -32,7 +32,7 @@ function Massive(props) {
             onMessagePgae={false}
             breakpoints={props.breakpoints}
         >
-            <div></div>
+            <div>{massive.length !== 0 ? massive.likes : null}</div>
         </Wrapper>
     );
 }

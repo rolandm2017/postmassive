@@ -42,15 +42,24 @@ router.post("/post", async (req, res) => {
     let displayName = userDoc.displayName;
 
     console.log(38, username, content, postFloor, datePosted, displayName);
-    // let mostRecentPostNumber = db.Massive.findOne(
-    //     {},
-    //     { $orderby: { created_at: -1 } }
-    // ).limit(1).postNumber;
-    // let newPostNumber = mostRecentPostNumber + 1;
+    let currentHighestPostNumber = Massive.find({})
+        .sort({ postNumber: "desc" })
+        .limit(1)
+        .exec((err, post) => {
+            if (err) {
+                console.log(7, err);
+                reject(err);
+            } else {
+                return post;
+            }
+        }).postNumber;
+    let newHighestPostNum = currentHighestPostNumber + 1;
     console.log(47, req.body);
-    // throw "Success kinda"; // postNumber, postedByUser, text, date,
+    // ### *** ###
+    // FIXME: MAJOR issue with Posting Massives and the postNumber.
+    // ### *** ###
     let newMassive = new Massive({
-        postNumber: 1, // will have to autoincrement this somehow...
+        postNumber: newHighestPostNum, // will have to autoincrement this somehow...
         postedByUser: username,
         displayName: displayName,
         text: content,

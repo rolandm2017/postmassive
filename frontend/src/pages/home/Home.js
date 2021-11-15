@@ -4,6 +4,7 @@ import { getOptions } from "../../_helper/authHeader";
 import { useHistory } from "react-router-dom";
 
 import Massive from "../../components/massive/Massive";
+import Poll from "../../components/poll/Poll";
 
 import Wrapper from "../_pageHelper/Wrapper";
 
@@ -21,7 +22,14 @@ function Home(props) {
                 return res.json();
             })
             .then((data) => {
-                setMassives(data);
+                let puttingSomePollsIntoIt = [];
+                for (let i = 0; i < 5; i++) {
+                    puttingSomePollsIntoIt.push("poll");
+                }
+                for (let i = 0; i < data.length; i++) {
+                    puttingSomePollsIntoIt.push(data[i]);
+                }
+                setMassives(puttingSomePollsIntoIt);
             });
     }, []);
 
@@ -34,10 +42,18 @@ function Home(props) {
         >
             {massives.length > 0
                 ? massives.map((massive) => {
+                      if (massive === "poll") {
+                          return (
+                              <div>
+                                  <Poll />
+                              </div>
+                          );
+                      }
                       return (
                           <div
                               onClick={() => {
-                                  let pathToGoTo = "/massive/" + massive._id;
+                                  let pathToGoTo =
+                                      "/massive/" + massive.postNumber;
                                   history.push(pathToGoTo);
                               }}
                           >

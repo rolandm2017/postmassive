@@ -1,5 +1,7 @@
 import React from "react";
 
+import "./Poll.css";
+
 function Poll(props) {
     // props.poll1.percentage for pct filled
     return (
