@@ -22,13 +22,20 @@ router.get("/get", (req, res) => {
 router.get("/profiles", (req, res) => {
     let amount = req.body.amount;
     let usernames = req.body.usernames;
+
+    let lowercaseUsernames = [];
+    usernames.forEach((u) => {
+        lowercaseUsernames.push(u.toLowerCase());
+    });
     let query;
     if (amount) {
         console.log(26, amount);
         query = User.find({}).sort({ date: -1 }).limit(amount);
     } else if (usernames) {
-        console.log(30, usernames);
-        query = User.find({}).sort({ date: -1 }).limit(usernames.length);
+        console.log(30, lowercaseUsernames);
+        query = User.find({ username: { $in: lowercaseUsernames } })
+            .sort({ date: -1 })
+            .limit(usernames.length);
     } else {
         console.log(amount, usernames);
         throw "How did this happen?";
