@@ -41,16 +41,15 @@ function Poll(props) {
                 </div>
             </div>
             <div id="testOuter">
-                <div id="testInnerOne"></div>
+                <div id="testInnerOne">Words</div>
                 <div id="testInnerTwo"></div>
             </div>
-            {/* <div className="">
-                <div className="shellInner">
-                    <div className={convertWidthToCssClass(30)}>
-                        <p>Fiction</p>
-                    </div>
+            <div id="testOuter2">
+                <div id={"testInnerOne2"}>
+                    <p>Fiction</p>
                 </div>
-            </div> */}
+                <div id="testInnerTwo2"></div>
+            </div>
             {/* <div className="shellOuter">
                 <div className="shellInner">
                     <div className={convertWidthToCssClass(10)}>
