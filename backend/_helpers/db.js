@@ -10,7 +10,7 @@ const connectionOptions = {
 };
 
 if (local) {
-    console.log("CONNECTED LOCALLY to the db");
+    console.log("CONNECTED LOCALLY to the db", config.localConnect);
     mongoose.connect(config.localConnect, connectionOptions);
 } else {
     mongoose.connect(config.connectionString, connectionOptions);
