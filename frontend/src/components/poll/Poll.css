@@ -119,10 +119,23 @@
 .secondaryPoll {
     color: white;
     height: 300px;
+    border: 5px solid rgb(23, 32, 42);
 }
 
-.secondaryPollContainer {
-    width: 50%;
-    height: 50%;
-    border: 3px solid gold;
+.pollResultContainer {
+    width: 100%;
+    height: 20%;
+    /* height is 20% of parent container; for a learning experience, try setting it to 30%  with borders included */
+    border: 3px solid #aaa;
+    display: flex;
+}
+
+.side30 {
+    width: 30%;
+    border: 3px solid yellow;
+}
+
+.side70 {
+    width: 70%;
+    border: 5px dotted darkorchid;
 }

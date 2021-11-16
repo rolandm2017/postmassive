@@ -97,8 +97,14 @@ let oldPoll = (
 
 let newPoll = (
     <div className="secondaryPoll">
-        <div className="secondaryPollContainer">foo</div>
-        <div className="secondaryPollContainer">bar</div>
+        <div className="pollResultContainer">
+            <div className="side30">30%</div>
+            <div className="side70">70%</div>
+        </div>
+        <div className="pollResultContainer">bar</div>
+        <div className="pollResultContainer">baz</div>
+        <div className="pollResultContainer">gad</div>
+        <div className="pollResultContainer">zukes</div>
     </div>
 );
 
