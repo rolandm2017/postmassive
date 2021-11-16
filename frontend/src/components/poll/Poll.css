@@ -1,4 +1,4 @@
-.pct0 {
+/* .pct0 {
     width: 0%;
     background-color: red !important;
     border: 5px solid red;
@@ -61,10 +61,10 @@
     width: 100%;
     background-color: red !important;
     border: 5px solid red;
-}
+} */
 
 .pollGeneric {
-    height: 200px;
+    height: 120px;
     border: 5px solid white;
 }
 
@@ -116,26 +116,125 @@
 
 /* the goods */
 
-.secondaryPoll {
+.pollMainContainer {
     color: white;
     height: 300px;
     border: 5px solid rgb(23, 32, 42);
 }
 
-.pollResultContainer {
+.pollInnerContainer {
     width: 100%;
-    height: 20%;
+    height: 19%;
     /* height is 20% of parent container; for a learning experience, try setting it to 30%  with borders included */
     border: 3px solid #aaa;
     display: flex;
 }
-
+.pollResultContainer {
+    height: 200px;
+}
+.pollTextContainer {
+    height: 100px;
+}
+.side0 {
+    width: 5%;
+    border: none;
+}
+.side10 {
+    width: 10%;
+    border: 3px solid darkorchid;
+}
+.side20 {
+    width: 20%;
+    border: 3px solid darkorchid;
+}
 .side30 {
     width: 30%;
-    border: 3px solid yellow;
+    border: 3px solid darkorchid;
 }
-
+.side40 {
+    width: 40%;
+    border: 3px solid darkorchid;
+}
+.side50 {
+    width: 50%;
+    border: 3px solid darkorchid;
+}
+.side60 {
+    width: 60%;
+    border: 3px solid darkorchid;
+}
 .side70 {
     width: 70%;
+    border: 5px dotted darkorchid;
+}
+
+.side80 {
+    width: 80%;
+    border: 5px dotted darkorchid;
+}
+
+.side90 {
+    width: 90%;
+    border: 5px dotted darkorchid;
+}
+.side100 {
+    width: 95%;
+    border: 5px dotted darkorchid;
+}
+
+.side0fill {
+    width: 5%;
+    background-color: red;
+    border: none;
+}
+.side10fill {
+    width: 10%;
+    background-color: red;
+    border: 3px solid darkorchid;
+}
+.side20fill {
+    width: 20%;
+    background-color: red;
+    border: 3px solid darkorchid;
+}
+.side30fill {
+    width: 30%;
+    background-color: red;
+    border: 3px solid darkorchid;
+}
+.side40fill {
+    width: 40%;
+    background-color: red;
+    border: 3px solid darkorchid;
+}
+.side50fill {
+    width: 50%;
+    border: 3px solid darkorchid;
+}
+.side60fill {
+    width: 60%;
+    background-color: red;
+    border: 3px solid darkorchid;
+}
+.side70fill {
+    width: 70%;
+    background-color: red;
+    border: 5px dotted darkorchid;
+}
+
+.side80fill {
+    width: 80%;
+    background-color: red;
+    border: 5px dotted darkorchid;
+}
+
+.side90fill {
+    width: 90%;
+    background-color: red;
+    border: 5px dotted darkorchid;
+}
+.side100fill {
+    width: 95%;
+    background-color: red;
     border: 5px dotted darkorchid;
 }

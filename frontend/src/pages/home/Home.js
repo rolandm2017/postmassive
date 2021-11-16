@@ -45,7 +45,32 @@ function Home(props) {
                       if (massive === "poll") {
                           return (
                               <div>
-                                  <Poll />
+                                  <Poll
+                                      possibilities={6}
+                                      options={[
+                                          {
+                                              text: "i love it",
+                                              percentage: 20,
+                                          },
+                                          {
+                                              text: "I don't love it",
+                                              percentage: 0,
+                                          },
+                                          {
+                                              text: "foo",
+                                              percentage: 10,
+                                          },
+                                          {
+                                              text: "bar",
+                                              percentage: 70,
+                                          },
+                                          { text: "baz", percentage: 0 },
+                                          {
+                                              text: "star trek",
+                                              percentage: 0,
+                                          },
+                                      ]}
+                                  />
                               </div>
                           );
                       }
