@@ -1,0 +1,68 @@
+.pct0 {
+    width: 0%;
+    background-color: red !important;
+}
+
+.pct10 {
+    width: 10%;
+    background-color: aqua !important;
+}
+
+.pct20 {
+    width: 20%;
+    background-color: rebeccapurple !important;
+}
+
+.pct30 {
+    width: 30%;
+    background-color: saddlebrown !important;
+}
+
+.pct40 {
+    width: 40%;
+    background-color: salmon !important;
+}
+
+.pct50 {
+    width: 50%;
+    background-color: seagreen !important;
+}
+
+.pct60 {
+    width: 60%;
+    background-color: antiquewhite !important;
+}
+
+.pct70 {
+    width: 70%;
+    background-color: green !important;
+}
+
+.pct80 {
+    width: 80%;
+    background-color: greenyellow !important;
+}
+
+.pct90 {
+    width: 90%;
+    background-color: yellow !important;
+}
+
+.pct100 {
+    width: 100%;
+    background-color: red !important;
+}
+
+.pollGeneric {
+    border: 5px solid white;
+}
+
+.shellInner {
+    height: 20px;
+    width: 100%;
+}
+.shellOuter {
+    height: 20px;
+    display: flex;
+    align-items: row;
+}
