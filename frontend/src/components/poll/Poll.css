@@ -1,11 +1,13 @@
 .pct0 {
     width: 0%;
     background-color: red !important;
+    border: 5px solid red;
 }
 
 .pct10 {
     width: 10%;
     background-color: aqua !important;
+    border: 5px solid aqua;
 }
 
 .pct20 {
@@ -16,53 +18,82 @@
 .pct30 {
     width: 30%;
     background-color: saddlebrown !important;
+    border: 5px solid saddlebrown;
 }
 
 .pct40 {
     width: 40%;
     background-color: salmon !important;
+    border: 5px solid saddlebrown;
 }
 
 .pct50 {
     width: 50%;
     background-color: seagreen !important;
+    border: 5px solid saddlebrown;
 }
 
 .pct60 {
     width: 60%;
     background-color: antiquewhite !important;
+    border: 5px solid saddlebrown;
 }
 
 .pct70 {
     width: 70%;
     background-color: green !important;
+    border: 5px solid saddlebrown;
 }
 
 .pct80 {
     width: 80%;
     background-color: greenyellow !important;
+    border: 5px solid saddlebrown;
 }
 
 .pct90 {
     width: 90%;
     background-color: yellow !important;
+    border: 5px solid saddlebrown;
 }
 
 .pct100 {
     width: 100%;
     background-color: red !important;
+    border: 5px solid red;
 }
 
 .pollGeneric {
+    height: 200px;
     border: 5px solid white;
 }
 
 .shellInner {
-    height: 20px;
     width: 100%;
-}
-.shellOuter {
-    height: 20px;
     display: flex;
     align-items: row;
+}
+
+.thePollItself {
+    min-height: 100%;
+    border: 5px solid red !important;
+}
+.shellOuter {
+    height: 40px;
+}
+
+#testInnerOne {
+    width: 30%;
+    background-color: seagreen;
+}
+#testInnerTwo {
+    width: 70%;
+    background-color: black !important;
+}
+
+#testOuter {
+    display: flex;
+    border: 2px solid black;
+    height: 100px;
+    background-color: salmon;
 }
