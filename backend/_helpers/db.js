@@ -1,5 +1,6 @@
 const config = require("../config.json");
 const mongoose = require("mongoose");
+const local = config.local;
 
 const connectionOptions = {
     useCreateIndex: true,
@@ -8,7 +9,13 @@ const connectionOptions = {
     useFindAndModify: false,
 };
 console.log(config.connectionString);
-mongoose.connect(config.connectionString, connectionOptions);
+
+if (local) {
+    console.log("CONNECTED LOCALLY");
+    mongoose.connect(config.localConnect, connectionOptions);
+} else {
+    mongoose.connect(config.connectionString, connectionOptions);
+}
 console.log("mongoose is connected to db");
 
 module.exports = {
