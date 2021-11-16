@@ -23,7 +23,7 @@ function Home(props) {
             })
             .then((data) => {
                 let puttingSomePollsIntoIt = [];
-                for (let i = 0; i < 5; i++) {
+                for (let i = 0; i < 1; i++) {
                     puttingSomePollsIntoIt.push("poll");
                 }
                 for (let i = 0; i < data.length; i++) {
