@@ -8,15 +8,17 @@ const connectionOptions = {
     useUnifiedTopology: true,
     useFindAndModify: false,
 };
-console.log(config.connectionString);
 
 if (local) {
-    console.log("CONNECTED LOCALLY");
+    console.log("CONNECTED LOCALLY to the db");
     mongoose.connect(config.localConnect, connectionOptions);
 } else {
     mongoose.connect(config.connectionString, connectionOptions);
+    console.log(
+        "mongoose is connected to db remotely",
+        config.connectionString
+    );
 }
-console.log("mongoose is connected to db");
 
 module.exports = {
     Massive: require("../models/massive.model"),

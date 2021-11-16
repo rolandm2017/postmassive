@@ -75,7 +75,11 @@ function Poll({ possibilities, options }) {
     let pollOptions = (
         <div className="pollResultContainer">
             {options.map((poll, index) => {
-                <Option text={poll.text} percentage={poll.percentage} />;
+                <Option
+                    key={index}
+                    text={poll.text}
+                    percentage={poll.percentage}
+                />;
             })}
         </div>
     );
