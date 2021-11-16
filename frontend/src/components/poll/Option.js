@@ -3,6 +3,7 @@ import React from "react";
 import convertWidthToCSS from "./convertWidthToCSS";
 
 function Option(text, percentage) {
+    console.log(6, text, percentage);
     return (
         <div className="pollInnerContainer">
             <div className={convertWidthToCSS(percentage)}>{text}</div>
