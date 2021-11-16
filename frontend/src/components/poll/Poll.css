@@ -113,3 +113,16 @@
     height: 100px;
     background-color: salmon;
 }
+
+/* the goods */
+
+.secondaryPoll {
+    color: white;
+    height: 300px;
+}
+
+.secondaryPollContainer {
+    width: 50%;
+    height: 50%;
+    border: 3px solid gold;
+}
