@@ -38,6 +38,12 @@ router.post("/post", async (req, res) => {
     let datePosted = Date.now();
 
     let getCostOfPosting = createCostOfPosting(); // fixme: should be moved to the post screen
+    // fixme: I try to Post and get a bug because I can't db.User.FindOne to match this post's request.
+    // i need to find this user so I can update their postCount.
+    // the post needs to have a ... username and other fields attached to it ... just some fields ...
+    // actual error:
+    // (node:7032) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'displayName' of null
+    // at C:\Users\jenfr\Documents\code\2021\postmassive\backend\userActions\post\post.js:42:31
     let userDoc = await db.User.findOne({ username: username });
     let displayName = userDoc.displayName;
 

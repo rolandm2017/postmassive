@@ -41,7 +41,7 @@ const corsOptions = {
         callback(new Error("Not allowed by CORS"));
     },
 };
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 // app.use(cors());
 // if (!production) {
 //     console.log("Proxy engaged, localhost:3000 -> 127.0.0.1");
