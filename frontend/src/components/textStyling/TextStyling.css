@@ -1,0 +1,86 @@
+.textSize16 {
+    font-size: 16px;
+}
+.textSize18 {
+    font-size: 18px;
+}
+.textSize20 {
+    font-size: 20px;
+}
+.textSize22 {
+    font-size: 22px;
+}
+.textSize24 {
+    font-size: 24px;
+}
+.textSize26 {
+    font-size: 26px;
+}
+
+.textAlignmentUpDown {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.textAlignmentAddPadding {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.paddingSmall {
+    padding-left: 20px;
+}
+
+.paddingMedium {
+    padding-left: 40px;
+}
+
+.paddingBig {
+    padding-left: 60px;
+}
+
+.makeBold {
+    font-weight: bold;
+}
+
+.makeItalics {
+    font-style: italic;
+}
+
+.makeStrikethrough {
+    text-decoration: line-through;
+}
+
+.makeUnderline {
+    text-decoration: underline;
+}
+
+.backgroundColorGreen {
+    background-color: greenyellow;
+}
+
+.backgroundColorCyan {
+    background-color: cyan;
+}
+
+.backgroundColorRed {
+    background-color: red;
+}
+
+.backgroundColorOrange {
+    background-color: orange;
+}
+
+.backgroundColorPurple {
+    background-color: orchid;
+}
+
+.backgroundColorBlack {
+    background-color: black;
+    color: white;
+}

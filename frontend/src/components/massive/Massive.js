@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 import EngagementContainer from "../engagementContainer/EngagementContainer";
 
@@ -6,14 +6,16 @@ import Logo from "../../images/bluePfp.png";
 
 import "./Massive.css";
 
-class Massive extends Component {
+import "../textStyling/TextStyling.css";
+
+function Massive() {
     // showMassiveAsPage(massiveId) {
     //     // massiveId is slug
     //     console.log(massiveId);
     //     this.props.history.push("/massive/" + massiveId.toString());
     // }
 
-    convertEngagementText(inputNum) {
+    function convertEngagementText(inputNum) {
         // will receive views and likes in the millions.
         // convert 10,000-999,999 -> 10.0k - 999.9k
         // 1,000,000 to 999m -> 1.00m - 999.9m
@@ -63,48 +65,53 @@ class Massive extends Component {
         }
     }
 
-    render() {
-        return (
-            <div className="background-blue bg-blue-highlight">
-                <div className="massive-container py-2 d-flex flex-column border-top ">
-                    <div className="d-flex">
-                        <div className="m-profile-pic-container">
-                            <img
-                                className="massive-profile-pic profile-pic"
-                                src={Logo}
-                                alt="dish"
-                            />
-                        </div>
-                        <div className="width-control text-left">
-                            <div className="m-author-container mt-1 d-flex">
-                                <p className="mr-2 mb-2">
-                                    <strong>{this.props.displayName}</strong>
-                                    {/* // this.props.displayName goes here! */}
-                                </p>
-                                <p className="m-author-handle mb-0">
-                                    {" "}
-                                    @{this.props.author}{" "}
-                                    {/* // this props author aka username goes here!!!! */}
-                                </p>
-                            </div>
+    function enterCustomStyling(inputText, customStyling) {}
 
-                            <p className="mt-0 text-left">
-                                {this.props.content}
+    let customStyling = "fontSizeWholeText"; // hardcode via this input
+
+    return (
+        <div className="background-blue bg-blue-highlight">
+            <div className="massive-container py-2 d-flex flex-column border-top ">
+                <div className="d-flex">
+                    <div className="m-profile-pic-container">
+                        <img
+                            className="massive-profile-pic profile-pic"
+                            src={Logo}
+                            alt="dish"
+                        />
+                    </div>
+                    <div className="width-control text-left">
+                        <div className="m-author-container mt-1 d-flex">
+                            <p className="mr-2 mb-2">
+                                <strong>{this.props.displayName}</strong>
+                                {/* // this.props.displayName goes here! */}
                             </p>
-                            <EngagementContainer
-                                replies={this.props.replies}
-                                amps={this.props.amps}
-                                likes={this.props.likes}
-                                views={this.props.views}
-                                cap={this.props.cap}
-                                inFeed={true}
-                            />
+                            <p className="m-author-handle mb-0">
+                                {" "}
+                                @{this.props.author}{" "}
+                                {/* // this props author aka username goes here!!!! */}
+                            </p>
                         </div>
+
+                        <p className="mt-0 text-left">
+                            {enterCustomStyling(
+                                this.props.content,
+                                customStyling
+                            )}
+                        </p>
+                        <EngagementContainer
+                            replies={this.props.replies}
+                            amps={this.props.amps}
+                            likes={this.props.likes}
+                            views={this.props.views}
+                            cap={this.props.cap}
+                            inFeed={true}
+                        />
                     </div>
                 </div>
             </div>
-        );
-    }
+        </div>
+    );
 }
 
 export default Massive;
