@@ -2,7 +2,8 @@ import React from "react";
 
 import MenuContainer from "../menu/MenuContainer";
 
-import Star from "../../images/star.png";
+// import Star from "../../images/star.png";
+// commented out 11-16 2021
 
 import "./MobileTopBar.scss";
 

@@ -12,7 +12,6 @@ import {
     handlePageOne,
     handlePageTwo,
     handlePageThree,
-    handleFinish,
 } from "../../loginTools/util";
 
 import Display from "./components/Display";

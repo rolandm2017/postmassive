@@ -10,7 +10,7 @@ import Cookies from "js-cookie";
 import { userValue, userSubject, getRefreshToken } from "../auth/use-auth";
 
 export function getOptions(url) {
-    console.log("further test:", authHeader(url));
+    // console.log("further test:", authHeader(url));
     return {
         method: "GET",
         headers: {
@@ -73,7 +73,7 @@ export function _deleteOptions(url) {
 // helper functions
 
 function authHeader(url, isExternal, calledBy) {
-    console.log("authHeader calledBy:", url, isExternal, calledBy);
+    // console.log("authHeader calledBy:", url, isExternal, calledBy);
     // return auth header with jwt if user is logged in and request is to the api url
     let user = userValue() !== null ? userValue() : false;
     if (isExternal) {
@@ -96,7 +96,7 @@ function authHeader(url, isExternal, calledBy) {
     const userObjectHasAToken = user.jwtToken;
     const isLoggedIn = user && userObjectHasAToken;
     const isApiUrl = url.startsWith(process.env.REACT_APP_API_URL);
-    console.log(83, isLoggedIn.substring(0, 20), isApiUrl, url);
+    // console.log(83, isLoggedIn.substring(0, 20), isApiUrl, url);
     if (isLoggedIn && isApiUrl) {
         // // console.log(
         // //     "Auth bearer trrying to add rToken",

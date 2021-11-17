@@ -44,7 +44,7 @@ function Home(props) {
                 ? massives.map((massive, index) => {
                       if (massive === "poll") {
                           return (
-                              <div>
+                              <div key={1}>
                                   <Poll
                                       key={index}
                                       pollText={
@@ -87,7 +87,7 @@ function Home(props) {
                               }}
                           >
                               <Massive
-                                  key={massive._id}
+                                  key={index}
                                   author={massive.postedByUser}
                                   displayName={massive.displayName}
                                   content={massive.text}

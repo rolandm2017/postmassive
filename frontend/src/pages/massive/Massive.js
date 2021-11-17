@@ -22,7 +22,7 @@ function Massive(props) {
             .then((data) => {
                 setMassive(data);
             });
-    }, []);
+    }, [id]);
 
     return (
         <Wrapper

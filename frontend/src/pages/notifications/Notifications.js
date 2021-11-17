@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-// import Reply from "../../components/notifications/Reply";
+// import Reply from "../../components/notifications/Reply";// commented out 11-16
 // import Amplify from "../../components/notifications/Amplify";
 // import Like from "../../components/notifications/Like";
 // import Follow from "../../components/notifications/Follow";
-// import Quote from "../../components/notifications/Quote";
+// import Quote from "../../components/notifications/Quote"; // commented out 11-16
 
 // import profilePicPlaceholder3 from "../../images/bluePfp.png";
 
