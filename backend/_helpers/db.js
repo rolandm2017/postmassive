@@ -9,15 +9,18 @@ const connectionOptions = {
     useFindAndModify: false,
 };
 
+// THIS SHOULD BE ONLY MONGO CONNECTION
+// THIS SHOULD BE ONLY MONGO CONNECTION
+// THIS SHOULD BE ONLY MONGO CONNECTION
+// THIS SHOULD BE ONLY MONGO CONNECTION
+// THIS SHOULD BE ONLY MONGO CONNECTION
+
 if (local) {
     console.log("CONNECTED LOCALLY to the db", config.localConnect);
     mongoose.connect(config.localConnect, connectionOptions);
 } else {
+    console.log("mongoose connects: remote db", config.connectionString);
     mongoose.connect(config.connectionString, connectionOptions);
-    console.log(
-        "mongoose is connected to db remotely",
-        config.connectionString
-    );
 }
 
 module.exports = {
