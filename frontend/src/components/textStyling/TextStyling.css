@@ -1,3 +1,55 @@
+.backgroundColorGreen {
+    background-color: greenyellow;
+}
+
+.backgroundColorCyan {
+    background-color: cyan;
+}
+
+.backgroundColorRed {
+    background-color: red;
+}
+
+.backgroundColorOrange {
+    background-color: orange;
+}
+
+.backgroundColorPurple {
+    background-color: orchid;
+}
+
+.backgroundColorBlack {
+    background-color: black;
+    color: white;
+}
+
+.makeBold {
+    font-weight: bold;
+}
+
+.makeItalics {
+    font-style: italic;
+}
+
+.makeStrikethrough {
+    text-decoration: line-through;
+}
+
+.makeUnderline {
+    text-decoration: underline;
+}
+.paddingSmall {
+    padding-left: 20px;
+}
+
+.paddingMedium {
+    padding-left: 40px;
+}
+
+.paddingBig {
+    padding-left: 60px;
+}
+
 .textSize16 {
     font-size: 16px;
 }
@@ -30,57 +82,4 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-}
-
-.paddingSmall {
-    padding-left: 20px;
-}
-
-.paddingMedium {
-    padding-left: 40px;
-}
-
-.paddingBig {
-    padding-left: 60px;
-}
-
-.makeBold {
-    font-weight: bold;
-}
-
-.makeItalics {
-    font-style: italic;
-}
-
-.makeStrikethrough {
-    text-decoration: line-through;
-}
-
-.makeUnderline {
-    text-decoration: underline;
-}
-
-.backgroundColorGreen {
-    background-color: greenyellow;
-}
-
-.backgroundColorCyan {
-    background-color: cyan;
-}
-
-.backgroundColorRed {
-    background-color: red;
-}
-
-.backgroundColorOrange {
-    background-color: orange;
-}
-
-.backgroundColorPurple {
-    background-color: orchid;
-}
-
-.backgroundColorBlack {
-    background-color: black;
-    color: white;
 }

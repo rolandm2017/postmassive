@@ -65,11 +65,31 @@ function Massive(props) {
         }
     }
 
-    function enterCustomStyling(inputText, locationCodes, customStyling) {
-        // how to locationCode? [1, 9, 36, 42, 49, 53, 193, 207] divide those up into subdivisions within the text.
-        // 1-9 is span1, 36-42 is span2, 49-53 is span3
+    // function enterCustomStyling(inputText, locationCodes, customStyling) {
+    //     // how to locationCode? [1, 9, 36, 42, 49, 53, 193, 207] divide those up into subdivisions within the text.
+    //     // 1-9 is span1, 36-42 is span2, 49-53 is span3
 
-        return <span className={`${customStyling}`}>{inputText}</span>;
+    //     return <span className={`${customStyling}`}>{inputText}</span>;
+    // }
+
+    function enterCustomStylingCodes(inputText, locationCodes, stylings) {
+        let plainTextChunks = [];
+        let specialTextChunks = [];
+        textChunks.push(inputText.substring(0, locationCodes[0]));
+        // const finalIndexForInputText = inputText.length
+        for (let i = 0; i < locationCodes.length; i++) {
+            if (i % 2 === 1) {
+                plainTextChunks.push(
+                    inputText.substring(locationCodes[i], locationCodes[i + 1])
+                );
+            } else {
+                specialTextChunks.push(
+                    inputText.substring(location[i], locationCodes[i + 1])
+                );
+            }
+            // will find edge cases as I go
+        }
+        let numberOfChunks = locationCodes.length; // should be ... [3, 5] yields 3 chunks: start, special, end.
     }
 
     let customStyling = "fontSizeWholeText"; // hardcode via this input
