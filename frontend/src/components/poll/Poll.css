@@ -1,67 +1,23 @@
-/* .pct0 {
-    width: 0%;
-    background-color: red !important;
-    border: 5px solid red;
+.heightModifier2 div:first-of-type {
+    height: 40px;
+    border: 3px solid red;
 }
-
-.pct10 {
-    width: 10%;
-    background-color: aqua !important;
-    border: 5px solid aqua;
+.heightModifier3 div:first-of-type {
+    height: 60px;
+    border: 3px solid cyan;
 }
-
-.pct20 {
-    width: 20%;
-    background-color: rebeccapurple !important;
+.heightModifier4 div:first-of-type {
+    height: 80px;
+    border: 3px solid cyan;
 }
-
-.pct30 {
-    width: 30%;
-    background-color: saddlebrown !important;
-    border: 5px solid saddlebrown;
+.heightModifier5 div:first-of-type {
+    height: 100px;
+    /* border: 3px solid red; */
 }
-
-.pct40 {
-    width: 40%;
-    background-color: salmon !important;
-    border: 5px solid saddlebrown;
+.heightModifier6 div {
+    height: 40px;
+    /* border: 3px solid red; */
 }
-
-.pct50 {
-    width: 50%;
-    background-color: seagreen !important;
-    border: 5px solid saddlebrown;
-}
-
-.pct60 {
-    width: 60%;
-    background-color: antiquewhite !important;
-    border: 5px solid saddlebrown;
-}
-
-.pct70 {
-    width: 70%;
-    background-color: green !important;
-    border: 5px solid saddlebrown;
-}
-
-.pct80 {
-    width: 80%;
-    background-color: greenyellow !important;
-    border: 5px solid saddlebrown;
-}
-
-.pct90 {
-    width: 90%;
-    background-color: yellow !important;
-    border: 5px solid saddlebrown;
-}
-
-.pct100 {
-    width: 100%;
-    background-color: red !important;
-    border: 5px solid red;
-} */
 
 .pollGeneric {
     height: 120px;
@@ -69,7 +25,7 @@
 }
 .pollResultContainer {
     color: white;
-    font-size: 22px;
+    font-size: 14px;
     /* background-color: white !important; */
 }
 
@@ -124,7 +80,7 @@
 .pollMainContainer {
     color: white;
     height: 300px;
-    border: 5px solid rgb(23, 32, 42);
+    border: 5px solid greenyellow;
 }
 
 .pollInnerContainer {
@@ -134,6 +90,12 @@
     border: 3px solid #aaa;
     display: flex;
 }
+
+.pollInnerContainer span {
+    color: white;
+    background-color: red !important;
+}
+
 .pollResultContainer {
     height: 200px;
 }
