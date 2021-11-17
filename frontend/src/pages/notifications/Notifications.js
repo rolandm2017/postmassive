@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-import Reply from "../../components/notifications/Reply";
-import Amplify from "../../components/notifications/Amplify";
-import Like from "../../components/notifications/Like";
-import Follow from "../../components/notifications/Follow";
-import Quote from "../../components/notifications/Quote";
+// import Reply from "../../components/notifications/Reply";
+// import Amplify from "../../components/notifications/Amplify";
+// import Like from "../../components/notifications/Like";
+// import Follow from "../../components/notifications/Follow";
+// import Quote from "../../components/notifications/Quote";
 
-import profilePicPlaceholder3 from "../../images/bluePfp.png";
+// import profilePicPlaceholder3 from "../../images/bluePfp.png";
 
 import Wrapper from "../_pageHelper/Wrapper";
 
