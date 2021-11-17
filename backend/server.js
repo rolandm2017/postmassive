@@ -3,6 +3,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const production = require("./config.json").production;
+const postman = require("./config.json").postman;
 
 const { createProxyMiddleware } = require("http-proxy-middleware");
 
@@ -41,7 +42,9 @@ const corsOptions = {
         callback(new Error("Not allowed by CORS"));
     },
 };
-// app.use(cors(corsOptions));
+if (!postman) {
+    app.use(cors(corsOptions)); // CORS OFF for Postman backend-only dev, ON for frontEnd dev
+}
 // app.use(cors());
 // if (!production) {
 //     console.log("Proxy engaged, localhost:3000 -> 127.0.0.1");

@@ -41,11 +41,15 @@ function Home(props) {
             breakpoints={props.breakpoints}
         >
             {massives.length > 0
-                ? massives.map((massive) => {
+                ? massives.map((massive, index) => {
                       if (massive === "poll") {
                           return (
                               <div>
                                   <Poll
+                                      key={index}
+                                      pollText={
+                                          "hey look this is a hardcoded poll lah dee dah"
+                                      }
                                       possibilities={6}
                                       options={[
                                           {

@@ -70,23 +70,29 @@ let originalPollResultsContainer = (
     </div>
 );
 
-function Poll({ possibilities, options }) {
-    // props.poll1.percentage for pct filled
-    let pollOptions = (
-        <div className="pollResultContainer">
-            {options.map((poll, index) => {
-                <Option
-                    key={index}
-                    text={poll.text}
-                    percentage={poll.percentage}
-                />;
-            })}
-        </div>
-    );
+function Poll({ pollText, possibilities, options }) {
+    function makeOptions(optionsInput) {
+        console.log(optionsInput);
+        let pollOptions = (
+            <div className="pollResultContainer">
+                {optionsInput.map((poll, index) => {
+                    console.log(poll);
+                    <Option
+                        key={index}
+                        text={poll.text}
+                        percentage={poll.percentage}
+                    />;
+                })}
+            </div>
+        );
+        return pollOptions;
+    }
     return (
         <div className="pollMainContainer">
-            <div className="pollTextContainer"></div>
-            {pollOptions}
+            <div className="pollTextContainer">{pollText}</div>
+            {options.length === possibilities // safeguards
+                ? makeOptions(options)
+                : null}
         </div>
     );
 }

@@ -44,7 +44,7 @@ function LogIn(props) {
                         <h1>Log in to PostMassive</h1>
                     </div>
                     <div id="log-in_input-container">
-                        <div>
+                        <div className="mt-3">
                             <h4>Email or Username</h4>
                             <input
                                 onChange={(value) =>
@@ -56,7 +56,7 @@ function LogIn(props) {
                                 }
                             />
                         </div>
-                        <div>
+                        <div className="mt-2">
                             <h4>Password</h4>
                             <input
                                 type="password"
