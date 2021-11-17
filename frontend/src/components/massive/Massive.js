@@ -8,11 +8,11 @@ import "./Massive.css";
 
 import "../textStyling/TextStyling.css";
 
-function Massive() {
+function Massive(props) {
     // showMassiveAsPage(massiveId) {
     //     // massiveId is slug
     //     console.log(massiveId);
-    //     this.props.history.push("/massive/" + massiveId.toString());
+    //     props.history.push("/massive/" + massiveId.toString());
     // }
 
     function convertEngagementText(inputNum) {
@@ -65,7 +65,12 @@ function Massive() {
         }
     }
 
-    function enterCustomStyling(inputText, customStyling) {}
+    function enterCustomStyling(inputText, locationCodes, customStyling) {
+        // how to locationCode? [1, 9, 36, 42, 49, 53, 193, 207] divide those up into subdivisions within the text.
+        // 1-9 is span1, 36-42 is span2, 49-53 is span3
+
+        return <span className={`${customStyling}`}>{inputText}</span>;
+    }
 
     let customStyling = "fontSizeWholeText"; // hardcode via this input
 
@@ -83,28 +88,28 @@ function Massive() {
                     <div className="width-control text-left">
                         <div className="m-author-container mt-1 d-flex">
                             <p className="mr-2 mb-2">
-                                <strong>{this.props.displayName}</strong>
-                                {/* // this.props.displayName goes here! */}
+                                <strong>{props.displayName}</strong>
+                                {/* // props.displayName goes here! */}
                             </p>
                             <p className="m-author-handle mb-0">
                                 {" "}
-                                @{this.props.author}{" "}
+                                @{props.author}{" "}
                                 {/* // this props author aka username goes here!!!! */}
                             </p>
                         </div>
 
                         <p className="mt-0 text-left">
                             {enterCustomStyling(
-                                this.props.content,
-                                customStyling
+                                props.content,
+                                "backgroundColorRed paddingMedium textSize26 makeStrikethrough"
                             )}
                         </p>
                         <EngagementContainer
-                            replies={this.props.replies}
-                            amps={this.props.amps}
-                            likes={this.props.likes}
-                            views={this.props.views}
-                            cap={this.props.cap}
+                            replies={props.replies}
+                            amps={props.amps}
+                            likes={props.likes}
+                            views={props.views}
+                            cap={props.cap}
                             inFeed={true}
                         />
                     </div>
