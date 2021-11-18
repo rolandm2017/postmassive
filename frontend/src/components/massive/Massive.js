@@ -75,7 +75,6 @@ function Massive(props) {
     function enterCustomStylingCodes(inputText, locationCodes, stylings) {
         let plainTextChunks = [];
         let specialTextChunks = [];
-        textChunks.push(inputText.substring(0, locationCodes[0]));
         // const finalIndexForInputText = inputText.length
         for (let i = 0; i < locationCodes.length; i++) {
             if (i % 2 === 1) {
@@ -84,12 +83,23 @@ function Massive(props) {
                 );
             } else {
                 specialTextChunks.push(
-                    inputText.substring(location[i], locationCodes[i + 1])
+                    inputText.substring(locationCodes[i], locationCodes[i + 1])
                 );
             }
             // will find edge cases as I go
         }
+        let specialTextChunksWithStyling = specialTextChunks.map(
+            (chunk, index) => {
+                return <span className={`${stylings[index]}`}>{chunk}</span>;
+            }
+        );
         let numberOfChunks = locationCodes.length; // should be ... [3, 5] yields 3 chunks: start, special, end.
+        let returnedString = [];
+        for (let i = 0; i < numberOfChunks; i++) {
+            returnedString.push(plainTextChunks[i]);
+            returnedString.push(specialTextChunksWithStyling[i]);
+        }
+        return returnedString.join(" ");
     }
 
     let customStyling = "fontSizeWholeText"; // hardcode via this input

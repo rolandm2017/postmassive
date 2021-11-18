@@ -8,6 +8,8 @@ import Poll from "../../components/poll/Poll";
 
 import Wrapper from "../_pageHelper/Wrapper";
 
+import testMassives from "./testContent/testMassives";
+
 function Home(props) {
     const [massives, setMassives] = useState([]);
 
@@ -90,7 +92,11 @@ function Home(props) {
                                   key={index}
                                   author={massive.postedByUser}
                                   displayName={massive.displayName}
-                                  content={massive.text}
+                                  content={testMassives[2].content}
+                                  startEndPoints={
+                                      testMassives[2].startEndPoints
+                                  }
+                                  stylings={startEndPoints[2].stylings}
                                   replies={massive.replies}
                                   amps={massive.amps}
                                   likes={massive.likes}
