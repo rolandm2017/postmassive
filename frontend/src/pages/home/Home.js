@@ -12,6 +12,7 @@ import testMassives from "./testContent/testMassives";
 
 function Home(props) {
     const [massives, setMassives] = useState([]);
+    console.log(15, testMassives);
 
     let history = useHistory();
 
@@ -46,7 +47,7 @@ function Home(props) {
                 ? massives.map((massive, index) => {
                       if (massive === "poll") {
                           return (
-                              <div key={1}>
+                              <div key={index}>
                                   <Poll
                                       key={index}
                                       pollText={
@@ -92,11 +93,11 @@ function Home(props) {
                                   key={index}
                                   author={massive.postedByUser}
                                   displayName={massive.displayName}
-                                  content={testMassives[2].content}
+                                  content={testMassives[0].content}
                                   startEndPoints={
-                                      testMassives[2].startEndPoints
+                                      testMassives[0].startEndPoints
                                   }
-                                  stylings={startEndPoints[2].stylings}
+                                  stylings={testMassives[0].stylings}
                                   replies={massive.replies}
                                   amps={massive.amps}
                                   likes={massive.likes}
