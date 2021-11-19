@@ -16,6 +16,7 @@ export function enterCustomStyling(inputText, locationCodes, stylings) {
         // will find edge cases as I go
     }
     if (specialTextChunks.length > 0) {
+        // process text into JSX
         let normalTextChunks = plainTextChunks.map((chunk, index) => {
             return <span key={index}>{chunk}</span>;
         });
@@ -29,13 +30,15 @@ export function enterCustomStyling(inputText, locationCodes, stylings) {
                 );
             }
         );
+        // handle reprocess into one singular array
         let numberOfChunks = locationCodes.length; // should be ... [3, 5] yields 3 chunks: start, special, end.
         let returnedString = [];
         for (let i = 0; i < numberOfChunks; i++) {
-            let plainTextToAdd = plainTextChunks[i];
+            // loop over ith iteration in each array at a time (trusting they will both be equal length)
+            let plainTextToAdd = normalTextChunks[i];
             let speciallyStyledText = specialTextChunksWithStyling[i];
-            console.log(30, plainTextToAdd, speciallyStyledText);
             // returnedString.push(plainTextToAdd);
+            returnedString.push(plainTextToAdd);
             returnedString.push(speciallyStyledText);
         }
         console.log(31, returnedString);
