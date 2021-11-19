@@ -66,7 +66,26 @@ export function enterCustomStyling2(inputText, locationCodes, stylings) {
 }
 
 export function enterCustomStyling(inputText, locationCodes, stylings) {
-    return getSubstrings(inputText, locationCodes);
+    let oddsAreSpecial = true;
+    if (locationCodes[0] === 0) {
+        // special condition
+        oddsAreSpecial = false;
+    }
+    let splitUpTexts = getSubstrings(inputText, locationCodes);
+    let normalTextChunks = splitUpTexts.map((chunk, index) => {
+        if (index % 2 === 0) {
+            return <span key={index}>{chunk}</span>;
+        } else {
+            return (
+                <span key={index} className={`${stylings[0]}`}>
+                    {chunk}
+                </span>
+            );
+        }
+    });
+    let specialTextChunksWithStyling = specialTextChunks.map((chunk, index) => {
+        overallIndex = overallIndex + 1;
+    });
 }
 
 function getSubstrings(inputText, locationCodes) {
