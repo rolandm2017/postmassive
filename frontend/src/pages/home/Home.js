@@ -45,42 +45,42 @@ function Home(props) {
         >
             {massives.length > 0
                 ? massives.map((massive, index) => {
-                      if (massive === "poll") {
-                          return (
-                              <div key={index}>
-                                  <Poll
-                                      key={index}
-                                      pollText={
-                                          "hey look this is a hardcoded poll lah dee dah"
-                                      }
-                                      possibilities={6}
-                                      options={[
-                                          {
-                                              text: "i love it",
-                                              percentage: 20,
-                                          },
-                                          {
-                                              text: "I don't love it",
-                                              percentage: 0,
-                                          },
-                                          {
-                                              text: "foo",
-                                              percentage: 10,
-                                          },
-                                          {
-                                              text: "bar",
-                                              percentage: 70,
-                                          },
-                                          { text: "baz", percentage: 0 },
-                                          {
-                                              text: "star trek",
-                                              percentage: 0,
-                                          },
-                                      ]}
-                                  />
-                              </div>
-                          );
-                      }
+                      //   if (massive === "poll") {
+                      //       return (
+                      //           <div key={index}>
+                      //               <Poll
+                      //                   key={index}
+                      //                   pollText={
+                      //                       "hey look this is a hardcoded poll lah dee dah"
+                      //                   }
+                      //                   possibilities={6}
+                      //                   options={[
+                      //                       {
+                      //                           text: "i love it",
+                      //                           percentage: 20,
+                      //                       },
+                      //                       {
+                      //                           text: "I don't love it",
+                      //                           percentage: 0,
+                      //                       },
+                      //                       {
+                      //                           text: "foo",
+                      //                           percentage: 10,
+                      //                       },
+                      //                       {
+                      //                           text: "bar",
+                      //                           percentage: 70,
+                      //                       },
+                      //                       { text: "baz", percentage: 0 },
+                      //                       {
+                      //                           text: "star trek",
+                      //                           percentage: 0,
+                      //                       },
+                      //                   ]}
+                      //               />
+                      //           </div>
+                      //       );
+                      //   }
                       return (
                           <div
                               onClick={() => {

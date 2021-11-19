@@ -2,8 +2,8 @@ const testMassives = [
     {
         content:
             "Mauris tempus orci nisl, vitae maximus justo porttitor ac. Vestibulum non magna viverra, sodales dui a, vestibulum augue. Proin dictum elit commodo erat iaculis fringilla. Vestibulum non magna viverra, sodales dui a, vestibulum augue. Proin dictum elit commodo erat iaculis fringilla.",
-        startEndPoints: [1, 9, 32, 39, 108, 140],
-        stylings: ["underline", "strikethrough", "bold, textSize22"],
+        startEndPoints: [5, 11, 32, 39, 108, 140],
+        stylings: ["textAlignmentUpDown", "strikethrough", "bold, textSize22"],
     },
     {
         content:

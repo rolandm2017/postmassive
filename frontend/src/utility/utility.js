@@ -1,4 +1,5 @@
-export function enterCustomStylingCodes(inputText, locationCodes, stylings) {
+export function enterCustomStyling(inputText, locationCodes, stylings) {
+    console.log(2, inputText, locationCodes, stylings);
     let plainTextChunks = [];
     let specialTextChunks = [];
     // const finalIndexForInputText = inputText.length
@@ -14,20 +15,31 @@ export function enterCustomStylingCodes(inputText, locationCodes, stylings) {
         }
         // will find edge cases as I go
     }
-    let specialTextChunksWithStyling;
     if (specialTextChunks.length > 0) {
+        let normalTextChunks = plainTextChunks.map((chunk, index) => {
+            return <span key={index}>{chunk}</span>;
+        });
         let specialTextChunksWithStyling = specialTextChunks.map(
             (chunk, index) => {
-                return <span className={`${stylings[index]}`}>{chunk}</span>;
+                console.log(index, 22, chunk);
+                return (
+                    <span key={index} className={`${stylings[0]}`}>
+                        {chunk}
+                    </span>
+                );
             }
         );
         let numberOfChunks = locationCodes.length; // should be ... [3, 5] yields 3 chunks: start, special, end.
         let returnedString = [];
         for (let i = 0; i < numberOfChunks; i++) {
-            returnedString.push(plainTextChunks[i]);
-            returnedString.push(specialTextChunksWithStyling[i]);
+            let plainTextToAdd = plainTextChunks[i];
+            let speciallyStyledText = specialTextChunksWithStyling[i];
+            console.log(30, plainTextToAdd, speciallyStyledText);
+            // returnedString.push(plainTextToAdd);
+            returnedString.push(speciallyStyledText);
         }
-        return returnedString.join(" ");
+        console.log(31, returnedString);
+        return returnedString;
     } else {
         return undefined;
     }

@@ -4,7 +4,7 @@ import EngagementContainer from "../engagementContainer/EngagementContainer";
 import Logo from "../../images/bluePfp.png";
 
 import {
-    enterCustomStylingCodes,
+    enterCustomStyling,
     convertEngagementText,
 } from "../../utility/utility";
 
@@ -38,7 +38,15 @@ function Massive(props) {
                             </p>
                         </div>
 
-                        <p className="mt-0 text-left">{props.content}</p>
+                        {/* <p className="mt-0 text-left">{props.content}</p> */}
+                        <p className="mt-0 text-left">
+                            {enterCustomStyling(
+                                props.content,
+                                props.startEndPoints,
+                                props.stylings
+                            )}
+                        </p>
+
                         <EngagementContainer
                             replies={props.replies}
                             amps={props.amps}
