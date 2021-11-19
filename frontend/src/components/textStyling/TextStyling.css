@@ -33,6 +33,7 @@
 
 .makeStrikethrough {
     text-decoration: line-through;
+    font-size: 24px;
 }
 
 .makeUnderline {

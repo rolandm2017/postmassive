@@ -14,6 +14,7 @@ import "../textStyling/TextStyling.css"; // this file will be imported in many p
 function Massive(props) {
     let customStyling = "fontSizeWholeText"; // hardcode via this input
 
+    console.log(props, 17);
     return (
         <div className="background-blue bg-blue-highlight">
             <div className="massive-container py-2 d-flex flex-column border-top ">

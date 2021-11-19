@@ -5,7 +5,7 @@ import convertWidthToCSS from "./convertWidthToCSS";
 import "./Option.css";
 
 function Option({ text, percentage }) {
-    console.log(6, text, percentage, "returning option...");
+    // console.log(6, text, percentage, "returning option...");
     return (
         <div className="pollInnerContainer">
             <div className={convertWidthToCSS(percentage)}>

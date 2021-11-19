@@ -1,30 +1,45 @@
-export function enterCustomStyling(inputText, locationCodes, stylings) {
-    console.log(2, inputText, locationCodes, stylings);
+export function enterCustomStyling2(inputText, locationCodes, stylings) {
+    console.log(
+        2,
+        "########\nSTART\n##########",
+        inputText.substring(0, 40),
+        locationCodes,
+        stylings
+    );
     let plainTextChunks = [];
     let specialTextChunks = [];
     // const finalIndexForInputText = inputText.length
     for (let i = 0; i < locationCodes.length; i++) {
         if (i % 2 === 1) {
-            plainTextChunks.push(
-                inputText.substring(locationCodes[i], locationCodes[i + 1])
+            let plainSubstring = inputText.substring(
+                locationCodes[i],
+                locationCodes[i + 1]
             );
+            console.log(12, plainSubstring);
+            plainTextChunks.push(plainSubstring);
         } else {
-            specialTextChunks.push(
-                inputText.substring(locationCodes[i], locationCodes[i + 1])
+            let specialSubstring = inputText.substring(
+                locationCodes[i],
+                locationCodes[i + 1]
             );
+            console.log(19, specialSubstring);
+            specialTextChunks.push(specialSubstring);
         }
         // will find edge cases as I go
     }
+    console.log(18, plainTextChunks, specialTextChunks);
     if (specialTextChunks.length > 0) {
         // process text into JSX
+        let overallIndex = 0;
         let normalTextChunks = plainTextChunks.map((chunk, index) => {
-            return <span key={index}>{chunk}</span>;
+            overallIndex = overallIndex + 1;
+            return <span key={overallIndex}>{chunk}</span>;
         });
         let specialTextChunksWithStyling = specialTextChunks.map(
             (chunk, index) => {
-                console.log(index, 22, chunk);
+                overallIndex = overallIndex + 1;
                 return (
-                    <span key={index} className={`${stylings[0]}`}>
+                    <span key={overallIndex} className={`${stylings[0]}`}>
                         {chunk}
                     </span>
                 );
@@ -40,11 +55,78 @@ export function enterCustomStyling(inputText, locationCodes, stylings) {
             // returnedString.push(plainTextToAdd);
             returnedString.push(plainTextToAdd);
             returnedString.push(speciallyStyledText);
+            // todo: insert keys, i, i + numberOfChunks
         }
         console.log(31, returnedString);
         return returnedString;
     } else {
+        throw "error!!!";
         return undefined;
+    }
+}
+
+export function enterCustomStyling(inputText, locationCodes, stylings) {
+    return getSubstrings(inputText, locationCodes);
+}
+
+function getSubstrings(inputText, locationCodes) {
+    let strings = [];
+    /// cycle
+    let slice = inputText.slice(0, locationCodes[0]);
+    strings.push(slice);
+    for (let i = 0; i < locationCodes.length; i++) {
+        if (i === locationCodes.length - 1) {
+            let slice = inputText.slice(locationCodes[i]); // will go from i to end of string
+            strings.push(slice);
+        } else {
+            let slice = inputText.slice(locationCodes[i], locationCodes[i + 1]);
+            strings.push(slice);
+        }
+    }
+    console.log(strings);
+    return strings;
+    /// cycle
+    // a = inputString.slice(locationCodes[0], locationCodes[1]);
+    // strings.push(a);
+    // // cycle
+    // a = inputString.slice(locationCodes[1], locationCodes[2]);
+    // strings.push(a);
+    // a = inputString.slice(locationCodes[2], locationCodes[3]);
+    // strings.push(a);
+    // //
+    // a = inputString.slice(locationCodes[3]);
+    // strings.push(a);
+}
+
+function getSubstrings2(inputText, locationCodes) {
+    let substrings = [];
+    if (locationCodes[0] === 0) {
+        // have to handle [0, 10, 40, 65, 110] diff than ...
+        for (let i = 0; i < locationCodes.length; i++) {
+            let substring = inputText.slice(
+                locationCodes[i],
+                locationCodes[i + 1]
+            );
+            console.log(substring);
+            substrings.push(substring);
+        }
+        return substrings;
+    } else {
+        // [20, 25, 40, 45, 80, 100]
+        for (let i = 0; i < locationCodes.length; i++) {
+            let substring;
+            if (i === 0) {
+                let firstSlice = locationCodes[i];
+                substring = inputText.slice(0, firstSlice);
+            } else {
+                let startOfSlice = locationCodes[i];
+                let endOfSlice = locationCodes[i + 1];
+                substring = inputText.slice(startOfSlice, endOfSlice);
+            }
+            substrings.push(substring);
+        }
+        console.log(substrings, 96);
+        return substrings;
     }
 }
 

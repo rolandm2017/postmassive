@@ -10,11 +10,11 @@ import { refreshToken } from "./auth/use-auth";
 
 // attempt silent token refresh on page load
 refreshToken(true).finally((x) => {
-    console.log("rendering!!!!!!!!!!!!!!!!!!!!");
-    const condition = "successful refresh token";
-    if (condition) {
-        console.log("success");
-    }
+    // console.log("rendering!!!!!!!!!!!!!!!!!!!!");
+    // const condition = "successful refresh token";
+    // if (condition) {
+    // console.log("success");
+    // }
     ReactDOM.render(
         <React.StrictMode>
             <Router>
