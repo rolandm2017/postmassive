@@ -36,3 +36,40 @@ textarea {
 .post_spacer {
     flex: 1;
 }
+
+#post_targeting {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* flex-wrap: wrap; */
+}
+
+#post_targeting-container {
+    /* display: flex; */
+    width: 100%;
+    border: 3px solid red;
+}
+
+#post_targeting-container > div {
+}
+
+.post_tones-outer-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* justify-content: flex-start; */
+    align-items: flex-start;
+}
+
+.post_tones-inner-container {
+    /* padding: 6px 0 0 6px; */
+    width: 50%;
+    border: 2px solid salmon;
+    flex-basis: 2;
+    margin: 0;
+}
+
+.aaaaaa * {
+    color: white;
+}

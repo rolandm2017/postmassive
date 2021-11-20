@@ -15,7 +15,7 @@ import Nicolai from "../../images/markZuckerberg.jpeg";
 
 import Wrapper from "../_pageHelper/Wrapper";
 
-import Flooring from "./Flooring";
+import Flooring from "./components/Flooring";
 
 import "./Post.css";
 
@@ -24,6 +24,7 @@ function Post(props) {
     const [content, setContent] = useState("");
     const [price, setPrice] = useState(null);
     const [floor, setFloor] = useState(NaN);
+    const [stylingChoice, setStylingChoice] = useState("");
 
     let currentUrl = useLocation().pathname;
     let history = useHistory();
@@ -69,13 +70,14 @@ function Post(props) {
         history.push("/home");
     }
 
-    function postPost(username, content, price, floor) {
+    function postPost(username, content, price, floor, styling) {
         // let displayName = user.displayName; // todo: get displayName for data
         let data = {
             username: username,
             content: content,
             price: price,
             floor: floor,
+            styling: styling,
         };
         console.log("Sending ........", data);
         // send a post to the server to
@@ -150,7 +152,7 @@ function Post(props) {
                             }}
                         ></textarea>
                     </div>
-                    <div id="post-targeting">
+                    <div id="post_targeting">
                         <div>
                             <img src={Photo} alt="upload a pic"></img>
                             <img src={Gif} alt="select gif"></img>
@@ -161,24 +163,52 @@ function Post(props) {
                             {/* TODO: steal from Facebook's ad targeting. Allow
                             targeting by age, gender. */}
                         </p>
-                        <div>
-                            <div>
-                                <p>bold</p>
-                                <p>italics</p>
-                                <p>strikethrough</p>
-                                <p>underline</p>
+                        <div id="post_targeting-container">
+                            <div className="post_tones-outer-container w-100">
+                                <div className="pl-2 pt-2 post_tones-inner-container">
+                                    <p>bold</p>
+                                </div>
+                                <div className="pl-2 pt-2 post_tones-inner-container">
+                                    <p>italics</p>
+                                </div>
+                                <div className="pl-2 pt-2 post_tones-inner-container">
+                                    <p>strikethrough</p>
+                                </div>
+                                <div className="pl-2 pt-2 post_tones-inner-container">
+                                    <p>underline</p>
+                                </div>
                             </div>
-                            <div>fontSizeSlider</div>
+                            <div className="">
+                                <div>fontSizeSlider</div>
+                            </div>
                             <div>
-                                backgroundColor:
-                                <div>red</div>
-                                <div>orange</div>
-                                <div>yellow</div>
-                                <div>purple</div>
-                                <div>blue</div>
-                                <div>green</div>
-                                <div>teal</div>
-                                <div>black</div>
+                                <div>backgroundColor:</div>
+                                <div className="post_tones-outer-container w-100 aaaaaa">
+                                    <div className="pl-2 post_tones-inner-container">
+                                        red
+                                    </div>
+                                    <div className="pl-2 post_tones-inner-container">
+                                        orange
+                                    </div>
+                                    <div className="pl-2 post_tones-inner-container">
+                                        yellow
+                                    </div>
+                                    <div className="pl-2 post_tones-inner-container">
+                                        purple
+                                    </div>
+                                    <div className="pl-2 post_tones-inner-container">
+                                        blue
+                                    </div>
+                                    <div className="pl-2 post_tones-inner-container">
+                                        green
+                                    </div>
+                                    <div className="pl-2 post_tones-inner-container">
+                                        teal
+                                    </div>
+                                    <div className="pl-2 post_tones-inner-container">
+                                        black
+                                    </div>
+                                </div>
                             </div>
                             <div>
                                 <div>regular alignment</div>
@@ -194,7 +224,13 @@ function Post(props) {
                         <div>
                             <button
                                 onClick={() => {
-                                    postPost(username, content, price, floor);
+                                    postPost(
+                                        username,
+                                        content,
+                                        price,
+                                        floor,
+                                        stylingChoice
+                                    );
                                 }}
                             >
                                 Post
