@@ -5,6 +5,8 @@ export const STYLINGS = [
     "italics",
     "strikethrough",
     "underline",
+    "textAlignmentUpDown",
+    "textAlignmentAddPadding",
     "backgroundColorRed",
     "backgroundColorGreen",
     "backgroundColorCyan",
@@ -12,6 +14,9 @@ export const STYLINGS = [
     "backgroundColorOrange",
     "backgroundColorPurple",
     "backgroundColorBlack",
+    "superscript",
+    "subscript",
+    "fontSize10", // install
     "fontSize12",
     "fontSize14",
     "fontSize16",

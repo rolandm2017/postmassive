@@ -161,7 +161,30 @@ function Post(props) {
                             {/* TODO: steal from Facebook's ad targeting. Allow
                             targeting by age, gender. */}
                         </p>
-                        <div>{STYLINGS}</div>
+                        <div>
+                            <div>
+                                <p>bold</p>
+                                <p>italics</p>
+                                <p>strikethrough</p>
+                                <p>underline</p>
+                            </div>
+                            <div>fontSizeSlider</div>
+                            <div>
+                                backgroundColor:
+                                <div>red</div>
+                                <div>orange</div>
+                                <div>yellow</div>
+                                <div>purple</div>
+                                <div>blue</div>
+                                <div>green</div>
+                                <div>teal</div>
+                                <div>black</div>
+                            </div>
+                            <div>
+                                <div>regular alignment</div>
+                                <div>center</div>
+                            </div>
+                        </div>
                     </div>
                     <div></div>
                     <div>
