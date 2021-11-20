@@ -25,7 +25,7 @@
 //     }
 //     // make big text that is costly to involve
 
-//     return ".textSize" + fontSize.toString();
+//     return ".fontSize" + fontSize.toString();
 // }
 
 // function backgroundBox(text, styling, alignment) {}

@@ -4,6 +4,8 @@ import { useHistory, useLocation } from "react-router-dom";
 
 import { postOptions } from "../../_helper/authHeader";
 
+import { FLOORS, STYLINGS } from "../../_helper/consts";
+
 import BackButton from "../../images/icons8-back-arrow-48-wh.png";
 import Photo from "../../images/mountain-32.png";
 import Gif from "../../images/gif-48.png";
@@ -18,7 +20,6 @@ import Flooring from "./Flooring";
 import "./Post.css";
 
 function Post(props) {
-    const FLOORS = [100, 1000, 10000, 100000];
     const [username, setUsername] = useState(null);
     const [content, setContent] = useState("");
     const [price, setPrice] = useState(null);
@@ -134,7 +135,7 @@ function Post(props) {
                     <div className="">
                         <p>Audience Floor:</p>
 
-                        {floors}
+                        {FLOORS}
                         {/* <br /> */}
                         <label htmlFor="content">
                             What do you want to say?
@@ -160,7 +161,9 @@ function Post(props) {
                             {/* TODO: steal from Facebook's ad targeting. Allow
                             targeting by age, gender. */}
                         </p>
+                        <div>{STYLINGS}</div>
                     </div>
+                    <div></div>
                     <div>
                         <div>
                             <p>Price: ${price}</p>
