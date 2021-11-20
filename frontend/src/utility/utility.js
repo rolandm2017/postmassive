@@ -17,7 +17,13 @@ export function enterCustomStyling(inputText, stylings) {
             // let stylingChoice = index;
             console.log(18, index, stylings);
             let indexSelection = Math.floor(index / 2);
-            let availableStyles = stylings[indexSelection].className;
+            let availableStyles;
+            if (className.includes(",")) {
+                availableStyles =
+                    stylings[indexSelection].className.split(", ");
+            } else {
+                availableStyles = stylings[indexSelection].className;
+            }
             console.log(
                 21,
                 "specialChoice:",
