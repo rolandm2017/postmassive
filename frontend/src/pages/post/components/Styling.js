@@ -1,10 +1,7 @@
-import React from "react";
-
-function Styling(props) {
+function Styling({ styling }) {
     return (
-        <div>
-            <h3>{props.title}</h3>
-            <p className={`${props.styling}`}>{props.styling}</p>
+        <div className="pl-2 pt-2 post_tones-inner-container">
+            <p>{styling}</p>
         </div>
     );
 }

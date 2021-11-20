@@ -14,6 +14,10 @@ import Emoji from "../../images/happy-48.png";
 import Nicolai from "../../images/markZuckerberg.jpeg";
 
 import Wrapper from "../_pageHelper/Wrapper";
+import Styling from "./components/Styling";
+import Special from "./components/Special";
+import BackgroundColor from "./components/BackgroundColor";
+import FontSlider from "./components/FontSlider";
 
 import Flooring from "./components/Flooring";
 
@@ -165,54 +169,52 @@ function Post(props) {
                         </p>
                         <div id="post_targeting-container">
                             <div className="post_tones-outer-container w-100">
-                                <div className="pl-2 pt-2 post_tones-inner-container">
-                                    <p>bold</p>
-                                </div>
-                                <div className="pl-2 pt-2 post_tones-inner-container">
-                                    <p>italics</p>
-                                </div>
-                                <div className="pl-2 pt-2 post_tones-inner-container">
-                                    <p>strikethrough</p>
-                                </div>
-                                <div className="pl-2 pt-2 post_tones-inner-container">
-                                    <p>underline</p>
-                                </div>
+                                <Styling
+                                    styling={"bold"}
+                                    onClick={() => {
+                                        setStylingChoice("bold");
+                                    }}
+                                />
+                                <Styling
+                                    styling={"italics"}
+                                    onClick={() => {
+                                        setStylingChoice("italics");
+                                    }}
+                                />
+                                <Styling
+                                    styling={"strikethrough"}
+                                    onClick={() => {
+                                        setStylingChoice("strikethrough");
+                                    }}
+                                />
+                                <Styling
+                                    styling={"underline"}
+                                    onClick={() => {
+                                        setStylingChoice("underline");
+                                    }}
+                                />
                             </div>
-                            <div className="">
-                                <div>fontSizeSlider</div>
+                            <div id="" className="aaaaaa">
+                                <FontSlider />
                             </div>
-                            <div>
-                                <div>backgroundColor:</div>
+                            <div className="aaaaaa">
+                                <div className="pl-2">backgroundColor:</div>
                                 <div className="post_tones-outer-container w-100 aaaaaa">
-                                    <div className="pl-2 post_tones-inner-container">
-                                        red
-                                    </div>
-                                    <div className="pl-2 post_tones-inner-container">
-                                        orange
-                                    </div>
-                                    <div className="pl-2 post_tones-inner-container">
-                                        yellow
-                                    </div>
-                                    <div className="pl-2 post_tones-inner-container">
-                                        purple
-                                    </div>
-                                    <div className="pl-2 post_tones-inner-container">
-                                        blue
-                                    </div>
-                                    <div className="pl-2 post_tones-inner-container">
-                                        green
-                                    </div>
-                                    <div className="pl-2 post_tones-inner-container">
-                                        teal
-                                    </div>
-                                    <div className="pl-2 post_tones-inner-container">
-                                        black
-                                    </div>
+                                    <BackgroundColor color={"red"} />
+                                    <BackgroundColor color={"orange"} />
+                                    <BackgroundColor color={"yellow"} />
+                                    <BackgroundColor color={"purple"} />
+                                    <BackgroundColor color={"blue"} />
+                                    <BackgroundColor color={"green"} />
+                                    <BackgroundColor color={"teal"} />
+                                    <BackgroundColor color={"black"} />
                                 </div>
                             </div>
-                            <div>
-                                <div>regular alignment</div>
-                                <div>center</div>
+                            <div className="aaaaaa">
+                                <Special special={"textAlignmentUpDown"} />
+                                <Special special={"textAlignmentAddPadding"} />
+                                <Special special={"superscript"} />
+                                <Special special={"subscript"} />
                             </div>
                         </div>
                     </div>

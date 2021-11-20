@@ -1,12 +1,15 @@
 export const FLOORS = [100, 1000, 10000, 100000];
 
-export const STYLINGS = [
-    "bold",
-    "italics",
-    "strikethrough",
-    "underline",
+export const STYLINGS = ["bold", "italics", "strikethrough", "underline"];
+
+export const SPECIALS = [
     "textAlignmentUpDown",
     "textAlignmentAddPadding",
+    "superscript",
+    "subscript",
+];
+
+export const BG_COLORS = [
     "backgroundColorRed",
     "backgroundColorGreen",
     "backgroundColorCyan",
@@ -14,8 +17,9 @@ export const STYLINGS = [
     "backgroundColorOrange",
     "backgroundColorPurple",
     "backgroundColorBlack",
-    "superscript",
-    "subscript",
+];
+
+export const FONT_SIZES = [
     "fontSize10", // install
     "fontSize12",
     "fontSize14",
