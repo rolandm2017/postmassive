@@ -95,9 +95,6 @@ function Home(props) {
                                   author={massive.postedByUser}
                                   displayName={massive.displayName}
                                   content={testMassives[3].content}
-                                  startEndPoints={
-                                      testMassives[3].startEndPoints
-                                  }
                                   stylings={testMassives[3].stylings}
                                   replies={massive.replies}
                                   amps={massive.amps}

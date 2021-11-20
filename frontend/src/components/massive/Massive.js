@@ -12,9 +12,9 @@ import "./Massive.css";
 import "../textStyling/TextStyling.css"; // this file will be imported in many places
 
 function Massive(props) {
-    let customStyling = "fontSizeWholeText"; // hardcode via this input
+    // let customStyling = "fontSizeWholeText"; // hardcode via this input
 
-    console.log(props, 17);
+    // console.log(props, 17);
     return (
         <div className="background-blue bg-blue-highlight">
             <div className="massive-container py-2 d-flex flex-column border-top ">
@@ -41,11 +41,7 @@ function Massive(props) {
 
                         {/* <p className="mt-0 text-left">{props.content}</p> */}
                         <p className="mt-0 text-left">
-                            {enterCustomStyling(
-                                props.content,
-                                props.startEndPoints,
-                                props.stylings
-                            )}
+                            {enterCustomStyling(props.content, props.stylings)}
                         </p>
 
                         <EngagementContainer
