@@ -1,7 +1,6 @@
 export function enterCustomStyling(inputText, stylings) {
     // stylings is an array of Styling objects
-    // let locationCodes =
-    console.log(70, stylings, typeof stylings);
+    // console.log(70, stylings, typeof stylings);
     let oddsAreSpecial = true;
     if (stylings[0].start === 0) {
         // special condition
@@ -11,31 +10,46 @@ export function enterCustomStyling(inputText, stylings) {
     let chunks = splitUpTexts.map((chunk, index) => {
         // have to do this math to turn the splitUpTexts index into the stylings index
         if (index % 2 === 0) {
-            console.log(14, index);
+            // console.log(14, index);
             return <span key={index}>{chunk}</span>;
         } else {
             // let stylingChoice = index;
             console.log(18, index, stylings);
             let indexSelection = Math.floor(index / 2);
             let availableStyles;
-            if (className.includes(",")) {
+            if (stylings[indexSelection].className.includes(",")) {
                 availableStyles =
                     stylings[indexSelection].className.split(", ");
+                console.log(
+                    25,
+                    "specialChoice:",
+                    availableStyles,
+                    indexSelection,
+                    index
+                );
+                return (
+                    <span
+                        key={index}
+                        className={`${availableStyles.join(" ")}`}
+                    >
+                        {chunk}
+                    </span>
+                );
             } else {
                 availableStyles = stylings[indexSelection].className;
+                console.log(
+                    39,
+                    "specialChoice:",
+                    availableStyles,
+                    indexSelection,
+                    index
+                );
+                return (
+                    <span key={index} className={`${availableStyles}`}>
+                        {chunk}
+                    </span>
+                );
             }
-            console.log(
-                21,
-                "specialChoice:",
-                availableStyles,
-                indexSelection,
-                index
-            );
-            return (
-                <span key={index} className={`${availableStyles}`}>
-                    {chunk}
-                </span>
-            );
         }
     });
     return chunks; // works as of 3:48 pm

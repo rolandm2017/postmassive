@@ -94,8 +94,8 @@ function Home(props) {
                                   key={Math.floor(Math.random() * 10000)}
                                   author={massive.postedByUser}
                                   displayName={massive.displayName}
-                                  content={testMassives[3].content}
-                                  stylings={testMassives[3].stylings}
+                                  content={testMassives[1].content}
+                                  stylings={testMassives[1].stylings}
                                   replies={massive.replies}
                                   amps={massive.amps}
                                   likes={massive.likes}
