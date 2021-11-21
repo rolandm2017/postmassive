@@ -1,3 +1,11 @@
+.styling_choice-list {
+    width: 100%;
+    /* border: 3px solid green; */
+
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .styling_options-container {
     width: 14%;
 }
@@ -15,10 +23,13 @@
 }
 
 .styling_options-right-container {
-    margin: 5px;
+    width: 100%;
+    /* border: 2px solid red; */
+    margin: 3px;
+    /* note: margin is sus, could adjust it to make UXUI look better */
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
 .styling_start-end-text {

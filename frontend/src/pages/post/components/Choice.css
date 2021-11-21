@@ -3,9 +3,10 @@
     height: 20px;
     border: 2px solid royalblue;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
-    margin: 0;
-    padding: 0;
+    margin: 2px;
+    padding: 4px;
+    border-radius: 5px;
 }

@@ -396,6 +396,11 @@ function Post(props) {
                                 }}
                                 previousStyleEnd={null}
                                 nextStyleStart={secondStyle.start}
+                                handleRemoval={() => {
+                                    console.log(
+                                        "removing a selected styling... obv not the option itself, but somemthing styled within it"
+                                    );
+                                }}
                             />
                             <Styling
                                 key={1}
