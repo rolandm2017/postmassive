@@ -8,6 +8,8 @@ function Styling({
     stylingInfo,
     previousStyleEnd,
     nextStyleStart,
+    adjustStart,
+    adjustEnd,
     currentlyChecked,
     handleRemoval,
 }) {
@@ -31,12 +33,13 @@ function Styling({
                         <span className="styling_start-end-text">Start:</span>
                     </div>
                     <input
+                        className="styling_slider"
                         // value={valueOfRangeFinder}
                         min={previousStyleEnd}
                         max={nextStyleStart}
                         type="range"
                         onChange={(event) => {
-                            console.log(event.target.value); // prints the expected value!
+                            adjustStart(menuOption, event.target.value); // prints the expected value!
                         }}
                     />
                     <span className="color-white">{previousStyleEnd}</span>
@@ -46,9 +49,13 @@ function Styling({
                         <span className="styling_start-end-text">End:</span>
                     </div>
                     <input
+                        className="styling_slider"
                         min={previousStyleEnd}
                         max={nextStyleStart}
                         type="range"
+                        onChange={(event) => {
+                            adjustEnd(menuOption, event.target.value); // prints the expected value!
+                        }}
                     />
                     <span className="color-white">{nextStyleStart}</span>
                 </div>

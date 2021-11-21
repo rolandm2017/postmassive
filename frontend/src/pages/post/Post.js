@@ -244,36 +244,38 @@ function Post(props) {
         }
     }
 
-    function handleChangeStartRange(styleObj, startAdjustment, indexSetter) {
-        // setRange;
-        let currentStart = styleObj.start;
-        if (startAdjustment === 1) {
-            let newStart = currentStart + 1;
-            styleObj.start = newStart;
-            indexSetter(styleObj); // setFirstStyle, setSecondStyle, setThirdStyle, etc
-        } else if (startAdjustment === -1) {
-            let newStart = currentStart - 1;
-            styleObj.start = newStart;
-            indexSetter(styleObj);
-        } else {
-            console.log(startAdjustment, 170);
-        }
+    function handleChangeStartRange(styleObjectIndex, newStartIndex) {
+        console.log(248, styleObjectIndex, newStartIndex);
+        // // setRange;
+        // let currentStart = styleObj.start;
+        // if (newStartIndex === 1) {
+        //     let newStart = currentStart + 1;
+        //     styleObj.start = newStart;
+        //     indexSetter(styleObj); // setFirstStyle, setSecondStyle, setThirdStyle, etc
+        // } else if (startAdjustment === -1) {
+        //     let newStart = currentStart - 1;
+        //     styleObj.start = newStart;
+        //     indexSetter(styleObj);
+        // } else {
+        //     console.log(startAdjustment, 170);
+        // }
     }
 
-    function handleChangeEndRange(styleObj, endAdjustment, indexSetter) {
+    function handleChangeEndRange(styleObjectIndex, newStartIndex) {
+        console.log(2265, styleObjectIndex, newStartIndex);
         // setRange;
-        let currentStart = styleObj.end;
-        if (endAdjustment === 1) {
-            let newEnd = currentStart + 1;
-            styleObj.start = newEnd;
-            indexSetter(styleObj); // setFirstStyle, setSecondStyle, setThirdStyle, etc
-        } else if (endAdjustment === -1) {
-            let newEnd = currentStart - 1;
-            styleObj.start = newEnd;
-            indexSetter(styleObj);
-        } else {
-            console.log(endAdjustment, 170);
-        }
+        // let currentStart = styleObj.end;
+        // if (endAdjustment === 1) {
+        //     let newEnd = currentStart + 1;
+        //     styleObj.start = newEnd;
+        //     indexSetter(styleObj); // setFirstStyle, setSecondStyle, setThirdStyle, etc
+        // } else if (endAdjustment === -1) {
+        //     let newEnd = currentStart - 1;
+        //     styleObj.start = newEnd;
+        //     indexSetter(styleObj);
+        // } else {
+        //     console.log(endAdjustment, 170);
+        // }
     }
 
     function handleChangeStylingSelection(number) {
@@ -410,15 +412,11 @@ function Post(props) {
                                     handleChangeStylingSelection(0);
                                 }}
                                 currentlyChecked={currentStyle}
-                                stylingInfo={firstStyle.styles}
-                                adjustStart={() => {
-                                    handleChangeStartRange();
-                                }}
-                                adjustEnd={() => {
-                                    handleChangeEndRange();
-                                }}
                                 previousStyleEnd={null}
                                 nextStyleStart={secondStyle.start}
+                                stylingInfo={firstStyle.styles}
+                                adjustStart={handleChangeStartRange}
+                                adjustEnd={handleChangeEndRange}
                                 handleRemoval={removeStyleFromSection}
                             />
                             <Styling
@@ -429,15 +427,11 @@ function Post(props) {
                                     handleChangeStylingSelection(1);
                                 }}
                                 currentlyChecked={currentStyle}
-                                stylingInfo={secondStyle.styles}
-                                adjustStart={() => {
-                                    handleChangeStartRange();
-                                }}
-                                adjustEnd={() => {
-                                    handleChangeEndRange();
-                                }}
                                 previousStyleEnd={firstStyle.end}
                                 nextStyleStart={thirdStyle.start}
+                                stylingInfo={secondStyle.styles}
+                                adjustStart={handleChangeStartRange}
+                                adjustEnd={handleChangeEndRange}
                                 handleRemoval={removeStyleFromSection}
                             />
                             <Styling
@@ -448,15 +442,11 @@ function Post(props) {
                                     handleChangeStylingSelection(2);
                                 }}
                                 currentlyChecked={currentStyle}
-                                stylingInfo={thirdStyle.styles}
-                                adjustStart={() => {
-                                    handleChangeStartRange();
-                                }}
-                                adjustEnd={() => {
-                                    handleChangeEndRange();
-                                }}
                                 previousStyleEnd={secondStyle.start}
                                 nextStyleStart={null}
+                                stylingInfo={thirdStyle.styles}
+                                adjustStart={handleChangeStartRange}
+                                adjustEnd={handleChangeEndRange}
                                 handleRemoval={removeStyleFromSection}
                             />
                         </div>

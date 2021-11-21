@@ -7,7 +7,7 @@
 }
 
 .styling_options-container {
-    width: 14%;
+    width: 30%;
 }
 
 .styling_options-container div {
@@ -30,6 +30,10 @@
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
+}
+
+.styling_slider {
+    width: 160px;
 }
 
 .styling_start-end-text {
