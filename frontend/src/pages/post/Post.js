@@ -194,23 +194,24 @@ function Post(props) {
     }
 
     function removeStyleFromSection(type, index) {
+        console.log(197, type, index);
         if (index === 0) {
-            let current = firstStyle;
-            const index = current.indexOf(type);
+            let currentStyles = [...firstStyle.styles];
+            const index = currentStyles.indexOf(type);
             if (index > -1) {
                 current.splice(index, 1);
             }
             setFirstStyle(current);
         } else if (index === 1) {
-            let current = secondStyle;
-            const index = current.indexOf(type);
+            let currentStyles = [...secondStyle.styles];
+            const index = currentStyles.indexOf(type);
             if (index > -1) {
                 current.splice(index, 1);
             }
             setSecondStyle(current);
         } else if (index === 2) {
-            let current = thirdStyle;
-            const index = current.indexOf(type);
+            let currentStyles = [...thirdStyle.styles];
+            const index = currentStyles.style.indexOf(type);
             if (index > -1) {
                 current.splice(index, 1);
             }
@@ -381,7 +382,7 @@ function Post(props) {
                         <div id="post_styling-area">
                             <Styling
                                 key={0}
-                                option={0}
+                                menuOption={0}
                                 handleClick={() => {
                                     console.log(340, "should update sel");
                                     handleChangeStylingSelection(0);
@@ -396,11 +397,7 @@ function Post(props) {
                                 }}
                                 previousStyleEnd={null}
                                 nextStyleStart={secondStyle.start}
-                                handleRemoval={() => {
-                                    console.log(
-                                        "removing a selected styling... obv not the option itself, but somemthing styled within it"
-                                    );
-                                }}
+                                handleRemoval={removeStyleFromSection}
                             />
                             <Styling
                                 key={1}
@@ -419,6 +416,7 @@ function Post(props) {
                                 }}
                                 previousStyleEnd={firstStyle.end}
                                 nextStyleStart={thirdStyle.start}
+                                handleRemoval={removeStyleFromSection}
                             />
                             <Styling
                                 key={2}
@@ -437,6 +435,7 @@ function Post(props) {
                                 }}
                                 previousStyleEnd={secondStyle.start}
                                 nextStyleStart={null}
+                                handleRemoval={removeStyleFromSection}
                             />
                         </div>
                         <p>

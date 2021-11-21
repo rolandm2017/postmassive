@@ -3,7 +3,7 @@ import Choice from "./Choice";
 import "./Styling.css";
 
 function Styling({
-    option,
+    menuOption,
     handleClick,
     stylingInfo,
     previousStyleEnd,
@@ -20,9 +20,9 @@ function Styling({
                         onChange={(event) => {
                             handleClick(event.target.value);
                         }}
-                        checked={option === currentlyChecked}
+                        checked={menuOption === currentlyChecked}
                     />
-                    <span className="mx-1">{option}.</span>
+                    <span className="mx-1">{menuOption}.</span>
                 </div>
             </div>
             <div className="d-flex flex-column">
@@ -61,7 +61,9 @@ function Styling({
                                   <Choice
                                       key={index}
                                       choice={choice}
-                                      onClick={() => handleRemoval()}
+                                      onClick={() =>
+                                          handleRemoval(choice, menuOption)
+                                      }
                                   />
                               );
                           })
