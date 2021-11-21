@@ -118,7 +118,8 @@ function Post(props) {
                 Object.keys(firstStyle).length === 0 &&
                 Object.getPrototypeOf(firstStyle) === Object.prototype;
             if (!firstStyleIsEmpty) {
-                let current = firstStyle.styles;
+                let current = [...firstStyle.styles];
+                console.log(122, current, firstStyle);
                 current.push(type);
                 firstStyle.styles = current;
                 let newStyle = firstStyle;
@@ -139,7 +140,8 @@ function Post(props) {
                 Object.keys(secondStyle).length === 0 &&
                 Object.getPrototypeOf(secondStyle) === Object.prototype;
             if (!secondStyleIsEmpty) {
-                let current = secondStyle.styles;
+                let current = [...secondStyle.styles];
+                console.log(122, current, secondStyle, secondStyle.styles);
                 current.push(type);
                 secondStyle.styles = current;
                 let newStyle = secondStyle;
@@ -160,7 +162,8 @@ function Post(props) {
                 Object.keys(thirdStyle).length === 0 &&
                 Object.getPrototypeOf(thirdStyle) === Object.prototype;
             if (!thirdStyleIsEmpty) {
-                let current = thirdStyle.styles;
+                let current = [...thirdStyle.styles];
+                console.log(122, current, thirdStyle);
                 current.push(type);
                 thirdStyle.styles = current;
                 let newStyle = thirdStyle;
@@ -350,7 +353,7 @@ function Post(props) {
                                         "Wife surprised me by bringing home a picnic table. $150.\n Spent hours painting it, almost a hundo on paint and primer, and I’m pretty sure oil based Rustoleum ruined my sprayer. \n Would have been cheaper to light the damn thing on fire"
                                     }
                                 </p>
-                                <button
+                                {/* <button
                                     onClick={() => {
                                         console.log(
                                             // stylingChoices,
@@ -362,7 +365,7 @@ function Post(props) {
                                     }}
                                 >
                                     Inspect
-                                </button>
+                                </button> */}
                             </div>
                         </div>
                         <div id="post_styling-area">
