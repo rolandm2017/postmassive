@@ -201,31 +201,47 @@ function Post(props) {
             index,
             "aiemd for bold"
         );
-        // if (index === 0) {
-        //     let currentStyles = [...firstStyle.styles];
-        //     const index = currentStyles.indexOf(type);
-        //     if (index > -1) {
-        //         currentStyles.splice(index, 1);
-        //     }
-        //     setFirstStyle(current);
-        // } else if (index === 1) {
-        //     let currentStyles = [...secondStyle.styles];
-        //     const index = currentStyles.indexOf(type);
-        //     if (index > -1) {
-        //         currentStyles.splice(index, 1);
-        //     }
-        //     setSecondStyle(current);
-        // } else if (index === 2) {
-        //     let currentStyles = [...thirdStyle.styles];
-        //     const index = currentStyles.style.indexOf(type);
-        //     if (index > -1) {
-        //         currentStyles.splice(index, 1);
-        //     }
-        //     setThirdStyle(current);
-        // } else {
-        //     console.log(currentStyle, "<--- weird bug");
-        //     // throw "strange error";
-        // }
+        let currentStyles;
+        if (index === 0) {
+            currentStyles = [...firstStyle.styles];
+            const typeIndex = currentStyles.indexOf(type);
+            if (typeIndex > -1) {
+                currentStyles.splice(typeIndex, 1);
+            }
+            let newFirstStyleObject = {
+                start: firstStyle.start,
+                end: firstStyle.end,
+                styles: currentStyles,
+            };
+            setFirstStyle(newFirstStyleObject);
+        } else if (index === 1) {
+            currentStyles = [...secondStyle.styles];
+            const typeIndex = currentStyles.indexOf(type);
+            if (typeIndex > -1) {
+                currentStyles.splice(typeIndex, 1);
+            }
+            let newSecondStyleObject = {
+                start: secondStyle.start,
+                end: secondStyle.end,
+                styles: currentStyles,
+            };
+            setSecondStyle(newSecondStyleObject);
+        } else if (index === 2) {
+            currentStyles = [...thirdStyle.styles];
+            const typeIndex = currentStyles.style.indexOf(type);
+            if (typeIndex > -1) {
+                currentStyles.splice(typeIndex, 1);
+            }
+            let newThirdStyleObject = {
+                start: thirdStyle.start,
+                end: thirdStyle.end,
+                styles: currentStyles,
+            };
+            setThirdStyle(newThirdStyleObject);
+        } else {
+            console.log(currentStyle, "<--- weird bug");
+            // throw "strange error";
+        }
     }
 
     function handleChangeStartRange(styleObj, startAdjustment, indexSetter) {
