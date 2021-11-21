@@ -103,25 +103,78 @@ function Post(props) {
     }
 
     function addStyleToSection(type) {
-        console.log(106, type, currentStyle, firstStyle);
+        console.log(
+            106,
+            type,
+            currentStyle,
+            firstStyle,
+            secondStyle,
+            thirdStyle
+        );
         if (currentStyle === 0) {
-            let current = firstStyle.styles;
-            current.push(type);
-            firstStyle.styles = current;
-            let newStyle = firstStyle;
-            setFirstStyle(newStyle);
+            // https://stackoverflow.com/questions/679915/how-do-i-test-for-an-empty-javascript-object
+            let firstStyleIsEmpty =
+                firstStyle && // 👈 null and undefined check
+                Object.keys(firstStyle).length === 0 &&
+                Object.getPrototypeOf(firstStyle) === Object.prototype;
+            if (!firstStyleIsEmpty) {
+                let current = firstStyle.styles;
+                current.push(type);
+                firstStyle.styles = current;
+                let newStyle = firstStyle;
+                setFirstStyle(newStyle);
+            } else {
+                // make the style. DO NOT refactor this to be outside of "currentStyle" dependency
+                let styleInit = {
+                    start: undefined,
+                    end: undefined,
+                    styles: [type],
+                };
+                console.log("creating style...", 133);
+                setFirstStyle(styleInit);
+            }
         } else if (currentStyle === 1) {
-            let current = secondStyle.styles;
-            current.push(type);
-            secondStyle.styles = current;
-            let newStyle = secondStyle;
-            setSecondStyle(newStyle);
+            let secondStyleIsEmpty =
+                secondStyle && // 👈 null and undefined check
+                Object.keys(secondStyle).length === 0 &&
+                Object.getPrototypeOf(secondStyle) === Object.prototype;
+            if (!secondStyleIsEmpty) {
+                let current = secondStyle.styles;
+                current.push(type);
+                secondStyle.styles = current;
+                let newStyle = secondStyle;
+                setSecondStyle(newStyle);
+            } else {
+                // make the style. DO NOT refactor this to be outside of "currentStyle" dependency
+                let styleInit = {
+                    start: undefined,
+                    end: undefined,
+                    styles: [type],
+                };
+                console.log("creating style...", 154);
+                setSecondStyle(styleInit);
+            }
         } else if (currentStyle === 2) {
-            let current = thirdStyle.styles;
-            current.push(type);
-            thirdStyle.styles = current;
-            let newStyle = thirdStyle;
-            setThirdStyle(newStyle);
+            let thirdStyleIsEmpty =
+                thirdStyle && // 👈 null and undefined check
+                Object.keys(thirdStyle).length === 0 &&
+                Object.getPrototypeOf(thirdStyle) === Object.prototype;
+            if (!thirdStyleIsEmpty) {
+                let current = thirdStyle.styles;
+                current.push(type);
+                thirdStyle.styles = current;
+                let newStyle = thirdStyle;
+                setThirdStyle(newStyle);
+            } else {
+                // make the style. DO NOT refactor this to be outside of "currentStyle" dependency
+                let styleInit = {
+                    start: undefined,
+                    end: undefined,
+                    styles: [type],
+                };
+                console.log("creating style...", 175);
+                setThirdStyle(styleInit);
+            }
         } else {
             console.log(currentStyle, "<--- weird bug");
         }
@@ -161,7 +214,7 @@ function Post(props) {
         if (startAdjustment === 1) {
             let newStart = currentStart + 1;
             styleObj.start = newStart;
-            indexSetter(styleObj);
+            indexSetter(styleObj); // setFirstStyle, setSecondStyle, setThirdStyle, etc
         } else if (startAdjustment === -1) {
             let newStart = currentStart - 1;
             styleObj.start = newStart;
@@ -177,19 +230,25 @@ function Post(props) {
         if (endAdjustment === 1) {
             let newEnd = currentStart + 1;
             styleObj.start = newEnd;
-            indexSetter(styleObj);
+            indexSetter(styleObj); // setFirstStyle, setSecondStyle, setThirdStyle, etc
         } else if (endAdjustment === -1) {
             let newEnd = currentStart - 1;
             styleObj.start = newEnd;
             indexSetter(styleObj);
         } else {
-            console.log(startAdjustment, 170);
+            console.log(endAdjustment, 170);
         }
     }
 
-    function handleChangeOption(number) {
+    function handleChangeStylingSelection(number) {
+        console.log(
+            218,
+            number,
+            "previousStyle:",
+            currentStyle,
+            "inside handleChangeStylingSelection"
+        );
         setCurrentStyle(number);
-        console.log(110, number);
     }
 
     const floors = FLOORS.map((floor, index) => (
@@ -311,12 +370,16 @@ function Post(props) {
                                 key={0}
                                 option={0}
                                 handleClick={() => {
-                                    handleChangeOption(0);
+                                    console.log(340, "should update sel");
+                                    handleChangeStylingSelection(0);
                                 }}
                                 currentlyChecked={currentStyle}
                                 stylingInfo={firstStyle.styles}
-                                range={() => {
-                                    handleChangeRange();
+                                adjustStart={() => {
+                                    handleChangeStartRange();
+                                }}
+                                adjustEnd={() => {
+                                    handleChangeEndRange();
                                 }}
                                 previousStyleEnd={null}
                                 nextStyleStart={secondStyle.start}
@@ -325,12 +388,16 @@ function Post(props) {
                                 key={1}
                                 option={1}
                                 handleClick={() => {
-                                    handleChangeOption(1);
+                                    console.log(340, "should update sel", 1);
+                                    handleChangeStylingSelection(1);
                                 }}
                                 currentlyChecked={currentStyle}
                                 stylingInfo={secondStyle.styles}
-                                range={() => {
-                                    handleChangeRange();
+                                adjustStart={() => {
+                                    handleChangeStartRange();
+                                }}
+                                adjustEnd={() => {
+                                    handleChangeEndRange();
                                 }}
                                 previousStyleEnd={firstStyle.end}
                                 nextStyleStart={thirdStyle.start}
@@ -339,12 +406,16 @@ function Post(props) {
                                 key={2}
                                 option={2}
                                 handleClick={() => {
-                                    handleChangeOption(2);
+                                    console.log(340, "should update sel", 2);
+                                    handleChangeStylingSelection(2);
                                 }}
                                 currentlyChecked={currentStyle}
                                 stylingInfo={thirdStyle.styles}
-                                range={() => {
-                                    handleChangeRange();
+                                adjustStart={() => {
+                                    handleChangeStartRange();
+                                }}
+                                adjustEnd={() => {
+                                    handleChangeEndRange();
                                 }}
                                 previousStyleEnd={secondStyle.start}
                                 nextStyleStart={null}
@@ -358,23 +429,41 @@ function Post(props) {
                             <div className="post_tones-outer-container w-100">
                                 <Emphasis
                                     emphasis={"bold"}
-                                    onClick={addStyleToSection("bold")}
+                                    onClick={() => {
+                                        console.log(
+                                            433,
+                                            "inside Emphasis onClick"
+                                        );
+                                        addStyleToSection("bold");
+                                    }}
                                 />
                                 <Emphasis
                                     emphasis={"italics"}
                                     onClick={() => {
+                                        console.log(
+                                            433,
+                                            "inside Emphasis onClick"
+                                        );
                                         addStyleToSection("italics");
                                     }}
                                 />
                                 <Emphasis
                                     emphasis={"strikethrough"}
                                     onClick={() => {
+                                        console.log(
+                                            433,
+                                            "inside Emphasis onClick"
+                                        );
                                         addStyleToSection("strikethrough");
                                     }}
                                 />
                                 <Emphasis
                                     emphasis={"underline"}
                                     onClick={() => {
+                                        console.log(
+                                            433,
+                                            "inside Emphasis onClick"
+                                        );
                                         addStyleToSection("underline");
                                     }}
                                 />

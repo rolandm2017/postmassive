@@ -12,7 +12,7 @@ function Styling({
                 <div>
                     <input
                         type="radio"
-                        onClick={(event) => {
+                        onChange={(event) => {
                             handleClick(event.target.value);
                         }}
                         checked={option === currentlyChecked}
@@ -30,6 +30,9 @@ function Styling({
                         min={previousStyleEnd}
                         max={nextStyleStart}
                         type="range"
+                        onChange={(event) => {
+                            console.log(event.target.value); // prints the expected value!
+                        }}
                     />
                     <span className="color-white">{previousStyleEnd}</span>
                 </div>
