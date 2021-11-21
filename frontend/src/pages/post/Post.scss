@@ -68,6 +68,24 @@ textarea {
     text-align: left;
 }
 
+#post_floor-container {
+    display: flex;
+    flex-direction: column;
+    // flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.post_floor-container-inner {
+    // border: 5px solid black;
+    padding: 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.post_floor-container-inner div {
+    flex: 1 1 60px;
+}
+
 .post_generic-filler {
     min-width: 60px;
 }
@@ -137,7 +155,7 @@ textarea {
 #post_typed-content-area {
     border: 3px solid black;
     width: 100%;
-    height: 80px;
+    height: 140px;
     padding: 0px 40px !important;
 }
 

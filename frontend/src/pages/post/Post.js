@@ -36,7 +36,11 @@ function Post(props) {
     const [content, setContent] = useState("");
     const [price, setPrice] = useState(null);
     const [floor, setFloor] = useState(NaN);
-    const [stylingChoices, addChoiceToSelectedStyles] = useState("");
+    const [stylingChoices, addChoiceToSelectedStyles] = useState([
+        "bold",
+        "backgroundGreen",
+        "superscript",
+    ]);
     const [firstStyle, setFirstStyle] = useState({});
     const [secondStyle, setSecondStyle] = useState({});
     const [thirdStyle, setThirdStyle] = useState({});
@@ -68,18 +72,6 @@ function Post(props) {
 
         return price;
     }
-
-    // function processIntToString(integer) {
-    //     // whatever comes into the func, it leaves with its trailing 2 ints as decimals.
-    //     // 1003 --> 10.03; 20 => 0.20; 48320 => 483.20
-    //     let toBeMoney = integer.toString();
-    //     let processedIntoMoney =
-    //         toBeMoney.slice(0, toBeMoney.length - 3) +
-    //         "." +
-    //         toBeMoney.slice(toBeMoney.length - 3);
-    //     console.log(48, processedIntoMoney);
-    //     return processedIntoMoney;
-    // }
 
     function handleClick() {
         history.push("/home");
@@ -158,10 +150,15 @@ function Post(props) {
                     </div>
                     <div className="post_middle px-2">
                         <div className="">
-                            <p>Audience Floor:</p>
-
-                            {floors}
-                            {/* <br /> */}
+                            <div id="post_floor-container">
+                                <div>
+                                    <p>Audience Floor:</p>
+                                </div>
+                                <div className="post_floor-container-inner">
+                                    {floors}
+                                </div>
+                                {/* <br /> */}
+                            </div>
 
                             <div className="d-flex flex-column align-items-center">
                                 <label htmlFor="content">
@@ -172,6 +169,7 @@ function Post(props) {
                                     id="content"
                                     type="text"
                                     name="content"
+                                    default="hello i am writing some text into the textbox so it has value by default"
                                     onChange={(event) => {
                                         console.log(
                                             170,
@@ -225,7 +223,7 @@ function Post(props) {
                                           <Styling
                                               key={index}
                                               option={index}
-                                              choice={styling}
+                                              stylingType={styling}
                                               range={() => {
                                                   handleChangeRange();
                                               }}
@@ -241,19 +239,19 @@ function Post(props) {
                         <div id="post_targeting-container">
                             <div className="post_tones-outer-container w-100">
                                 <Emphasis
-                                    styling={"bold"}
+                                    emphasis={"bold"}
                                     onClick={() => {
                                         addChoiceToSelectedStyles("bold");
                                     }}
                                 />
                                 <Emphasis
-                                    styling={"italics"}
+                                    emphasis={"italics"}
                                     onClick={() => {
                                         addChoiceToSelectedStyles("italics");
                                     }}
                                 />
                                 <Emphasis
-                                    styling={"strikethrough"}
+                                    emphasis={"strikethrough"}
                                     onClick={() => {
                                         addChoiceToSelectedStyles(
                                             "strikethrough"
@@ -261,7 +259,7 @@ function Post(props) {
                                     }}
                                 />
                                 <Emphasis
-                                    styling={"underline"}
+                                    emphasis={"underline"}
                                     onClick={() => {
                                         addChoiceToSelectedStyles("underline");
                                     }}
