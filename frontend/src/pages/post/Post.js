@@ -194,32 +194,38 @@ function Post(props) {
     }
 
     function removeStyleFromSection(type, index) {
-        console.log(197, type, index);
-        if (index === 0) {
-            let currentStyles = [...firstStyle.styles];
-            const index = currentStyles.indexOf(type);
-            if (index > -1) {
-                current.splice(index, 1);
-            }
-            setFirstStyle(current);
-        } else if (index === 1) {
-            let currentStyles = [...secondStyle.styles];
-            const index = currentStyles.indexOf(type);
-            if (index > -1) {
-                current.splice(index, 1);
-            }
-            setSecondStyle(current);
-        } else if (index === 2) {
-            let currentStyles = [...thirdStyle.styles];
-            const index = currentStyles.style.indexOf(type);
-            if (index > -1) {
-                current.splice(index, 1);
-            }
-            setThirdStyle(current);
-        } else {
-            console.log(currentStyle, "<--- weird bug");
-            // throw "strange error";
-        }
+        console.log(
+            197,
+            type,
+            "this is index of what",
+            index,
+            "aiemd for bold"
+        );
+        // if (index === 0) {
+        //     let currentStyles = [...firstStyle.styles];
+        //     const index = currentStyles.indexOf(type);
+        //     if (index > -1) {
+        //         currentStyles.splice(index, 1);
+        //     }
+        //     setFirstStyle(current);
+        // } else if (index === 1) {
+        //     let currentStyles = [...secondStyle.styles];
+        //     const index = currentStyles.indexOf(type);
+        //     if (index > -1) {
+        //         currentStyles.splice(index, 1);
+        //     }
+        //     setSecondStyle(current);
+        // } else if (index === 2) {
+        //     let currentStyles = [...thirdStyle.styles];
+        //     const index = currentStyles.style.indexOf(type);
+        //     if (index > -1) {
+        //         currentStyles.splice(index, 1);
+        //     }
+        //     setThirdStyle(current);
+        // } else {
+        //     console.log(currentStyle, "<--- weird bug");
+        //     // throw "strange error";
+        // }
     }
 
     function handleChangeStartRange(styleObj, startAdjustment, indexSetter) {
@@ -401,7 +407,7 @@ function Post(props) {
                             />
                             <Styling
                                 key={1}
-                                option={1}
+                                menuOption={1}
                                 handleClick={() => {
                                     console.log(340, "should update sel", 1);
                                     handleChangeStylingSelection(1);
@@ -420,7 +426,7 @@ function Post(props) {
                             />
                             <Styling
                                 key={2}
-                                option={2}
+                                menuOption={2}
                                 handleClick={() => {
                                     console.log(340, "should update sel", 2);
                                     handleChangeStylingSelection(2);
