@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Highlightable from "highlightable";
+import Highlightable, { Range } from "highlightable";
 
 import { useHistory, useLocation } from "react-router-dom";
 
@@ -191,9 +191,19 @@ function Post(props) {
                             <img src={Emoji} alt="pick emoji"></img>
                         </div>
                         <div id="post_typed-content-area">
-                            <p>
-                                <Highlightable text={content} />
-                            </p>
+                            <Highlightable
+                                ranges={new Range[(0, 20)]()}
+                                enabled={true}
+                                onTextHighlighted={(e) => {
+                                    setStylingChoice(e.target.value);
+                                }}
+                                id={0}
+                                highlightStyle={{ backgroundColor: "red" }}
+                                text={
+                                    "sdfnlasdfna fnadsflm adsfndsafnk aldsnfkasdf asdf asdlfndsf"
+                                }
+                            />
+                            <div></div>
                         </div>
                         <p>
                             {/* TODO: steal from Facebook's ad targeting. Allow
