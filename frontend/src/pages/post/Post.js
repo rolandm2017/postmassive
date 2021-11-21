@@ -30,6 +30,7 @@ import FontSlider from "./components/FontSlider";
 import Flooring from "./components/Flooring";
 
 import "./Post.scss";
+import { current } from "@reduxjs/toolkit";
 
 function Post(props) {
     const [username, setUsername] = useState(null);
@@ -101,8 +102,89 @@ function Post(props) {
             });
     }
 
-    function handleChangeRange() {
+    function addStyleToSection(type) {
+        console.log(106, type, currentStyle, firstStyle);
+        if (currentStyle === 0) {
+            let current = firstStyle.styles;
+            current.push(type);
+            firstStyle.styles = current;
+            let newStyle = firstStyle;
+            setFirstStyle(newStyle);
+        } else if (currentStyle === 1) {
+            let current = secondStyle.styles;
+            current.push(type);
+            secondStyle.styles = current;
+            let newStyle = secondStyle;
+            setSecondStyle(newStyle);
+        } else if (currentStyle === 2) {
+            let current = thirdStyle.styles;
+            current.push(type);
+            thirdStyle.styles = current;
+            let newStyle = thirdStyle;
+            setThirdStyle(newStyle);
+        } else {
+            console.log(currentStyle, "<--- weird bug");
+        }
+    }
+
+    function removeStyleFromSection(type, index) {
+        if (index === 0) {
+            let current = firstStyle;
+            const index = current.indexOf(type);
+            if (index > -1) {
+                current.splice(index, 1);
+            }
+            setFirstStyle(current);
+        } else if (index === 1) {
+            let current = secondStyle;
+            const index = current.indexOf(type);
+            if (index > -1) {
+                current.splice(index, 1);
+            }
+            setSecondStyle(current);
+        } else if (index === 2) {
+            let current = thirdStyle;
+            const index = current.indexOf(type);
+            if (index > -1) {
+                current.splice(index, 1);
+            }
+            setThirdStyle(current);
+        } else {
+            console.log(currentStyle, "<--- weird bug");
+            // throw "strange error";
+        }
+    }
+
+    function handleChangeStartRange(styleObj, startAdjustment, indexSetter) {
         // setRange;
+        let currentStart = styleObj.start;
+        if (startAdjustment === 1) {
+            let newStart = currentStart + 1;
+            styleObj.start = newStart;
+            indexSetter(styleObj);
+        } else if (startAdjustment === -1) {
+            let newStart = currentStart - 1;
+            styleObj.start = newStart;
+            indexSetter(styleObj);
+        } else {
+            console.log(startAdjustment, 170);
+        }
+    }
+
+    function handleChangeEndRange(styleObj, endAdjustment, indexSetter) {
+        // setRange;
+        let currentStart = styleObj.end;
+        if (endAdjustment === 1) {
+            let newEnd = currentStart + 1;
+            styleObj.start = newEnd;
+            indexSetter(styleObj);
+        } else if (endAdjustment === -1) {
+            let newEnd = currentStart - 1;
+            styleObj.start = newEnd;
+            indexSetter(styleObj);
+        } else {
+            console.log(startAdjustment, 170);
+        }
     }
 
     function handleChangeOption(number) {
@@ -231,13 +313,13 @@ function Post(props) {
                                 handleClick={() => {
                                     handleChangeOption(0);
                                 }}
+                                currentlyChecked={currentStyle}
                                 stylingInfo={firstStyle.styles}
                                 range={() => {
                                     handleChangeRange();
                                 }}
                                 previousStyleEnd={null}
                                 nextStyleStart={secondStyle.start}
-                                currentlyChecked={currentStyle}
                             />
                             <Styling
                                 key={1}
@@ -245,13 +327,13 @@ function Post(props) {
                                 handleClick={() => {
                                     handleChangeOption(1);
                                 }}
+                                currentlyChecked={currentStyle}
                                 stylingInfo={secondStyle.styles}
                                 range={() => {
                                     handleChangeRange();
                                 }}
                                 previousStyleEnd={firstStyle.end}
                                 nextStyleStart={thirdStyle.start}
-                                currentlyChecked={currentStyle}
                             />
                             <Styling
                                 key={2}
@@ -259,13 +341,13 @@ function Post(props) {
                                 handleClick={() => {
                                     handleChangeOption(2);
                                 }}
+                                currentlyChecked={currentStyle}
                                 stylingInfo={thirdStyle.styles}
                                 range={() => {
                                     handleChangeRange();
                                 }}
                                 previousStyleEnd={secondStyle.start}
                                 nextStyleStart={null}
-                                currentlyChecked={currentStyle}
                             />
                         </div>
                         <p>
@@ -276,19 +358,25 @@ function Post(props) {
                             <div className="post_tones-outer-container w-100">
                                 <Emphasis
                                     emphasis={"bold"}
-                                    onClick={() => {}}
+                                    onClick={addStyleToSection("bold")}
                                 />
                                 <Emphasis
                                     emphasis={"italics"}
-                                    onClick={() => {}}
+                                    onClick={() => {
+                                        addStyleToSection("italics");
+                                    }}
                                 />
                                 <Emphasis
                                     emphasis={"strikethrough"}
-                                    onClick={() => {}}
+                                    onClick={() => {
+                                        addStyleToSection("strikethrough");
+                                    }}
                                 />
                                 <Emphasis
                                     emphasis={"underline"}
-                                    onClick={() => {}}
+                                    onClick={() => {
+                                        addStyleToSection("underline");
+                                    }}
                                 />
                             </div>
                             <div id="" className="aaaaaa">
