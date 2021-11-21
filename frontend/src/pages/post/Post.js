@@ -121,9 +121,13 @@ function Post(props) {
                 let current = [...firstStyle.styles];
                 console.log(122, current, firstStyle);
                 current.push(type);
-                firstStyle.styles = current;
-                let newStyle = firstStyle;
-                setFirstStyle(newStyle);
+                console.log(146, current, firstStyle, firstStyle.styles);
+                let newFirstStyle = {
+                    start: undefined,
+                    end: undefined,
+                    styles: current,
+                };
+                setFirstStyle(newFirstStyle);
             } else {
                 // make the style. DO NOT refactor this to be outside of "currentStyle" dependency
                 let styleInit = {
@@ -131,7 +135,7 @@ function Post(props) {
                     end: undefined,
                     styles: [type],
                 };
-                console.log("creating style...", 133);
+                console.log("creating style...", styleInit, 134);
                 setFirstStyle(styleInit);
             }
         } else if (currentStyle === 1) {
@@ -141,11 +145,16 @@ function Post(props) {
                 Object.getPrototypeOf(secondStyle) === Object.prototype;
             if (!secondStyleIsEmpty) {
                 let current = [...secondStyle.styles];
-                console.log(122, current, secondStyle, secondStyle.styles);
                 current.push(type);
                 secondStyle.styles = current;
-                let newStyle = secondStyle;
-                setSecondStyle(newStyle);
+                // let newStyle = secondStyle;
+                console.log(146, current, secondStyle, secondStyle.styles);
+                let newSecondStyle = {
+                    start: undefined,
+                    end: undefined,
+                    styles: current,
+                };
+                setSecondStyle(newSecondStyle);
             } else {
                 // make the style. DO NOT refactor this to be outside of "currentStyle" dependency
                 let styleInit = {
@@ -163,11 +172,16 @@ function Post(props) {
                 Object.getPrototypeOf(thirdStyle) === Object.prototype;
             if (!thirdStyleIsEmpty) {
                 let current = [...thirdStyle.styles];
-                console.log(122, current, thirdStyle);
                 current.push(type);
                 thirdStyle.styles = current;
-                let newStyle = thirdStyle;
-                setThirdStyle(newStyle);
+                // let newStyle = thirdStyle;
+                console.log(168, current, thirdStyle, thirdStyle.styles);
+                let newThirdStyle = {
+                    start: undefined,
+                    end: undefined,
+                    styles: current,
+                };
+                setThirdStyle(newThirdStyle);
             } else {
                 // make the style. DO NOT refactor this to be outside of "currentStyle" dependency
                 let styleInit = {
@@ -175,7 +189,7 @@ function Post(props) {
                     end: undefined,
                     styles: [type],
                 };
-                console.log("creating style...", 175);
+                console.log("creating style...", 179);
                 setThirdStyle(styleInit);
             }
         } else {
