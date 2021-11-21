@@ -134,27 +134,39 @@ function Post(props) {
                 ></img>
             </div>
             <div className="mt-4 d-flex justify-content-center">
-                <div id="post_profile-pic" className="post_spacer">
-                    <img src={Nicolai} alt="profile pic"></img>
-                </div>
-                <div className="post_middle px-2">
-                    <div className="">
-                        <p>Audience Floor:</p>
+                <div id="post_top-half">
+                    <div id="post_profile-pic" className="post_spacer">
+                        <img src={Nicolai} alt="profile pic"></img>
+                    </div>
+                    <div className="post_middle px-2">
+                        <div className="">
+                            <p>Audience Floor:</p>
 
-                        {FLOORS}
-                        {/* <br /> */}
-                        <label htmlFor="content">
-                            What do you want to say?
-                        </label>
-                        {/* <br /> */}
-                        <textarea
-                            id="content"
-                            type="text"
-                            name="content"
-                            onChange={(event) => {
-                                setContent(event.target.value);
-                            }}
-                        ></textarea>
+                            {floors}
+                            {/* <br /> */}
+                            <div className="d-flex flex-column">
+                                <label htmlFor="content">
+                                    What do you want to say?
+                                </label>
+                                {/* <br /> */}
+                                <textarea
+                                    id="content"
+                                    type="text"
+                                    name="content"
+                                    onChange={(event) => {
+                                        setContent(event.target.value);
+                                    }}
+                                ></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="post_right-spacer" className="post_spacer">
+                        <div className="w-100"></div>
+                    </div>
+                </div>
+                <div id="post_bottom-half">
+                    <div id="post_profile-pic" className="post_spacer">
+                        <img src={Nicolai} alt="profile pic"></img>
                     </div>
                     <div id="post_targeting">
                         <div>
@@ -239,8 +251,10 @@ function Post(props) {
                             </button>
                         </div>
                     </div>
+                    <div id="post_right-spacer" className="post_spacer">
+                        <div className="w-100"></div>
+                    </div>
                 </div>
-                <div className="post_spacer"></div>
             </div>
         </Wrapper>
     );
@@ -250,6 +264,3 @@ export default Post;
 
 // TODO-MUCH-LATER: Dynamically generate audience sizes based on monthly(?) pageviews
 // TODO-LATER: wire up the price to the server's generated price
-
-// REMEMBER: The idea is to price posts as an auction. Or like a stock market
-// the site is getting lots of views = price goes down. few views and lots of posts = price goes up.

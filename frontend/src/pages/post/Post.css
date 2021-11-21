@@ -7,6 +7,10 @@ textarea {
     height: 150px;
 }
 
+.post_color-white {
+    color: white;
+}
+
 #post_back-button {
     width: 36px;
     height: 36px;
@@ -25,12 +29,44 @@ textarea {
     text-align: right;
 }
 
+#post_right-spacer {
+    border: 6px solid slateblue;
+    min-width: 60px !important;
+}
+
+@media screen and (max-width: 570px) {
+    #post_right-spacer {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    #post_profile-pic {
+        display: none;
+    }
+
+    #post_middle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .post_middle {
+        margin: 0 30px;
+    }
+
+    .post_spacer {
+        display: none !important;
+    }
+}
+
 .audience-size-container {
     text-align: left;
 }
 
 .post_middle {
-    flex: 2;
+    /* flex: 2; */
+    width: 140%;
 }
 
 .post_spacer {
