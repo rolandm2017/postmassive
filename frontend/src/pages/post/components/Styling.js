@@ -1,7 +1,8 @@
-function Styling({ styling }) {
+function Styling({ stylingType }) {
     return (
-        <div className="pl-2 pt-2 post_tones-inner-container">
-            <p>{styling}</p>
+        <div>
+            <input type="range" />
+            <label>{stylingType}</label>
         </div>
     );
 }

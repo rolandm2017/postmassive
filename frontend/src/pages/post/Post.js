@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
-import Highlightable, { Range } from "highlightable";
 
 import { useHistory, useLocation } from "react-router-dom";
 
 import { postOptions } from "../../_helper/authHeader";
 
-import { FLOORS, STYLINGS } from "../../_helper/consts";
+import {
+    FLOORS,
+    EMPHASIS,
+    SPECIALS,
+    BG_COLORS,
+    FONT_SIZES,
+} from "../../_helper/consts";
 
 import BackButton from "../../images/icons8-back-arrow-48-wh.png";
 import Photo from "../../images/mountain-32.png";
@@ -16,6 +21,8 @@ import Nicolai from "../../images/markZuckerberg.jpeg";
 
 import Wrapper from "../_pageHelper/Wrapper";
 import Styling from "./components/Styling";
+
+import Emphasis from "./components/Emphasis";
 import Special from "./components/Special";
 import BackgroundColor from "./components/BackgroundColor";
 import FontSlider from "./components/FontSlider";
@@ -29,7 +36,10 @@ function Post(props) {
     const [content, setContent] = useState("");
     const [price, setPrice] = useState(null);
     const [floor, setFloor] = useState(NaN);
-    const [stylingChoice, setStylingChoice] = useState("");
+    const [stylingChoices, addChoiceToSelectedStyles] = useState("");
+    const [firstStyle, setFirstStyle] = useState({});
+    const [secondStyle, setSecondStyle] = useState({});
+    const [thirdStyle, setThirdStyle] = useState({});
 
     let currentUrl = useLocation().pathname;
     let history = useHistory();
@@ -77,17 +87,21 @@ function Post(props) {
 
     function postPost(username, content, price, floor, styling) {
         // let displayName = user.displayName; // todo: get displayName for data
-        let data = {
+        let postContentWithStyling = {
             username: username,
             content: content,
             price: price,
             floor: floor,
             styling: styling,
         };
-        console.log("Sending ........", data);
+        // TODO: stick it into localHistory so browser can reload the data upon pgBack
+        console.log("Sending ........", postContentWithStyling);
         // send a post to the server to
         let postingUrl = process.env.REACT_APP_API_URL + "/post/post";
-        fetch(postingUrl, postOptions(postingUrl, false, 51, data)) // todo: content packages stuff into json.
+        fetch(
+            postingUrl,
+            postOptions(postingUrl, false, 51, postContentWithStyling)
+        ) // todo: content packages stuff into json.
             .then((x) => {
                 if (200) {
                     handleClick(); // redirect to /home
@@ -99,9 +113,9 @@ function Post(props) {
             });
     }
 
-    // function handler(floor) {
-    //     setFloor(floor);
-    // }
+    function handleChangeRange() {
+        // setRange;
+    }
 
     const floors = FLOORS.map((floor, index) => (
         <div
@@ -159,6 +173,11 @@ function Post(props) {
                                     type="text"
                                     name="content"
                                     onChange={(event) => {
+                                        console.log(
+                                            170,
+                                            event.target.value,
+                                            content
+                                        );
                                         setContent(event.target.value);
                                     }}
                                 ></textarea>
@@ -191,19 +210,29 @@ function Post(props) {
                             <img src={Emoji} alt="pick emoji"></img>
                         </div>
                         <div id="post_typed-content-area">
-                            <Highlightable
-                                ranges={new Range[(0, 20)]()}
-                                enabled={true}
-                                onTextHighlighted={(e) => {
-                                    setStylingChoice(e.target.value);
-                                }}
-                                id={0}
-                                highlightStyle={{ backgroundColor: "red" }}
-                                text={
-                                    "sdfnlasdfna fnadsflm adsfndsafnk aldsnfkasdf asdf asdlfndsf"
-                                }
-                            />
-                            <div></div>
+                            {/* // select up to 3 types of stylings, set
+                            textLocationRanges with sliders. // stack
+                            stylingTypes with drag n drop, or by selecting the
+                            type then selecting another styling */}
+                            <div>
+                                <p className="post_color-white">{content}</p>
+                            </div>
+                        </div>
+                        <div>
+                            {stylingChoices.length > 0
+                                ? stylingChoices.map((styling, index) => {
+                                      return (
+                                          <Styling
+                                              key={index}
+                                              option={index}
+                                              choice={styling}
+                                              range={() => {
+                                                  handleChangeRange();
+                                              }}
+                                          />
+                                      );
+                                  })
+                                : null}
                         </div>
                         <p>
                             {/* TODO: steal from Facebook's ad targeting. Allow
@@ -211,28 +240,30 @@ function Post(props) {
                         </p>
                         <div id="post_targeting-container">
                             <div className="post_tones-outer-container w-100">
-                                <Styling
+                                <Emphasis
                                     styling={"bold"}
                                     onClick={() => {
-                                        setStylingChoice("bold");
+                                        addChoiceToSelectedStyles("bold");
                                     }}
                                 />
-                                <Styling
+                                <Emphasis
                                     styling={"italics"}
                                     onClick={() => {
-                                        setStylingChoice("italics");
+                                        addChoiceToSelectedStyles("italics");
                                     }}
                                 />
-                                <Styling
+                                <Emphasis
                                     styling={"strikethrough"}
                                     onClick={() => {
-                                        setStylingChoice("strikethrough");
+                                        addChoiceToSelectedStyles(
+                                            "strikethrough"
+                                        );
                                     }}
                                 />
-                                <Styling
+                                <Emphasis
                                     styling={"underline"}
                                     onClick={() => {
-                                        setStylingChoice("underline");
+                                        addChoiceToSelectedStyles("underline");
                                     }}
                                 />
                             </div>
@@ -271,7 +302,11 @@ function Post(props) {
                                             content,
                                             price,
                                             floor,
-                                            stylingChoice
+                                            [
+                                                firstStyle,
+                                                secondStyle,
+                                                thirdStyle,
+                                            ] // wrap up all 3 choices and put into Post
                                         );
                                     }}
                                 >

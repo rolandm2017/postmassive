@@ -1,13 +1,8 @@
 export const FLOORS = [100, 1000, 10000, 100000];
 
-export const STYLINGS = ["bold", "italics", "strikethrough", "underline"];
+export const EMPHASIS = ["bold", "italics", "strikethrough", "underline"];
 
-export const SPECIALS = [
-    "textAlignmentUpDown",
-    "textAlignmentAddPadding",
-    "superscript",
-    "subscript",
-];
+export const SPECIALS = ["textAlignmentUpDown", "superscript", "subscript"];
 
 export const BG_COLORS = [
     "backgroundColorRed",
