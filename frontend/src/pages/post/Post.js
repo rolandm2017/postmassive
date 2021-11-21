@@ -133,9 +133,12 @@ function Post(props) {
                     }}
                 ></img>
             </div>
-            <div className="mt-4 d-flex justify-content-center">
-                <div id="post_top-half">
-                    <div id="post_profile-pic" className="post_spacer">
+            <div className="mt-4 d-flex flex-column">
+                <div id="post_top-half" className="post_space-divider">
+                    <div
+                        id="post_profile-pic"
+                        className="post_spacer post_generic-spacer post_generic-filler"
+                    >
                         <img src={Nicolai} alt="profile pic"></img>
                     </div>
                     <div className="post_middle px-2">
@@ -160,13 +163,20 @@ function Post(props) {
                             </div>
                         </div>
                     </div>
-                    <div id="post_right-spacer" className="post_spacer">
+                    <div
+                        id="post_right-spacer"
+                        className="post_spacer post_generic-spacer post_generic-filler"
+                    >
                         <div className="w-100"></div>
                     </div>
                 </div>
-                <div id="post_bottom-half">
-                    <div id="post_profile-pic" className="post_spacer">
-                        <img src={Nicolai} alt="profile pic"></img>
+                <div id="post_bottom-half" className="post_space-divider">
+                    <div
+                        id="post_profile-pic"
+                        className="post_spacer post_generic-spacer"
+                    >
+                        <div className="post_generic-filler"></div>
+                        {/* <img src={Nicolai} alt="profile pic"></img> */}
                     </div>
                     <div id="post_targeting">
                         <div>
@@ -230,7 +240,6 @@ function Post(props) {
                             </div>
                         </div>
                     </div>
-                    <div></div>
                     <div>
                         <div>
                             <p>Price: ${price}</p>
@@ -251,8 +260,11 @@ function Post(props) {
                             </button>
                         </div>
                     </div>
-                    <div id="post_right-spacer" className="post_spacer">
-                        <div className="w-100"></div>
+                    <div
+                        id="post_right-spacer"
+                        className="post_spacer post_generic-spacer"
+                    >
+                        <div className="w-100 post_generic-filler"></div>
                     </div>
                 </div>
             </div>
@@ -264,3 +276,6 @@ export default Post;
 
 // TODO-MUCH-LATER: Dynamically generate audience sizes based on monthly(?) pageviews
 // TODO-LATER: wire up the price to the server's generated price
+
+// REMEMBER: The idea is to price posts as an auction. Or like a stock market
+// the site is getting lots of views = price goes down. few views and lots of posts = price goes up.

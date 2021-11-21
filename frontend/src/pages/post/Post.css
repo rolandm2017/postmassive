@@ -31,7 +31,7 @@ textarea {
 
 #post_right-spacer {
     border: 6px solid slateblue;
-    min-width: 60px !important;
+    /* min-width: 60px !important; */
 }
 
 @media screen and (max-width: 570px) {
@@ -64,6 +64,16 @@ textarea {
     text-align: left;
 }
 
+.post_generic-filler {
+    min-width: 60px;
+}
+
+.post_generic-spacer {
+    /* width: 100px !important; */
+    flex-basis: 100px;
+    border: 3px solid magenta !important;
+}
+
 .post_middle {
     /* flex: 2; */
     width: 140%;
@@ -71,6 +81,10 @@ textarea {
 
 .post_spacer {
     flex: 1;
+}
+
+.post_space-divider {
+    display: flex;
 }
 
 #post_targeting {
