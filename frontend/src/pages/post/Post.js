@@ -36,11 +36,7 @@ function Post(props) {
     const [content, setContent] = useState("");
     const [price, setPrice] = useState(null);
     const [floor, setFloor] = useState(NaN);
-    const [stylingChoices, addChoiceToSelectedStyles] = useState([
-        "bold",
-        "backgroundGreen",
-        "superscript",
-    ]);
+    const [currentStyle, setCurrentStyle] = useState(0); // 0, 1, 2 selects radio btn
     const [firstStyle, setFirstStyle] = useState({});
     const [secondStyle, setSecondStyle] = useState({});
     const [thirdStyle, setThirdStyle] = useState({});
@@ -49,9 +45,9 @@ function Post(props) {
     let history = useHistory();
 
     useEffect(() => {
-        console.log(30, currentUrl);
+        // console.log(30, currentUrl);
         let usernameForState = currentUrl.split("/")[1];
-        console.log(31, usernameForState);
+        // console.log(31, usernameForState);
         setUsername(usernameForState);
         let price = getAuctioneerResponse();
         setPrice(price);
@@ -109,6 +105,11 @@ function Post(props) {
         // setRange;
     }
 
+    function handleChangeOption(number) {
+        setCurrentStyle(number);
+        console.log(110, number);
+    }
+
     const floors = FLOORS.map((floor, index) => (
         <div
             key={floor}
@@ -150,16 +151,6 @@ function Post(props) {
                     </div>
                     <div className="post_middle px-2">
                         <div className="">
-                            <div id="post_floor-container">
-                                <div>
-                                    <p>Audience Floor:</p>
-                                </div>
-                                <div className="post_floor-container-inner">
-                                    {floors}
-                                </div>
-                                {/* <br /> */}
-                            </div>
-
                             <div className="d-flex flex-column align-items-center">
                                 <label htmlFor="content">
                                     What do you want to say?
@@ -213,24 +204,69 @@ function Post(props) {
                             stylingTypes with drag n drop, or by selecting the
                             type then selecting another styling */}
                             <div>
-                                <p className="post_color-white">{content}</p>
+                                <p className="post_color-white">
+                                    {
+                                        "Wife surprised me by bringing home a picnic table. $150.\n Spent hours painting it, almost a hundo on paint and primer, and I’m pretty sure oil based Rustoleum ruined my sprayer. \n Would have been cheaper to light the damn thing on fire"
+                                    }
+                                </p>
+                                <button
+                                    onClick={() => {
+                                        console.log(
+                                            // stylingChoices,
+                                            firstStyle,
+                                            secondStyle,
+                                            thirdStyle,
+                                            225
+                                        );
+                                    }}
+                                >
+                                    Inspect
+                                </button>
                             </div>
                         </div>
-                        <div>
-                            {stylingChoices.length > 0
-                                ? stylingChoices.map((styling, index) => {
-                                      return (
-                                          <Styling
-                                              key={index}
-                                              option={index}
-                                              stylingType={styling}
-                                              range={() => {
-                                                  handleChangeRange();
-                                              }}
-                                          />
-                                      );
-                                  })
-                                : null}
+                        <div id="post_styling-area">
+                            <Styling
+                                key={0}
+                                option={0}
+                                handleClick={() => {
+                                    handleChangeOption(0);
+                                }}
+                                stylingInfo={firstStyle.styles}
+                                range={() => {
+                                    handleChangeRange();
+                                }}
+                                previousStyleEnd={null}
+                                nextStyleStart={secondStyle.start}
+                                currentlyChecked={currentStyle}
+                            />
+                            <Styling
+                                key={1}
+                                option={1}
+                                handleClick={() => {
+                                    handleChangeOption(1);
+                                }}
+                                stylingInfo={secondStyle.styles}
+                                range={() => {
+                                    handleChangeRange();
+                                }}
+                                previousStyleEnd={firstStyle.end}
+                                nextStyleStart={thirdStyle.start}
+                                currentlyChecked={currentStyle}
+                            />
+                            <Styling
+                                key={2}
+                                option={2}
+                                handleClick={() => {
+                                    handleChangeOption(2);
+                                }}
+                                stylingInfo={thirdStyle.styles}
+                                range={() => {
+                                    handleChangeRange();
+                                }}
+                                previousStyleEnd={secondStyle.start}
+                                nextStyleStart={null}
+                                currentlyChecked={currentStyle}
+                            />
                         </div>
                         <p>
                             {/* TODO: steal from Facebook's ad targeting. Allow
@@ -240,29 +276,19 @@ function Post(props) {
                             <div className="post_tones-outer-container w-100">
                                 <Emphasis
                                     emphasis={"bold"}
-                                    onClick={() => {
-                                        addChoiceToSelectedStyles("bold");
-                                    }}
+                                    onClick={() => {}}
                                 />
                                 <Emphasis
                                     emphasis={"italics"}
-                                    onClick={() => {
-                                        addChoiceToSelectedStyles("italics");
-                                    }}
+                                    onClick={() => {}}
                                 />
                                 <Emphasis
                                     emphasis={"strikethrough"}
-                                    onClick={() => {
-                                        addChoiceToSelectedStyles(
-                                            "strikethrough"
-                                        );
-                                    }}
+                                    onClick={() => {}}
                                 />
                                 <Emphasis
                                     emphasis={"underline"}
-                                    onClick={() => {
-                                        addChoiceToSelectedStyles("underline");
-                                    }}
+                                    onClick={() => {}}
                                 />
                             </div>
                             <div id="" className="aaaaaa">
@@ -289,6 +315,15 @@ function Post(props) {
                             </div>
                         </div>
                         <div>
+                            <div id="post_floor-container">
+                                <div>
+                                    <p>Audience Floor:</p>
+                                </div>
+                                <div className="post_floor-container-inner">
+                                    {floors}
+                                </div>
+                                {/* <br /> */}
+                            </div>
                             <div>
                                 <p>Price: ${price}</p>
                             </div>
@@ -309,6 +344,18 @@ function Post(props) {
                                     }}
                                 >
                                     Post
+                                </button>
+                                <button
+                                    onClick={() => {
+                                        console.log(
+                                            currentStyle,
+                                            firstStyle,
+                                            secondStyle,
+                                            thirdStyle
+                                        );
+                                    }}
+                                >
+                                    Inspect
                                 </button>
                             </div>
                         </div>
