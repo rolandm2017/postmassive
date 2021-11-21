@@ -102,6 +102,10 @@ function Post(props) {
             });
     }
 
+    function onlyUnique(value, index, self) {
+        return self.indexOf(value) === index;
+    }
+
     function addStyleToSection(type) {
         console.log(
             106,
@@ -119,13 +123,11 @@ function Post(props) {
                 Object.getPrototypeOf(firstStyle) === Object.prototype;
             if (!firstStyleIsEmpty) {
                 let current = [...firstStyle.styles];
-                console.log(122, current, firstStyle);
                 current.push(type);
-                console.log(146, current, firstStyle, firstStyle.styles);
                 let newFirstStyle = {
-                    start: undefined,
-                    end: undefined,
-                    styles: current,
+                    start: firstStyle.start,
+                    end: secondStyle.end,
+                    styles: current.filter(onlyUnique),
                 };
                 setFirstStyle(newFirstStyle);
             } else {
@@ -146,13 +148,10 @@ function Post(props) {
             if (!secondStyleIsEmpty) {
                 let current = [...secondStyle.styles];
                 current.push(type);
-                secondStyle.styles = current;
-                // let newStyle = secondStyle;
-                console.log(146, current, secondStyle, secondStyle.styles);
                 let newSecondStyle = {
-                    start: undefined,
-                    end: undefined,
-                    styles: current,
+                    start: secondStyle.start,
+                    end: secondStyle.end,
+                    styles: current.filter(onlyUnique),
                 };
                 setSecondStyle(newSecondStyle);
             } else {
@@ -173,13 +172,10 @@ function Post(props) {
             if (!thirdStyleIsEmpty) {
                 let current = [...thirdStyle.styles];
                 current.push(type);
-                thirdStyle.styles = current;
-                // let newStyle = thirdStyle;
-                console.log(168, current, thirdStyle, thirdStyle.styles);
                 let newThirdStyle = {
-                    start: undefined,
-                    end: undefined,
-                    styles: current,
+                    start: thirdStyle.start,
+                    end: thirdStyle.end,
+                    styles: current.filter(onlyUnique),
                 };
                 setThirdStyle(newThirdStyle);
             } else {

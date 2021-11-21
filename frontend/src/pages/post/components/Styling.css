@@ -1,0 +1,31 @@
+.styling_options-container {
+    width: 14%;
+}
+
+.styling_options-container div {
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.styling_label-container {
+    width: 50px;
+    border: 3px solid palegreen;
+}
+
+.styling_options-right-container {
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.styling_start-end-text {
+    font-size: 14px;
+}
+
+.styling_styling-parent-container {
+    min-width: 100%;
+    border: 3px solid yellow;
+}

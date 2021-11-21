@@ -96,11 +96,6 @@ textarea {
     border: 3px solid magenta !important;
 }
 
-.post_label-container {
-    width: 50px;
-    border: 3px solid palegreen;
-}
-
 .post_middle {
     /* flex: 2; */
     width: 140%;
@@ -116,27 +111,12 @@ textarea {
     width: 30px;
 }
 
-.post_options-container {
-    width: 60px;
-}
-
-.post_options-container div {
-    padding-top: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .post_spacer {
     flex: 1;
 }
 
 .post_space-divider {
     display: flex;
-}
-
-.post_start-end-text {
-    font-size: 14px;
 }
 
 #post_styling-area {
@@ -146,11 +126,6 @@ textarea {
     justify-content: center;
     // justify-content: ;
     border: 2px solid brown;
-}
-
-.post_styling-container {
-    min-width: 100%;
-    border: 3px solid yellow;
 }
 
 #post_targeting {
