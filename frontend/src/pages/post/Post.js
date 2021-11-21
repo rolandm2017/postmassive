@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Highlightable from "highlightable";
 
 import { useHistory, useLocation } from "react-router-dom";
 
@@ -21,7 +22,7 @@ import FontSlider from "./components/FontSlider";
 
 import Flooring from "./components/Flooring";
 
-import "./Post.css";
+import "./Post.scss";
 
 function Post(props) {
     const [username, setUsername] = useState(null);
@@ -147,7 +148,8 @@ function Post(props) {
 
                             {floors}
                             {/* <br /> */}
-                            <div className="d-flex flex-column">
+
+                            <div className="d-flex flex-column align-items-center">
                                 <label htmlFor="content">
                                     What do you want to say?
                                 </label>
@@ -178,12 +180,20 @@ function Post(props) {
                         <div className="post_generic-filler"></div>
                         {/* <img src={Nicolai} alt="profile pic"></img> */}
                     </div>
-                    <div id="post_targeting">
-                        <div>
+                    <div
+                        id="post_targeting"
+                        className="d-flex flex-column justify-content-center"
+                    >
+                        <div id="post_option-buttons" className="w-100">
                             <img src={Photo} alt="upload a pic"></img>
                             <img src={Gif} alt="select gif"></img>
                             <img src={Poll} alt="start poll"></img>
                             <img src={Emoji} alt="pick emoji"></img>
+                        </div>
+                        <div id="post_typed-content-area">
+                            <p>
+                                <Highlightable text={content} />
+                            </p>
                         </div>
                         <p>
                             {/* TODO: steal from Facebook's ad targeting. Allow
@@ -239,27 +249,28 @@ function Post(props) {
                                 <Special special={"subscript"} />
                             </div>
                         </div>
-                    </div>
-                    <div>
                         <div>
-                            <p>Price: ${price}</p>
-                        </div>
-                        <div>
-                            <button
-                                onClick={() => {
-                                    postPost(
-                                        username,
-                                        content,
-                                        price,
-                                        floor,
-                                        stylingChoice
-                                    );
-                                }}
-                            >
-                                Post
-                            </button>
+                            <div>
+                                <p>Price: ${price}</p>
+                            </div>
+                            <div>
+                                <button
+                                    onClick={() => {
+                                        postPost(
+                                            username,
+                                            content,
+                                            price,
+                                            floor,
+                                            stylingChoice
+                                        );
+                                    }}
+                                >
+                                    Post
+                                </button>
+                            </div>
                         </div>
                     </div>
+
                     <div
                         id="post_right-spacer"
                         className="post_spacer post_generic-spacer"
