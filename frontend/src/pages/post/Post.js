@@ -247,9 +247,9 @@ function Post(props) {
     }
 
     function handleChangeStartRange(styleObjectIndex, newStartIndex) {
-        console.log(248, styleObjectIndex, newStartIndex);
+        console.log(2248, styleObjectIndex, newStartIndex);
         if (styleObjectIndex === 0) {
-            if (firstStyle.start) {
+            if (typeof firstStyle.start === "undefined") {
                 let updatedFirstStyleStart = { ...firstStyle };
                 updatedFirstStyleStart.start = newStartIndex;
                 setFirstStyle(updatedFirstStyleStart);
@@ -400,8 +400,8 @@ function Post(props) {
                                 <p className="post_color-white">
                                     {prettyText(
                                         "Wife surprised me by bringing home a picnic table. $150.\n Spent hours painting it, almost a hundo on paint and primer, and I’m pretty sure oil based Rustoleum ruined my sprayer. \n Would have been cheaper to light the damn thing on fire",
-                                        [firstStyle, secondStyle, thirdStyle],
-                                        setContent
+                                        [firstStyle, secondStyle, thirdStyle]
+                                        // setContent // YAGNI
                                     )}
                                 </p>
                                 {/* <button

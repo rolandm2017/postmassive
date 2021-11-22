@@ -22,24 +22,22 @@ export function prettyText(inputText, stylings, callback) {
     // stylings: expecting 1 to 3 Stylings objects.
     // returns: chunks of JSX that (magically? how?) connect together in the browser
     */
-    if (typeof callback === "function" && typeof callback !== "undefined") {
-        callback(inputText);
-    }
+
     let isStylingsEmpty = detectIsStylingEmpty(stylings);
     if (isStylingsEmpty) {
-        console.log(26, "yes, it was empty");
+        // console.log(26, "yes, it was empty");
         return inputText;
     } else {
-        console.log(30, stylings);
+        // console.log(30, stylings);
     }
 
     console.log(
         7,
         stylings,
         typeof stylings,
-        stylings[0],
-        stylings[1],
-        stylings[2]
+        stylings[0]
+        // stylings[1],
+        // stylings[2]
     );
     let oddsAreSpecial = true;
     // fixme: standard case where stylings is all empty objects; this is the start of the show
@@ -55,16 +53,21 @@ export function prettyText(inputText, stylings, callback) {
             return <span key={index}>{chunk}</span>;
         } else {
             // let stylingChoice = index;
-            console.log(18, index, stylings, inputText); // stylings is an index of prettyText objects
             let indexSelection = Math.floor(index / 2);
+            if (stylings[indexSelection].stylings === undefined) {
+                return inputText; // safeguard prevents stylings[i] from throwing err further down.
+                // ###
+                // this is a safeguard to prevent throwing an error
+                // ###
+            }
             let availableStylings;
-            console.log(75, stylings[indexSelection], indexSelection);
+            console.log(58, stylings, stylings[indexSelection], indexSelection);
 
             if (stylings[indexSelection].stylings.includes(",")) {
                 availableStylings =
                     stylings[indexSelection].stylings.split(", ");
                 console.log(
-                    25,
+                    64,
                     "specialChoice:",
                     availableStylings,
                     indexSelection,
@@ -81,7 +84,7 @@ export function prettyText(inputText, stylings, callback) {
             } else {
                 availableStylings = stylings[indexSelection].stylings;
                 console.log(
-                    39,
+                    81,
                     "specialChoice:",
                     availableStylings,
                     indexSelection,

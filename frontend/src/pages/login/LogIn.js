@@ -60,6 +60,20 @@ function LogIn(props) {
                             <h4>Password</h4>
                             <input
                                 type="password"
+                                onKeyDown={(event) => {
+                                    if (event.key === "Enter") {
+                                        console.log(event.key);
+                                        sendLogInIfInfoIsValid(
+                                            username,
+                                            email,
+                                            password,
+                                            false, // displayErrInModal = false, so it will be DesktopLoginError
+                                            setError,
+                                            setDesktopLoginError,
+                                            auth
+                                        );
+                                    }
+                                }}
                                 onChange={(value) => handlePassword(value)}
                             />
                         </div>
