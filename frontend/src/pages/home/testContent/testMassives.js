@@ -7,10 +7,10 @@ const testMassives = [
             {
                 start: 5,
                 end: 11,
-                className: "textAlignmentUpDown",
+                stylings: "textAlignmentUpDown",
             },
-            { start: 32, end: 39, className: "strikethrough" },
-            { start: 108, end: 104, className: "makeBold, textSize22" },
+            { start: 32, end: 39, stylings: "strikethrough" },
+            { start: 108, end: 104, stylings: "makeBold, textSize22" },
         ],
     },
     {
@@ -20,14 +20,14 @@ const testMassives = [
         stylings: [
             {
                 start: 5,
-                end: 15,
-                className: "strikethrough, makeBold, textSize22",
+                end: 26,
+                stylings: "strikethrough, makeBold, textSize22",
             },
-            { start: 47, end: 53, className: "backgroundColorRed" },
+            { start: 47, end: 63, stylings: "backgroundColorRed" },
             {
                 start: 193,
-                end: 208,
-                className: "backgroundColorCyan, makeBold, fontSize12",
+                end: 209,
+                stylings: "backgroundColorCyan, makeBold, fontSize12",
             },
         ],
     },
@@ -37,17 +37,17 @@ const testMassives = [
             "Vestibulum dictum euismod finibus. Suspendisse varius tellus sem, eu imperdiet sapien sollicitudin sit amet. Mauris a faucibus sapien. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce rutrum ante eu facilisis efficitur.",
         startEndPoints: [1, 6, 25, 35, 100, 120, 200, 240],
         stylings: [
-            { start: 1, end: 6, className: "strikethrough, italics" },
-            { start: 25, end: 35, className: "fontSize24" },
+            { start: 1, end: 6, stylings: "strikethrough, italics" },
+            { start: 25, end: 35, stylings: "fontSize24" },
             {
                 start: 100,
                 end: 120,
-                className: "underline, backgroundColorGreen",
+                stylings: "underline, backgroundColorGreen",
             },
             {
                 start: 200,
                 end: 240,
-                className: "underline, backgroundColorRed",
+                stylings: "underline, backgroundColorRed",
             },
         ],
     },
@@ -56,8 +56,8 @@ const testMassives = [
         content:
             "I can see what you see not. Vision milky, then eyes rot. When you turn, they will be gone, Whispering their hidden song. Then you see what cannot be, Shadows move where light should be. Out of darkness, out of mind, Cast down into the Halls of the Blind.",
         stylings: [
-            { start: 20, end: 28, className: "makeBold, underline" },
-            { start: 150, end: 199, className: "darthNo" },
+            { start: 20, end: 28, stylings: "makeBold, underline" },
+            { start: 150, end: 199, stylings: "darthNo" },
         ],
     },
 ];

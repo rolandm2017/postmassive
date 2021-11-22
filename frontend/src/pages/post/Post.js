@@ -12,6 +12,8 @@ import {
     FONT_SIZES,
 } from "../../_helper/consts";
 
+import { prettyText, detectIsStylingEmpty } from "../../utility/utility";
+
 import BackButton from "../../images/icons8-back-arrow-48-wh.png";
 import Photo from "../../images/mountain-32.png";
 import Gif from "../../images/gif-48.png";
@@ -246,36 +248,40 @@ function Post(props) {
 
     function handleChangeStartRange(styleObjectIndex, newStartIndex) {
         console.log(248, styleObjectIndex, newStartIndex);
-        // // setRange;
-        // let currentStart = styleObj.start;
-        // if (newStartIndex === 1) {
-        //     let newStart = currentStart + 1;
-        //     styleObj.start = newStart;
-        //     indexSetter(styleObj); // setFirstStyle, setSecondStyle, setThirdStyle, etc
-        // } else if (startAdjustment === -1) {
-        //     let newStart = currentStart - 1;
-        //     styleObj.start = newStart;
-        //     indexSetter(styleObj);
-        // } else {
-        //     console.log(startAdjustment, 170);
-        // }
+        if (styleObjectIndex === 0) {
+            let newFirstStyle = { ...firstStyle };
+            newFirstStyle.start = newStartIndex;
+            setFirstStyle(newFirstStyle);
+        } else if (styleObjectIndex === 1) {
+            let newSecondStyle = { ...secondStyle };
+            newSecondStyle.start = newStartIndex;
+            setSecondStyle(newSecondStyle);
+        } else if (styleObjectIndex === 2) {
+            let newThirdStyle = {
+                ...thirdStyle,
+            };
+            newThirdStyle.start = newStartIndex;
+            setThirdStyle(newThirdStyle);
+        }
     }
 
-    function handleChangeEndRange(styleObjectIndex, newStartIndex) {
-        console.log(2265, styleObjectIndex, newStartIndex);
-        // setRange;
-        // let currentStart = styleObj.end;
-        // if (endAdjustment === 1) {
-        //     let newEnd = currentStart + 1;
-        //     styleObj.start = newEnd;
-        //     indexSetter(styleObj); // setFirstStyle, setSecondStyle, setThirdStyle, etc
-        // } else if (endAdjustment === -1) {
-        //     let newEnd = currentStart - 1;
-        //     styleObj.start = newEnd;
-        //     indexSetter(styleObj);
-        // } else {
-        //     console.log(endAdjustment, 170);
-        // }
+    function handleChangeEndRange(styleObjectIndex, newEndIndex) {
+        console.log(2265, styleObjectIndex, newEndIndex);
+        if (styleObjectIndex === 0) {
+            let newFirstStyle = { ...firstStyle };
+            newFirstStyle.end = newEndIndex;
+            setFirstStyle(newFirstStyle);
+        } else if (styleObjectIndex === 1) {
+            let newSecondStyle = { ...secondStyle };
+            newSecondStyle.end = newEndIndex;
+            setSecondStyle(newSecondStyle);
+        } else if (styleObjectIndex === 2) {
+            let newThirdStyle = {
+                ...thirdStyle,
+            };
+            newThirdStyle.end = newEndIndex;
+            setThirdStyle(newThirdStyle);
+        }
     }
 
     function handleChangeStylingSelection(number) {
@@ -384,9 +390,10 @@ function Post(props) {
                             type then selecting another styling */}
                             <div>
                                 <p className="post_color-white">
-                                    {
-                                        "Wife surprised me by bringing home a picnic table. $150.\n Spent hours painting it, almost a hundo on paint and primer, and I’m pretty sure oil based Rustoleum ruined my sprayer. \n Would have been cheaper to light the damn thing on fire"
-                                    }
+                                    {prettyText(
+                                        "Wife surprised me by bringing home a picnic table. $150.\n Spent hours painting it, almost a hundo on paint and primer, and I’m pretty sure oil based Rustoleum ruined my sprayer. \n Would have been cheaper to light the damn thing on fire",
+                                        [firstStyle, secondStyle, thirdStyle]
+                                    )}
                                 </p>
                                 {/* <button
                                     onClick={() => {

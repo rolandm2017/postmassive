@@ -1,7 +1,45 @@
-export function enterCustomStyling(inputText, stylings) {
-    // stylings is an array of Styling objects
-    // console.log(70, stylings, typeof stylings);
+export function detectIsStylingEmpty(stylings) {
+    let a = 0;
+    for (let i = 0; i < stylings.length; i++) {
+        let objectIsEmpty =
+            stylings[i] && // 👈 null and undefined check
+            Object.keys(stylings[i]).length === 0 &&
+            Object.getPrototypeOf(stylings[i]) === Object.prototype;
+        console.log(8, objectIsEmpty);
+        if (objectIsEmpty) {
+            a++;
+        }
+    }
+    if (a === 3) {
+        return true;
+    }
+    return false;
+}
+
+export function prettyText(inputText, stylings) {
+    /*
+    // inputText: the text to style. should be a long string.
+    // stylings: expecting 3 Stylings objects.
+    // returns: chunks of JSX that (magically? how?) connect together in the browser
+    */
+    let isStylingsEmpty = detectIsStylingEmpty(stylings);
+    if (isStylingsEmpty) {
+        console.log(26, "yes, it was empty");
+        return inputText;
+    } else {
+        console.log(30, stylings);
+    }
+
+    console.log(
+        7,
+        stylings,
+        typeof stylings,
+        stylings[0],
+        stylings[1],
+        stylings[2]
+    );
     let oddsAreSpecial = true;
+    // fixme: standard case where stylings is all empty objects; this is the start of the show
     if (stylings[0].start === 0) {
         // special condition
         oddsAreSpecial = false;
@@ -14,38 +52,39 @@ export function enterCustomStyling(inputText, stylings) {
             return <span key={index}>{chunk}</span>;
         } else {
             // let stylingChoice = index;
-            console.log(18, index, stylings);
+            console.log(18, index, stylings, inputText); // stylings is an index of prettyText objects
             let indexSelection = Math.floor(index / 2);
-            let availableStyles;
-            if (stylings[indexSelection].className.includes(",")) {
-                availableStyles =
-                    stylings[indexSelection].className.split(", ");
+            let availableStylings;
+            console.log(75, stylings[indexSelection], indexSelection);
+            if (stylings[indexSelection].stylings.includes(",")) {
+                availableStylings =
+                    stylings[indexSelection].stylings.split(", ");
                 console.log(
                     25,
                     "specialChoice:",
-                    availableStyles,
+                    availableStylings,
                     indexSelection,
                     index
                 );
                 return (
                     <span
                         key={index}
-                        className={`${availableStyles.join(" ")}`}
+                        className={`${availableStylings.join(" ")}`}
                     >
                         {chunk}
                     </span>
                 );
             } else {
-                availableStyles = stylings[indexSelection].className;
+                availableStylings = stylings[indexSelection].stylings;
                 console.log(
                     39,
                     "specialChoice:",
-                    availableStyles,
+                    availableStylings,
                     indexSelection,
                     index
                 );
                 return (
-                    <span key={index} className={`${availableStyles}`}>
+                    <span key={index} className={`${availableStylings}`}>
                         {chunk}
                     </span>
                 );
@@ -79,7 +118,7 @@ function getSubstrings(inputText, stylings) {
             strings.push(theNormalPartInBetween);
         }
     }
-    console.log(strings);
+    // console.log(strings);
     return strings;
     /// cycle
     // a = inputString.slice(locationCodes[0], locationCodes[1]);

@@ -3,10 +3,7 @@ import React from "react";
 import EngagementContainer from "../engagementContainer/EngagementContainer";
 import Logo from "../../images/bluePfp.png";
 
-import {
-    enterCustomStyling,
-    convertEngagementText,
-} from "../../utility/utility";
+import { prettyText, convertEngagementText } from "../../utility/utility";
 
 import "./Massive.css";
 import "../textStyling/TextStyling.css"; // this file will be imported in many places
@@ -41,7 +38,7 @@ function Massive(props) {
 
                         {/* <p className="mt-0 text-left">{props.content}</p> */}
                         <p className="mt-0 text-left">
-                            {enterCustomStyling(props.content, props.stylings)}
+                            {prettyText(props.content, props.stylings)}
                         </p>
 
                         <EngagementContainer
