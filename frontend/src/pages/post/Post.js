@@ -227,7 +227,8 @@ function Post(props) {
             setSecondStyle(newSecondStyleObject);
         } else if (index === 2) {
             currentStyles = [...thirdStyle.styles];
-            const typeIndex = currentStyles.style.indexOf(type);
+            const typeIndex = currentStyles.indexOf(type);
+            // FIXME: i suspect something is broken in here
             if (typeIndex > -1) {
                 currentStyles.splice(typeIndex, 1);
             }

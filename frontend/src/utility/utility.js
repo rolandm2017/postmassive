@@ -42,7 +42,7 @@ export function prettyText(inputText, stylings, callback) {
         typeof stylings,
         stylings[0]
         // stylings[1],
-        // stylings[2]
+        // stylings[2] // 3, 35, bold
     );
     let oddsAreSpecial = true;
     // fixme: standard case where stylings is all empty objects; this is the start of the show
@@ -51,22 +51,33 @@ export function prettyText(inputText, stylings, callback) {
         oddsAreSpecial = false;
     }
     let splitUpTexts = getSubstrings(inputText, stylings);
+    // FIXME: what if we have special chunks like sSSSs
+    // ...where s = nonspecial, S = special. or SSSs
+    // or sSSsSs or sSsSSs ... need a more generalized algo.
     let chunks = splitUpTexts.map((chunk, index) => {
+        console.log(chunk, index, 58);
         // have to do this math to turn the splitUpTexts index into the stylings index
         if (index % 2 === 0) {
-            // console.log(14, index);
+            console.log("returning plain ...", chunk);
             return <span key={index}>{chunk}</span>;
         } else {
             // let stylingChoice = index;
             let indexSelection = Math.floor(index / 2);
             if (stylings[indexSelection].stylings === undefined) {
+                console.log(
+                    stylings,
+                    stylings[indexSelection].stylings,
+                    stylings[indexSelection],
+                    indexSelection,
+                    67
+                );
                 return inputText; // safeguard prevents stylings[i] from throwing err further down.
                 // ###
                 // this is a safeguard to prevent throwing an error
                 // ###
             }
             let availableStylings;
-            console.log(58, stylings, stylings[indexSelection], indexSelection);
+            console.log(80, stylings, stylings[indexSelection], indexSelection);
 
             if (stylings[indexSelection].stylings.includes(",")) {
                 availableStylings =
@@ -90,7 +101,7 @@ export function prettyText(inputText, stylings, callback) {
                 availableStylings = stylings[indexSelection].stylings;
                 console.log(
                     81,
-                    "specialChoice:",
+                    "special:",
                     availableStylings,
                     indexSelection,
                     index
@@ -106,43 +117,89 @@ export function prettyText(inputText, stylings, callback) {
     return chunks; // works as of 3:48 pm
 }
 
-function getSubstrings(inputText, stylings) {
-    let strings = [];
-    /// cycle
+function getSubstrings(inputText, preprocessedStylings) {
+    /*
+    // inputText - self explanatory
+    // preprocessedStylings - it may be that the user has supplied 0, 1, 2, or 3 stylings.
+    // ...this function's role is to sort out how many substrings we'll need.
+    // for 0, we don't need any substrings.
+    // for 1, we just need the substring that is encapsulated by the Styling.
+    // for 2 or 3, a loop makes sense, though barely!
+    */
+
+    // todo: only splice if there is a styling attached to the stylings obj
+    let stylings = [];
+    preprocessedStylings.forEach((styling) => {
+        // get rid of the empty styling objects.
+        if (typeof styling.styles === "undefined") {
+            // ...
+            console.log(
+                126,
+                "styling ",
+                styling,
+                " did not have a styling attached!"
+            );
+        } else {
+            stylings.push(styling);
+        }
+    });
+    let stringsWithInstructions = [];
+
+    // handle case where Stylings is only 1 singular Styling
+    if (stylings.length === 1) {
+        let initSlice = inputText.slice(0, stylings[0].start);
+        let specialMiddleSlice = inputText.slice(
+            stylings[0].start,
+            stylings[0].end
+        );
+        let endSlice = inputText.slice(stylings[0].end, inputText.length);
+        return [
+            {
+                special: false,
+                value: initSlice,
+            },
+            { special: true, value: specialMiddleSlice, styling: stylings[0] },
+            {
+                special: false,
+                value: endSlice,
+            },
+        ];
+    }
+
+    // if 2 or 3 ... almost want to write it out by hand...
     let initSlice = inputText.slice(0, stylings[0].start);
     if (stylings.length > 0) {
-        strings.push(initSlice);
+        stringsWithInstructions.push(initSlice);
     }
     for (let i = 0; i < stylings.length; i++) {
         let weAreOnTheLastStyling = i === stylings.length - 1;
         if (weAreOnTheLastStyling) {
             let slice = inputText.slice(stylings[i].start, stylings[i].end); // will go from i to end of string
-            strings.push(slice);
+            slice = {
+                special: true,
+                value: slice,
+                styling: stylings[i],
+            };
+            stringsWithInstructions.push(slice);
             let trailEnd = inputText.slice(stylings[i].end); // will be the trailing but
-            strings.push(trailEnd);
+            trailEnd = {
+                special: false,
+                value: trailEnd,
+            };
+            stringsWithInstructions.push(trailEnd);
         } else {
             let slice = inputText.slice(stylings[i].start, stylings[i].end);
-            strings.push(slice);
-            let theNormalPartInBetween = inputText.slice(
-                stylings[i].end,
-                stylings[i + 1].start
-            );
-            strings.push(theNormalPartInBetween);
+            slice = { special: true, value: slice, styling: stylings[i] };
+            stringsWithInstructions.push(slice);
+            let theNormalPartInBetween = {
+                special: false,
+                value: inputText.slice(stylings[i].end, stylings[i + 1].start),
+            };
+            stringsWithInstructions.push(theNormalPartInBetween);
         }
     }
-    // console.log(strings);
-    return strings;
-    /// cycle
-    // a = inputString.slice(locationCodes[0], locationCodes[1]);
-    // strings.push(a);
-    // // cycle
-    // a = inputString.slice(locationCodes[1], locationCodes[2]);
-    // strings.push(a);
-    // a = inputString.slice(locationCodes[2], locationCodes[3]);
-    // strings.push(a);
-    // //
-    // a = inputString.slice(locationCodes[3]);
-    // strings.push(a);
+    // console.log(stringsWithInstructions);
+    return stringsWithInstructions;
 }
 
 export function convertEngagementText(inputNum) {
