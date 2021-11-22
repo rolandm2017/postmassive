@@ -10,7 +10,7 @@ export function detectIsStylingEmpty(stylings) {
     let a = 0;
     for (let i = 0; i < stylings.length; i++) {
         let objectIsEmpty = styleObjectIsEmpty(stylings[i]);
-        console.log(8, objectIsEmpty);
+        // console.log(8, objectIsEmpty);
         if (objectIsEmpty) {
             a++;
         }
@@ -36,21 +36,21 @@ export function prettyText(inputText, stylings, callback) {
         // console.log(30, stylings);
     }
 
-    console.log(
-        7,
-        stylings,
-        typeof stylings,
-        stylings[0]
-        // stylings[1],
-        // stylings[2] // 3, 35, bold
-    );
+    // console.log(
+    //     7,
+    //     stylings,
+    //     typeof stylings,
+    //     stylings[0]
+    //     // stylings[1],
+    //     // stylings[2] // 3, 35, bold
+    // );
     let oddsAreSpecial = true;
     // fixme: standard case where stylings is all empty objects; this is the start of the show
     if (stylings[0].start === 0) {
         // special condition
         oddsAreSpecial = false;
     }
-    console.log(inputText, stylings);
+    // console.log(inputText, stylings);
     let splitUpTexts = getSubstringsWithInstructions(inputText, stylings);
     // FIXME: what if we have special chunks like sSSSs
     // ...where s = nonspecial, S = special. or SSSs
@@ -58,24 +58,49 @@ export function prettyText(inputText, stylings, callback) {
 
     // { special: false, value: initSlice }
     // { special: true, value: specialMiddleSlice, styling: stylings[0] },
-    console.log(splitUpTexts, stylings);
+    // console.log(splitUpTexts, stylings);
     let chunks = splitUpTexts.map((chunk, index) => {
-        console.log(chunk.special, chunk.value);
+        console.log(63, chunk, chunk.value);
         if (chunk.special) {
+            let availableStylings = chunk.styling;
+            // console.log(66, availableStylings, chunk);
+            if (chunk.numberOfStylings > 1) {
+                return (
+                    <span
+                        key={index}
+                        className={`${availableStylings
+                            .split(", ")
+                            .join(" .")}`}
+                    >
+                        {chunk.value}
+                    </span>
+                );
+            } else {
+                return (
+                    <span key={index} className={`${availableStylings}`}>
+                        {chunk.value}
+                    </span>
+                );
+            }
+        } else {
+            return <span key={index}>{chunk.value}</span>;
         }
-        return null;
     });
-    return chunks; // works as of 3:48 pm
-    // return (
-    //     <span key={index} className={`${availableStylings.join(" ")}`}>
-    //         {chunk}
-    //     </span>
-    // );
-    // return (
-    //     <span key={index} className={`${availableStylings}`}>
-    //         {chunk}
-    //     </span>
-    // );
+    return chunks; //
+}
+
+function countStylingsBasedOnCommas(stylings) {
+    /* 
+    // pass the VALUE of stylings.stylings, not the stylings object.
+    // return value - the length of the stylings
+    */
+    if (typeof stylings !== undefined) {
+        if (stylings.includes(",")) {
+            return stylings.split(", ").length;
+        } else {
+            return 1; // because if no "," then stylings is length 1
+        }
+    }
 }
 
 function getSubstringsWithInstructions(inputText, preprocessedStylings) {
@@ -88,6 +113,14 @@ function getSubstringsWithInstructions(inputText, preprocessedStylings) {
     // for 2 or 3, a loop makes sense, though barely!
     // return value - should be an array of strings that can be combined using prettyText
     */
+
+    /* template */
+    // special: true,
+    // value: slice,
+    // styling: stylings[0].stylings,
+    // numberOfStylings: countStylingsBasedOnCommas(
+    //                      stylings[0].stylings
+    //                      ),
 
     // todo: only splice if there is a styling attached to the stylings obj
     let stylings = [];
@@ -115,7 +148,14 @@ function getSubstringsWithInstructions(inputText, preprocessedStylings) {
                 special: false,
                 value: initSlice,
             },
-            { special: true, value: specialMiddleSlice, styling: stylings[0] },
+            {
+                special: true,
+                value: specialMiddleSlice,
+                styling: stylings[0].stylings,
+                numberOfStylings: countStylingsBasedOnCommas(
+                    stylings[0].stylings
+                ),
+            },
             {
                 special: false,
                 value: endSlice,
@@ -144,8 +184,10 @@ function getSubstringsWithInstructions(inputText, preprocessedStylings) {
             slice = {
                 special: true,
                 value: slice,
-                styling: stylings[i],
-                numberOfStylings: stylings[i].stylings.length,
+                styling: stylings[i].stylings,
+                numberOfStylings: countStylingsBasedOnCommas(
+                    stylings[i].stylings
+                ),
             };
             stringsWithInstructions.push(slice);
             let trailEnd = inputText.slice(stylings[i].end); // will be the trailing but
@@ -159,8 +201,10 @@ function getSubstringsWithInstructions(inputText, preprocessedStylings) {
             slice = {
                 special: true,
                 value: slice,
-                styling: stylings[i],
-                numberOfStylings: stylings[i].stylings.length,
+                styling: stylings[i].stylings,
+                numberOfStylings: countStylingsBasedOnCommas(
+                    stylings[i].stylings
+                ),
             };
             stringsWithInstructions.push(slice);
             let theNormalPartInBetween = {

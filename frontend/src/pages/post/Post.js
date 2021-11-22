@@ -37,7 +37,7 @@ import FontSlider from "./components/FontSlider";
 import Flooring from "./components/Flooring";
 
 import "./Post.scss";
-import { current } from "@reduxjs/toolkit";
+// import { current } from "@reduxjs/toolkit";
 
 function Post(props) {
     const [username, setUsername] = useState(null);
