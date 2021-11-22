@@ -19,7 +19,7 @@ export function detectIsStylingEmpty(stylings) {
 export function prettyText(inputText, stylings, callback) {
     /*
     // inputText: the text to style. should be a long string.
-    // stylings: expecting 1 to 3 Stylings objects.
+    // stylings: expecting 0 to 3 Stylings objects.
     // returns: chunks of JSX that (magically? how?) connect together in the browser
     */
 

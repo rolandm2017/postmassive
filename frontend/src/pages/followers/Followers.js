@@ -39,7 +39,7 @@ function Following(props) {
         });
     }, [userAndLocation]);
 
-    console.log("aaaaaaaa", userAndLocation);
+    console.log("", userAndLocation);
     useEffect(() => {
         fetchPageOwnerDisplayName();
         fetchUsers(userAndLocation[1], userAndLocation[2]);

@@ -36,7 +36,7 @@ import { current } from "@reduxjs/toolkit";
 
 function Post(props) {
     const [username, setUsername] = useState(null);
-    const [content, setContent] = useState("");
+    const [content, setContent] = useState("Write something...");
     const [price, setPrice] = useState(null);
     const [floor, setFloor] = useState(NaN);
     const [currentStyle, setCurrentStyle] = useState(0); // 0, 1, 2 selects radio btn
@@ -248,6 +248,7 @@ function Post(props) {
 
     function handleChangeStartRange(styleObjectIndex, newStartIndex) {
         console.log(2248, styleObjectIndex, newStartIndex);
+        // for starts
         if (styleObjectIndex === 0) {
             if (typeof firstStyle.start === "undefined") {
                 let updatedFirstStyleStart = { ...firstStyle };
@@ -257,28 +258,64 @@ function Post(props) {
                 let newFirstStyleStart = {
                     ...firstStyle,
                     start: newStartIndex,
+                    end: newStartIndex + 15, // # out of hat, could've been 5 or 20
                 };
                 setFirstStyle(newFirstStyleStart);
             }
         } else if (styleObjectIndex === 1) {
-            let newSecondStyle = { ...secondStyle };
-            newSecondStyle.start = newStartIndex;
-            setSecondStyle(newSecondStyle);
+            // original:
+            // let newSecondStyle = { ...secondStyle };
+            // newSecondStyle.start = newStartIndex;
+            // setSecondStyle(newSecondStyle);
+            if (typeof secondStyle.start === "undefined") {
+                let updatedSecondStyleStart = { ...secondStyle };
+                updatedSecondStyleStart.start = newStartIndex;
+                setFirstStyle(updatedSecondStyleStart);
+            } else {
+                let newSecondStyleStart = {
+                    ...secondStyle,
+                    start: newStartIndex,
+                    end: newStartIndex + 20, // # out of hat, might cause issues if content.length > newStartIndex
+                };
+                setFirstStyle(newSecondStyleStart);
+            }
         } else if (styleObjectIndex === 2) {
-            let newThirdStyle = {
-                ...thirdStyle,
-            };
-            newThirdStyle.start = newStartIndex;
-            setThirdStyle(newThirdStyle);
+            // let newThirdStyle = {
+            //     ...thirdStyle,
+            // };
+            // newThirdStyle.start = newStartIndex;
+            // setThirdStyle(newThirdStyle);
+            if (typeof thirdStyle.start === "undefined") {
+                let updatedThirdStyleStart = { ...thirdStyle };
+                updatedThirdStyleStart.start = newStartIndex;
+                setFirstStyle(updatedThirdStyleStart);
+            } else {
+                let newSecondStyleStart = {
+                    ...thirdStyle,
+                    start: newStartIndex,
+                    end: content.length, // # out of hat, might cause issues if content.length > newStartIndex
+                };
+                setFirstStyle(newSecondStyleStart);
+            }
         }
     }
 
     function handleChangeEndRange(styleObjectIndex, newEndIndex) {
         console.log(2265, styleObjectIndex, newEndIndex);
+        // for ends
         if (styleObjectIndex === 0) {
-            let newFirstStyle = { ...firstStyle };
-            newFirstStyle.end = newEndIndex;
-            setFirstStyle(newFirstStyle);
+            if (typeof firstStyle.end === "undefined") {
+                let updatedSecondStyleEnd = { ...firstStyle };
+                updatedSecondStyleEnd.end = newEndIndex;
+                setFirstStyle(updatedSecondStyleEnd);
+            } else {
+                let newFirstStyleEnd = {
+                    ...firstStyle,
+                    start: 10, // number out of a hat, couldve been 0 or 20
+                    end: newEndIndex,
+                };
+                setFirstStyle(newFirstStyleEnd);
+            }
         } else if (styleObjectIndex === 1) {
             let newSecondStyle = { ...secondStyle };
             newSecondStyle.end = newEndIndex;
@@ -398,11 +435,17 @@ function Post(props) {
                             type then selecting another styling */}
                             <div>
                                 <p className="post_color-white">
-                                    {prettyText(
-                                        "Wife surprised me by bringing home a picnic table. $150.\n Spent hours painting it, almost a hundo on paint and primer, and I’m pretty sure oil based Rustoleum ruined my sprayer. \n Would have been cheaper to light the damn thing on fire",
-                                        [firstStyle, secondStyle, thirdStyle]
-                                        // setContent // YAGNI
-                                    )}
+                                    {content.length > 20
+                                        ? prettyText(
+                                              content,
+                                              [
+                                                  firstStyle,
+                                                  secondStyle,
+                                                  thirdStyle,
+                                              ]
+                                              // setContent // YAGNI
+                                          )
+                                        : null}
                                 </p>
                                 {/* <button
                                     onClick={() => {
@@ -513,12 +556,12 @@ function Post(props) {
                                     }}
                                 />
                             </div>
-                            <div id="" className="aaaaaa">
+                            <div id="" className="">
                                 <FontSlider />
                             </div>
-                            <div className="aaaaaa">
+                            <div className="">
                                 <div className="pl-2">backgroundColor:</div>
-                                <div className="post_tones-outer-container w-100 aaaaaa">
+                                <div className="post_tones-outer-container w-100 ">
                                     <BackgroundColor color={"red"} />
                                     <BackgroundColor color={"orange"} />
                                     <BackgroundColor color={"yellow"} />
@@ -529,7 +572,7 @@ function Post(props) {
                                     <BackgroundColor color={"black"} />
                                 </div>
                             </div>
-                            <div className="aaaaaa">
+                            <div className="">
                                 <Special special={"textAlignmentUpDown"} />
                                 <Special special={"textAlignmentAddPadding"} />
                                 <Special special={"superscript"} />

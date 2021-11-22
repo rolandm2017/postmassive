@@ -17,7 +17,6 @@ function Home(props) {
     let history = useHistory();
 
     useEffect(() => {
-        document.title = "AabbbbBbba";
         let feedUrl = process.env.REACT_APP_API_URL + "/wall/introduce";
         console.log(fetch(feedUrl, getOptions(feedUrl)));
         fetch(feedUrl, getOptions(feedUrl))
