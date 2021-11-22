@@ -12,7 +12,11 @@ import {
     FONT_SIZES,
 } from "../../_helper/consts";
 
-import { prettyText, detectIsStylingEmpty } from "../../utility/utility";
+import {
+    prettyText,
+    detectIsStylingEmpty,
+    styleObjectIsEmpty,
+} from "../../utility/utility";
 
 import BackButton from "../../images/icons8-back-arrow-48-wh.png";
 import Photo from "../../images/mountain-32.png";
@@ -110,7 +114,7 @@ function Post(props) {
 
     function addStyleToSection(type) {
         console.log(
-            106,
+            113,
             type,
             currentStyle,
             firstStyle,
@@ -119,24 +123,22 @@ function Post(props) {
         );
         if (currentStyle === 0) {
             // https://stackoverflow.com/questions/679915/how-do-i-test-for-an-empty-javascript-object
-            let firstStyleIsEmpty =
-                firstStyle && // 👈 null and undefined check
-                Object.keys(firstStyle).length === 0 &&
-                Object.getPrototypeOf(firstStyle) === Object.prototype;
+            let firstStyleIsEmpty = styleObjectIsEmpty(firstStyle);
+            console.log(131, firstStyleIsEmpty, firstStyle);
+
             if (!firstStyleIsEmpty) {
-                let current = [...firstStyle.styles];
-                current.push(type);
                 let newFirstStyle = {
-                    start: firstStyle.start,
-                    end: secondStyle.end,
-                    styles: current.filter(onlyUnique),
+                    firstStyle,
                 };
+                let current = [...firstStyle.styles];
+                newFirstStyle.styles.push(type);
+                newFirstStyle.styles = current.filter(onlyUnique);
                 setFirstStyle(newFirstStyle);
             } else {
                 // make the style. DO NOT refactor this to be outside of "currentStyle" dependency
                 let styleInit = {
                     start: 0,
-                    end: content.length,
+                    end: 3,
                     styles: [type],
                 };
                 console.log("creating style...", styleInit, 134);
@@ -248,46 +250,38 @@ function Post(props) {
 
     function handleChangeStartRange(styleObjectIndex, newStartIndex) {
         console.log(2248, styleObjectIndex, newStartIndex);
+        let integerNewStartIndex = parseInt(newStartIndex, 10);
         if (styleObjectIndex === 0) {
-            if (typeof firstStyle.start === "undefined") {
-                let updatedFirstStyleStart = { ...firstStyle };
-                updatedFirstStyleStart.start = newStartIndex;
-                setFirstStyle(updatedFirstStyleStart);
-            } else {
-                let newFirstStyleStart = {
-                    ...firstStyle,
-                    start: newStartIndex,
-                };
-                setFirstStyle(newFirstStyleStart);
-            }
+            let newFirstStyle = { ...firstStyle };
+            newFirstStyle.start = integerNewStartIndex;
+            setFirstStyle(newFirstStyle);
         } else if (styleObjectIndex === 1) {
             let newSecondStyle = { ...secondStyle };
-            newSecondStyle.start = newStartIndex;
+            newSecondStyle.start = integerNewStartIndex;
             setSecondStyle(newSecondStyle);
         } else if (styleObjectIndex === 2) {
-            let newThirdStyle = {
-                ...thirdStyle,
-            };
+            let newThirdStyle = { ...thirdStyle };
             newThirdStyle.start = newStartIndex;
             setThirdStyle(newThirdStyle);
         }
     }
 
     function handleChangeEndRange(styleObjectIndex, newEndIndex) {
-        console.log(2265, styleObjectIndex, newEndIndex);
+        let integerNewEndIndex = parseInt(newEndIndex, 10);
+        console.log(2265, styleObjectIndex, newEndIndex, integerNewEndIndex);
         if (styleObjectIndex === 0) {
             let newFirstStyle = { ...firstStyle };
-            newFirstStyle.end = newEndIndex;
+            newFirstStyle.end = integerNewEndIndex;
             setFirstStyle(newFirstStyle);
         } else if (styleObjectIndex === 1) {
             let newSecondStyle = { ...secondStyle };
-            newSecondStyle.end = newEndIndex;
+            newSecondStyle.end = integerNewEndIndex;
             setSecondStyle(newSecondStyle);
         } else if (styleObjectIndex === 2) {
             let newThirdStyle = {
                 ...thirdStyle,
             };
-            newThirdStyle.end = newEndIndex;
+            newThirdStyle.end = integerNewEndIndex;
             setThirdStyle(newThirdStyle);
         }
     }
@@ -398,11 +392,17 @@ function Post(props) {
                             type then selecting another styling */}
                             <div>
                                 <p className="post_color-white">
-                                    {prettyText(
-                                        "Wife surprised me by bringing home a picnic table. $150.\n Spent hours painting it, almost a hundo on paint and primer, and I’m pretty sure oil based Rustoleum ruined my sprayer. \n Would have been cheaper to light the damn thing on fire",
-                                        [firstStyle, secondStyle, thirdStyle]
-                                        // setContent // YAGNI
-                                    )}
+                                    {content.length > 15
+                                        ? prettyText(
+                                              content,
+                                              [
+                                                  firstStyle,
+                                                  secondStyle,
+                                                  thirdStyle,
+                                              ]
+                                              // setContent // YAGNI
+                                          )
+                                        : null}
                                 </p>
                                 {/* <button
                                     onClick={() => {

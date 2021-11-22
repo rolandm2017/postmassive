@@ -1,3 +1,11 @@
+export function styleObjectIsEmpty(style) {
+    let isEmpty =
+        style && // 👈 null and undefined check
+        Object.keys(style).length === 0 &&
+        Object.getPrototypeOf(style) === Object.prototype;
+    return isEmpty;
+}
+
 export function detectIsStylingEmpty(stylings) {
     let a = 0;
     for (let i = 0; i < stylings.length; i++) {
