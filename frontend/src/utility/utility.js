@@ -9,10 +9,7 @@ export function styleObjectIsEmpty(style) {
 export function detectIsStylingEmpty(stylings) {
     let a = 0;
     for (let i = 0; i < stylings.length; i++) {
-        let objectIsEmpty =
-            stylings[i] && // 👈 null and undefined check
-            Object.keys(stylings[i]).length === 0 &&
-            Object.getPrototypeOf(stylings[i]) === Object.prototype;
+        let objectIsEmpty = styleObjectIsEmpty(stylings[i]);
         console.log(8, objectIsEmpty);
         if (objectIsEmpty) {
             a++;

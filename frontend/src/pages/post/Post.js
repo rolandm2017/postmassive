@@ -6,10 +6,10 @@ import { postOptions } from "../../_helper/authHeader";
 
 import {
     FLOORS,
-    EMPHASIS,
-    SPECIALS,
-    BG_COLORS,
-    FONT_SIZES,
+    // EMPHASIS,
+    // SPECIALS,
+    // BG_COLORS,
+    // FONT_SIZES,
 } from "../../_helper/consts";
 
 import {
@@ -26,6 +26,7 @@ import Emoji from "../../images/happy-48.png";
 import Nicolai from "../../images/markZuckerberg.jpeg";
 
 import Wrapper from "../_pageHelper/Wrapper";
+import TextArea from "./components/TextArea";
 import Styling from "./components/Styling";
 
 import Emphasis from "./components/Emphasis";
@@ -112,6 +113,22 @@ function Post(props) {
         return self.indexOf(value) === index;
     }
 
+    function updateStyleWithType(type, styleObject, setter) {
+        console.log(116, type, styleObject, setter);
+        let newNthStyle = {
+            ...styleObject,
+        };
+        let currentStyles = styleObject.styles;
+        if (typeof currentStyles === "undefined") {
+            currentStyles = [];
+        }
+        currentStyles.push(type);
+        newNthStyle.styles = currentStyles.filter(onlyUnique);
+        setter(newNthStyle);
+    }
+
+    // function createNouveauObject()
+
     function addStyleToSection(type) {
         console.log(
             113,
@@ -127,13 +144,8 @@ function Post(props) {
             console.log(131, firstStyleIsEmpty, firstStyle);
 
             if (!firstStyleIsEmpty) {
-                let newFirstStyle = {
-                    firstStyle,
-                };
-                let current = [...firstStyle.styles];
-                newFirstStyle.styles.push(type);
-                newFirstStyle.styles = current.filter(onlyUnique);
-                setFirstStyle(newFirstStyle);
+                // type can still be empty tho
+                updateStyleWithType(type, firstStyle, setFirstStyle);
             } else {
                 // make the style. DO NOT refactor this to be outside of "currentStyle" dependency
                 let styleInit = {
@@ -145,19 +157,11 @@ function Post(props) {
                 setFirstStyle(styleInit);
             }
         } else if (currentStyle === 1) {
-            let secondStyleIsEmpty =
-                secondStyle && // 👈 null and undefined check
-                Object.keys(secondStyle).length === 0 &&
-                Object.getPrototypeOf(secondStyle) === Object.prototype;
+            let secondStyleIsEmpty = styleObjectIsEmpty(secondStyle);
+            console.log(149, secondStyleIsEmpty, secondStyle);
+
             if (!secondStyleIsEmpty) {
-                let current = [...secondStyle.styles];
-                current.push(type);
-                let newSecondStyle = {
-                    start: secondStyle.start,
-                    end: secondStyle.end,
-                    styles: current.filter(onlyUnique),
-                };
-                setSecondStyle(newSecondStyle);
+                updateStyleWithType(type, secondStyle, setSecondStyle);
             } else {
                 // make the style. DO NOT refactor this to be outside of "currentStyle" dependency
                 let styleInit = {
@@ -169,19 +173,10 @@ function Post(props) {
                 setSecondStyle(styleInit);
             }
         } else if (currentStyle === 2) {
-            let thirdStyleIsEmpty =
-                thirdStyle && // 👈 null and undefined check
-                Object.keys(thirdStyle).length === 0 &&
-                Object.getPrototypeOf(thirdStyle) === Object.prototype;
+            let thirdStyleIsEmpty = styleObjectIsEmpty(thirdStyle);
+            console.log(179, thirdStyle, thirdStyleIsEmpty);
             if (!thirdStyleIsEmpty) {
-                let current = [...thirdStyle.styles];
-                current.push(type);
-                let newThirdStyle = {
-                    start: thirdStyle.start,
-                    end: thirdStyle.end,
-                    styles: current.filter(onlyUnique),
-                };
-                setThirdStyle(newThirdStyle);
+                updateStyleWithType(type, thirdStyle, setThirdStyle);
             } else {
                 // make the style. DO NOT refactor this to be outside of "currentStyle" dependency
                 let styleInit = {
@@ -261,7 +256,7 @@ function Post(props) {
             setSecondStyle(newSecondStyle);
         } else if (styleObjectIndex === 2) {
             let newThirdStyle = { ...thirdStyle };
-            newThirdStyle.start = newStartIndex;
+            newThirdStyle.start = integerNewStartIndex;
             setThirdStyle(newThirdStyle);
         }
     }
@@ -337,28 +332,7 @@ function Post(props) {
                         <img src={Nicolai} alt="profile pic"></img>
                     </div>
                     <div className="post_middle px-2">
-                        <div className="">
-                            <div className="d-flex flex-column align-items-center">
-                                <label htmlFor="content">
-                                    What do you want to say?
-                                </label>
-                                {/* <br /> */}
-                                <textarea
-                                    id="content"
-                                    type="text"
-                                    name="content"
-                                    default="hello i am writing some text into the textbox so it has value by default"
-                                    onChange={(event) => {
-                                        console.log(
-                                            170,
-                                            event.target.value,
-                                            content
-                                        );
-                                        setContent(event.target.value);
-                                    }}
-                                ></textarea>
-                            </div>
-                        </div>
+                        <TextArea setContent={setContent} />
                     </div>
                     <div
                         id="post_right-spacer"
@@ -404,19 +378,6 @@ function Post(props) {
                                           )
                                         : null}
                                 </p>
-                                {/* <button
-                                    onClick={() => {
-                                        console.log(
-                                            // stylingChoices,
-                                            firstStyle,
-                                            secondStyle,
-                                            thirdStyle,
-                                            225
-                                        );
-                                    }}
-                                >
-                                    Inspect
-                                </button> */}
                             </div>
                         </div>
                         <div id="post_styling-area">
@@ -428,7 +389,7 @@ function Post(props) {
                                     handleChangeStylingSelection(0);
                                 }}
                                 currentlyChecked={currentStyle}
-                                previousStyleEnd={null}
+                                previousStyleEnd={0}
                                 nextStyleStart={secondStyle.start}
                                 stylingInfo={firstStyle.styles}
                                 adjustStart={handleChangeStartRange}
@@ -458,8 +419,8 @@ function Post(props) {
                                     handleChangeStylingSelection(2);
                                 }}
                                 currentlyChecked={currentStyle}
-                                previousStyleEnd={secondStyle.start}
-                                nextStyleStart={null}
+                                previousStyleEnd={secondStyle.end}
+                                nextStyleStart={content.length}
                                 stylingInfo={thirdStyle.styles}
                                 adjustStart={handleChangeStartRange}
                                 adjustEnd={handleChangeEndRange}
@@ -475,30 +436,22 @@ function Post(props) {
                                 <Emphasis
                                     emphasis={"bold"}
                                     onClick={() => {
-                                        console.log(
-                                            433,
-                                            "inside Emphasis onClick"
-                                        );
+                                        // console.log(
+                                        //     433,
+                                        //     "inside Emphasis onClick"
+                                        // );
                                         addStyleToSection("bold");
                                     }}
                                 />
                                 <Emphasis
                                     emphasis={"italics"}
                                     onClick={() => {
-                                        console.log(
-                                            433,
-                                            "inside Emphasis onClick"
-                                        );
                                         addStyleToSection("italics");
                                     }}
                                 />
                                 <Emphasis
                                     emphasis={"strikethrough"}
                                     onClick={() => {
-                                        console.log(
-                                            433,
-                                            "inside Emphasis onClick"
-                                        );
                                         addStyleToSection("strikethrough");
                                     }}
                                 />

@@ -32,6 +32,9 @@ function Styling({
                     <div className="styling_label-container">
                         <span className="styling_start-end-text">Start:</span>
                     </div>
+                    {/* ##### */}
+                    {/* // TODO: Remove the need for stylings to not overlap, and
+                    allow order to be 3, 1, 2|| 1,3,2||3,2,1 etc */}
                     <input
                         className="styling_slider"
                         // value={valueOfRangeFinder}
@@ -42,12 +45,13 @@ function Styling({
                             adjustStart(menuOption, event.target.value); // prints the expected value!
                         }}
                     />
-                    <span className="color-white">{previousStyleEnd}</span>
+                    <span className="color-white">Min: {previousStyleEnd}</span>
                 </div>
                 <div className="d-flex justify-content-start align-items-center">
                     <div className="styling_label-container">
                         <span className="styling_start-end-text">End:</span>
                     </div>
+                    {/* ###### */}
                     <input
                         className="styling_slider"
                         min={previousStyleEnd}
@@ -57,7 +61,7 @@ function Styling({
                             adjustEnd(menuOption, event.target.value); // prints the expected value!
                         }}
                     />
-                    <span className="color-white">{nextStyleStart}</span>
+                    <span className="color-white">Max: {nextStyleStart}</span>
                 </div>
             </div>
             <div className="styling_options-right-container d-flex flex-column">
