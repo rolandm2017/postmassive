@@ -10,18 +10,19 @@ export function detectIsStylingEmpty(stylings) {
             a++;
         }
     }
-    if (a === 3) {
+    if (a === stylings.length) {
         return true;
     }
     return false;
 }
 
-export function prettyText(inputText, stylings) {
+export function prettyText(inputText, stylings, callback) {
     /*
     // inputText: the text to style. should be a long string.
-    // stylings: expecting 3 Stylings objects.
+    // stylings: expecting 1 to 3 Stylings objects.
     // returns: chunks of JSX that (magically? how?) connect together in the browser
     */
+    callback(inputText);
     let isStylingsEmpty = detectIsStylingEmpty(stylings);
     if (isStylingsEmpty) {
         console.log(26, "yes, it was empty");
@@ -56,6 +57,7 @@ export function prettyText(inputText, stylings) {
             let indexSelection = Math.floor(index / 2);
             let availableStylings;
             console.log(75, stylings[indexSelection], indexSelection);
+
             if (stylings[indexSelection].stylings.includes(",")) {
                 availableStylings =
                     stylings[indexSelection].stylings.split(", ");

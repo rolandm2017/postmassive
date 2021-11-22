@@ -135,8 +135,8 @@ function Post(props) {
             } else {
                 // make the style. DO NOT refactor this to be outside of "currentStyle" dependency
                 let styleInit = {
-                    start: undefined,
-                    end: undefined,
+                    start: 0,
+                    end: content.length,
                     styles: [type],
                 };
                 console.log("creating style...", styleInit, 134);
@@ -159,8 +159,8 @@ function Post(props) {
             } else {
                 // make the style. DO NOT refactor this to be outside of "currentStyle" dependency
                 let styleInit = {
-                    start: undefined,
-                    end: undefined,
+                    start: 0,
+                    end: content.length,
                     styles: [type],
                 };
                 console.log("creating style...", 154);
@@ -183,8 +183,8 @@ function Post(props) {
             } else {
                 // make the style. DO NOT refactor this to be outside of "currentStyle" dependency
                 let styleInit = {
-                    start: undefined,
-                    end: undefined,
+                    start: 0,
+                    end: content.length,
                     styles: [type],
                 };
                 console.log("creating style...", 179);
