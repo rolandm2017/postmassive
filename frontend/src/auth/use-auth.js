@@ -188,7 +188,7 @@ export function useProvideAuth() {
                 Cookies.set("jwt", user.jwtToken);
                 userSubject.next(user);
             } else {
-                console.log("line 195");
+                // console.log("line 195");
                 Cookies.remove("jwt");
                 userSubject.next(null);
             }

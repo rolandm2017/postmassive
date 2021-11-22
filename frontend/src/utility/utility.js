@@ -50,74 +50,35 @@ export function prettyText(inputText, stylings, callback) {
         // special condition
         oddsAreSpecial = false;
     }
-    let splitUpTexts = getSubstrings(inputText, stylings);
+    console.log(inputText, stylings);
+    let splitUpTexts = getSubstringsWithInstructions(inputText, stylings);
     // FIXME: what if we have special chunks like sSSSs
     // ...where s = nonspecial, S = special. or SSSs
     // or sSSsSs or sSsSSs ... need a more generalized algo.
-    let chunks = splitUpTexts.map((chunk, index) => {
-        console.log(chunk, index, 58);
-        // have to do this math to turn the splitUpTexts index into the stylings index
-        if (index % 2 === 0) {
-            console.log("returning plain ...", chunk);
-            return <span key={index}>{chunk}</span>;
-        } else {
-            // let stylingChoice = index;
-            let indexSelection = Math.floor(index / 2);
-            if (stylings[indexSelection].stylings === undefined) {
-                console.log(
-                    stylings,
-                    stylings[indexSelection].stylings,
-                    stylings[indexSelection],
-                    indexSelection,
-                    67
-                );
-                return inputText; // safeguard prevents stylings[i] from throwing err further down.
-                // ###
-                // this is a safeguard to prevent throwing an error
-                // ###
-            }
-            let availableStylings;
-            console.log(80, stylings, stylings[indexSelection], indexSelection);
 
-            if (stylings[indexSelection].stylings.includes(",")) {
-                availableStylings =
-                    stylings[indexSelection].stylings.split(", ");
-                console.log(
-                    64,
-                    "specialChoice:",
-                    availableStylings,
-                    indexSelection,
-                    index
-                );
-                return (
-                    <span
-                        key={index}
-                        className={`${availableStylings.join(" ")}`}
-                    >
-                        {chunk}
-                    </span>
-                );
-            } else {
-                availableStylings = stylings[indexSelection].stylings;
-                console.log(
-                    81,
-                    "special:",
-                    availableStylings,
-                    indexSelection,
-                    index
-                );
-                return (
-                    <span key={index} className={`${availableStylings}`}>
-                        {chunk}
-                    </span>
-                );
-            }
+    // { special: false, value: initSlice }
+    // { special: true, value: specialMiddleSlice, styling: stylings[0] },
+    console.log(splitUpTexts, stylings);
+    let chunks = splitUpTexts.map((chunk, index) => {
+        console.log(chunk.special, chunk.value);
+        if (chunk.special) {
         }
+        return null;
     });
     return chunks; // works as of 3:48 pm
+    // return (
+    //     <span key={index} className={`${availableStylings.join(" ")}`}>
+    //         {chunk}
+    //     </span>
+    // );
+    // return (
+    //     <span key={index} className={`${availableStylings}`}>
+    //         {chunk}
+    //     </span>
+    // );
 }
 
-function getSubstrings(inputText, preprocessedStylings) {
+function getSubstringsWithInstructions(inputText, preprocessedStylings) {
     /*
     // inputText - self explanatory
     // preprocessedStylings - it may be that the user has supplied 0, 1, 2, or 3 stylings.
@@ -125,20 +86,16 @@ function getSubstrings(inputText, preprocessedStylings) {
     // for 0, we don't need any substrings.
     // for 1, we just need the substring that is encapsulated by the Styling.
     // for 2 or 3, a loop makes sense, though barely!
+    // return value - should be an array of strings that can be combined using prettyText
     */
 
     // todo: only splice if there is a styling attached to the stylings obj
     let stylings = [];
     preprocessedStylings.forEach((styling) => {
         // get rid of the empty styling objects.
-        if (typeof styling.styles === "undefined") {
+        if (typeof styling.stylings === "undefined") {
             // ...
-            console.log(
-                126,
-                "styling ",
-                styling,
-                " did not have a styling attached!"
-            );
+            console.log(126, styling, " did not have a styling attached!");
         } else {
             stylings.push(styling);
         }
@@ -167,18 +124,28 @@ function getSubstrings(inputText, preprocessedStylings) {
     }
 
     // if 2 or 3 ... almost want to write it out by hand...
-    let initSlice = inputText.slice(0, stylings[0].start);
+    if (detectIsStylingEmpty(stylings)) {
+        return inputText;
+    }
+
+    let initSlice = {
+        special: false,
+        value: inputText.slice(0, stylings[0].start),
+    };
     if (stylings.length > 0) {
         stringsWithInstructions.push(initSlice);
     }
     for (let i = 0; i < stylings.length; i++) {
         let weAreOnTheLastStyling = i === stylings.length - 1;
+
         if (weAreOnTheLastStyling) {
             let slice = inputText.slice(stylings[i].start, stylings[i].end); // will go from i to end of string
+
             slice = {
                 special: true,
                 value: slice,
                 styling: stylings[i],
+                numberOfStylings: stylings[i].stylings.length,
             };
             stringsWithInstructions.push(slice);
             let trailEnd = inputText.slice(stylings[i].end); // will be the trailing but
@@ -189,16 +156,22 @@ function getSubstrings(inputText, preprocessedStylings) {
             stringsWithInstructions.push(trailEnd);
         } else {
             let slice = inputText.slice(stylings[i].start, stylings[i].end);
-            slice = { special: true, value: slice, styling: stylings[i] };
+            slice = {
+                special: true,
+                value: slice,
+                styling: stylings[i],
+                numberOfStylings: stylings[i].stylings.length,
+            };
             stringsWithInstructions.push(slice);
             let theNormalPartInBetween = {
                 special: false,
                 value: inputText.slice(stylings[i].end, stylings[i + 1].start),
             };
+
             stringsWithInstructions.push(theNormalPartInBetween);
         }
     }
-    // console.log(stringsWithInstructions);
+    console.log(stringsWithInstructions);
     return stringsWithInstructions;
 }
 
