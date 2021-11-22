@@ -22,7 +22,9 @@ export function prettyText(inputText, stylings, callback) {
     // stylings: expecting 1 to 3 Stylings objects.
     // returns: chunks of JSX that (magically? how?) connect together in the browser
     */
-    callback(inputText);
+    if (typeof callback === "function" && typeof callback !== "undefined") {
+        callback(inputText);
+    }
     let isStylingsEmpty = detectIsStylingEmpty(stylings);
     if (isStylingsEmpty) {
         console.log(26, "yes, it was empty");
