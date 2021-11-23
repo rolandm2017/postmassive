@@ -1,32 +1,38 @@
 import {
+    countStylingsBasedOnCommas,
     convertEngagementText,
     handleJustOneStyling,
     processMin,
     processMax,
 } from "./utility";
 
+// describe("the function is absolutely airtight and flawless", () => {});
+
 describe("correctly splits stylings objects into the correct integer", () => {
     it("turns one singular styling into 1", () => {
-        expect(countStylingsBasedOnCommas("bold")).toBe(1);
-        expect(countStylingsBasedOnCommas("italics")).toBe(1);
-        expect(countStylingsBasedOnCommas("backgroundColorRed")).toBe(1);
+        expect(countStylingsBasedOnCommas(["bold"])).toBe(1);
+        expect(countStylingsBasedOnCommas(["italics"])).toBe(1);
+        expect(countStylingsBasedOnCommas(["backgroundColorRed"])).toBe(1);
     });
     it("turns two into 2 and three into 3", () => {
-        expect(countStylingsBasedOnCommas("backgroundColorRed, bold")).toBe(2);
-        expect(countStylingsBasedOnCommas("backgroundColorBlack, bold")).toBe(
+        expect(countStylingsBasedOnCommas(["backgroundColorRed, bold"])).toBe(
+            2
+        );
+        expect(countStylingsBasedOnCommas(["backgroundColorBlack, bold"])).toBe(
             2
         );
         expect(
-            countStylingsBasedOnCommas(
-                "backgroundColorRed, bold, strikethrough"
-            )
+            countStylingsBasedOnCommas([
+                "backgroundColorRed, bold, strikethrough",
+            ])
         ).toBe(3);
         expect(
-            countStylingsBasedOnCommas(
-                "backgroundColorCyan, bold, strikethrough"
-            )
+            countStylingsBasedOnCommas([
+                "backgroundColorCyan, bold, strikethrough",
+            ])
         ).toBe(3);
     });
+    it("throws unless the input is absolutely perfect", () => {});
 });
 
 describe("handles a singular Styling object & surrounding text, processing it into 3 instructions", () => {
@@ -44,7 +50,7 @@ describe("handles a singular Styling object & surrounding text, processing it in
             },
             {
                 special: true,
-                value: " dabba",
+                value: "dabba",
                 stylings: ["bold, backgroundColorRed"],
                 numberOfStylings: 2,
             },
