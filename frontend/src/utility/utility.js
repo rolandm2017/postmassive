@@ -21,6 +21,20 @@ export function detectIsStylingEmpty(stylings) {
     return false;
 }
 
+function detectWellMadeStyling(stylings) {
+    // just look for ONE. then return.
+    for (let i = 0; i < stylings.length; i++) {
+        let stylingHasStart = stylings[i].start > 0;
+        let stylingHasEnd = stylings[i].end > stylingHasStart;
+        let stylesAreUndefined = typeof stylings[i].stylings === undefined;
+        let stylingHasStyles = !!stylesAreUndefined;
+        if (stylingHasStart && stylingHasEnd && stylingHasStyles) {
+            return true;
+        }
+    }
+    return false;
+}
+
 export function prettyText(inputText, stylings, callback) {
     /*
     // inputText: the text to style. should be a long string.
@@ -36,7 +50,12 @@ export function prettyText(inputText, stylings, callback) {
         // console.log(30, stylings);
     }
 
-    // console.log(inputText, stylings);
+    let atLeastOneWellFormedStyling = detectWellMadeStyling(stylings);
+    if (!atLeastOneWellFormedStyling) {
+        return inputText;
+    }
+
+    console.log(39, inputText, stylings);
     let splitUpTexts = getSubstringsWithInstructions(inputText, stylings);
     // FIXME: what if we have special chunks like sSSSs
     // ...where s = nonspecial, S = special. or SSSs
@@ -133,7 +152,7 @@ function getSubstringsWithInstructions(inputText, preprocessedStylings) {
     // todo: only splice if there is a styling attached to the stylings obj
     let stylings = [];
     preprocessedStylings.forEach((styling) => {
-        // get rid of the empty styling objects.
+        // get rid of the empty styling objects. could go from 3 down to 1.
 
         if (typeof styling.stylings === "undefined") {
             // ...
