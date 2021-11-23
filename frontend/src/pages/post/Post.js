@@ -367,7 +367,7 @@ function Post(props) {
                             type then selecting another styling */}
                             <div>
                                 <p className="post_color-white">
-                                    {content.length > 15
+                                    {content.length > 8
                                         ? prettyText(
                                               content,
                                               [

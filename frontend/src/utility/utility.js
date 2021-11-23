@@ -89,6 +89,28 @@ export function prettyText(inputText, stylings, callback) {
     return chunks; //
 }
 
+function handleJustOneStyling(inputText, styling) {
+    let initSlice = inputText.slice(0, styling.start);
+    let specialMiddleSlice = inputText.slice(styling.start, styling.end);
+    let endSlice = inputText.slice(styling.end, inputText.length);
+    return [
+        {
+            special: false,
+            value: initSlice,
+        },
+        {
+            special: true,
+            value: specialMiddleSlice,
+            styling: styling.stylings,
+            numberOfStylings: countStylingsBasedOnCommas(styling.stylings),
+        },
+        {
+            special: false,
+            value: endSlice,
+        },
+    ];
+}
+
 function countStylingsBasedOnCommas(stylings) {
     /* 
     // pass the VALUE of stylings.stylings, not the stylings object.
@@ -130,6 +152,7 @@ function getSubstringsWithInstructions(inputText, preprocessedStylings) {
             // ...
             console.log(126, styling, " did not have a styling attached!");
         } else {
+            console.log(133, "pushing ", styling);
             stylings.push(styling);
         }
     });
@@ -137,30 +160,7 @@ function getSubstringsWithInstructions(inputText, preprocessedStylings) {
 
     // handle case where Stylings is only 1 singular Styling
     if (stylings.length === 1) {
-        let initSlice = inputText.slice(0, stylings[0].start);
-        let specialMiddleSlice = inputText.slice(
-            stylings[0].start,
-            stylings[0].end
-        );
-        let endSlice = inputText.slice(stylings[0].end, inputText.length);
-        return [
-            {
-                special: false,
-                value: initSlice,
-            },
-            {
-                special: true,
-                value: specialMiddleSlice,
-                styling: stylings[0].stylings,
-                numberOfStylings: countStylingsBasedOnCommas(
-                    stylings[0].stylings
-                ),
-            },
-            {
-                special: false,
-                value: endSlice,
-            },
-        ];
+        return handleJustOneStyling(inputText, stylings[0]);
     }
 
     // if 2 or 3 ... almost want to write it out by hand...
