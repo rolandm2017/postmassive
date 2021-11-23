@@ -1,6 +1,7 @@
 import {
     detectWellMadeStyling,
     countStylingsBasedOnCommas,
+    getSubstringsWithInstructions,
     convertEngagementText,
     handleJustOneStyling,
     processMin,
@@ -210,38 +211,41 @@ describe("processes string with stylings object(s) into substrings with instruct
 
     it("turns strings and stylings into substrings with instructions", () => {
         expect(
-            getSubstringsWithInstructions("aaa, bbb, ccc, ddd, eee, fff, ggg", [
-                {
-                    start: 5,
-                    end: 9,
-                    stylings: ["bold, strikethrough, backgroundColorRed"],
-                },
-                {
-                    start: 14,
-                    end: 19,
-                    stylings: ["italics, backgroundColorBlack"],
-                },
-            ])
+            getSubstringsWithInstructions(
+                "aaa, bbb, cCc, dDd, EEEe, fff, ggg",
+                [
+                    {
+                        start: 5,
+                        end: 9,
+                        stylings: ["bold, strikethrough, backgroundColorRed"],
+                    },
+                    {
+                        start: 14,
+                        end: 19,
+                        stylings: ["italics, backgroundColorBlack"],
+                    },
+                ]
+            )
         ).toEqual([
             { special: false, value: "aaa, " },
             {
                 special: true,
-                value: "bbb, ",
+                value: "bbb,",
                 stylings: ["bold, strikethrough, backgroundColorRed"],
                 numberOfStylings: 3,
             },
-            { special: false, value: "ccc, " },
+            { special: false, value: " cCc," },
             {
                 special: true,
-                value: "ccc, ddd,",
+                value: " dDd,",
                 stylings: ["italics, backgroundColorBlack"],
                 numberOfStylings: 2,
             },
-            { special: false, value: " eee, fff, ggg" },
+            { special: false, value: " EEEe, fff, ggg" },
         ]);
         expect(
             getSubstringsWithInstructions(
-                "AAAAAAAAA, bBbBb, CCCCCC, DDDD, EEEEEE, ffff, GGGGGGGGggggg",
+                "AAAAAAAAA, bBbBb, c2c2c2, d5d5, EHSHEH, ffff, GGGGGGGGggggg",
                 [
                     {
                         start: 11,
@@ -264,21 +268,21 @@ describe("processes string with stylings object(s) into substrings with instruct
             { special: false, value: "AAAAAAAAA, " },
             {
                 special: true,
-                value: "bBbBb",
+                value: "bBbB",
                 stylings: ["bold, strikethrough, backgroundColorRed"],
                 numberOfStylings: 3,
             },
-            { special: false, value: ", CCCCCC, " },
+            { special: false, value: "b, c2c2c2," },
             {
                 special: true,
-                value: "DDDD",
+                value: " d5d",
                 stylings: ["italics, backgroundColorBlack"],
                 numberOfStylings: 2,
             },
-            { special: false, value: "EEEEEE" },
+            { special: false, value: "5, EHSHEH, f" },
             {
                 special: true,
-                value: "ffff",
+                value: "fff",
                 stylings: ["italics, backgroundColorBlack"],
                 numberOfStylings: 2,
             },

@@ -81,7 +81,10 @@ export function prettyText(inputText, stylings, callback) {
                 let availableStylings = chunk.stylings.split(", ").join(" .");
                 console.log(73, availableStylings, chunk);
                 return (
-                    <span key={index} className={`${availableStylings} `}>
+                    <span
+                        key={index}
+                        className={`stylized ${availableStylings} `}
+                    >
                         {chunk.value}
                     </span>
                 );
@@ -89,7 +92,10 @@ export function prettyText(inputText, stylings, callback) {
                 let availableStylings = chunk.stylings;
                 console.log(80, availableStylings);
                 return (
-                    <span key={index} className={`${availableStylings}`}>
+                    <span
+                        key={index}
+                        className={`stylized ${availableStylings}`}
+                    >
                         {chunk.value}
                     </span>
                 );
@@ -173,7 +179,7 @@ export function getSubstringsWithInstructions(inputText, preprocessedStylings) {
                 " did not have a styling attached!"
             );
         } else {
-            console.log(133, "pushing ", styling);
+            // console.log(133, "pushing ", styling);
             stylings.push(styling);
         }
     });
@@ -239,7 +245,7 @@ export function getSubstringsWithInstructions(inputText, preprocessedStylings) {
             stringsWithInstructions.push(theNormalPartInBetween);
         }
     }
-    console.log(stringsWithInstructions);
+    // console.log(stringsWithInstructions);
     return stringsWithInstructions;
 }
 
