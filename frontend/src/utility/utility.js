@@ -279,3 +279,58 @@ export function convertEngagementText(inputNum) {
         return stringVer.slice(0, 1) + "." + stringVer.slice(1, 3) + "b";
     }
 }
+
+export function processMin(index, sourceOfMin, contentLength) {
+    /*
+    // per Styling, min is as follows: 
+    // (1) srcOfMin === 0, 
+    // (2) end of first style *if* it exists, otherwise content.length
+    // (3) end of second style *if* it exists, otherwise content.length;
+    // returns: the index's assigned minimum value
+    */
+
+    if (index === 0) {
+        return 0;
+    } else if (index === 1) {
+        if (sourceOfMin) {
+            return sourceOfMin;
+        } else {
+            return contentLength;
+        }
+    } else if (index === 2) {
+        if (sourceOfMin) {
+            return sourceOfMin;
+        } else {
+            return contentLength;
+        }
+    }
+}
+
+export function processMax(index, sourceOfMax, contentLength) {
+    /*
+    // per Styling, max is as follows: 
+    // (1) start of second style *if* it exists; otherwise, contentLength 
+    // (2) start of third style *if* it exists; otherwise, contentLength.
+    // (3) srcOfMax === contentLength;
+    // returns: the index's assigned minimum value
+    */
+    if (index === 0) {
+        if (sourceOfMax) {
+            return sourceOfMax;
+        } else {
+            return contentLength;
+        }
+    } else if (index === 1) {
+        if (sourceOfMax) {
+            return sourceOfMax;
+        } else {
+            return contentLength;
+        }
+    } else if (index === 2) {
+        if (sourceOfMax) {
+            return sourceOfMax;
+        } else {
+            return contentLength;
+        }
+    }
+}

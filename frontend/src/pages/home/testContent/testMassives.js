@@ -21,7 +21,7 @@ const testMassives = [
             {
                 start: 5,
                 end: 26,
-                stylings: "strikethrough, makeBold, textSize22",
+                stylings: "backgroundColorBlack, makeBold, textSize22",
             },
             { start: 47, end: 63, stylings: "backgroundColorRed" },
             {

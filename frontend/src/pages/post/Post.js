@@ -195,6 +195,7 @@ function Post(props) {
     }
 
     function removeStyleFromSection(type, index) {
+        // fixme: very broken! if bold,italic,strikethrough, clicking 1 removes all.
         console.log(
             197,
             type,
@@ -285,14 +286,62 @@ function Post(props) {
     }
 
     function handleChangeStylingSelection(number) {
-        console.log(
-            218,
-            number,
-            "previousStyle:",
-            currentStyle,
-            "inside handleChangeStylingSelection"
-        );
-        setCurrentStyle(number);
+        setCurrentStyle(number); // does work btw!
+    }
+
+    function processMin(index, sourceOfMin, contentLength) {
+        /*
+        // per Styling, min is as follows: 
+        // (1) srcOfMin === 0, 
+        // (2) end of first style *if* it exists, otherwise content.length
+        // (3) end of second style *if* it exists, otherwise content.length;
+        // returns: the index's assigned minimum value
+        */
+
+        if (index === 0) {
+            return 0;
+        } else if (index === 1) {
+            if (sourceOfMin) {
+                return sourceOfMin;
+            } else {
+                return contentLength;
+            }
+        } else if (index === 2) {
+            if (sourceOfMin) {
+                return sourceOfMin;
+            } else {
+                return contentLength;
+            }
+        }
+    }
+
+    function processMax(index, sourceOfMax, contentLength) {
+        /*
+        // per Styling, max is as follows: 
+        // (1) start of second style *if* it exists; otherwise, contentLength 
+        // (2) start of third style *if* it exists; otherwise, contentLength.
+        // (3) srcOfMax === contentLength;
+        // returns: the index's assigned minimum value
+        */
+        if (index === 0) {
+            if (sourceOfMax) {
+                return sourceOfMax;
+            } else {
+                return contentLength;
+            }
+        } else if (index === 1) {
+            if (sourceOfMax) {
+                return sourceOfMax;
+            } else {
+                return contentLength;
+            }
+        } else if (index === 2) {
+            if (sourceOfMax) {
+                return sourceOfMax;
+            } else {
+                return contentLength;
+            }
+        }
     }
 
     const floors = FLOORS.map((floor, index) => (
@@ -393,7 +442,11 @@ function Post(props) {
                                 }}
                                 currentlyChecked={currentStyle}
                                 currentMin={0}
-                                currentMax={secondStyle.start}
+                                currentMax={
+                                    secondStyle.start
+                                        ? secondStyle.start
+                                        : content.length
+                                }
                                 stylingInfo={firstStyle.stylings}
                                 adjustStart={handleChangeStartRange}
                                 adjustEnd={handleChangeEndRange}
