@@ -6,8 +6,8 @@ function Styling({
     menuOption,
     handleClick,
     stylingInfo,
-    previousStyleEnd,
-    nextStyleStart,
+    currentMin,
+    currentMax,
     adjustStart,
     adjustEnd,
     currentlyChecked,
@@ -38,14 +38,14 @@ function Styling({
                     <input
                         className="styling_slider"
                         // value={valueOfRangeFinder}
-                        min={previousStyleEnd}
-                        max={nextStyleStart}
+                        min={currentMin}
+                        max={currentMax}
                         type="range"
                         onChange={(event) => {
                             adjustStart(menuOption, event.target.value); // prints the expected value!
                         }}
                     />
-                    <span className="color-white">Min: {previousStyleEnd}</span>
+                    <span className="color-white">Min: {currentMin}</span>
                 </div>
                 <div className="d-flex justify-content-start align-items-center">
                     <div className="styling_label-container">
@@ -54,14 +54,14 @@ function Styling({
                     {/* ###### */}
                     <input
                         className="styling_slider"
-                        min={previousStyleEnd}
-                        max={nextStyleStart}
+                        min={currentMin}
+                        max={currentMax}
                         type="range"
                         onChange={(event) => {
                             adjustEnd(menuOption, event.target.value); // prints the expected value!
                         }}
                     />
-                    <span className="color-white">Max: {nextStyleStart}</span>
+                    <span className="color-white">Max: {currentMax}</span>
                 </div>
             </div>
             <div className="styling_options-right-container d-flex flex-column">

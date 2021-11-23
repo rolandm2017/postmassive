@@ -28,10 +28,12 @@ function detectWellMadeStyling(stylings) {
     for (let i = 0; i < stylings.length; i++) {
         let stylingHasStart = stylings[i].start >= 0;
         let stylingHasEnd = stylings[i].end >= 0;
-        let stylingHasStyles = stylings[i].stylings.length >= 1;
+        let stylingHasStyles = stylings[i].stylings // primo ternary. "if undefined, then false!"
+            ? stylings[i].stylings.length >= 1
+            : false;
         console.log(34, stylingHasStart, stylingHasEnd, stylingHasStyles);
         if (stylingHasStart && stylingHasEnd && stylingHasStyles) {
-            console.log(stylings[i]);
+            console.log(35, stylings[i]);
             return true;
         }
     }
@@ -66,7 +68,7 @@ export function prettyText(inputText, stylings, callback) {
     // or sSSsSs or sSsSSs ... need a more generalized algo.
 
     // { special: false, value: initSlice }
-    // { special: true, value: specialMiddleSlice, styling: stylings[0] },
+    // { special: true, value: specialMiddleSlice, stylings: stylings[0] },
     console.log(splitUpTexts, stylings, 48);
     let chunks = splitUpTexts.map((chunk, index) => {
         console.log(68, chunk, chunk.value);
@@ -74,7 +76,7 @@ export function prettyText(inputText, stylings, callback) {
             // console.log(66, availableStylings, chunk);
             if (chunk.numberOfStylings > 1) {
                 let availableStylings = chunk.stylings.split(", ").join(" .");
-                console.log(73, availableStylings);
+                console.log(73, availableStylings, chunk);
                 return (
                     <span key={index} className={`${availableStylings} `}>
                         {chunk.value}
@@ -108,7 +110,7 @@ function handleJustOneStyling(inputText, styling) {
         {
             special: true,
             value: specialMiddleSlice,
-            styling: styling.stylings,
+            stylings: styling.stylings,
             numberOfStylings: countStylingsBasedOnCommas(styling.stylings),
         },
         {
@@ -146,7 +148,7 @@ function getSubstringsWithInstructions(inputText, preprocessedStylings) {
     /* template */
     // special: true,
     // value: slice,
-    // styling: stylings[0].stylings,
+    // stylings: stylings[0].stylings,
     // numberOfStylings: countStylingsBasedOnCommas(
     //                      stylings[0].stylings
     //                      ),
@@ -199,7 +201,7 @@ function getSubstringsWithInstructions(inputText, preprocessedStylings) {
             slice = {
                 special: true,
                 value: slice,
-                styling: stylings[i].stylings,
+                stylings: stylings[i].stylings,
                 numberOfStylings: countStylingsBasedOnCommas(
                     stylings[i].stylings
                 ),
@@ -216,7 +218,7 @@ function getSubstringsWithInstructions(inputText, preprocessedStylings) {
             slice = {
                 special: true,
                 value: slice,
-                styling: stylings[i].stylings,
+                stylings: stylings[i].stylings,
                 numberOfStylings: countStylingsBasedOnCommas(
                     stylings[i].stylings
                 ),

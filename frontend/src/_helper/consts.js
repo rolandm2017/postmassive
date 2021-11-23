@@ -5,7 +5,6 @@ export const EMPHASIS = ["bold", "italics", "strikethrough", "underline"];
 export const SPECIALS = ["textAlignmentUpDown", "superscript", "subscript"];
 
 export const BG_COLORS = [
-    "backgroundColorRed",
     "backgroundColorGreen",
     "backgroundColorCyan",
     "backgroundColorRed",
