@@ -235,6 +235,7 @@ export function getSubstringsWithInstructions(inputText, preprocessedStylings) {
 }
 
 export function convertEngagementText(inputNum) {
+    // practical question: Which is more satisfying to see engagement wise, 999k or 999.9k? 999.9m or 999m?
     // will receive views and likes in the millions.
     // convert 10,000-999,999 -> 10.0k - 999.9k
     // 1,000,000 to 999m -> 1.00m - 999.9m
@@ -261,7 +262,7 @@ export function convertEngagementText(inputNum) {
     } else if (inputNum < 1000000000) {
         if (stringVer.length === lengthOfSingleDigitMillions) {
             // single digit millions, special case
-            return stringVer.slice(0, 1) + "." + stringVer.slice(1, 2);
+            return stringVer.slice(0, 1) + "." + stringVer.slice(1, 2) + "m";
         }
         const lengthPreDecimal = stringVer.length - 6; // 6: slice off the 0's in 13,000,000, for instance
         const decimal = stringVer.slice(lengthPreDecimal, lengthPreDecimal + 1);
@@ -306,7 +307,7 @@ export function processMin(index, sourceOfMin, contentLength) {
 
 export function processMax(index, sourceOfMax, contentLength) {
     /*
-    // per Styling, max is as follows: 
+    // this is the maximum value available for the given index. per Styling, max is as follows: 
     // (1) start of second style *if* it exists; otherwise, contentLength 
     // (2) start of third style *if* it exists; otherwise, contentLength.
     // (3) srcOfMax === contentLength;

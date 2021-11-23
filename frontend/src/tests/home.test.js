@@ -13,8 +13,8 @@ import {
     FAKE_BAD_USERNAME,
     FAKE_BAD_PASSWORD,
     FAKE_BUNDLE_OF_DATA,
-} from "./fixtures/github"; // test data to use in a mock API
-import "./helpers/initTestLocalization"; // to configure i18n for tests
+} from "./userData/mockData"; // test data to use in a mock API
+// import "./helpers/initTestLocalization"; // to configure i18n for tests // do I need i18n for some reason?
 
 import Home from "../pages/home/Home";
 import Post from "../pages/post/Post";
@@ -24,39 +24,39 @@ describe("view PostMassive identities by username", () => {
     beforeAll(() => {
         nock("http://127.0.0.1:8080/api")
             .persist()
-            .get(`/users/${FAKE_USERNAME_WITH_REPOS}/repos`)
+            .get(`/users/${FAKE_USERNAME}/repos`)
             .query(true)
             .reply(200, FAKE_BUNDLE_OF_DATA);
     });
 
     afterEach(cleanup);
 
-    describe("when PM user has an account", () => {
-        it("can post successfully onto PM and get back a status code", async () => {
-            // arrange
-            // act
-            // assert
-        });
-    });
+    // describe("when PM user has an account", () => {
+    //     it("can post successfully onto PM and get back a status code", async () => {
+    //         // arrange
+    //         // act
+    //         // assert
+    //     });
+    // });
 
-    describe("when PM user has no account", () => {
-        it("cannot post or view the /home route, gets redirected to /public", async () => {
-            // arrange
-            // act
-            // assert
-        });
-        it("but can view specific posts", async () => {
-            // arrange
-            // act
-            // assert
-        });
-    });
+    // describe("when PM user has no account", () => {
+    //     it("cannot post or view the /home route, gets redirected to /public", async () => {
+    //         // arrange
+    //         // act
+    //         // assert
+    //     });
+    //     it("can view specific posts", async () => {
+    //         // arrange
+    //         // act
+    //         // assert
+    //     });
+    // });
 
-    describe("when PM user does not exist", () => {
-        it("user is presented with an error message", async () => {
-            // arrange
-            // act
-            // assert
-        });
-    });
+    // describe("when PM user does not exist", () => {
+    //     it("user is presented with an error message", async () => {
+    //         // arrange
+    //         // act
+    //         // assert
+    //     });
+    // });
 });
