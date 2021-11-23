@@ -1,10 +1,66 @@
 import {
+    detectWellMadeStyling,
     countStylingsBasedOnCommas,
     convertEngagementText,
     handleJustOneStyling,
     processMin,
     processMax,
 } from "./utility";
+
+describe("detects the difference between a well made Style object and a malformed one", () => {
+    it("validates well made Stylings", () => {
+        expect(
+            detectWellMadeStyling([
+                {
+                    start: 10,
+                    end: 25,
+                    stylings: ["bold", "strikethrough"],
+                },
+                {
+                    start: 0,
+                    end: 20,
+                    stylings: ["bold", "italics"],
+                },
+                {
+                    start: 100,
+                    end: 125,
+                    stylings: ["underline", "italics"],
+                },
+            ])
+        ).toEqual(true);
+        expect(
+            detectWellMadeStyling(
+                {},
+                {},
+                {
+                    start: 0,
+                    end: 25,
+                    stylings: ["bold", "backgroundColorBlack"],
+                }
+            )
+        ).toEqual(true);
+        expect(
+            detectWellMadeStyling(
+                {},
+                {},
+                {
+                    start: 50,
+                    end: 60,
+                    stylings: ["strikethrough"],
+                }
+            )
+        ).toEqual(true);
+    });
+    it("returns false when the Styling is malformed", () => {
+        expect(detectWellMadeStyling({ start: 0, stylings: ["bold"] })).toEqual(
+            false
+        );
+        expect(
+            detectWellMadeStyling({ end: 15, stylings: ["bold", "italics"] })
+        ).toEqual(false);
+        expect(detectWellMadeStyling({ start: 20, end: 50 })).toEqual(false);
+    });
+});
 
 // describe("the function is absolutely airtight and flawless", () => {});
 
@@ -32,7 +88,11 @@ describe("correctly splits stylings objects into the correct integer", () => {
             ])
         ).toBe(3);
     });
-    it("throws unless the input is absolutely perfect", () => {});
+    it("throws unless the input is absolutely perfect", () => {
+        expect(() => {
+            countStylingsBasedOnCommas();
+        }).toThrow(TypeError);
+    });
 });
 
 describe("handles a singular Styling object & surrounding text, processing it into 3 instructions", () => {
@@ -82,15 +142,15 @@ describe("handles a singular Styling object & surrounding text, processing it in
             },
         ]);
     });
-    // it("throws an error if stylingS is replaced with styling (no s)", () => {
-    //     expect(() =>
-    //         handleJustOneStyling({
-    //             start: 6,
-    //             end: 11,
-    //             styling: ["italic"],
-    //         })
-    //     ).toThrow(TypeError);
-    // });
+    it("throws an error if stylingS is replaced with styling (no s)", () => {
+        expect(() =>
+            handleJustOneStyling({
+                start: 6,
+                end: 11,
+                styling: ["italic"],
+            })
+        ).toThrow(TypeError);
+    });
 });
 
 // // describe("processes string with stylings object(s) into substrings with instruction objects", () => {
@@ -98,50 +158,50 @@ describe("handles a singular Styling object & surrounding text, processing it in
 // //     it("scares me");
 // // });
 
-// describe("converts integers into 2-3 digit strings. no more than 3 digits plus k, m or b", () => {
-//     // const singleDigitThousands = 1050;
-//     const singleDigitThousands2 = 1990;
-//     const doubleDigitThousands = 10325;
-//     const doubleDigitThousands2 = 19325;
-//     const tripleDigitThousands = 103252;
-//     const tripleDigitThousands2 = 193252;
-//     //
-//     const singleDigitMil = 1021000;
-//     const singleDigitMil2 = 1921000;
-//     // const doubleDigitMil = 20132100;
-//     const doubleDigitMil2 = 29132100;
-//     const tripleDigitMil = 301321000;
-//     const tripleDigitMil2 = 391321000;
-//     //
-//     const billion = 1357222111;
-//     const billion2 = 2457222111;
-//     //
-//     it("converts to text in the thousands properly", () => {
-//         // remember, if this is wrong, the test is wrong, *probably*. you gotta check.
-//         // pretty sure I'm *truncating*, not rounding.
-//         // just be consistent: truncate or round?
+describe("converts integers into 2-3 digit strings. no more than 3 digits plus k, m or b", () => {
+    // const singleDigitThousands = 1050;
+    const singleDigitThousands2 = 1990;
+    const doubleDigitThousands = 10325;
+    const doubleDigitThousands2 = 19325;
+    const tripleDigitThousands = 103252;
+    const tripleDigitThousands2 = 193252;
+    //
+    const singleDigitMil = 1021000;
+    const singleDigitMil2 = 1921000;
+    // const doubleDigitMil = 20132100;
+    const doubleDigitMil2 = 29132100;
+    const tripleDigitMil = 301321000;
+    const tripleDigitMil2 = 391321000;
+    //
+    const billion = 1357222111;
+    const billion2 = 2457222111;
+    //
+    it("converts to text in the thousands properly", () => {
+        // remember, if this is wrong, the test is wrong, *probably*. you gotta check.
+        // pretty sure I'm *truncating*, not rounding.
+        // just be consistent: truncate or round?
 
-//         // EDIT2: can fix bugs but its low priority
-//         // expect(convertEngagementText(singleDigitThousands)).toEqual("1.0k"); // fixme
-//         // expect(convertEngagementText(singleDigitThousands2)).toEqual("1.9k");  // fixme
-//         expect(convertEngagementText(doubleDigitThousands)).toEqual("10.3k");
-//         expect(convertEngagementText(doubleDigitThousands2)).toEqual("19.3k");
-//         // expect(convertEngagementText(tripleDigitThousands)).toEqual("103k"); // fixme
-//         // expect(convertEngagementText(tripleDigitThousands2)).toEqual("193k"); // fixme
-//     });
-//     it("converts to text in the millions properly", () => {
-//         expect(convertEngagementText(singleDigitMil)).toEqual("1.0m");
-//         expect(convertEngagementText(singleDigitMil2)).toEqual("1.9m");
-//         // expect(convertEngagementText(doubleDigitMil)).toEqual("20.0m"); // fixme
-//         // expect(convertEngagementText(doubleDigitMil2)).toEqual("29.0m"); // fixme
-//         // expect(convertEngagementText(tripleDigitMil)).toEqual("301m"); // fixme
-//         // expect(convertEngagementText(tripleDigitMil2)).toEqual("391m"); // fixme
-//     });
-//     it("converts to text in the billions properly", () => {
-//         expect(convertEngagementText(billion)).toEqual("1.35b");
-//         expect(convertEngagementText(billion2)).toEqual("2.45b"); // truncated #
-//     });
-// });
+        // EDIT2: can fix bugs but its low priority
+        // expect(convertEngagementText(singleDigitThousands)).toEqual("1.0k"); // fixme
+        // expect(convertEngagementText(singleDigitThousands2)).toEqual("1.9k");  // fixme
+        expect(convertEngagementText(doubleDigitThousands)).toEqual("10.3k");
+        expect(convertEngagementText(doubleDigitThousands2)).toEqual("19.3k");
+        // expect(convertEngagementText(tripleDigitThousands)).toEqual("103k"); // fixme
+        // expect(convertEngagementText(tripleDigitThousands2)).toEqual("193k"); // fixme
+    });
+    it("converts to text in the millions properly", () => {
+        expect(convertEngagementText(singleDigitMil)).toEqual("1.0m");
+        expect(convertEngagementText(singleDigitMil2)).toEqual("1.9m");
+        // expect(convertEngagementText(doubleDigitMil)).toEqual("20.0m"); // fixme
+        // expect(convertEngagementText(doubleDigitMil2)).toEqual("29.0m"); // fixme
+        // expect(convertEngagementText(tripleDigitMil)).toEqual("301m"); // fixme
+        // expect(convertEngagementText(tripleDigitMil2)).toEqual("391m"); // fixme
+    });
+    it("converts to text in the billions properly", () => {
+        expect(convertEngagementText(billion)).toEqual("1.35b");
+        expect(convertEngagementText(billion2)).toEqual("2.45b"); // truncated #
+    });
+});
 
 // describe("processMin and processMax", () => {
 //     test("processMin(0, a, b) should equal 0", () => {

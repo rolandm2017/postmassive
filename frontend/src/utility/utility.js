@@ -31,11 +31,11 @@ export function detectWellMadeStyling(stylings) {
             : false;
         console.log(34, stylingHasStart, stylingHasEnd, stylingHasStyles);
         if (stylingHasStart && stylingHasEnd && stylingHasStyles) {
-            console.log(35, stylings[i]);
+            // console.log(35, stylings[i]);
             return true;
         }
     }
-    console.log("false!!!!!!!!", 37);
+    // console.log("false!!!!!!!!", 37);
     return false;
 }
 
@@ -124,9 +124,12 @@ export function countStylingsBasedOnCommas(stylings) {
     // pass the VALUE of stylings.stylings, not the stylings object.
     // return value - the length of the stylings
     */
+
+    // FIXME: should this function receive ["bgColor, bold"] or ... "bgColor, bold"
+    // changed stylings to stylings[0] ... but maybe it should be "bold, italics"
     if (typeof stylings !== undefined) {
-        if (stylings.includes(",")) {
-            return stylings.split(", ").length;
+        if (stylings[0].includes(",")) {
+            return stylings[0].split(", ").length;
         } else {
             return 1; // because if no "," then stylings is length 1
         }
@@ -277,7 +280,7 @@ export function convertEngagementText(inputNum) {
         );
     } else {
         // don't ever expect a billion but maybe some day...
-        console.log("wow!");
+        // console.log("wow!");
         return stringVer.slice(0, 1) + "." + stringVer.slice(1, 3) + "b";
     }
 }
