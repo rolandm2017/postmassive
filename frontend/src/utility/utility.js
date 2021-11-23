@@ -100,6 +100,7 @@ export function handleJustOneStyling(inputText, styling) {
     let initSlice = inputText.slice(0, styling.start);
     let specialMiddleSlice = inputText.slice(styling.start, styling.end);
     let endSlice = inputText.slice(styling.end, inputText.length);
+    // console.log(initSlice, specialMiddleSlice, endSlice);
     return [
         {
             special: false,
@@ -266,6 +267,8 @@ export function convertEngagementText(inputNum) {
         }
         const lengthPreDecimal = stringVer.length - 6; // 6: slice off the 0's in 13,000,000, for instance
         const decimal = stringVer.slice(lengthPreDecimal, lengthPreDecimal + 1);
+        // let puttingItTogether =
+        console.log(stringVer, lengthPreDecimal, decimal);
         return (
             stringVer.slice(0, lengthPreDecimal) +
             "." +
