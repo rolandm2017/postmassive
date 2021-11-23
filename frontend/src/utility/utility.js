@@ -1,5 +1,3 @@
-import { empty } from "rxjs";
-
 export function styleObjectIsEmpty(style) {
     let isEmpty =
         style && // 👈 null and undefined check
@@ -23,7 +21,7 @@ export function detectIsStylingEmpty(stylings) {
     return false;
 }
 
-function detectWellMadeStyling(stylings) {
+export function detectWellMadeStyling(stylings) {
     // just look for ONE. then return.
     for (let i = 0; i < stylings.length; i++) {
         let stylingHasStart = stylings[i].start >= 0;
@@ -98,7 +96,7 @@ export function prettyText(inputText, stylings, callback) {
     return chunks; //
 }
 
-function handleJustOneStyling(inputText, styling) {
+export function handleJustOneStyling(inputText, styling) {
     let initSlice = inputText.slice(0, styling.start);
     let specialMiddleSlice = inputText.slice(styling.start, styling.end);
     let endSlice = inputText.slice(styling.end, inputText.length);
@@ -120,7 +118,7 @@ function handleJustOneStyling(inputText, styling) {
     ];
 }
 
-function countStylingsBasedOnCommas(stylings) {
+export function countStylingsBasedOnCommas(stylings) {
     /* 
     // pass the VALUE of stylings.stylings, not the stylings object.
     // return value - the length of the stylings
@@ -134,7 +132,7 @@ function countStylingsBasedOnCommas(stylings) {
     }
 }
 
-function getSubstringsWithInstructions(inputText, preprocessedStylings) {
+export function getSubstringsWithInstructions(inputText, preprocessedStylings) {
     /*
     // inputText - self explanatory
     // preprocessedStylings - it may be that the user has supplied 0, 1, 2, or 3 stylings.

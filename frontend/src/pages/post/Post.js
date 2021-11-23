@@ -16,6 +16,8 @@ import {
     prettyText,
     detectIsStylingEmpty,
     styleObjectIsEmpty,
+    processMin,
+    processMax,
 } from "../../utility/utility";
 
 import BackButton from "../../images/icons8-back-arrow-48-wh.png";
@@ -289,61 +291,6 @@ function Post(props) {
         setCurrentStyle(number); // does work btw!
     }
 
-    function processMin(index, sourceOfMin, contentLength) {
-        /*
-        // per Styling, min is as follows: 
-        // (1) srcOfMin === 0, 
-        // (2) end of first style *if* it exists, otherwise content.length
-        // (3) end of second style *if* it exists, otherwise content.length;
-        // returns: the index's assigned minimum value
-        */
-
-        if (index === 0) {
-            return 0;
-        } else if (index === 1) {
-            if (sourceOfMin) {
-                return sourceOfMin;
-            } else {
-                return contentLength;
-            }
-        } else if (index === 2) {
-            if (sourceOfMin) {
-                return sourceOfMin;
-            } else {
-                return contentLength;
-            }
-        }
-    }
-
-    function processMax(index, sourceOfMax, contentLength) {
-        /*
-        // per Styling, max is as follows: 
-        // (1) start of second style *if* it exists; otherwise, contentLength 
-        // (2) start of third style *if* it exists; otherwise, contentLength.
-        // (3) srcOfMax === contentLength;
-        // returns: the index's assigned minimum value
-        */
-        if (index === 0) {
-            if (sourceOfMax) {
-                return sourceOfMax;
-            } else {
-                return contentLength;
-            }
-        } else if (index === 1) {
-            if (sourceOfMax) {
-                return sourceOfMax;
-            } else {
-                return contentLength;
-            }
-        } else if (index === 2) {
-            if (sourceOfMax) {
-                return sourceOfMax;
-            } else {
-                return contentLength;
-            }
-        }
-    }
-
     const floors = FLOORS.map((floor, index) => (
         <div
             key={floor}
@@ -442,11 +389,11 @@ function Post(props) {
                                 }}
                                 currentlyChecked={currentStyle}
                                 currentMin={0}
-                                currentMax={
-                                    secondStyle.start
-                                        ? secondStyle.start
-                                        : content.length
-                                }
+                                currentMax={processMax(
+                                    0,
+                                    secondStyle.start,
+                                    content.length
+                                )}
                                 stylingInfo={firstStyle.stylings}
                                 adjustStart={handleChangeStartRange}
                                 adjustEnd={handleChangeEndRange}
@@ -460,8 +407,16 @@ function Post(props) {
                                     handleChangeStylingSelection(1);
                                 }}
                                 currentlyChecked={currentStyle}
-                                currentMin={firstStyle.end}
-                                currentMax={thirdStyle.start}
+                                currentMin={processMin(
+                                    1,
+                                    firstStyle.end,
+                                    content.length
+                                )}
+                                currentMax={processMax(
+                                    1,
+                                    thirdStyle.start,
+                                    content.length
+                                )}
                                 stylingInfo={secondStyle.stylings}
                                 adjustStart={handleChangeStartRange}
                                 adjustEnd={handleChangeEndRange}
@@ -475,8 +430,16 @@ function Post(props) {
                                     handleChangeStylingSelection(2);
                                 }}
                                 currentlyChecked={currentStyle}
-                                currentMin={secondStyle.end}
-                                currentMax={content.length}
+                                currentMin={processMin(
+                                    2,
+                                    secondStyle.end,
+                                    content.length
+                                )}
+                                currentMax={processMax(
+                                    2,
+                                    undefined,
+                                    content.length
+                                )}
                                 stylingInfo={thirdStyle.stylings}
                                 adjustStart={handleChangeStartRange}
                                 adjustEnd={handleChangeEndRange}
