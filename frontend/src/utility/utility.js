@@ -36,20 +36,6 @@ export function prettyText(inputText, stylings, callback) {
         // console.log(30, stylings);
     }
 
-    // console.log(
-    //     7,
-    //     stylings,
-    //     typeof stylings,
-    //     stylings[0]
-    //     // stylings[1],
-    //     // stylings[2] // 3, 35, bold
-    // );
-    let oddsAreSpecial = true;
-    // fixme: standard case where stylings is all empty objects; this is the start of the show
-    if (stylings[0].start === 0) {
-        // special condition
-        oddsAreSpecial = false;
-    }
     // console.log(inputText, stylings);
     let splitUpTexts = getSubstringsWithInstructions(inputText, stylings);
     // FIXME: what if we have special chunks like sSSSs
@@ -58,7 +44,7 @@ export function prettyText(inputText, stylings, callback) {
 
     // { special: false, value: initSlice }
     // { special: true, value: specialMiddleSlice, styling: stylings[0] },
-    // console.log(splitUpTexts, stylings);
+    console.log(splitUpTexts, stylings, 48);
     let chunks = splitUpTexts.map((chunk, index) => {
         console.log(63, chunk, chunk.value);
         if (chunk.special) {
@@ -148,9 +134,14 @@ function getSubstringsWithInstructions(inputText, preprocessedStylings) {
     let stylings = [];
     preprocessedStylings.forEach((styling) => {
         // get rid of the empty styling objects.
+
         if (typeof styling.stylings === "undefined") {
             // ...
-            console.log(126, styling, " did not have a styling attached!");
+            console.log(
+                126,
+                styling.stylings,
+                " did not have a styling attached!"
+            );
         } else {
             console.log(133, "pushing ", styling);
             stylings.push(styling);

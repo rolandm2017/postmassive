@@ -42,6 +42,12 @@ function LogInModal({
                                 placeholder="Password"
                                 type="password"
                                 onChange={handleAddPassword}
+                                onKeyDown={(event) => {
+                                    if (event.key === "Enter") {
+                                        console.log(event.key);
+                                        sendLogInIfInfoIsValid();
+                                    }
+                                }}
                             />
                         </div>
                     </div>
