@@ -1,3 +1,5 @@
+import ToBeStyled from "./ToBeStyled";
+
 export function styleObjectIsEmpty(style) {
     let isEmpty =
         style && // 👈 null and undefined check
@@ -27,14 +29,14 @@ export function detectWellMadeStyling(stylings) {
     // return value - true if there is at least one proper styling object in the array
     */
     // just look for ONE. then return.
-    console.log(stylings.length);
+    // console.log(stylings.length);
     for (let i = 0; i < stylings.length; i++) {
         let stylingHasStart = stylings[i].start >= 0;
         let stylingHasEnd = stylings[i].end >= 0;
         let stylingHasStyles = stylings[i].stylings // primo ternary. "if undefined, then false!"
             ? stylings[i].stylings.length >= 1
             : false;
-        console.log(34, stylingHasStart, stylingHasEnd, stylingHasStyles);
+        // console.log(34, stylingHasStart, stylingHasEnd, stylingHasStyles);
         if (stylingHasStart && stylingHasEnd && stylingHasStyles) {
             // console.log(35, stylings[i]);
             return true;
@@ -54,14 +56,32 @@ export function prettyText(inputText, stylings, callback) {
     let isStylingsEmpty = detectIsStylingsEmpty(stylings);
     if (isStylingsEmpty) {
         // console.log(26, "yes, it was empty");
-        return inputText;
+        return (
+            <ToBeStyled
+                index={null}
+                availableStylings={null}
+                chunkValue={inputText}
+            />
+        );
+        // return (
+        //     <span key={index} className="stylized">
+        //         {inputText}
+        //     </span>
+        // ); // return simply the text
     } else {
         // console.log(30, stylings);
     }
     console.log("prettyText52", isStylingsEmpty, stylings);
     let atLeastOneWellFormedStyling = detectWellMadeStyling(stylings);
     if (!atLeastOneWellFormedStyling) {
-        return inputText;
+        // return <span className="stylized">{inputText}</span>; // return simply the text ??
+        return (
+            <ToBeStyled
+                index={null}
+                availableStylings={null}
+                chunkValue={inputText}
+            />
+        );
     }
 
     console.log("prettyText58", inputText, stylings);
@@ -81,27 +101,31 @@ export function prettyText(inputText, stylings, callback) {
                 let availableStylings = chunk.stylings.split(", ").join(" .");
                 console.log(73, availableStylings, chunk);
                 return (
-                    <span
-                        key={index}
-                        className={`stylized ${availableStylings} `}
-                    >
-                        {chunk.value}
-                    </span>
+                    <ToBeStyled
+                        index={index}
+                        availableStylings={availableStylings}
+                        chunkValue={chunk.value}
+                    />
                 );
             } else {
                 let availableStylings = chunk.stylings;
                 console.log(80, availableStylings);
                 return (
-                    <span
-                        key={index}
-                        className={`stylized ${availableStylings}`}
-                    >
-                        {chunk.value}
-                    </span>
+                    <ToBeStyled
+                        index={index}
+                        availableStylings={availableStylings}
+                        chunkValue={chunk.value}
+                    />
                 );
             }
         } else {
-            return <span key={index}>{chunk.value}</span>;
+            return (
+                <ToBeStyled
+                    index={index}
+                    availableStylings={null}
+                    chunkValue={chunk.value}
+                />
+            );
         }
     });
     return chunks; //

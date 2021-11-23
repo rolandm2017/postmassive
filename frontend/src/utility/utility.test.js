@@ -1,4 +1,5 @@
 import {
+    prettyText,
     detectWellMadeStyling,
     countStylingsBasedOnCommas,
     getSubstringsWithInstructions,
@@ -9,6 +10,39 @@ import {
     styleObjectIsEmpty,
 } from "./utility";
 
+const wellMadeStylingsOne = {
+    start: 10,
+    end: 25,
+    stylings: ["bold", "strikethrough"],
+};
+const wellMadeStylingsTwo = {
+    start: 0,
+    end: 20,
+    stylings: ["bold", "italics"],
+};
+
+const wellMadeStylingsThree = {
+    start: 100,
+    end: 125,
+    stylings: ["underline", "italics"],
+};
+const wellMadeStylingsFour = {
+    start: 0,
+    end: 25,
+    stylings: ["bold", "backgroundColorBlack"],
+};
+const wellMadeStylingsFive = {
+    start: 50,
+    end: 60,
+    stylings: ["strikethrough"],
+};
+
+const wellMadeStylingsSix = {
+    start: 61,
+    end: 70,
+    stylings: ["italics", "backgroundColorRed", "underline"],
+};
+
 describe("detects empty object", () => {
     it("detects an empty object", () => {
         expect(styleObjectIsEmpty({})).toBe(true);
@@ -18,49 +52,65 @@ describe("detects empty object", () => {
     });
 });
 
+describe("converts text to prettyText", () => {
+    it("contains the 'stylized' class in all cases", () => {
+        expect(
+            prettyText("I can see what you see not, vision milky ...", [
+                {},
+                {},
+                {},
+            ]).classList.contains("stylized")
+        ).toBe(true);
+    });
+    expect(
+        prettyText("I can see what you see not, vision milky ...", [{}, {}, {}])
+    ).toHaveLength(1);
+
+    it("returns chunks of modified text with stylings", () => {
+        expect(
+            prettyText(
+                "I can see what you see not, vision milky ... cast down into the halls of the blind",
+                wellMadeStylingsOne
+            ).classList.contains("bold")
+        ).toBe(true);
+        expect(
+            prettyText(
+                "I can see what you see not, vision milky ... cast down into the halls of the blind",
+                wellMadeStylingsTwo
+            ).classList.contains("italics")
+        ).toBe(true);
+    });
+    it("has the appropriate length return value for a given string and Stylings combo", () => {
+        expect(
+            prettyText(
+                "I can see what you see not. Vision milky, then eyes rot. When you turn, they will be gone, Whispering their hidden song. Then you see what cannot be, Shadows move where light should be. Out of darkness, out of mind, Cast down into the Halls of the Blind.",
+                [
+                    wellMadeStylingsOne,
+                    wellMadeStylingsFive,
+                    wellMadeStylingsThree,
+                ]
+            )
+        ).toHaveLength(7);
+    });
+
+    // prettyText - test for length, test for chunks being special in the right way, the right chunsk being nonSpecial.
+});
+
 describe("detects the difference between a well made Style object and a malformed one", () => {
     it("validates well made Stylings", () => {
         expect(
             detectWellMadeStyling([
-                {
-                    start: 10,
-                    end: 25,
-                    stylings: ["bold", "strikethrough"],
-                },
-                {
-                    start: 0,
-                    end: 20,
-                    stylings: ["bold", "italics"],
-                },
-                {
-                    start: 100,
-                    end: 125,
-                    stylings: ["underline", "italics"],
-                },
+                wellMadeStylingsOne,
+                wellMadeStylingsTwo,
+                wellMadeStylingsThree,
             ])
         ).toEqual(true);
-        expect(
-            detectWellMadeStyling([
-                {},
-                {},
-                {
-                    start: 0,
-                    end: 25,
-                    stylings: ["bold", "backgroundColorBlack"],
-                },
-            ])
-        ).toEqual(true);
-        expect(
-            detectWellMadeStyling([
-                {},
-                {},
-                {
-                    start: 50,
-                    end: 60,
-                    stylings: ["strikethrough"],
-                },
-            ])
-        ).toEqual(true);
+        expect(detectWellMadeStyling([{}, {}, wellMadeStylingsFour])).toEqual(
+            true
+        );
+        expect(detectWellMadeStyling([{}, {}, wellMadeStylingsFive])).toEqual(
+            true
+        );
     });
     it("returns false when the Styling is malformed", () => {
         expect(
