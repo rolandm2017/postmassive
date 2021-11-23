@@ -6,7 +6,7 @@ export function styleObjectIsEmpty(style) {
     return isEmpty;
 }
 
-export function detectIsStylingEmpty(stylings) {
+export function detectIsStylingsEmpty(stylings) {
     let a = 0;
     for (let i = 0; i < stylings.length; i++) {
         let objectIsEmpty = styleObjectIsEmpty(stylings[i]);
@@ -22,7 +22,12 @@ export function detectIsStylingEmpty(stylings) {
 }
 
 export function detectWellMadeStyling(stylings) {
+    /*
+    // @params stylings - an array of stylings objects to loop over.
+    // return value - true if there is at least one proper styling object in the array
+    */
     // just look for ONE. then return.
+    console.log(stylings.length);
     for (let i = 0; i < stylings.length; i++) {
         let stylingHasStart = stylings[i].start >= 0;
         let stylingHasEnd = stylings[i].end >= 0;
@@ -46,7 +51,7 @@ export function prettyText(inputText, stylings, callback) {
     // returns: chunks of JSX that (magically? how?) connect together in the browser
     */
 
-    let isStylingsEmpty = detectIsStylingEmpty(stylings);
+    let isStylingsEmpty = detectIsStylingsEmpty(stylings);
     if (isStylingsEmpty) {
         // console.log(26, "yes, it was empty");
         return inputText;
@@ -139,7 +144,7 @@ export function countStylingsBasedOnCommas(stylings) {
 export function getSubstringsWithInstructions(inputText, preprocessedStylings) {
     /*
     // inputText - self explanatory
-    // preprocessedStylings - it may be that the user has supplied 0, 1, 2, or 3 stylings.
+    // preprocessedStylings - array. it may be that the user has supplied 0, 1, 2, or 3 stylings.
     // ...this function's role is to sort out how many substrings we'll need.
     // for 0, we don't need any substrings.
     // for 1, we just need the substring that is encapsulated by the Styling.
@@ -180,7 +185,7 @@ export function getSubstringsWithInstructions(inputText, preprocessedStylings) {
     }
 
     // if 2 or 3 ... almost want to write it out by hand...
-    if (detectIsStylingEmpty(stylings)) {
+    if (detectIsStylingsEmpty(stylings)) {
         return inputText;
     }
 

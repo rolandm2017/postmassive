@@ -5,7 +5,17 @@ import {
     handleJustOneStyling,
     processMin,
     processMax,
+    styleObjectIsEmpty,
 } from "./utility";
+
+describe("detects empty object", () => {
+    it("detects an empty object", () => {
+        expect(styleObjectIsEmpty({})).toBe(true);
+    });
+    it("detects an object with contents", () => {
+        expect(styleObjectIsEmpty({ start: 5, end: 10 })).toBe(false);
+    });
+});
 
 describe("detects the difference between a well made Style object and a malformed one", () => {
     it("validates well made Stylings", () => {
@@ -29,36 +39,36 @@ describe("detects the difference between a well made Style object and a malforme
             ])
         ).toEqual(true);
         expect(
-            detectWellMadeStyling(
+            detectWellMadeStyling([
                 {},
                 {},
                 {
                     start: 0,
                     end: 25,
                     stylings: ["bold", "backgroundColorBlack"],
-                }
-            )
+                },
+            ])
         ).toEqual(true);
         expect(
-            detectWellMadeStyling(
+            detectWellMadeStyling([
                 {},
                 {},
                 {
                     start: 50,
                     end: 60,
                     stylings: ["strikethrough"],
-                }
-            )
+                },
+            ])
         ).toEqual(true);
     });
     it("returns false when the Styling is malformed", () => {
-        expect(detectWellMadeStyling({ start: 0, stylings: ["bold"] })).toEqual(
-            false
-        );
         expect(
-            detectWellMadeStyling({ end: 15, stylings: ["bold", "italics"] })
+            detectWellMadeStyling([{ start: 0, stylings: ["bold"] }])
         ).toEqual(false);
-        expect(detectWellMadeStyling({ start: 20, end: 50 })).toEqual(false);
+        expect(
+            detectWellMadeStyling([{ end: 15, stylings: ["bold", "italics"] }])
+        ).toEqual(false);
+        expect(detectWellMadeStyling([{ start: 20, end: 50 }])).toEqual(false);
     });
 });
 
@@ -153,10 +163,129 @@ describe("handles a singular Styling object & surrounding text, processing it in
     });
 });
 
-// // describe("processes string with stylings object(s) into substrings with instruction objects", () => {
-// //     // this is why I started writing tests. This is what finally broke me.
-// //     it("scares me");
-// // });
+describe("processes string with stylings object(s) into substrings with instruction objects", () => {
+    // this is why I started writing tests. This is what finally broke me.
+    it("returns plain string when there are no stylings", () => {
+        expect(getSubstringsWithInstructions("Mushrooms", [])).toBe(
+            "Mushrooms"
+        );
+        expect(
+            getSubstringsWithInstructions(
+                "Pineapple on pizza, therefore being a cardigan late at night.",
+                []
+            )
+        ).toBe("Pineapple on pizza, therefore being a cardigan late at night.");
+    });
+    it("gracefully handles text & one styling", () => {
+        expect(
+            getSubstringsWithInstructions("this is some simple input", [
+                { start: 7, end: 11, stylings: ["underline"] },
+            ])
+        );
+        expect(
+            getSubstringsWithInstructions("Yabba dabba doo", [
+                {
+                    start: 6,
+                    end: 11,
+                    stylings: ["bold, backgroundColorRed"],
+                },
+            ])
+        ).toEqual([
+            {
+                special: false,
+                value: "Yabba ",
+            },
+            {
+                special: true,
+                value: "dabba",
+                stylings: ["bold, backgroundColorRed"],
+                numberOfStylings: 2,
+            },
+            {
+                special: false,
+                value: " doo",
+            },
+        ]);
+    });
+
+    it("turns strings and stylings into substrings with instructions", () => {
+        expect(
+            getSubstringsWithInstructions("aaa, bbb, ccc, ddd, eee, fff, ggg", [
+                {
+                    start: 5,
+                    end: 9,
+                    stylings: ["bold, strikethrough, backgroundColorRed"],
+                },
+                {
+                    start: 14,
+                    end: 19,
+                    stylings: ["italics, backgroundColorBlack"],
+                },
+            ])
+        ).toEqual([
+            { special: false, value: "aaa, " },
+            {
+                special: true,
+                value: "bbb, ",
+                stylings: ["bold, strikethrough, backgroundColorRed"],
+                numberOfStylings: 3,
+            },
+            { special: false, value: "ccc, " },
+            {
+                special: true,
+                value: "ccc, ddd,",
+                stylings: ["italics, backgroundColorBlack"],
+                numberOfStylings: 2,
+            },
+            { special: false, value: " eee, fff, ggg" },
+        ]);
+        expect(
+            getSubstringsWithInstructions(
+                "AAAAAAAAA, bBbBb, CCCCCC, DDDD, EEEEEE, ffff, GGGGGGGGggggg",
+                [
+                    {
+                        start: 11,
+                        end: 15,
+                        stylings: ["bold, strikethrough, backgroundColorRed"],
+                    },
+                    {
+                        start: 25,
+                        end: 29,
+                        stylings: ["italics, backgroundColorBlack"],
+                    },
+                    {
+                        start: 41,
+                        end: 44,
+                        stylings: ["italics, backgroundColorBlack"],
+                    },
+                ]
+            )
+        ).toEqual([
+            { special: false, value: "AAAAAAAAA, " },
+            {
+                special: true,
+                value: "bBbBb",
+                stylings: ["bold, strikethrough, backgroundColorRed"],
+                numberOfStylings: 3,
+            },
+            { special: false, value: ", CCCCCC, " },
+            {
+                special: true,
+                value: "DDDD",
+                stylings: ["italics, backgroundColorBlack"],
+                numberOfStylings: 2,
+            },
+            { special: false, value: "EEEEEE" },
+            {
+                special: true,
+                value: "ffff",
+                stylings: ["italics, backgroundColorBlack"],
+                numberOfStylings: 2,
+            },
+            { special: false, value: ", GGGGGGGGggggg" },
+        ]);
+    });
+});
 
 describe("converts integers into 2-3 digit strings. no more than 3 digits plus k, m or b", () => {
     // const singleDigitThousands = 1050;
@@ -203,23 +332,24 @@ describe("converts integers into 2-3 digit strings. no more than 3 digits plus k
     });
 });
 
-// describe("processMin and processMax", () => {
-//     test("processMin(0, a, b) should equal 0", () => {
-//         expect(processMin(0, 15, 342942342394)).toEqual(0);
-//     });
-//     test("processMin(1, 5, 15) should equal 5", () => {
-//         expect(processMin(1, 5, 15)).toEqual(5);
-//     });
-//     test("processMin(1, undefined, 15) should equal 15", () => {
-//         expect(processMin(1, undefined, 15)).toEqual(15);
-//     });
+describe("processMin and processMax", () => {
+    test("processMin(0, a, b) should equal 0", () => {
+        expect(processMin(0, 15, 23894)).toEqual(0);
+    });
+    test("processMin(1, 5, 15) should equal 5", () => {
+        expect(processMin(1, 5, 15)).toEqual(5);
+    });
+    test("processMin(1, undefined, 15) should equal 15", () => {
+        expect(processMin(1, undefined, 15)).toEqual(15);
+    });
 
-//     // max
-//     test("processMax should return the contentLength when there is no defined 2nd arg", () => {
-//         expect(processMax(0, undefined, 25)).toEqual(25);
-//     });
-//     test("processMax takes the value of the sourceOfMax when it is present", () => {
-//         expect(processMax(1, 15, 25)).toEqual(15);
-//         expect(processMax(2, 15, 25)).toEqual(15);
-//     });
-// });
+    // max
+    test("processMax should return the contentLength when there is no defined 2nd arg", () => {
+        expect(processMax(0, undefined, 25)).toEqual(25);
+    });
+    test("processMax takes the value of the sourceOfMax when it is present", () => {
+        expect(processMax(1, 15, 25)).toEqual(15);
+        expect(processMax(2, 15, 25)).toEqual(15);
+        // params: index, sourceOfMax, contentLength
+    });
+});
