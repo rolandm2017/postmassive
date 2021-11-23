@@ -33,7 +33,7 @@ describe("handles one singular Styling object and its surrounding text, processi
 //     it("scares me");
 // });
 
-describe("convertEngagementText", () => {
+describe("converts integers into 2-3 digit strings. no more than 3 digits plus k, m or b", () => {
     const singleDigitThousands = 1050;
     const singleDigitThousands2 = 1990;
     const doubleDigitThousands = 10325;
@@ -55,24 +55,24 @@ describe("convertEngagementText", () => {
         // remember, if this is wrong, the test is wrong, *probably*. you gotta check.
         // pretty sure I'm *truncating*, not rounding.
         // just be consistent: truncate or round?
-        expect(convertEngagementText(singleDigitThousands).toEqual("1.0k"));
-        expect(convertEngagementText(singleDigitThousands2).toEqual("1.9k"));
-        expect(convertEngagementText(doubleDigitThousands).toEqual("10.3k"));
-        expect(convertEngagementText(doubleDigitThousands2).toEqual("19.3k"));
-        expect(convertEngagementText(tripleDigitThousands).toEqual("103k"));
-        expect(convertEngagementText(tripleDigitThousands2).toEqual("193k"));
+        expect(convertEngagementText(singleDigitThousands)).toEqual("1.0k");
+        expect(convertEngagementText(singleDigitThousands2)).toEqual("1.9k");
+        expect(convertEngagementText(doubleDigitThousands)).toEqual("10.3k");
+        expect(convertEngagementText(doubleDigitThousands2)).toEqual("19.3k");
+        expect(convertEngagementText(tripleDigitThousands)).toEqual("103k");
+        expect(convertEngagementText(tripleDigitThousands2)).toEqual("193k");
     });
     it("converts to text in the millions properly", () => {
-        expect(convertEngagementText(singleDigitMil).toEqual("1.0m"));
-        expect(convertEngagementText(singleDigitMil2).toEqual("1.9m"));
-        expect(convertEngagementText(doubleDigitMil).toEqual("20m"));
-        expect(convertEngagementText(doubleDigitMil2).toEqual("29m"));
-        expect(convertEngagementText(tripleDigitMil).toEqual("301m"));
-        expect(convertEngagementText(tripleDigitMil2).toEqual("391m"));
+        expect(convertEngagementText(singleDigitMil)).toEqual("1.0m");
+        expect(convertEngagementText(singleDigitMil2)).toEqual("1.9m");
+        expect(convertEngagementText(doubleDigitMil)).toEqual("20m");
+        expect(convertEngagementText(doubleDigitMil2)).toEqual("29m");
+        expect(convertEngagementText(tripleDigitMil)).toEqual("301m");
+        expect(convertEngagementText(tripleDigitMil2)).toEqual("391m");
     });
     it("converts to text in the billions properly", () => {
-        expect(convertEngagementText(billion).toEqual("1.35b"));
-        expect(convertEngagementText(billion2).toEqual("2.46b"));
+        expect(convertEngagementText(billion)).toEqual("1.35b");
+        expect(convertEngagementText(billion2)).toEqual("2.46b");
     });
 });
 
