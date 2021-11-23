@@ -37,6 +37,7 @@ import FontSlider from "./components/FontSlider";
 import Flooring from "./components/Flooring";
 
 import "./Post.scss";
+import "../../components/textStyling/TextStyling.css";
 // import { current } from "@reduxjs/toolkit";
 
 function Post(props) {
@@ -118,12 +119,13 @@ function Post(props) {
         let newNthStyle = {
             ...styleObject,
         };
-        let currentStyles = styleObject.styles;
+        let currentStyles = styleObject.stylings;
         if (typeof currentStyles === "undefined") {
             currentStyles = [];
         }
         currentStyles.push(type);
-        newNthStyle.styles = currentStyles.filter(onlyUnique);
+        newNthStyle.stylings = currentStyles.filter(onlyUnique);
+
         setter(newNthStyle);
     }
 
@@ -202,7 +204,7 @@ function Post(props) {
         );
         let currentStyles;
         if (index === 0) {
-            currentStyles = [...firstStyle.styles];
+            currentStyles = [...firstStyle.stylings];
             const typeIndex = currentStyles.indexOf(type);
             if (typeIndex > -1) {
                 currentStyles.splice(typeIndex, 1);
@@ -214,7 +216,7 @@ function Post(props) {
             };
             setFirstStyle(newFirstStyleObject);
         } else if (index === 1) {
-            currentStyles = [...secondStyle.styles];
+            currentStyles = [...secondStyle.stylings];
             const typeIndex = currentStyles.indexOf(type);
             if (typeIndex > -1) {
                 currentStyles.splice(typeIndex, 1);
@@ -226,7 +228,7 @@ function Post(props) {
             };
             setSecondStyle(newSecondStyleObject);
         } else if (index === 2) {
-            currentStyles = [...thirdStyle.styles];
+            currentStyles = [...thirdStyle.stylings];
             const typeIndex = currentStyles.indexOf(type);
             // FIXME: i suspect something is broken in here
             if (typeIndex > -1) {
@@ -245,7 +247,7 @@ function Post(props) {
     }
 
     function handleChangeStartRange(styleObjectIndex, newStartIndex) {
-        console.log(2248, styleObjectIndex, newStartIndex);
+        // console.log(2248, styleObjectIndex, newStartIndex);
         let integerNewStartIndex = parseInt(newStartIndex, 10);
         if (styleObjectIndex === 0) {
             let newFirstStyle = { ...firstStyle };
@@ -264,7 +266,7 @@ function Post(props) {
 
     function handleChangeEndRange(styleObjectIndex, newEndIndex) {
         let integerNewEndIndex = parseInt(newEndIndex, 10);
-        console.log(2265, styleObjectIndex, newEndIndex, integerNewEndIndex);
+        // console.log(2265, styleObjectIndex, newEndIndex, integerNewEndIndex);
         if (styleObjectIndex === 0) {
             let newFirstStyle = { ...firstStyle };
             newFirstStyle.end = integerNewEndIndex;
@@ -390,9 +392,9 @@ function Post(props) {
                                     handleChangeStylingSelection(0);
                                 }}
                                 currentlyChecked={currentStyle}
-                                previousStyleEnd={0}
-                                nextStyleStart={secondStyle.start}
-                                stylingInfo={firstStyle.styles}
+                                currentMin={0}
+                                currentMax={secondStyle.start}
+                                stylingInfo={firstStyle.stylings}
                                 adjustStart={handleChangeStartRange}
                                 adjustEnd={handleChangeEndRange}
                                 handleRemoval={removeStyleFromSection}
@@ -405,9 +407,9 @@ function Post(props) {
                                     handleChangeStylingSelection(1);
                                 }}
                                 currentlyChecked={currentStyle}
-                                previousStyleEnd={firstStyle.end}
-                                nextStyleStart={thirdStyle.start}
-                                stylingInfo={secondStyle.styles}
+                                currentMin={firstStyle.end}
+                                currentMax={thirdStyle.start}
+                                stylingInfo={secondStyle.stylings}
                                 adjustStart={handleChangeStartRange}
                                 adjustEnd={handleChangeEndRange}
                                 handleRemoval={removeStyleFromSection}
@@ -420,9 +422,9 @@ function Post(props) {
                                     handleChangeStylingSelection(2);
                                 }}
                                 currentlyChecked={currentStyle}
-                                previousStyleEnd={secondStyle.end}
-                                nextStyleStart={content.length}
-                                stylingInfo={thirdStyle.styles}
+                                currentMin={secondStyle.end}
+                                currentMax={content.length}
+                                stylingInfo={thirdStyle.stylings}
                                 adjustStart={handleChangeStartRange}
                                 adjustEnd={handleChangeEndRange}
                                 handleRemoval={removeStyleFromSection}
@@ -467,12 +469,12 @@ function Post(props) {
                                     }}
                                 />
                             </div>
-                            <div id="" className="aaaaaa">
+                            <div id="" className="">
                                 <FontSlider />
                             </div>
-                            <div className="aaaaaa">
+                            {/* <div className="">
                                 <div className="pl-2">backgroundColor:</div>
-                                <div className="post_tones-outer-container w-100 aaaaaa">
+                                <div className="post_tones-outer-container w-100">
                                     <BackgroundColor color={"red"} />
                                     <BackgroundColor color={"orange"} />
                                     <BackgroundColor color={"yellow"} />
@@ -483,12 +485,12 @@ function Post(props) {
                                     <BackgroundColor color={"black"} />
                                 </div>
                             </div>
-                            <div className="aaaaaa">
+                            <div className="">
                                 <Special special={"textAlignmentUpDown"} />
                                 <Special special={"textAlignmentAddPadding"} />
                                 <Special special={"superscript"} />
                                 <Special special={"subscript"} />
-                            </div>
+                            </div> */}
                         </div>
                         <div>
                             <div id="post_floor-container">

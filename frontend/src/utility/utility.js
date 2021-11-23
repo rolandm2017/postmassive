@@ -1,3 +1,5 @@
+import { empty } from "rxjs";
+
 export function styleObjectIsEmpty(style) {
     let isEmpty =
         style && // 👈 null and undefined check
@@ -24,14 +26,16 @@ export function detectIsStylingEmpty(stylings) {
 function detectWellMadeStyling(stylings) {
     // just look for ONE. then return.
     for (let i = 0; i < stylings.length; i++) {
-        let stylingHasStart = stylings[i].start > 0;
-        let stylingHasEnd = stylings[i].end > stylingHasStart;
-        let stylesAreUndefined = typeof stylings[i].stylings === undefined;
-        let stylingHasStyles = !!stylesAreUndefined;
+        let stylingHasStart = stylings[i].start >= 0;
+        let stylingHasEnd = stylings[i].end >= 0;
+        let stylingHasStyles = stylings[i].stylings.length >= 1;
+        console.log(34, stylingHasStart, stylingHasEnd, stylingHasStyles);
         if (stylingHasStart && stylingHasEnd && stylingHasStyles) {
+            console.log(stylings[i]);
             return true;
         }
     }
+    console.log("false!!!!!!!!", 37);
     return false;
 }
 
@@ -49,13 +53,13 @@ export function prettyText(inputText, stylings, callback) {
     } else {
         // console.log(30, stylings);
     }
-
+    console.log("prettyText52", isStylingsEmpty, stylings);
     let atLeastOneWellFormedStyling = detectWellMadeStyling(stylings);
     if (!atLeastOneWellFormedStyling) {
         return inputText;
     }
 
-    console.log(39, inputText, stylings);
+    console.log("prettyText58", inputText, stylings);
     let splitUpTexts = getSubstringsWithInstructions(inputText, stylings);
     // FIXME: what if we have special chunks like sSSSs
     // ...where s = nonspecial, S = special. or SSSs
@@ -65,22 +69,20 @@ export function prettyText(inputText, stylings, callback) {
     // { special: true, value: specialMiddleSlice, styling: stylings[0] },
     console.log(splitUpTexts, stylings, 48);
     let chunks = splitUpTexts.map((chunk, index) => {
-        console.log(63, chunk, chunk.value);
+        console.log(68, chunk, chunk.value);
         if (chunk.special) {
-            let availableStylings = chunk.styling;
             // console.log(66, availableStylings, chunk);
             if (chunk.numberOfStylings > 1) {
+                let availableStylings = chunk.stylings.split(", ").join(" .");
+                console.log(73, availableStylings);
                 return (
-                    <span
-                        key={index}
-                        className={`${availableStylings
-                            .split(", ")
-                            .join(" .")}`}
-                    >
+                    <span key={index} className={`${availableStylings} `}>
                         {chunk.value}
                     </span>
                 );
             } else {
+                let availableStylings = chunk.stylings;
+                console.log(80, availableStylings);
                 return (
                     <span key={index} className={`${availableStylings}`}>
                         {chunk.value}
@@ -149,7 +151,7 @@ function getSubstringsWithInstructions(inputText, preprocessedStylings) {
     //                      stylings[0].stylings
     //                      ),
 
-    // todo: only splice if there is a styling attached to the stylings obj
+    // todo: only splice if there is a styling attached to the stylings obj // delete if here on dec 20th
     let stylings = [];
     preprocessedStylings.forEach((styling) => {
         // get rid of the empty styling objects. could go from 3 down to 1.
@@ -185,6 +187,9 @@ function getSubstringsWithInstructions(inputText, preprocessedStylings) {
     if (stylings.length > 0) {
         stringsWithInstructions.push(initSlice);
     }
+    // fixme: if end is before start, use end as start and start as end. its not a big deal.
+    // priority: high!
+    // fixme: also the sliders ranges have to be unmessed from their current messy bugged state
     for (let i = 0; i < stylings.length; i++) {
         let weAreOnTheLastStyling = i === stylings.length - 1;
 

@@ -23,20 +23,20 @@
     color: white;
 }
 
-.makeBold {
+.bold {
     font-weight: bold;
 }
 
-.makeItalics {
+.italics {
     font-style: italic;
 }
 
-.makeStrikethrough {
+.strikethrough {
     text-decoration: line-through;
     font-size: 24px;
 }
 
-.makeUnderline {
+.underline {
     text-decoration: underline;
 }
 .paddingSmall {
