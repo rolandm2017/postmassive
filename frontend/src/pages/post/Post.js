@@ -5,7 +5,7 @@ import { postOptions } from "../../_helper/authHeader";
 // import Styling from "../../utility/classes/Styling";
 import {
     FLOORS,
-    // EMPHASIS,
+    EMPHASIS,
     // SPECIALS,
     // BG_COLORS,
     // FONT_SIZES,
@@ -19,8 +19,11 @@ import {
 } from "../../utility/utility";
 import {
     getAuctioneerResponse,
-    handleChangeStartRange,
     postPost,
+    addStyleToSection,
+    removeStyleFromSection,
+    handleChangeStartRange,
+    handleChangeEndRange,
 } from "../../_helper/auctioneer";
 // images
 import BackButton from "../../images/icons8-back-arrow-48-wh.png";
@@ -58,6 +61,8 @@ function Post(props) {
     let currentUrl = useLocation().pathname;
     let history = useHistory();
 
+    const aaaa = ["bold", "italics", "underline", "strikethrough"];
+
     useEffect(() => {
         // console.log(30, currentUrl);
         let usernameForState = currentUrl.split("/")[1];
@@ -73,23 +78,52 @@ function Post(props) {
         history.push("/home");
     }
 
-    function onlyUnique(value, index, self) {
-        return self.indexOf(value) === index;
+    export function handleChangeStartRange(
+        styling,
+        styleObjectIndex,
+        newStartIndex,
+        setter
+    ) {
+        // console.log(2248, styleObjectIndex, newStartIndex);
+        let integerNewStartIndex = parseInt(newStartIndex, 10);
+        if (styleObjectIndex === 0) {
+            let newFirstStyle = { ...firstStyle };
+            newFirstStyle.start = integerNewStartIndex;
+            setFirstStyle(newFirstStyle);
+        } else if (styleObjectIndex === 1) {
+            let newSecondStyle = { ...secondStyle };
+            newSecondStyle.start = integerNewStartIndex;
+            setSecondStyle(newSecondStyle);
+        } else if (styleObjectIndex === 2) {
+            let newThirdStyle = { ...thirdStyle };
+            newThirdStyle.start = integerNewStartIndex;
+            setThirdStyle(newThirdStyle);
+        }
     }
 
-    function updateStyleWithType(type, styleObject, setter) {
-        console.log(116, type, styleObject, setter);
-        let newNthStyle = {
-            ...styleObject,
-        };
-        let currentStyles = styleObject.stylings;
-        if (typeof currentStyles === "undefined") {
-            currentStyles = [];
+    export function handleChangeEndRange(
+        styling,
+        styleObjectIndex,
+        newEndIndex,
+        setter
+    ) {
+        let integerNewEndIndex = parseInt(newEndIndex, 10);
+        // console.log(2265, styleObjectIndex, newEndIndex, integerNewEndIndex);
+        if (styleObjectIndex === 0) {
+            let newFirstStyle = { ...firstStyle };
+            newFirstStyle.end = integerNewEndIndex;
+            setFirstStyle(newFirstStyle);
+        } else if (styleObjectIndex === 1) {
+            let newSecondStyle = { ...secondStyle };
+            newSecondStyle.end = integerNewEndIndex;
+            setSecondStyle(newSecondStyle);
+        } else if (styleObjectIndex === 2) {
+            let newThirdStyle = {
+                ...thirdStyle,
+            };
+            newThirdStyle.end = integerNewEndIndex;
+            setThirdStyle(newThirdStyle);
         }
-        currentStyles.push(type);
-        newNthStyle.stylings = currentStyles.filter(onlyUnique);
-
-        setter(newNthStyle);
     }
 
     function handleChangeStylingSelection(number) {
@@ -200,9 +234,12 @@ function Post(props) {
                                     content.length
                                 )}
                                 stylingInfo={firstStyle.stylings}
-                                adjustStart={handleChangeStartRange(firstStyle)}
+                                adjustStart={handleChangeStartRange}
+                                // styling,styleObjectIndex,newStartIndex,setter
                                 adjustEnd={handleChangeEndRange}
                                 handleRemoval={removeStyleFromSection}
+                                styling={firstStyle}
+                                setter={setFirstStyle}
                             />
                             <ChoiceMaker
                                 key={1}
@@ -226,6 +263,8 @@ function Post(props) {
                                 adjustStart={handleChangeStartRange}
                                 adjustEnd={handleChangeEndRange}
                                 handleRemoval={removeStyleFromSection}
+                                styling={secondStyle}
+                                setter={setSecondStyle}
                             />
                             <ChoiceMaker
                                 key={2}
@@ -249,6 +288,8 @@ function Post(props) {
                                 adjustStart={handleChangeStartRange}
                                 adjustEnd={handleChangeEndRange}
                                 handleRemoval={removeStyleFromSection}
+                                styling={thirdStyle}
+                                setter={setThirdStyle}
                             />
                         </div>
                         <p>
@@ -257,7 +298,50 @@ function Post(props) {
                         </p>
                         <div id="post_targeting-container">
                             <div className="post_tones-outer-container w-100">
-                                <Emphasis
+                                {EMPHASIS.map((styling, index) => {
+                                    return (
+                                        <div key={index}>
+                                            <Emphasis
+                                                emphasis={styling}
+                                                onClick={() => {
+                                                    if (currentStyle === 0) {
+                                                        {
+                                                            /* // styling, type, index, setter */
+                                                        }
+                                                        addStyleToSection(
+                                                            firstStyle,
+                                                            styling,
+                                                            0,
+                                                            setFirstStyle
+                                                        );
+                                                    } else if (
+                                                        currentStyle === 1
+                                                    ) {
+                                                        addStyleToSection(
+                                                            secondStyle,
+                                                            styling,
+                                                            1,
+                                                            setSecondStyle
+                                                        );
+                                                    } else if (
+                                                        currentStyle === 2
+                                                    ) {
+                                                        addStyleToSection(
+                                                            thirdStyle,
+                                                            styling,
+                                                            2,
+                                                            setThirdStyle
+                                                        );
+                                                    } else {
+                                                        throw "You shouldn't be able to get here you know";
+                                                    }
+                                                }}
+                                            />
+                                        </div>
+                                    );
+                                })}
+
+                                {/* <Emphasis
                                     emphasis={"bold"}
                                     onClick={() => {
                                         // console.log(
@@ -265,30 +349,9 @@ function Post(props) {
                                         //     "inside Emphasis onClick"
                                         // );
                                         addStyleToSection("bold");
-                                    }}
-                                />
-                                <Emphasis
-                                    emphasis={"italics"}
-                                    onClick={() => {
-                                        addStyleToSection("italics");
-                                    }}
-                                />
-                                <Emphasis
-                                    emphasis={"strikethrough"}
-                                    onClick={() => {
-                                        addStyleToSection("strikethrough");
-                                    }}
-                                />
-                                <Emphasis
-                                    emphasis={"underline"}
-                                    onClick={() => {
-                                        console.log(
-                                            433,
-                                            "inside Emphasis onClick"
-                                        );
-                                        addStyleToSection("underline");
-                                    }}
-                                />
+                                    })
+                                }
+                                /> */}
                             </div>
                             <div id="" className="">
                                 <FontSlider />

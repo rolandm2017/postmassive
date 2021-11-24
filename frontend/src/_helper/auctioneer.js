@@ -40,6 +40,25 @@ export function postPost(username, content, price, floor, stylings) {
         });
 }
 
+function onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+}
+
+function updateStyleWithType(type, styleObject, setter) {
+    console.log(116, type, styleObject, setter);
+    let newNthStyle = {
+        ...styleObject,
+    };
+    let currentStyles = styleObject.stylings;
+    if (typeof currentStyles === "undefined") {
+        currentStyles = [];
+    }
+    currentStyles.push(type);
+    newNthStyle.stylings = currentStyles.filter(onlyUnique);
+
+    setter(newNthStyle);
+}
+
 export function addStyleToSection(styling, type, index, setter) {
     console.log(113, type, currentStyle, firstStyle, secondStyle, thirdStyle);
     if (currentStyle === 0) {
@@ -140,53 +159,5 @@ export function removeStyleFromSection(styling, type, index, setter) {
     } else {
         console.log(currentStyle, "<--- weird bug");
         // throw "strange error";
-    }
-}
-
-export function handleChangeStartRange(
-    styling,
-    styleObjectIndex,
-    newStartIndex,
-    setter
-) {
-    // console.log(2248, styleObjectIndex, newStartIndex);
-    let integerNewStartIndex = parseInt(newStartIndex, 10);
-    if (styleObjectIndex === 0) {
-        let newFirstStyle = { ...firstStyle };
-        newFirstStyle.start = integerNewStartIndex;
-        setFirstStyle(newFirstStyle);
-    } else if (styleObjectIndex === 1) {
-        let newSecondStyle = { ...secondStyle };
-        newSecondStyle.start = integerNewStartIndex;
-        setSecondStyle(newSecondStyle);
-    } else if (styleObjectIndex === 2) {
-        let newThirdStyle = { ...thirdStyle };
-        newThirdStyle.start = integerNewStartIndex;
-        setThirdStyle(newThirdStyle);
-    }
-}
-
-export function handleChangeEndRange(
-    styling,
-    styleObjectIndex,
-    newEndIndex,
-    setter
-) {
-    let integerNewEndIndex = parseInt(newEndIndex, 10);
-    // console.log(2265, styleObjectIndex, newEndIndex, integerNewEndIndex);
-    if (styleObjectIndex === 0) {
-        let newFirstStyle = { ...firstStyle };
-        newFirstStyle.end = integerNewEndIndex;
-        setFirstStyle(newFirstStyle);
-    } else if (styleObjectIndex === 1) {
-        let newSecondStyle = { ...secondStyle };
-        newSecondStyle.end = integerNewEndIndex;
-        setSecondStyle(newSecondStyle);
-    } else if (styleObjectIndex === 2) {
-        let newThirdStyle = {
-            ...thirdStyle,
-        };
-        newThirdStyle.end = integerNewEndIndex;
-        setThirdStyle(newThirdStyle);
     }
 }

@@ -12,6 +12,7 @@ function ChoiceMaker({
     adjustEnd,
     currentlyChecked,
     handleRemoval,
+    styling,
 }) {
     return (
         <div className="styling_styling-parent-container d-flex flex-row align-items-start">
@@ -73,8 +74,14 @@ function ChoiceMaker({
                                       key={index}
                                       choice={choice}
                                       onClick={() =>
-                                          handleRemoval(choice, menuOption)
+                                          handleRemoval(
+                                              choice,
+                                              styling,
+                                              menuOption,
+                                              setter
+                                          )
                                       }
+                                      // styling, type, index, setter
                                   />
                               );
                           })
