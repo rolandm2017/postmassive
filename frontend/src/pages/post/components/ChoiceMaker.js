@@ -1,8 +1,8 @@
 import Choice from "./Choice";
 
-import "./Styling.css";
+import "./ChoiceMaker.css";
 
-function Styling({
+function ChoiceMaker({
     menuOption,
     handleClick,
     stylingInfo,
@@ -86,4 +86,4 @@ function Styling({
     );
 }
 
-export default Styling;
+export default ChoiceMaker;

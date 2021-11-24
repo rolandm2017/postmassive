@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
-
+// logic imports
 import { postOptions } from "../../_helper/authHeader";
-// import Styling from "../../utility/classes/Styling";
+import Styling from "../../utility/classes/Styling";
 import {
     FLOORS,
     // EMPHASIS,
@@ -10,7 +10,6 @@ import {
     // BG_COLORS,
     // FONT_SIZES,
 } from "../../_helper/consts";
-
 import {
     prettyText,
     detectIsStylingEmpty,
@@ -18,20 +17,20 @@ import {
     processMin,
     processMax,
 } from "../../utility/utility";
-
+// images
 import BackButton from "../../images/icons8-back-arrow-48-wh.png";
 import Photo from "../../images/mountain-32.png";
 import Gif from "../../images/gif-48.png";
 import Poll from "../../images/poll-48.png";
 import Emoji from "../../images/happy-48.png";
 import Nicolai from "../../images/markZuckerberg.jpeg";
-
+// major imports
 import Wrapper from "../_pageHelper/Wrapper";
 import TextArea from "./components/TextArea";
-import Styling from "./components/Styling";
+import ChoiceMaker from "./components/ChoiceMaker";
 
 import Emphasis from "./components/Emphasis";
-import Special from "./components/Special";
+import Special from "./components/Special"; // lighthouse
 import BackgroundColor from "./components/BackgroundColor";
 import FontSlider from "./components/FontSlider";
 
@@ -379,7 +378,7 @@ function Post(props) {
                             </div>
                         </div>
                         <div id="post_styling-area">
-                            <Choice
+                            <ChoiceMaker
                                 key={0}
                                 menuOption={0}
                                 handleClick={() => {
@@ -398,7 +397,7 @@ function Post(props) {
                                 adjustEnd={handleChangeEndRange}
                                 handleRemoval={removeStyleFromSection}
                             />
-                            <Choice
+                            <ChoiceMaker
                                 key={1}
                                 menuOption={1}
                                 handleClick={() => {
@@ -421,7 +420,7 @@ function Post(props) {
                                 adjustEnd={handleChangeEndRange}
                                 handleRemoval={removeStyleFromSection}
                             />
-                            <Choice
+                            <ChoiceMaker
                                 key={2}
                                 menuOption={2}
                                 handleClick={() => {
