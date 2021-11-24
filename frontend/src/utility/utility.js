@@ -55,9 +55,10 @@ export function splitClassesAndVerify(unsplitClasses, expectedNumberOfClasses) {
     */
     let splitClasses = unsplitClasses.split(", ");
     if (splitClasses.length === expectedNumberOfClasses) {
-        let joinedClasses = splitClasses.join(" .");
+        let joinedClasses = "." + splitClasses.join(" .");
         return joinedClasses;
     } else {
+        console.log(splitClasses, expectedNumberOfClasses);
         throw "Unexpected mismatch between splitClasses length and expectedNumber";
     }
 }
@@ -118,7 +119,7 @@ export function prettyText(inputText, stylings, callback) {
                     chunk.stylings,
                     chunk.numberOfStylings
                 );
-                let availableStylings = chunk.stylings;
+                // let availableStylings = chunk.stylings;
                 // console.log(73, availableStylings, chunk);
                 return (
                     <ToBeStyled

@@ -1,7 +1,8 @@
-import { shallow, mount } from "enzyme";
-import ToBeStyled from "./ToBeStyled";
+// import { shallow, mount } from "enzyme";
+// import ToBeStyled from "./ToBeStyled/ToBeStyled"; // disabled 11-24
 import {
     prettyText,
+    splitClassesAndVerify,
     detectWellMadeStyling,
     countStylingsBasedOnCommas,
     getSubstringsWithInstructions,
@@ -44,6 +45,35 @@ const wellMadeStylingsSix = {
     end: 70,
     stylings: ["italics", "backgroundColorRed", "underline"],
 };
+
+describe("splits classes and verifies that they yield what I expected", () => {
+    it("throws an error when I want it to", () => {
+        const willThrowError = () => {
+            splitClassesAndVerify("bold, italic", 1);
+        };
+        const errMsg =
+            "Unexpected mismatch between splitClasses length and expectedNumber";
+        expect(willThrowError).toThrow(errMsg);
+        const anotherError = () => {
+            splitClassesAndVerify("bold, italic", 3);
+        };
+        expect(anotherError).toThrow(errMsg);
+
+        // have to use function() because of how .not.toThrow() works under the hood
+        expect(function () {
+            splitClassesAndVerify("bold, italic, backgroundColorRed", 3);
+        }).not.toThrow(errMsg);
+    });
+
+    it("converts a string with commas ', ' to a string with periods ' .' for class names", () => {
+        expect(splitClassesAndVerify("bold, italic", 2)).toEqual(
+            ".bold .italic"
+        );
+        expect(
+            splitClassesAndVerify("italic, fontSize22, strikethrough", 3)
+        ).toEqual(".italic .fontSize22 .strikethrough"); // this helped me debug my own code.
+    });
+});
 
 describe("detects empty object", () => {
     it("detects an empty object", () => {
