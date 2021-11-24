@@ -78,12 +78,7 @@ function Post(props) {
         history.push("/home");
     }
 
-    export function handleChangeStartRange(
-        styling,
-        styleObjectIndex,
-        newStartIndex,
-        setter
-    ) {
+    export function handleChangeStartRange(styleObjectIndex, newStartIndex) {
         // console.log(2248, styleObjectIndex, newStartIndex);
         let integerNewStartIndex = parseInt(newStartIndex, 10);
         if (styleObjectIndex === 0) {

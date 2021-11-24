@@ -1,3 +1,6 @@
+import Styling from "../utility/classes/Styling";
+import { styleObjectIsEmpty } from "../utility/utility";
+
 export function getAuctioneerResponse() {
     // talks to server's auctioneer to get price of post
     let auctioneerSays = Math.random() * 1000;
@@ -60,6 +63,19 @@ function updateStyleWithType(type, styleObject, setter) {
 }
 
 export function addStyleToSection(styling, type, index, setter) {
+    let isEmptyObject = styleObjectIsEmpty(styling);
+    if (!isEmptyObject) {
+        updateStyleWithType(type, styling, setter);
+    } else {
+        const styleInit = new Styling(0, 1, [type]);
+        if (index === 0) {
+            setter(styleInit);
+        }
+    }
+    // 78 -> 132 refactored into 65 -> 75? that just cant be// FIXME: this.
+}
+
+export function addStyleToSection2() {
     console.log(113, type, currentStyle, firstStyle, secondStyle, thirdStyle);
     if (currentStyle === 0) {
         // https://stackoverflow.com/questions/679915/how-do-i-test-for-an-empty-javascript-object
