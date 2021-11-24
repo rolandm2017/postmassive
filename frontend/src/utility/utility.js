@@ -257,36 +257,26 @@ export function getSubstringsWithInstructions(inputText, preprocessedStylings) {
     // fixme: also the sliders ranges have to be unmessed from their current messy bugged state
     for (let i = 0; i < stylings.length; i++) {
         let areWeOnTheLastStyling = i === stylings.length - 1;
+        let stylingsCount = countStylingsBasedOnCommas(stylings[i].stylings);
+        let textSlice = inputText.slice(stylings[i].start, stylings[i].end); // will go from i to end of string
+        let instruction = Instruction(
+            true,
+            textSlice,
+            stylings[i].stylings,
+            stylingsCount
+        );
+        stringsWithInstructions.push(instruction);
 
         if (areWeOnTheLastStyling) {
-            let textSlice = inputText.slice(stylings[i].start, stylings[i].end); // will go from i to end of string
-            let stylingsCount = countStylingsBasedOnCommas(
-                stylings[i].stylings
-            );
-            let instruction = Instruction(
-                true,
-                textSlice,
-                stylings[i].stylings,
-                stylingsCount
-            );
-            stringsWithInstructions.push(instruction);
-            let ordinaryTrailEndPart = inputText.slice(stylings[i].end); // will be the trailing but
+            // special case. get (start, end) and then (end, contentLength)
+
+            let ordinaryTrailEndPart = inputText.slice(stylings[i].end + 1); // will be the trailing but
             let trailEnd = Instruction(false, ordinaryTrailEndPart);
             stringsWithInstructions.push(trailEnd);
         } else {
-            let sliceText = inputText.slice(stylings[i].start, stylings[i].end);
-            let stylingsCount = countStylingsBasedOnCommas(
-                stylings[i].stylings
-            );
-            let instruction = Instruction(
-                true,
-                sliceText,
-                stylings[i].stylings,
-                stylingsCount
-            );
-            stringsWithInstructions.push(instruction);
+            // standard case. get (start, end), then (end + 1, nextStart)
             let normalTextInBetween = inputText.slice(
-                stylings[i].end,
+                stylings[i].end + 1,
                 stylings[i + 1].start
             );
             let instruction = Instruction(false, normalTextInBetween);

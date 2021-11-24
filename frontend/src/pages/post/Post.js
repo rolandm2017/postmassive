@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 // logic imports
 import { postOptions } from "../../_helper/authHeader";
-import Styling from "../../utility/classes/Styling";
+// import Styling from "../../utility/classes/Styling";
 import {
     FLOORS,
     // EMPHASIS,
