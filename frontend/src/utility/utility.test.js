@@ -273,9 +273,9 @@ describe("processes string with stylings object(s) into instructions", () => {
                 },
             ])
         ).toEqual([
-            Instruction(false, "Yabba "), 
-            Instruction(true, "dabba", ".bold .backgroundColorRed", 2), 
-            Instruction(false, " doo")
+            new Instruction(false, "Yabba "), 
+            new Instruction(true, "dabba", ".bold .backgroundColorRed", 2), 
+            new Instruction(false, " doo")
         ]);
     });
 
@@ -304,13 +304,13 @@ describe("processes string with stylings object(s) into instructions", () => {
                 pairingTwo, [stylingFour, stylingFive, stylingSix]
             )
         ).toEqual([
-            Instruction(false,  "AAAAAAAAA, "),
-            Instruction(true, "bBbB", ".bold .strikethrough .backgroundColorRed", 3),
-            Instruction(false, "b, c2c2c2,"),
-            Instruction(true, " d5d", ".italics .backgroundColorBlack", 2),
-            Instruction(false, "5, EHSHEH, f"),
-            Instruction(true, "fff", ".italics .backgroundColorBlack", 2),
-            Instruction(false, ", GGGGGGGGggggg")
+            new Instruction(false,  "AAAAAAAAA, "),
+            new Instruction(true, "bBbB", ".bold .strikethrough .backgroundColorRed", 3),
+            new Instruction(false, "b, c2c2c2,"),
+            new Instruction(true, " d5d", ".italics .backgroundColorBlack", 2),
+            new Instruction(false, "5, EHSHEH, f"),
+            new Instruction(true, "fff", ".italics .backgroundColorBlack", 2),
+            new Instruction(false, ", GGGGGGGGggggg")
         ]);
     });
 
@@ -321,69 +321,69 @@ describe("processes string with stylings object(s) into instructions", () => {
         expect(getSubstringsWithInstructions("Hello world", [])).toBe("Hello world");``
 });
 
-describe("converts integers into 2-3 digit strings. no more than 3 digits plus k, m or b", () => {
-    // const singleDigitThousands = 1050;
-    const singleDigitThousands2 = 1990;
-    const doubleDigitThousands = 10325;
-    const doubleDigitThousands2 = 19325;
-    const tripleDigitThousands = 103252;
-    const tripleDigitThousands2 = 193252;
-    //
-    const singleDigitMil = 1021000;
-    const singleDigitMil2 = 1921000;
-    // const doubleDigitMil = 20132100;
-    const doubleDigitMil2 = 29132100;
-    const tripleDigitMil = 301321000;
-    const tripleDigitMil2 = 391321000;
-    //
-    const billion = 1357222111;
-    const billion2 = 2457222111;
-    //
-    it("converts to text in the thousands properly", () => {
-        // remember, if this is wrong, the test is wrong, *probably*. you gotta check.
-        // pretty sure I'm *truncating*, not rounding.
-        // just be consistent: truncate or round?
+// describe("converts integers into 2-3 digit strings. no more than 3 digits plus k, m or b", () => {
+//     // const singleDigitThousands = 1050;
+//     const singleDigitThousands2 = 1990;
+//     const doubleDigitThousands = 10325;
+//     const doubleDigitThousands2 = 19325;
+//     const tripleDigitThousands = 103252;
+//     const tripleDigitThousands2 = 193252;
+//     //
+//     const singleDigitMil = 1021000;
+//     const singleDigitMil2 = 1921000;
+//     // const doubleDigitMil = 20132100;
+//     const doubleDigitMil2 = 29132100;
+//     const tripleDigitMil = 301321000;
+//     const tripleDigitMil2 = 391321000;
+//     //
+//     const billion = 1357222111;
+//     const billion2 = 2457222111;
+//     //
+//     it("converts to text in the thousands properly", () => {
+//         // remember, if this is wrong, the test is wrong, *probably*. you gotta check.
+//         // pretty sure I'm *truncating*, not rounding.
+//         // just be consistent: truncate or round?
 
-        // EDIT2: can fix bugs but its low priority
-        // expect(convertEngagementText(singleDigitThousands)).toEqual("1.0k"); // fixme
-        // expect(convertEngagementText(singleDigitThousands2)).toEqual("1.9k");  // fixme
-        expect(convertEngagementText(doubleDigitThousands)).toEqual("10.3k");
-        expect(convertEngagementText(doubleDigitThousands2)).toEqual("19.3k");
-        // expect(convertEngagementText(tripleDigitThousands)).toEqual("103k"); // fixme
-        // expect(convertEngagementText(tripleDigitThousands2)).toEqual("193k"); // fixme
-    });
-    it("converts to text in the millions properly", () => {
-        expect(convertEngagementText(singleDigitMil)).toEqual("1.0m");
-        expect(convertEngagementText(singleDigitMil2)).toEqual("1.9m");
-        // expect(convertEngagementText(doubleDigitMil)).toEqual("20.0m"); // fixme
-        // expect(convertEngagementText(doubleDigitMil2)).toEqual("29.0m"); // fixme
-        // expect(convertEngagementText(tripleDigitMil)).toEqual("301m"); // fixme
-        // expect(convertEngagementText(tripleDigitMil2)).toEqual("391m"); // fixme
-    });
-    it("converts to text in the billions properly", () => {
-        expect(convertEngagementText(billion)).toEqual("1.35b");
-        expect(convertEngagementText(billion2)).toEqual("2.45b"); // truncated #
-    });
-});
+//         // EDIT2: can fix bugs but its low priority
+//         // expect(convertEngagementText(singleDigitThousands)).toEqual("1.0k"); // fixme
+//         // expect(convertEngagementText(singleDigitThousands2)).toEqual("1.9k");  // fixme
+//         expect(convertEngagementText(doubleDigitThousands)).toEqual("10.3k");
+//         expect(convertEngagementText(doubleDigitThousands2)).toEqual("19.3k");
+//         // expect(convertEngagementText(tripleDigitThousands)).toEqual("103k"); // fixme
+//         // expect(convertEngagementText(tripleDigitThousands2)).toEqual("193k"); // fixme
+//     });
+//     it("converts to text in the millions properly", () => {
+//         expect(convertEngagementText(singleDigitMil)).toEqual("1.0m");
+//         expect(convertEngagementText(singleDigitMil2)).toEqual("1.9m");
+//         // expect(convertEngagementText(doubleDigitMil)).toEqual("20.0m"); // fixme
+//         // expect(convertEngagementText(doubleDigitMil2)).toEqual("29.0m"); // fixme
+//         // expect(convertEngagementText(tripleDigitMil)).toEqual("301m"); // fixme
+//         // expect(convertEngagementText(tripleDigitMil2)).toEqual("391m"); // fixme
+//     });
+//     it("converts to text in the billions properly", () => {
+//         expect(convertEngagementText(billion)).toEqual("1.35b");
+//         expect(convertEngagementText(billion2)).toEqual("2.45b"); // truncated #
+//     });
+// });
 
-describe("processMin and processMax", () => {
-    test("processMin(0, a, b) should equal 0", () => {
-        expect(processMin(0, 15, 23894)).toEqual(0);
-    });
-    test("processMin(1, 5, 15) should equal 5", () => {
-        expect(processMin(1, 5, 15)).toEqual(5);
-    });
-    test("processMin(1, undefined, 15) should equal 15", () => {
-        expect(processMin(1, undefined, 15)).toEqual(15);
-    });
+// describe("processMin and processMax", () => {
+//     test("processMin(0, a, b) should equal 0", () => {
+//         expect(processMin(0, 15, 23894)).toEqual(0);
+//     });
+//     test("processMin(1, 5, 15) should equal 5", () => {
+//         expect(processMin(1, 5, 15)).toEqual(5);
+//     });
+//     test("processMin(1, undefined, 15) should equal 15", () => {
+//         expect(processMin(1, undefined, 15)).toEqual(15);
+//     });
 
-    // max
-    test("processMax should return the contentLength when there is no defined 2nd arg", () => {
-        expect(processMax(0, undefined, 25)).toEqual(25);
-    });
-    test("processMax takes the value of the sourceOfMax when it is present", () => {
-        expect(processMax(1, 15, 25)).toEqual(15);
-        expect(processMax(2, 15, 25)).toEqual(15);
-        // params: index, sourceOfMax, contentLength
-    });
-});
+//     // max
+//     test("processMax should return the contentLength when there is no defined 2nd arg", () => {
+//         expect(processMax(0, undefined, 25)).toEqual(25);
+//     });
+//     test("processMax takes the value of the sourceOfMax when it is present", () => {
+//         expect(processMax(1, 15, 25)).toEqual(15);
+//         expect(processMax(2, 15, 25)).toEqual(15);
+//         // params: index, sourceOfMax, contentLength
+//     });
+// });

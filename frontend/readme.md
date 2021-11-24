@@ -6,6 +6,8 @@ const goodStyling = {25, 50, ["bold", "italic"]}
 
 const malformed = {25, 50, ["bold, italic"]} <-- wrong
 
+In other words, .stylings is an array of strings.
+
 ### An Instruction object
 
 ...has stylings like ".bold .fontSize22"

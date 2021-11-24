@@ -17,6 +17,7 @@ import {
     processMin,
     processMax,
 } from "../../utility/utility";
+import { getAuctioneerResponse, postPost } from "../../_helper/auctioneer";
 // images
 import BackButton from "../../images/icons8-back-arrow-48-wh.png";
 import Photo from "../../images/mountain-32.png";
@@ -64,50 +65,8 @@ function Post(props) {
 
     // todo: on load, get username from slug.
 
-    function getAuctioneerResponse() {
-        // talks to server's auctioneer to get price of post
-        let auctioneerSays = Math.random() * 1000;
-        console.log(36, auctioneerSays);
-        let asMoney = auctioneerSays.toString().split(".")[0];
-        let decimalValue = Math.ceil(Math.random() * 99)
-            .toString()
-            .substring(0, 3);
-
-        let price = asMoney + "." + decimalValue;
-
-        return price;
-    }
-
     function handleClick() {
         history.push("/home");
-    }
-
-    function postPost(username, content, price, floor, styling) {
-        // let displayName = user.displayName; // todo: get displayName for data
-        let postContentWithStyling = {
-            username: username,
-            content: content,
-            price: price,
-            floor: floor,
-            styling: styling,
-        };
-        // TODO: stick it into localHistory so browser can reload the data upon pgBack
-        console.log("Sending ........", postContentWithStyling);
-        // send a post to the server to
-        let postingUrl = process.env.REACT_APP_API_URL + "/post/post";
-        fetch(
-            postingUrl,
-            postOptions(postingUrl, false, 51, postContentWithStyling)
-        ) // todo: content packages stuff into json.
-            .then((x) => {
-                if (200) {
-                    handleClick(); // redirect to /home
-                    console.log("sent data to server successfully");
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-            });
     }
 
     function onlyUnique(value, index, self) {
