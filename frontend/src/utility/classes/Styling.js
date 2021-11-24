@@ -1,12 +1,10 @@
 class Styling {
     constructor(start, end, stylings) {
         this.start = start;
-        if (end > start) {
-            throw "Malformed start or end code";
-        }
         this.end = end;
         this.stylings = stylings;
     }
+    // make it work even if start > end. i.e. (25, 5) just gets you (5, 25)
 }
 
 export default Styling;

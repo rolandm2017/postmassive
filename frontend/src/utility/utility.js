@@ -1,3 +1,4 @@
+import Instruction from "./classes/Instruction";
 import ToBeStyled from "./toBeStyled/ToBeStyled";
 
 export function styleObjectIsEmpty(style) {
@@ -158,20 +159,28 @@ export function handleJustOneStyling(inputText, styling) {
     let endSlice = inputText.slice(styling.end, inputText.length);
     // console.log(initSlice, specialMiddleSlice, endSlice);
     return [
-        {
-            special: false,
-            value: initSlice,
-        },
-        {
-            special: true,
-            value: specialMiddleSlice,
-            stylings: styling.stylings,
-            numberOfStylings: countStylingsBasedOnCommas(styling.stylings),
-        },
-        {
-            special: false,
-            value: endSlice,
-        },
+        Instruction(false, initSlice),
+        // {
+        //     special: false,
+        //     value: initSlice,
+        // },
+        Instruction(
+            true,
+            specialMiddleSlice,
+            styling.stylings,
+            countStylingsBasedOnCommas(styling.stylings)
+        ),
+        // {
+        //     special: true,
+        //     value: specialMiddleSlice,
+        //     stylings: styling.stylings,
+        //     numberOfStylings: countStylingsBasedOnCommas(styling.stylings),
+        // },
+        Instruction(false, endSlice),
+        // {
+        //     special: false,
+        //     value: endSlice,
+        // },
     ];
 }
 
@@ -203,13 +212,7 @@ export function getSubstringsWithInstructions(inputText, preprocessedStylings) {
     // return value - should be an array of strings that can be combined using prettyText
     */
 
-    /* template */
-    // special: true,
-    // value: slice,
-    // stylings: stylings[0].stylings,
-    // numberOfStylings: countStylingsBasedOnCommas(
-    //                      stylings[0].stylings
-    //                      ),
+    // TODO: Rewrite this function, it's awful. Too many edge cases before the meat and potatoes.
 
     // todo: only splice if there is a styling attached to the stylings obj // delete if here on dec 20th
     let stylings = [];
@@ -232,18 +235,20 @@ export function getSubstringsWithInstructions(inputText, preprocessedStylings) {
 
     // handle case where Stylings is only 1 singular Styling
     if (stylings.length === 1) {
-        return handleJustOneStyling(inputText, stylings[0]);
+        return handleJustOneStyling(inputText, stylings[0]); // end of stylings
     }
 
-    // if 2 or 3 ... almost want to write it out by hand...
+    // case where there are no stylings, just exit early &  return input text
     if (detectIsStylingsEmpty(stylings)) {
         return inputText;
     }
 
-    let initSlice = {
-        special: false,
-        value: inputText.slice(0, stylings[0].start),
-    };
+    let startingSliceValue = inputText.slice(0, stylings[0].start);
+    let initSlice = Instruction(false, startingSliceValue);
+    // let initSlice = {
+    //     special: false,
+    //     value: startingSliceValue
+    // };
     if (stylings.length > 0) {
         stringsWithInstructions.push(initSlice);
     }
@@ -251,43 +256,41 @@ export function getSubstringsWithInstructions(inputText, preprocessedStylings) {
     // priority: high!
     // fixme: also the sliders ranges have to be unmessed from their current messy bugged state
     for (let i = 0; i < stylings.length; i++) {
-        let weAreOnTheLastStyling = i === stylings.length - 1;
+        let areWeOnTheLastStyling = i === stylings.length - 1;
 
-        if (weAreOnTheLastStyling) {
-            let slice = inputText.slice(stylings[i].start, stylings[i].end); // will go from i to end of string
-
-            slice = {
-                special: true,
-                value: slice,
-                stylings: stylings[i].stylings,
-                numberOfStylings: countStylingsBasedOnCommas(
-                    stylings[i].stylings
-                ),
-            };
-            stringsWithInstructions.push(slice);
-            let trailEnd = inputText.slice(stylings[i].end); // will be the trailing but
-            trailEnd = {
-                special: false,
-                value: trailEnd,
-            };
+        if (areWeOnTheLastStyling) {
+            let textSlice = inputText.slice(stylings[i].start, stylings[i].end); // will go from i to end of string
+            let stylingsCount = countStylingsBasedOnCommas(
+                stylings[i].stylings
+            );
+            let instruction = Instruction(
+                true,
+                textSlice,
+                stylings[i].stylings,
+                stylingsCount
+            );
+            stringsWithInstructions.push(instruction);
+            let ordinaryTrailEndPart = inputText.slice(stylings[i].end); // will be the trailing but
+            let trailEnd = Instruction(false, ordinaryTrailEndPart);
             stringsWithInstructions.push(trailEnd);
         } else {
-            let slice = inputText.slice(stylings[i].start, stylings[i].end);
-            slice = {
-                special: true,
-                value: slice,
-                stylings: stylings[i].stylings,
-                numberOfStylings: countStylingsBasedOnCommas(
-                    stylings[i].stylings
-                ),
-            };
-            stringsWithInstructions.push(slice);
-            let theNormalPartInBetween = {
-                special: false,
-                value: inputText.slice(stylings[i].end, stylings[i + 1].start),
-            };
-
-            stringsWithInstructions.push(theNormalPartInBetween);
+            let sliceText = inputText.slice(stylings[i].start, stylings[i].end);
+            let stylingsCount = countStylingsBasedOnCommas(
+                stylings[i].stylings
+            );
+            let instruction = Instruction(
+                true,
+                sliceText,
+                stylings[i].stylings,
+                stylingsCount
+            );
+            stringsWithInstructions.push(instruction);
+            let normalTextInBetween = inputText.slice(
+                stylings[i].end,
+                stylings[i + 1].start
+            );
+            let instruction = Instruction(false, normalTextInBetween);
+            stringsWithInstructions.push(instruction);
         }
     }
     // console.log(stringsWithInstructions);

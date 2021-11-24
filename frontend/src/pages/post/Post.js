@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-
 import { useHistory, useLocation } from "react-router-dom";
 
 import { postOptions } from "../../_helper/authHeader";
-
+// import Styling from "../../utility/classes/Styling";
 import {
     FLOORS,
     // EMPHASIS,
@@ -380,7 +379,7 @@ function Post(props) {
                             </div>
                         </div>
                         <div id="post_styling-area">
-                            <Styling
+                            <Choice
                                 key={0}
                                 menuOption={0}
                                 handleClick={() => {
@@ -399,7 +398,7 @@ function Post(props) {
                                 adjustEnd={handleChangeEndRange}
                                 handleRemoval={removeStyleFromSection}
                             />
-                            <Styling
+                            <Choice
                                 key={1}
                                 menuOption={1}
                                 handleClick={() => {
@@ -422,7 +421,7 @@ function Post(props) {
                                 adjustEnd={handleChangeEndRange}
                                 handleRemoval={removeStyleFromSection}
                             />
-                            <Styling
+                            <Choice
                                 key={2}
                                 menuOption={2}
                                 handleClick={() => {
