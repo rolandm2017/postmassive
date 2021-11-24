@@ -4,7 +4,7 @@ class Instruction {
     constructor(special, textValue, stylings, numberOfStylings) {
         this.special = special;
         this.textValue = textValue;
-        this.stylings = stylings;
+        this.dotNotationStylings = stylings; // ".bold .fontSize22 .backgroundColorRed"
         this.numberOfStylings = numberOfStylings;
     }
 
@@ -14,7 +14,7 @@ class Instruction {
                 return (
                     <ToBeStyled
                         index={index}
-                        availableStylings={this.stylings}
+                        availableStylings={this.dotNotationStylings}
                         chunkValue={this.textValue}
                     />
                 );

@@ -1,5 +1,7 @@
 // import { shallow, mount } from "enzyme";
 // import ToBeStyled from "./ToBeStyled/ToBeStyled"; // disabled 11-24
+import Instruction from "./classes/Instruction";
+import Styling from "./classes/Styling";
 import {
     prettyText,
     splitClassesAndVerify,
@@ -13,38 +15,13 @@ import {
     styleObjectIsEmpty,
 } from "./utility";
 
-const wellMadeStylingsOne = {
-    start: 10,
-    end: 25,
-    stylings: ["bold", "strikethrough"],
-};
-const wellMadeStylingsTwo = {
-    start: 0,
-    end: 20,
-    stylings: ["bold", "italics"],
-};
+const wellMadeStylingOne = new Styling(10, 25, ["bold", "strikethrough"]); // sequential w...
+const wellMadeStylingTwo = new Styling(25, 50, ["bold", "italics"]) //... this one
+const wellMadeStylingThree = new Styling(60, 65, ["underline", "italics"])
+const wellMadeStylingFour = new Styling(0, 25, ["bold", "backgroundColorBlack"])
 
-const wellMadeStylingsThree = {
-    start: 100,
-    end: 125,
-    stylings: ["underline", "italics"],
-};
-const wellMadeStylingsFour = {
-    start: 0,
-    end: 25,
-    stylings: ["bold", "backgroundColorBlack"],
-};
-const wellMadeStylingsFive = {
-    start: 50,
-    end: 60,
-    stylings: ["strikethrough"],
-};
-
-const wellMadeStylingsSix = {
-    start: 61,
-    end: 70,
-    stylings: ["italics", "backgroundColorRed", "underline"],
-};
+const wellMadeStylingFive = new Styling(50, 60, ["strikethrough"]) // allows space for ...
+const wellMadeStylingSix = new Styling(61, 70, ["italics", "backgroundColorRed", "underline"]) //... a space
 
 describe("splits classes and verifies that they yield what I expected", () => {
     it("throws an error when I want it to", () => {
@@ -274,25 +251,19 @@ describe("handles a singular Styling object & surrounding text, processing it in
     });
 });
 
-describe("processes string with stylings object(s) into substrings with instruction objects", () => {
+describe("processes string with stylings object(s) into instructions", () => {
     // this is why I started writing tests. This is what finally broke me.
-    it("returns plain string when there are no stylings", () => {
-        expect(getSubstringsWithInstructions("Mushrooms", [])).toBe(
-            "Mushrooms"
-        );
-        expect(
-            getSubstringsWithInstructions(
-                "Pineapple on pizza, therefore being a cardigan late at night.",
-                []
-            )
-        ).toBe("Pineapple on pizza, therefore being a cardigan late at night.");
-    });
+    
+    const stylingThree = new Styling(23, 30, ["italics", "fontSize22"]);
+    const pairingOne = "this is some simple input";
+
+    //
+    const stylingFour = new Styling(11, 15, ["bold", "strikethrough", "backgroundColorRed"])
+    const stylingFive = new Styling(25, 29, ["italics", "backgroundColorBlack"])
+    const stylingSix = new Styling(41, 44, ["italics", "backgroundColorBlack"])
+    const pairingTwo = "AAAAAAAAA, bBbBb, c2c2c2, d5d5, EHSHEH, ffff, GGGGGGGGggggg",
+
     it("gracefully handles text & one styling", () => {
-        expect(
-            getSubstringsWithInstructions("this is some simple input", [
-                { start: 7, end: 11, stylings: ["underline"] },
-            ])
-        );
         expect(
             getSubstringsWithInstructions("Yabba dabba doo", [
                 {
@@ -302,103 +273,52 @@ describe("processes string with stylings object(s) into substrings with instruct
                 },
             ])
         ).toEqual([
-            {
-                special: false,
-                value: "Yabba ",
-            },
-            {
-                special: true,
-                value: "dabba",
-                stylings: ["bold, backgroundColorRed"],
-                numberOfStylings: 2,
-            },
-            {
-                special: false,
-                value: " doo",
-            },
+            Instruction(false, "Yabba "), 
+            Instruction(true, "dabba", ".bold .backgroundColorRed", 2), 
+            Instruction(false, " doo")
         ]);
     });
 
     it("turns strings and stylings into substrings with instructions", () => {
+        const stylingOne = new Styling(5, 9, [
+            "bold, strikethrough, backgroundColorRed",
+        ]);
+        const stylingTwo = new Styling(9, 19, [// note the 9 in both One and Two
+            "italics, fontSize12, backgroundColorBlack",
+        ]);
         expect(
             getSubstringsWithInstructions(
                 "aaa, bbb, cCc, dDd, EEEe, fff, ggg",
-                [
-                    {
-                        start: 5,
-                        end: 9,
-                        stylings: ["bold, strikethrough, backgroundColorRed"],
-                    },
-                    {
-                        start: 14,
-                        end: 19,
-                        stylings: ["italics, backgroundColorBlack"],
-                    },
-                ]
+                [stylingOne, stylingTwo]
             )
         ).toEqual([
-            { special: false, value: "aaa, " },
-            {
-                special: true,
-                value: "bbb,",
-                stylings: ["bold, strikethrough, backgroundColorRed"],
-                numberOfStylings: 3,
-            },
-            { special: false, value: " cCc," },
-            {
-                special: true,
-                value: " dDd,",
-                stylings: ["italics, backgroundColorBlack"],
-                numberOfStylings: 2,
-            },
-            { special: false, value: " EEEe, fff, ggg" },
+            new Instruction(false, "aaa, "),
+            new Instruction(true, "bbb,", ".bold .strikethrough .backgroundColorRed", 3),
+            new Instruction(false, " cCc,"),
+            new Instruction(true, " dDd,", ".italics .backgroundColorBlack", 2),
+            new Instruction(false, " EEEe, fff, ggg")
         ]);
+        
         expect(
             getSubstringsWithInstructions(
-                "AAAAAAAAA, bBbBb, c2c2c2, d5d5, EHSHEH, ffff, GGGGGGGGggggg",
-                [
-                    {
-                        start: 11,
-                        end: 15,
-                        stylings: ["bold, strikethrough, backgroundColorRed"],
-                    },
-                    {
-                        start: 25,
-                        end: 29,
-                        stylings: ["italics, backgroundColorBlack"],
-                    },
-                    {
-                        start: 41,
-                        end: 44,
-                        stylings: ["italics, backgroundColorBlack"],
-                    },
-                ]
+                pairingTwo, [stylingFour, stylingFive, stylingSix]
             )
         ).toEqual([
-            { special: false, value: "AAAAAAAAA, " },
-            {
-                special: true,
-                value: "bBbB",
-                stylings: ["bold, strikethrough, backgroundColorRed"],
-                numberOfStylings: 3,
-            },
-            { special: false, value: "b, c2c2c2," },
-            {
-                special: true,
-                value: " d5d",
-                stylings: ["italics, backgroundColorBlack"],
-                numberOfStylings: 2,
-            },
-            { special: false, value: "5, EHSHEH, f" },
-            {
-                special: true,
-                value: "fff",
-                stylings: ["italics, backgroundColorBlack"],
-                numberOfStylings: 2,
-            },
-            { special: false, value: ", GGGGGGGGggggg" },
+            Instruction(false,  "AAAAAAAAA, "),
+            Instruction(true, "bBbB", ".bold .strikethrough .backgroundColorRed", 3),
+            Instruction(false, "b, c2c2c2,"),
+            Instruction(true, " d5d", ".italics .backgroundColorBlack", 2),
+            Instruction(false, "5, EHSHEH, f"),
+            Instruction(true, "fff", ".italics .backgroundColorBlack", 2),
+            Instruction(false, ", GGGGGGGGggggg")
         ]);
     });
+
+    it("returns plain string when there are no stylings", () => {
+        expect(getSubstringsWithInstructions("Mushrooms", [])).toBe(
+            "Mushrooms"
+        );
+        expect(getSubstringsWithInstructions("Hello world", [])).toBe("Hello world");``
 });
 
 describe("converts integers into 2-3 digit strings. no more than 3 digits plus k, m or b", () => {

@@ -25,6 +25,8 @@ export function detectIsStylingsEmpty(stylings) {
 }
 
 export function detectWellMadeStyling(stylings) {
+    // TODO: Update this if it needs it
+
     /*
     // @params stylings - an array of stylings objects to loop over.
     // return value - true if there is at least one proper styling object in the array
@@ -159,12 +161,12 @@ export function handleJustOneStyling(inputText, styling) {
     let endSlice = inputText.slice(styling.end, inputText.length);
     // console.log(initSlice, specialMiddleSlice, endSlice);
     return [
-        Instruction(false, initSlice),
+        new Instruction(false, initSlice),
         // {
         //     special: false,
         //     value: initSlice,
         // },
-        Instruction(
+        new Instruction(
             true,
             specialMiddleSlice,
             styling.stylings,
@@ -176,7 +178,7 @@ export function handleJustOneStyling(inputText, styling) {
         //     stylings: styling.stylings,
         //     numberOfStylings: countStylingsBasedOnCommas(styling.stylings),
         // },
-        Instruction(false, endSlice),
+        new Instruction(false, endSlice),
         // {
         //     special: false,
         //     value: endSlice,
@@ -201,10 +203,13 @@ export function countStylingsBasedOnCommas(stylings) {
     }
 }
 
-export function getSubstringsWithInstructions(inputText, preprocessedStylings) {
+export function getSubstringsWithInstructions(
+    inputText,
+    stylingsSansProcessing
+) {
     /*
     // inputText - self explanatory
-    // preprocessedStylings - array. it may be that the user has supplied 0, 1, 2, or 3 stylings.
+    // stylingsSansProcessing - the .stylings array. it may be that the user has supplied 0, 1, 2, or 3 stylings.
     // ...this function's role is to sort out how many substrings we'll need.
     // for 0, we don't need any substrings.
     // for 1, we just need the substring that is encapsulated by the Styling.
@@ -216,7 +221,7 @@ export function getSubstringsWithInstructions(inputText, preprocessedStylings) {
 
     // todo: only splice if there is a styling attached to the stylings obj // delete if here on dec 20th
     let stylings = [];
-    preprocessedStylings.forEach((styling) => {
+    stylingsSansProcessing.forEach((styling) => {
         // get rid of the empty styling objects. could go from 3 down to 1.
 
         if (typeof styling.stylings === "undefined") {
@@ -244,7 +249,7 @@ export function getSubstringsWithInstructions(inputText, preprocessedStylings) {
     }
 
     let startingSliceValue = inputText.slice(0, stylings[0].start);
-    let initSlice = Instruction(false, startingSliceValue);
+    let initSlice = new Instruction(false, startingSliceValue);
     // let initSlice = {
     //     special: false,
     //     value: startingSliceValue
@@ -259,7 +264,7 @@ export function getSubstringsWithInstructions(inputText, preprocessedStylings) {
         let areWeOnTheLastStyling = i === stylings.length - 1;
         let stylingsCount = countStylingsBasedOnCommas(stylings[i].stylings);
         let textSlice = inputText.slice(stylings[i].start, stylings[i].end); // will go from i to end of string
-        let instruction = Instruction(
+        let instruction = new Instruction(
             true,
             textSlice,
             stylings[i].stylings,
@@ -271,7 +276,7 @@ export function getSubstringsWithInstructions(inputText, preprocessedStylings) {
             // special case. get (start, end) and then (end, contentLength)
 
             let ordinaryTrailEndPart = inputText.slice(stylings[i].end + 1); // will be the trailing but
-            let trailEnd = Instruction(false, ordinaryTrailEndPart);
+            let trailEnd = new Instruction(false, ordinaryTrailEndPart);
             stringsWithInstructions.push(trailEnd);
         } else {
             // standard case. get (start, end), then (end + 1, nextStart)
@@ -279,7 +284,7 @@ export function getSubstringsWithInstructions(inputText, preprocessedStylings) {
                 stylings[i].end + 1,
                 stylings[i + 1].start
             );
-            let instruction = Instruction(false, normalTextInBetween);
+            let instruction = new Instruction(false, normalTextInBetween);
             stringsWithInstructions.push(instruction);
         }
     }
