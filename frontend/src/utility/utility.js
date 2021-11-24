@@ -1,4 +1,4 @@
-import ToBeStyled from "./ToBeStyled";
+import ToBeStyled from "./toBeStyled/ToBeStyled";
 
 export function styleObjectIsEmpty(style) {
     let isEmpty =
@@ -44,6 +44,22 @@ export function detectWellMadeStyling(stylings) {
     }
     // console.log("false!!!!!!!!", 37);
     return false;
+}
+
+export function splitClassesAndVerify(unsplitClasses, expectedNumberOfClasses) {
+    // really proud of this one
+    /* 
+    // @params unsplitClasses - input raw string like "bold, fontSize24" to convert to ["bold", "fontSize24"]
+    // @params expectedNumberOfClasses - Comes direct from the Instructions object. To be compared for error detection. 
+    // returns - the classes string to insert into the component
+    */
+    let splitClasses = unsplitClasses.split(", ");
+    if (splitClasses.length === expectedNumberOfClasses) {
+        let joinedClasses = splitClasses.join(" .");
+        return joinedClasses;
+    } else {
+        throw "Unexpected mismatch between splitClasses length and expectedNumber";
+    }
 }
 
 export function prettyText(inputText, stylings, callback) {
@@ -98,7 +114,11 @@ export function prettyText(inputText, stylings, callback) {
         if (chunk.special) {
             // console.log(66, availableStylings, chunk);
             if (chunk.numberOfStylings > 1) {
-                let availableStylings = chunk.stylings.split(", ").join(" .");
+                let availableStylings = splitClassesAndVerify(
+                    chunk.stylings,
+                    chunk.numberOfStylings
+                );
+                let availableStylings = chunk.stylings;
                 // console.log(73, availableStylings, chunk);
                 return (
                     <ToBeStyled
