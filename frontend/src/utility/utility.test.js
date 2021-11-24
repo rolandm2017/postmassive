@@ -1,3 +1,5 @@
+import { shallow, mount } from "enzyme";
+import ToBeStyled from "./ToBeStyled";
 import {
     prettyText,
     detectWellMadeStyling,
@@ -77,20 +79,24 @@ describe("converts text to prettyText", () => {
     });
 
     it("returns chunks of modified text with stylings", () => {
-        const returnedText = prettyText(
+        const returnedToBeStyledTexts = prettyText(
             "I can see what you see not, vision milky ... cast down into the halls of the blind",
             [wellMadeStylingsOne]
         );
-        expect(returnedText.classList.contains("bold")).toBe(true);
-        expect(
-            prettyText(
-                "I can see what you see not, vision milky ... cast down into the halls of the blind",
-                [wellMadeStylingsTwo]
-            ).classList.contains("italics")
-        ).toBe(true);
+        console.log(
+            returnedToBeStyledTexts,
+            returnedToBeStyledTexts.type,
+            returnedToBeStyledTexts.classList
+        );
+        expect(returnedToBeStyledTexts.classList.contains("bold")).toBe(true);
+        const italicizedToBeStyled = prettyText(
+            "I can see what you see not, vision milky ... cast down into the halls of the blind",
+            [wellMadeStylingsTwo]
+        ).classList.contains("italics");
+        expect(italicizedToBeStyled).toBe(true);
     });
     it("has the appropriate length return value for a given string and Stylings combo", () => {
-        const returnedText = prettyText(
+        const returnedToBeStyledText = prettyText(
             "I can see what you see not. Vision milky, then eyes rot. When you turn, they will be gone, Whispering their hidden song. Then you see what cannot be, Shadows move where light should be. Out of darkness, out of mind, Cast down into the Halls of the Blind.",
             [wellMadeStylingsOne, wellMadeStylingsFive, wellMadeStylingsThree]
         );
@@ -98,9 +104,14 @@ describe("converts text to prettyText", () => {
             "I can see what you see not. Vision milky, then eyes rot. When you turn, they will be gone, Whispering their hidden song. Then you see what cannot be, Shadows move where light should be. Out of darkness, out of mind, Cast down into the Halls of the Blind.",
             [wellMadeStylingsOne, wellMadeStylingsFive]
         );
-        console.log(returnedText);
-        expect(returnedText).toHaveLength(7);
+        // console.log(returnedText);
+        const willProduceFourSlices = prettyText("aaaaabbbbbcccccddddd", [
+            { start: 5, end: 11, stylings: ["bold"] },
+            { start: 11, end: 16, stylings: ["italics"] },
+        ]);
+        expect(returnedToBeStyledText).toHaveLength(7);
         expect(shorterReturnedText).toHaveLength(5);
+        expect(willProduceFourSlices).toHaveLength(4);
     });
     // prettyText - test for length, test for chunks being special in the right way, the right chunsk being nonSpecial.
 });
