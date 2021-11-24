@@ -71,7 +71,7 @@ export function prettyText(inputText, stylings, callback) {
     } else {
         // console.log(30, stylings);
     }
-    console.log("prettyText52", isStylingsEmpty, stylings);
+    // console.log("prettyText52", isStylingsEmpty, stylings);
     let atLeastOneWellFormedStyling = detectWellMadeStyling(stylings);
     if (!atLeastOneWellFormedStyling) {
         // return <span className="stylized">{inputText}</span>; // return simply the text ??
@@ -84,7 +84,7 @@ export function prettyText(inputText, stylings, callback) {
         );
     }
 
-    console.log("prettyText58", inputText, stylings);
+    // console.log("prettyText58", inputText, stylings);
     let splitUpTexts = getSubstringsWithInstructions(inputText, stylings);
     // FIXME: what if we have special chunks like sSSSs
     // ...where s = nonspecial, S = special. or SSSs
@@ -92,14 +92,14 @@ export function prettyText(inputText, stylings, callback) {
 
     // { special: false, value: initSlice }
     // { special: true, value: specialMiddleSlice, stylings: stylings[0] },
-    console.log(splitUpTexts, stylings, 48);
+    // console.log(splitUpTexts, stylings, 48);
     let chunks = splitUpTexts.map((chunk, index) => {
-        console.log(68, chunk, chunk.value);
+        // console.log(68, chunk, chunk.value);
         if (chunk.special) {
             // console.log(66, availableStylings, chunk);
             if (chunk.numberOfStylings > 1) {
                 let availableStylings = chunk.stylings.split(", ").join(" .");
-                console.log(73, availableStylings, chunk);
+                // console.log(73, availableStylings, chunk);
                 return (
                     <ToBeStyled
                         index={index}
@@ -109,7 +109,7 @@ export function prettyText(inputText, stylings, callback) {
                 );
             } else {
                 let availableStylings = chunk.stylings;
-                console.log(80, availableStylings);
+                // console.log(80, availableStylings);
                 return (
                     <ToBeStyled
                         index={index}
@@ -197,11 +197,11 @@ export function getSubstringsWithInstructions(inputText, preprocessedStylings) {
 
         if (typeof styling.stylings === "undefined") {
             // ...
-            console.log(
-                126,
-                styling.stylings,
-                " did not have a styling attached!"
-            );
+            // console.log(
+            //     126,
+            //     styling.stylings,
+            //     " did not have a styling attached!"
+            // );
         } else {
             // console.log(133, "pushing ", styling);
             stylings.push(styling);
@@ -306,7 +306,7 @@ export function convertEngagementText(inputNum) {
         const lengthPreDecimal = stringVer.length - 6; // 6: slice off the 0's in 13,000,000, for instance
         const decimal = stringVer.slice(lengthPreDecimal, lengthPreDecimal + 1);
         // let puttingItTogether =
-        console.log(stringVer, lengthPreDecimal, decimal);
+        // console.log(stringVer, lengthPreDecimal, decimal);
         return (
             stringVer.slice(0, lengthPreDecimal) +
             "." +

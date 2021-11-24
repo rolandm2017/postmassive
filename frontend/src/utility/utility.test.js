@@ -47,50 +47,59 @@ describe("detects empty object", () => {
     it("detects an empty object", () => {
         expect(styleObjectIsEmpty({})).toBe(true);
     });
-    it("detects an object with contents", () => {
+    it("detects an object with contents, even if they are malformed", () => {
         expect(styleObjectIsEmpty({ start: 5, end: 10 })).toBe(false);
+        expect(styleObjectIsEmpty({ start: 5, stylings: ["bold"] })).toBe(
+            false
+        );
+        expect(
+            styleObjectIsEmpty({ start: 5, end: 25, stylings: ["italic"] })
+        ).toBe(false);
+        expect(styleObjectIsEmpty({ start: 55, end: 25, stylings: [] })).toBe(
+            false
+        );
     });
 });
 
 describe("converts text to prettyText", () => {
-    it("contains the 'stylized' class in all cases", () => {
-        expect(
-            prettyText("I can see what you see not, vision milky ...", [
-                {},
-                {},
-                {},
-            ]).classList.contains("stylized")
-        ).toBe(true);
-    });
-    expect(
-        prettyText("I can see what you see not, vision milky ...", [{}, {}, {}])
-    ).toHaveLength(1);
+    const diabloPassage = "I can see what you see not, vision milky ...";
 
-    it("returns chunks of modified text with stylings", () => {
-        expect(
-            prettyText(
-                "I can see what you see not, vision milky ... cast down into the halls of the blind",
-                wellMadeStylingsOne
-            ).classList.contains("bold")
-        ).toBe(true);
-        expect(
-            prettyText(
-                "I can see what you see not, vision milky ... cast down into the halls of the blind",
-                wellMadeStylingsTwo
-            ).classList.contains("italics")
-        ).toBe(true);
-    });
+    // it("contains the 'stylized' class in all cases", () => {
+    //     const plainOleText =  prettyText(diabloPassage, [
+    //         {},
+    //         {},
+    //         {},
+    //     ])
+    //     expect(plainOleText).classList.contains("stylized")}).toBe(true);
+    //     expect(plainOleText).toHaveLength(1);
+    //     expect(plainOleText)
+    // });
+
+    // it("returns chunks of modified text with stylings", () => {
+    //     const returnedText = prettyText(
+    //         "I can see what you see not, vision milky ... cast down into the halls of the blind",
+    //         [wellMadeStylingsOne]
+    //     )
+    //     expect(returnedText.classList.contains("bold")).toBe(true);
+    //     expect(
+    //         prettyText(
+    //             "I can see what you see not, vision milky ... cast down into the halls of the blind",
+    //             [wellMadeStylingsTwo]
+    //         ).classList.contains("italics")
+    //     ).toBe(true);
+    // });
     it("has the appropriate length return value for a given string and Stylings combo", () => {
-        expect(
-            prettyText(
-                "I can see what you see not. Vision milky, then eyes rot. When you turn, they will be gone, Whispering their hidden song. Then you see what cannot be, Shadows move where light should be. Out of darkness, out of mind, Cast down into the Halls of the Blind.",
-                [
-                    wellMadeStylingsOne,
-                    wellMadeStylingsFive,
-                    wellMadeStylingsThree,
-                ]
-            )
-        ).toHaveLength(7);
+        const returnedText = prettyText(
+            "I can see what you see not. Vision milky, then eyes rot. When you turn, they will be gone, Whispering their hidden song. Then you see what cannot be, Shadows move where light should be. Out of darkness, out of mind, Cast down into the Halls of the Blind.",
+            [wellMadeStylingsOne, wellMadeStylingsFive, wellMadeStylingsThree]
+        );
+        const shorterReturnedText = prettyText(
+            "I can see what you see not. Vision milky, then eyes rot. When you turn, they will be gone, Whispering their hidden song. Then you see what cannot be, Shadows move where light should be. Out of darkness, out of mind, Cast down into the Halls of the Blind.",
+            [wellMadeStylingsOne, wellMadeStylingsFive]
+        );
+        console.log(returnedText);
+        expect(returnedText).toHaveLength(7);
+        expect(shorterReturnedText).toHaveLength(5);
     });
 
     // prettyText - test for length, test for chunks being special in the right way, the right chunsk being nonSpecial.
