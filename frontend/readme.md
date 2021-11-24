@@ -13,3 +13,10 @@ In other words, .stylings is an array of strings.
 ...has stylings like ".bold .fontSize22"
 
 We keep it as a string because the classNames accepts a string.
+
+## style, styles, styling, stylings
+
+English is a bad language.
+
+singular = style || styling,
+plural = styles || stylings,
