@@ -1,0 +1,46 @@
+.styling_choice-list {
+    width: 100%;
+    /* border: 3px solid green; */
+
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.styling_options-container {
+    width: 30%;
+}
+
+.styling_options-container div {
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.styling_label-container {
+    width: 50px;
+    border: 3px solid palegreen;
+}
+
+.styling_options-right-container {
+    width: 100%;
+    /* border: 2px solid red; */
+    margin: 3px;
+    /* note: margin is sus, could adjust it to make UXUI look better */
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.styling_slider {
+    width: 160px;
+}
+
+.styling_start-end-text {
+    font-size: 14px;
+}
+
+.styling_styling-parent-container {
+    min-width: 100%;
+    border: 3px solid yellow;
+}

@@ -29,13 +29,13 @@ const userSchema = new Schema({
     },
     lastUpdatedInfo: { type: Date }, // what is this field for? talk about a YAGNI violation
     acceptsTermsAndConditions: { type: Boolean, required: true },
-    suspended: { type: Boolean, required: true },
+    suspended: { type: Boolean },
 
     // public profile
     displayName: { type: String, required: true },
-    bio: { type: String, required: false },
-    location: { type: String, required: false },
-    url: { type: String, required: false },
+    bio: { type: String },
+    location: { type: String },
+    url: { type: String },
     followers: { type: Array, required: true },
     following: { type: Array, required: true },
     DMsAreOpen: { type: Boolean, required: true },

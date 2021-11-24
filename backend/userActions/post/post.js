@@ -38,19 +38,34 @@ router.post("/post", async (req, res) => {
     let datePosted = Date.now();
 
     let getCostOfPosting = createCostOfPosting(); // fixme: should be moved to the post screen
+    // fixme: I try to Post and get a bug because I can't db.User.FindOne to match this post's request.
+    // i need to find this user so I can update their postCount.
+    // the post needs to have a ... username and other fields attached to it ... just some fields ...
+    // actual error:
+    // (node:7032) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'displayName' of null
+    // at C:\Users\jenfr\Documents\code\2021\postmassive\backend\userActions\post\post.js:42:31
     let userDoc = await db.User.findOne({ username: username });
     let displayName = userDoc.displayName;
 
     console.log(38, username, content, postFloor, datePosted, displayName);
-    // let mostRecentPostNumber = db.Massive.findOne(
-    //     {},
-    //     { $orderby: { created_at: -1 } }
-    // ).limit(1).postNumber;
-    // let newPostNumber = mostRecentPostNumber + 1;
+    let currentHighestPostNumber = Massive.find({})
+        .sort({ postNumber: "desc" })
+        .limit(1)
+        .exec((err, post) => {
+            if (err) {
+                console.log(7, err);
+                reject(err);
+            } else {
+                return post;
+            }
+        }).postNumber;
+    let newHighestPostNum = currentHighestPostNumber + 1;
     console.log(47, req.body);
-    // throw "Success kinda"; // postNumber, postedByUser, text, date,
+    // ### *** ###
+    // FIXME: MAJOR issue with Posting Massives and the postNumber.
+    // ### *** ###
     let newMassive = new Massive({
-        postNumber: 1, // will have to autoincrement this somehow...
+        postNumber: newHighestPostNum, // will have to autoincrement this somehow...
         postedByUser: username,
         displayName: displayName,
         text: content,

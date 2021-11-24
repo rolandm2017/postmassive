@@ -1,25 +1,20 @@
 import React, { useState, useEffect } from "react";
-
-import Massive from "../../components/massive/Massive";
-
 import { getOptions } from "../../_helper/authHeader";
 
+import { useHistory } from "react-router-dom";
+
 import Wrapper from "../_pageHelper/Wrapper";
+import Massive from "../../components/massive/Massive";
+import Poll from "../../components/poll/Poll";
+import testMassives from "./testContent/testMassives";
+
+import "../../components/textStyling/TextStyling.css"; // this file will be imported in many places
 
 function Home(props) {
     const [massives, setMassives] = useState([]);
+    // console.log(15, testMassives);
 
-    // useEffect(() => {
-    //     let feedUrl = process.env.REACT_APP_API_URL + "/wall/introduce";
-
-    //     fetch(feedUrl, getOptions(feedUrl)).then((res) => {
-    //         console.log(res)
-
-    //     // res.json().then((massives) => {
-    //     // console.log(7, massives);
-    //     // setMassives(massives);}
-    //     // });
-    // }, []);
+    let history = useHistory();
 
     useEffect(() => {
         document.title = "AabbbbBbba";
@@ -30,6 +25,16 @@ function Home(props) {
                 return res.json();
             })
             .then((data) => {
+                let puttingSomePollsIntoIt = [];
+                // for (let i = 0; i < 1; i++) {
+                //     puttingSomePollsIntoIt.push("poll");
+                // }
+                console.log(data, 32);
+                for (let i = 0; i < data.length; i++) {
+                    puttingSomePollsIntoIt.push(data[i]);
+                }
+                // fixme: Error: Objects are not valid as a React child (found: object with keys {special, value, styling, numberOfStylings}). I
+                // setMassives(puttingSomePollsIntoIt.slice(0, 2));
                 setMassives(data);
             });
     }, []);
@@ -42,19 +47,65 @@ function Home(props) {
             breakpoints={props.breakpoints}
         >
             {massives.length > 0
-                ? massives.map((massive) => {
+                ? massives.map((massive, index) => {
+                      if (massive === "poll") {
+                          return (
+                              <div key={index}>
+                                  <Poll
+                                      key={index}
+                                      pollText={
+                                          "hey look this is a hardcoded poll lah dee dah"
+                                      }
+                                      possibilities={6}
+                                      options={[
+                                          {
+                                              text: "i love it",
+                                              percentage: 20,
+                                          },
+                                          {
+                                              text: "I don't love it",
+                                              percentage: 0,
+                                          },
+                                          {
+                                              text: "foo",
+                                              percentage: 10,
+                                          },
+                                          {
+                                              text: "bar",
+                                              percentage: 70,
+                                          },
+                                          { text: "baz", percentage: 0 },
+                                          {
+                                              text: "star trek",
+                                              percentage: 0,
+                                          },
+                                      ]}
+                                  />
+                              </div>
+                          );
+                      }
                       return (
-                          <Massive
-                              key={massive._id}
-                              author={massive.postedByUser}
-                              displayName={massive.displayName}
-                              content={massive.text}
-                              replies={massive.replies}
-                              amps={massive.amps}
-                              likes={massive.likes}
-                              views={massive.viewsFloor}
-                              cap={massive.viewsFloor}
-                          />
+                          <div
+                              key={index}
+                              onClick={() => {
+                                  let pathToGoTo =
+                                      "/massive/" + massive.postNumber;
+                                  history.push(pathToGoTo);
+                              }}
+                          >
+                              <Massive
+                                  key={Math.floor(Math.random() * 10000)}
+                                  author={massive.postedByUser}
+                                  displayName={massive.displayName}
+                                  content={testMassives[1].content}
+                                  stylings={testMassives[1].stylings}
+                                  replies={massive.replies}
+                                  amps={massive.amps}
+                                  likes={massive.likes}
+                                  views={massive.viewsFloor}
+                                  cap={massive.viewsFloor}
+                              />
+                          </div>
                       );
                   })
                 : null}

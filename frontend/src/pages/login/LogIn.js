@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useAuth } from "../../auth/use-auth";
 
-import Form from "react-bootstrap/Form";
+// import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
 import Logo from "../../images/gps-searching.png";
@@ -44,7 +44,7 @@ function LogIn(props) {
                         <h1>Log in to PostMassive</h1>
                     </div>
                     <div id="log-in_input-container">
-                        <div>
+                        <div className="mt-3">
                             <h4>Email or Username</h4>
                             <input
                                 onChange={(value) =>
@@ -56,10 +56,24 @@ function LogIn(props) {
                                 }
                             />
                         </div>
-                        <div>
+                        <div className="mt-2">
                             <h4>Password</h4>
                             <input
                                 type="password"
+                                onKeyDown={(event) => {
+                                    if (event.key === "Enter") {
+                                        console.log(event.key);
+                                        sendLogInIfInfoIsValid(
+                                            username,
+                                            email,
+                                            password,
+                                            false, // displayErrInModal = false, so it will be DesktopLoginError
+                                            setError,
+                                            setDesktopLoginError,
+                                            auth
+                                        );
+                                    }
+                                }}
                                 onChange={(value) => handlePassword(value)}
                             />
                         </div>

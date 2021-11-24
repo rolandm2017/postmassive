@@ -1,5 +1,6 @@
 const config = require("../config.json");
 const mongoose = require("mongoose");
+const local = config.local;
 
 const connectionOptions = {
     useCreateIndex: true,
@@ -7,9 +8,20 @@ const connectionOptions = {
     useUnifiedTopology: true,
     useFindAndModify: false,
 };
-console.log(config.connectionString);
-mongoose.connect(config.connectionString, connectionOptions);
-console.log("mongoose is connected to db");
+
+// THIS SHOULD BE ONLY MONGO CONNECTION
+// THIS SHOULD BE ONLY MONGO CONNECTION
+// THIS SHOULD BE ONLY MONGO CONNECTION
+// THIS SHOULD BE ONLY MONGO CONNECTION
+// THIS SHOULD BE ONLY MONGO CONNECTION
+
+if (local) {
+    console.log("CONNECTED LOCALLY to the db", config.localConnect);
+    mongoose.connect(config.localConnect, connectionOptions);
+} else {
+    console.log("mongoose connects: remote db", config.connectionString);
+    mongoose.connect(config.connectionString, connectionOptions);
+}
 
 module.exports = {
     Massive: require("../models/massive.model"),

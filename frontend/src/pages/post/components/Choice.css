@@ -1,0 +1,12 @@
+.choice_compactor {
+    width: fit-content;
+    height: 20px;
+    border: 2px solid royalblue;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 2px;
+    padding: 4px;
+    border-radius: 5px;
+}

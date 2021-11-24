@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-import Reply from "../../components/notifications/Reply";
-import Amplify from "../../components/notifications/Amplify";
-import Like from "../../components/notifications/Like";
-import Follow from "../../components/notifications/Follow";
-import Quote from "../../components/notifications/Quote";
+// import Reply from "../../components/notifications/Reply";// commented out 11-16
+// import Amplify from "../../components/notifications/Amplify";
+// import Like from "../../components/notifications/Like";
+// import Follow from "../../components/notifications/Follow";
+// import Quote from "../../components/notifications/Quote"; // commented out 11-16
 
-import profilePicPlaceholder3 from "../../images/bluePfp.png";
+// import profilePicPlaceholder3 from "../../images/bluePfp.png";
 
 import Wrapper from "../_pageHelper/Wrapper";
 
@@ -30,78 +30,78 @@ function Notifications(props) {
         });
     }, []);
 
-    function generate(data) {
-        let profilePic;
-        const choice = Math.floor(Math.random() * 3);
-        if (choice === 0) {
-            profilePic = profilePicPlaceholder3;
-        } else if (choice === 1) {
-            profilePic = profilePicPlaceholder3;
-        } else if (choice === 2) {
-            profilePic = profilePicPlaceholder3;
-        }
+    // function generate(data) {
+    //     let profilePic;
+    //     const choice = Math.floor(Math.random() * 3);
+    //     if (choice === 0) {
+    //         profilePic = profilePicPlaceholder3;
+    //     } else if (choice === 1) {
+    //         profilePic = profilePicPlaceholder3;
+    //     } else if (choice === 2) {
+    //         profilePic = profilePicPlaceholder3;
+    //     }
 
-        // TODO: use multiple profile pics when the notification demands it
-        // return <div style={{ color: "red" }}>Foo</div>;
-        if (data.type === "reply") {
-            return (
-                // <div>Foo</div>
-                <Reply
-                    key={data.data.id}
-                    replier={data.data.replier}
-                    replierProfilePic={profilePic}
-                    to={data.data.to}
-                    content={data.data.content}
-                />
-            );
-        } else if (data.type === "amplify") {
-            return (
-                <Amplify
-                    key={data.data.id}
-                    amplifier={data.data.author.displayName}
-                    profilePics={profilePic}
-                    others={data.data.others}
-                    author={data.data.author}
-                    content={data.data.content}
-                />
-                // <div>Foo</div>
-            );
-        } else if (data.type === "like") {
-            return (
-                // <div>Foo</div>
-                <Like
-                    key={data.data.id}
-                    headliner={data.data.headliner}
-                    profilePics={profilePic}
-                    likes={data.data.likes}
-                    text={data.data.content}
-                />
-            );
-        } else if (data.type === "follow") {
-            return (
-                <Follow
-                    key={data.data.id}
-                    user={data.data.user}
-                    profilePic={profilePic}
-                    others={data.data.others}
-                />
-                // <div>Foo</div>
-            );
-        } else if (data.type === "quote") {
-            return (
-                // <div>Foo</div>
-                <Quote
-                    key={data.data.id}
-                    quoter={data.data.quoter}
-                    quoterProfilePic={profilePic}
-                    content={data.data.content}
-                    OP={data.data.OP}
-                    opProfilePic={profilePic}
-                    originalText={data.data.originalText}
-                />
-            );
-        }
-    }
+    //     // TODO: use multiple profile pics when the notification demands it
+    //     // return <div style={{ color: "red" }}>Foo</div>;
+    //     if (data.type === "reply") {
+    //         return (
+    //             // <div>Foo</div>
+    //             <Reply
+    //                 key={data.data.id}
+    //                 replier={data.data.replier}
+    //                 replierProfilePic={profilePic}
+    //                 to={data.data.to}
+    //                 content={data.data.content}
+    //             />
+    //         );
+    //     } else if (data.type === "amplify") {
+    //         return (
+    //             <Amplify
+    //                 key={data.data.id}
+    //                 amplifier={data.data.author.displayName}
+    //                 profilePics={profilePic}
+    //                 others={data.data.others}
+    //                 author={data.data.author}
+    //                 content={data.data.content}
+    //             />
+    //             // <div>Foo</div>
+    //         );
+    //     } else if (data.type === "like") {
+    //         return (
+    //             // <div>Foo</div>
+    //             <Like
+    //                 key={data.data.id}
+    //                 headliner={data.data.headliner}
+    //                 profilePics={profilePic}
+    //                 likes={data.data.likes}
+    //                 text={data.data.content}
+    //             />
+    //         );
+    //     } else if (data.type === "follow") {
+    //         return (
+    //             <Follow
+    //                 key={data.data.id}
+    //                 user={data.data.user}
+    //                 profilePic={profilePic}
+    //                 others={data.data.others}
+    //             />
+    //             // <div>Foo</div>
+    //         );
+    //     } else if (data.type === "quote") {
+    //         return (
+    //             // <div>Foo</div>
+    //             <Quote
+    //                 key={data.data.id}
+    //                 quoter={data.data.quoter}
+    //                 quoterProfilePic={profilePic}
+    //                 content={data.data.content}
+    //                 OP={data.data.OP}
+    //                 opProfilePic={profilePic}
+    //                 originalText={data.data.originalText}
+    //             />
+    //         );
+    //     }
+    // }
 
     return (
         <Wrapper

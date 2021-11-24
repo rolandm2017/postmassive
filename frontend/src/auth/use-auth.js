@@ -188,7 +188,7 @@ export function useProvideAuth() {
                 Cookies.set("jwt", user.jwtToken);
                 userSubject.next(user);
             } else {
-                console.log("line 195");
+                // console.log("line 195");
                 Cookies.remove("jwt");
                 userSubject.next(null);
             }
@@ -225,7 +225,7 @@ export function refreshToken(isExternal) {
             // a promise
             // whereas mine is a promise inside of a promise.
             .then((res) => {
-                console.log("burning man", res); // ok this is where the json error is coming from
+                // console.log("burning man", res); // ok this is where the json error is coming from
                 return res.json().then((refreshedUser) => {
                     console.log("shambhala", refreshedUser);
                     return refreshedUser;

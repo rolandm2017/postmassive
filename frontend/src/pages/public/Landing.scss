@@ -17,7 +17,7 @@ body {
     width: 100%;
     height: 200px;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 #landing_desktop-copyright p {
@@ -109,7 +109,6 @@ body {
 .generic-flex {
     display: flex;
 }
-
 
 // midway resizing of uiMan
 @media screen and (max-width: 1000px) {
