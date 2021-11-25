@@ -6,7 +6,7 @@ const ProcessAmount = (number, displayedInFeed) => {
         if (containsOnlyDigits) {
             number = parseInt(number, 10);
         } else {
-            throw new Error("String was input with non-digit chars");
+            throw Error("String was input with non-digit chars");
         }
     }
     if (number === null) {

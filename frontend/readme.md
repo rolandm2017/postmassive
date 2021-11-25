@@ -20,3 +20,7 @@ English is a bad language.
 
 singular = style || styling,
 plural = styles || stylings,
+
+## ProcessAmount and convertEngagementText
+
+these are the same function. Prune one. A TODO. You wrote the code twice.

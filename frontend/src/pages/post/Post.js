@@ -321,7 +321,9 @@ function Post(props) {
                                                             setThirdStyle
                                                         );
                                                     } else {
-                                                        throw "You shouldn't be able to get here you know";
+                                                        throw Error(
+                                                            "You shouldn't be able to get here you know"
+                                                        );
                                                     }
                                                 }}
                                             />

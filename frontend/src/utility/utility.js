@@ -49,19 +49,18 @@ export function detectWellMadeStyling(stylings) {
     return false;
 }
 
-export function splitClassesAndVerify(unsplitClasses, expectedNumberOfClasses) {
+export function splitClassesAndVerify(classesList, expectedNumberOfClasses) {
     // really proud of this one
     /* 
     // @params unsplitClasses - input raw string like "bold, fontSize24" to convert to ["bold", "fontSize24"]
     // @params expectedNumberOfClasses - Comes direct from the Instructions object. To be compared for error detection. 
     // returns - the classes string to insert into the component
     */
-    let splitClasses = unsplitClasses.split(", ");
-    if (splitClasses.length === expectedNumberOfClasses) {
-        let joinedClasses = "." + splitClasses.join(" .");
+    if (classesList.length === expectedNumberOfClasses) {
+        let joinedClasses = "." + classesList.join(" .");
         return joinedClasses;
     } else {
-        console.log(splitClasses, expectedNumberOfClasses);
+        console.log(classesList, expectedNumberOfClasses);
         throw Error(
             "Unexpected mismatch between splitClasses length and expectedNumber"
         );
@@ -99,7 +98,7 @@ export function prettyText(inputText, stylings, callback) {
     }
 
     // console.log("prettyText58", inputText, stylings);
-    let splitUpTexts = getSubstringsWithInstructions(inputText, stylings);
+    let instructions = getSubstringsWithInstructions(inputText, stylings);
     // FIXME: what if we have special chunks like sSSSs
     // ...where s = nonspecial, S = special. or SSSs
     // or sSSsSs or sSsSSs ... need a more generalized algo.
@@ -107,14 +106,15 @@ export function prettyText(inputText, stylings, callback) {
     // { special: false, value: initSlice }
     // { special: true, value: specialMiddleSlice, stylings: stylings[0] },
     // console.log(splitUpTexts, stylings, 48);
-    let chunks = splitUpTexts.map((chunk, index) => {
-        // console.log(68, chunk, chunk.value);
-        if (chunk.special) {
+    let chunks = instructions.map((instruction, index) => {
+        console.log(instruction, instruction.value, 110);
+        if (instruction.special) {
             // console.log(66, availableStylings, chunk);
-            if (chunk.numberOfStylings > 1) {
+            if (instruction.numberOfStylings > 1) {
+                console.log(114, instruction);
                 let availableStylings = splitClassesAndVerify(
-                    chunk.stylings,
-                    chunk.numberOfStylings
+                    instruction.stylings,
+                    instruction.numberOfStylings
                 );
                 // let availableStylings = chunk.stylings;
                 // console.log(73, availableStylings, chunk);
@@ -122,17 +122,17 @@ export function prettyText(inputText, stylings, callback) {
                     <Chunk
                         index={index}
                         availableStylings={availableStylings}
-                        chunkValue={chunk.value}
+                        chunkValue={instruction.value}
                     />
                 );
             } else {
-                let availableStylings = chunk.stylings;
-                // console.log(80, availableStylings);
+                let availableStylings = instruction.stylings;
+                console.log(availableStylings, instruction, 130);
                 return (
                     <Chunk
                         index={index}
                         availableStylings={availableStylings}
-                        chunkValue={chunk.value}
+                        chunkValue={instruction.value}
                     />
                 );
             }
@@ -141,11 +141,12 @@ export function prettyText(inputText, stylings, callback) {
                 <Chunk
                     index={index}
                     availableStylings={null}
-                    chunkValue={chunk.value}
+                    chunkValue={instruction.value}
                 />
             );
         }
     });
+    console.log(chunks, 149);
     return chunks; //
 }
 

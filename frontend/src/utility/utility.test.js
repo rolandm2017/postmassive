@@ -201,20 +201,9 @@ describe("handles a SINGULAR Styling & surrounding text, makes into 3 instructio
                 stylings: ["bold, backgroundColorRed"],
             })
         ).toEqual([
-            {
-                special: false,
-                value: "Yabba ",
-            },
-            {
-                special: true,
-                value: "dabba",
-                stylings: ["bold, backgroundColorRed"],
-                numberOfStylings: 2,
-            },
-            {
-                special: false,
-                value: " doo",
-            },
+            new Instruction(false, "Yabba "),
+            new Instruction(true, "dabba", ".bold .backgroundColorRed", 2),
+            new Instruction(false, " doo"),
         ]);
         expect(
             handleJustOneStyling("ABCDEFG GFEDCBA ABC DEF", {
@@ -223,20 +212,9 @@ describe("handles a SINGULAR Styling & surrounding text, makes into 3 instructio
                 stylings: ["backgroundColorBlack"],
             })
         ).toEqual([
-            {
-                special: false,
-                value: "ABCDEFG ",
-            },
-            {
-                special: true,
-                value: "GFEDCBA ",
-                stylings: ["backgroundColorBlack"],
-                numberOfStylings: 1,
-            },
-            {
-                special: false,
-                value: "ABC DEF",
-            },
+            new Instruction(false, "ABCDEFG "),
+            new Instruction(true, "GFEDCBA ", ".backgroundColorBlack", 1),
+            new Instruction(false, "ABC DEF"),
         ]);
     });
     it("throws an error if stylingS is replaced with styling (no s)", () => {
