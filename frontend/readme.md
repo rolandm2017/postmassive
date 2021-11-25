@@ -1,4 +1,4 @@
-## styling -> instruction -> toBeStyled
+## styling -> instruction -> Chunk
 
 A styling object contains an array of styles.
 

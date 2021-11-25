@@ -1,5 +1,5 @@
 import Instruction from "./classes/Instruction";
-import ToBeStyled from "./toBeStyled/ToBeStyled";
+import Chunk from "./chunk/Chunk";
 
 export function styleObjectIsEmpty(style) {
     let isEmpty =
@@ -79,11 +79,7 @@ export function prettyText(inputText, stylings, callback) {
     if (isStylingsEmpty) {
         // console.log(26, "yes, it was empty");
         return (
-            <ToBeStyled
-                index={0}
-                availableStylings={null}
-                chunkValue={inputText}
-            />
+            <Chunk index={0} availableStylings={null} chunkValue={inputText} />
         );
         // return (
         //     <span key={index} className="stylized">
@@ -98,11 +94,7 @@ export function prettyText(inputText, stylings, callback) {
     if (!atLeastOneWellFormedStyling) {
         // return <span className="stylized">{inputText}</span>; // return simply the text ??
         return (
-            <ToBeStyled
-                index={0}
-                availableStylings={null}
-                chunkValue={inputText}
-            />
+            <Chunk index={0} availableStylings={null} chunkValue={inputText} />
         );
     }
 
@@ -127,7 +119,7 @@ export function prettyText(inputText, stylings, callback) {
                 // let availableStylings = chunk.stylings;
                 // console.log(73, availableStylings, chunk);
                 return (
-                    <ToBeStyled
+                    <Chunk
                         index={index}
                         availableStylings={availableStylings}
                         chunkValue={chunk.value}
@@ -137,7 +129,7 @@ export function prettyText(inputText, stylings, callback) {
                 let availableStylings = chunk.stylings;
                 // console.log(80, availableStylings);
                 return (
-                    <ToBeStyled
+                    <Chunk
                         index={index}
                         availableStylings={availableStylings}
                         chunkValue={chunk.value}
@@ -146,7 +138,7 @@ export function prettyText(inputText, stylings, callback) {
             }
         } else {
             return (
-                <ToBeStyled
+                <Chunk
                     index={index}
                     availableStylings={null}
                     chunkValue={chunk.value}
@@ -161,47 +153,28 @@ export function handleJustOneStyling(inputText, styling) {
     let initSlice = inputText.slice(0, styling.start);
     let specialMiddleSlice = inputText.slice(styling.start, styling.end);
     let endSlice = inputText.slice(styling.end, inputText.length);
-    // console.log(initSlice, specialMiddleSlice, endSlice);
     return [
         new Instruction(false, initSlice),
-        // {
-        //     special: false,
-        //     value: initSlice,
-        // },
         new Instruction(
             true,
             specialMiddleSlice,
             styling.stylings,
-            countStylingsBasedOnCommas(styling.stylings)
+            countStylings(styling.stylings)
         ),
-        // {
-        //     special: true,
-        //     value: specialMiddleSlice,
-        //     stylings: styling.stylings,
-        //     numberOfStylings: countStylingsBasedOnCommas(styling.stylings),
-        // },
         new Instruction(false, endSlice),
-        // {
-        //     special: false,
-        //     value: endSlice,
-        // },
     ];
 }
 
-export function countStylingsBasedOnCommas(stylings) {
+export function countStylings(stylings) {
     /* 
-    // pass the VALUE of stylings.stylings, not the stylings object.
+    // pass the value of stylings.stylings, not the stylings object.
     // return value - the length of the stylings
+    // e.g. ["bold", "italics"], 2
     */
-
-    // FIXME: should this function receive ["bgColor, bold"] or ... "bgColor, bold"
-    // changed stylings to stylings[0] ... but maybe it should be "bold, italics"
     if (typeof stylings !== undefined) {
-        if (stylings[0].includes(",")) {
-            return stylings[0].split(", ").length;
-        } else {
-            return 1; // because if no "," then stylings is length 1
-        }
+        return stylings.length;
+    } else {
+        throw Error("Shouldn't call this when there are no inputs");
     }
 }
 
@@ -264,7 +237,7 @@ export function getSubstringsWithInstructions(
     // fixme: also the sliders ranges have to be unmessed from their current messy bugged state
     for (let i = 0; i < stylings.length; i++) {
         let areWeOnTheLastStyling = i === stylings.length - 1;
-        let stylingsCount = countStylingsBasedOnCommas(stylings[i].stylings);
+        let stylingsCount = countStylings(stylings[i].stylings);
         let textSlice = inputText.slice(stylings[i].start, stylings[i].end); // will go from i to end of string
         let instruction = new Instruction(
             true,

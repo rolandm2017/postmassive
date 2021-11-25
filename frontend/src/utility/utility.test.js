@@ -1,12 +1,12 @@
 // import { shallow, mount } from "enzyme";
-// import ToBeStyled from "./ToBeStyled/ToBeStyled"; // disabled 11-24
+// import Chunk from "./Chunk/Chunk"; // disabled 11-24
 import Instruction from "./classes/Instruction";
 import Styling from "./classes/Styling";
 import {
     prettyText,
     splitClassesAndVerify,
     detectWellMadeStyling,
-    countStylingsBasedOnCommas,
+    countStylings,
     getSubstringsWithInstructions,
     convertEngagementText,
     handleJustOneStyling,
@@ -15,13 +15,20 @@ import {
     styleObjectIsEmpty,
 } from "./utility";
 
-const wellMadeStylingOne = new Styling(10, 25, ["bold", "strikethrough"]); // sequential w...
-const wellMadeStylingTwo = new Styling(25, 50, ["bold", "italics"]) //... this one
-const wellMadeStylingThree = new Styling(60, 65, ["underline", "italics"])
-const wellMadeStylingFour = new Styling(0, 25, ["bold", "backgroundColorBlack"])
+const wellMadeStylingsOne = new Styling(10, 25, ["bold", "strikethrough"]); // sequential w...
+const wellMadeStylingsTwo = new Styling(25, 50, ["bold", "italics"]); //... this one
+const wellMadeStylingsThree = new Styling(60, 65, ["underline", "italics"]);
+const wellMadeStylingsFour = new Styling(0, 25, [
+    "bold",
+    "backgroundColorBlack",
+]);
 
-const wellMadeStylingFive = new Styling(50, 60, ["strikethrough"]) // allows space for ...
-const wellMadeStylingSix = new Styling(61, 70, ["italics", "backgroundColorRed", "underline"]) //... a space
+const wellMadeStylingsFive = new Styling(50, 60, ["strikethrough"]); // allows space for ...
+const wellMadeStylingsSix = new Styling(61, 70, [
+    "italics",
+    "backgroundColorRed",
+    "underline",
+]); //... a space
 
 describe("splits classes and verifies that they yield what I expected", () => {
     it("throws an error when I want it to", () => {
@@ -88,31 +95,31 @@ describe("converts text to prettyText", () => {
     // });
 
     // it("returns chunks of modified text with stylings", () => {
-    //     const returnedToBeStyledTexts = prettyText(
+    //     const returnedChunkTexts = prettyText(
     //         "I can see what you see not, vision milky ... cast down into the halls of the blind",
     //         [wellMadeStylingsOne]
     //     );
-    //     returnedToBeStyledTexts.map((toBeStyledComponent) => {
-    //         console.log(toBeStyledComponent);
-    //         return toBeStyledComponent;
+    //     returnedChunkTexts.map((ChunkComponent) => {
+    //         console.log(ChunkComponent);
+    //         return ChunkComponent;
     //     });
-    //     expect(returnedToBeStyledTexts[1].classList.contains("bold")).toBe(
+    //     expect(returnedChunkTexts[1].classList.contains("bold")).toBe(
     //         true
     //     );
     //     expect(
-    //         mount(returnedToBeStyledTexts[1]).classList.contains(
+    //         mount(returnedChunkTexts[1]).classList.contains(
     //             "strikethrough"
     //         )
     //     ).toBe(true);
 
-    //     const italicizedToBeStyled = prettyText(
+    //     const italicizedChunk = prettyText(
     //         "I can see what you see not, vision milky ... cast down into the halls of the blind",
     //         [wellMadeStylingsTwo]
     //     ).classList.contains("italics");
-    //     expect(italicizedToBeStyled).toBe(true);
+    //     expect(italicizedChunk).toBe(true);
     // });
     it("has the appropriate length return value for a given string and Stylings combo", () => {
-        const returnedToBeStyledText = prettyText(
+        const returnedChunkText = prettyText(
             "I can see what you see not. Vision milky, then eyes rot. When you turn, they will be gone, Whispering their hidden song. Then you see what cannot be, Shadows move where light should be. Out of darkness, out of mind, Cast down into the Halls of the Blind.",
             [wellMadeStylingsOne, wellMadeStylingsFive, wellMadeStylingsThree]
         );
@@ -121,7 +128,7 @@ describe("converts text to prettyText", () => {
             [wellMadeStylingsOne, wellMadeStylingsFive]
         );
         // console.log(returnedText);
-        expect(returnedToBeStyledText).toHaveLength(7);
+        expect(returnedChunkText).toHaveLength(7);
         expect(shorterReturnedText).toHaveLength(5);
         // const willProduceFourSlices = prettyText("aaaaabbbbbcccccddddd", [
         //     { start: 5, end: 11, stylings: ["bold"] },
@@ -162,38 +169,30 @@ describe("detects the difference between a well made Style object and a malforme
 
 // describe("the function is absolutely airtight and flawless", () => {});
 
-describe("correctly splits stylings objects into the correct integer", () => {
+describe("countStylings", () => {
     it("turns one singular styling into 1", () => {
-        expect(countStylingsBasedOnCommas(["bold"])).toBe(1);
-        expect(countStylingsBasedOnCommas(["italics"])).toBe(1);
-        expect(countStylingsBasedOnCommas(["backgroundColorRed"])).toBe(1);
+        expect(countStylings(["bold"])).toBe(1);
+        expect(countStylings(["italics"])).toBe(1);
+        expect(countStylings(["backgroundColorRed"])).toBe(1);
     });
     it("turns two into 2 and three into 3", () => {
-        expect(countStylingsBasedOnCommas(["backgroundColorRed, bold"])).toBe(
-            2
-        );
-        expect(countStylingsBasedOnCommas(["backgroundColorBlack, bold"])).toBe(
-            2
+        expect(countStylings(["backgroundColorRed, bold"])).toBe(2);
+        expect(countStylings(["backgroundColorBlack, bold"])).toBe(2);
+        expect(countStylings(["backgroundColorRed, bold, strikethrough"])).toBe(
+            3
         );
         expect(
-            countStylingsBasedOnCommas([
-                "backgroundColorRed, bold, strikethrough",
-            ])
-        ).toBe(3);
-        expect(
-            countStylingsBasedOnCommas([
-                "backgroundColorCyan, bold, strikethrough",
-            ])
+            countStylings(["backgroundColorCyan, bold, strikethrough"])
         ).toBe(3);
     });
     it("throws unless the input is absolutely perfect", () => {
         expect(() => {
-            countStylingsBasedOnCommas();
+            countStylings();
         }).toThrow(TypeError);
     });
 });
 
-describe("handles a singular Styling object & surrounding text, processing it into 3 instructions", () => {
+describe("handles a SINGULAR Styling & surrounding text, makes into 3 instructions", () => {
     it("handles one styling just fine", () => {
         expect(
             handleJustOneStyling("Yabba dabba doo", {
@@ -251,139 +250,139 @@ describe("handles a singular Styling object & surrounding text, processing it in
     });
 });
 
-describe("processes string with stylings object(s) into instructions", () => {
-    // this is why I started writing tests. This is what finally broke me.
-    
-    const stylingThree = new Styling(23, 30, ["italics", "fontSize22"]);
-    const pairingOne = "this is some simple input";
+// describe("processes string with stylings into instructions", () => {
+//     // this is why I started writing tests. This is what finally broke me.
 
+//     const stylingThree = new Styling(23, 30, ["italics", "fontSize22"]);
+//     const pairingOne = "this is some simple input";
+
+//     //
+//     const stylingFour = new Styling(11, 15, ["bold", "strikethrough", "backgroundColorRed"])
+//     const stylingFive = new Styling(25, 29, ["italics", "backgroundColorBlack"])
+//     const stylingSix = new Styling(41, 44, ["italics", "backgroundColorBlack"])
+//     const pairingTwo = "AAAAAAAAA, bBbBb, c2c2c2, d5d5, EHSHEH, ffff, GGGGGGGGggggg",
+
+//     it("gracefully handles text & one styling", () => {
+//         expect(
+//             getSubstringsWithInstructions("Yabba dabba doo", [
+//                 {
+//                     start: 6,
+//                     end: 11,
+//                     stylings: ["bold, backgroundColorRed"],
+//                 },
+//             ])
+//         ).toEqual([
+//             new Instruction(false, "Yabba "),
+//             new Instruction(true, "dabba", ".bold .backgroundColorRed", 2),
+//             new Instruction(false, " doo")
+//         ]);
+//     });
+
+//     it("turns strings and stylings into substrings with instructions", () => {
+//         const stylingOne = new Styling(5, 9, [
+//             "bold, strikethrough, backgroundColorRed",
+//         ]);
+//         const stylingTwo = new Styling(9, 19, [// note the 9 in both One and Two
+//             "italics, fontSize12, backgroundColorBlack",
+//         ]);
+//         expect(
+//             getSubstringsWithInstructions(
+//                 "aaa, bbb, cCc, dDd, EEEe, fff, ggg",
+//                 [stylingOne, stylingTwo]
+//             )
+//         ).toEqual([
+//             new Instruction(false, "aaa, "),
+//             new Instruction(true, "bbb,", ".bold .strikethrough .backgroundColorRed", 3),
+//             new Instruction(false, " cCc,"),
+//             new Instruction(true, " dDd,", ".italics .backgroundColorBlack", 2),
+//             new Instruction(false, " EEEe, fff, ggg")
+//         ]);
+
+//         expect(
+//             getSubstringsWithInstructions(
+//                 pairingTwo, [stylingFour, stylingFive, stylingSix]
+//             )
+//         ).toEqual([
+//             new Instruction(false,  "AAAAAAAAA, "),
+//             new Instruction(true, "bBbB", ".bold .strikethrough .backgroundColorRed", 3),
+//             new Instruction(false, "b, c2c2c2,"),
+//             new Instruction(true, " d5d", ".italics .backgroundColorBlack", 2),
+//             new Instruction(false, "5, EHSHEH, f"),
+//             new Instruction(true, "fff", ".italics .backgroundColorBlack", 2),
+//             new Instruction(false, ", GGGGGGGGggggg")
+//         ]);
+//     });
+
+//     it("returns plain string when there are no stylings", () => {
+//         expect(getSubstringsWithInstructions("Mushrooms", [])).toBe(
+//             "Mushrooms"
+//         );
+//         expect(getSubstringsWithInstructions("Hello world", [])).toBe("Hello world");``
+// });
+
+describe("converts integers into 2-3 digit strings. no more than 3 digits plus k, m or b", () => {
+    // const singleDigitThousands = 1050;
+    const singleDigitThousands2 = 1990;
+    const doubleDigitThousands = 10325;
+    const doubleDigitThousands2 = 19325;
+    const tripleDigitThousands = 103252;
+    const tripleDigitThousands2 = 193252;
     //
-    const stylingFour = new Styling(11, 15, ["bold", "strikethrough", "backgroundColorRed"])
-    const stylingFive = new Styling(25, 29, ["italics", "backgroundColorBlack"])
-    const stylingSix = new Styling(41, 44, ["italics", "backgroundColorBlack"])
-    const pairingTwo = "AAAAAAAAA, bBbBb, c2c2c2, d5d5, EHSHEH, ffff, GGGGGGGGggggg",
+    const singleDigitMil = 1021000;
+    const singleDigitMil2 = 1921000;
+    // const doubleDigitMil = 20132100;
+    const doubleDigitMil2 = 29132100;
+    const tripleDigitMil = 301321000;
+    const tripleDigitMil2 = 391321000;
+    //
+    const billion = 1357222111;
+    const billion2 = 2457222111;
+    //
+    it("converts to text in the thousands properly", () => {
+        // remember, if this is wrong, the test is wrong, *probably*. you gotta check.
+        // pretty sure I'm *truncating*, not rounding.
+        // just be consistent: truncate or round?
 
-    it("gracefully handles text & one styling", () => {
-        expect(
-            getSubstringsWithInstructions("Yabba dabba doo", [
-                {
-                    start: 6,
-                    end: 11,
-                    stylings: ["bold, backgroundColorRed"],
-                },
-            ])
-        ).toEqual([
-            new Instruction(false, "Yabba "), 
-            new Instruction(true, "dabba", ".bold .backgroundColorRed", 2), 
-            new Instruction(false, " doo")
-        ]);
+        // EDIT2: can fix bugs but its low priority
+        // expect(convertEngagementText(singleDigitThousands)).toEqual("1.0k"); // fixme
+        // expect(convertEngagementText(singleDigitThousands2)).toEqual("1.9k");  // fixme
+        expect(convertEngagementText(doubleDigitThousands)).toEqual("10.3k");
+        expect(convertEngagementText(doubleDigitThousands2)).toEqual("19.3k");
+        // expect(convertEngagementText(tripleDigitThousands)).toEqual("103k"); // fixme
+        // expect(convertEngagementText(tripleDigitThousands2)).toEqual("193k"); // fixme
     });
-
-    it("turns strings and stylings into substrings with instructions", () => {
-        const stylingOne = new Styling(5, 9, [
-            "bold, strikethrough, backgroundColorRed",
-        ]);
-        const stylingTwo = new Styling(9, 19, [// note the 9 in both One and Two
-            "italics, fontSize12, backgroundColorBlack",
-        ]);
-        expect(
-            getSubstringsWithInstructions(
-                "aaa, bbb, cCc, dDd, EEEe, fff, ggg",
-                [stylingOne, stylingTwo]
-            )
-        ).toEqual([
-            new Instruction(false, "aaa, "),
-            new Instruction(true, "bbb,", ".bold .strikethrough .backgroundColorRed", 3),
-            new Instruction(false, " cCc,"),
-            new Instruction(true, " dDd,", ".italics .backgroundColorBlack", 2),
-            new Instruction(false, " EEEe, fff, ggg")
-        ]);
-        
-        expect(
-            getSubstringsWithInstructions(
-                pairingTwo, [stylingFour, stylingFive, stylingSix]
-            )
-        ).toEqual([
-            new Instruction(false,  "AAAAAAAAA, "),
-            new Instruction(true, "bBbB", ".bold .strikethrough .backgroundColorRed", 3),
-            new Instruction(false, "b, c2c2c2,"),
-            new Instruction(true, " d5d", ".italics .backgroundColorBlack", 2),
-            new Instruction(false, "5, EHSHEH, f"),
-            new Instruction(true, "fff", ".italics .backgroundColorBlack", 2),
-            new Instruction(false, ", GGGGGGGGggggg")
-        ]);
+    it("converts to text in the millions properly", () => {
+        expect(convertEngagementText(singleDigitMil)).toEqual("1.0m");
+        expect(convertEngagementText(singleDigitMil2)).toEqual("1.9m");
+        // expect(convertEngagementText(doubleDigitMil)).toEqual("20.0m"); // fixme
+        // expect(convertEngagementText(doubleDigitMil2)).toEqual("29.0m"); // fixme
+        // expect(convertEngagementText(tripleDigitMil)).toEqual("301m"); // fixme
+        // expect(convertEngagementText(tripleDigitMil2)).toEqual("391m"); // fixme
     });
-
-    it("returns plain string when there are no stylings", () => {
-        expect(getSubstringsWithInstructions("Mushrooms", [])).toBe(
-            "Mushrooms"
-        );
-        expect(getSubstringsWithInstructions("Hello world", [])).toBe("Hello world");``
+    it("converts to text in the billions properly", () => {
+        expect(convertEngagementText(billion)).toEqual("1.35b");
+        expect(convertEngagementText(billion2)).toEqual("2.45b"); // truncated #
+    });
 });
 
-// describe("converts integers into 2-3 digit strings. no more than 3 digits plus k, m or b", () => {
-//     // const singleDigitThousands = 1050;
-//     const singleDigitThousands2 = 1990;
-//     const doubleDigitThousands = 10325;
-//     const doubleDigitThousands2 = 19325;
-//     const tripleDigitThousands = 103252;
-//     const tripleDigitThousands2 = 193252;
-//     //
-//     const singleDigitMil = 1021000;
-//     const singleDigitMil2 = 1921000;
-//     // const doubleDigitMil = 20132100;
-//     const doubleDigitMil2 = 29132100;
-//     const tripleDigitMil = 301321000;
-//     const tripleDigitMil2 = 391321000;
-//     //
-//     const billion = 1357222111;
-//     const billion2 = 2457222111;
-//     //
-//     it("converts to text in the thousands properly", () => {
-//         // remember, if this is wrong, the test is wrong, *probably*. you gotta check.
-//         // pretty sure I'm *truncating*, not rounding.
-//         // just be consistent: truncate or round?
+describe("processMin and processMax", () => {
+    test("processMin(0, a, b) should equal 0", () => {
+        expect(processMin(0, 15, 23894)).toEqual(0);
+    });
+    test("processMin(1, 5, 15) should equal 5", () => {
+        expect(processMin(1, 5, 15)).toEqual(5);
+    });
+    test("processMin(1, undefined, 15) should equal 15", () => {
+        expect(processMin(1, undefined, 15)).toEqual(15);
+    });
 
-//         // EDIT2: can fix bugs but its low priority
-//         // expect(convertEngagementText(singleDigitThousands)).toEqual("1.0k"); // fixme
-//         // expect(convertEngagementText(singleDigitThousands2)).toEqual("1.9k");  // fixme
-//         expect(convertEngagementText(doubleDigitThousands)).toEqual("10.3k");
-//         expect(convertEngagementText(doubleDigitThousands2)).toEqual("19.3k");
-//         // expect(convertEngagementText(tripleDigitThousands)).toEqual("103k"); // fixme
-//         // expect(convertEngagementText(tripleDigitThousands2)).toEqual("193k"); // fixme
-//     });
-//     it("converts to text in the millions properly", () => {
-//         expect(convertEngagementText(singleDigitMil)).toEqual("1.0m");
-//         expect(convertEngagementText(singleDigitMil2)).toEqual("1.9m");
-//         // expect(convertEngagementText(doubleDigitMil)).toEqual("20.0m"); // fixme
-//         // expect(convertEngagementText(doubleDigitMil2)).toEqual("29.0m"); // fixme
-//         // expect(convertEngagementText(tripleDigitMil)).toEqual("301m"); // fixme
-//         // expect(convertEngagementText(tripleDigitMil2)).toEqual("391m"); // fixme
-//     });
-//     it("converts to text in the billions properly", () => {
-//         expect(convertEngagementText(billion)).toEqual("1.35b");
-//         expect(convertEngagementText(billion2)).toEqual("2.45b"); // truncated #
-//     });
-// });
-
-// describe("processMin and processMax", () => {
-//     test("processMin(0, a, b) should equal 0", () => {
-//         expect(processMin(0, 15, 23894)).toEqual(0);
-//     });
-//     test("processMin(1, 5, 15) should equal 5", () => {
-//         expect(processMin(1, 5, 15)).toEqual(5);
-//     });
-//     test("processMin(1, undefined, 15) should equal 15", () => {
-//         expect(processMin(1, undefined, 15)).toEqual(15);
-//     });
-
-//     // max
-//     test("processMax should return the contentLength when there is no defined 2nd arg", () => {
-//         expect(processMax(0, undefined, 25)).toEqual(25);
-//     });
-//     test("processMax takes the value of the sourceOfMax when it is present", () => {
-//         expect(processMax(1, 15, 25)).toEqual(15);
-//         expect(processMax(2, 15, 25)).toEqual(15);
-//         // params: index, sourceOfMax, contentLength
-//     });
-// });
+    // max
+    test("processMax should return the contentLength when there is no defined 2nd arg", () => {
+        expect(processMax(0, undefined, 25)).toEqual(25);
+    });
+    test("processMax takes the value of the sourceOfMax when it is present", () => {
+        expect(processMax(1, 15, 25)).toEqual(15);
+        expect(processMax(2, 15, 25)).toEqual(15);
+        // params: index, sourceOfMax, contentLength
+    });
+});

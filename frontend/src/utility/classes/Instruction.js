@@ -1,4 +1,4 @@
-import ToBeStyled from "../toBeStyled/ToBeStyled";
+import Chunk from "../chunk/Chunk";
 
 class Instruction {
     constructor(special, textValue, stylings, numberOfStylings) {
@@ -12,7 +12,7 @@ class Instruction {
         if (this.special) {
             if (this.stylings && this.numberOfStylings) {
                 return (
-                    <ToBeStyled
+                    <Chunk
                         index={index}
                         availableStylings={this.dotNotationStylings}
                         chunkValue={this.textValue}
