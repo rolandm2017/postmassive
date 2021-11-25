@@ -8,7 +8,6 @@ const userSchema = new Schema({
     fullName: { type: String, required: true },
     email: { type: String, required: true },
     dateOfBirth: { type: Date, required: true },
-    username: { type: String, required: true },
     passwordHash: { type: String, required: true },
     passwordResetAt: { type: Date }, // for what purpose does this field exist? I think sth to do with recent resets of pw
 
@@ -32,6 +31,7 @@ const userSchema = new Schema({
     suspended: { type: Boolean },
 
     // public profile
+    username: { type: String, required: true },
     displayName: { type: String, required: true },
     bio: { type: String },
     location: { type: String },

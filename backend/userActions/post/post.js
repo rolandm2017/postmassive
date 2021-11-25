@@ -1,6 +1,7 @@
 // file for MAKING posts
 
 const db = require("../../_helpers/db");
+const mongoose = require("mongoose");
 const {
     BOLD,
     ITALIC,
@@ -30,12 +31,12 @@ router.get("/post", (req, res) => {
 
 router.post("/post", async (req, res) => {
     let username = req.body.username;
-    // let displayName = req.body.displayName;
     let content = req.body.content;
     let postFloor = req.body.floor;
     console.log("Posting a massive...", content, req.body);
     let priceIsAuthorizedByUser = req.body.authorization; // true/false
     let datePosted = Date.now();
+    const stylings = req.body.stylings;
 
     let getCostOfPosting = createCostOfPosting(); // fixme: should be moved to the post screen
     // fixme: I try to Post and get a bug because I can't db.User.FindOne to match this post's request.
@@ -47,24 +48,39 @@ router.post("/post", async (req, res) => {
     let userDoc = await db.User.findOne({ username: username });
     let displayName = userDoc.displayName;
 
-    console.log(38, username, content, postFloor, datePosted, displayName);
-    let currentHighestPostNumber = Massive.find({})
-        .sort({ postNumber: "desc" })
-        .limit(1)
-        .exec((err, post) => {
-            if (err) {
-                console.log(7, err);
-                reject(err);
-            } else {
-                return post;
-            }
-        }).postNumber;
+    console.log(
+        38,
+        username,
+        content,
+        postFloor,
+        datePosted,
+        displayName,
+        stylings
+    );
+    let currentHighestPostNumber;
+    try {
+        currentHighestPostNumber = Massive.find({})
+            .sort({ postNumber: "desc" })
+            .limit(1)
+            .exec((err, post) => {
+                if (err) {
+                    console.log(7, err);
+                    reject(err);
+                } else {
+                    return post;
+                }
+            }).postNumber; // was throwing error when the user tried to make their first post
+    } catch {
+        currentHighestPostNumber = 0;
+    }
     let newHighestPostNum = currentHighestPostNumber + 1;
     console.log(47, req.body);
-    // ### *** ###
+    let newId = new mongoose.Types.ObjectId();
+    //    / ### *** ###
     // FIXME: MAJOR issue with Posting Massives and the postNumber.
     // ### *** ###
     let newMassive = new Massive({
+        _id: newId,
         postNumber: newHighestPostNum, // will have to autoincrement this somehow...
         postedByUser: username,
         displayName: displayName,
@@ -78,13 +94,18 @@ router.post("/post", async (req, res) => {
         views: Math.ceil(Math.random() * 1000),
         replies: Math.ceil(Math.random() * 10),
         amplifies: Math.ceil(Math.random() * 20),
+        stylings: req.body.stylings,
     });
     newMassive.save(function (err) {
         if (err) {
             console.log(53, err);
         }
     });
-    res.status(200).send();
+    if (req.body.stylings) {
+        res.status(200).send("successfully posted with stylings added");
+    } else {
+        res.status(200).send("posted successfully");
+    }
 });
 
 router.delete("/post", (req, res) => {

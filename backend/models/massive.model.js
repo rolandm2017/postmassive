@@ -25,13 +25,6 @@ const massiveSchema = new Schema({
     // indicates whether the massive is a quote tweet.
     quotesSomeone: { type: Boolean, required: true, default: false },
     quotedMassiveId: { type: String, required: false },
-    // markings for highlighting
-    highlightRange: { type: Object },
-    underlineRange: { type: Object },
-    italicsRange: { type: Object },
-    boldRange: { type: Object },
-    fontSize: { type: Number },
-    upsizedFontRange: { type: Object },
     // flooring
     viewsFloor: { type: Number, required: true, default: 100 }, // default guaranteed engagement
     likesFloor: { type: Number, required: true, default: 3 }, // default guaranteed engagement
@@ -39,6 +32,7 @@ const massiveSchema = new Schema({
     emoji: {
         type: Object,
     },
+    stylings: { type: Object },
 });
 
 module.exports = mongoose.model("Massive", massiveSchema);
