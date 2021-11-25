@@ -62,7 +62,9 @@ export function splitClassesAndVerify(unsplitClasses, expectedNumberOfClasses) {
         return joinedClasses;
     } else {
         console.log(splitClasses, expectedNumberOfClasses);
-        throw "Unexpected mismatch between splitClasses length and expectedNumber";
+        throw Error(
+            "Unexpected mismatch between splitClasses length and expectedNumber"
+        );
     }
 }
 
@@ -78,7 +80,7 @@ export function prettyText(inputText, stylings, callback) {
         // console.log(26, "yes, it was empty");
         return (
             <ToBeStyled
-                index={null}
+                index={0}
                 availableStylings={null}
                 chunkValue={inputText}
             />
@@ -97,7 +99,7 @@ export function prettyText(inputText, stylings, callback) {
         // return <span className="stylized">{inputText}</span>; // return simply the text ??
         return (
             <ToBeStyled
-                index={null}
+                index={0}
                 availableStylings={null}
                 chunkValue={inputText}
             />

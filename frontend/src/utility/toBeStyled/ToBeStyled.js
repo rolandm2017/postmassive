@@ -1,6 +1,6 @@
 import React from "react";
 
-function ToBeStyled({ index, availableStylings, chunkValue }) {
+function Chunk({ index, availableStylings, chunkValue }) {
     return (
         <span key={index} className={`stylized ${availableStylings} `}>
             {chunkValue}
@@ -8,4 +8,4 @@ function ToBeStyled({ index, availableStylings, chunkValue }) {
     );
 }
 
-export default ToBeStyled;
+export default Chunk;

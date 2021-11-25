@@ -26,6 +26,7 @@ function Messages(props) {
     const [showSettings, setShowSettings] = useState(false);
 
     useEffect(() => {
+        setTargetName(null);
         // TODO: expect this to be broken!
         const messagesUrl = process.env.REACT_APP_API_URL + "/messages";
         fetch(messagesUrl, getOptions(messagesUrl)).then((res) => {
@@ -49,7 +50,7 @@ function Messages(props) {
         handleResize();
         // Remove event listener on cleanup
         return () => window.removeEventListener("resize", handleResize);
-    }, []);
+    }, [setTargetName]);
 
     function loadMessageSelect() {
         if (messages) {

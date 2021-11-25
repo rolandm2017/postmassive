@@ -145,6 +145,10 @@ textarea {
 #post_targeting-container > div {
 }
 
+#post_text-area-content {
+    height: 80px;
+}
+
 .post_tones-outer-container {
     display: flex;
     flex-direction: row;
@@ -164,7 +168,7 @@ textarea {
 #post_typed-content-area {
     border: 3px solid black;
     width: 100%;
-    height: 140px;
+    height: 70px;
     padding: 0px 40px !important;
 }
 

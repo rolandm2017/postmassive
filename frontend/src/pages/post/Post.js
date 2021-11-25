@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 // logic imports
-import { postOptions } from "../../_helper/authHeader";
+// import { postOptions } from "../../_helper/authHeader";
 // import Styling from "../../utility/classes/Styling";
 import {
     FLOORS,
@@ -12,8 +12,8 @@ import {
 } from "../../_helper/consts";
 import {
     prettyText,
-    detectIsStylingEmpty,
-    styleObjectIsEmpty,
+    // detectIsStylingEmpty,
+    // styleObjectIsEmpty,
     processMin,
     processMax,
 } from "../../utility/utility";
@@ -22,8 +22,6 @@ import {
     postPost,
     addStyleToSection,
     removeStyleFromSection,
-    handleChangeStartRange,
-    handleChangeEndRange,
 } from "../../_helper/auctioneer";
 // images
 import BackButton from "../../images/icons8-back-arrow-48-wh.png";
@@ -38,8 +36,8 @@ import TextArea from "./components/TextArea";
 import ChoiceMaker from "./components/ChoiceMaker";
 
 import Emphasis from "./components/Emphasis";
-import Special from "./components/Special"; // lighthouse
-import BackgroundColor from "./components/BackgroundColor";
+// import Special from "./components/Special"; // lighthouse
+// import BackgroundColor from "./components/BackgroundColor";
 import FontSlider from "./components/FontSlider";
 
 import Flooring from "./components/Flooring";
@@ -60,8 +58,6 @@ function Post(props) {
 
     let currentUrl = useLocation().pathname;
     let history = useHistory();
-
-    const aaaa = ["bold", "italics", "underline", "strikethrough"];
 
     useEffect(() => {
         // console.log(30, currentUrl);
@@ -300,9 +296,6 @@ function Post(props) {
                                                 emphasis={styling}
                                                 onClick={() => {
                                                     if (currentStyle === 0) {
-                                                        {
-                                                            /* // styling, type, index, setter */
-                                                        }
                                                         addStyleToSection(
                                                             firstStyle,
                                                             styling,

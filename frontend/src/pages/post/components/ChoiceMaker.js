@@ -76,8 +76,8 @@ function ChoiceMaker({
                                       choice={choice}
                                       onClick={() =>
                                           handleRemoval(
-                                              choice,
                                               styling,
+                                              choice,
                                               menuOption,
                                               setter
                                           )

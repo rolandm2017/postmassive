@@ -19,7 +19,7 @@ class Instruction {
                     />
                 );
             } else {
-                throw "Input error";
+                throw Error("Input error");
             }
         }
     }

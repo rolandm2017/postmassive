@@ -6,7 +6,7 @@ import { styleObjectIsEmpty } from "../utility/utility";
 export function getAuctioneerResponse() {
     // talks to server's auctioneer to get price of post
     let auctioneerSays = Math.random() * 1000;
-    console.log(36, auctioneerSays);
+    // console.log(36, auctioneerSays);
     let asMoney = auctioneerSays.toString().split(".")[0];
     let decimalValue = Math.ceil(Math.random() * 99)
         .toString()
@@ -84,71 +84,14 @@ export function addStyleToSection(styling, type, index, setter) {
     // 78 -> 132 refactored into 65 -> 75? that just cant be// FIXME: this.
 }
 
-// export function addStyleToSection2() {
-//     console.log(113, type, currentStyle, firstStyle, secondStyle, thirdStyle);
-//     if (currentStyle === 0) {
-//         // https://stackoverflow.com/questions/679915/how-do-i-test-for-an-empty-javascript-object
-//         let firstStyleIsEmpty = styleObjectIsEmpty(firstStyle);
-//         console.log(131, firstStyleIsEmpty, firstStyle);
-
-//         if (!firstStyleIsEmpty) {
-//             // type can still be empty tho
-//             updateStyleWithType(type, firstStyle, setFirstStyle);
-//         } else {
-//             // make the style. DO NOT refactor this to be outside of "currentStyle" dependency
-//             let styleInit = {
-//                 start: 0,
-//                 end: 3,
-//                 styles: [type],
-//             };
-//             console.log("creating style...", styleInit, 134);
-//             setFirstStyle(styleInit);
-//         }
-//     } else if (currentStyle === 1) {
-//         let secondStyleIsEmpty = styleObjectIsEmpty(secondStyle);
-//         console.log(149, secondStyleIsEmpty, secondStyle);
-
-//         if (!secondStyleIsEmpty) {
-//             updateStyleWithType(type, secondStyle, setSecondStyle);
-//         } else {
-//             // make the style. DO NOT refactor this to be outside of "currentStyle" dependency
-//             let styleInit = {
-//                 start: 0,
-//                 end: content.length,
-//                 styles: [type],
-//             };
-//             console.log("creating style...", 154);
-//             setSecondStyle(styleInit);
-//         }
-//     } else if (currentStyle === 2) {
-//         let thirdStyleIsEmpty = styleObjectIsEmpty(thirdStyle);
-//         console.log(179, thirdStyle, thirdStyleIsEmpty);
-//         if (!thirdStyleIsEmpty) {
-//             updateStyleWithType(type, thirdStyle, setThirdStyle);
-//         } else {
-//             // make the style. DO NOT refactor this to be outside of "currentStyle" dependency
-//             let styleInit = {
-//                 start: 0,
-//                 end: content.length,
-//                 styles: [type],
-//             };
-//             console.log("creating style...", 179);
-//             setThirdStyle(styleInit);
-//         }
-//     } else {
-//         console.log(currentStyle, "<--- weird bug");
-//     }
-// }
-
 export function removeStyleFromSection(styling, type, index, setter) {
+    console.log(styling, 144);
     let currentStylings = new Styling(styling.start, styling.end, [
         ...styling.stylings,
     ]);
     let typeIndex = currentStylings.stylings.indexOf(type);
-    let remainingStylings;
-    if (typeIndex > -1) {
-        remainingStylings = currentStylings.splice(typeIndex, 1);
-    }
+    console.log(currentStylings);
+    let remainingStylings = currentStylings.getStylings().splice(typeIndex, 1);
     let newStyleObject = new Styling(
         currentStylings.start,
         currentStylings.end,
