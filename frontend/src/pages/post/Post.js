@@ -194,7 +194,7 @@ function Post(props) {
                             stylingTypes with drag n drop, or by selecting the
                             type then selecting another styling */}
                             <div>
-                                <p className="post_color-white">
+                                <div className="post_color-white">
                                     {content.length > 8
                                         ? prettyText(
                                               content,
@@ -204,9 +204,15 @@ function Post(props) {
                                                   thirdStyle,
                                               ]
                                               // setContent // YAGNI
-                                          )
+                                          ).map((Chunk, index) => {
+                                              return (
+                                                  <div>
+                                                      <Chunk />
+                                                  </div>
+                                              );
+                                          })
                                         : null}
-                                </p>
+                                </div>
                             </div>
                         </div>
                         <div id="post_styling-area">
@@ -214,7 +220,7 @@ function Post(props) {
                                 key={0}
                                 menuOption={0}
                                 handleClick={() => {
-                                    console.log(340, "should update sel");
+                                    console.log(340, "should update sel", 0);
                                     handleChangeStylingSelection(0);
                                 }}
                                 currentlyChecked={currentStyle}

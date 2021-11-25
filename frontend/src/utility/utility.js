@@ -111,13 +111,13 @@ export function prettyText(inputText, stylings, callback) {
         if (instruction.special) {
             // console.log(66, availableStylings, chunk);
             if (instruction.numberOfStylings > 1) {
-                console.log(114, instruction);
                 let availableStylings = splitClassesAndVerify(
                     instruction.stylings,
                     instruction.numberOfStylings
                 );
+                console.log(114);
                 // let availableStylings = chunk.stylings;
-                // console.log(73, availableStylings, chunk);
+                console.log(instruction, availableStylings, 73);
                 return (
                     <Chunk
                         index={index}
@@ -146,7 +146,7 @@ export function prettyText(inputText, stylings, callback) {
             );
         }
     });
-    console.log(chunks, 149);
+    console.log(chunks, 149, "end of prettyText");
     return chunks; //
 }
 
