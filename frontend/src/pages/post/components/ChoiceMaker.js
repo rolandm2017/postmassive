@@ -13,6 +13,7 @@ function ChoiceMaker({
     currentlyChecked,
     handleRemoval,
     styling,
+    setter,
 }) {
     return (
         <div className="styling_styling-parent-container d-flex flex-row align-items-start">

@@ -1,3 +1,5 @@
+import { postOptions } from "./authHeader";
+
 import Styling from "../utility/classes/Styling";
 import { styleObjectIsEmpty } from "../utility/utility";
 
@@ -15,7 +17,14 @@ export function getAuctioneerResponse() {
     return price;
 }
 
-export function postPost(username, content, price, floor, stylings) {
+export function postPost(
+    username,
+    content,
+    price,
+    floor,
+    stylings,
+    handleGoToHome
+) {
     // let displayName = user.displayName; // todo: get displayName for data
     let postContentWithStyling = {
         username: username,
@@ -34,7 +43,7 @@ export function postPost(username, content, price, floor, stylings) {
     ) // todo: content packages stuff into json.
         .then((x) => {
             if (200) {
-                handleClick(); // redirect to /home
+                handleGoToHome(); // redirect to /home
                 console.log("sent data to server successfully");
             }
         })
@@ -75,105 +84,122 @@ export function addStyleToSection(styling, type, index, setter) {
     // 78 -> 132 refactored into 65 -> 75? that just cant be// FIXME: this.
 }
 
-export function addStyleToSection2() {
-    console.log(113, type, currentStyle, firstStyle, secondStyle, thirdStyle);
-    if (currentStyle === 0) {
-        // https://stackoverflow.com/questions/679915/how-do-i-test-for-an-empty-javascript-object
-        let firstStyleIsEmpty = styleObjectIsEmpty(firstStyle);
-        console.log(131, firstStyleIsEmpty, firstStyle);
+// export function addStyleToSection2() {
+//     console.log(113, type, currentStyle, firstStyle, secondStyle, thirdStyle);
+//     if (currentStyle === 0) {
+//         // https://stackoverflow.com/questions/679915/how-do-i-test-for-an-empty-javascript-object
+//         let firstStyleIsEmpty = styleObjectIsEmpty(firstStyle);
+//         console.log(131, firstStyleIsEmpty, firstStyle);
 
-        if (!firstStyleIsEmpty) {
-            // type can still be empty tho
-            updateStyleWithType(type, firstStyle, setFirstStyle);
-        } else {
-            // make the style. DO NOT refactor this to be outside of "currentStyle" dependency
-            let styleInit = {
-                start: 0,
-                end: 3,
-                styles: [type],
-            };
-            console.log("creating style...", styleInit, 134);
-            setFirstStyle(styleInit);
-        }
-    } else if (currentStyle === 1) {
-        let secondStyleIsEmpty = styleObjectIsEmpty(secondStyle);
-        console.log(149, secondStyleIsEmpty, secondStyle);
+//         if (!firstStyleIsEmpty) {
+//             // type can still be empty tho
+//             updateStyleWithType(type, firstStyle, setFirstStyle);
+//         } else {
+//             // make the style. DO NOT refactor this to be outside of "currentStyle" dependency
+//             let styleInit = {
+//                 start: 0,
+//                 end: 3,
+//                 styles: [type],
+//             };
+//             console.log("creating style...", styleInit, 134);
+//             setFirstStyle(styleInit);
+//         }
+//     } else if (currentStyle === 1) {
+//         let secondStyleIsEmpty = styleObjectIsEmpty(secondStyle);
+//         console.log(149, secondStyleIsEmpty, secondStyle);
 
-        if (!secondStyleIsEmpty) {
-            updateStyleWithType(type, secondStyle, setSecondStyle);
-        } else {
-            // make the style. DO NOT refactor this to be outside of "currentStyle" dependency
-            let styleInit = {
-                start: 0,
-                end: content.length,
-                styles: [type],
-            };
-            console.log("creating style...", 154);
-            setSecondStyle(styleInit);
-        }
-    } else if (currentStyle === 2) {
-        let thirdStyleIsEmpty = styleObjectIsEmpty(thirdStyle);
-        console.log(179, thirdStyle, thirdStyleIsEmpty);
-        if (!thirdStyleIsEmpty) {
-            updateStyleWithType(type, thirdStyle, setThirdStyle);
-        } else {
-            // make the style. DO NOT refactor this to be outside of "currentStyle" dependency
-            let styleInit = {
-                start: 0,
-                end: content.length,
-                styles: [type],
-            };
-            console.log("creating style...", 179);
-            setThirdStyle(styleInit);
-        }
-    } else {
-        console.log(currentStyle, "<--- weird bug");
-    }
-}
+//         if (!secondStyleIsEmpty) {
+//             updateStyleWithType(type, secondStyle, setSecondStyle);
+//         } else {
+//             // make the style. DO NOT refactor this to be outside of "currentStyle" dependency
+//             let styleInit = {
+//                 start: 0,
+//                 end: content.length,
+//                 styles: [type],
+//             };
+//             console.log("creating style...", 154);
+//             setSecondStyle(styleInit);
+//         }
+//     } else if (currentStyle === 2) {
+//         let thirdStyleIsEmpty = styleObjectIsEmpty(thirdStyle);
+//         console.log(179, thirdStyle, thirdStyleIsEmpty);
+//         if (!thirdStyleIsEmpty) {
+//             updateStyleWithType(type, thirdStyle, setThirdStyle);
+//         } else {
+//             // make the style. DO NOT refactor this to be outside of "currentStyle" dependency
+//             let styleInit = {
+//                 start: 0,
+//                 end: content.length,
+//                 styles: [type],
+//             };
+//             console.log("creating style...", 179);
+//             setThirdStyle(styleInit);
+//         }
+//     } else {
+//         console.log(currentStyle, "<--- weird bug");
+//     }
+// }
 
 export function removeStyleFromSection(styling, type, index, setter) {
-    // fixme: very broken! if bold,italic,strikethrough, clicking 1 removes all.
-    console.log(197, type, "this is index of what", index, "aiemd for bold");
-    let currentStyles;
-    if (index === 0) {
-        currentStyles = [...firstStyle.stylings];
-        const typeIndex = currentStyles.indexOf(type);
-        if (typeIndex > -1) {
-            currentStyles.splice(typeIndex, 1);
-        }
-        let newFirstStyleObject = {
-            start: firstStyle.start,
-            end: firstStyle.end,
-            styles: currentStyles,
-        };
-        setFirstStyle(newFirstStyleObject);
-    } else if (index === 1) {
-        currentStyles = [...secondStyle.stylings];
-        const typeIndex = currentStyles.indexOf(type);
-        if (typeIndex > -1) {
-            currentStyles.splice(typeIndex, 1);
-        }
-        let newSecondStyleObject = {
-            start: secondStyle.start,
-            end: secondStyle.end,
-            styles: currentStyles,
-        };
-        setSecondStyle(newSecondStyleObject);
-    } else if (index === 2) {
-        currentStyles = [...thirdStyle.stylings];
-        const typeIndex = currentStyles.indexOf(type);
-        // FIXME: i suspect something is broken in here
-        if (typeIndex > -1) {
-            currentStyles.splice(typeIndex, 1);
-        }
-        let newThirdStyleObject = {
-            start: thirdStyle.start,
-            end: thirdStyle.end,
-            styles: currentStyles,
-        };
-        setThirdStyle(newThirdStyleObject);
-    } else {
-        console.log(currentStyle, "<--- weird bug");
-        // throw "strange error";
+    let currentStylings = new Styling(styling.start, styling.end, [
+        ...styling.stylings,
+    ]);
+    let typeIndex = currentStylings.stylings.indexOf(type);
+    let remainingStylings;
+    if (typeIndex > -1) {
+        remainingStylings = currentStylings.splice(typeIndex, 1);
     }
+    let newStyleObject = new Styling(
+        currentStylings.start,
+        currentStylings.end,
+        remainingStylings
+    );
+    setter(newStyleObject);
 }
+
+// export function removeStyleFromSection2(styling, type, index, setter) {
+//     // fixme: very broken! if bold,italic,strikethrough, clicking 1 removes all.
+//     console.log(197, type, "this is index of what", index, "aiemd for bold");
+//     let currentStyles;
+//     if (index === 0) {
+//         currentStyles = [...firstStyle.stylings];
+//         const typeIndex = currentStyles.indexOf(type);
+//         if (typeIndex > -1) {
+//             currentStyles.splice(typeIndex, 1);
+//         }
+//         let newFirstStyleObject = {
+//             start: firstStyle.start,
+//             end: firstStyle.end,
+//             styles: currentStyles,
+//         };
+//         setFirstStyle(newFirstStyleObject);
+//     } else if (index === 1) {
+//         currentStyles = [...secondStyle.stylings];
+//         const typeIndex = currentStyles.indexOf(type);
+//         if (typeIndex > -1) {
+//             currentStyles.splice(typeIndex, 1);
+//         }
+//         let newSecondStyleObject = {
+//             start: secondStyle.start,
+//             end: secondStyle.end,
+//             styles: currentStyles,
+//         };
+//         setSecondStyle(newSecondStyleObject);
+//     } else if (index === 2) {
+//         currentStyles = [...thirdStyle.stylings];
+//         const typeIndex = currentStyles.indexOf(type);
+//         // FIXME: i suspect something is broken in here
+//         if (typeIndex > -1) {
+//             currentStyles.splice(typeIndex, 1);
+//         }
+//         let newThirdStyleObject = {
+//             start: thirdStyle.start,
+//             end: thirdStyle.end,
+//             styles: currentStyles,
+//         };
+//         setThirdStyle(newThirdStyleObject);
+//     } else {
+//         console.log(currentStyle, "<--- weird bug");
+//         // throw "strange error";
+//     }
+// }

@@ -74,11 +74,11 @@ function Post(props) {
 
     // todo: on load, get username from slug.
 
-    function handleClick() {
+    function handleGoToHome() {
         history.push("/home");
     }
 
-    export function handleChangeStartRange(styleObjectIndex, newStartIndex) {
+    function handleChangeStartRange(styleObjectIndex, newStartIndex) {
         // console.log(2248, styleObjectIndex, newStartIndex);
         let integerNewStartIndex = parseInt(newStartIndex, 10);
         if (styleObjectIndex === 0) {
@@ -96,7 +96,7 @@ function Post(props) {
         }
     }
 
-    export function handleChangeEndRange(
+    function handleChangeEndRange(
         styling,
         styleObjectIndex,
         newEndIndex,
@@ -396,7 +396,9 @@ function Post(props) {
                                                 firstStyle,
                                                 secondStyle,
                                                 thirdStyle,
-                                            ] // wrap up all 3 choices and put into Post
+                                            ],
+                                            // wrap up all 3 choices and put into Post
+                                            handleGoToHome
                                         );
                                     }}
                                 >
