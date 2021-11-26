@@ -21,6 +21,8 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src"
+    "src/utility/utility.js",
+    "src/utility/chunk/Chunk.js",
+    "src/_helper/auctioneer.js"
   ]
 }
