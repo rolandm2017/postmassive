@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
+
+import Styling from "../../utility/classes/Styling";
 // logic imports
-// import { postOptions } from "../../_helper/authHeader";
-// import Styling from "../../utility/classes/Styling";
 import {
     FLOORS,
     EMPHASIS,
@@ -11,13 +11,10 @@ import {
     // FONT_SIZES,
 } from "../../_helper/consts";
 import {
-    
-    // detectIsStylingEmpty,
-    // styleObjectIsEmpty,
     processMin,
     processMax,
 } from "../../utility/utility";
-import { prettyText } from "../../utility/PrettyText";
+import prettyText from "../../utility/prettyText";
 import {
     getAuctioneerResponse,
     postPost,
@@ -48,41 +45,41 @@ import "../../components/textStyling/TextStyling.css";
 // import { current } from "@reduxjs/toolkit";
 
 function Post(props: any) {
-    const [username, setUsername] = useState(null);
+    const [username, setUsername] = useState<string>("");
     const [content, setContent] = useState("");
     const [price, setPrice] = useState<string>("");
     const [floor, setFloor] = useState(NaN);
     const [currentStyle, setCurrentStyle] = useState(0); // 0, 1, 2 selects radio btn
-    const [firstStyle, setFirstStyle] = useState({});
-    const [secondStyle, setSecondStyle] = useState({});
-    const [thirdStyle, setThirdStyle] = useState({});
+    const [firstStyle, setFirstStyle] = useState(new Styling( 0, 0, []));
+    const [secondStyle, setSecondStyle] = useState(new Styling( 0, 0, []));
+    const [thirdStyle, setThirdStyle] = useState(new Styling( 0, 0, []));
 
     let currentUrl = useLocation().pathname;
     let history = useHistory();
 
     useEffect(() => {
         // console.log(30, currentUrl);
-        let usernameForState = currentUrl.split("/")[1];
+        let usernameForState: string = currentUrl.split("/")[1];
         // console.log(31, usernameForState);
         setUsername(usernameForState);
         let price: string = getAuctioneerResponse();
         setPrice(price);
     }, [currentUrl]);
 
-    // todo: on load, get username from slug.
-
     function handleGoToHome() {
         history.push("/home");
     }
 
-    function convertToFormalStyling(start, end, stylings, setter) {
-        const avoidPassByReference = Styling(start, end, [...stylings]);
+    function convertToFormalStyling(start: number, end: number, stylings: string[], setter: any): void {
+        const avoidPassByReference = new Styling(start, end, [...stylings]);
         setter(avoidPassByReference);
+        return undefined;
     }
 
-    function handleChangeStartRange(styleObjectIndex, newStartIndex) {
+    function handleChangeStartRange(styleObjectIndex: number, newStartIndex: any): void {
+        // TODO: nail down newStartIndex as either string||integer
         // console.log(2248, styleObjectIndex, newStartIndex);
-        let integerNewStartIndex = parseInt(newStartIndex, 10);
+        let integerNewStartIndex: number = parseInt(newStartIndex, 10);
         if (styleObjectIndex === 0) {
             let newFirstStyle = { ...firstStyle };
             newFirstStyle.start = integerNewStartIndex;
@@ -95,15 +92,18 @@ function Post(props: any) {
             let newThirdStyle = { ...thirdStyle };
             newThirdStyle.start = integerNewStartIndex;
             setThirdStyle(newThirdStyle);
+        } else {
+            throw Error("Index out of range for handleChangeStartRange");
         }
     }
 
+    // TODO: rewrite this func to use these 4 args
     function handleChangeEndRange(
-        styling,
-        styleObjectIndex,
-        newEndIndex,
-        setter
-    ) {
+        styling: any, 
+        styleObjectIndex: number,
+        newEndIndex: number,
+        setter: any
+    ): void {
         let integerNewEndIndex = parseInt(newEndIndex, 10);
         // console.log(2265, styleObjectIndex, newEndIndex, integerNewEndIndex);
         if (styleObjectIndex === 0) {
@@ -123,7 +123,7 @@ function Post(props: any) {
         }
     }
 
-    function handleChangeStylingSelection(number) {
+    function handleChangeStylingSelection(number: number): void {
         setCurrentStyle(number); // does work btw!
     }
 

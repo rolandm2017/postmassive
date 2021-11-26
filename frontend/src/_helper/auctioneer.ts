@@ -56,7 +56,7 @@ function onlyUnique(value: any, index: number, self: any):boolean {
     return self.indexOf(value) === index;
 }
 
-function updateStyleWithType(type: string, styleObject: Styling, setter: any): undefined {
+function updateStyleWithType(type: string, styleObject: Styling, setter: any): void {
     console.log(116, type, styleObject, setter);
     let newNthStyle = {
         ...styleObject,
@@ -69,7 +69,6 @@ function updateStyleWithType(type: string, styleObject: Styling, setter: any): u
     newNthStyle.stylings = currentStyles.filter(onlyUnique);
 
     setter(newNthStyle);
-    return undefined;
 }
 
 export function addStyleToSection(styling: Styling, type: string, index: number, setter: any) {
