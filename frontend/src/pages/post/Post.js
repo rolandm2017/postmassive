@@ -74,6 +74,11 @@ function Post(props) {
         history.push("/home");
     }
 
+    function convertToFormalStyling(start, end, stylings, setter) {
+        const avoidPassByReference = Styling(start, end, [...stylings]);
+        setter(avoidPassByReference);
+    }
+
     function handleChangeStartRange(styleObjectIndex, newStartIndex) {
         // console.log(2248, styleObjectIndex, newStartIndex);
         let integerNewStartIndex = parseInt(newStartIndex, 10);

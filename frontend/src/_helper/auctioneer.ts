@@ -71,7 +71,7 @@ function updateStyleWithType(type, styleObject, setter) {
     setter(newNthStyle);
 }
 
-export function addStyleToSection(styling, type, index, setter) {
+export function addStyleToSection(styling: Styling, type: string, index: number, setter: any) {
     let isEmptyObject = styleObjectIsEmpty(styling);
     if (!isEmptyObject) {
         updateStyleWithType(type, styling, setter);
@@ -84,7 +84,7 @@ export function addStyleToSection(styling, type, index, setter) {
     // 78 -> 132 refactored into 65 -> 75? that just cant be// FIXME: this.
 }
 
-export function removeStyleFromSection(styling, type, index, setter) {
+export function removeStyleFromSection(styling: Styling, type: string, index: number, setter: any): any {
     console.log(styling, 144);
     let currentStylings = new Styling(styling.start, styling.end, [
         ...styling.stylings,
@@ -98,51 +98,5 @@ export function removeStyleFromSection(styling, type, index, setter) {
         remainingStylings
     );
     setter(newStyleObject);
+    return undefined;
 }
-
-// export function removeStyleFromSection2(styling, type, index, setter) {
-//     // fixme: very broken! if bold,italic,strikethrough, clicking 1 removes all.
-//     console.log(197, type, "this is index of what", index, "aiemd for bold");
-//     let currentStyles;
-//     if (index === 0) {
-//         currentStyles = [...firstStyle.stylings];
-//         const typeIndex = currentStyles.indexOf(type);
-//         if (typeIndex > -1) {
-//             currentStyles.splice(typeIndex, 1);
-//         }
-//         let newFirstStyleObject = {
-//             start: firstStyle.start,
-//             end: firstStyle.end,
-//             styles: currentStyles,
-//         };
-//         setFirstStyle(newFirstStyleObject);
-//     } else if (index === 1) {
-//         currentStyles = [...secondStyle.stylings];
-//         const typeIndex = currentStyles.indexOf(type);
-//         if (typeIndex > -1) {
-//             currentStyles.splice(typeIndex, 1);
-//         }
-//         let newSecondStyleObject = {
-//             start: secondStyle.start,
-//             end: secondStyle.end,
-//             styles: currentStyles,
-//         };
-//         setSecondStyle(newSecondStyleObject);
-//     } else if (index === 2) {
-//         currentStyles = [...thirdStyle.stylings];
-//         const typeIndex = currentStyles.indexOf(type);
-//         // FIXME: i suspect something is broken in here
-//         if (typeIndex > -1) {
-//             currentStyles.splice(typeIndex, 1);
-//         }
-//         let newThirdStyleObject = {
-//             start: thirdStyle.start,
-//             end: thirdStyle.end,
-//             styles: currentStyles,
-//         };
-//         setThirdStyle(newThirdStyleObject);
-//     } else {
-//         console.log(currentStyle, "<--- weird bug");
-//         // throw "strange error";
-//     }
-// }

@@ -162,3 +162,68 @@ export function processMax(index: number, sourceOfMax: number | undefined, conte
     }
 }
 
+export function getSubstringsWithInstructions(inputText: string, stylings: Styling[]): Instruction[] {
+    /*
+    // inputText - self explanatory
+    // stylingsSansProcessing - the .stylings array. it may be that the user has supplied 0, 1, 2, or 3 stylings.
+    // ...this function's role is to sort out how many substrings we'll need.
+    // for 0, we don't need any substrings.
+    // for 1, we just need the substring that is encapsulated by the Styling.
+    // for 2 or 3, a loop makes sense, though barely!
+    // return value - should be an array of strings that can be combined using prettyText
+    */
+
+    // TODO: Rewrite this function, it's awful. Too many edge cases before the meat and potatoes.
+
+    // todo: only splice if there is a styling attached to the stylings obj // delete if here on dec 20th
+    
+    let stringsWithInstructions = [];
+
+    if (stylings.length === 1) {
+        return handleJustOneStyling(inputText, stylings[0]); // end of stylings
+    }
+
+    let startingSliceValue = inputText.slice(0, stylings[0].start);
+    let initSlice = new Instruction(false, startingSliceValue);
+    // let initSlice = {
+    //     special: false,
+    //     value: startingSliceValue
+    // };
+    if (stylings.length > 0) {
+        stringsWithInstructions.push(initSlice);
+    }
+    // fixme: if end is before start, use end as start and start as end. its not a big deal.
+    // priority: high!
+    // fixme: also the sliders ranges have to be unmessed from their current messy bugged state
+    for (let i = 0; i < stylings.length; i++) {
+        let areWeOnTheLastStyling = i === stylings.length - 1;
+        let stylingsCount = countStylings(stylings[i].stylings);
+        let textSlice = inputText.slice(stylings[i].start, stylings[i].end); // will go from i to end of string
+        let instruction = new Instruction(
+            true,
+            textSlice,
+            stylings[i].stylings,
+            stylingsCount
+        );
+        stringsWithInstructions.push(instruction);
+
+        if (areWeOnTheLastStyling) {
+            // special case. get (start, end) and then (end, contentLength)
+
+            let ordinaryTrailEndPart = inputText.slice(stylings[i].end + 1); // will be the trailing but
+            let trailEnd = new Instruction(false, ordinaryTrailEndPart);
+            stringsWithInstructions.push(trailEnd);
+        } else {
+            // standard case. get (start, end), then (end + 1, nextStart)
+            let normalTextInBetween = inputText.slice(
+                stylings[i].end + 1,
+                stylings[i + 1].start
+            );
+            let instruction = new Instruction(false, normalTextInBetween);
+            stringsWithInstructions.push(instruction);
+        }
+    }
+    // console.log(stringsWithInstructions);
+    return stringsWithInstructions;
+}
+
