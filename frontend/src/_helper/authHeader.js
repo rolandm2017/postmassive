@@ -7,6 +7,8 @@
 // the request is to the application api url.
 import Cookies from "js-cookie";
 
+// maybe turn this into ts as well
+
 import { userValue, userSubject, getRefreshToken } from "../auth/use-auth";
 
 export function getOptions(url) {

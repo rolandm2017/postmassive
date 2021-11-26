@@ -1,7 +1,11 @@
-import { wellMadeStylingIsPresent} from "./utility"
+import { FC } from "react";
+
+import { wellMadeStylingIsPresent, joinClassesAndVerify } from "./utility"
 
 import Styling from "./classes/Styling";
-import Chunk from "./chunk/Chunk";
+import { Chunk } from "./chunk/Chunk";
+
+
 
 function prettyText(inputText: string, stylings: Array<Styling>, callback: any): Array<Chunk> {
     /*
@@ -13,8 +17,8 @@ function prettyText(inputText: string, stylings: Array<Styling>, callback: any):
     let isStylingsEmpty = stylings.length === 0;
     if (isStylingsEmpty) {
         // console.log(26, "yes, it was empty");
-        let createNonspecialChunk: Chunk = <Chunk index={0} availableStylings={null} chunkValue={inputText} />
-        let nonspecialChunkArray: Chunk[] = [createNonspecialChunk]
+        let createNonspecialChunk: any = <typeof Chunk index={0} availableStylings={null} chunkValue={inputText} />;
+        let nonspecialChunkArray: any[] = [createNonspecialChunk]
         return (
             nonspecialChunkArray
         );
@@ -30,8 +34,8 @@ function prettyText(inputText: string, stylings: Array<Styling>, callback: any):
     let atLeastOneWellFormedStyling = wellMadeStylingIsPresent(stylings);
     if (!atLeastOneWellFormedStyling) {
         // return <span className="stylized">{inputText}</span>; // return simply the text ??
-        let createNonspecialChunk: Chunk = <Chunk index={0} availableStylings={null} chunkValue={inputText} />
-        let nonspecialChunkArray: Chunk[] = [createNonspecialChunk]
+        let createNonspecialChunk: typeof Chunk = <Chunk index={0} availableStylings={null} chunkValue={inputText} />
+        let nonspecialChunkArray: typeof Chunk[] = [createNonspecialChunk]
         return (
             nonspecialChunkArray
         );
@@ -45,7 +49,7 @@ function prettyText(inputText: string, stylings: Array<Styling>, callback: any):
         if (instruction.special) {
             // console.log(66, availableStylings, chunk);
             if (instruction.numberOfStylings > 1) {
-                let availableStylings = splitClassesAndVerify(
+                let availableStylings = joinClassesAndVerify(
                     instruction.stylings,
                     instruction.numberOfStylings
                 );

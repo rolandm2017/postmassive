@@ -42,6 +42,7 @@ import Flooring from "./components/Flooring";
 
 import "./Post.scss";
 import "../../components/textStyling/TextStyling.css";
+import { first } from "rxjs";
 // import { current } from "@reduxjs/toolkit";
 
 function Post(props: any) {
@@ -81,15 +82,15 @@ function Post(props: any) {
         // console.log(2248, styleObjectIndex, newStartIndex);
         let integerNewStartIndex: number = parseInt(newStartIndex, 10);
         if (styleObjectIndex === 0) {
-            let newFirstStyle = { ...firstStyle };
+            let newFirstStyle = new Styling(firstStyle.start, firstStyle.end, [...firstStyle.stylings]);
             newFirstStyle.start = integerNewStartIndex;
             setFirstStyle(newFirstStyle);
         } else if (styleObjectIndex === 1) {
-            let newSecondStyle = { ...secondStyle };
+            let newSecondStyle = new Styling(secondStyle.start, secondStyle.end, [...secondStyle.stylings]);
             newSecondStyle.start = integerNewStartIndex;
             setSecondStyle(newSecondStyle);
         } else if (styleObjectIndex === 2) {
-            let newThirdStyle = { ...thirdStyle };
+            let newThirdStyle = new Styling(thirdStyle.start, thirdStyle.end, [...thirdStyle.stylings]);
             newThirdStyle.start = integerNewStartIndex;
             setThirdStyle(newThirdStyle);
         } else {
@@ -97,27 +98,25 @@ function Post(props: any) {
         }
     }
 
-    // TODO: rewrite this func to use these 4 args
+    // TODO: rewrite this func to use these 4 args -- it was plainly obvious to me that it was doable before
     function handleChangeEndRange(
         styling: any, 
         styleObjectIndex: number,
-        newEndIndex: number,
+        newEndIndex: string,
         setter: any
     ): void {
-        let integerNewEndIndex = parseInt(newEndIndex, 10);
+        let integerNewEndIndex:number = parseInt(newEndIndex, 10);
         // console.log(2265, styleObjectIndex, newEndIndex, integerNewEndIndex);
         if (styleObjectIndex === 0) {
-            let newFirstStyle = { ...firstStyle };
+            let newFirstStyle = new Styling(firstStyle.start, firstStyle.end, [...firstStyle.stylings]);
             newFirstStyle.end = integerNewEndIndex;
             setFirstStyle(newFirstStyle);
         } else if (styleObjectIndex === 1) {
-            let newSecondStyle = { ...secondStyle };
+            let newSecondStyle = new Styling(secondStyle.start, secondStyle.end, [...secondStyle.stylings]);
             newSecondStyle.end = integerNewEndIndex;
             setSecondStyle(newSecondStyle);
         } else if (styleObjectIndex === 2) {
-            let newThirdStyle = {
-                ...thirdStyle,
-            };
+            let newThirdStyle = new Styling(thirdStyle.start, thirdStyle.end, [...thirdStyle.stylings]);
             newThirdStyle.end = integerNewEndIndex;
             setThirdStyle(newThirdStyle);
         }
@@ -208,7 +207,7 @@ function Post(props: any) {
                                                   firstStyle,
                                                   secondStyle,
                                                   thirdStyle,
-                                              ]
+                                              ], undefined
                                               // setContent // YAGNI
                                           ).map((Chunk, index) => {
                                               return (
