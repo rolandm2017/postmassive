@@ -173,24 +173,20 @@ export function getSubstringsWithInstructions(inputText: string, stylings: Styli
     // return value - should be an array of strings that can be combined using prettyText
     */
 
-    // TODO: Rewrite this function, it's awful. Too many edge cases before the meat and potatoes.
-
     // todo: only splice if there is a styling attached to the stylings obj // delete if here on dec 20th
+    // REWRITE
+    // REWRITE
+    // REWRITE
     
-    let stringsWithInstructions = [];
-
-    if (stylings.length === 1) {
-        return handleJustOneStyling(inputText, stylings[0]); // end of stylings
-    }
-
     let startingSliceValue = inputText.slice(0, stylings[0].start);
     let initSlice = new Instruction(false, startingSliceValue);
     // let initSlice = {
     //     special: false,
     //     value: startingSliceValue
     // };
+    let extremelySpecificInstructions: Instruction[] = [];
     if (stylings.length > 0) {
-        stringsWithInstructions.push(initSlice);
+        extremelySpecificInstructions.push(initSlice);
     }
     // fixme: if end is before start, use end as start and start as end. its not a big deal.
     // priority: high!
@@ -205,14 +201,14 @@ export function getSubstringsWithInstructions(inputText: string, stylings: Styli
             stylings[i].stylings,
             stylingsCount
         );
-        stringsWithInstructions.push(instruction);
+        extremelySpecificInstructions.push(instruction);
 
         if (areWeOnTheLastStyling) {
             // special case. get (start, end) and then (end, contentLength)
 
             let ordinaryTrailEndPart = inputText.slice(stylings[i].end + 1); // will be the trailing but
             let trailEnd = new Instruction(false, ordinaryTrailEndPart);
-            stringsWithInstructions.push(trailEnd);
+            extremelySpecificInstructions.push(trailEnd);
         } else {
             // standard case. get (start, end), then (end + 1, nextStart)
             let normalTextInBetween = inputText.slice(
@@ -220,10 +216,10 @@ export function getSubstringsWithInstructions(inputText: string, stylings: Styli
                 stylings[i + 1].start
             );
             let instruction = new Instruction(false, normalTextInBetween);
-            stringsWithInstructions.push(instruction);
+            extremelySpecificInstructions.push(instruction);
         }
     }
     // console.log(stringsWithInstructions);
-    return stringsWithInstructions;
+    return extremelySpecificInstructions;
 }
 

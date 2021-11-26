@@ -11,12 +11,13 @@ import {
     // FONT_SIZES,
 } from "../../_helper/consts";
 import {
-    prettyText,
+    
     // detectIsStylingEmpty,
     // styleObjectIsEmpty,
     processMin,
     processMax,
 } from "../../utility/utility";
+import { prettyText } from "../../utility/PrettyText";
 import {
     getAuctioneerResponse,
     postPost,
@@ -46,10 +47,10 @@ import "./Post.scss";
 import "../../components/textStyling/TextStyling.css";
 // import { current } from "@reduxjs/toolkit";
 
-function Post(props) {
+function Post(props: any) {
     const [username, setUsername] = useState(null);
     const [content, setContent] = useState("");
-    const [price, setPrice] = useState(null);
+    const [price, setPrice] = useState<string>("");
     const [floor, setFloor] = useState(NaN);
     const [currentStyle, setCurrentStyle] = useState(0); // 0, 1, 2 selects radio btn
     const [firstStyle, setFirstStyle] = useState({});
@@ -64,7 +65,7 @@ function Post(props) {
         let usernameForState = currentUrl.split("/")[1];
         // console.log(31, usernameForState);
         setUsername(usernameForState);
-        let price = getAuctioneerResponse();
+        let price: string = getAuctioneerResponse();
         setPrice(price);
     }, [currentUrl]);
 

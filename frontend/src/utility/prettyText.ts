@@ -1,4 +1,4 @@
-import { wellMadeStylingIsPresent} from "./TSutility"
+import { wellMadeStylingIsPresent} from "./utility"
 
 import Styling from "./classes/Styling";
 import Chunk from "./chunk/Chunk";

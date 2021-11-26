@@ -1,7 +1,7 @@
 import { postOptions } from "./authHeader";
 
 import Styling from "../utility/classes/Styling";
-import { styleObjectIsEmpty } from "../utility/utility";
+import { isAllEmpty, thisSingularObjectIsEmpty } from "../utility/utility";
 
 export function getAuctioneerResponse() {
     // talks to server's auctioneer to get price of post
@@ -18,12 +18,12 @@ export function getAuctioneerResponse() {
 }
 
 export function postPost(
-    username,
-    content,
-    price,
-    floor,
-    stylings,
-    handleGoToHome
+    username: string,
+    content: string,
+    price: any,
+    floor: number,
+    stylings: Styling[],
+    handleGoToHome: any
 ) {
     // let displayName = user.displayName; // todo: get displayName for data
     let postContentWithStyling = {
@@ -52,11 +52,11 @@ export function postPost(
         });
 }
 
-function onlyUnique(value, index, self) {
+function onlyUnique(value: any, index: number, self: any):boolean {
     return self.indexOf(value) === index;
 }
 
-function updateStyleWithType(type, styleObject, setter) {
+function updateStyleWithType(type: string, styleObject: Styling, setter: any): undefined {
     console.log(116, type, styleObject, setter);
     let newNthStyle = {
         ...styleObject,
@@ -69,10 +69,11 @@ function updateStyleWithType(type, styleObject, setter) {
     newNthStyle.stylings = currentStyles.filter(onlyUnique);
 
     setter(newNthStyle);
+    return undefined;
 }
 
 export function addStyleToSection(styling: Styling, type: string, index: number, setter: any) {
-    let isEmptyObject = styleObjectIsEmpty(styling);
+    let isEmptyObject = thisSingularObjectIsEmpty(styling);
     if (!isEmptyObject) {
         updateStyleWithType(type, styling, setter);
     } else {

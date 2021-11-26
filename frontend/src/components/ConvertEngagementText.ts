@@ -29,7 +29,7 @@ export function convertEngagementText(inputNum: number): string {
             return stringVer.slice(0, 1) + "." + stringVer.slice(1, 2) + "m";
         }
         const lengthPreDecimal: number = stringVer.length - 6; // 6: slice off the 0's in 13,000,000, for instance
-        const decimal: any = stringVer.slice(lengthPreDecimal, lengthPreDecimal + 1).;
+        const decimal: any = stringVer.slice(lengthPreDecimal, lengthPreDecimal + 1);
         // let puttingItTogether =
         // console.log(stringVer, lengthPreDecimal, decimal);
         return (

@@ -1,7 +1,7 @@
 function processAmount(number: number, displayedInFeed: boolean): string {
     // turns "2707" -> "2,707" and "306438" -> "306k"
     // console.log(number);
-    const amtAsString = parseInt(number, 10).toString();
+    const amtAsString: string = number.toString();
     if (amtAsString.length <= 3) {
         // handles values like "123" and other 3 digit nums
         return amtAsString;
@@ -26,7 +26,9 @@ function processAmount(number: number, displayedInFeed: boolean): string {
         let together = beforeDot + "." + afterDot + mil;
         console.log(together);
         return together;
+    } else {
+        throw Error("processAmount did not receive a correct input")
     }
 };
 
-export default ProcessAmount;
+export default processAmount;
