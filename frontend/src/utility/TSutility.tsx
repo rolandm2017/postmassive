@@ -2,6 +2,9 @@ import Styling from "./classes/Styling";
 
 
 export function thisSingularObjectIsEmpty(styling: Styling): boolean {
+    /*
+    //
+    */
     let isEmpty: boolean =
     styling && // 👈 null and undefined check
         Object.keys(styling).length === 0 &&
@@ -25,7 +28,11 @@ export function isAllEmpty(stylings: Array<Styling>): boolean {
 }
 
 
-export function detectWellMadeStyling(stylings) {
+// TODO: find out what this is actually used for
+// TODO: find out what this is actually used for
+// TODO: find out what this is actually used for
+
+export function wellMadeStylingIsPresent(stylings: Array<Styling>): boolean {
     // TODO: Update this if it needs it
 
     /*
@@ -42,10 +49,99 @@ export function detectWellMadeStyling(stylings) {
             : false;
         // console.log(34, stylingHasStart, stylingHasEnd, stylingHasStyles);
         if (stylingHasStart && stylingHasEnd && stylingHasStyles) {
-            // console.log(35, stylings[i]);
             return true;
         }
     }
-    // console.log("false!!!!!!!!", 37);
     return false;
+}
+
+export function countStylings(stylings: Array<string>): number {
+    /* 
+    // pass the value of stylings.stylings, not the stylings object. 
+    // **
+    // ** PLEASE NOTE: Array<string> IS the CORRECT type
+    // **
+    // return value - the length of the stylings
+    // e.g. ["bold", "italics"], 2
+    */
+    return stylings.length;
+}
+
+export function joinClassesAndVerify(classesList: Array<string>, expectedNumberOfClasses: number): string {
+    // really proud of this one
+    /* 
+    // @params unsplitClasses - input raw string like "bold, fontSize24" to convert to ["bold", "fontSize24"]
+    // @params expectedNumberOfClasses - Comes direct from the Instructions object. To be compared for error detection. 
+    // returns - the classes string to insert into the component
+    */
+    if (classesList.length === expectedNumberOfClasses) {
+        let joinedClasses = "." + classesList.join(" .");
+        return joinedClasses;
+    } else {
+        console.log(classesList, expectedNumberOfClasses);
+        throw Error(
+            "Unexpected mismatch between splitClasses length and expectedNumber"
+        );
+    }
+}
+
+
+export function processMin(index: number, sourceOfMin: number | undefined, contentLength: number): number {
+    /*
+    // per Styling, min is as follows: 
+    // (1) srcOfMin === 0, 
+    // (2) end of first style *if* it exists, otherwise content.length
+    // (3) end of second style *if* it exists, otherwise content.length;
+    // returns: the index's assigned minimum value
+    */
+
+    if (index === 0) {
+        return 0;
+    } else if (index === 1) {
+        if (sourceOfMin) {
+            return sourceOfMin;
+        } else {
+            return contentLength;
+        }
+    } else if (index === 2) {
+        if (sourceOfMin) {
+            return sourceOfMin;
+        } else {
+            return contentLength;
+        }
+    } else {
+        throw Error("Index was out of range");
+    }
+    
+}
+
+export function processMax(index: number, sourceOfMax: number | undefined, contentLength: number): number {
+    /*
+    // this is the maximum value available for the given index. per Styling, max is as follows: 
+    // (1) start of second style *if* it exists; otherwise, contentLength 
+    // (2) start of third style *if* it exists; otherwise, contentLength.
+    // (3) srcOfMax === contentLength;
+    // returns: the index's assigned minimum value
+    */
+    if (index === 0) {
+        if (sourceOfMax) {
+            return sourceOfMax;
+        } else {
+            return contentLength;
+        }
+    } else if (index === 1) {
+        if (sourceOfMax) {
+            return sourceOfMax;
+        } else {
+            return contentLength;
+        }
+    } else if (index === 2) {
+        if (sourceOfMax) {
+            return sourceOfMax;
+        } else {
+            return contentLength;
+        }
+    } else {
+        throw "Index was out of range"
+    }
 }

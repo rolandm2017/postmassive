@@ -1,24 +1,6 @@
 import Instruction from "./classes/Instruction";
 import Chunk from "./chunk/Chunk";
 
-export function splitClassesAndVerify(classesList, expectedNumberOfClasses) {
-    // really proud of this one
-    /* 
-    // @params unsplitClasses - input raw string like "bold, fontSize24" to convert to ["bold", "fontSize24"]
-    // @params expectedNumberOfClasses - Comes direct from the Instructions object. To be compared for error detection. 
-    // returns - the classes string to insert into the component
-    */
-    if (classesList.length === expectedNumberOfClasses) {
-        let joinedClasses = "." + classesList.join(" .");
-        return joinedClasses;
-    } else {
-        console.log(classesList, expectedNumberOfClasses);
-        throw Error(
-            "Unexpected mismatch between splitClasses length and expectedNumber"
-        );
-    }
-}
-
 export function prettyText(inputText, stylings, callback) {
     /*
     // inputText: the text to style. should be a long string.
@@ -41,7 +23,7 @@ export function prettyText(inputText, stylings, callback) {
         // console.log(30, stylings);
     }
     // console.log("prettyText52", isStylingsEmpty, stylings);
-    let atLeastOneWellFormedStyling = detectWellMadeStyling(stylings);
+    let atLeastOneWellFormedStyling = wellMadeStylingIsPresent(stylings);
     if (!atLeastOneWellFormedStyling) {
         // return <span className="stylized">{inputText}</span>; // return simply the text ??
         return (
@@ -118,19 +100,6 @@ export function handleJustOneStyling(inputText, styling) {
     ];
 }
 
-export function countStylings(stylings) {
-    /* 
-    // pass the value of stylings.stylings, not the stylings object.
-    // return value - the length of the stylings
-    // e.g. ["bold", "italics"], 2
-    */
-    if (typeof stylings !== undefined) {
-        return stylings.length;
-    } else {
-        throw Error("Shouldn't call this when there are no inputs");
-    }
-}
-
 export function getSubstringsWithInstructions(
     inputText,
     stylingsSansProcessing
@@ -166,14 +135,8 @@ export function getSubstringsWithInstructions(
     });
     let stringsWithInstructions = [];
 
-    // handle case where Stylings is only 1 singular Styling
     if (stylings.length === 1) {
         return handleJustOneStyling(inputText, stylings[0]); // end of stylings
-    }
-
-    // case where there are no stylings, just exit early &  return input text
-    if (detectIsStylingsEmpty(stylings)) {
-        return inputText;
     }
 
     let startingSliceValue = inputText.slice(0, stylings[0].start);
@@ -264,60 +227,5 @@ export function convertEngagementText(inputNum) {
         // don't ever expect a billion but maybe some day...
         // console.log("wow!");
         return stringVer.slice(0, 1) + "." + stringVer.slice(1, 3) + "b";
-    }
-}
-
-export function processMin(index, sourceOfMin, contentLength) {
-    /*
-    // per Styling, min is as follows: 
-    // (1) srcOfMin === 0, 
-    // (2) end of first style *if* it exists, otherwise content.length
-    // (3) end of second style *if* it exists, otherwise content.length;
-    // returns: the index's assigned minimum value
-    */
-
-    if (index === 0) {
-        return 0;
-    } else if (index === 1) {
-        if (sourceOfMin) {
-            return sourceOfMin;
-        } else {
-            return contentLength;
-        }
-    } else if (index === 2) {
-        if (sourceOfMin) {
-            return sourceOfMin;
-        } else {
-            return contentLength;
-        }
-    }
-}
-
-export function processMax(index, sourceOfMax, contentLength) {
-    /*
-    // this is the maximum value available for the given index. per Styling, max is as follows: 
-    // (1) start of second style *if* it exists; otherwise, contentLength 
-    // (2) start of third style *if* it exists; otherwise, contentLength.
-    // (3) srcOfMax === contentLength;
-    // returns: the index's assigned minimum value
-    */
-    if (index === 0) {
-        if (sourceOfMax) {
-            return sourceOfMax;
-        } else {
-            return contentLength;
-        }
-    } else if (index === 1) {
-        if (sourceOfMax) {
-            return sourceOfMax;
-        } else {
-            return contentLength;
-        }
-    } else if (index === 2) {
-        if (sourceOfMax) {
-            return sourceOfMax;
-        } else {
-            return contentLength;
-        }
     }
 }
