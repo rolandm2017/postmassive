@@ -1,22 +1,6 @@
-const ProcessAmount = (number, displayedInFeed) => {
+function processAmount(number: number, displayedInFeed: boolean): string {
     // turns "2707" -> "2,707" and "306438" -> "306k"
     // console.log(number);
-    if (typeof number === "string") {
-        const containsOnlyDigits = /^\d+$/.test(number);
-        if (containsOnlyDigits) {
-            number = parseInt(number, 10);
-        } else {
-            throw Error("String was input with non-digit chars");
-        }
-    }
-    if (number === null) {
-        return null;
-    }
-    if (typeof number !== "number" && number !== null) {
-        // console.log(16, number, displayedInFeed);
-        // throw new Error("Wrong input type");
-        console.error("Wrong input type:", number, displayedInFeed);
-    }
     const amtAsString = parseInt(number, 10).toString();
     if (amtAsString.length <= 3) {
         // handles values like "123" and other 3 digit nums

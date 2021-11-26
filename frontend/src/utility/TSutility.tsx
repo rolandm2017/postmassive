@@ -1,3 +1,4 @@
+import Instruction from "./classes/Instruction";
 import Styling from "./classes/Styling";
 
 
@@ -85,6 +86,21 @@ export function joinClassesAndVerify(classesList: Array<string>, expectedNumberO
     }
 }
 
+export function handleJustOneStyling(inputText: string, styling: Styling): Array<Instruction> {
+    let initSlice = inputText.slice(0, styling.start);
+    let specialMiddleSlice = inputText.slice(styling.start, styling.end);
+    let endSlice = inputText.slice(styling.end, inputText.length);
+    return [
+        new Instruction(false, initSlice),
+        new Instruction(
+            true,
+            specialMiddleSlice,
+            styling.stylings,
+            countStylings(styling.stylings)
+        ),
+        new Instruction(false, endSlice),
+    ];
+}
 
 export function processMin(index: number, sourceOfMin: number | undefined, contentLength: number): number {
     /*
@@ -145,3 +161,4 @@ export function processMax(index: number, sourceOfMax: number | undefined, conte
         throw "Index was out of range"
     }
 }
+
