@@ -162,4 +162,21 @@ router.put("/vote", async (req, res) => {
     // res.status(200).json(poll); // fixme: sending vote 2x doesnt increase poll value 2x
 });
 
+router.delete("/", (req, res) => {
+    const pollToDelete = req.body.pollId;
+    const confirmDelete = req.body.confirmDelete;
+    if (confirmDelete) {
+        Poll.findOneAndDelete(
+            { pollId: pollToDelete },
+            function (fail, succeed) {
+                if (fail) {
+                    console.log(fail);
+                } else {
+                    res.status(200).json(succeed);
+                }
+            }
+        );
+    }
+});
+
 module.exports = router;
