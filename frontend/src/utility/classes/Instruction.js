@@ -1,4 +1,4 @@
-import Chunk from "../chunk/Chunk";
+import { Chunk } from "../chunk/Chunk";
 
 class Instruction {
     constructor(special, textValue, stylings, numberOfStylings) {

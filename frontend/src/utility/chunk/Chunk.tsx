@@ -1,12 +1,12 @@
-import {FC, ReactNode} from "react";
+import React from "react";
 
-type ChunkProps = {
+type IChunkProps = {
     index: number,
     availableStylings: string,
     chunkValue: string,
 };
 
-export function Chunk: FC<ChunkProps>({ index, availableStylings, chunkValue }: ChunkProps) {
+export const Chunk: React.FC<IChunkProps> = ({ index, availableStylings, chunkValue }) => {
     return (
         <span key={index} className={`stylized ${availableStylings} `}>
             {chunkValue}
