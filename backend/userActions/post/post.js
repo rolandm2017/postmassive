@@ -11,6 +11,7 @@ const {
 const Massive = require("../../models/massive.model");
 
 const express = require("express");
+
 const router = express.Router();
 
 router.get("/post", (req, res) => {
@@ -48,7 +49,7 @@ router.post("/post", async (req, res) => {
     let displayName = userDoc.displayName;
 
     console.log(38, username, content, postFloor, datePosted, displayName);
-    let currentHighestPostNumber = Massive.find({})
+    let currentHighestPostNumber = await Massive.find({})
         .sort({ postNumber: "desc" })
         .limit(1)
         .exec((err, post) => {
