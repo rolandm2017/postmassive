@@ -11,13 +11,25 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-    Poll.find({}).find().sort({ _id: -1 }).limit(10);
+    console.log(14, "requesting");
+    Poll.find({})
+        .find()
+        .sort({ pollId: -1 })
+        .limit(10)
+        .exec(function (err, success) {
+            if (err) {
+                console.log(err);
+            } else {
+                res.status(200).json(success);
+            }
+        });
 });
 
 router.get("/:id", (req, res) => {
     let id = req.params.id;
+    console.log(20, "requesting", id);
     let username = req.body.username;
-    console.log(id, 19, username);
+    console.log(id, 22, username);
     if (id === "unknown") {
         // get random poll
         console.log("random poll");
