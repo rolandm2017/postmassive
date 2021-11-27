@@ -209,13 +209,16 @@ function Post(props: any) {
                                                   thirdStyle,
                                               ], undefined
                                               // setContent // YAGNI
-                                          ).map((Chunk, index) => {
-                                              return (
-                                                  <div>
-                                                      <Chunk />
-                                                  </div>
-                                              );
-                                          })
+                                          )
+                                          
+                                          
+                                        //   .map((Chunk, index) => {
+                                        //       return (
+                                        //           <div>
+                                        //               <Chunk />
+                                        //           </div>
+                                        //       );
+                                        //   })
                                         : null}
                                 </div>
                             </div>
