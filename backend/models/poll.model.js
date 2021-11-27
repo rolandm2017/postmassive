@@ -39,8 +39,8 @@ const massiveSchema = new Schema({
     emoji: {
         type: Object,
     },
-    possibilities: { type: Number, required: true },
-    options: { type: Array, required: true },
+    pollId: { type: String, required: true },
+    options: { type: Array }, // array of Poll objects
     // TODO: should really make these a "simplified" version for PM.
 });
 
