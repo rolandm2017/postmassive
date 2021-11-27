@@ -7,7 +7,6 @@ import { Chunk } from "./chunk/Chunk";
 import Instruction from "./classes/Instruction";
 
 
-
 function prettyText(inputText: string, stylings: Array<Styling>, callback: any): any {
     /*
     // inputText: the text to style. should be a long string.
