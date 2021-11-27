@@ -119,61 +119,34 @@ router.put("/vote", async (req, res) => {
 
     const filter = { pollId: pollId };
 
-    let pollToUpdate = await Poll.findOne(filter);
-    let pollOptions = pollToUpdate.options;
+    let updateTarget = await Poll.findOne(filter);
+    console.log(123, updateTarget.pollId, updateTarget.options);
+    let oldOptions = updateTarget.options;
 
-    let newPollValue = NaN;
-    for (let i = 0; i < pollToUpdate.options.length; i++) {
-        if (pollOptions[i].label === voteTarget) {
-            newPollValue = pollOptions[i].votes + 1;
-            pollOptions[i].votes = newPollValue;
-            console.log(pollOptions, 130, 130);
+    let newPollValue;
+    for (let i = 0; i < updateTarget.options.length; i++) {
+        if (oldOptions[i].label === voteTarget) {
+            console.log(oldOptions[i].votes, 128128);
+            let currentVoteTargetValue = oldOptions[i].votes;
+            newPollValue = currentVoteTargetValue + 1;
+            oldOptions[i].votes = newPollValue;
+            console.log(oldOptions, 130, 130);
         }
     }
-    pollToUpdate.options = pollOptions;
-    await pollToUpdate.save();
-    // throw "k"
+
+    let newOptions = [...oldOptions];
+    console.log(newOptions, 138);
+
+    updateTarget.options = newOptions;
+    updateTarget.markModified("options");
+    console.log(updateTarget.options, 141);
+    await updateTarget.save();
     res.status(200).send(
         "successfully updated poll value for " +
             voteTarget +
             " to value " +
             newPollValue
     );
-    // function (err, initialPollValue) {
-    //     if (err) {
-    //         console.log(err);
-    //     }
-    //     const options = initialPollValue.options;
-    //     let index;
-    //     let updatedOptions = [...options];
-    //     let currentVotesForVoteTarget = null;
-    //     console.log(129, options);
-    //     for (let i = 0; i < options.length; i++) {
-    //         if (options[i].label === voteTarget) {
-    //             index = i;
-    //             // console.log(132, options[i].label, voteTarget);
-    //             // currentVotesForVoteTarget = options[i].votes;
-    //             updatedOptions[i].votes = updatedOptions[i].votes + 1;
-    //         }
-    //     }
-
-    //     Poll.findOneAndUpdate(
-    //         filter,
-    //         updatedOptions,
-    //         function (err, updatedPoll) {
-    //             if (err) {
-    //                 console.log(err);
-    //             }
-
-    //             res.status(200).json(updatedPoll);
-    //         }
-    //     );
-    // }
-    // );
-
-    // console.log(139, pollToUpdate);
-    // let poll = await pollToUpdate.save();
-    // console.log(93);
     // res.status(200).json(poll); // fixme: sending vote 2x doesnt increase poll value 2x
 });
 
