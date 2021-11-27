@@ -17,7 +17,7 @@ function prettyText(inputText: string, stylings: Array<Styling>, callback: any):
     let isStylingsEmpty = stylings.length === 0;
     if (isStylingsEmpty) {
         // console.log(26, "yes, it was empty");
-        let createNonspecialChunk: any = <Chunk index={0} availableStylings={null} chunkValue={inputText} />;
+        let createNonspecialChunk: any = <Chunk index={0} availableStylings={""} chunkValue={inputText} />;
         let nonspecialChunkArray: any[] = [createNonspecialChunk]
         return (
             nonspecialChunkArray
@@ -36,7 +36,7 @@ function prettyText(inputText: string, stylings: Array<Styling>, callback: any):
         // return <span className="stylized">{inputText}</span>; // return simply the text ??
         // let createNonspecialChunk: typeof Chunk = <Chunk index=  {0} availableStylings={null} chunkValue={inputText} />
         // let nonspecialChunkArray: typeof Chunk[] = [createNonspecialChunk]
-        let createNonspecialChunk: any = <Chunk index={0} availableStylings={null} chunkValue={inputText} />
+        let createNonspecialChunk: any = <Chunk index={0} availableStylings={""} chunkValue={inputText} />
         let nonspecialChunkArray: typeof Chunk[] = [createNonspecialChunk] 
         return (
             nonspecialChunkArray
@@ -46,7 +46,7 @@ function prettyText(inputText: string, stylings: Array<Styling>, callback: any):
     // console.log("prettyText58", inputText, stylings);
     let instructions: Instruction[] = getSubstringsWithInstructions(inputText, stylings);
 
-    let chunks: Array<Chunk> = instructions.map((instruction, index) => {
+    let chunks: any[] = instructions.map((instruction, index) => {
         console.log(instruction, instruction.textValue, 110);
         if (instruction.special) {
             // console.log(66, availableStylings, chunk);
@@ -62,17 +62,17 @@ function prettyText(inputText: string, stylings: Array<Styling>, callback: any):
                     <Chunk
                         index={index}
                         availableStylings={availableStylings}
-                        chunkValue={Instruction.textValue}
+                        chunkValue={instruction.textValue}
                     />
                 );
             } else {
-                let availableStylings = Instruction.dotNotationStylings;
+                let availableStylings = instruction.dotNotationStylings;
                 console.log(availableStylings, Instruction, 130);
                 return (
                     <Chunk
                         index={index}
                         availableStylings={availableStylings}
-                        chunkValue={instruction.value}
+                        chunkValue={instruction.textValue}
                     />
                 );
             }
@@ -80,8 +80,8 @@ function prettyText(inputText: string, stylings: Array<Styling>, callback: any):
             return (
                 <Chunk
                     index={index}
-                    availableStylings={null}
-                    chunkValue={instruction.value}
+                    availableStylings={""}
+                    chunkValue={instruction.textValue}
                 />
             );
         }
