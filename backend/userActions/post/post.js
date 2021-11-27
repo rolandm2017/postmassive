@@ -1,4 +1,4 @@
-// file for MAKING posts
+// file for making posts
 
 const db = require("../../_helpers/db");
 const mongoose = require("mongoose");
@@ -12,6 +12,7 @@ const {
 const Massive = require("../../models/massive.model");
 
 const express = require("express");
+
 const router = express.Router();
 
 router.get("/post", (req, res) => {

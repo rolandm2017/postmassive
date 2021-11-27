@@ -84,6 +84,7 @@ app.use(api + "/auth", require("./authentication/authentication"));
 // The Post Page
 
 app.use(api + "/post", require("./userActions/post/post"));
+app.use(api + "/poll", require("./userActions/poll/poll"));
 
 // CRUD for User profile info, their bio & user settings
 
