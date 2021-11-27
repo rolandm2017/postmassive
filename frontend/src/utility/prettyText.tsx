@@ -21,19 +21,13 @@ function prettyText(inputText: string, stylings: Array<Styling>, callback: any):
         let nonspecialChunkArray: any[] = [createNonspecialChunk]
         return (
             nonspecialChunkArray
-        );
-        // return (
-        //     <span key={index} className="stylized">
-        //         {inputText}
-        //     </span>
-        // ); // return simply the text
-    } else {
-        // console.log(30, stylings);
-    }
-    // console.log("prettyText52", isStylingsEmpty, stylings);
+        ); // return simply the text
+    } 
+    
+    console.log("prettyText27", isStylingsEmpty, stylings);
     let atLeastOneWellFormedStyling = wellMadeStylingIsPresent(stylings);
     if (!atLeastOneWellFormedStyling) {
-        // return <span className="stylized">{inputText}</span>; // return simply the text ??
+        // zombie detected 11-27 // return <span className="stylized">{inputText}</span>; // return simply the text ??
         // let createNonspecialChunk: typeof Chunk = <Chunk index=  {0} availableStylings={null} chunkValue={inputText} />
         // let nonspecialChunkArray: typeof Chunk[] = [createNonspecialChunk]
         let createNonspecialChunk: any = <Chunk index={0} availableStylings={""} chunkValue={inputText} />
@@ -43,21 +37,20 @@ function prettyText(inputText: string, stylings: Array<Styling>, callback: any):
         );
     }
 
-    // console.log("prettyText58", inputText, stylings);
+    // console.log("prettyText40", inputText, stylings);
     let instructions: Instruction[] = getSubstringsWithInstructions(inputText, stylings);
 
     let chunks: any[] = instructions.map((instruction, index) => {
-        console.log(instruction, instruction.textValue, 110);
+        console.log(instruction, instruction.textValue, 44);
         if (instruction.special) {
-            // console.log(66, availableStylings, chunk);
+            // console.log(46, availableStylings, chunk);
             if (instruction.numberOfStylings > 1) {
                 let availableStylings = joinClassesAndVerify(
                     instruction.dotNotationStylings,
                     instruction.numberOfStylings
                 );
-                console.log(114);
                 // let availableStylings = chunk.dotNotationStylings;
-                console.log(instruction, availableStylings, 73);
+                console.log(instruction, availableStylings, 53);
                 return (
                     <Chunk
                         index={index}
@@ -67,7 +60,7 @@ function prettyText(inputText: string, stylings: Array<Styling>, callback: any):
                 );
             } else {
                 let availableStylings = instruction.dotNotationStylings;
-                console.log(availableStylings, Instruction, 130);
+                console.log(availableStylings, Instruction, 63);
                 return (
                     <Chunk
                         index={index}
@@ -86,7 +79,7 @@ function prettyText(inputText: string, stylings: Array<Styling>, callback: any):
             );
         }
     });
-    console.log(chunks, 149, "end of prettyText");
+    console.log(chunks, 82, "end of prettyText");
     return chunks; //
 }
 
