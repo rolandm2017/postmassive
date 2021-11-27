@@ -38,20 +38,24 @@ router.get("/:id", (req, res) => {
     }
 });
 
-router.post("/submit", async (req, res) => {
-    console.log("hey");
-    let username = req.body.username;
-    let content = req.body.content;
-    let pollLabels = req.body.pollOptions;
-
+function generateID() {
     let potentialIdChars = "0123456789abcdefghijklmnopqrstuvwzxy";
-    let idLength = 8;
+    let idLength = 16;
     let pollId = "";
 
     for (let i = 0; i < idLength; i++) {
         let charIndex = Math.floor(Math.random() * potentialIdChars.length);
         pollId = pollId + potentialIdChars.slice(charIndex, charIndex + 1);
     }
+    return pollId;
+}
+
+router.post("/submit", async (req, res) => {
+    let username = req.body.username;
+    let content = req.body.content;
+    let pollLabels = req.body.pollOptions;
+
+    let pollId = generateID();
 
     let pollOptions = pollLabels.map((label) => {
         return { label: label, votes: 0 };
@@ -83,6 +87,7 @@ router.post("/submit", async (req, res) => {
         // postNumber, monetaryCost, postedByUser, text, date, replies,
         // amps, likes, views, hasImage, quotesSomeone, pollId
         {
+            _id: pollId,
             postNumber: highestPostNum,
             monetaryCost: 1,
             postedByUser: username,
