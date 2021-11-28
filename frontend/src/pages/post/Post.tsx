@@ -15,9 +15,11 @@ import {
     processMax,
 } from "../../utility/utility";
 import prettyText from "../../utility/prettyText";
+
+import { postPost } from "../../_helper/Post";
 import {
     getAuctioneerResponse,
-    postPost,
+    
     addStyleToSection,
     removeStyleFromSection,
 } from "../../_helper/auctioneer";
@@ -139,6 +141,7 @@ function Post(props: any) {
 
     function inspecter(input1: any, inputArr: any): any {
         console.log(input1, inputArr[0], inputArr[1], inputArr[2])
+        return input1;
     }
 
     return (

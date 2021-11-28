@@ -134,6 +134,7 @@ textarea {
     justify-content: center;
     align-items: center;
     /* flex-wrap: wrap; */
+    width: 90%;
 }
 
 #post_targeting-container {
@@ -159,7 +160,7 @@ textarea {
 
 .post_tones-inner-container {
     /* padding: 6px 0 0 6px; */
-    width: 50%;
+    width: 100%;
     border: 2px solid salmon;
     flex-basis: 2;
     margin: 0;

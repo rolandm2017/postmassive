@@ -17,47 +17,13 @@ export function getAuctioneerResponse() {
     return price;
 }
 
-export function postPost(
-    username: string,
-    content: string,
-    price: any,
-    floor: number,
-    stylings: Styling[],
-    handleGoToHome: any
-) {
-    // let displayName = user.displayName; // todo: get displayName for data
-    let postContentWithStyling = {
-        username: username,
-        content: content,
-        price: price,
-        floor: floor,
-        stylings: stylings,
-    };
-    // TODO: stick it into localHistory so browser can reload the data upon pgBack
-    console.log("Sending ........", postContentWithStyling);
-    // send a post to the server to
-    let postingUrl = process.env.REACT_APP_API_URL + "/post/post";
-    fetch(
-        postingUrl,
-        postOptions(postingUrl, false, 51, postContentWithStyling)
-    ) // todo: content packages stuff into json.
-        .then((x) => {
-            if (200) {
-                handleGoToHome(); // redirect to /home
-                console.log("sent data to server successfully");
-            }
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-}
 
 function onlyUnique(value: any, index: number, self: any):boolean {
     return self.indexOf(value) === index;
 }
 
 function updateStyleWithType(type: string, styleObject: Styling, setter: any): void {
-    console.log(116, type, styleObject, setter);
+    console.log(116, type, styleObject, "setter");
     let newNthStyle = {
         ...styleObject,
     };
@@ -72,6 +38,7 @@ function updateStyleWithType(type: string, styleObject: Styling, setter: any): v
 }
 
 export function addStyleToSection(styling: Styling, type: string, index: number, setter: any) {
+    console.log(41, styling, type, index)
     let isEmptyObject = thisSingularObjectIsEmpty(styling);
     if (!isEmptyObject) {
         updateStyleWithType(type, styling, setter);
@@ -84,19 +51,28 @@ export function addStyleToSection(styling: Styling, type: string, index: number,
     // 78 -> 132 refactored into 65 -> 75? that just cant be// FIXME: this.
 }
 
-export function removeStyleFromSection(styling: Styling, type: string, index: number, setter: any): any {
-    console.log(styling, 144);
-    let currentStylings = new Styling(styling.start, styling.end, [
-        ...styling.stylings,
-    ]);
-    let typeIndex = currentStylings.stylings.indexOf(type);
+export function removeStyleFromSection(styling: Styling, typeToRemove: string, index: number, setter: any): void {
+    console.log(555555, styling, typeToRemove, index);
+    let currentStylings: string[] = [...styling.stylings];
+    let typeIndex: number = currentStylings.indexOf(typeToRemove);
     console.log(currentStylings);
-    let remainingStylings = currentStylings.getStylings().splice(typeIndex, 1);
+
+    let remainingStylings: string[] = [];
+    console.log(63, currentStylings, currentStylings.length)
+    for (let i = 0; i < currentStylings.length; i++) {
+        console.log(646464, "currentStylings:", currentStylings[i])
+        if (typeToRemove === currentStylings[i]) {
+            console.log("removing...", typeToRemove, currentStylings[i])
+            continue
+        } else {
+
+            remainingStylings.push(currentStylings[i])
+        }
+    }
     let newStyleObject = new Styling(
         currentStylings.start,
         currentStylings.end,
         remainingStylings
     );
     setter(newStyleObject);
-    return undefined;
 }

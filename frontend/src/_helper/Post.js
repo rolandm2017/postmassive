@@ -1,6 +1,7 @@
 // moved into its own .js file because
 // in auctioneer.ts I couldn't figure out how to get
 // postOptions to import correctly w/o throwing an error
+import { postOptions } from "./authHeader";
 
 export function postPost(
     username,
