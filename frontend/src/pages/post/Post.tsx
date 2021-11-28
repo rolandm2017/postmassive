@@ -200,7 +200,7 @@ function Post(props: any) {
                             type then selecting another styling */}
                             <div>
                                 <div className="post_color-white">
-                                    {content.length > 8
+                                    {content.length > 4
                                         ? prettyText(
                                               content,
                                               [
@@ -413,18 +413,7 @@ function Post(props: any) {
                                 >
                                     Post
                                 </button>
-                                <button
-                                    onClick={() => {
-                                        console.log(
-                                            currentStyle,
-                                            firstStyle,
-                                            secondStyle,
-                                            thirdStyle
-                                        );
-                                    }}
-                                >
-                                    Inspect
-                                </button>
+                             
                             </div>
                         </div>
                     </div>

@@ -65,12 +65,10 @@ export function joinClasses(classesList: any): string {
     try  { // this try catch here to take care of condition where I'm still using 
         // the "bold, italics" as opposed to ["bold", "italics"]
         if (classesList.indexOf(", ") > -1) {
-
-            let dotNotationClasses= classesList.split(", ").join(" ");
+            let dotNotationClasses = classesList.split(", ").join(" ");
             return dotNotationClasses;
         } else {
-
-            return "." + classesList
+            return classesList
         }
     } catch {
         let dotNotationClasses = classesList.join(" ");
@@ -181,7 +179,7 @@ export function getSubstringsWithInstructions(inputText: string, stylings: Styli
         if (areWeOnTheLastStyling) {
             // special case. get (start, end) and then (end, contentLength)
 
-            let ordinaryTrailEndPart = inputText.slice(stylings[i].end + 1); // will be the trailing but
+            let ordinaryTrailEndPart = inputText.slice(stylings[i].end + 1);
             let trailEnd = new Instruction(false, ordinaryTrailEndPart);
             extremelySpecificInstructions.push(trailEnd);
         } else {

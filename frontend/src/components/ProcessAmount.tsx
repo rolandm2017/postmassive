@@ -1,6 +1,6 @@
 function processAmount(number: number, displayedInFeed: boolean): string {
     if (number === null) {
-        console.log("processAmt returning 0")
+        // console.log("processAmt returning 0")
         return "0";
     }
     // turns "2707" -> "2,707" and "306438" -> "306k"
