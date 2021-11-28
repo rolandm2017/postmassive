@@ -23,7 +23,7 @@ function onlyUnique(value: any, index: number, self: any):boolean {
 }
 
 function updateStyleWithType(type: string, styleObject: Styling, setter: any): void {
-    console.log(116, type, styleObject, "setter");
+    // console.log(116, type, styleObject, "setter");
     let newNthStyle = {
         ...styleObject,
     };
@@ -37,8 +37,8 @@ function updateStyleWithType(type: string, styleObject: Styling, setter: any): v
     setter(newNthStyle);
 }
 
-export function addStyleToSection(styling: Styling, type: string, index: number, setter: any) {
-    console.log(41, styling, type, index)
+export function addStyleToSection(styling: Styling, type: string, index: number, setter: any): void {
+    // console.log(41, styling, type, index)
     let isEmptyObject = thisSingularObjectIsEmpty(styling);
     if (!isEmptyObject) {
         updateStyleWithType(type, styling, setter);
@@ -51,7 +51,7 @@ export function addStyleToSection(styling: Styling, type: string, index: number,
     // 78 -> 132 refactored into 65 -> 75? that just cant be// FIXME: this.
 }
 
-export function removeStyleFromSection(styling: Styling, typeToRemove: string, index: number, setter: any): void {
+export function removeStyleFromSection(styling: Styling, typeToRemove: string, index: number, setter: any): Styling {
     console.log(555555, styling, typeToRemove, index);
     let currentStylings: string[] = [...styling.stylings];
     let typeIndex: number = currentStylings.indexOf(typeToRemove);
@@ -70,9 +70,10 @@ export function removeStyleFromSection(styling: Styling, typeToRemove: string, i
         }
     }
     let newStyleObject = new Styling(
-        currentStylings.start,
-        currentStylings.end,
+        styling.start,
+        styling.end,
         remainingStylings
     );
     setter(newStyleObject);
+    return newStyleObject;
 }
