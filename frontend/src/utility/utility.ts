@@ -56,18 +56,27 @@ export function wellMadeStylingIsPresent(stylings: Array<Styling>): boolean {
     return false;
 }
 
-export function joinClasses(classesList: string): string {
+export function joinClasses(classesList: any): string {
     /* really proud of this one
-    // @params classesList - the comma separated. 
+    // @params classesList - could be "bold, italics" or ["bold", italics] <-- this is the only one that makes sense
     // returns - the classes string to insert into the component
     */
    console.log("inside joinClasses", classesList, 64)
-    if (classesList.indexOf(", ") > -1) {
-        let dotNotationClasses= "." + classesList.split(", ").join(" .");
-        return dotNotationClasses;
-    } else {
-        return "." + classesList
+    try  { // this try catch here to take care of condition where I'm still using 
+        // the "bold, italics" as opposed to ["bold", "italics"]
+        if (classesList.indexOf(", ") > -1) {
+
+            let dotNotationClasses= "." + classesList.split(", ").join(" .");
+            return dotNotationClasses;
+        } else {
+
+            return "." + classesList
+        }
+    } catch {
+        let dotNotationClasses = "." + classesList.join(" .");
+        return dotNotationClasses
     }
+    
 }
 
 
