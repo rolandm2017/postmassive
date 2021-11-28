@@ -16,7 +16,7 @@ const testMassives = [
     {
         id: 1,
         content:
-            "I can see what you see not. Vision milky, then eyes rot. When you turn, they will be gone, Whispering their hidden song. Then you see what cannot be, Shadows move where light should be. Out of darkness, out of mind, Cast down into the Halls of the Blind.",
+            "Men at some time are masters of their fates: The fault, dear Brutus, is not in our stars, But in ourselves, that we are underlings. This above all: to thine own self be true, And it must follow, as the night the day, Thou canst not then be false to any man",
         stylings: [
             {
                 start: 5,
@@ -54,7 +54,7 @@ const testMassives = [
     {
         id: 3,
         content:
-            "I can see what you see not. Vision milky, then eyes rot. When you turn, they will be gone, Whispering their hidden song. Then you see what cannot be, Shadows move where light should be. Out of darkness, out of mind, Cast down into the Halls of the Blind.",
+            "To be, or not to be: that is the question: Whether ’tis nobler in the mind to suffer The slings and arrows of outrageous fortune, Or to take arms against a sea of troubles, And by opposing end them. To die: to sleep...",
         stylings: [
             { start: 20, end: 28, stylings: "makeBold, underline" },
             { start: 150, end: 199, stylings: "darthNo" },
