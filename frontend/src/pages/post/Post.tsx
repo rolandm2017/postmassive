@@ -77,7 +77,7 @@ function Post(props: any) {
         return undefined;
     }
 
-    function handleChangeStartRange(styleObjectIndex: number, newStartIndex: any): void {
+    function changeStartRange(styleObjectIndex: number, newStartIndex: any): void {
         // TODO: nail down newStartIndex as either string||integer
         // console.log(2248, styleObjectIndex, newStartIndex);
         let integerNewStartIndex: number = parseInt(newStartIndex, 10);
@@ -94,17 +94,17 @@ function Post(props: any) {
             newThirdStyle.start = integerNewStartIndex;
             setThirdStyle(newThirdStyle);
         } else {
-            throw Error("Index out of range for handleChangeStartRange");
+            throw Error("Index out of range for changeStartRange");
         }
     }
 
     // TODO: rewrite this func to use these 4 args -- it was plainly obvious to me that it was doable before
-    function handleChangeEndRange(
-        styling: any, 
-        styleObjectIndex: number,
-        newEndIndex: string,
-        setter: any
+    function changeEndRange(
+        styleObjectIndex: any, 
+        newEndIndex: any,
     ): void {
+        // console.log(108, styleObjectIndex, newEndIndex, setter)
+        
         let integerNewEndIndex:number = parseInt(newEndIndex, 10);
         // console.log(2265, styleObjectIndex, newEndIndex, integerNewEndIndex);
         if (styleObjectIndex === 0) {
@@ -136,6 +136,10 @@ function Post(props: any) {
             <Flooring flooring={floor} />
         </div>
     ));
+
+    function inspecter(input1: any, inputArr: any): any {
+        console.log(input1, inputArr[0], inputArr[1], inputArr[2])
+    }
 
     return (
         <Wrapper
@@ -201,13 +205,13 @@ function Post(props: any) {
                             <div>
                                 <div className="post_color-white">
                                     {content.length > 4
-                                        ? prettyText(
+                                        ? inspecter(
                                               content,
                                               [
                                                   firstStyle,
                                                   secondStyle,
                                                   thirdStyle,
-                                              ], undefined
+                                              ]
                                               // setContent // YAGNI
                                           )
                                           
@@ -233,15 +237,16 @@ function Post(props: any) {
                                 }}
                                 currentlyChecked={currentStyle}
                                 currentMin={0}
-                                currentMax={processMax(
-                                    0,
-                                    secondStyle.start,
-                                    content.length
-                                )}
+                                // currentMax={processMax(
+                                //     0,
+                                //     secondStyle.start,
+                                //     content.length
+                                // )}
+                                currentMax={content.length}
                                 stylingInfo={firstStyle.stylings}
-                                adjustStart={handleChangeStartRange}
+                                adjustStart={changeStartRange}
                                 // styling,styleObjectIndex,newStartIndex,setter
-                                adjustEnd={handleChangeEndRange}
+                                adjustEnd={changeEndRange}
                                 handleRemoval={removeStyleFromSection}
                                 styling={firstStyle}
                                 setter={setFirstStyle}
@@ -254,19 +259,11 @@ function Post(props: any) {
                                     handleChangeStylingSelection(1);
                                 }}
                                 currentlyChecked={currentStyle}
-                                currentMin={processMin(
-                                    1,
-                                    firstStyle.end,
-                                    content.length
-                                )}
-                                currentMax={processMax(
-                                    1,
-                                    thirdStyle.start,
-                                    content.length
-                                )}
+                                currentMin={0}
+                                currentMax={content.length}
                                 stylingInfo={secondStyle.stylings}
-                                adjustStart={handleChangeStartRange}
-                                adjustEnd={handleChangeEndRange}
+                                adjustStart={changeStartRange}
+                                adjustEnd={changeEndRange}
                                 handleRemoval={removeStyleFromSection}
                                 styling={secondStyle}
                                 setter={setSecondStyle}
@@ -279,19 +276,11 @@ function Post(props: any) {
                                     handleChangeStylingSelection(2);
                                 }}
                                 currentlyChecked={currentStyle}
-                                currentMin={processMin(
-                                    2,
-                                    secondStyle.end,
-                                    content.length
-                                )}
-                                currentMax={processMax(
-                                    2,
-                                    undefined,
-                                    content.length
-                                )}
+                                currentMin={0}
+                                currentMax={content.length}
                                 stylingInfo={thirdStyle.stylings}
-                                adjustStart={handleChangeStartRange}
-                                adjustEnd={handleChangeEndRange}
+                                adjustStart={changeStartRange}
+                                adjustEnd={changeEndRange}
                                 handleRemoval={removeStyleFromSection}
                                 styling={thirdStyle}
                                 setter={setThirdStyle}
