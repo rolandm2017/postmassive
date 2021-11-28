@@ -1,4 +1,4 @@
-import Styling from "../../utility/classes";
+import Styling from "../../../utility/classes/Styling";
 
 const testMassives = [
     {

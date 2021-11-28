@@ -66,14 +66,14 @@ export function joinClasses(classesList: any): string {
         // the "bold, italics" as opposed to ["bold", "italics"]
         if (classesList.indexOf(", ") > -1) {
 
-            let dotNotationClasses= "." + classesList.split(", ").join(" .");
+            let dotNotationClasses= classesList.split(", ").join(" ");
             return dotNotationClasses;
         } else {
 
             return "." + classesList
         }
     } catch {
-        let dotNotationClasses = "." + classesList.join(" .");
+        let dotNotationClasses = classesList.join(" ");
         return dotNotationClasses
     }
     
