@@ -56,25 +56,12 @@ export function wellMadeStylingIsPresent(stylings: Array<Styling>): boolean {
     return false;
 }
 
-export function countStylings(stylings: Array<string>): number {
-    /* 
-    // pass the value of stylings.stylings, not the stylings object. 
-    // **
-    // ** PLEASE NOTE: Array<string> IS the CORRECT type
-    // **
-    // return value - the length of the stylings
-    // e.g. ["bold", "italics"], 2
-    */
-    return stylings.length;
-}
-
 export function joinClasses(classesList: string): string {
-    // really proud of this one
-    /* 
-    // @params unsplitClasses - input raw string like "bold, fontSize24" to convert to ["bold", "fontSize24"]
-    // @params expectedNumberOfClasses - Comes direct from the Instructions object. To be compared for error detection. 
+    /* really proud of this one
+    // @params classesList - the comma separated. 
     // returns - the classes string to insert into the component
     */
+   console.log("inside joinClasses", classesList, 64)
     if (classesList.indexOf(", ") > -1) {
         let dotNotationClasses= "." + classesList.split(", ").join(" .");
         return dotNotationClasses;
@@ -83,21 +70,6 @@ export function joinClasses(classesList: string): string {
     }
 }
 
-export function handleJustOneStyling(inputText: string, styling: Styling): Array<Instruction> {
-    let initSlice = inputText.slice(0, styling.start);
-    let specialMiddleSlice = inputText.slice(styling.start, styling.end);
-    let endSlice = inputText.slice(styling.end, inputText.length);
-    return [
-        new Instruction(false, initSlice),
-        new Instruction(
-            true,
-            specialMiddleSlice,
-            styling.stylings,
-            countStylings(styling.stylings)
-        ),
-        new Instruction(false, endSlice),
-    ];
-}
 
 export function processMin(index: number, sourceOfMin: number | undefined, contentLength: number): number {
     /*
@@ -171,10 +143,6 @@ export function getSubstringsWithInstructions(inputText: string, stylings: Styli
     */
 
     // todo: only splice if there is a styling attached to the stylings obj // delete if here on dec 20th
-    // REWRITE
-    // REWRITE
-    // REWRITE
-    
     let startingSliceValue = inputText.slice(0, stylings[0].start);
     let initSlice = new Instruction(false, startingSliceValue);
     // let initSlice = {
@@ -190,7 +158,6 @@ export function getSubstringsWithInstructions(inputText: string, stylings: Styli
     // fixme: also the sliders ranges have to be unmessed from their current messy bugged state
     for (let i = 0; i < stylings.length; i++) {
         let areWeOnTheLastStyling = i === stylings.length - 1;
-        let stylingsCount = countStylings(stylings[i].stylings);
         let textSlice = inputText.slice(stylings[i].start, stylings[i].end); // will go from i to end of string
         let dotNotationStylings = joinClasses(stylings[i].stylings)
         let countOfSpecialClasses = dotNotationStylings.split(".").length;
