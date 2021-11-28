@@ -13,7 +13,7 @@ import {
 import {
     processMin,
     processMax,
-} from "../../utility/utility";
+} from "../../utility/process";
 import prettyText from "../../utility/prettyText";
 
 import { postPost } from "../../_helper/Post";

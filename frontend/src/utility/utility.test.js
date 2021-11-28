@@ -4,14 +4,9 @@ import Instruction from "./classes/Instruction";
 import Styling from "./classes/Styling";
 import {
     prettyText,
-    splitClassesAndVerify,
+    joinClasses,
     detectWellMadeStyling,
-    countStylings,
     getSubstringsWithInstructions,
-    convertEngagementText,
-    handleJustOneStyling,
-    processMin,
-    processMax,
     styleObjectIsEmpty,
 } from "./utility";
 
@@ -30,50 +25,39 @@ const wellMadeStylingsSix = new Styling(61, 70, [
     "underline",
 ]); //... a space
 
+const stylingThree = new Styling(23, 30, ["italics", "fontSize22"]);
+const pairingOne = "this is some simple input";
+
+//
+const stylingFour = new Styling(11, 15, ["bold", "strikethrough", "backgroundColorRed"])
+const stylingFive = new Styling(25, 29, ["italics", "backgroundColorBlack"])
+const stylingSix = new Styling(41, 44, ["italics", "backgroundColorBlack"])
+const pairingTwo = "The quick brown fox jumped over the angry dog and found his way to the grocery store. Calmness exudes because he was able to buy some eggs",
+
 describe("splits classes and verifies that they yield what I expected", () => {
     it("throws an error when I want it to", () => {
         const willThrowError = () => {
-            splitClassesAndVerify("bold, italic", 1);
+            joinClasses("bold, italic", 1);
         };
         const errMsg =
             "Unexpected mismatch between splitClasses length and expectedNumber";
         expect(willThrowError).toThrow(errMsg);
         const anotherError = () => {
-            splitClassesAndVerify("bold, italic", 3);
+            joinClasses("bold, italic", 3);
         };
         expect(anotherError).toThrow(errMsg);
 
         // have to use function() because of how .not.toThrow() works under the hood
         expect(function () {
-            splitClassesAndVerify("bold, italic, backgroundColorRed", 3);
+            joinClasses(["bold", "italic", "backgroundColorRed"], 3);
         }).not.toThrow(errMsg);
     });
 
     it("converts a string with commas ', ' to a string with periods ' .' for class names", () => {
-        expect(splitClassesAndVerify("bold, italic", 2)).toEqual(
-            ".bold .italic"
-        );
+        expect(joinClasses(["bold", "italic"], 2)).toEqual(".bold .italic");
         expect(
-            splitClassesAndVerify("italic, fontSize22, strikethrough", 3)
+            joinClasses(["italic", "fontSize22", "strikethrough"], 3)
         ).toEqual(".italic .fontSize22 .strikethrough"); // this helped me debug my own code.
-    });
-});
-
-describe("detects empty object", () => {
-    it("detects an empty object", () => {
-        expect(styleObjectIsEmpty({})).toBe(true);
-    });
-    it("detects an object with contents, even if they are malformed", () => {
-        expect(styleObjectIsEmpty({ start: 5, end: 10 })).toBe(false);
-        expect(styleObjectIsEmpty({ start: 5, stylings: ["bold"] })).toBe(
-            false
-        );
-        expect(
-            styleObjectIsEmpty({ start: 5, end: 25, stylings: ["italic"] })
-        ).toBe(false);
-        expect(styleObjectIsEmpty({ start: 55, end: 25, stylings: [] })).toBe(
-            false
-        );
     });
 });
 
@@ -128,7 +112,7 @@ describe("converts text to prettyText", () => {
             [wellMadeStylingsOne, wellMadeStylingsFive]
         );
         // console.log(returnedText);
-        expect(returnedChunkText).toHaveLength(7);
+        expect(returnedChunkText).toHaveLength(7); // TODO: test chunk's internals for the correct subtext
         expect(shorterReturnedText).toHaveLength(5);
         // const willProduceFourSlices = prettyText("aaaaabbbbbcccccddddd", [
         //     { start: 5, end: 11, stylings: ["bold"] },
@@ -167,155 +151,65 @@ describe("detects the difference between a well made Style object and a malforme
     });
 });
 
-// describe("the function is absolutely airtight and flawless", () => {});
+describe("processes string with stylings into instructions", () => {
+    // this is why I started writing tests. This is what finally broke me.
 
-describe("countStylings", () => {
-    it("turns one singular styling into 1", () => {
-        expect(countStylings(["bold"])).toBe(1);
-        expect(countStylings(["italics"])).toBe(1);
-        expect(countStylings(["backgroundColorRed"])).toBe(1);
-    });
-    it("turns two into 2 and three into 3", () => {
-        expect(countStylings(["backgroundColorRed, bold"])).toBe(2);
-        expect(countStylings(["backgroundColorBlack, bold"])).toBe(2);
-        expect(countStylings(["backgroundColorRed, bold, strikethrough"])).toBe(
-            3
-        );
-        expect(
-            countStylings(["backgroundColorCyan, bold, strikethrough"])
-        ).toBe(3);
-    });
-    it("throws unless the input is absolutely perfect", () => {
-        expect(() => {
-            countStylings();
-        }).toThrow(TypeError);
-    });
-});
+    
 
-describe("handles a SINGULAR Styling & surrounding text, makes into 3 instructions", () => {
-    it("handles one styling just fine", () => {
+    it("gracefully handles text & one styling", () => {
         expect(
-            handleJustOneStyling("Yabba dabba doo", {
-                start: 6,
-                end: 11,
-                stylings: ["bold, backgroundColorRed"],
-            })
+            getSubstringsWithInstructions("Yabba dabba doo", [
+                {
+                    start: 6,
+                    end: 11,
+                    stylings: ["bold, backgroundColorRed"],
+                },
+            ])
         ).toEqual([
             new Instruction(false, "Yabba "),
             new Instruction(true, "dabba", ".bold .backgroundColorRed", 2),
-            new Instruction(false, " doo"),
+            new Instruction(false, " doo")
+        ]);
+    });
+
+    it("turns strings and stylings into substrings with instructions", () => {
+        const stylingOne = new Styling(5, 9, [
+            "bold, strikethrough, backgroundColorRed",
+        ]);
+        const stylingTwo = new Styling(9, 19, [// note the 9 in both One and Two
+            "italics, fontSize12, backgroundColorBlack",
         ]);
         expect(
-            handleJustOneStyling("ABCDEFG GFEDCBA ABC DEF", {
-                start: 8,
-                end: 16,
-                stylings: ["backgroundColorBlack"],
-            })
+            getSubstringsWithInstructions(
+                "aaa, bbb, cCc, dDd, EEEe, fff, ggg",
+                [stylingOne, stylingTwo]
+            )
         ).toEqual([
-            new Instruction(false, "ABCDEFG "),
-            new Instruction(true, "GFEDCBA ", ".backgroundColorBlack", 1),
-            new Instruction(false, "ABC DEF"),
+            new Instruction(false, "aaa, "),
+            new Instruction(true, "bbb,", ".bold .strikethrough .backgroundColorRed", 3),
+            new Instruction(false, " cCc,"),
+            new Instruction(true, " dDd,", ".italics .backgroundColorBlack", 2),
+            new Instruction(false, " EEEe, fff, ggg")
+        ]);
+
+        expect(
+            getSubstringsWithInstructions(
+                pairingTwo, [stylingFour, stylingFive, stylingSix]
+            )
+        ).toEqual([
+            new Instruction(false,  "AAAAAAAAA, "),
+            new Instruction(true, "bBbB", ".bold .strikethrough .backgroundColorRed", 3),
+            new Instruction(false, "b, c2c2c2,"),
+            new Instruction(true, " d5d", ".italics .backgroundColorBlack", 2),
+            new Instruction(false, "5, EHSHEH, f"),
+            new Instruction(true, "fff", ".italics .backgroundColorBlack", 2),
+            new Instruction(false, ", GGGGGGGGggggg")
         ]);
     });
-    it("throws an error if stylingS is replaced with styling (no s)", () => {
-        expect(() =>
-            handleJustOneStyling({
-                start: 6,
-                end: 11,
-                styling: ["italic"],
-            })
-        ).toThrow(TypeError);
-    });
-});
 
-// describe("processes string with stylings into instructions", () => {
-//     // this is why I started writing tests. This is what finally broke me.
-
-//     const stylingThree = new Styling(23, 30, ["italics", "fontSize22"]);
-//     const pairingOne = "this is some simple input";
-
-//     //
-//     const stylingFour = new Styling(11, 15, ["bold", "strikethrough", "backgroundColorRed"])
-//     const stylingFive = new Styling(25, 29, ["italics", "backgroundColorBlack"])
-//     const stylingSix = new Styling(41, 44, ["italics", "backgroundColorBlack"])
-//     const pairingTwo = "AAAAAAAAA, bBbBb, c2c2c2, d5d5, EHSHEH, ffff, GGGGGGGGggggg",
-
-//     it("gracefully handles text & one styling", () => {
-//         expect(
-//             getSubstringsWithInstructions("Yabba dabba doo", [
-//                 {
-//                     start: 6,
-//                     end: 11,
-//                     stylings: ["bold, backgroundColorRed"],
-//                 },
-//             ])
-//         ).toEqual([
-//             new Instruction(false, "Yabba "),
-//             new Instruction(true, "dabba", ".bold .backgroundColorRed", 2),
-//             new Instruction(false, " doo")
-//         ]);
-//     });
-
-//     it("turns strings and stylings into substrings with instructions", () => {
-//         const stylingOne = new Styling(5, 9, [
-//             "bold, strikethrough, backgroundColorRed",
-//         ]);
-//         const stylingTwo = new Styling(9, 19, [// note the 9 in both One and Two
-//             "italics, fontSize12, backgroundColorBlack",
-//         ]);
-//         expect(
-//             getSubstringsWithInstructions(
-//                 "aaa, bbb, cCc, dDd, EEEe, fff, ggg",
-//                 [stylingOne, stylingTwo]
-//             )
-//         ).toEqual([
-//             new Instruction(false, "aaa, "),
-//             new Instruction(true, "bbb,", ".bold .strikethrough .backgroundColorRed", 3),
-//             new Instruction(false, " cCc,"),
-//             new Instruction(true, " dDd,", ".italics .backgroundColorBlack", 2),
-//             new Instruction(false, " EEEe, fff, ggg")
-//         ]);
-
-//         expect(
-//             getSubstringsWithInstructions(
-//                 pairingTwo, [stylingFour, stylingFive, stylingSix]
-//             )
-//         ).toEqual([
-//             new Instruction(false,  "AAAAAAAAA, "),
-//             new Instruction(true, "bBbB", ".bold .strikethrough .backgroundColorRed", 3),
-//             new Instruction(false, "b, c2c2c2,"),
-//             new Instruction(true, " d5d", ".italics .backgroundColorBlack", 2),
-//             new Instruction(false, "5, EHSHEH, f"),
-//             new Instruction(true, "fff", ".italics .backgroundColorBlack", 2),
-//             new Instruction(false, ", GGGGGGGGggggg")
-//         ]);
-//     });
-
-//     it("returns plain string when there are no stylings", () => {
-//         expect(getSubstringsWithInstructions("Mushrooms", [])).toBe(
-//             "Mushrooms"
-//         );
-//         expect(getSubstringsWithInstructions("Hello world", [])).toBe("Hello world");``
-// });
-
-describe("processMin and processMax", () => {
-    test("processMin(0, a, b) should equal 0", () => {
-        expect(processMin(0, 15, 23894)).toEqual(0);
-    });
-    test("processMin(1, 5, 15) should equal 5", () => {
-        expect(processMin(1, 5, 15)).toEqual(5);
-    });
-    test("processMin(1, undefined, 15) should equal 15", () => {
-        expect(processMin(1, undefined, 15)).toEqual(15);
-    });
-
-    // max
-    test("processMax should return the contentLength when there is no defined 2nd arg", () => {
-        expect(processMax(0, undefined, 25)).toEqual(25);
-    });
-    test("processMax takes the value of the sourceOfMax when it is present", () => {
-        expect(processMax(1, 15, 25)).toEqual(15);
-        expect(processMax(2, 15, 25)).toEqual(15);
-        // params: index, sourceOfMax, contentLength
-    });
+    it("returns plain string when there are no stylings", () => {
+        expect(getSubstringsWithInstructions("Mushrooms", [])).toBe(
+            "Mushrooms"
+        );
+        expect(getSubstringsWithInstructions("Hello world", [])).toBe("Hello world");
 });

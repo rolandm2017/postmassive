@@ -1,12 +1,7 @@
 import Instruction from "./classes/Instruction";
 import Styling from "./classes/Styling";
 
-
-
 export function thisSingularObjectIsEmpty(styling: Styling): boolean {
-    /*
-    //
-    */
     let isEmpty: boolean =
     styling && // 👈 null and undefined check
         Object.keys(styling).length === 0 &&
@@ -14,25 +9,7 @@ export function thisSingularObjectIsEmpty(styling: Styling): boolean {
     return isEmpty;
 }
 
-export function isAllEmpty(stylings: Array<Styling>): boolean {
-    let a: number = 0;
-    for (let i = 0; i < stylings.length; i++) {
-        let objectIsEmpty: boolean = thisSingularObjectIsEmpty(stylings[i]);
-        // console.log(8, objectIsEmpty);
-        if (objectIsEmpty) {
-            a++;
-        }
-    }
-    if (a >= 0) {
-        return true;
-    }
-    return false;
-}
 
-
-// TODO: find out what this is actually used for
-// TODO: find out what this is actually used for
-// TODO: find out what this is actually used for
 
 export function wellMadeStylingIsPresent(stylings: Array<Styling>): boolean {
     // TODO: Update this if it needs it
@@ -82,66 +59,6 @@ export function joinClasses(classesList: any): string {
     
 }
 
-
-export function processMin(index: number, sourceOfMin: number | undefined, contentLength: number): number {
-    /*
-    // per Styling, min is as follows: 
-    // (1) srcOfMin === 0, 
-    // (2) end of first style *if* it exists, otherwise content.length
-    // (3) end of second style *if* it exists, otherwise content.length;
-    // returns: the index's assigned minimum value
-    */
-
-    if (index === 0) {
-        return 0;
-    } else if (index === 1) {
-        if (sourceOfMin) {
-            return sourceOfMin;
-        } else {
-            return contentLength;
-        }
-    } else if (index === 2) {
-        if (sourceOfMin) {
-            return sourceOfMin;
-        } else {
-            return contentLength;
-        }
-    } else {
-        throw Error("Index was out of range");
-    }
-    
-}
-
-export function processMax(index: number, sourceOfMax: number | undefined, contentLength: number): number {
-    /*
-    // this is the maximum value available for the given index. per Styling, max is as follows: 
-    // (1) start of second style *if* it exists; otherwise, contentLength 
-    // (2) start of third style *if* it exists; otherwise, contentLength.
-    // (3) srcOfMax === contentLength;
-    // returns: the index's assigned minimum value
-    */
-    if (index === 0) {
-        if (sourceOfMax) {
-            return sourceOfMax;
-        } else {
-            return contentLength;
-        }
-    } else if (index === 1) {
-        if (sourceOfMax) {
-            return sourceOfMax;
-        } else {
-            return contentLength;
-        }
-    } else if (index === 2) {
-        if (sourceOfMax) {
-            return sourceOfMax;
-        } else {
-            return contentLength;
-        }
-    } else {
-        throw "Index was out of range"
-    }
-}
 
 export function getSubstringsWithInstructions(inputText: string, stylings: Styling[]): Instruction[] {
     /*
@@ -204,3 +121,17 @@ export function getSubstringsWithInstructions(inputText: string, stylings: Styli
     return extremelySpecificInstructions;
 }
 
+// export function wholeArrayIsEmpty(stylings: Array<Styling>): boolean {
+//     let a: number = 0;
+//     for (let i = 0; i < stylings.length; i++) {
+//         let objectIsEmpty: boolean = thisSingularObjectIsEmpty(stylings[i]);
+//         // console.log(8, objectIsEmpty);
+//         if (objectIsEmpty) {
+//             a++;
+//         }
+//     }
+//     if (a >= 0) {
+//         return false;
+//     }
+//     return true;
+// }

@@ -15,7 +15,7 @@ function prettyText(inputText: string, stylings: Array<Styling>): any {
 // TODO: until(oneStyleIsFinished) {
     // ...handleJustOneStyling(the)
 // }
-
+    
     let isStylingsEmpty = stylings.length === 0;
     if (isStylingsEmpty) {
         // console.log(26, "yes, it was empty");
@@ -26,7 +26,7 @@ function prettyText(inputText: string, stylings: Array<Styling>): any {
         ); // return simply the text
     } 
     
-    console.log("prettyText27", isStylingsEmpty, stylings);
+    console.log("prettyText27", isStylingsEmpty, stylings, stylings.length);
     let atLeastOneWellFormedStyling = wellMadeStylingIsPresent(stylings);
     if (!atLeastOneWellFormedStyling) {
         // zombie detected 11-27 // return <span className="stylized">{inputText}</span>; // return simply the text ??
@@ -40,11 +40,11 @@ function prettyText(inputText: string, stylings: Array<Styling>): any {
     }
 
     // console.log("prettyText40", inputText, stylings);
-    console.log("prettyText41", stylings) // fixme: problem is in here... (1)
+    // console.log("prettyText41", stylings) // fixme: problem is in here... (1)
     let instructions: Instruction[] = getSubstringsWithInstructions(inputText, stylings);
 
     let chunks: any[] = instructions.map((instruction, index) => {
-        console.log(instruction, instruction.textValue, 44);
+        // console.log(instruction, instruction.textValue, 44);
         if (instruction.special) {
             // console.log(46, availableStylings, chunk);
             if (instruction.numberOfStylings > 1) {
