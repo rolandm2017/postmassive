@@ -46,14 +46,7 @@ function prettyText(inputText: string, stylings: Array<Styling>): any {
     let chunks: any[] = instructions.map((instruction, index) => {
         // console.log(instruction, instruction.textValue, 44);
         if (instruction.special) {
-            // console.log(46, availableStylings, chunk);
-            if (instruction.numberOfStylings > 1) {
-                // let availableStylings = joinClassesAndVerify(
-                //     instruction.dotNotationStylings,
-                //     instruction.numberOfStylings
-                // );
-                let availableStylings = instruction.dotNotationStylings;
-                console.log(instruction, availableStylings, 53);
+            let availableStylings = instruction.dotNotationStylings
                 return (
                     <Chunk
                         index={index}
@@ -61,17 +54,6 @@ function prettyText(inputText: string, stylings: Array<Styling>): any {
                         chunkValue={instruction.textValue}
                     />
                 );
-            } else {
-                let availableStylings = instruction.dotNotationStylings;
-                console.log(availableStylings, Instruction, 63);
-                return (
-                    <Chunk
-                        index={index}
-                        availableStylings={availableStylings}
-                        chunkValue={instruction.textValue}
-                    />
-                );
-            }
         } else {
             return (
                 <Chunk

@@ -92,12 +92,10 @@ export function getSubstringsWithInstructions(inputText: string, stylings: Styli
         if (stylings[i].stylings.length > 0) {
             dotNotationStylings = joinClasses(stylings[i].stylings) // issue here because I added "bold"
         }
-        let countOfSpecialClasses = dotNotationStylings.split(".").length; 
         let instruction = new Instruction(
             true,
             textSlice,
             dotNotationStylings,
-            countOfSpecialClasses // fixme: stylingsCount is way too big
         );
         extremelySpecificInstructions.push(instruction);
 
