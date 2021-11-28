@@ -1,7 +1,13 @@
 function processAmount(number: number, displayedInFeed: boolean): string {
+    if (number === null) {
+        console.log("processAmt returning 0")
+        return "0";
+    }
     // turns "2707" -> "2,707" and "306438" -> "306k"
-    // console.log(number);
-    const amtAsString: string = number.toString();
+    console.log(number, displayedInFeed, 3);
+    let inputNumber: number = number;
+    const amtAsString: string = inputNumber.toString();
+    console.log(6, inputNumber, inputNumber.toString(), amtAsString)
     if (amtAsString.length <= 3) {
         // handles values like "123" and other 3 digit nums
         return amtAsString;

@@ -1,6 +1,4 @@
-import { FC } from "react";
-
-import { wellMadeStylingIsPresent, joinClassesAndVerify, getSubstringsWithInstructions } from "./utility"
+import { wellMadeStylingIsPresent, joinClasses, getSubstringsWithInstructions } from "./utility"
 
 import Styling from "./classes/Styling";
 import { Chunk } from "./chunk/Chunk";
@@ -38,6 +36,7 @@ function prettyText(inputText: string, stylings: Array<Styling>, callback: any):
     }
 
     // console.log("prettyText40", inputText, stylings);
+    console.log("prettyText41", stylings)
     let instructions: Instruction[] = getSubstringsWithInstructions(inputText, stylings);
 
     let chunks: any[] = instructions.map((instruction, index) => {
@@ -45,11 +44,11 @@ function prettyText(inputText: string, stylings: Array<Styling>, callback: any):
         if (instruction.special) {
             // console.log(46, availableStylings, chunk);
             if (instruction.numberOfStylings > 1) {
-                let availableStylings = joinClassesAndVerify(
-                    instruction.dotNotationStylings,
-                    instruction.numberOfStylings
-                );
-                // let availableStylings = chunk.dotNotationStylings;
+                // let availableStylings = joinClassesAndVerify(
+                //     instruction.dotNotationStylings,
+                //     instruction.numberOfStylings
+                // );
+                let availableStylings = instruction.dotNotationStylings;
                 console.log(instruction, availableStylings, 53);
                 return (
                     <Chunk

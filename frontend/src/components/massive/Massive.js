@@ -3,7 +3,7 @@ import React from "react";
 import EngagementContainer from "../engagementContainer/EngagementContainer";
 import Logo from "../../images/bluePfp.png";
 
-import { prettyText } from "../../utility/prettyText.js";
+import prettyText from "../../utility/prettyText.tsx";
 
 import "./Massive.css";
 import "../textStyling/TextStyling.css"; // this file will be imported in many places

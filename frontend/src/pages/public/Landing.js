@@ -49,7 +49,7 @@ function Landing(props) {
 
     useEffect(() => {
         document.title = "PostMassive. Say it loud";
-        desktopLoginError("");
+        setDesktopLoginError("");
         console.log("is this var worthless?", verifiable);
     }, [verifiable, desktopLoginError]);
 

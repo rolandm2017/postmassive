@@ -68,21 +68,18 @@ export function countStylings(stylings: Array<string>): number {
     return stylings.length;
 }
 
-export function joinClassesAndVerify(classesList: Array<string>, expectedNumberOfClasses: number): string {
+export function joinClasses(classesList: string): string {
     // really proud of this one
     /* 
     // @params unsplitClasses - input raw string like "bold, fontSize24" to convert to ["bold", "fontSize24"]
     // @params expectedNumberOfClasses - Comes direct from the Instructions object. To be compared for error detection. 
     // returns - the classes string to insert into the component
     */
-    if (classesList.length === expectedNumberOfClasses) {
-        let joinedClasses = "." + classesList.join(" .");
-        return joinedClasses;
+    if (classesList.indexOf(", ") > -1) {
+        let dotNotationClasses= "." + classesList.split(", ").join(" .");
+        return dotNotationClasses;
     } else {
-        console.log(classesList, expectedNumberOfClasses);
-        throw Error(
-            "Unexpected mismatch between splitClasses length and expectedNumber"
-        );
+        return "." + classesList
     }
 }
 
@@ -195,11 +192,13 @@ export function getSubstringsWithInstructions(inputText: string, stylings: Styli
         let areWeOnTheLastStyling = i === stylings.length - 1;
         let stylingsCount = countStylings(stylings[i].stylings);
         let textSlice = inputText.slice(stylings[i].start, stylings[i].end); // will go from i to end of string
+        let dotNotationStylings = joinClasses(stylings[i].stylings)
+        let countOfSpecialClasses = dotNotationStylings.split(".").length;
         let instruction = new Instruction(
             true,
             textSlice,
-            stylings[i].stylings,
-            stylingsCount
+            dotNotationStylings,
+            countOfSpecialClasses // fixme: stylingsCount is way too big
         );
         extremelySpecificInstructions.push(instruction);
 
