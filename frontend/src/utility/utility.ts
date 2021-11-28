@@ -49,8 +49,8 @@ export function joinClasses(classesList: any): string {
             let dotNotationClasses = classesList.split(", ").join(" ");
             return dotNotationClasses;
         } else {
-            console.log(72, "." + classesList)
-            return "." + classesList
+            console.log(72, classesList)
+            return classesList
         }
     } catch {
         let dotNotationClasses = classesList.join(" ");
