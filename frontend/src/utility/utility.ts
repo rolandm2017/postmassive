@@ -9,8 +9,6 @@ export function thisSingularObjectIsEmpty(styling: Styling): boolean {
     return isEmpty;
 }
 
-
-
 export function wellMadeStylingIsPresent(stylings: Array<Styling>): boolean {
     // TODO: Update this if it needs it
 
@@ -46,28 +44,52 @@ export function joinClasses(classesList: any): string {
     try  { // this try catch here to take care of condition where I'm still using 
         // the "bold, italics" as opposed to ["bold", "italics"]
         if (classesList.indexOf(", ") > -1) {
-            let dotNotationClasses = classesList.split(", ").join(" ");
+            let dotNotationClasses = classesList.join(" ");
+            console.log("inside joinClasses, returning ", dotNotationClasses)
             return dotNotationClasses;
         } else {
             console.log(72, classesList)
+            console.log("inside joinClasses, returning ", classesList)
             return classesList
         }
     } catch {
+        if (classesList.indexOf(", ") > -1) {
+            let dotNotationClasses = classesList.split(", ").join(" ");    
+            console.log("inside joinClasses, returning ", dotNotationClasses)
+            return dotNotationClasses;
+        }
         let dotNotationClasses = classesList.join(" ");
+        console.log("inside joinClasses, returning ", dotNotationClasses)
         return dotNotationClasses
     }
     
+}
+
+export function verifyEachStyling(stylings: Styling[]): boolean[] {
+    // am really looking to see if a Styling contains instructional information that has to be
+    // acted upon to turn it into a chunk.
+    // false === plain
+    let descriptions: boolean[] = []
+    stylings.forEach(styling => {
+        if (styling.start > 0 && styling.end > 0 && styling.stylings.length > 0) {
+            descriptions.push(true)
+        } else if (styling.start > 0 && styling.end > 0 && styling.stylings.length === 0) {
+            descriptions.push(false)
+        } else if (styling.start === 0 && styling.end === 0 && styling.stylings.length === 0) {
+            descriptions.push(true)
+        } else {
+            console.log(76, styling)
+            descriptions.push(true)
+        }
+})
+    return descriptions
 }
 
 
 export function getSubstringsWithInstructions(inputText: string, stylings: Styling[]): Instruction[] {
     /*
     // inputText - self explanatory
-    // stylingsSansProcessing - the .stylings array. it may be that the user has supplied 0, 1, 2, or 3 stylings.
-    // ...this function's role is to sort out how many substrings we'll need.
-    // for 0, we don't need any substrings.
-    // for 1, we just need the substring that is encapsulated by the Styling.
-    // for 2 or 3, a loop makes sense, though barely!
+    // stylings - Stylings array!
     // return value - should be an array of strings that can be combined using prettyText
     */
 
@@ -85,37 +107,64 @@ export function getSubstringsWithInstructions(inputText: string, stylings: Styli
     // fixme: if end is before start, use end as start and start as end. its not a big deal.
     // priority: high!
     // fixme: also the sliders ranges have to be unmessed from their current messy bugged state
+    let booleanValuesDescribingQuality = verifyEachStyling(stylings);
+    // REWRITE
+    console.log(stylings, 878787878787) // INPUT: looks fine here
+    let startPoints = stylings.map(styling => {
+        if (styling.stylings.length > 0) {
+            return styling.start;
+        }
+    })
+    let endPoints = stylings.map(styling => {
+        if (styling.stylings.length > 0)  {   
+            return styling.end;
+        }
+    })
     for (let i = 0; i < stylings.length; i++) {
+        let endOfSpecialTextIndex = 0; // increases every time some StyledText ends. will be used to slice the final TrailEnd
         let areWeOnTheLastStyling = i === stylings.length - 1;
-        let textSlice = inputText.slice(stylings[i].start, stylings[i].end); // will go from i to end of string
+        let textSlice;
+        if (stylings[i].stylings.length > 0) {
+            textSlice = inputText.slice(stylings[i].start, stylings[i].end); // will go from i to end of string
+        } else {
+            textSlice = inputText.slice(endOfSpecialTextIndex);
+        }
         let dotNotationStylings = ".unstyledIfRemaining";
         if (stylings[i].stylings.length > 0) {
             dotNotationStylings = joinClasses(stylings[i].stylings) // issue here because I added "bold"
+            const isStartIndexBiggerThanEnd = stylings[i].start > stylings[i].end;
+            const chooseEndIndexForNewMinimum = stylings[i].end
+            endOfSpecialTextIndex = isStartIndexBiggerThanEnd ? stylings[i].start : chooseEndIndexForNewMinimum;
         }
         let instruction = new Instruction(
             true,
             textSlice,
             dotNotationStylings,
         );
+        console.log(102102102, instruction, i)
         extremelySpecificInstructions.push(instruction);
 
         if (areWeOnTheLastStyling) {
+            console.log(10666666666, extremelySpecificInstructions)
             // special case. get (start, end) and then (end, contentLength)
-
             let ordinaryTrailEndPart = inputText.slice(stylings[i].end + 1);
             let trailEnd = new Instruction(false, ordinaryTrailEndPart);
+            console.log(107, trailEnd, stylings[i], i)
             extremelySpecificInstructions.push(trailEnd);
         } else {
             // standard case. get (start, end), then (end + 1, nextStart)
+            let endOfCurrentStylingRange = stylings[i].end + 1;
+            let startOfNextStylingRange = stylings[i + 1].start
             let normalTextInBetween = inputText.slice(
-                stylings[i].end + 1,
-                stylings[i + 1].start
+                endOfCurrentStylingRange,
+                startOfNextStylingRange
             );
             let instruction = new Instruction(false, normalTextInBetween);
+            console.log(115, normalTextInBetween, i)
             extremelySpecificInstructions.push(instruction);
         }
     }
-    // console.log(stringsWithInstructions);
+    console.log(extremelySpecificInstructions, 117); // INPUT: is messed up by this point
     return extremelySpecificInstructions;
 }
 

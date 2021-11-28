@@ -240,12 +240,12 @@ function Post(props: any) {
                                 }}
                                 currentlyChecked={currentStyle}
                                 currentMin={0}
-                                // currentMax={processMax(
-                                //     0,
-                                //     secondStyle.start,
-                                //     content.length
-                                // )}
-                                currentMax={content.length}
+                                currentMax={processMax(
+                                    0,
+                                    secondStyle.start,
+                                    content.length
+                                )}
+                                // currentMax={content.length}
                                 stylingInfo={firstStyle.stylings}
                                 adjustStart={changeStartRange}
                                 // styling,styleObjectIndex,newStartIndex,setter
@@ -262,8 +262,16 @@ function Post(props: any) {
                                     handleChangeStylingSelection(1);
                                 }}
                                 currentlyChecked={currentStyle}
-                                currentMin={0}
-                                currentMax={content.length}
+                                currentMin={processMin(
+                                    1,
+                                    firstStyle.end,
+                                    content.length
+                                )}
+                                currentMax={processMax(
+                                    1,
+                                    thirdStyle.start,
+                                    content.length
+                                )}
                                 stylingInfo={secondStyle.stylings}
                                 adjustStart={changeStartRange}
                                 adjustEnd={changeEndRange}
@@ -279,8 +287,16 @@ function Post(props: any) {
                                     handleChangeStylingSelection(2);
                                 }}
                                 currentlyChecked={currentStyle}
-                                currentMin={0}
-                                currentMax={content.length}
+                                currentMin={processMin(
+                                    2,
+                                    secondStyle.end,
+                                    content.length
+                                )}
+                                currentMax={processMax(
+                                    2,
+                                    undefined,
+                                    content.length
+                                )}
                                 stylingInfo={thirdStyle.stylings}
                                 adjustStart={changeStartRange}
                                 adjustEnd={changeEndRange}

@@ -26,7 +26,7 @@ function prettyText(inputText: string, stylings: Array<Styling>): any {
         ); // return simply the text
     } 
     
-    console.log("prettyText27", isStylingsEmpty, stylings, stylings.length);
+    // console.log("prettyText27", isStylingsEmpty, stylings, stylings.length);
     let atLeastOneWellFormedStyling = wellMadeStylingIsPresent(stylings);
     if (!atLeastOneWellFormedStyling) {
         // zombie detected 11-27 // return <span className="stylized">{inputText}</span>; // return simply the text ??

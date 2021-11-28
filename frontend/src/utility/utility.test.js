@@ -34,6 +34,8 @@ const stylingFive = new Styling(25, 29, ["italics", "backgroundColorBlack"])
 const stylingSix = new Styling(41, 44, ["italics", "backgroundColorBlack"])
 const pairingTwo = "The quick brown fox jumped over the angry dog and found his way to the grocery store. Calmness exudes because he was able to buy some eggs",
 
+// TODO: unit test getSubstringsWithInstructions with a variety of inputs. [true false true], [false true false], [false true true].
+
 describe("splits classes and verifies that they yield what I expected", () => {
     it("throws an error when I want it to", () => {
         const willThrowError = () => {
