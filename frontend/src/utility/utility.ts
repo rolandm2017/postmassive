@@ -2,6 +2,7 @@ import Instruction from "./classes/Instruction";
 import Styling from "./classes/Styling";
 
 
+
 export function thisSingularObjectIsEmpty(styling: Styling): boolean {
     /*
     //
@@ -61,14 +62,18 @@ export function joinClasses(classesList: any): string {
     // @params classesList - could be "bold, italics" or ["bold", italics] <-- this is the only one that makes sense
     // returns - the classes string to insert into the component
     */
-   console.log("inside joinClasses", classesList, 64)
+
+    // fixme: clicking "bold" causes TypeError: dotNotationStylings.split is not a function.
+    // fixme: result is received empty array into joinClasses
+   console.log("inside joinClasses", classesList, 64) 
     try  { // this try catch here to take care of condition where I'm still using 
         // the "bold, italics" as opposed to ["bold", "italics"]
         if (classesList.indexOf(", ") > -1) {
             let dotNotationClasses = classesList.split(", ").join(" ");
             return dotNotationClasses;
         } else {
-            return classesList
+            console.log(72, "." + classesList)
+            return "." + classesList
         }
     } catch {
         let dotNotationClasses = classesList.join(" ");
@@ -166,8 +171,11 @@ export function getSubstringsWithInstructions(inputText: string, stylings: Styli
     for (let i = 0; i < stylings.length; i++) {
         let areWeOnTheLastStyling = i === stylings.length - 1;
         let textSlice = inputText.slice(stylings[i].start, stylings[i].end); // will go from i to end of string
-        let dotNotationStylings = joinClasses(stylings[i].stylings)
-        let countOfSpecialClasses = dotNotationStylings.split(".").length;
+        let dotNotationStylings = ".unstyledIfRemaining";
+        if (stylings[i].stylings.length > 0) {
+            dotNotationStylings = joinClasses(stylings[i].stylings) // issue here because I added "bold"
+        }
+        let countOfSpecialClasses = dotNotationStylings.split(".").length; 
         let instruction = new Instruction(
             true,
             textSlice,

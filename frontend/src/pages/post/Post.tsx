@@ -208,7 +208,7 @@ function Post(props: any) {
                             <div>
                                 <div className="post_color-white">
                                     {content.length > 4
-                                        ? inspecter(
+                                        ? prettyText(
                                               content,
                                               [
                                                   firstStyle,
