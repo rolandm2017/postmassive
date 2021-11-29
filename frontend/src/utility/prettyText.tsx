@@ -11,11 +11,6 @@ function prettyText(inputText: string, stylings: Array<Styling>): any {
     // stylings: expecting 1 to 3 Stylings objects.
     // returns: chunks of JSX that (magically? how?) connect together in the browser
     */
-
-// TODO: until(oneStyleIsFinished) {
-    // ...handleJustOneStyling(the)
-// }
-    
     let isStylingsEmpty = stylings.length === 0;
     if (isStylingsEmpty) {
         // console.log(26, "yes, it was empty");

@@ -32,37 +32,37 @@ export function wellMadeStylingIsPresent(stylings: Array<Styling>): boolean {
     return false;
 }
 
-export function joinClasses(classesList: any): string {
-    /* really proud of this one
-    // @params classesList - could be "bold, italics" or ["bold", italics] <-- this is the only one that makes sense
-    // returns - the classes string to insert into the component
-    */
+// export function joinClasses(classesList: any): string {
+//     /* really proud of this one
+//     // @params classesList - could be "bold, italics" or ["bold", italics] <-- this is the only one that makes sense
+//     // returns - the classes string to insert into the component
+//     */
 
-    // fixme: clicking "bold" causes TypeError: dotNotationStylings.split is not a function.
-    // fixme: result is received empty array into joinClasses
-   console.log("inside joinClasses", classesList, 64) 
-    try  { // this try catch here to take care of condition where I'm still using 
-        // the "bold, italics" as opposed to ["bold", "italics"]
-        if (classesList.indexOf(", ") > -1) {
-            let dotNotationClasses = classesList.join(" ");
-            console.log("inside joinClasses, returning ", dotNotationClasses)
-            return dotNotationClasses;
-        } else {
-            console.log(72, "inside joinClasses, returning ", classesList)
-            return classesList
-        }
-    } catch {
-        if (classesList.indexOf(", ") > -1) { // why is this in try AND catch? There's a reason, I just don't remember what it is
-            let dotNotationClasses = classesList.split(", ").join(" ");    
-            console.log("inside joinClasses, returning ", dotNotationClasses)
-            return dotNotationClasses;
-        }
-        let dotNotationClasses = classesList.join(" ");
-        console.log("inside joinClasses, returning ", dotNotationClasses)
-        return dotNotationClasses
-    }
+//     // fixme: clicking "bold" causes TypeError: dotNotationStylings.split is not a function.
+//     // fixme: result is received empty array into joinClasses
+//    console.log("inside joinClasses", classesList, 64) 
+//     try  { // this try catch here to take care of condition where I'm still using 
+//         // the "bold, italics" as opposed to ["bold", "italics"]
+//         if (classesList.indexOf(", ") > -1) {
+//             let dotNotationClasses = classesList.join(" ");
+//             console.log("inside joinClasses, returning ", dotNotationClasses)
+//             return dotNotationClasses;
+//         } else {
+//             console.log(72, "inside joinClasses, returning ", classesList)
+//             return classesList
+//         }
+//     } catch {
+//         if (classesList.indexOf(", ") > -1) { // why is this in try AND catch? There's a reason, I just don't remember what it is
+//             let dotNotationClasses = classesList.split(", ").join(" ");    
+//             console.log("inside joinClasses, returning ", dotNotationClasses)
+//             return dotNotationClasses;
+//         }
+//         let dotNotationClasses = classesList.join(" ");
+//         console.log("inside joinClasses, returning ", dotNotationClasses)
+//         return dotNotationClasses
+//     }
     
-}
+// }
 
 export function verifyEachStyling(stylings: Styling[]): boolean[] {
     // am really looking to see if a Styling contains instructional information that has to be
@@ -82,6 +82,33 @@ export function verifyEachStyling(stylings: Styling[]): boolean[] {
         }
 })
     return descriptions
+}
+
+
+function incompleteStylingsBecomeComplete(stylings: any[]): Styling[] {
+    // made this because I spotted the input for getSubstringsWithInstructions was like
+    //(3) [{…}, Styling, Styling]
+    // 0: {start: 0, end: 5, stylings: Array(1)}
+    // look --> //// end: 5, start: 0, stylings: ['bold'][[Prototype]]: Object
+    // 1: Styling {start: 0, end: 0, stylings: Array(0)}end: 0start: 0stylings: [][[Prototype]]: Object
+    // 2: Styling {start: 0, end: 0, stylings: Array(0)}
+    // length: 3
+    // [[Prototype]]: Array(0) 
+    //
+    // notice how the first one is a regular object, not a Styling object. it was causing a bug downstream.
+    let properlyMade: Styling[] = [];
+    stylings.forEach(styling => { // this will retain proper order. 1, 2, 3 --> 1, 2, 3, not 3, 1, 2 or something like that
+        try {
+            if (styling.isProperlyMade) {
+                properlyMade.push(styling)
+            }
+        } catch {
+            const caughtUnmadeStyling = styling;
+            let madeIntoProperStyling = new Styling(caughtUnmadeStyling.start, caughtUnmadeStyling.end, caughtUnmadeStyling.stylings)
+            properlyMade.push(madeIntoProperStyling)
+        }
+    })
+    return properlyMade;
 }
 
 
@@ -119,21 +146,24 @@ export function getSubstringsWithInstructions(inputText: string, stylings: Styli
             return styling.end;
         }
     })
-    for (let i = 0; i < stylings.length; i++) {
+    
+    let cleanedUpStylings = incompleteStylingsBecomeComplete(stylings)
+
+    for (let i = 0; i < cleanedUpStylings.length; i++) {
         let endOfSpecialTextIndex = 0; // increases every time some StyledText ends. will be used to slice the final TrailEnd
-        let areWeOnTheLastStyling = i === stylings.length - 1;
+        let areWeOnTheLastStyling = i === cleanedUpStylings.length - 1;
         let textSlice;
-        if (stylings[i].stylings.length > 0) {
-            textSlice = inputText.slice(stylings[i].start, stylings[i].end); // will go from i to end of string
+        if (cleanedUpStylings[i].stylings.length > 0) {
+            textSlice = inputText.slice(cleanedUpStylings[i].start, cleanedUpStylings[i].end); // will go from i to end of string
         } else {
             textSlice = inputText.slice(endOfSpecialTextIndex);
         }
         let dotNotationStylings = "unstyledIfRemaining";
-        if (stylings[i].stylings.length > 0) {
-            dotNotationStylings = joinClasses(stylings[i].stylings) // issue here because I added "bold"
-            const isStartIndexBiggerThanEnd = stylings[i].start > stylings[i].end;
-            const chooseEndIndexForNewMinimum = stylings[i].end
-            endOfSpecialTextIndex = isStartIndexBiggerThanEnd ? stylings[i].start : chooseEndIndexForNewMinimum;
+        if (cleanedUpStylings[i].stylings.length > 0) {
+            dotNotationStylings = cleanedUpStylings[i].stylings // issue here because I added "bold"
+            const isStartIndexBiggerThanEnd = cleanedUpStylings[i].start > stylings[i].end;
+            const chooseEndIndexForNewMinimum = cleanedUpStylings[i].end
+            endOfSpecialTextIndex = isStartIndexBiggerThanEnd ? cleanedUpStylings[i].start : chooseEndIndexForNewMinimum;
         }
         let instruction = new Instruction(
             true,
@@ -146,14 +176,14 @@ export function getSubstringsWithInstructions(inputText: string, stylings: Styli
         if (areWeOnTheLastStyling) {
             console.log(10666666666, extremelySpecificInstructions) // instructions.dotNotationStylings is an array of stylings
             // special case. get (start, end) and then (end, contentLength)
-            let ordinaryTrailEndPart = inputText.slice(stylings[i].end + 1);
+            let ordinaryTrailEndPart = inputText.slice(cleanedUpStylings[i].end + 1);
             let trailEnd = new Instruction(false, ordinaryTrailEndPart);
-            console.log(107, trailEnd, stylings[i], i)
+            console.log(107, trailEnd, cleanedUpStylings[i], i)
             extremelySpecificInstructions.push(trailEnd);
         } else {
             // standard case. get (start, end), then (end + 1, nextStart)
-            let endOfCurrentStylingRange = stylings[i].end + 1;
-            let startOfNextStylingRange = stylings[i + 1].start
+            let endOfCurrentStylingRange = cleanedUpStylings[i].end + 1;
+            let startOfNextStylingRange = cleanedUpStylings[i + 1].start
             let normalTextInBetween = inputText.slice(
                 endOfCurrentStylingRange,
                 startOfNextStylingRange
