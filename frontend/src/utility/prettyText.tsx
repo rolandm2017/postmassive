@@ -34,7 +34,7 @@ function prettyText(inputText: string, stylings: Array<Styling>): any {
         );
     }
 
-    // console.log("prettyText40", inputText, stylings);
+    console.log("prettyText40", inputText, stylings);
     // console.log("prettyText41", stylings) // fixme: problem is in here... (1)
     let instructions: Instruction[] = getSubstringsWithInstructions(inputText, stylings);
 

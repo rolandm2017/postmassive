@@ -132,9 +132,9 @@ export function getSubstringsWithInstructions(inputText: string, stylings: Styli
     // stylings - Stylings array!
     // return value - should be an array of strings that can be combined using prettyText
     */
-
+    console.log(stylings)
     let cleanedUpStylings: Styling[] = incompleteStylingsBecomeComplete(stylings)
-
+    console.log(cleanedUpStylings)
     let slicesToDistribute: string[] = [];
     let specialSubstringIndexes: number[] = [];
     // split the inputText into its substrings. Assign the right substring to the right Instruction, via index.
@@ -155,7 +155,8 @@ export function getSubstringsWithInstructions(inputText: string, stylings: Styli
             }
             const specialStyledText = inputText.slice(startOfCurrent, endOfCurrent)
             slicesToDistribute.push(specialStyledText)
-            specialSubstringIndexes.push(i + 1)
+            specialSubstringIndexes.push(slicesToDistribute.length - 1) 
+            // fixme: might have to wrap this in [specialIndex, cleanedArrIndex]
 
             // now handle trailing bit
             const nextIndexGoesBeyondTheEnd = i + 1 === cleanedUpStylings.length
@@ -182,7 +183,17 @@ export function getSubstringsWithInstructions(inputText: string, stylings: Styli
         }
     }
     console.log(cleanedUpStylings, slicesToDistribute, specialSubstringIndexes)
-    let extremelySpecificInstructions: Instruction[] = [];
+    let extremelySpecificInstructions: Instruction[] = slicesToDistribute.map((slice, index) => {
+        if (specialSubstringIndexes.includes(index)) {
+            let dotNotationStyling = cleanedUpStylings.shift()?.stylings;
+            console.log(dotNotationStyling)
+            const specialInstruction = new Instruction(true, slice, dotNotationStyling);
+            return specialInstruction;
+        } else {
+            const genericInstruction = new Instruction(false, slice, "generic");
+            return genericInstruction;
+        }
+    })
     
     console.log(extremelySpecificInstructions, 117); // INPUT: is messed up by this point
     return extremelySpecificInstructions;

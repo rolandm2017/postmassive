@@ -6,9 +6,9 @@ const testMassives = [
         content:
             "Mauris tempus orci nisl, vitae maximus justo porttitor ac. Vestibulum non magna viverra, sodales dui a, vestibulum augue. Proin dictum elit commodo erat iaculis fringilla. ",
         stylings: [
-            new Styling(5, 11, "textAlignmentUpDown"),
-            new Styling(32, 39, "strikethrough"),
-            new Styling(104, 124, "bold", "textSize22"),
+            new Styling(5, 11, ["textAlignmentUpDown"]),
+            new Styling(32, 39, ["strikethrough"]),
+            new Styling(104, 124, ["bold", "textSize22"]),
         ],
     },
     {
@@ -16,9 +16,13 @@ const testMassives = [
         content:
             "Men at some time are masters of their fates: The fault, dear Brutus, is not in our stars, But in ourselves, that we are underlings. This above all: to thine own self be true, And it must follow, as the night the day, Thou canst not then be false to any man",
         stylings: [
-            new Styling(4, 27, "backgroundColorOrange", "bold", "textSize22"),
-            new Styling(45, 67, "backgroundColorRed"),
-            new Styling(193, 209, "backgroundColorCyan", "bold", "fontSize12"),
+            new Styling(4, 27, ["backgroundColorOrange", "bold", "textSize22"]),
+            new Styling(45, 67, ["bold"]),
+            new Styling(193, 209, [
+                "backgroundColorCyan",
+                "bold",
+                "fontSize12",
+            ]),
         ],
     },
     {
