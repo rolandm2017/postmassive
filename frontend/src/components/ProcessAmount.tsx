@@ -1,23 +1,13 @@
-const ProcessAmount = (number, displayedInFeed) => {
-    // turns "2707" -> "2,707" and "306438" -> "306k"
-    // console.log(number);
-    if (typeof number === "string") {
-        const containsOnlyDigits = /^\d+$/.test(number);
-        if (containsOnlyDigits) {
-            number = parseInt(number, 10);
-        } else {
-            throw new Error("String was input with non-digit chars");
-        }
-    }
+function processAmount(number: number, displayedInFeed: boolean): string {
     if (number === null) {
-        return null;
+        // console.log("processAmt returning 0")
+        return "0";
     }
-    if (typeof number !== "number" && number !== null) {
-        // console.log(16, number, displayedInFeed);
-        // throw new Error("Wrong input type");
-        console.error("Wrong input type:", number, displayedInFeed);
-    }
-    const amtAsString = parseInt(number, 10).toString();
+    // turns "2707" -> "2,707" and "306438" -> "306k"
+    // console.log(number, displayedInFeed, 3);
+    let inputNumber: number = number;
+    const amtAsString: string = inputNumber.toString();
+    // console.log(6, inputNumber, inputNumber.toString(), amtAsString)
     if (amtAsString.length <= 3) {
         // handles values like "123" and other 3 digit nums
         return amtAsString;
@@ -42,7 +32,9 @@ const ProcessAmount = (number, displayedInFeed) => {
         let together = beforeDot + "." + afterDot + mil;
         console.log(together);
         return together;
+    } else {
+        throw Error("processAmount did not receive a correct input")
     }
 };
 
-export default ProcessAmount;
+export default processAmount;

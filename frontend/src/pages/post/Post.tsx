@@ -1,293 +1,130 @@
 import React, { useState, useEffect } from "react";
-
 import { useHistory, useLocation } from "react-router-dom";
 
-import { postOptions } from "../../_helper/authHeader";
-
+import Styling from "../../utility/classes/Styling";
+// logic imports
 import {
     FLOORS,
-    // EMPHASIS,
+    EMPHASIS,
     // SPECIALS,
     // BG_COLORS,
     // FONT_SIZES,
 } from "../../_helper/consts";
-
 import {
-    prettyText,
-    detectIsStylingEmpty,
-    styleObjectIsEmpty,
     processMin,
     processMax,
-} from "../../utility/utility";
+} from "../../utility/process";
+import prettyText from "../../utility/prettyText";
 
+import { postPost } from "../../_helper/Post";
+import {
+    getAuctioneerResponse,
+    
+    addStyleToSection,
+    removeStyleFromSection,
+} from "../../_helper/auctioneer";
+// images
 import BackButton from "../../images/icons8-back-arrow-48-wh.png";
 import Photo from "../../images/mountain-32.png";
 import Gif from "../../images/gif-48.png";
 import Poll from "../../images/poll-48.png";
 import Emoji from "../../images/happy-48.png";
 import Nicolai from "../../images/markZuckerberg.jpeg";
-
+// major imports
 import Wrapper from "../_pageHelper/Wrapper";
 import TextArea from "./components/TextArea";
-import Styling from "./components/Styling";
+import ChoiceMaker from "./components/ChoiceMaker";
 
 import Emphasis from "./components/Emphasis";
-import Special from "./components/Special";
-import BackgroundColor from "./components/BackgroundColor";
+// import Special from "./components/Special"; // lighthouse
+// import BackgroundColor from "./components/BackgroundColor";
 import FontSlider from "./components/FontSlider";
 
 import Flooring from "./components/Flooring";
 
 import "./Post.scss";
 import "../../components/textStyling/TextStyling.css";
+import { first } from "rxjs";
 // import { current } from "@reduxjs/toolkit";
 
-function Post(props) {
-    const [username, setUsername] = useState(null);
+function Post(props: any) {
+    const [username, setUsername] = useState<string>("");
     const [content, setContent] = useState("");
-    const [price, setPrice] = useState(null);
+    const [price, setPrice] = useState<string>("");
     const [floor, setFloor] = useState(NaN);
     const [currentStyle, setCurrentStyle] = useState(0); // 0, 1, 2 selects radio btn
-    const [firstStyle, setFirstStyle] = useState({});
-    const [secondStyle, setSecondStyle] = useState({});
-    const [thirdStyle, setThirdStyle] = useState({});
+    const [firstStyle, setFirstStyle] = useState(new Styling( 0, 0, []));
+    const [secondStyle, setSecondStyle] = useState(new Styling( 0, 0, []));
+    const [thirdStyle, setThirdStyle] = useState(new Styling( 0, 0, []));
 
     let currentUrl = useLocation().pathname;
     let history = useHistory();
 
     useEffect(() => {
         // console.log(30, currentUrl);
-        let usernameForState = currentUrl.split("/")[1];
+        let usernameForState: string = currentUrl.split("/")[1];
         // console.log(31, usernameForState);
         setUsername(usernameForState);
-        let price = getAuctioneerResponse();
+        let price: string = getAuctioneerResponse();
         setPrice(price);
     }, [currentUrl]);
 
-    // todo: on load, get username from slug.
-
-    function getAuctioneerResponse() {
-        // talks to server's auctioneer to get price of post
-        let auctioneerSays = Math.random() * 1000;
-        console.log(36, auctioneerSays);
-        let asMoney = auctioneerSays.toString().split(".")[0];
-        let decimalValue = Math.ceil(Math.random() * 99)
-            .toString()
-            .substring(0, 3);
-
-        let price = asMoney + "." + decimalValue;
-
-        return price;
-    }
-
-    function handleClick() {
+    function handleGoToHome() {
         history.push("/home");
     }
 
-    function postPost(username, content, price, floor, styling) {
-        // let displayName = user.displayName; // todo: get displayName for data
-        let postContentWithStyling = {
-            username: username,
-            content: content,
-            price: price,
-            floor: floor,
-            styling: styling,
-        };
-        // TODO: stick it into localHistory so browser can reload the data upon pgBack
-        console.log("Sending ........", postContentWithStyling);
-        // send a post to the server to
-        let postingUrl = process.env.REACT_APP_API_URL + "/post/post";
-        fetch(
-            postingUrl,
-            postOptions(postingUrl, false, 51, postContentWithStyling)
-        ) // todo: content packages stuff into json.
-            .then((x) => {
-                if (200) {
-                    handleClick(); // redirect to /home
-                    console.log("sent data to server successfully");
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+    function convertToFormalStyling(start: number, end: number, stylings: string[], setter: any): void {
+        const avoidPassByReference = new Styling(start, end, [...stylings]);
+        setter(avoidPassByReference);
+        return undefined;
     }
 
-    function onlyUnique(value, index, self) {
-        return self.indexOf(value) === index;
-    }
-
-    function updateStyleWithType(type, styleObject, setter) {
-        console.log(116, type, styleObject, setter);
-        let newNthStyle = {
-            ...styleObject,
-        };
-        let currentStyles = styleObject.stylings;
-        if (typeof currentStyles === "undefined") {
-            currentStyles = [];
-        }
-        currentStyles.push(type);
-        newNthStyle.stylings = currentStyles.filter(onlyUnique);
-
-        setter(newNthStyle);
-    }
-
-    // function createNouveauObject()
-
-    function addStyleToSection(type) {
-        console.log(
-            113,
-            type,
-            currentStyle,
-            firstStyle,
-            secondStyle,
-            thirdStyle
-        );
-        if (currentStyle === 0) {
-            // https://stackoverflow.com/questions/679915/how-do-i-test-for-an-empty-javascript-object
-            let firstStyleIsEmpty = styleObjectIsEmpty(firstStyle);
-            console.log(131, firstStyleIsEmpty, firstStyle);
-
-            if (!firstStyleIsEmpty) {
-                // type can still be empty tho
-                updateStyleWithType(type, firstStyle, setFirstStyle);
-            } else {
-                // make the style. DO NOT refactor this to be outside of "currentStyle" dependency
-                let styleInit = {
-                    start: 0,
-                    end: 3,
-                    styles: [type],
-                };
-                console.log("creating style...", styleInit, 134);
-                setFirstStyle(styleInit);
-            }
-        } else if (currentStyle === 1) {
-            let secondStyleIsEmpty = styleObjectIsEmpty(secondStyle);
-            console.log(149, secondStyleIsEmpty, secondStyle);
-
-            if (!secondStyleIsEmpty) {
-                updateStyleWithType(type, secondStyle, setSecondStyle);
-            } else {
-                // make the style. DO NOT refactor this to be outside of "currentStyle" dependency
-                let styleInit = {
-                    start: 0,
-                    end: content.length,
-                    styles: [type],
-                };
-                console.log("creating style...", 154);
-                setSecondStyle(styleInit);
-            }
-        } else if (currentStyle === 2) {
-            let thirdStyleIsEmpty = styleObjectIsEmpty(thirdStyle);
-            console.log(179, thirdStyle, thirdStyleIsEmpty);
-            if (!thirdStyleIsEmpty) {
-                updateStyleWithType(type, thirdStyle, setThirdStyle);
-            } else {
-                // make the style. DO NOT refactor this to be outside of "currentStyle" dependency
-                let styleInit = {
-                    start: 0,
-                    end: content.length,
-                    styles: [type],
-                };
-                console.log("creating style...", 179);
-                setThirdStyle(styleInit);
-            }
-        } else {
-            console.log(currentStyle, "<--- weird bug");
-        }
-    }
-
-    function removeStyleFromSection(type, index) {
-        // fixme: very broken! if bold,italic,strikethrough, clicking 1 removes all.
-        console.log(
-            197,
-            type,
-            "this is index of what",
-            index,
-            "aiemd for bold"
-        );
-        let currentStyles;
-        if (index === 0) {
-            currentStyles = [...firstStyle.stylings];
-            const typeIndex = currentStyles.indexOf(type);
-            if (typeIndex > -1) {
-                currentStyles.splice(typeIndex, 1);
-            }
-            let newFirstStyleObject = {
-                start: firstStyle.start,
-                end: firstStyle.end,
-                styles: currentStyles,
-            };
-            setFirstStyle(newFirstStyleObject);
-        } else if (index === 1) {
-            currentStyles = [...secondStyle.stylings];
-            const typeIndex = currentStyles.indexOf(type);
-            if (typeIndex > -1) {
-                currentStyles.splice(typeIndex, 1);
-            }
-            let newSecondStyleObject = {
-                start: secondStyle.start,
-                end: secondStyle.end,
-                styles: currentStyles,
-            };
-            setSecondStyle(newSecondStyleObject);
-        } else if (index === 2) {
-            currentStyles = [...thirdStyle.stylings];
-            const typeIndex = currentStyles.indexOf(type);
-            // FIXME: i suspect something is broken in here
-            if (typeIndex > -1) {
-                currentStyles.splice(typeIndex, 1);
-            }
-            let newThirdStyleObject = {
-                start: thirdStyle.start,
-                end: thirdStyle.end,
-                styles: currentStyles,
-            };
-            setThirdStyle(newThirdStyleObject);
-        } else {
-            console.log(currentStyle, "<--- weird bug");
-            // throw "strange error";
-        }
-    }
-
-    function handleChangeStartRange(styleObjectIndex, newStartIndex) {
+    function changeStartRange(styleObjectIndex: number, newStartIndex: any): void {
+        // TODO: nail down newStartIndex as either string||integer
         // console.log(2248, styleObjectIndex, newStartIndex);
-        let integerNewStartIndex = parseInt(newStartIndex, 10);
+        let integerNewStartIndex: number = parseInt(newStartIndex, 10);
         if (styleObjectIndex === 0) {
-            let newFirstStyle = { ...firstStyle };
+            let newFirstStyle = new Styling(firstStyle.start, firstStyle.end, [...firstStyle.stylings]);
             newFirstStyle.start = integerNewStartIndex;
             setFirstStyle(newFirstStyle);
         } else if (styleObjectIndex === 1) {
-            let newSecondStyle = { ...secondStyle };
+            let newSecondStyle = new Styling(secondStyle.start, secondStyle.end, [...secondStyle.stylings]);
             newSecondStyle.start = integerNewStartIndex;
             setSecondStyle(newSecondStyle);
         } else if (styleObjectIndex === 2) {
-            let newThirdStyle = { ...thirdStyle };
+            let newThirdStyle = new Styling(thirdStyle.start, thirdStyle.end, [...thirdStyle.stylings]);
             newThirdStyle.start = integerNewStartIndex;
             setThirdStyle(newThirdStyle);
+        } else {
+            throw Error("Index out of range for changeStartRange");
         }
     }
 
-    function handleChangeEndRange(styleObjectIndex, newEndIndex) {
-        let integerNewEndIndex = parseInt(newEndIndex, 10);
+    // TODO: rewrite this func to use these 4 args -- it was plainly obvious to me that it was doable before
+    function changeEndRange(
+        styleObjectIndex: any, 
+        newEndIndex: any,
+    ): void {
+        // console.log(108, styleObjectIndex, newEndIndex, setter)
+        
+        let integerNewEndIndex:number = parseInt(newEndIndex, 10);
         // console.log(2265, styleObjectIndex, newEndIndex, integerNewEndIndex);
         if (styleObjectIndex === 0) {
-            let newFirstStyle = { ...firstStyle };
+            let newFirstStyle = new Styling(firstStyle.start, firstStyle.end, [...firstStyle.stylings]);
             newFirstStyle.end = integerNewEndIndex;
             setFirstStyle(newFirstStyle);
         } else if (styleObjectIndex === 1) {
-            let newSecondStyle = { ...secondStyle };
+            let newSecondStyle = new Styling(secondStyle.start, secondStyle.end, [...secondStyle.stylings]);
             newSecondStyle.end = integerNewEndIndex;
             setSecondStyle(newSecondStyle);
         } else if (styleObjectIndex === 2) {
-            let newThirdStyle = {
-                ...thirdStyle,
-            };
+            let newThirdStyle = new Styling(thirdStyle.start, thirdStyle.end, [...thirdStyle.stylings]);
             newThirdStyle.end = integerNewEndIndex;
             setThirdStyle(newThirdStyle);
         }
     }
 
-    function handleChangeStylingSelection(number) {
+    function handleChangeStylingSelection(number: number): void {
         setCurrentStyle(number); // does work btw!
     }
 
@@ -301,6 +138,11 @@ function Post(props) {
             <Flooring flooring={floor} />
         </div>
     ));
+
+    function inspecter(input1: any, inputArr: any): any {
+        console.log(input1, inputArr[0], inputArr[1], inputArr[2])
+        return input1;
+    }
 
     return (
         <Wrapper
@@ -364,8 +206,8 @@ function Post(props) {
                             stylingTypes with drag n drop, or by selecting the
                             type then selecting another styling */}
                             <div>
-                                <p className="post_color-white">
-                                    {content.length > 8
+                                <div className="post_color-white">
+                                    {content.length > 4
                                         ? prettyText(
                                               content,
                                               [
@@ -375,16 +217,25 @@ function Post(props) {
                                               ]
                                               // setContent // YAGNI
                                           )
+                                          
+                                          
+                                        //   .map((Chunk, index) => {
+                                        //       return (
+                                        //           <div>
+                                        //               <Chunk />
+                                        //           </div>
+                                        //       );
+                                        //   })
                                         : null}
-                                </p>
+                                </div>
                             </div>
                         </div>
                         <div id="post_styling-area">
-                            <Styling
+                            <ChoiceMaker
                                 key={0}
                                 menuOption={0}
                                 handleClick={() => {
-                                    console.log(340, "should update sel");
+                                    console.log(340, "should update sel", 0);
                                     handleChangeStylingSelection(0);
                                 }}
                                 currentlyChecked={currentStyle}
@@ -394,12 +245,16 @@ function Post(props) {
                                     secondStyle.start,
                                     content.length
                                 )}
+                                // currentMax={content.length}
                                 stylingInfo={firstStyle.stylings}
-                                adjustStart={handleChangeStartRange}
-                                adjustEnd={handleChangeEndRange}
+                                adjustStart={changeStartRange}
+                                // styling,styleObjectIndex,newStartIndex,setter
+                                adjustEnd={changeEndRange}
                                 handleRemoval={removeStyleFromSection}
+                                styling={firstStyle}
+                                setter={setFirstStyle}
                             />
-                            <Styling
+                            <ChoiceMaker
                                 key={1}
                                 menuOption={1}
                                 handleClick={() => {
@@ -418,11 +273,13 @@ function Post(props) {
                                     content.length
                                 )}
                                 stylingInfo={secondStyle.stylings}
-                                adjustStart={handleChangeStartRange}
-                                adjustEnd={handleChangeEndRange}
+                                adjustStart={changeStartRange}
+                                adjustEnd={changeEndRange}
                                 handleRemoval={removeStyleFromSection}
+                                styling={secondStyle}
+                                setter={setSecondStyle}
                             />
-                            <Styling
+                            <ChoiceMaker
                                 key={2}
                                 menuOption={2}
                                 handleClick={() => {
@@ -441,9 +298,11 @@ function Post(props) {
                                     content.length
                                 )}
                                 stylingInfo={thirdStyle.stylings}
-                                adjustStart={handleChangeStartRange}
-                                adjustEnd={handleChangeEndRange}
+                                adjustStart={changeStartRange}
+                                adjustEnd={changeEndRange}
                                 handleRemoval={removeStyleFromSection}
+                                styling={thirdStyle}
+                                setter={setThirdStyle}
                             />
                         </div>
                         <p>
@@ -452,7 +311,49 @@ function Post(props) {
                         </p>
                         <div id="post_targeting-container">
                             <div className="post_tones-outer-container w-100">
-                                <Emphasis
+                                {EMPHASIS.map((styling, index) => {
+                                    return (
+                                        <div key={index}>
+                                            <Emphasis
+                                                emphasis={styling}
+                                                onClick={() => {
+                                                    if (currentStyle === 0) {
+                                                        addStyleToSection(
+                                                            firstStyle,
+                                                            styling,
+                                                            0,
+                                                            setFirstStyle
+                                                        );
+                                                    } else if (
+                                                        currentStyle === 1
+                                                    ) {
+                                                        addStyleToSection(
+                                                            secondStyle,
+                                                            styling,
+                                                            1,
+                                                            setSecondStyle
+                                                        );
+                                                    } else if (
+                                                        currentStyle === 2
+                                                    ) {
+                                                        addStyleToSection(
+                                                            thirdStyle,
+                                                            styling,
+                                                            2,
+                                                            setThirdStyle
+                                                        );
+                                                    } else {
+                                                        throw Error(
+                                                            "You shouldn't be able to get here you know"
+                                                        );
+                                                    }
+                                                }}
+                                            />
+                                        </div>
+                                    );
+                                })}
+
+                                {/* <Emphasis
                                     emphasis={"bold"}
                                     onClick={() => {
                                         // console.log(
@@ -460,30 +361,9 @@ function Post(props) {
                                         //     "inside Emphasis onClick"
                                         // );
                                         addStyleToSection("bold");
-                                    }}
-                                />
-                                <Emphasis
-                                    emphasis={"italics"}
-                                    onClick={() => {
-                                        addStyleToSection("italics");
-                                    }}
-                                />
-                                <Emphasis
-                                    emphasis={"strikethrough"}
-                                    onClick={() => {
-                                        addStyleToSection("strikethrough");
-                                    }}
-                                />
-                                <Emphasis
-                                    emphasis={"underline"}
-                                    onClick={() => {
-                                        console.log(
-                                            433,
-                                            "inside Emphasis onClick"
-                                        );
-                                        addStyleToSection("underline");
-                                    }}
-                                />
+                                    })
+                                }
+                                /> */}
                             </div>
                             <div id="" className="">
                                 <FontSlider />
@@ -533,24 +413,15 @@ function Post(props) {
                                                 firstStyle,
                                                 secondStyle,
                                                 thirdStyle,
-                                            ] // wrap up all 3 choices and put into Post
+                                            ],
+                                            // wrap up all 3 choices and put into Post
+                                            handleGoToHome
                                         );
                                     }}
                                 >
                                     Post
                                 </button>
-                                <button
-                                    onClick={() => {
-                                        console.log(
-                                            currentStyle,
-                                            firstStyle,
-                                            secondStyle,
-                                            thirdStyle
-                                        );
-                                    }}
-                                >
-                                    Inspect
-                                </button>
+                             
                             </div>
                         </div>
                     </div>

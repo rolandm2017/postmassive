@@ -7,7 +7,7 @@ function TextArea({ setContent }) {
                 <label htmlFor="content">What do you want to say?</label>
                 {/* <br /> */}
                 <textarea
-                    id="content"
+                    id="post_text-area-content"
                     type="text"
                     name="content"
                     default="hello i am writing some text into the textbox so it has value by default"

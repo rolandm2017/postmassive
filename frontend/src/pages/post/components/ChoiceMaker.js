@@ -1,8 +1,8 @@
 import Choice from "./Choice";
 
-import "./Styling.css";
+import "./ChoiceMaker.css";
 
-function Styling({
+function ChoiceMaker({
     menuOption,
     handleClick,
     stylingInfo,
@@ -12,6 +12,8 @@ function Styling({
     adjustEnd,
     currentlyChecked,
     handleRemoval,
+    styling,
+    setter,
 }) {
     return (
         <div className="styling_styling-parent-container d-flex flex-row align-items-start">
@@ -73,8 +75,14 @@ function Styling({
                                       key={index}
                                       choice={choice}
                                       onClick={() =>
-                                          handleRemoval(choice, menuOption)
+                                          handleRemoval(
+                                              styling,
+                                              choice,
+                                              menuOption,
+                                              setter
+                                          )
                                       }
+                                      // styling, type, index, setter
                                   />
                               );
                           })
@@ -86,4 +94,4 @@ function Styling({
     );
 }
 
-export default Styling;
+export default ChoiceMaker;

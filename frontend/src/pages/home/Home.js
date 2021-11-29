@@ -9,6 +9,7 @@ import Poll from "../../components/poll/Poll";
 import testMassives from "./testContent/testMassives";
 
 import "../../components/textStyling/TextStyling.css"; // this file will be imported in many places
+import "../../components/textStyling/TextStyling.css";
 
 function Home(props) {
     const [massives, setMassives] = useState([]);
@@ -17,7 +18,6 @@ function Home(props) {
     let history = useHistory();
 
     useEffect(() => {
-        document.title = "AabbbbBbba";
         let feedUrl = process.env.REACT_APP_API_URL + "/wall/introduce";
         console.log(fetch(feedUrl, getOptions(feedUrl)));
         fetch(feedUrl, getOptions(feedUrl))
@@ -35,7 +35,7 @@ function Home(props) {
                 }
                 // fixme: Error: Objects are not valid as a React child (found: object with keys {special, value, styling, numberOfStylings}). I
                 // setMassives(puttingSomePollsIntoIt.slice(0, 2));
-                setMassives(data);
+                setMassives(data.slice(0, 5));
             });
     }, []);
 
