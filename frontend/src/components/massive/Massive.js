@@ -9,6 +9,7 @@ import "./Massive.css";
 import "../textStyling/TextStyling.css"; // this file will be imported in many places
 
 function Massive(props) {
+    console.log(props, 12);
     // let customStyling = "fontSizeWholeText"; // hardcode via this input
 
     // console.log(props, 17);
@@ -39,6 +40,7 @@ function Massive(props) {
                         {/* <p className="mt-0 text-left">{props.content}</p> */}
                         <p className="mt-0 text-left">
                             {prettyText(props.content, props.stylings)}
+                            {/* fishy, this works */}
                         </p>
 
                         <EngagementContainer

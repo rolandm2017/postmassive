@@ -40,7 +40,7 @@ export function joinClasses(classesList: any): string {
 
     // fixme: clicking "bold" causes TypeError: dotNotationStylings.split is not a function.
     // fixme: result is received empty array into joinClasses
-   console.log("inside joinClasses", classesList, 64) 
+//    console.log("inside joinClasses", classesList, 64) 
     try  { // this try catch here to take care of condition where I'm still using 
         // the "bold, italics" as opposed to ["bold", "italics"]
         if (classesList.indexOf(", ") > -1) {
@@ -48,14 +48,13 @@ export function joinClasses(classesList: any): string {
             console.log("inside joinClasses, returning ", dotNotationClasses)
             return dotNotationClasses;
         } else {
-            console.log(72, classesList)
-            console.log("inside joinClasses, returning ", classesList)
+            // console.log("inside joinClasses, returning ", classesList)
             return classesList
         }
     } catch {
         if (classesList.indexOf(", ") > -1) {
             let dotNotationClasses = classesList.split(", ").join(" ");    
-            console.log("inside joinClasses, returning ", dotNotationClasses)
+            // console.log("inside joinClasses, returning ", dotNotationClasses)
             return dotNotationClasses;
         }
         let dotNotationClasses = classesList.join(" ");
@@ -145,7 +144,7 @@ export function getSubstringsWithInstructions(inputText: string, stylings: Styli
         extremelySpecificInstructions.push(instruction);
 
         if (areWeOnTheLastStyling) {
-            console.log(10666666666, extremelySpecificInstructions)
+            console.log(10666666666, extremelySpecificInstructions) // here, tM.4 is ok.
             // special case. get (start, end) and then (end, contentLength)
             let ordinaryTrailEndPart = inputText.slice(stylings[i].end + 1);
             let trailEnd = new Instruction(false, ordinaryTrailEndPart);
@@ -160,7 +159,7 @@ export function getSubstringsWithInstructions(inputText: string, stylings: Styli
                 startOfNextStylingRange
             );
             let instruction = new Instruction(false, normalTextInBetween);
-            console.log(115, normalTextInBetween, i)
+            // console.log(115, normalTextInBetween, i)
             extremelySpecificInstructions.push(instruction);
         }
     }

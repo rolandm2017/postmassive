@@ -24,8 +24,9 @@ import {
     removeStyleFromSection,
 } from "../../_helper/auctioneer";
 // images
-import BackButton from "../../images/icons8-back-arrow-48-wh.png";
-import Photo from "../../images/mountain-32.png";
+import * as BackButton from "../../images/icons8-back-arrow-48-wh.png";
+// import BackButton from "../../images/icons8-back-arrow-48-wh.png";
+import * as Photo from "../../images/mountain-32.png";
 import Gif from "../../images/gif-48.png";
 import Poll from "../../images/poll-48.png";
 import Emoji from "../../images/happy-48.png";

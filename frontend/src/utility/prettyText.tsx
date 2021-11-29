@@ -46,7 +46,7 @@ function prettyText(inputText: string, stylings: Array<Styling>): any {
     let chunks: any[] = instructions.map((instruction, index) => {
         // console.log(instruction, instruction.textValue, 44);
         if (instruction.special) {
-            let availableStylings = instruction.dotNotationStylings
+            let availableStylings = instruction.dotNotationStylings.join(" ")
                 return (
                     <Chunk
                         index={index}
