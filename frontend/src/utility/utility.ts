@@ -48,12 +48,11 @@ export function joinClasses(classesList: any): string {
             console.log("inside joinClasses, returning ", dotNotationClasses)
             return dotNotationClasses;
         } else {
-            console.log(72, classesList)
-            console.log("inside joinClasses, returning ", classesList)
+            console.log(72, "inside joinClasses, returning ", classesList)
             return classesList
         }
     } catch {
-        if (classesList.indexOf(", ") > -1) {
+        if (classesList.indexOf(", ") > -1) { // why is this in try AND catch? There's a reason, I just don't remember what it is
             let dotNotationClasses = classesList.split(", ").join(" ");    
             console.log("inside joinClasses, returning ", dotNotationClasses)
             return dotNotationClasses;
@@ -129,7 +128,7 @@ export function getSubstringsWithInstructions(inputText: string, stylings: Styli
         } else {
             textSlice = inputText.slice(endOfSpecialTextIndex);
         }
-        let dotNotationStylings = ".unstyledIfRemaining";
+        let dotNotationStylings = "unstyledIfRemaining";
         if (stylings[i].stylings.length > 0) {
             dotNotationStylings = joinClasses(stylings[i].stylings) // issue here because I added "bold"
             const isStartIndexBiggerThanEnd = stylings[i].start > stylings[i].end;
@@ -145,7 +144,7 @@ export function getSubstringsWithInstructions(inputText: string, stylings: Styli
         extremelySpecificInstructions.push(instruction);
 
         if (areWeOnTheLastStyling) {
-            console.log(10666666666, extremelySpecificInstructions)
+            console.log(10666666666, extremelySpecificInstructions) // instructions.dotNotationStylings is an array of stylings
             // special case. get (start, end) and then (end, contentLength)
             let ordinaryTrailEndPart = inputText.slice(stylings[i].end + 1);
             let trailEnd = new Instruction(false, ordinaryTrailEndPart);

@@ -8,6 +8,8 @@ class Styling {
     getStylings() {
         return this.stylings;
     }
+
+    getInstruction() {}
 }
 
 export default Styling;

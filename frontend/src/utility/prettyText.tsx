@@ -46,22 +46,11 @@ function prettyText(inputText: string, stylings: Array<Styling>): any {
     let chunks: any[] = instructions.map((instruction, index) => {
         // console.log(instruction, instruction.textValue, 44);
         if (instruction.special) {
-            let availableStylings = instruction.dotNotationStylings
-                return (
-                    <Chunk
-                        index={index}
-                        availableStylings={availableStylings}
-                        chunkValue={instruction.textValue}
-                    />
-                );
+            console.log(49, instruction.dotNotationStylings)
+            return instruction.getStyledChunk(index)
         } else {
-            return (
-                <Chunk
-                    index={index}
-                    availableStylings={""}
-                    chunkValue={instruction.textValue}
-                />
-            );
+            console.log(49, instruction.dotNotationStylings)
+            return instruction.getStyledChunk(index)
         }
     });
     console.log(chunks, 82, "end of prettyText");
