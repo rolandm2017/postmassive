@@ -111,8 +111,10 @@ function incompleteStylingsBecomeComplete(stylings: Styling[]): Styling[] {
     let properlyMade: Styling[] = [];
     stylings.forEach(styling => { // this will retain proper order. 1, 2, 3 --> 1, 2, 3, not 3, 1, 2 or something like that
         try {
-            if (styling.isProperlyMade) {
-                properlyMade.push(styling)
+            if (styling.start > 0 && styling.start > 0) {
+                if (styling.stylings) {
+                    properlyMade.push(styling)
+                }
             }
         } catch {
             const caughtUnmadeStyling = styling;
@@ -136,27 +138,51 @@ export function getSubstringsWithInstructions(inputText: string, stylings: Styli
     let slicesToDistribute: string[] = [];
     let specialSubstringIndexes: number[] = [];
     // split the inputText into its substrings. Assign the right substring to the right Instruction, via index.
+    let specialIndex = 0;
     for (let i = 0; i < cleanedUpStylings.length; i++) {
-        const stylingStartsRightAway = i === 0 && cleanedUpStylings[i].start === 0
+        const startOfCurrent = cleanedUpStylings[i].start
+        const endOfCurrent = cleanedUpStylings[i].end
+        const stylingStartsRightAway = i === 0 && startOfCurrent === 0
         if (stylingStartsRightAway) {
-            const stylingFromZero = inputText.slice(cleanedUpStylings[i].start, cleanedUpStylings[i].end)
+            const stylingFromZero = inputText.slice(startOfCurrent, endOfCurrent)
             slicesToDistribute.push(stylingFromZero)
             specialSubstringIndexes.push(i)
         } else {
             if (i === 0) {
-                const unstyledPartBeforeFirstStyling = inputText.slice(0, cleanedUpStylings[i].start);
+                const unstyledPartBeforeFirstStyling = inputText.slice(0, startOfCurrent);
                 slicesToDistribute.push(unstyledPartBeforeFirstStyling)
+                specialIndex++;
             }
-            const specialStyledText = inputText.slice(cleanedUpStylings[i].start, cleanedUpStylings[i].end)
+            const specialStyledText = inputText.slice(startOfCurrent, endOfCurrent)
             slicesToDistribute.push(specialStyledText)
+            specialSubstringIndexes.push(i + 1)
+
+            // now handle trailing bit
+            const nextIndexGoesBeyondTheEnd = i + 1 === cleanedUpStylings.length
+            if (nextIndexGoesBeyondTheEnd) {
+                // vvvvvvv 
+                // GENERIC 
+                // ^^^^^^^ 
+                // we are handling the trailing bit like
+                // style 3: (29, 59)
+                // content.length: 73 <--- will have 14 remaining chars
+                let trailingEndPart = inputText.slice(endOfCurrent);
+                slicesToDistribute.push(trailingEndPart)
+
+            } else {
+                // vvvvvvv 
+                // GENERIC 
+                // ^^^^^^^
+                // we are handling the text between the end of styling[i] and the start of styling[i + 1]
+                const startOfNextStyling = cleanedUpStylings[i + 1].start;
+                let genericTextInMiddle = inputText.slice(endOfCurrent, startOfNextStyling)
+                slicesToDistribute.push(genericTextInMiddle)
+                specialIndex++;
+            }
         }
     }
-
+    console.log(cleanedUpStylings, slicesToDistribute, specialSubstringIndexes)
     let extremelySpecificInstructions: Instruction[] = [];
-
-    for (let i = 0; i < cleanedUpStylings.length; i++) {
-
-    }
     
     console.log(extremelySpecificInstructions, 117); // INPUT: is messed up by this point
     return extremelySpecificInstructions;
