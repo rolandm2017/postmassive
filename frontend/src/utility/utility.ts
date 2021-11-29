@@ -84,8 +84,20 @@ export function verifyEachStyling(stylings: Styling[]): boolean[] {
     return descriptions
 }
 
+// export function removedEmpties(stylings: Styling[]): any {
+//     let fullOnly: any = [];
+//     stylings.forEach(styling => {
+//         if (styling.start > 0 && styling.end > 0) {
+//             if (styling.stylings.length > 0) {
+//                 fullOnly.push(styling)
+//             }
+//         }
+//     })
+//     return fullOnly;
+// }
 
-function incompleteStylingsBecomeComplete(stylings: any[]): Styling[] {
+
+function incompleteStylingsBecomeComplete(stylings: Styling[]): Styling[] {
     // made this because I spotted the input for getSubstringsWithInstructions was like
     //(3) [{…}, Styling, Styling]
     // 0: {start: 0, end: 5, stylings: Array(1)}
@@ -119,80 +131,33 @@ export function getSubstringsWithInstructions(inputText: string, stylings: Styli
     // return value - should be an array of strings that can be combined using prettyText
     */
 
-    // todo: only splice if there is a styling attached to the stylings obj // delete if here on dec 20th
-    let startingSliceValue = inputText.slice(0, stylings[0].start);
-    let initSlice = new Instruction(false, startingSliceValue);
-    // let initSlice = {
-    //     special: false,
-    //     value: startingSliceValue
-    // };
-    let extremelySpecificInstructions: Instruction[] = [];
-    if (stylings.length > 0) {
-        extremelySpecificInstructions.push(initSlice);
+    let cleanedUpStylings: Styling[] = incompleteStylingsBecomeComplete(stylings)
+
+    let slicesToDistribute: string[] = [];
+    let specialSubstringIndexes: number[] = [];
+    // split the inputText into its substrings. Assign the right substring to the right Instruction, via index.
+    for (let i = 0; i < cleanedUpStylings.length; i++) {
+        const stylingStartsRightAway = i === 0 && cleanedUpStylings[i].start === 0
+        if (stylingStartsRightAway) {
+            const stylingFromZero = inputText.slice(cleanedUpStylings[i].start, cleanedUpStylings[i].end)
+            slicesToDistribute.push(stylingFromZero)
+            specialSubstringIndexes.push(i)
+        } else {
+            if (i === 0) {
+                const unstyledPartBeforeFirstStyling = inputText.slice(0, cleanedUpStylings[i].start);
+                slicesToDistribute.push(unstyledPartBeforeFirstStyling)
+            }
+            const specialStyledText = inputText.slice(cleanedUpStylings[i].start, cleanedUpStylings[i].end)
+            slicesToDistribute.push(specialStyledText)
+        }
     }
-    // fixme: if end is before start, use end as start and start as end. its not a big deal.
-    // priority: high!
-    // fixme: also the sliders ranges have to be unmessed from their current messy bugged state
-    let booleanValuesDescribingQuality = verifyEachStyling(stylings);
-    // REWRITE
-    console.log(stylings, 878787878787) // INPUT: looks fine here
-    let startPoints = stylings.map(styling => {
-        if (styling.stylings.length > 0) {
-            return styling.start;
-        }
-    })
-    let endPoints = stylings.map(styling => {
-        if (styling.stylings.length > 0)  {   
-            return styling.end;
-        }
-    })
-    
-    let cleanedUpStylings = incompleteStylingsBecomeComplete(stylings)
+
+    let extremelySpecificInstructions: Instruction[] = [];
 
     for (let i = 0; i < cleanedUpStylings.length; i++) {
-        let endOfSpecialTextIndex = 0; // increases every time some StyledText ends. will be used to slice the final TrailEnd
-        let areWeOnTheLastStyling = i === cleanedUpStylings.length - 1;
-        let textSlice;
-        if (cleanedUpStylings[i].stylings.length > 0) {
-            textSlice = inputText.slice(cleanedUpStylings[i].start, cleanedUpStylings[i].end); // will go from i to end of string
-        } else {
-            textSlice = inputText.slice(endOfSpecialTextIndex);
-        }
-        let dotNotationStylings = "unstyledIfRemaining";
-        if (cleanedUpStylings[i].stylings.length > 0) {
-            dotNotationStylings = cleanedUpStylings[i].stylings // issue here because I added "bold"
-            const isStartIndexBiggerThanEnd = cleanedUpStylings[i].start > stylings[i].end;
-            const chooseEndIndexForNewMinimum = cleanedUpStylings[i].end
-            endOfSpecialTextIndex = isStartIndexBiggerThanEnd ? cleanedUpStylings[i].start : chooseEndIndexForNewMinimum;
-        }
-        let instruction = new Instruction(
-            true,
-            textSlice,
-            dotNotationStylings,
-        );
-        console.log(102102102, instruction, i)
-        extremelySpecificInstructions.push(instruction);
 
-        if (areWeOnTheLastStyling) {
-            console.log(10666666666, extremelySpecificInstructions) // instructions.dotNotationStylings is an array of stylings
-            // special case. get (start, end) and then (end, contentLength)
-            let ordinaryTrailEndPart = inputText.slice(cleanedUpStylings[i].end + 1);
-            let trailEnd = new Instruction(false, ordinaryTrailEndPart);
-            console.log(107, trailEnd, cleanedUpStylings[i], i)
-            extremelySpecificInstructions.push(trailEnd);
-        } else {
-            // standard case. get (start, end), then (end + 1, nextStart)
-            let endOfCurrentStylingRange = cleanedUpStylings[i].end + 1;
-            let startOfNextStylingRange = cleanedUpStylings[i + 1].start
-            let normalTextInBetween = inputText.slice(
-                endOfCurrentStylingRange,
-                startOfNextStylingRange
-            );
-            let instruction = new Instruction(false, normalTextInBetween);
-            console.log(115, normalTextInBetween, i)
-            extremelySpecificInstructions.push(instruction);
-        }
     }
+    
     console.log(extremelySpecificInstructions, 117); // INPUT: is messed up by this point
     return extremelySpecificInstructions;
 }
