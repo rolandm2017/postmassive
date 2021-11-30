@@ -33,6 +33,7 @@ function Home(props) {
                 for (let i = 0; i < data.length; i++) {
                     puttingSomePollsIntoIt.push(data[i]);
                 }
+
                 // fixme: Error: Objects are not valid as a React child (found: object with keys {special, value, styling, numberOfStylings}). I
                 // setMassives(puttingSomePollsIntoIt.slice(0, 2));
                 setMassives(data.slice(0, 1));

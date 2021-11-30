@@ -144,6 +144,11 @@ function Post(props: any) {
         return input1;
     }
 
+    function prettyWrapper(textInput, stylings) {
+        let processedStylings: Styling[] = [];
+        return prettyText(textInput, processedStylings);
+    }
+
     return (
         <Wrapper
             pagename="post"
@@ -211,9 +216,9 @@ function Post(props: any) {
                                         ? prettyText(
                                               content,
                                               [
-                                                  firstStyle,
-                                                  secondStyle,
-                                                  thirdStyle,
+                                                  new Styling(firstStyle.start, firstStyle.end, [...firstStyle.stylings]),
+                                                  new Styling(secondStyle.start, secondStyle.end, [...secondStyle.stylings]),
+                                                  new Styling(thirdStyle.start, thirdStyle.end, [...thirdStyle.stylings]),
                                               ]
                                               // setContent // YAGNI
                                           )
