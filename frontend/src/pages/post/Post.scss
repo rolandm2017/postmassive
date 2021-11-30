@@ -1,4 +1,5 @@
 @import "./../../styles/colors";
+@import "./../../styles/breakpoints";
 
 label {
     color: white;
@@ -172,6 +173,16 @@ textarea {
     margin: 0;
 }
 
+.post_bg-lighten {
+    margin: 3px;
+    padding: 3px 2px;
+    background-color: lighten($uxui-dg, 9);
+}
+
+.post_bg-lighten p {
+    margin: 0;
+}
+
 #post_typed-content-area {
     border: 3px solid black;
     width: 100%;
@@ -185,4 +196,18 @@ textarea {
 
 .color-white {
     color: white;
+}
+
+@media only screen and (max-width: $mobile-sized) {
+    #post_bottom-half {
+        justify-content: center;
+    }
+
+    #post_styling-area {
+        padding-left: 10px;
+    }
+
+    .post_mobile-even-spacer {
+        justify-content: space-evenly;
+    }
 }

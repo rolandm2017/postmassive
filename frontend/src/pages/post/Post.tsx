@@ -293,7 +293,7 @@ function Post(props: any) {
                             targeting by age, gender. */}
                         </p>
                         <div id="post_targeting-container">
-                            <div className="post_tones-outer-container w-100">
+                            <div className="post_tones-outer-container w-100 post_mobile-even-spacer ">
                                 {EMPHASIS.map((styling, index) => {
                                     return (
                                         <div key={index}>
@@ -338,8 +338,8 @@ function Post(props: any) {
                             </div>
                             
                             <div className="">
-                                <div className="pl-2"><span className="color-white">backgroundColor:</span></div>
-                                <div className="post_tones-outer-container w-100">
+                                {/* <div className="pl-2"><span className="color-white">backgroundColor:</span></div> */}
+                                <div className="post_tones-outer-container w-100 post_mobile-even-spacer ">
                                     {BG_COLORS.map((color, index) => {
                                         return (
                                             <div key={index} onClick={() => {
@@ -379,10 +379,41 @@ function Post(props: any) {
                                         )
                                     })}
                                 </div>
-                                <div className="post_tones-outer-container">    
+                                <div className="post_tones-outer-container post_mobile-even-spacer px-2">    
                                     {FONT_SIZES.map((size, index) =>{
                                         return (
-                                            <div>
+                                            <div onClick={() => {
+                                                if (currentStyle === 0) {
+                                                    addStyleToSection(
+                                                        firstStyle,
+                                                        size,
+                                                        0,
+                                                        setFirstStyle
+                                                    );
+                                                } else if (
+                                                    currentStyle === 1
+                                                ) {
+                                                    addStyleToSection(
+                                                        secondStyle,
+                                                        size,
+                                                        1,
+                                                        setSecondStyle
+                                                    );
+                                                } else if (
+                                                    currentStyle === 2
+                                                ) {
+                                                    addStyleToSection(
+                                                        thirdStyle,
+                                                        size,
+                                                        2,
+                                                        setThirdStyle
+                                                    );
+                                                } else {
+                                                    throw Error(
+                                                        "You shouldn't be able to get here you know"
+                                                    );
+                                                }
+                                            }}>
                                                 <FontSizing fontSize={size}/>
                                             </div>
                                         )

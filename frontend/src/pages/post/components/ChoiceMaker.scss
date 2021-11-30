@@ -1,3 +1,6 @@
+@import "../../../styles/colors";
+@import "../../../styles/breakpoints";
+
 .styling_choice-list {
     width: 100%;
     /* border: 3px solid green; */
@@ -7,7 +10,7 @@
 }
 
 .styling_options-container {
-    width: 30%;
+    width: 49%;
 }
 
 .styling_options-container div {
@@ -19,7 +22,9 @@
 
 .styling_label-container {
     width: 50px;
-    border: 3px solid palegreen;
+    // border: 3px solid palegreen;
+    background-color: lighten($uxui-dg, 9);
+    padding-left: 5px;
 }
 
 .styling_options-right-container {
@@ -28,6 +33,7 @@
     margin: 3px;
     /* note: margin is sus, could adjust it to make UXUI look better */
     display: flex;
+    flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
 }
@@ -43,4 +49,13 @@
 .styling_styling-parent-container {
     min-width: 100%;
     border: 3px solid yellow;
+}
+
+@media only screen and (max-width: $mobile-sized) {
+    .styling_options-right-container {
+        display: none;
+    }
+    .styling_options-container {
+        width: 19%;
+    }
 }

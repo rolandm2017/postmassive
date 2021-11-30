@@ -4,7 +4,7 @@ function Emphasis({ emphasis, onClick }) {
             onClick={() => {
                 onClick();
             }}
-            className="post_tones-inner-container"
+            className="post_tones-inner-container post_bg-lighten"
         >
             <p className="post_emphasis">{emphasis}</p>
         </div>

@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import Choice from "./Choice";
 
-import "./ChoiceMaker.css";
+import "./ChoiceMaker.scss";
 
 function ChoiceMaker({
     menuOption,
@@ -93,7 +93,7 @@ function ChoiceMaker({
                 <div className="d-flex justify-content-start align-items-center">
                     <div className="styling_label-container w-100">
                         <span className={`styling_start-end-text`}>
-                            Current Text:{" "}
+                            Selected:{" "}
                             <span
                                 className={`${processStylingInfo(
                                     menuOption,
@@ -106,7 +106,7 @@ function ChoiceMaker({
                     </div>
                 </div>
             </div>
-            <div className="styling_options-right-container d-flex flex-column">
+            <div className="styling_options-right-container ">
                 <div className="color-white styling_choice-list">
                     {stylingInfo
                         ? stylingInfo.map((choice, index) => {
