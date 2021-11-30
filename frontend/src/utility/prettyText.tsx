@@ -11,6 +11,11 @@ function prettyText(inputText: string, stylings: Array<Styling>): any {
     // stylings: expecting 1 to 3 Stylings objects.
     // returns: chunks of JSX that (magically? how?) connect together in the browser
     */
+    console.log("##############")
+    console.log("##############")
+    console.log(stylings)
+    console.log("##############")
+    console.log("##############")
     let isStylingsEmpty = stylings.length === 0;
     if (isStylingsEmpty) {
         // console.log(26, "yes, it was empty");
@@ -34,7 +39,7 @@ function prettyText(inputText: string, stylings: Array<Styling>): any {
         );
     }
 
-    console.log("prettyText40", inputText, stylings);
+    // console.log("prettyText40", inputText, stylings);
     // console.log("prettyText41", stylings) // fixme: problem is in here... (1)
     let instructions: Instruction[] = getSubstringsWithInstructions(inputText, stylings);
 

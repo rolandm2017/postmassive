@@ -1,4 +1,4 @@
-import Choice from "./Choice";
+import Choice, { useState } from "./Choice";
 
 import "./ChoiceMaker.css";
 
@@ -6,6 +6,8 @@ function ChoiceMaker({
     menuOption,
     handleClick,
     stylingInfo,
+    content,
+    startStopInfo,
     currentMin,
     currentMax,
     adjustStart,
@@ -15,6 +17,13 @@ function ChoiceMaker({
     styling,
     setter,
 }) {
+    const [startLocation, setStartLocation]
+    const [endLocation, setEndLocation] = useState(0);
+
+    function textPortion(inputText, styling) {
+        return inputText.slice(styling.start, styling.end);
+    }
+
     return (
         <div className="styling_styling-parent-container d-flex flex-row align-items-start">
             <div className="styling_options-container d-flex flex-row align-items-start justify-content-center">
@@ -32,7 +41,7 @@ function ChoiceMaker({
             <div className="d-flex flex-column">
                 <div className=" d-flex justify-content-start align-items-center">
                     <div className="styling_label-container">
-                        <span className="styling_start-end-text">Start:</span>
+                        <span className="styling_start-end-text">Start: {startLocation}</span>
                     </div>
                     {/* ##### */}
                     {/* // TODO: Remove the need for stylings to not overlap, and
@@ -44,6 +53,7 @@ function ChoiceMaker({
                         max={currentMax}
                         type="range"
                         onChange={(event) => {
+                            setStartLocation(event.target.value)
                             adjustStart(menuOption, event.target.value); // prints the expected value!
                         }}
                     />
@@ -51,7 +61,7 @@ function ChoiceMaker({
                 </div>
                 <div className="d-flex justify-content-start align-items-center">
                     <div className="styling_label-container">
-                        <span className="styling_start-end-text">End:</span>
+                        <span className="styling_start-end-text">End: {endLocation}</span>
                     </div>
                     {/* ###### */}
                     <input
@@ -60,10 +70,16 @@ function ChoiceMaker({
                         max={currentMax}
                         type="range"
                         onChange={(event) => {
+                            setEndLocation(event.target.value)
                             adjustEnd(menuOption, event.target.value); // prints the expected value!
                         }}
                     />
                     <span className="color-white">Max: {currentMax}</span>
+                </div>
+                <div className="d-flex justify-content-start align-items-center">
+                    <div className="styling_label-container">
+                        <span className="styling_start-end-text">Current Text: {textPortion(content, startStopInfo)}</span>
+                    </div>
                 </div>
             </div>
             <div className="styling_options-right-container d-flex flex-column">

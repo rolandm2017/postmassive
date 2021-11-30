@@ -252,6 +252,8 @@ function Post(props: any) {
                                 )}
                                 // currentMax={content.length}
                                 stylingInfo={firstStyle.stylings}
+                                content={content}
+                                startStopInfo={firstStyle}
                                 adjustStart={changeStartRange}
                                 // styling,styleObjectIndex,newStartIndex,setter
                                 adjustEnd={changeEndRange}
@@ -278,6 +280,8 @@ function Post(props: any) {
                                     content.length
                                 )}
                                 stylingInfo={secondStyle.stylings}
+                                content={content}
+                                startStopInfo={firstStyle}
                                 adjustStart={changeStartRange}
                                 adjustEnd={changeEndRange}
                                 handleRemoval={removeStyleFromSection}
@@ -303,6 +307,8 @@ function Post(props: any) {
                                     content.length
                                 )}
                                 stylingInfo={thirdStyle.stylings}
+                                content={content}
+                                startStopInfo={firstStyle}
                                 adjustStart={changeStartRange}
                                 adjustEnd={changeEndRange}
                                 handleRemoval={removeStyleFromSection}

@@ -77,7 +77,7 @@ export function verifyEachStyling(stylings: Styling[]): boolean[] {
         } else if (styling.start === 0 && styling.end === 0 && styling.stylings.length === 0) {
             descriptions.push(true)
         } else {
-            console.log(76, styling)
+            // console.log(76, styling)
             descriptions.push(true)
         }
 })
@@ -186,7 +186,7 @@ export function getSubstringsWithInstructions(inputText: string, stylings: Styli
     let extremelySpecificInstructions: Instruction[] = slicesToDistribute.map((slice, index) => {
         if (specialSubstringIndexes.includes(index)) {
             let dotNotationStyling = cleanedUpStylings.shift()?.stylings;
-            console.log(dotNotationStyling)
+            // console.log(dotNotationStyling)
             const specialInstruction = new Instruction(true, slice, dotNotationStyling);
             return specialInstruction;
         } else {
