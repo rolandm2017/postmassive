@@ -5,7 +5,6 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
 const massiveSchema = new Schema({
-    _id: { type: String }, // FIXME: Make all docs require id. 11/14/2021
     postNumber: { type: Number, required: true },
     postIsAccessible: { type: Boolean, required: false }, // if this is ever False, its b/c a user 'deleted' their post.
     monetaryCost: { type: Number, required: true, default: 1 }, // postNumber, monetaryCost, postedByUser, text, date, replies, amps, likes,

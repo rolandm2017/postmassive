@@ -3,17 +3,100 @@ const Massive = require("../models/massive.model");
 const express = require("express");
 const router = express.Router();
 
-router.get("/", (req, res) => {
-    console.log("here!");
-    res.status(200).send("hiya");
+router.get("/getHighestViews", (req, res) => {
+    console.log("here! a route to order views by");
+    Massive.find({})
+        .sort({ views: -1 })
+        .limit(2)
+        .exec(function (err, massives) {
+            if (err) {
+                console.log(err);
+            }
+            console.log(massives);
+            res.status(200).json(massives);
+        });
+});
+
+router.post("/makeHighestViews", (req, res) => {
+    Massive.find({})
+        .sort({ views: -1 })
+        .limit(1)
+        .then((massive) => {
+            if (massive) {
+                console.log(26, massive[0].views);
+            }
+            let currentViews = massive[0].views;
+            let novelHighestViews = currentViews + 100;
+            console.log(31, novelHighestViews, massive[0].views, massive[0]);
+            // make a new one
+            let newMassive = new Massive({
+                postNumber: 1, // will have to autoincrement this somehow...
+                postedByUser: "aardvark",
+                displayName: "Infinity000",
+                text: "I will sell your wares",
+                date: Date.now(),
+                replies: Math.ceil(Math.random() * 10),
+                amps: Math.ceil(Math.random() * 10),
+                likes: Math.ceil(Math.random() * 100),
+                hasImage: false,
+                quotesSomeone: false,
+                views: novelHighestViews,
+                replies: Math.ceil(Math.random() * 10),
+                amplifies: Math.ceil(Math.random() * 20),
+                stylings: [{}, {}, {}],
+            });
+
+            newMassive.save(function (err, success) {
+                if (err) {
+                    console.log(53, err);
+                }
+                console.log(53, success, "winning");
+                res.json(success);
+            });
+        });
 });
 
 router.post("/", (req, res) => {
     res.status(200).send("hiya");
 });
 
-router.get("/post", (req, res) => {
-    res.status(200).send("hiya");
+router.post("/post/makeHigh", (req, res) => {
+    let awaitingBaitedBreath = Massive.find({})
+        .sort({ postNumber: -1 })
+        .limit(1)
+        .exec(function (err, docs) {
+            if (err) {
+                console.log(err);
+            }
+            if (docs) {
+                console.log(20, docs);
+            }
+        });
+
+    throw Error("hi");
+    let newHighestPostNum;
+    let newMassive = new Massive({
+        postNumber: newHighestPostNum, // will have to autoincrement this somehow...
+        postedByUser: username,
+        displayName: displayName,
+        text: content,
+        date: datePosted,
+        replies: Math.ceil(Math.random() * 10),
+        amps: Math.ceil(Math.random() * 10),
+        likes: Math.ceil(Math.random() * 100),
+        hasImage: false,
+        quotesSomeone: false,
+        views: Math.ceil(Math.random() * 1000),
+        replies: Math.ceil(Math.random() * 10),
+        amplifies: Math.ceil(Math.random() * 20),
+        stylings: req.body.stylings,
+    });
+    newMassive.save(function (err, success) {
+        if (err) {
+            console.log(53, err);
+        }
+        res.status(200).send(success);
+    });
 });
 
 // TEST
@@ -24,13 +107,10 @@ router.get("/post", (req, res) => {
 // TEST
 router.get("/post/getHighest", async (req, res) => {
     // throw Error("stop now");
-    let username = req.body.username;
+    // let username = req.body.username;
     // let displayName = req.body.displayName;
     let content = req.body.content;
-    let postFloor = req.body.floor;
-    console.log("Posting a massive...", content, req.body);
-    let priceIsAuthorizedByUser = req.body.authorization; // true/false
-    let datePosted = Date.now();
+    let username = req.body.username;
 
     // fixme: I try to Post and get a bug because I can't db.User.FindOne to match this post's request.
     // i need to find this user so I can update their postCount.
@@ -50,12 +130,11 @@ router.get("/post/getHighest", async (req, res) => {
     // );
     // .sort({ postNumber: 1 })
     console.log("you made it!");
-    let currentHighestPostNumber = await Massive.find({}).exec((err, post) => {
+    let currentHighestPostNumber = await Massive.find({}, function (err, docs) {
         if (err) {
             console.log(7, err);
-            reject(err);
         } else {
-            return post;
+            return docs;
         }
     });
 
@@ -63,7 +142,7 @@ router.get("/post/getHighest", async (req, res) => {
     // throw Error("stop now");
     let newHighestPostNum = currentHighestPostNumber + 1;
     res.send("youre here again");
-    console.log(47, req.body);
+    console.log(47, currentHighestPostNumber);
     // ### *** ###
     // FIXME: MAJOR issue with Posting Massives and the postNumber.
     // ### *** ###
