@@ -26,6 +26,14 @@ function ChoiceMaker({
         return inputText.slice(styling.start, styling.end);
     }
 
+    function processStylingInfo(index, info) {
+        console.log(index, info, 30);
+        if (info.length > 0) {
+            return info.join(" ");
+        }
+        return info;
+    }
+
     return (
         <div className="styling_styling-parent-container d-flex flex-row align-items-start">
             <div className="styling_options-container d-flex flex-row align-items-start justify-content-center">
@@ -84,8 +92,16 @@ function ChoiceMaker({
                 </div>
                 <div className="d-flex justify-content-start align-items-center">
                     <div className="styling_label-container w-100">
-                        <span className="styling_start-end-text">
-                            Current Text: {textPortion(content, startStopInfo)}
+                        <span className={`styling_start-end-text`}>
+                            Current Text:{" "}
+                            <span
+                                className={`${processStylingInfo(
+                                    menuOption,
+                                    stylingInfo
+                                )}`}
+                            >
+                                {textPortion(content, startStopInfo)}
+                            </span>
                         </span>
                     </div>
                 </div>

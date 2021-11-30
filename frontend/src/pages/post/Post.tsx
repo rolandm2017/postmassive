@@ -56,6 +56,7 @@ function Post(props: any) {
     const [firstStyle, setFirstStyle] = useState(new Styling( 0, 0, []));
     const [secondStyle, setSecondStyle] = useState(new Styling( 0, 0, []));
     const [thirdStyle, setThirdStyle] = useState(new Styling( 0, 0, []));
+    const [previewTime, setPreviewTime] = useState(false);
 
     let currentUrl = useLocation().pathname;
     let history = useHistory();
@@ -139,8 +140,8 @@ function Post(props: any) {
         </div>
     ));
 
-    function inspecter(input1: any, inputArr: any): any {
-        console.log(input1, inputArr[0], inputArr[1], inputArr[2])
+    function inspecter(input1: any, a: any, b: any, c: any): any {
+        console.log(input1, a, b, c)
         return input1;
     }
 
@@ -205,36 +206,7 @@ function Post(props: any) {
                             <img src={Poll} alt="start poll"></img>
                             <img src={Emoji} alt="pick emoji"></img>
                         </div>
-                        <div id="post_typed-content-area">
-                            {/* // select up to 3 types of stylings, set
-                            textLocationRanges with sliders. // stack
-                            stylingTypes with drag n drop, or by selecting the
-                            type then selecting another styling */}
-                            <div>
-                                <div className="post_color-white">
-                                    {content.length > 4
-                                        ? prettyText(
-                                              content,
-                                              [
-                                                  new Styling(firstStyle.start, firstStyle.end, [...firstStyle.stylings]),
-                                                  new Styling(secondStyle.start, secondStyle.end, [...secondStyle.stylings]),
-                                                  new Styling(thirdStyle.start, thirdStyle.end, [...thirdStyle.stylings]),
-                                              ]
-                                              // setContent // YAGNI
-                                          )
-                                          
-                                          
-                                        //   .map((Chunk, index) => {
-                                        //       return (
-                                        //           <div>
-                                        //               <Chunk />
-                                        //           </div>
-                                        //       );
-                                        //   })
-                                        : null}
-                                </div>
-                            </div>
-                        </div>
+                        
                         <div id="post_styling-area">
                             <ChoiceMaker
                                 key={0}
@@ -415,25 +387,26 @@ function Post(props: any) {
                             <div>
                                 <button
                                     onClick={() => {
-                                        postPost(
-                                            username,
-                                            content,
-                                            price,
-                                            floor,
-                                            [
-                                                firstStyle,
-                                                secondStyle,
-                                                thirdStyle,
-                                            ],
-                                            // wrap up all 3 choices and put into Post
-                                            handleGoToHome
-                                        );
+                                        setPreviewTime(true);
                                     }}
                                 >
-                                    Post
+                                    Preview
                                 </button>
+                                <div id="post_typed-content-area">
+                                    <div>
+                                        <div className="post_color-white">
+                                            {previewTime ? prettyText(content, [firstStyle, secondStyle, thirdStyle]) : null}
+                                        </div>
+                                    </div>
+                                </div>
+                                <button onClick={() => {
+                                    inspecter(content, firstStyle,secondStyle,thirdStyle);
+                                }}>Inspect</button>
                              
                             </div>
+                            <div>
+                               
+                            </div>  
                         </div>
                     </div>
 
