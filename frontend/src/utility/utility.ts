@@ -186,8 +186,15 @@ export function getSubstringsWithInstructions(inputText: string, stylings: Styli
     let extremelySpecificInstructions: Instruction[] = slicesToDistribute.map((slice, index) => {
         if (specialSubstringIndexes.includes(index)) {
             let dotNotationStyling = cleanedUpStylings.shift()?.stylings;
-            // console.log(dotNotationStyling)
-            const specialInstruction = new Instruction(true, slice, dotNotationStyling);
+            let removePeriodsFromClassNames: string[] = dotNotationStyling.map((element: string) => {
+                if (element.indexOf(".") > -1) {
+                    return element.slice(1)
+                } else {
+                    return element
+                }
+            });
+            
+            const specialInstruction = new Instruction(true, slice, removePeriodsFromClassNames);
             return specialInstruction;
         } else {
             const genericInstruction = new Instruction(false, slice, "generic");
