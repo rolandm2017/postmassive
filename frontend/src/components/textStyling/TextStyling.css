@@ -1,25 +1,31 @@
 .backgroundColorGreen {
     background-color: greenyellow;
+    padding: 2px 2px;
 }
 
 .backgroundColorCyan {
     background-color: cyan;
+    padding: 2px 2px;
 }
 
 .backgroundColorRed {
     background-color: red;
+    padding: 2px 2px;
 }
 
 .backgroundColorOrange {
     background-color: orange;
+    padding: 2px 2px;
 }
 
 .backgroundColorPurple {
     background-color: orchid;
+    padding: 2px 2px;
 }
 
 .backgroundColorBlack {
     background-color: black;
+    padding: 2px 2px;
     color: white;
 }
 
