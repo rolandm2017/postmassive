@@ -281,7 +281,7 @@ function Post(props: any) {
                                 )}
                                 stylingInfo={secondStyle.stylings}
                                 content={content}
-                                startStopInfo={firstStyle}
+                                startStopInfo={secondStyle}
                                 adjustStart={changeStartRange}
                                 adjustEnd={changeEndRange}
                                 handleRemoval={removeStyleFromSection}
@@ -308,7 +308,7 @@ function Post(props: any) {
                                 )}
                                 stylingInfo={thirdStyle.stylings}
                                 content={content}
-                                startStopInfo={firstStyle}
+                                startStopInfo={thirdStyle}
                                 adjustStart={changeStartRange}
                                 adjustEnd={changeEndRange}
                                 handleRemoval={removeStyleFromSection}
