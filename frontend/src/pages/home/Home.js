@@ -36,7 +36,7 @@ function Home(props) {
 
                 // fixme: Error: Objects are not valid as a React child (found: object with keys {special, value, styling, numberOfStylings}). I
                 // setMassives(puttingSomePollsIntoIt.slice(0, 2));
-                setMassives(data.slice(0, 1));
+                setMassives(data);
             });
     }, []);
 
@@ -98,8 +98,8 @@ function Home(props) {
                                   key={Math.floor(Math.random() * 10000)}
                                   author={massive.postedByUser}
                                   displayName={massive.displayName}
-                                  content={testMassives[1].content}
-                                  stylings={testMassives[1].stylings}
+                                  content={massive.text}
+                                  stylings={massive.stylings}
                                   replies={massive.replies}
                                   amps={massive.amps}
                                   likes={massive.likes}
