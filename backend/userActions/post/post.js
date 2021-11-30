@@ -47,25 +47,36 @@ router.post("/post", async (req, res) => {
     let userDoc = await db.User.findOne({ username: username });
     let displayName = userDoc.displayName;
 
-    console.log(38, username, content, postFloor, datePosted, displayName);
-    let currentHighestPostNumber = Massive.find({})
-        .sort({ postNumber: "desc" })
-        .limit(1)
-        .exec((err, post) => {
-            if (err) {
-                console.log(7, err);
-                reject(err);
-            } else {
-                return post;
-            }
-        }).postNumber;
+    console.log(
+        38,
+        username,
+        content,
+        postFloor,
+        datePosted,
+        displayName,
+        req.body.stylings
+    );
+    // .sort({ postNumber: 1 })
+    let currentHighestPostNumber = await Massive.find({
+        postNumber: { $gte: 1 },
+    }).exec((err, post) => {
+        if (err) {
+            console.log(7, err);
+            reject(err);
+        } else {
+            return post;
+        }
+    });
+
+    console.log(70, currentHighestPostNumber);
+    // throw Error("stop now");
     let newHighestPostNum = currentHighestPostNumber + 1;
     console.log(47, req.body);
     // ### *** ###
     // FIXME: MAJOR issue with Posting Massives and the postNumber.
     // ### *** ###
     let newMassive = new Massive({
-        postNumber: newHighestPostNum, // will have to autoincrement this somehow...
+        postNumber: 5, // will have to autoincrement this somehow...
         postedByUser: username,
         displayName: displayName,
         text: content,
@@ -78,13 +89,14 @@ router.post("/post", async (req, res) => {
         views: Math.ceil(Math.random() * 1000),
         replies: Math.ceil(Math.random() * 10),
         amplifies: Math.ceil(Math.random() * 20),
+        stylings: req.body.stylings,
     });
-    newMassive.save(function (err) {
+    newMassive.save(function (err, success) {
         if (err) {
             console.log(53, err);
         }
+        res.status(200).send(success);
     });
-    res.status(200).send();
 });
 
 router.delete("/post", (req, res) => {

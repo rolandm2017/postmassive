@@ -387,10 +387,15 @@ function Post(props: any) {
                             <div>
                                 <button
                                     onClick={() => {
-                                        setPreviewTime(true);
+                                        postPost(username,
+                                            content,
+                                            price,
+                                            floor,
+                                            [firstStyle, secondStyle, thirdStyle],
+                                            handleGoToHome)
                                     }}
                                 >
-                                    Preview
+                                    Post
                                 </button>
                                 <div id="post_typed-content-area">
                                     <div>
