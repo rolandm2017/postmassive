@@ -32,9 +32,8 @@ router.post("/post", async (req, res) => {
     let username = req.body.username;
     // let displayName = req.body.displayName;
     let content = req.body.content;
-    let postFloor = req.body.floor;
     console.log("Posting a massive...", content, req.body);
-    let priceIsAuthorizedByUser = req.body.authorization; // true/false
+    // let priceIsAuthorizedByUser = req.body.authorization; // true/false // gonna need Stripe integration
     let datePosted = Date.now();
 
     let getCostOfPosting = createCostOfPosting(); // fixme: should be moved to the post screen
@@ -44,59 +43,51 @@ router.post("/post", async (req, res) => {
     // actual error:
     // (node:7032) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'displayName' of null
     // at C:\Users\jenfr\Documents\code\2021\postmassive\backend\userActions\post\post.js:42:31
-    let userDoc = await db.User.findOne({ username: username });
-    let displayName = userDoc.displayName;
+    db.User.findOne({ username: username }).then((username) => {
+        console.log(username, 48, username.displayName);
+        let displayName = username.displayName;
 
-    console.log(
-        38,
-        username,
-        content,
-        postFloor,
-        datePosted,
-        displayName,
-        req.body.stylings
-    );
-    // .sort({ postNumber: 1 })
-    let currentHighestPostNumber = await Massive.find({
-        postNumber: { $gte: 1 },
-    }).exec((err, post) => {
-        if (err) {
-            console.log(7, err);
-            reject(err);
-        } else {
-            return post;
-        }
+        Massive.find({})
+            .sort({ postNumber: -1 })
+            .limit(1)
+            .then((doc) => {
+                const currentHighestPostNumber = doc[0].postNumber;
+                const incrementedHigehstPostNumber =
+                    currentHighestPostNumber + 1;
+
+                let postToPost = new Massive({
+                    postNumber: incrementedHigehstPostNumber, // will have to autoincrement this somehow...
+                    postedByUser: username.username,
+                    displayName: displayName,
+                    text: content,
+                    date: datePosted,
+                    replies: Math.ceil(Math.random() * 10),
+                    amps: Math.ceil(Math.random() * 10),
+                    likes: Math.ceil(Math.random() * 100),
+                    hasImage: false,
+                    quotesSomeone: false,
+                    views: Math.ceil(Math.random() * 1000),
+                    replies: Math.ceil(Math.random() * 10),
+                    amplifies: Math.ceil(Math.random() * 20),
+                    stylings: req.body.stylings,
+                });
+                postToPost.save(function (err, success) {
+                    if (err) {
+                        console.log(53, err);
+                    }
+                    res.status(200).send(success);
+                });
+            });
     });
 
-    console.log(70, currentHighestPostNumber);
-    // throw Error("stop now");
-    let newHighestPostNum = currentHighestPostNumber + 1;
-    console.log(47, req.body);
-    // ### *** ###
-    // FIXME: MAJOR issue with Posting Massives and the postNumber.
-    // ### *** ###
-    let newMassive = new Massive({
-        postNumber: 5, // will have to autoincrement this somehow...
-        postedByUser: username,
-        displayName: displayName,
-        text: content,
-        date: datePosted,
-        replies: Math.ceil(Math.random() * 10),
-        amps: Math.ceil(Math.random() * 10),
-        likes: Math.ceil(Math.random() * 100),
-        hasImage: false,
-        quotesSomeone: false,
-        views: Math.ceil(Math.random() * 1000),
-        replies: Math.ceil(Math.random() * 10),
-        amplifies: Math.ceil(Math.random() * 20),
-        stylings: req.body.stylings,
-    });
-    newMassive.save(function (err, success) {
-        if (err) {
-            console.log(53, err);
-        }
-        res.status(200).send(success);
-    });
+    // console.log(70, currentHighestPostNumber);
+    // // throw Error("stop now");
+    // let newHighestPostNum = currentHighestPostNumber + 1;
+    // console.log(47, req.body);
+    // // ### *** ###
+    // // FIXME: MAJOR issue with Posting Massives and the postNumber.
+    // // ### *** ###
+    // let newMassive =
 });
 
 router.delete("/post", (req, res) => {

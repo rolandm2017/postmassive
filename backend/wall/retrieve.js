@@ -11,7 +11,7 @@ async function retrieve(username, marker) {
             postNumber: { $gte: marker, $lte: thirtyHigher },
         })
         .sort()
-        .exec();
+        .exec(); // fixme: .exec() is just a fancy promise
     return nextThirty;
 }
 
