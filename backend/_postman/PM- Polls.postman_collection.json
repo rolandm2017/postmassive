@@ -1,0 +1,208 @@
+{
+	"info": {
+		"_postman_id": "00058abd-d1a7-4d7c-945b-e4919f29cdc7",
+		"name": "PM/ Polls",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Post Poll",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"crono\",\r\n    \"displayName\": \"rolypolyistaken\",\r\n    \"content\": \"consequatur aut perferendis doloribus asperiores repellat\",\r\n    \"type\": \"poll\",\r\n    \"possibilities\": 6,\r\n    \"options\": [\"Marle\", \"Crono\", \"Lucca\", \"Frog\", \"Robo\", \"Magus\"]\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/post/poll",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"post",
+						"poll"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Massive - Poll",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"crono\",\r\n    \"content\": \"Pretium nibh ipsum consequat nisl vel. Rutrum tellus pellentesque eu tincidunt tortor aliquam nulla facilisi. Tempus egestas sed sed risus pretium quam vulputate. Ac tortor dignissim convallis aenean et tortor.\",\r\n    \"stylings\": [],\r\n    \"pollOptions\": [\r\n        \"dilbert\",\r\n        \"catbert\",\r\n        \"dogbert\",\r\n        \"Wally\",\r\n        \"Alice\",\r\n        \"Asok\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/poll/submit",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"poll",
+						"submit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Massive - Poll - 4 options",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"crono\",\r\n    \"content\": \"Pretium nibh ipsum consequat nisl vel. Rutrum tellus pellentesque eu tincidunt tortor aliquam nulla facilisi. Tempus egestas sed sed risus pretium quam vulputate. Ac tortor dignissim convallis aenean et tortor.\",\r\n    \"stylings\": [],\r\n    \"pollOptions\": [\"apples\", \"oranges\", \"pineapple\", \"mango\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/poll/submit",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"poll",
+						"submit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Massive - Vote In Poll",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"crono\",\r\n    \"pollId\": \"tr7b1sli6ufo5no0\",\r\n    \"voteTarget\": \"oranges\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/poll/vote",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"poll",
+						"vote"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET polls to extract Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/poll/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"poll",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET poll by id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"crono\",\r\n    \"pollId\": \"tr7b1sli6ufo5no0\",\r\n    \"temp\": \"qzuz4wznot3q7b2g\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/poll/tr7b1sli6ufo5no0",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"poll",
+						"tr7b1sli6ufo5no0"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,274 @@
+{
+	"info": {
+		"_postman_id": "7a394563-3fae-4146-967a-0bd75732ca09",
+		"name": "PM/ Profile",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET profile for Specific User",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/profile/get?username=marle",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"profile",
+						"get"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "marle"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST *SignUp* profile for Specific User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"marle\",\r\n    \"displayName\": \"dont call me princess\",\r\n    \"bio\": \"guardia's future queen\",\r\n    \"location\": \"castle\",\r\n    \"url\": \"www.guardia.gov/magic\",\r\n    \"followers\": 94,\r\n    \"following\": 23\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/profile/init?username=marle",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"profile",
+						"init"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "marle"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCH profile for Specific User Copy",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"crono\",\r\n    \"displayName\": \"heroOfGuardia\",\r\n    \"bio\": \"savior of the past present and future\",\r\n    \"location\": \"castle\",\r\n    \"url\": \"www.guardia.gov/swordplay\",\r\n    \"followers\": 15194,\r\n    \"following\": 23\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/profile?username=crono",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"profile"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "crono"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET BATCH of Users by NAMES",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"usernames\": [\"Lucca\", \"Marle\", \"Ayla\", \"Frog\", \"Crono\", \"Marle\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/profile/profiles",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"profile",
+						"profiles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET BATCH of Users by AMT",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"amount\": 20\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/profile/profiles",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"profile",
+						"profiles"
+					],
+					"query": [
+						{
+							"key": "amount",
+							"value": "20",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Flip DMs value - closed",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"dmStatus\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/profile/crono/dms",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"profile",
+						"crono",
+						"dms"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Flip DMs value - Open",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"dmStatus\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/profile/crono/dms",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"profile",
+						"crono",
+						"dms"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

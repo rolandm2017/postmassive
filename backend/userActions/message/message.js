@@ -14,13 +14,30 @@ const router = express.Router();
 module.exports = router;
 
 router.get("/getMsgs", (req, res) => {
-    let recip = req.body.recipient;
-    let sender = req.body.sender;
-    let numberOfMsgs = req.body.number;
-    Message.find({ recipient: recip, sender: sender })
+    let recip = req.query.user1;
+    let sender = req.query.user2;
+    let foundMsgs = [];
+    const orderOne = { recipient: recip, sender: sender };
+    const orderTwo = { recipient: sender, sender: recip };
+    Message.find(orderOne)
         .sort("-date")
-        .limit(numberOfMsgs)
-        .then((msgs) => res.status(200).json(msgs));
+        .then((msgs) => {
+            for (let i = 0; i < msgs.length; i++) {
+                foundMsgs.push(msgs[i]);
+            }
+            Message.find(orderTwo)
+                .sort("-date")
+                .then((msgs) => {
+                    console.log(msgs, 28);
+                    for (let i = 0; i < msgs.length; i++) {
+                        foundMsgs.push(msgs[i]);
+                    }
+                    const orderedMsgs = foundMsgs.sort(function (a, b) {
+                        return new Date(b.date) - new Date(a.date);
+                    });
+                    res.status(200).json(orderedMsgs);
+                });
+        });
 });
 
 router.post("/send", (req, res) => {
@@ -35,10 +52,6 @@ router.post("/send", (req, res) => {
             sender: sender,
             text: messageToSend,
             date: now,
-            linksSomeonesMassive: false,
-            linkedMassiveId: false,
-            hasImage: false,
-            imageURL: null,
         },
         function (err, created) {
             if (err) {

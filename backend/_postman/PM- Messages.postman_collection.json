@@ -1,0 +1,108 @@
+{
+	"info": {
+		"_postman_id": "0c0dce42-f8df-487d-a01c-61083c819b41",
+		"name": "PM/ Messages",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Msgs Between 2 Users",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"recipient\": \"marle\",\r\n    \"sender\": \"crono\",\r\n    \"number\": 20\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/message/getMsgs",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"message",
+						"getMsgs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send MSG From User To User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"sender\": \"crono\",\r\n    \"recipient\": \"marle\",\r\n    \"content\": \"one dimensional love story\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/message/send",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"message",
+						"send"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Sent Message",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "?from=\"crono\"&to=\"marle\"&id=12345",
+					"query": [
+						{
+							"key": "from",
+							"value": "\"crono\""
+						},
+						{
+							"key": "to",
+							"value": "\"marle\""
+						},
+						{
+							"key": "id",
+							"value": "12345"
+						},
+						{
+							"key": "content",
+							"value": "\"some message I wanna delete\"",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
