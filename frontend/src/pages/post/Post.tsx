@@ -151,10 +151,10 @@ function Post(props: any) {
         return input1;
     }
 
-    function prettyWrapper(textInput, stylings) {
-        let processedStylings: Styling[] = [];
-        return prettyText(textInput, processedStylings);
-    }
+    // function prettyWrapper(textInput, stylings) {
+    //     let processedStylings: Styling[] = [];
+    //     return prettyText(textInput, processedStylings);
+    // }
 
     return (
         <Wrapper

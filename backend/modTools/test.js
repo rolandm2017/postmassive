@@ -166,4 +166,20 @@ router.delete("/post/remove/:id", (req, res) => {
     res.status(200).send("deleted successfully!");
 });
 
+router.put("/giveFollowers", (req, res) => {
+    const toWho = req.query.username;
+    const howManyFollowers = req.query.followers;
+    const howManyFollowing = req.query.following;
+    console.log(toWho, howManyFollowers, howManyFollowing);
+    User.findOne({ username: toWho }).then((user) => {
+        user.followers = howManyFollowers;
+        user.following = howManyFollowing;
+        user.role = "user";
+        user.save().then((success) => {
+            console.log(178, success);
+            res.status(200).json(success);
+        });
+    });
+});
+
 module.exports = router;
