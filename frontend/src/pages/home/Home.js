@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 import Wrapper from "../_pageHelper/Wrapper";
 import Massive from "../../components/massive/Massive";
 import Poll from "../../components/poll/Poll";
-import testMassives from "./testContent/testMassives";
+// import testMassives from "./testContent/testMassives";
 
 import "../../components/textStyling/TextStyling.css"; // this file will be imported in many places
 import "../../components/textStyling/TextStyling.css";

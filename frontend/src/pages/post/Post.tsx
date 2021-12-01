@@ -6,7 +6,6 @@ import Styling from "../../utility/classes/Styling";
 import {
     FLOORS,
     EMPHASIS,
-    SPECIALS,
     BG_COLORS,
     FONT_SIZES,
     // FONT_SIZES,
@@ -15,7 +14,7 @@ import {
     processMin,
     processMax,
 } from "../../utility/process";
-import prettyText from "../../utility/prettyText";
+// import prettyText from "../../utility/prettyText";
 
 import { postPost } from "../../_helper/Post";
 import {
@@ -135,16 +134,16 @@ function Post(props: any) {
         setCurrentStyle(number); // does work btw!
     }
 
-    const floors = FLOORS.map((floor, index) => (
-        <div
-            key={floor}
-            onClick={() => {
-                setFloor(floor);
-            }}
-        >
-            <Flooring flooring={floor} />
-        </div>
-    ));
+    // const floors = FLOORS.map((floor, index) => (
+    //     <div
+    //         key={floor}
+    //         onClick={() => {
+    //             setFloor(floor);
+    //         }}
+    //     >
+    //         <Flooring flooring={floor} />
+    //     </div>
+    // ));
 
     function inspecter(input1: any, a: any, b: any, c: any): any {
         console.log(input1, a, b, c)

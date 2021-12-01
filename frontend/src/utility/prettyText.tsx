@@ -1,4 +1,4 @@
-import { wellMadeStylingIsPresent, joinClasses, getSubstringsWithInstructions } from "./utility"
+import { wellMadeStylingIsPresent, getSubstringsWithInstructions } from "./utility"
 
 import Styling from "./classes/Styling";
 import { Chunk } from "./chunk/Chunk";

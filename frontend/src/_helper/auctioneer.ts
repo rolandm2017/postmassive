@@ -1,7 +1,5 @@
-import { postOptions } from "./authHeader";
-
 import Styling from "../utility/classes/Styling";
-import { isAllEmpty, thisSingularObjectIsEmpty } from "../utility/utility";
+import { thisSingularObjectIsEmpty } from "../utility/utility";
 
 export function getAuctioneerResponse() {
     // talks to server's auctioneer to get price of post
@@ -54,7 +52,6 @@ export function addStyleToSection(styling: Styling, type: string, index: number,
 export function removeStyleFromSection(styling: Styling, typeToRemove: string, index: number, setter: any): Styling {
     console.log(555555, styling, typeToRemove, index);
     let currentStylings: string[] = [...styling.stylings];
-    let typeIndex: number = currentStylings.indexOf(typeToRemove);
     console.log(currentStylings);
 
     let remainingStylings: string[] = [];

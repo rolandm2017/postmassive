@@ -26,6 +26,7 @@ router.get("/getMsgs", (req, res) => {
 router.post("/send", (req, res) => {
     let recipient = req.body.recipient;
     let sender = req.body.sender;
+    console.log(30, recipient, sender);
     let messageToSend = req.body.content;
     let now = Date.now();
     Message.create(
