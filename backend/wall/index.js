@@ -5,6 +5,8 @@ const introduceWallForTheDay = require("./introduce");
 const retrieve = require("./retrieve");
 const refresh = require("./refresh");
 
+const Massives = require("../models/massive.model");
+
 module.exports = router;
 
 router.get("/introduce", (req, res) => {
@@ -30,4 +32,16 @@ router.get("/refresh", (req, res) => {
         let r = refreshed;
         res.json(r);
     });
+});
+
+// http://127.0.0.1:8080/api/wall/profile/:username
+
+router.get("/profile/:username", (req, res) => {
+    console.log(req.params.username);
+    Massives.find({ postedByUser: req.params.username })
+        .sort({ date: "desc" })
+        .then((massives) => {
+            console.log(44, massives);
+            res.status(200).json(massives);
+        });
 });
