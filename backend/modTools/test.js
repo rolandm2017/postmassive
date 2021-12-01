@@ -51,6 +51,15 @@ router.get("/post/getHighest", (req, res) => {
         });
 });
 
+router.get("/post/mostRecent", (req, res) => {
+    Massive.find({})
+        .sort("-date")
+        .limit(1)
+        .then((docs) => {
+            res.status(200).send(docs[0]);
+        });
+});
+
 router.post("/makeHighestViews", (req, res) => {
     Massive.find({})
         .sort({ views: -1 })

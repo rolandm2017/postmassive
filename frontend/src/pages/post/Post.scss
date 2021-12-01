@@ -12,8 +12,8 @@ textarea {
     color: white;
 }
 
-.post_color-white {
-    color: white;
+.audience-size-container {
+    text-align: left;
 }
 
 #post_back-button {
@@ -23,6 +23,10 @@ textarea {
 
 #post_back-button-container {
     border-bottom: 1px solid #888;
+}
+
+.post_color-white {
+    color: white;
 }
 
 #post_headline {
@@ -65,10 +69,6 @@ textarea {
     }
 }
 
-.audience-size-container {
-    text-align: left;
-}
-
 #post_floor-container {
     display: flex;
     flex-direction: column;
@@ -87,6 +87,17 @@ textarea {
     flex: 1 1 60px;
 }
 
+#post_font-sizes-container {
+    margin: 0px 10px 0px 10px;
+    // background-color: red;
+    justify-content: space-around;
+}
+
+#post_font-sizes-container div {
+    width: 30px;
+    margin: 2px 4px 3px 4px;
+}
+
 .post_generic-filler {
     min-width: 60px;
 }
@@ -100,12 +111,6 @@ textarea {
 .post_middle {
     /* flex: 2; */
     width: 80%;
-}
-
-.greenBorder {
-    border: 3px solid greenyellow;
-    height: 100%;
-    width: 100%;
 }
 
 #post_option-buttons {
@@ -161,16 +166,19 @@ textarea {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    /* justify-content: flex-start; */
+    justify-content: space-between;
     align-items: flex-start;
+    padding: 0px 20px;
 }
 
 .post_tones-inner-container {
     /* padding: 6px 0 0 6px; */
-    width: 100%;
-    border: 2px solid salmon;
+    // width: 100%;
+    min-width: 60px;
+    // border: 2px solid salmon;
     flex-basis: 2;
     margin: 0;
+    text-align: center;
 }
 
 .post_bg-lighten {
@@ -192,6 +200,10 @@ textarea {
 
 #post_typed-content-area p {
     margin: 0;
+}
+
+#post_stylings-header {
+    font-size: 20px;
 }
 
 .color-white {

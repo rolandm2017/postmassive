@@ -48,6 +48,11 @@ import "../../components/textStyling/TextStyling.css";
 import { first } from "rxjs";
 // import { current } from "@reduxjs/toolkit";
 
+// TODO: Make BackgroundColor & fontSize exclusive choices; they cna't be combined
+// TODO: Split "pick your text" and "stylize your text" into two separate modals. ABANDON it having its own page??
+// TODO: COlor the Post Btn
+// TODO: move to modals. (1) for choosing text, (2) for styling it.
+
 function Post(props: any) {
     const [username, setUsername] = useState<string>("");
     const [content, setContent] = useState("");
@@ -288,10 +293,9 @@ function Post(props: any) {
                                 setter={setThirdStyle}
                             />
                         </div>
-                        <p>
-                            {/* TODO: steal from Facebook's ad targeting. Allow
-                            targeting by age, gender. */}
-                        </p>
+                        <h2 id="post_stylings-header">
+                            Stylings
+                        </h2>
                         <div id="post_targeting-container">
                             <div className="post_tones-outer-container w-100 post_mobile-even-spacer ">
                                 {EMPHASIS.map((styling, index) => {
@@ -379,7 +383,7 @@ function Post(props: any) {
                                         )
                                     })}
                                 </div>
-                                <div className="post_tones-outer-container post_mobile-even-spacer px-2">    
+                                <div id="post_font-sizes-container" className="post_tones-outer-container post_mobile-even-spacer px-2">    
                                     {FONT_SIZES.map((size, index) =>{
                                         return (
                                             <div onClick={() => {

@@ -90,6 +90,30 @@ function ChoiceMaker({
                     />
                     <span className="color-white">Max: {currentMax}</span>
                 </div>
+                <div className="styling_options-right-container-mobile ">
+                    <div className="color-white styling_choice-list">
+                        {stylingInfo
+                            ? stylingInfo.map((choice, index) => {
+                                  return (
+                                      <Choice
+                                          key={index}
+                                          choice={choice}
+                                          onClick={() =>
+                                              handleRemoval(
+                                                  styling,
+                                                  choice,
+                                                  menuOption,
+                                                  setter
+                                              )
+                                          }
+                                          // styling, type, index, setter
+                                      />
+                                  );
+                              })
+                            : null}
+                    </div>
+                    {/* // want be able to add 2nd and 3rd type here */}
+                </div>
                 <div className="d-flex justify-content-start align-items-center">
                     <div className="styling_label-container w-100">
                         <span className={`styling_start-end-text`}>

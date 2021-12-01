@@ -1,6 +1,6 @@
 function FontSizing({ fontSize }) {
     return (
-        <div className="pl-2 post_bg-lighten">
+        <div className="post_bg-lighten post_">
             <p>{fontSize.slice(8)}</p>
         </div>
     );
