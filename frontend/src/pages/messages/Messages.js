@@ -94,7 +94,7 @@ function Messages(props) {
                                 key={message._id}
                                 showMsg={() => {
                                     console.log("bbb");
-                                    setSelectedMsg(message);
+                                    setTargetName(message.users);
                                 }}
                                 usernames={message.users}
                                 profilePic={bluePfp}
@@ -172,8 +172,8 @@ function Messages(props) {
                         ) : selectedMsg === "new" ? (
                             <div id="inbox-items">
                                 <SelectedUserDisplay
-                                    // currentUser={username}
-                                    selectedMsg={selectedMsg}
+                                    currentUser={props.username}
+                                    userMsgs={messages}
                                     userIsSelected={targetName}
                                     profilePic={bluePfp}
                                 />
@@ -182,8 +182,8 @@ function Messages(props) {
                             // this one handles when a msg is open but no user is selected. tis "new".
                             <div id="inbox-items">
                                 <SelectedUserDisplay
-                                    // currentUser={username}
-                                    selectedMsg={selectedMsg}
+                                    currentUser={props.username}
+                                    userMsgs={messages}
                                     userIsSelected={targetName}
                                     profilePic={bluePfp}
                                 />
@@ -199,15 +199,15 @@ function Messages(props) {
                         />
                     ) : selectedMsg === "new" ? (
                         <SelectedUserDisplay
-                            // currentUser={username}
-                            selectedMsg={selectedMsg}
+                            currentUser={props.username}
+                            userMsgs={messages}
                             userIsSelected={targetName}
                             profilePic={bluePfp}
                         /> // this one handles when a msg is open but no user is selected. tis "new".
                     ) : (
                         <SelectedUserDisplay
-                            // currentUser={username}
-                            selectedMsg={selectedMsg}
+                            currentUser={props.username}
+                            userMsgs={messages}
                             userIsSelected={targetName}
                             profilePic={bluePfp}
                         />
