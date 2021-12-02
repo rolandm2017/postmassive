@@ -36,7 +36,25 @@ function Messages(props) {
         // console.log(messagesUrl);
         fetch(messagesUrl, getOptions(messagesUrl)).then((res) => {
             res.json().then((messages) => {
+                // username, content, deliveryDate
                 console.log(messages);
+                // let assembledMsgs = [];
+                // let assembling = [];
+                // let currentConvoPartner = "";
+                // for (let i = 0; i < messages.length; i++) {
+                //     const needToChangeConvoPartner =
+                //         messages[i].users.indexOf(currentConvoPartner) === -1;
+                //     if (needToChangeConvoPartner) {
+                //         currentConvoPartner = getNewConvoPartner(
+                //             messages,
+                //             i,
+                //             props.username
+                //         );
+                //     } else {
+                //         assembling.push();
+                //     }
+                // }
+
                 setMessages(messages);
             });
         });
@@ -56,6 +74,14 @@ function Messages(props) {
         // Remove event listener on cleanup
         return () => window.removeEventListener("resize", handleResize);
     }, [setTargetName]);
+
+    function getNewConvoPartner(messages, index, username) {
+        if (messages[index].users.indexOf(username) !== 0) {
+            return messages[index].users[0];
+        } else {
+            return messages[index].users[1];
+        }
+    }
 
     function loadMessageSelect() {
         if (messages) {
