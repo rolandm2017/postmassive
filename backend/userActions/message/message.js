@@ -14,44 +14,38 @@ const router = express.Router();
 module.exports = router;
 
 router.get("/getMsgs", (req, res) => {
-    let recip = req.query.user1;
-    let sender = req.query.user2;
-    let foundMsgs = [];
-    const orderOne = { recipient: recip, sender: sender };
-    const orderTwo = { recipient: sender, sender: recip };
-    Message.find(orderOne)
+    let username = req.query.username;
+    Message.find({ users: username })
         .sort("-date")
         .then((msgs) => {
-            for (let i = 0; i < msgs.length; i++) {
-                foundMsgs.push(msgs[i]);
+            res.status(200).json(msgs);
+        });
+});
+
+router.get("/:username", (req, res) => {
+    let username = req.params.username;
+    let peopleWhoMessagedUser = [];
+    let msgsSentByUser = [];
+    Messages.find({ recipient: username })
+        .sort("-date")
+        .then((messages) => {
+            for (let i = 0; i < messages.length; i++) {
+                peopleWhoMessagedUser.push(messages[i]);
             }
-            Message.find(orderTwo)
-                .sort("-date")
-                .then((msgs) => {
-                    console.log(msgs, 28);
-                    for (let i = 0; i < msgs.length; i++) {
-                        foundMsgs.push(msgs[i]);
-                    }
-                    const orderedMsgs = foundMsgs.sort(function (a, b) {
-                        return new Date(b.date) - new Date(a.date);
-                    });
-                    res.status(200).json(orderedMsgs);
-                });
         });
 });
 
 router.post("/send", (req, res) => {
-    let recipient = req.body.recipient;
-    let sender = req.body.sender;
-    console.log(30, recipient, sender);
-    let messageToSend = req.body.content;
+    let users = req.body.users;
+    let userMsgs = req.body.userMsgs;
     let now = Date.now();
+    console.log(30, users, userMsgs);
+    userMsgs.time = now;
+
     Message.create(
         {
-            recipient: recipient,
-            sender: sender,
-            text: messageToSend,
-            date: now,
+            users: users,
+            userMsgs: userMsgs,
         },
         function (err, created) {
             if (err) {
@@ -59,7 +53,7 @@ router.post("/send", (req, res) => {
             }
             if (created) {
                 let successMsg =
-                    "created msg for " + recipient + " & " + sender;
+                    "created msg for " + users[0] + " & " + users[1];
                 console.log(50, successMsg);
                 res.status(200).send(successMsg);
             }

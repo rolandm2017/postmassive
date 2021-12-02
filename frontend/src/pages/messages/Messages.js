@@ -29,7 +29,9 @@ function Messages(props) {
     useEffect(() => {
         setTargetName(null);
         // TODO: expect this to be broken!
-        const messagesUrl = process.env.REACT_APP_API_URL + "/messages";
+        const messagesUrl =
+            process.env.REACT_APP_API_URL + "/messages/" + props.username;
+        console.log(messagesUrl);
         fetch(messagesUrl, getOptions(messagesUrl)).then((res) => {
             res.json().then((messages) => {
                 console.log(messages);
