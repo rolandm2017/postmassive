@@ -16,6 +16,7 @@ import { getOptions } from "../../_helper/authHeader";
 import "./Messages.scss";
 
 function Messages(props) {
+    console.log(props, 19);
     const [messages, setMessages] = useState(null);
     const [selectedMsg, setSelectedMsg] = useState(null);
     const [targetName, setTargetName] = useState(null);

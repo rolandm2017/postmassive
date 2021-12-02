@@ -45,7 +45,7 @@ router.get("/profiles", (req, res) => {
             console.log(38, err, amount, usernames);
         } else {
             let profileInfos = [];
-            console.log(profiles);
+            console.log(profiles, 48);
             profiles.forEach((profile) => {
                 profileInfos.push(safeguard(profile));
             });
