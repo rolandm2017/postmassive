@@ -3,6 +3,7 @@ import React from "react";
 import styles from "./InboxItem.module.scss";
 
 function InboxItem(props) {
+    console.log(props, 6);
     const formatDate = (date) => {
         // console.log("formatting...", date);
         var d = new Date(date),
@@ -68,13 +69,13 @@ function InboxItem(props) {
                                 {props.displayName}
                             </span>{" "} */}
                             <span className={`${styles.usernameOrMessage}`}>
-                                @{props.username[0]} and @{props.username[1]}
+                                @{props.usernames[0]} and @{props.usernames[1]}
                             </span>
                         </h3>
                     </div>
                     <div>
                         <p className={`${styles.truncateText}`}>
-                            {props.content}
+                            {props.content[0].content}
                         </p>
                     </div>
                     <div

@@ -21,7 +21,7 @@ function SelectedUserDisplay(props) {
                     {props.userIsSelected ? (
                         <div>
                             <span id="cd-username-color" className="pr-2">
-                                @{props.selectedMsg.author.username}{" "}
+                                @{props.selectedMsg.sender}{" "}
                             </span>
                             <span>{props.selectedMsg.author.displayName}</span>
                         </div>

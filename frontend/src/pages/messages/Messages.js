@@ -16,7 +16,7 @@ import { getOptions } from "../../_helper/authHeader";
 import "./Messages.scss";
 
 function Messages(props) {
-    // console.log(props, 19);
+    console.log(props, 19);
     const [messages, setMessages] = useState(null);
     const [selectedMsg, setSelectedMsg] = useState(null);
     const [targetName, setTargetName] = useState(null);
@@ -87,7 +87,8 @@ function Messages(props) {
         if (messages) {
             return (
                 <div id="inbox-items">
-                    {messages.map((message, index) => {
+                    {messages.map((message) => {
+                        console.log(message, 91);
                         return (
                             <InboxItem
                                 key={message._id}
@@ -95,9 +96,9 @@ function Messages(props) {
                                     console.log("bbb");
                                     setSelectedMsg(message);
                                 }}
-                                username={message.users}
+                                usernames={message.users}
                                 profilePic={bluePfp}
-                                content={message.userMsgs[0].content}
+                                content={message.userMsgs}
                                 deliveryDate={message.userMsgs[0].time}
                             />
                         );
@@ -171,6 +172,7 @@ function Messages(props) {
                         ) : selectedMsg === "new" ? (
                             <div id="inbox-items">
                                 <SelectedUserDisplay
+                                    // currentUser={username}
                                     selectedMsg={selectedMsg}
                                     userIsSelected={targetName}
                                     profilePic={bluePfp}
@@ -180,6 +182,7 @@ function Messages(props) {
                             // this one handles when a msg is open but no user is selected. tis "new".
                             <div id="inbox-items">
                                 <SelectedUserDisplay
+                                    // currentUser={username}
                                     selectedMsg={selectedMsg}
                                     userIsSelected={targetName}
                                     profilePic={bluePfp}
@@ -196,12 +199,14 @@ function Messages(props) {
                         />
                     ) : selectedMsg === "new" ? (
                         <SelectedUserDisplay
+                            // currentUser={username}
                             selectedMsg={selectedMsg}
                             userIsSelected={targetName}
                             profilePic={bluePfp}
                         /> // this one handles when a msg is open but no user is selected. tis "new".
                     ) : (
                         <SelectedUserDisplay
+                            // currentUser={username}
                             selectedMsg={selectedMsg}
                             userIsSelected={targetName}
                             profilePic={bluePfp}
