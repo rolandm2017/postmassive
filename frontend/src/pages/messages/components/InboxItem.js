@@ -24,7 +24,8 @@ function InboxItem(props) {
         const ONE_WEEK = 60 * 60 * 1000 * 24 * 7;
         const now = new Date();
 
-        const parsedInput = new Date(Date.parse(inputDate));
+        const parsedInput = new Date(inputDate);
+        // const parsedInput = Date.parse(inputDate.toString());
         const differenceInMilliseconds = Date.now() - parsedInput;
 
         if (now - parsedInput < ONE_HOUR) {
@@ -41,7 +42,7 @@ function InboxItem(props) {
             const diffDays = Math.floor(differenceInMilliseconds / 86400000); // days
             output = diffDays.toString() + "d";
         } else {
-            console.log("aa");
+            console.log("aa", output, parsedInput);
             output = formatDate(parsedInput);
         }
         // console.log(output);
@@ -63,11 +64,11 @@ function InboxItem(props) {
                 <div className={`${styles.theTextPart} mt-3`}>
                     <div>
                         <h3 className={`${styles.truncateText} my-0`}>
-                            <span className={`${styles.displayName}`}>
+                            {/* <span className={`${styles.displayName}`}>
                                 {props.displayName}
-                            </span>{" "}
+                            </span>{" "} */}
                             <span className={`${styles.usernameOrMessage}`}>
-                                @{props.username}
+                                @{props.username[0]} and @{props.username[1]}
                             </span>
                         </h3>
                     </div>

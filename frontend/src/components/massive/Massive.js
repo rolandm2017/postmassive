@@ -13,7 +13,7 @@ function Massive(props) {
     const stylings =
         props.stylings === undefined ? [{}, {}, {}] : props.stylings;
 
-    console.log(props, 17);
+    // console.log(props, 17);
     return (
         <div className="background-blue bg-blue-highlight">
             <div className="massive-container py-2 d-flex flex-column border-top ">

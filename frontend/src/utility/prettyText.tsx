@@ -13,8 +13,8 @@ function prettyText(inputText: string, stylings: Array<Styling>): any {
     */
     // console.log("##############")
     // console.log("##############")
-    console.log(stylings)
-    console.log("##############")
+    // console.log(stylings)
+    // console.log("##############")
     // console.log("##############")
     let isStylingsEmpty = stylings.length === 0;
     if (isStylingsEmpty) {

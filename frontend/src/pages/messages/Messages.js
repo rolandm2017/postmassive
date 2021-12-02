@@ -16,7 +16,7 @@ import { getOptions } from "../../_helper/authHeader";
 import "./Messages.scss";
 
 function Messages(props) {
-    console.log(props, 19);
+    // console.log(props, 19);
     const [messages, setMessages] = useState(null);
     const [selectedMsg, setSelectedMsg] = useState(null);
     const [targetName, setTargetName] = useState(null);
@@ -30,8 +30,10 @@ function Messages(props) {
         setTargetName(null);
         // TODO: expect this to be broken!
         const messagesUrl =
-            process.env.REACT_APP_API_URL + "/messages/" + props.username;
-        console.log(messagesUrl);
+            process.env.REACT_APP_API_URL +
+            "/messages/getAllMsgsForUser?username=" +
+            props.username;
+        // console.log(messagesUrl);
         fetch(messagesUrl, getOptions(messagesUrl)).then((res) => {
             res.json().then((messages) => {
                 console.log(messages);
@@ -59,19 +61,18 @@ function Messages(props) {
         if (messages) {
             return (
                 <div id="inbox-items">
-                    {messages.map((message) => {
+                    {messages.map((message, index) => {
                         return (
                             <InboxItem
-                                key={message.id}
+                                key={message._id}
                                 showMsg={() => {
                                     console.log("bbb");
                                     setSelectedMsg(message);
                                 }}
-                                displayName={message.author.displayName}
-                                username={message.author.username}
+                                username={message.users}
                                 profilePic={bluePfp}
-                                content={message.content}
-                                deliveryDate={message.deliveryDate}
+                                content={message.userMsgs[0].content}
+                                deliveryDate={message.userMsgs[0].time}
                             />
                         );
                     })}

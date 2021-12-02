@@ -13,25 +13,32 @@ const router = express.Router();
 
 module.exports = router;
 
-router.get("/getMsgs", (req, res) => {
+router.get("/getAllMsgsForUser", (req, res) => {
     let username = req.query.username;
+    console.log(username, 18);
     Message.find({ users: username })
         .sort("-date")
         .then((msgs) => {
+            console.log(msgs, 22);
             res.status(200).json(msgs);
         });
 });
 
-router.get("/:username", (req, res) => {
-    let username = req.params.username;
-    let peopleWhoMessagedUser = [];
-    let msgsSentByUser = [];
-    Messages.find({ recipient: username })
+router.get("/getMsgsBetweenUsers", (req, res) => {
+    let user1 = req.query.user1;
+    let user2 = req.query.user2;
+    console.log([user1, user2]);
+    Message.find({ users: user1 })
         .sort("-date")
-        .then((messages) => {
-            for (let i = 0; i < messages.length; i++) {
-                peopleWhoMessagedUser.push(messages[i]);
-            }
+        .limit(10)
+        .then((msgs) => {
+            let msgsWithUserTwo = [];
+            msgs.forEach((msg) => {
+                if (msg.users.indexOf(user2) > -1) {
+                    msgsWithUserTwo.push(msg);
+                }
+            });
+            res.status(200).json(msgsWithUserTwo); // order the usernames properly on the frontend
         });
 });
 
