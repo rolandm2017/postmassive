@@ -88,7 +88,7 @@ function Messages(props) {
             return (
                 <div id="inbox-items">
                     {messages.map((message) => {
-                        console.log(message, 91);
+                        // console.log(message, 91);
                         return (
                             <InboxItem
                                 key={message._id}

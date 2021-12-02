@@ -15,29 +15,20 @@ module.exports = router;
 
 router.get("/getAllMsgsForUser", (req, res) => {
     let username = req.query.username;
-    console.log(username, 18);
     Message.find({ users: username })
         .sort("-date")
         .then((msgs) => {
-            console.log(msgs, 22);
-            let assembledBySharedConvos = [];
-            let currentOtherUser = "";
-            let convo = { user1: "", user2: "", msgs: [] };
-            for (let i = 0; i < msgs.length; i++) {
-                if (msgs[i].users.includes(currentOtherUser)) {
-                    convo.msgs.push(msgs[i]);
-                } else {
-                    if (msgs[i].users[0] === username) {
-                        currentOtherUser = msgs[i].users[1];
-                    } else {
-                        currentOtherUser = msgs[i].users[0];
-                    }
-                    convo.user1 = username;
-                    convo.user2 = currentOtherUser;
-                    convo.msgs.push(msgs[i]);
-                }
-            }
-            res.status(200).json(msgs);
+            // TODO: make msgs into a structure like
+            // [{username: Robo, messagesByTime: []}]
+            const updatedMsgs = msgs.map((msg) => {
+                return {
+                    username: username,
+                    conversationPartner:
+                        msg.users[msg.users.indexOf(username) === 0 ? 1 : 0],
+                    msgs: msg.userMsgs,
+                };
+            });
+            res.status(200).json(updatedMsgs);
         });
 });
 
