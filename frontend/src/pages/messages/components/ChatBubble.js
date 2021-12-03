@@ -6,12 +6,12 @@ function ChatBubble(props) {
     return (
         <div
             className={`generic-chat-bub-container ${
-                props.left
+                props.divIsAlignedLeft
                     ? "left-side-chat"
                     : "right-side-chat d-flex justify-content-end"
             }`}
         >
-            {props.left ? (
+            {props.divIsAlignedLeft ? (
                 <div className="generic-chat-bub">
                     <img
                         className="generic-chat-bub-pfp "
