@@ -46,8 +46,10 @@ function SelectedUserDisplay({
                     )}
                 </div>
                 {/* // center box */}
-                <div id="chat-display_messages">
-                    <div>{/* empty div */}</div>
+                <div id="chat-display_messages-outer-shell">
+                    <div id="chat-display_messages">
+                        <div>{/* empty div */}</div>
+                    </div>
                 </div>
                 {/* // input */}
                 <div
@@ -88,28 +90,38 @@ function SelectedUserDisplay({
                     </div>
                 </div>
                 {/* // center box */}
-                <div id="chat-display_messages">
-                    {userMsgs.msgs.map((msg, index) => {
-                        if (msg.sender === currentlyLoggedInUser) {
-                            // right hand side
-                            return (
-                                <ChatBubble
-                                    divIsAlignedLeft={false}
-                                    msg={msg.content}
-                                    profilePic={profilePic}
-                                />
-                            );
-                        } else {
-                            // left hand side
-                            return (
-                                <ChatBubble
-                                    divIsAlignedLeft={true}
-                                    msg={msg.content}
-                                    profilePic={profilePic}
-                                />
-                            );
-                        }
-                    })}
+                <div id="chat-display_messages-outer-shell">
+                    <div id="chat-display_messages">
+                        <div id="chat-display_messages-inner-shell">
+                            {userMsgs.msgs
+                                .map((msg, index) => {
+                                    if (msg.sender === currentlyLoggedInUser) {
+                                        // right hand side
+                                        return (
+                                            <ChatBubble
+                                                key={index}
+                                                divIsAlignedLeft={false}
+                                                msg={msg.content}
+                                                profilePic={profilePic}
+                                            />
+                                        );
+                                    } else {
+                                        // left hand side
+                                        return (
+                                            <ChatBubble
+                                                key={index}
+                                                divIsAlignedLeft={true}
+                                                msg={msg.content}
+                                                profilePic={profilePic}
+                                            />
+                                        );
+                                    }
+                                })
+                                .reverse()}
+                            {/* // it has to be .reversed() because the y-scroll
+                            depends on flex-direction: column-reverse; */}
+                        </div>
+                    </div>
                 </div>
                 {/* // input */}
                 <div

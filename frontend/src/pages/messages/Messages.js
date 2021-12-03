@@ -29,7 +29,8 @@ function Messages(props) {
 
     useEffect(() => {
         setConversationPartner(null);
-        // TODO: expect this to be broken!
+        console.log("RETRIGGERED", 32);
+
         const messagesUrl =
             process.env.REACT_APP_API_URL +
             "/messages/getAllMsgsForUser?username=" +
@@ -122,6 +123,9 @@ function Messages(props) {
                             alt="to requests"
                             height="30px"
                             with="30px"
+                            onClick={() => {
+                                setSelectedMsg(null);
+                            }}
                         />
                     </div>
                     <div className="inbox-header pl-2 py-2 d-flex justify-content-start align-items-center">
@@ -142,7 +146,7 @@ function Messages(props) {
                         selectedMsg === null ? (
                             loadMessageSelect()
                         ) : selectedMsg === "new" ? (
-                            <div id="inbox-items">
+                            <div id="inbox-items-mobile">
                                 <SelectedUserDisplay
                                     selectedMsg={selectedMsg}
                                     currentlyLoggedInUser={props.username}
@@ -154,7 +158,7 @@ function Messages(props) {
                             </div>
                         ) : (
                             // this one handles when a msg is open but no user is selected. tis "new".
-                            <div id="inbox-items">
+                            <div id="inbox-items-mobile">
                                 <SelectedUserDisplay
                                     selectedMsg={selectedMsg}
                                     currentlyLoggedInUser={props.username}

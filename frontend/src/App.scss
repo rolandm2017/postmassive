@@ -147,7 +147,9 @@ p {
 // site wide styling for inputs
 
 .dark-mode-input {
-    border-color: $light-grey;
+    border: 0px;
+    border-radius: 18px;
     color: white !important;
+    background-color: $search-bar-grey;
     // todo: change this to match figma
 }
