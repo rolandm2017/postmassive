@@ -104,7 +104,7 @@ app.use(api + "/notifications", require("./notifications/notifications"));
 // *** *** ***
 // CRUD for DMs
 
-app.use(api + "/message", require("./userActions/message/message"));
+app.use(api + "/messages", require("./userActions/message/message"));
 
 //
 

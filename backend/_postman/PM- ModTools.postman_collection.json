@@ -1,0 +1,411 @@
+{
+	"info": {
+		"_postman_id": "9209268f-e845-4ee1-8ebe-dd224ba6a37d",
+		"name": "PM/ ModTools",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Make Highest",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"hi\": \"hello\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/test/getHighest",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"test",
+						"getHighest"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "USER/GiveUserDisplayName",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"crono\",\r\n    \"displayName\": \"heroOfGuardia\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/test/giveUserDisplayName",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"test",
+						"giveUserDisplayName"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "USER/Get User Profile",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"crono\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/test/getUserProfile",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"test",
+						"getUserProfile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Make Highest Views",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"hi\": \"hello\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/test/makeHighestViews",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"test",
+						"makeHighestViews"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Highest Views",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"hi\": \"hello\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/test/getHighestViews",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"test",
+						"getHighestViews"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Make Highest Post Number",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"hi\": \"hello\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/test/post/makeHighestPostNumber",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"test",
+						"post",
+						"makeHighestPostNumber"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Highest Post Number",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"hi\": \"hello\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/test/post/getHighest",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"test",
+						"post",
+						"getHighest"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST User FRESH",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fullName\": \"Roly Poly\",\r\n    \"email\": \"roly@rolypoly.com\",\r\n    \"dateOfBirth\": \"9148234\",\r\n    \"username\": \"rolypolyistaken\",\r\n    \"password\": \"acedefgh\",\r\n    \"role\": \"admin\",\r\n    \"accountCreatedAt\": \"9123124821\",\r\n    \"isVerified\": undefined,\r\n    \"verificationCode\": \"asdadfsa\",\r\n    \"failedVerifications\": 0,\r\n    \"acceptsTermsAndConditions\": true,\r\n    \"displayName\": \"rolypoly\",\r\n    \"followers\": 1,\r\n    \"following\": 10,\r\n    \"DMsAreOpen\": true,\r\n    \"postCount\": 100\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/users/user?username=marle",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"user"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "marle"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Massive",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"deleteId\": \"61a645eb9cba4136985a7d49\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/test/post/remove/61a645eb9cba4136985a7d49",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"test",
+						"post",
+						"remove",
+						"61a645eb9cba4136985a7d49"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BAN user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "SUSPEND 7 day",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "MUTE word from PM",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "AMP keyword",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "PERMABAN (careful)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "Give User Followers",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/test/giveFollowers?username=marle&followers=200&following=495",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"test",
+						"giveFollowers"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "marle"
+						},
+						{
+							"key": "followers",
+							"value": "200"
+						},
+						{
+							"key": "following",
+							"value": "495"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

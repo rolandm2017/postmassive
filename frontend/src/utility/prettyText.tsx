@@ -13,8 +13,8 @@ function prettyText(inputText: string, stylings: Array<Styling>): any {
     */
     // console.log("##############")
     // console.log("##############")
-    console.log(stylings)
-    console.log("##############")
+    // console.log(stylings)
+    // console.log("##############")
     // console.log("##############")
     let isStylingsEmpty = stylings.length === 0;
     if (isStylingsEmpty) {
@@ -46,14 +46,14 @@ function prettyText(inputText: string, stylings: Array<Styling>): any {
     let chunks: any[] = instructions.map((instruction, index) => {
         // console.log(instruction, instruction.textValue, 44);
         if (instruction.special) {
-            console.log(49, instruction.dotNotationStylings, instruction.textValue)
+            // console.log(49, instruction.dotNotationStylings, instruction.textValue)
             return instruction.getStyledChunk(index)
         } else {
-            console.log(49, instruction.dotNotationStylings)
+            // console.log(49, instruction.dotNotationStylings)
             return instruction.getStyledChunk(index)
         }
     });
-    console.log(chunks, 82, "end of prettyText");
+    // console.log(chunks, 82, "end of prettyText");
     return chunks; //
 }
 

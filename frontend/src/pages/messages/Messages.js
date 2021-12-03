@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import InboxHeader from "./components/InboxHeader";
+// import { processDateToString } from "./components/TimeLogic";
 import InboxItem from "./components/InboxItem";
 import SelectedUserDisplay from "./components/SelectedUserDisplay";
 
@@ -7,8 +9,7 @@ import NoMsgSelected from "./components/NoMsgSelected";
 import Wrapper from "../_pageHelper/Wrapper";
 
 import RightArrow from "../../images/icons8-right-arrow-50.png";
-import Gear from "../../images/icons8-settings-50.png";
-import Mail from "../../images/icons8-mail-50.png";
+
 import bluePfp from "../../images/bluePfp.png";
 
 import { getOptions } from "../../_helper/authHeader";
@@ -16,9 +17,10 @@ import { getOptions } from "../../_helper/authHeader";
 import "./Messages.scss";
 
 function Messages(props) {
+    // console.log(props, 19);
     const [messages, setMessages] = useState(null);
     const [selectedMsg, setSelectedMsg] = useState(null);
-    const [targetName, setTargetName] = useState(null);
+    const [conversationPartner, setConversationPartner] = useState(null);
     const [windowSize, setWindowSize] = useState({
         width: undefined,
         height: undefined,
@@ -26,12 +28,19 @@ function Messages(props) {
     const [showSettings, setShowSettings] = useState(false);
 
     useEffect(() => {
-        setTargetName(null);
-        // TODO: expect this to be broken!
-        const messagesUrl = process.env.REACT_APP_API_URL + "/messages";
+        setConversationPartner(null);
+        console.log("RETRIGGERED", 32);
+
+        const messagesUrl =
+            process.env.REACT_APP_API_URL +
+            "/messages/getAllMsgsForUser?username=" +
+            props.username;
+        // console.log(messagesUrl);
         fetch(messagesUrl, getOptions(messagesUrl)).then((res) => {
             res.json().then((messages) => {
+                // username, content, deliveryDate
                 console.log(messages);
+
                 setMessages(messages);
             });
         });
@@ -50,31 +59,47 @@ function Messages(props) {
         handleResize();
         // Remove event listener on cleanup
         return () => window.removeEventListener("resize", handleResize);
-    }, [setTargetName]);
+    }, [setConversationPartner]);
 
     function loadMessageSelect() {
         if (messages) {
             return (
                 <div id="inbox-items">
-                    {messages.map((message) => {
+                    {messages.map((message, index) => {
+                        // console.log(message.msgs, 91);
                         return (
                             <InboxItem
-                                key={message.id}
+                                key={index}
                                 showMsg={() => {
                                     console.log("bbb");
+                                    // change the chat window display to be the message object,
+                                    // access its contents inside SelectedUserDisplay
                                     setSelectedMsg(message);
+                                    setConversationPartner(
+                                        message.conversationPartner
+                                    );
                                 }}
-                                displayName={message.author.displayName}
-                                username={message.author.username}
+                                username={message.username}
+                                conversationPartner={
+                                    message.conversationPartner
+                                }
                                 profilePic={bluePfp}
-                                content={message.content}
-                                deliveryDate={message.deliveryDate}
+                                content={message.msgs[0].content}
+                                deliveryDate={message.msgs[0].time}
                             />
                         );
                     })}
                 </div>
             );
         }
+    }
+
+    function getOnlyRelevantMessageData(messages) {
+        return messages.filter((message) => {
+            if (message.conversationPartner === conversationPartner) {
+                return message;
+            }
+        })[0];
     }
 
     return (
@@ -87,31 +112,10 @@ function Messages(props) {
         >
             <div className="d-flex hacky-hider">
                 <div id="inbox">
-                    <div className="inbox-header inbox-header-border pl-2 py-1 d-flex justify-content-between align-items-center">
-                        <h1 className="pl-2">Messages Page</h1>
-                        <div className="mr-3 d-flex">
-                            <img
-                                src={Mail}
-                                className="msgs-img-btn mr-2"
-                                onClick={() => {
-                                    setSelectedMsg("new");
-                                }}
-                                alt="new msg"
-                            />
-                            <img
-                                src={Gear}
-                                className="msgs-img-btn mr-2"
-                                onClick={() => {
-                                    console.error(
-                                        "you shouldn't have clicked me, feature not installed"
-                                    );
-                                    setShowSettings(true); // i know this is bad but, convenience
-                                    // open a div when openSettings===true;
-                                }}
-                                alt="settings for msgs"
-                            />
-                        </div>
-                    </div>
+                    <InboxHeader
+                        setSelectedMsg={setSelectedMsg}
+                        setShowSettings={setShowSettings}
+                    />
                     <div id="inbox-msg-requests">
                         <p>Message requests</p>
                         <img
@@ -119,6 +123,9 @@ function Messages(props) {
                             alt="to requests"
                             height="30px"
                             with="30px"
+                            onClick={() => {
+                                setSelectedMsg(null);
+                            }}
                         />
                     </div>
                     <div className="inbox-header pl-2 py-2 d-flex justify-content-start align-items-center">
@@ -139,19 +146,27 @@ function Messages(props) {
                         selectedMsg === null ? (
                             loadMessageSelect()
                         ) : selectedMsg === "new" ? (
-                            <div id="inbox-items">
+                            <div id="inbox-items-mobile">
                                 <SelectedUserDisplay
                                     selectedMsg={selectedMsg}
-                                    userIsSelected={targetName}
+                                    currentlyLoggedInUser={props.username}
+                                    userMsgs={null}
+                                    conversationPartner={conversationPartner}
+                                    userIsSelected={conversationPartner}
                                     profilePic={bluePfp}
                                 />
                             </div>
                         ) : (
                             // this one handles when a msg is open but no user is selected. tis "new".
-                            <div id="inbox-items">
+                            <div id="inbox-items-mobile">
                                 <SelectedUserDisplay
                                     selectedMsg={selectedMsg}
-                                    userIsSelected={targetName}
+                                    currentlyLoggedInUser={props.username}
+                                    userMsgs={getOnlyRelevantMessageData(
+                                        messages
+                                    )}
+                                    conversationPartner={conversationPartner}
+                                    userIsSelected={conversationPartner}
                                     profilePic={bluePfp}
                                 />
                             </div>
@@ -167,13 +182,19 @@ function Messages(props) {
                     ) : selectedMsg === "new" ? (
                         <SelectedUserDisplay
                             selectedMsg={selectedMsg}
-                            userIsSelected={targetName}
+                            currentlyLoggedInUser={props.username}
+                            userMsgs={null}
+                            conversationPartner={conversationPartner}
+                            userIsSelected={conversationPartner}
                             profilePic={bluePfp}
                         /> // this one handles when a msg is open but no user is selected. tis "new".
                     ) : (
                         <SelectedUserDisplay
                             selectedMsg={selectedMsg}
-                            userIsSelected={targetName}
+                            currentlyLoggedInUser={props.username}
+                            userMsgs={getOnlyRelevantMessageData(messages)}
+                            conversationPartner={conversationPartner}
+                            userIsSelected={conversationPartner}
                             profilePic={bluePfp}
                         />
                         // this 1 handles after a user is selected.

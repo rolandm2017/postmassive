@@ -12,6 +12,7 @@ router.get("/get", (req, res) => {
         if (err) {
             console.log(171717, err);
         } else {
+            console.log(userData, 15);
             let publiclyViewableData = safeguard(userData); // total failures: 0 failures
             console.log("successfully retrieved userData for " + username);
             res.status(200).json(publiclyViewableData);
@@ -38,14 +39,14 @@ router.get("/profiles", (req, res) => {
             .limit(usernames.length);
     } else {
         console.log(amount, usernames);
-        throw "How did this happen?";
+        throw Error("How did this happen?");
     }
     query.exec(function (err, profiles) {
         if (err) {
             console.log(38, err, amount, usernames);
         } else {
             let profileInfos = [];
-            console.log(profiles);
+            console.log(profiles, 48);
             profiles.forEach((profile) => {
                 profileInfos.push(safeguard(profile));
             });

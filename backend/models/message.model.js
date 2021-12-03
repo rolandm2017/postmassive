@@ -4,10 +4,8 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
 const messageSchema = new Schema({
-    recipient: { type: String, required: true },
-    sender: { type: String, required: true },
-    text: { type: String, required: false }, //
-    date: { type: Date, required: true },
+    users: { type: Array, required: true },
+    userMsgs: { type: Array, required: true }, //
     // **
     // * KISS - I won't need more than what I already have
     // **

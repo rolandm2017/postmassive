@@ -1,0 +1,325 @@
+{
+	"info": {
+		"_postman_id": "61e86742-6fa2-4060-89b9-1e622b245582",
+		"name": "PM/Massives",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Post Massive Styled Generic2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"crono\",\r\n    \"content\": \"consequatur aut perferendis doloribus asperiores repellat\",\r\n    \"stylings\": [\r\n        {\r\n            \"start\": 10,\r\n            \"end\": 20,\r\n            \"stylings\": [\r\n                \"bold\",\r\n                \"underline\"\r\n            ]\r\n        },\r\n        {\r\n            \"start\": 20,\r\n            \"end\": 25,\r\n            \"stylings\": [\r\n                \"underline\",\r\n                \"backgroundColorRed\"\r\n            ]\r\n        },\r\n        {\r\n            \"start\": 40,\r\n            \"end\": 45,\r\n            \"stylings\": [\r\n                \"fontSize24\",\r\n                \"backgroundColorBlack\"\r\n            ]\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/post/post",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"post",
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Massive UNSTYLED",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"crono\",\r\n    \"displayName\": \"rolypolyistaken\",\r\n    \"content\": \"consequatur aut perferendis doloribus asperiores repellat\",\r\n    \"stylings\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/post/post",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"post",
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Massive Styled Singular",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"crono\",\r\n    \"content\": \"consequatur aut perferendis doloribus asperiores repellat\",\r\n    \"stylings\": [\r\n        {\r\n            \"start\": 10,\r\n            \"end\": 20,\r\n            \"stylings\": [\r\n                \"strikethrough\", \"backgroundColorPurple\"\r\n            ]\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/post/post",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"post",
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Massive Styled Singular2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"crono\",\r\n    \"content\": \"Crono! You are the best hero to ever live. You and your party are my favorites!\",\r\n    \"stylings\": [\r\n        {\r\n            \"start\": 20,\r\n            \"end\": 35,\r\n            \"stylings\": [\r\n                \"fontSize36\", \"backgroundColorOrange\"\r\n            ]\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/post/post",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"post",
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Massive Styled Sequential",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"crono\",\r\n    \"content\": \"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi\",\r\n    \"stylings\": [\r\n        {\r\n            \"start\": 10,\r\n            \"end\": 20,\r\n            \"stylings\": [\r\n                \"bold\", \"underline\"\r\n            ]\r\n        },\r\n        {\"start\":20, \"end\": 25, \"stylings\": [\"underline\", \"backgroundColorRed\"]},\r\n        {\"start\":45, \"end\": 45, \"stylings\": [\"fontSize26\", \"backgroundColorBlack\"]}\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/post/post",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"post",
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Massive Styled SequentialTwo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"crono\",\r\n    \"content\": \"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi\",\r\n    \"stylings\": [\r\n        {\r\n            \"start\": 35,\r\n            \"end\": 125,\r\n            \"stylings\": [\r\n                \"bold\",\r\n                \"underline\"\r\n            ]\r\n        },\r\n        {\r\n            \"start\": 125,\r\n            \"end\": 145,\r\n            \"stylings\": [\r\n                \"underline\",\r\n                \"backgroundColorOrange\"\r\n            ]\r\n        },\r\n        {\r\n            \"start\": 145,\r\n            \"end\": 180,\r\n            \"stylings\": [\r\n                \".fontSize26\",\r\n                \"backgroundColorBlack\"\r\n            ]\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/post/post",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"post",
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Massive Styled Generic",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"crono\",\r\n    \"content\": \"Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo?\",\r\n    \"stylings\": [\r\n        {\r\n            \"start\": 5,\r\n            \"end\": 20,\r\n            \"stylings\": [\r\n                \".bold\",\r\n                \".underline\"\r\n            ]\r\n        },\r\n        {\r\n            \"start\": 20,\r\n            \"end\": 65,\r\n            \"stylings\": [\r\n                \".underline\",\r\n                \"backgroundColorRed\"\r\n            ]\r\n        },\r\n        {\r\n            \"start\": 130,\r\n            \"end\": 140,\r\n            \"stylings\": [\r\n                \".fontSize36\",\r\n                \"backgroundColorBlack\"\r\n            ]\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/post/post",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"post",
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Picture/Gif",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"rolypolyDev\",\r\n    \"displayName\": \"rolypolyistaken\",\r\n    \"content\": \"consequatur aut perferendis doloribus asperiores repellat\",\r\n    \"type\": \"pic\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/post/pic",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"post",
+						"pic"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Refresh Massives",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "POST Like Post",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "POST Amplify Post",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "GET most Recent Post",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/test/post/mostRecent",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"test",
+						"post",
+						"mostRecent"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

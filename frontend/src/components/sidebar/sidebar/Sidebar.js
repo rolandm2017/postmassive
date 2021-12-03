@@ -55,13 +55,21 @@ function Sidebar(props) {
                             src={Notifications}
                             alt="Notifications"
                             text="Notifications"
-                            onClick={() => history.push("/notifications")}
+                            onClick={() =>
+                                history.push(
+                                    "/" + props.user.username + "/notifications"
+                                )
+                            }
                         />
                         <SidebarButton
                             src={Messages}
                             alt="Messages"
                             text="Messages"
-                            onClick={() => history.push("/messages")}
+                            onClick={() =>
+                                history.push(
+                                    "/" + props.user.username + "/messages"
+                                )
+                            }
                         />
                         {/* <SidebarButton
                             src={Bookmarks}

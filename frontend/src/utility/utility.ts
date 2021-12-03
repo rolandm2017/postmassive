@@ -132,9 +132,9 @@ export function getSubstringsWithInstructions(inputText: string, stylings: Styli
     // stylings - Stylings array!
     // return value - should be an array of strings that can be combined using prettyText
     */
-    console.log(stylings)
+    // console.log(stylings)
     let cleanedUpStylings: Styling[] = incompleteStylingsBecomeComplete(stylings)
-    console.log(cleanedUpStylings)
+    // console.log(cleanedUpStylings)
     let slicesToDistribute: string[] = [];
     let specialSubstringIndexes: number[] = [];
     // split the inputText into its substrings. Assign the right substring to the right Instruction, via index.
@@ -182,7 +182,7 @@ export function getSubstringsWithInstructions(inputText: string, stylings: Styli
             }
         }
     }
-    console.log(cleanedUpStylings, slicesToDistribute, specialSubstringIndexes)
+    // console.log(cleanedUpStylings, slicesToDistribute, specialSubstringIndexes)
     let extremelySpecificInstructions: Instruction[] = slicesToDistribute.map((slice, index) => {
         if (specialSubstringIndexes.includes(index)) {
             let dotNotationStyling = cleanedUpStylings.shift()?.stylings;
@@ -202,7 +202,7 @@ export function getSubstringsWithInstructions(inputText: string, stylings: Styli
         }
     })
     
-    console.log(extremelySpecificInstructions, 117); // INPUT: is messed up by this point
+    // console.log(extremelySpecificInstructions, 117); // INPUT: is messed up by this point
     return extremelySpecificInstructions;
 }
 

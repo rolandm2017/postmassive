@@ -7,13 +7,14 @@ class Instruction {
         this.dotNotationStylings = stylings; // "bold fontSize22 backgroundColorRed" is correct, not ".bold .fontSize22"
     }
 
+    // TODO: add this.index so this.index can be used to give Chunks a unique index.
     getStyledChunk(index) {
         if (this.special) {
-            console.log(
-                13,
-                this.dotNotationStylings,
-                this.dotNotationStylings.length
-            );
+            // console.log(
+            //     13,
+            //     this.dotNotationStylings,
+            //     this.dotNotationStylings.length
+            // );
             if (this.dotNotationStylings.length === 1) {
                 return (
                     <Chunk
@@ -23,11 +24,11 @@ class Instruction {
                     />
                 );
             } else {
-                console.log(
-                    26,
-                    this.dotNotationStylings,
-                    this.dotNotationStylings.length
-                );
+                // console.log(
+                //     26,
+                //     this.dotNotationStylings,
+                //     this.dotNotationStylings.length
+                // );
                 return (
                     <Chunk
                         index={index}

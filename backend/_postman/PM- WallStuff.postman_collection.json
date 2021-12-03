@@ -1,0 +1,188 @@
+{
+	"info": {
+		"_postman_id": "5f60ccd3-bb76-4877-8cce-d110591e77e2",
+		"name": "PM/ WallStuff",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Wall PLAIN",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/wall/introduce",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"wall",
+						"introduce"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Wall Posts/Include Polls Copy",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"crono\",\r\n    \"includePolls\": true\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/wall/introduce",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"wall",
+						"introduce"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Wall Posts/StyledOnly",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"crono\",\r\n    \"stylizedOnly\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/wall/introduce?username=crono&stylizedOnly=true",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"wall",
+						"introduce"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "crono"
+						},
+						{
+							"key": "stylizedOnly",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Wall SPECIFIC TYPE",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"crono\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/wall/introduce?type=poll",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"wall",
+						"introduce"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "poll"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Refresh Posts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "Wall - for profile",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/wall/profile/:username",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"wall",
+						"profile",
+						":username"
+					],
+					"variable": [
+						{
+							"key": "username",
+							"value": "marle"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

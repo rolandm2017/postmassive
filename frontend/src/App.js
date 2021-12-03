@@ -76,7 +76,9 @@ function App() {
                     }
 
                     // authorized so return component
-                    return <Component {...props} />;
+                    return (
+                        <Component {...props} username={userValue().username} />
+                    );
                 }}
             />
         );
@@ -114,10 +116,13 @@ function App() {
                         </Route>
                         <PrivateRoute exact path="/home" component={Home} />
                         <PrivateRoute
-                            path="/notifications"
+                            path="/:username/notifications"
                             component={Notifications}
                         />
-                        <PrivateRoute path="/messages" component={Messages} />
+                        <PrivateRoute
+                            path="/:username/messages"
+                            component={Messages}
+                        />
                         <PrivateRoute path="/:username/post" component={Post} />
                         {/* <PrivateRoute path="/admin" roles={[Role.Admin]} component={Admin} /> */}
                         <Route path="/explore">

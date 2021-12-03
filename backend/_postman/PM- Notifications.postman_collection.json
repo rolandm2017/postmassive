@@ -1,0 +1,279 @@
+{
+	"info": {
+		"_postman_id": "1d669106-7786-4ce5-9427-2dba929eed59",
+		"name": "PM/ Notifications",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET 10 notifications for user",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"crono\",\r\n    \"amount\": 15\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/notifications/crono",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"notifications",
+						"crono"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SET TO SEEN for user Copy",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"seen\": true,\r\n    \"id\": \"61917971d76c2a1c380b6b40\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/notifications/crono/6191792faba2503740f91b47",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"notifications",
+						"crono",
+						"6191792faba2503740f91b47"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST novel notification LIKE",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"follow\",\r\n    \"text\": \"the user %% liked your post\",\r\n    \"byWho\": \"Magus,Lucca,Marle\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/notifications/crono",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"notifications",
+						"crono"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "\"like\"",
+							"disabled": true
+						},
+						{
+							"key": "text",
+							"value": "\"the user %% likes your post\"",
+							"disabled": true
+						},
+						{
+							"key": "byWho",
+							"value": "\"Robo\"",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST novel notification FOLLOW",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"follow\",\r\n    \"text\": \"the user %% followed you\",\r\n    \"byWho\": \"Robo,Marle,Lucca,Magus,Frog,Ayla\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/notifications/crono",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"notifications",
+						"crono"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "\"like\"",
+							"disabled": true
+						},
+						{
+							"key": "text",
+							"value": "\"the user %% likes your post\"",
+							"disabled": true
+						},
+						{
+							"key": "byWho",
+							"value": "\"Robo\"",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST novel notification AMPed",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"amp\",\r\n    \"text\": \"the user %% amped your post\",\r\n    \"byWho\": \"Lucca\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/notifications/crono",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"notifications",
+						"crono"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "\"like\"",
+							"disabled": true
+						},
+						{
+							"key": "text",
+							"value": "\"the user %% likes your post\"",
+							"disabled": true
+						},
+						{
+							"key": "byWho",
+							"value": "\"Robo\"",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST novel notification REPLIED",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"reply\",\r\n    \"text\": \"the user %% replied to your post\",\r\n    \"byWho\": \"Ayla,Frog,Magus,Lucca,Crono\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/notifications/crono",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"notifications",
+						"crono"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "\"like\"",
+							"disabled": true
+						},
+						{
+							"key": "text",
+							"value": "\"the user %% likes your post\"",
+							"disabled": true
+						},
+						{
+							"key": "byWho",
+							"value": "\"Robo\"",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
