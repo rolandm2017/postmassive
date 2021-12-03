@@ -20,7 +20,10 @@ export function postPost(
         stylings: stylings,
     };
     // TODO: stick it into localHistory so browser can reload the data upon pgBack
-    console.log("Sending ........", postContentWithStyling);
+    console.log(
+        "Sending ........ it will be JSON.stringified",
+        postContentWithStyling
+    );
     // send a post to the server to
     let postingUrl = process.env.REACT_APP_API_URL + "/post/post";
     fetch(

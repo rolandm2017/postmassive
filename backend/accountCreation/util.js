@@ -50,7 +50,7 @@ async function getUserVerificationCode(email) {
         //     console.log("but was it really??", verificationCode);
         //     return verificationCode;
         // }
-    ).exec();
+    ).exec(); // fixme: .exec() is just a fancy promise
     console.log("thing", thing, thing[0]);
     const verificationCode = thing[0].verificationCode;
     console.log("55,", verificationCode, typeof verificationCode);

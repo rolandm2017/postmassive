@@ -108,10 +108,14 @@ app.use(api + "/message", require("./userActions/message/message"));
 
 //
 
-app.get(api + "/test", (req, res) => {
+app.get(api + "/foo", (req, res) => {
     // so you can see if going to the https://147.182.152.13:${port}/api/test returns 'foo' to confirm server runs on that ip
     res.send("foo");
 });
+
+if (postman) {
+    app.use(api + "/test", require("./modTools/test"));
+}
 
 if (production) {
     app.listen(8080, () => {

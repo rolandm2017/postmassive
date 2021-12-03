@@ -6,15 +6,15 @@ import Styling from "../../utility/classes/Styling";
 import {
     FLOORS,
     EMPHASIS,
-    // SPECIALS,
-    // BG_COLORS,
+    BG_COLORS,
+    FONT_SIZES,
     // FONT_SIZES,
 } from "../../_helper/consts";
 import {
     processMin,
     processMax,
 } from "../../utility/process";
-import prettyText from "../../utility/prettyText";
+// import prettyText from "../../utility/prettyText";
 
 import { postPost } from "../../_helper/Post";
 import {
@@ -37,8 +37,8 @@ import ChoiceMaker from "./components/ChoiceMaker";
 
 import Emphasis from "./components/Emphasis";
 // import Special from "./components/Special"; // lighthouse
-// import BackgroundColor from "./components/BackgroundColor";
-import FontSlider from "./components/FontSlider";
+import BackgroundColor from "./components/BackgroundColor";
+import FontSizing from "./components/FontSizing";
 
 import Flooring from "./components/Flooring";
 
@@ -46,6 +46,11 @@ import "./Post.scss";
 import "../../components/textStyling/TextStyling.css";
 import { first } from "rxjs";
 // import { current } from "@reduxjs/toolkit";
+
+// TODO: Make BackgroundColor & fontSize exclusive choices; they cna't be combined
+// TODO: Split "pick your text" and "stylize your text" into two separate modals. ABANDON it having its own page??
+// TODO: COlor the Post Btn
+// TODO: move to modals. (1) for choosing text, (2) for styling it.
 
 function Post(props: any) {
     const [username, setUsername] = useState<string>("");
@@ -56,6 +61,7 @@ function Post(props: any) {
     const [firstStyle, setFirstStyle] = useState(new Styling( 0, 0, []));
     const [secondStyle, setSecondStyle] = useState(new Styling( 0, 0, []));
     const [thirdStyle, setThirdStyle] = useState(new Styling( 0, 0, []));
+    const [previewTime, setPreviewTime] = useState(false);
 
     let currentUrl = useLocation().pathname;
     let history = useHistory();
@@ -128,21 +134,26 @@ function Post(props: any) {
         setCurrentStyle(number); // does work btw!
     }
 
-    const floors = FLOORS.map((floor, index) => (
-        <div
-            key={floor}
-            onClick={() => {
-                setFloor(floor);
-            }}
-        >
-            <Flooring flooring={floor} />
-        </div>
-    ));
+    // const floors = FLOORS.map((floor, index) => (
+    //     <div
+    //         key={floor}
+    //         onClick={() => {
+    //             setFloor(floor);
+    //         }}
+    //     >
+    //         <Flooring flooring={floor} />
+    //     </div>
+    // ));
 
-    function inspecter(input1: any, inputArr: any): any {
-        console.log(input1, inputArr[0], inputArr[1], inputArr[2])
+    function inspecter(input1: any, a: any, b: any, c: any): any {
+        console.log(input1, a, b, c)
         return input1;
     }
+
+    // function prettyWrapper(textInput, stylings) {
+    //     let processedStylings: Styling[] = [];
+    //     return prettyText(textInput, processedStylings);
+    // }
 
     return (
         <Wrapper
@@ -184,7 +195,6 @@ function Post(props: any) {
                 </div>
                 <div id="post_bottom-half" className="post_space-divider">
                     <div
-                        id="post_profile-pic"
                         className="post_spacer post_generic-spacer"
                     >
                         <div className="post_generic-filler"></div>
@@ -200,36 +210,7 @@ function Post(props: any) {
                             <img src={Poll} alt="start poll"></img>
                             <img src={Emoji} alt="pick emoji"></img>
                         </div>
-                        <div id="post_typed-content-area">
-                            {/* // select up to 3 types of stylings, set
-                            textLocationRanges with sliders. // stack
-                            stylingTypes with drag n drop, or by selecting the
-                            type then selecting another styling */}
-                            <div>
-                                <div className="post_color-white">
-                                    {content.length > 4
-                                        ? prettyText(
-                                              content,
-                                              [
-                                                  firstStyle,
-                                                  secondStyle,
-                                                  thirdStyle,
-                                              ]
-                                              // setContent // YAGNI
-                                          )
-                                          
-                                          
-                                        //   .map((Chunk, index) => {
-                                        //       return (
-                                        //           <div>
-                                        //               <Chunk />
-                                        //           </div>
-                                        //       );
-                                        //   })
-                                        : null}
-                                </div>
-                            </div>
-                        </div>
+                        
                         <div id="post_styling-area">
                             <ChoiceMaker
                                 key={0}
@@ -247,6 +228,8 @@ function Post(props: any) {
                                 )}
                                 // currentMax={content.length}
                                 stylingInfo={firstStyle.stylings}
+                                content={content}
+                                startStopInfo={firstStyle}
                                 adjustStart={changeStartRange}
                                 // styling,styleObjectIndex,newStartIndex,setter
                                 adjustEnd={changeEndRange}
@@ -273,6 +256,8 @@ function Post(props: any) {
                                     content.length
                                 )}
                                 stylingInfo={secondStyle.stylings}
+                                content={content}
+                                startStopInfo={secondStyle}
                                 adjustStart={changeStartRange}
                                 adjustEnd={changeEndRange}
                                 handleRemoval={removeStyleFromSection}
@@ -298,6 +283,8 @@ function Post(props: any) {
                                     content.length
                                 )}
                                 stylingInfo={thirdStyle.stylings}
+                                content={content}
+                                startStopInfo={thirdStyle}
                                 adjustStart={changeStartRange}
                                 adjustEnd={changeEndRange}
                                 handleRemoval={removeStyleFromSection}
@@ -305,12 +292,11 @@ function Post(props: any) {
                                 setter={setThirdStyle}
                             />
                         </div>
-                        <p>
-                            {/* TODO: steal from Facebook's ad targeting. Allow
-                            targeting by age, gender. */}
-                        </p>
+                        <h2 id="post_stylings-header">
+                            Stylings
+                        </h2>
                         <div id="post_targeting-container">
-                            <div className="post_tones-outer-container w-100">
+                            <div className="post_tones-outer-container w-100 post_mobile-even-spacer ">
                                 {EMPHASIS.map((styling, index) => {
                                     return (
                                         <div key={index}>
@@ -352,87 +338,129 @@ function Post(props: any) {
                                         </div>
                                     );
                                 })}
-
-                                {/* <Emphasis
-                                    emphasis={"bold"}
-                                    onClick={() => {
-                                        // console.log(
-                                        //     433,
-                                        //     "inside Emphasis onClick"
-                                        // );
-                                        addStyleToSection("bold");
-                                    })
-                                }
-                                /> */}
                             </div>
-                            <div id="" className="">
-                                <FontSlider />
-                            </div>
-                            {/* <div className="">
-                                <div className="pl-2">backgroundColor:</div>
-                                <div className="post_tones-outer-container w-100">
-                                    <BackgroundColor color={"red"} />
-                                    <BackgroundColor color={"orange"} />
-                                    <BackgroundColor color={"yellow"} />
-                                    <BackgroundColor color={"purple"} />
-                                    <BackgroundColor color={"blue"} />
-                                    <BackgroundColor color={"green"} />
-                                    <BackgroundColor color={"teal"} />
-                                    <BackgroundColor color={"black"} />
-                                </div>
-                            </div>
+                            
                             <div className="">
-                                <Special special={"textAlignmentUpDown"} />
-                                <Special special={"textAlignmentAddPadding"} />
-                                <Special special={"superscript"} />
-                                <Special special={"subscript"} />
-                            </div> */}
+                                {/* <div className="pl-2"><span className="color-white">backgroundColor:</span></div> */}
+                                <div className="post_tones-outer-container w-100 post_mobile-even-spacer ">
+                                    {BG_COLORS.map((color, index) => {
+                                        return (
+                                            <div key={index} onClick={() => {
+                                                if (currentStyle === 0) {
+                                                    addStyleToSection(
+                                                        firstStyle,
+                                                        color,
+                                                        0,
+                                                        setFirstStyle
+                                                    );
+                                                } else if (
+                                                    currentStyle === 1
+                                                ) {
+                                                    addStyleToSection(
+                                                        secondStyle,
+                                                        color,
+                                                        1,
+                                                        setSecondStyle
+                                                    );
+                                                } else if (
+                                                    currentStyle === 2
+                                                ) {
+                                                    addStyleToSection(
+                                                        thirdStyle,
+                                                        color,
+                                                        2,
+                                                        setThirdStyle
+                                                    );
+                                                } else {
+                                                    throw Error(
+                                                        "You shouldn't be able to get here you know"
+                                                    );
+                                                }
+                                            }}>
+                                                <BackgroundColor color={color.slice(15)} />
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                                <div id="post_font-sizes-container" className="post_tones-outer-container post_mobile-even-spacer px-2">    
+                                    {FONT_SIZES.map((size, index) =>{
+                                        return (
+                                            <div onClick={() => {
+                                                if (currentStyle === 0) {
+                                                    addStyleToSection(
+                                                        firstStyle,
+                                                        size,
+                                                        0,
+                                                        setFirstStyle
+                                                    );
+                                                } else if (
+                                                    currentStyle === 1
+                                                ) {
+                                                    addStyleToSection(
+                                                        secondStyle,
+                                                        size,
+                                                        1,
+                                                        setSecondStyle
+                                                    );
+                                                } else if (
+                                                    currentStyle === 2
+                                                ) {
+                                                    addStyleToSection(
+                                                        thirdStyle,
+                                                        size,
+                                                        2,
+                                                        setThirdStyle
+                                                    );
+                                                } else {
+                                                    throw Error(
+                                                        "You shouldn't be able to get here you know"
+                                                    );
+                                                }
+                                            }}>
+                                                <FontSizing fontSize={size}/>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                           
+                            </div>
+                            
                         </div>
+                        <div id="" className="color-white">
+                            
+                        
                         <div>
-                            <div id="post_floor-container">
-                                <div>
-                                    <p>Audience Floor:</p>
-                                </div>
-                                <div className="post_floor-container-inner">
-                                    {floors}
-                                </div>
-                                {/* <br /> */}
-                            </div>
-                            <div>
-                                <p>Price: ${price}</p>
-                            </div>
+                            
                             <div>
                                 <button
                                     onClick={() => {
-                                        postPost(
-                                            username,
+                                        postPost(username,
                                             content,
                                             price,
                                             floor,
-                                            [
-                                                firstStyle,
-                                                secondStyle,
-                                                thirdStyle,
-                                            ],
-                                            // wrap up all 3 choices and put into Post
-                                            handleGoToHome
-                                        );
+                                            [firstStyle, secondStyle, thirdStyle],
+                                            handleGoToHome)
                                     }}
                                 >
                                     Post
                                 </button>
+                        
+                                <button onClick={() => {
+                                    inspecter(content, firstStyle,secondStyle,thirdStyle);
+                                }}>Inspect</button>
                              
                             </div>
                         </div>
                     </div>
-
-                    <div
+                    
+                </div>
+                <div
                         id="post_right-spacer"
-                        className="post_spacer post_generic-spacer"
+                        className="post_spacer post_generic-spacer greenBorder"
                     >
                         <div className="w-100 post_generic-filler"></div>
                     </div>
-                </div>
+            </div>
             </div>
         </Wrapper>
     );

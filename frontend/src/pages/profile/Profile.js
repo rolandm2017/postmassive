@@ -22,13 +22,14 @@ class Profile extends Component {
     state = {
         profile: null,
         massives: null,
+        showUpdateProfileModal: false,
     };
 
     componentDidMount() {
         let username = window.location.pathname.slice(1);
-        console.log(29, username);
         const profileUrl =
-            process.env.REACT_APP_API_URL + "/profile/" + username;
+            process.env.REACT_APP_API_URL + "/profile/get?username=" + username;
+        console.log(29, username, profileUrl);
         console.log(profileUrl);
         // fixme-now: get profile bio...
         fetch(profileUrl).then((res) => {
@@ -36,6 +37,14 @@ class Profile extends Component {
             res.json()
                 .then((profile) => {
                     console.log("setting profile,", profile);
+                    // make popup if profile isn't filled in yet
+                    const displayNameNeedsToBeChosen = !!profile.displayName;
+                    const bioNeedsTobeChosen = !!profile.bio;
+                    console.log(profile.bio, profile.displayName);
+                    if (displayNameNeedsToBeChosen || bioNeedsTobeChosen) {
+                        // push popUpState = true
+                        this.setState({ showUpdateProfileModal: true });
+                    }
                     this.setState({ profile: profile });
                 })
                 .catch((err) => {
@@ -286,10 +295,10 @@ class Profile extends Component {
                     <div id={`${styles.details}`} className="">
                         <div className="d-flex flex-row">
                             {this.state.profile
-                                ? displayLocation(this.state.profile.location)
+                                ? displayWebsite(this.state.profile.url)
                                 : null}
                             {this.state.profile
-                                ? displayWebsite(this.state.profile.website)
+                                ? displayLocation(this.state.profile.location)
                                 : null}
                         </div>
                         <div className="d-flex flex-row">

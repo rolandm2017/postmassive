@@ -1,25 +1,31 @@
 .backgroundColorGreen {
     background-color: greenyellow;
+    padding: 2px 2px;
 }
 
 .backgroundColorCyan {
     background-color: cyan;
+    padding: 2px 2px;
 }
 
 .backgroundColorRed {
     background-color: red;
+    padding: 2px 2px;
 }
 
 .backgroundColorOrange {
     background-color: orange;
+    padding: 2px 2px;
 }
 
 .backgroundColorPurple {
     background-color: orchid;
+    padding: 2px 2px;
 }
 
 .backgroundColorBlack {
     background-color: black;
+    padding: 2px 2px;
     color: white;
 }
 
@@ -66,13 +72,21 @@
 .fontSize22 {
     font-size: 22px;
 }
-.fontSize24 {
-    font-size: 24px;
-}
 .fontSize26 {
     font-size: 26px;
 }
-
+.fontSize30 {
+    font-size: 30px;
+}
+.fontSize36 {
+    font-size: 36px;
+}
+.fontSize44 {
+    font-size: 44px;
+}
+.fontSize52 {
+    font-size: 52px;
+}
 .textAlignmentUpDown {
     display: flex;
     flex-direction: column;

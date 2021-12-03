@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 import Wrapper from "../_pageHelper/Wrapper";
 import Massive from "../../components/massive/Massive";
 import Poll from "../../components/poll/Poll";
-import testMassives from "./testContent/testMassives";
+// import testMassives from "./testContent/testMassives";
 
 import "../../components/textStyling/TextStyling.css"; // this file will be imported in many places
 import "../../components/textStyling/TextStyling.css";
@@ -29,13 +29,14 @@ function Home(props) {
                 // for (let i = 0; i < 1; i++) {
                 //     puttingSomePollsIntoIt.push("poll");
                 // }
-                console.log(data, 32);
+                // console.log(data, 32);
                 for (let i = 0; i < data.length; i++) {
                     puttingSomePollsIntoIt.push(data[i]);
                 }
+
                 // fixme: Error: Objects are not valid as a React child (found: object with keys {special, value, styling, numberOfStylings}). I
                 // setMassives(puttingSomePollsIntoIt.slice(0, 2));
-                setMassives(data.slice(0, 5));
+                setMassives(data);
             });
     }, []);
 
@@ -97,8 +98,8 @@ function Home(props) {
                                   key={Math.floor(Math.random() * 10000)}
                                   author={massive.postedByUser}
                                   displayName={massive.displayName}
-                                  content={testMassives[1].content}
-                                  stylings={testMassives[1].stylings}
+                                  content={massive.text}
+                                  stylings={massive.stylings}
                                   replies={massive.replies}
                                   amps={massive.amps}
                                   likes={massive.likes}

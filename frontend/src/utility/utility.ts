@@ -32,38 +32,37 @@ export function wellMadeStylingIsPresent(stylings: Array<Styling>): boolean {
     return false;
 }
 
-export function joinClasses(classesList: any): string {
-    /* really proud of this one
-    // @params classesList - could be "bold, italics" or ["bold", italics] <-- this is the only one that makes sense
-    // returns - the classes string to insert into the component
-    */
+// export function joinClasses(classesList: any): string {
+//     /* really proud of this one
+//     // @params classesList - could be "bold, italics" or ["bold", italics] <-- this is the only one that makes sense
+//     // returns - the classes string to insert into the component
+//     */
 
-    // fixme: clicking "bold" causes TypeError: dotNotationStylings.split is not a function.
-    // fixme: result is received empty array into joinClasses
-   console.log("inside joinClasses", classesList, 64) 
-    try  { // this try catch here to take care of condition where I'm still using 
-        // the "bold, italics" as opposed to ["bold", "italics"]
-        if (classesList.indexOf(", ") > -1) {
-            let dotNotationClasses = classesList.join(" ");
-            console.log("inside joinClasses, returning ", dotNotationClasses)
-            return dotNotationClasses;
-        } else {
-            console.log(72, classesList)
-            console.log("inside joinClasses, returning ", classesList)
-            return classesList
-        }
-    } catch {
-        if (classesList.indexOf(", ") > -1) {
-            let dotNotationClasses = classesList.split(", ").join(" ");    
-            console.log("inside joinClasses, returning ", dotNotationClasses)
-            return dotNotationClasses;
-        }
-        let dotNotationClasses = classesList.join(" ");
-        console.log("inside joinClasses, returning ", dotNotationClasses)
-        return dotNotationClasses
-    }
+//     // fixme: clicking "bold" causes TypeError: dotNotationStylings.split is not a function.
+//     // fixme: result is received empty array into joinClasses
+//    console.log("inside joinClasses", classesList, 64) 
+//     try  { // this try catch here to take care of condition where I'm still using 
+//         // the "bold, italics" as opposed to ["bold", "italics"]
+//         if (classesList.indexOf(", ") > -1) {
+//             let dotNotationClasses = classesList.join(" ");
+//             console.log("inside joinClasses, returning ", dotNotationClasses)
+//             return dotNotationClasses;
+//         } else {
+//             console.log(72, "inside joinClasses, returning ", classesList)
+//             return classesList
+//         }
+//     } catch {
+//         if (classesList.indexOf(", ") > -1) { // why is this in try AND catch? There's a reason, I just don't remember what it is
+//             let dotNotationClasses = classesList.split(", ").join(" ");    
+//             console.log("inside joinClasses, returning ", dotNotationClasses)
+//             return dotNotationClasses;
+//         }
+//         let dotNotationClasses = classesList.join(" ");
+//         console.log("inside joinClasses, returning ", dotNotationClasses)
+//         return dotNotationClasses
+//     }
     
-}
+// }
 
 export function verifyEachStyling(stylings: Styling[]): boolean[] {
     // am really looking to see if a Styling contains instructional information that has to be
@@ -78,11 +77,52 @@ export function verifyEachStyling(stylings: Styling[]): boolean[] {
         } else if (styling.start === 0 && styling.end === 0 && styling.stylings.length === 0) {
             descriptions.push(true)
         } else {
-            console.log(76, styling)
+            // console.log(76, styling)
             descriptions.push(true)
         }
 })
     return descriptions
+}
+
+// export function removedEmpties(stylings: Styling[]): any {
+//     let fullOnly: any = [];
+//     stylings.forEach(styling => {
+//         if (styling.start > 0 && styling.end > 0) {
+//             if (styling.stylings.length > 0) {
+//                 fullOnly.push(styling)
+//             }
+//         }
+//     })
+//     return fullOnly;
+// }
+
+
+function incompleteStylingsBecomeComplete(stylings: Styling[]): Styling[] {
+    // made this because I spotted the input for getSubstringsWithInstructions was like
+    //(3) [{…}, Styling, Styling]
+    // 0: {start: 0, end: 5, stylings: Array(1)}
+    // look --> //// end: 5, start: 0, stylings: ['bold'][[Prototype]]: Object
+    // 1: Styling {start: 0, end: 0, stylings: Array(0)}end: 0start: 0stylings: [][[Prototype]]: Object
+    // 2: Styling {start: 0, end: 0, stylings: Array(0)}
+    // length: 3
+    // [[Prototype]]: Array(0) 
+    //
+    // notice how the first one is a regular object, not a Styling object. it was causing a bug downstream.
+    let properlyMade: Styling[] = [];
+    stylings.forEach(styling => { // this will retain proper order. 1, 2, 3 --> 1, 2, 3, not 3, 1, 2 or something like that
+        try {
+            if (styling.start > 0 && styling.start > 0) {
+                if (styling.stylings) {
+                    properlyMade.push(styling)
+                }
+            }
+        } catch {
+            const caughtUnmadeStyling = styling;
+            let madeIntoProperStyling = new Styling(caughtUnmadeStyling.start, caughtUnmadeStyling.end, caughtUnmadeStyling.stylings)
+            properlyMade.push(madeIntoProperStyling)
+        }
+    })
+    return properlyMade;
 }
 
 
@@ -92,78 +132,76 @@ export function getSubstringsWithInstructions(inputText: string, stylings: Styli
     // stylings - Stylings array!
     // return value - should be an array of strings that can be combined using prettyText
     */
-
-    // todo: only splice if there is a styling attached to the stylings obj // delete if here on dec 20th
-    let startingSliceValue = inputText.slice(0, stylings[0].start);
-    let initSlice = new Instruction(false, startingSliceValue);
-    // let initSlice = {
-    //     special: false,
-    //     value: startingSliceValue
-    // };
-    let extremelySpecificInstructions: Instruction[] = [];
-    if (stylings.length > 0) {
-        extremelySpecificInstructions.push(initSlice);
-    }
-    // fixme: if end is before start, use end as start and start as end. its not a big deal.
-    // priority: high!
-    // fixme: also the sliders ranges have to be unmessed from their current messy bugged state
-    let booleanValuesDescribingQuality = verifyEachStyling(stylings);
-    // REWRITE
-    console.log(stylings, 878787878787) // INPUT: looks fine here
-    let startPoints = stylings.map(styling => {
-        if (styling.stylings.length > 0) {
-            return styling.start;
-        }
-    })
-    let endPoints = stylings.map(styling => {
-        if (styling.stylings.length > 0)  {   
-            return styling.end;
-        }
-    })
-    for (let i = 0; i < stylings.length; i++) {
-        let endOfSpecialTextIndex = 0; // increases every time some StyledText ends. will be used to slice the final TrailEnd
-        let areWeOnTheLastStyling = i === stylings.length - 1;
-        let textSlice;
-        if (stylings[i].stylings.length > 0) {
-            textSlice = inputText.slice(stylings[i].start, stylings[i].end); // will go from i to end of string
+    console.log(stylings)
+    let cleanedUpStylings: Styling[] = incompleteStylingsBecomeComplete(stylings)
+    console.log(cleanedUpStylings)
+    let slicesToDistribute: string[] = [];
+    let specialSubstringIndexes: number[] = [];
+    // split the inputText into its substrings. Assign the right substring to the right Instruction, via index.
+    let specialIndex = 0;
+    for (let i = 0; i < cleanedUpStylings.length; i++) {
+        const startOfCurrent = cleanedUpStylings[i].start
+        const endOfCurrent = cleanedUpStylings[i].end
+        const stylingStartsRightAway = i === 0 && startOfCurrent === 0
+        if (stylingStartsRightAway) {
+            const stylingFromZero = inputText.slice(startOfCurrent, endOfCurrent)
+            slicesToDistribute.push(stylingFromZero)
+            specialSubstringIndexes.push(i)
         } else {
-            textSlice = inputText.slice(endOfSpecialTextIndex);
-        }
-        let dotNotationStylings = ".unstyledIfRemaining";
-        if (stylings[i].stylings.length > 0) {
-            dotNotationStylings = joinClasses(stylings[i].stylings) // issue here because I added "bold"
-            const isStartIndexBiggerThanEnd = stylings[i].start > stylings[i].end;
-            const chooseEndIndexForNewMinimum = stylings[i].end
-            endOfSpecialTextIndex = isStartIndexBiggerThanEnd ? stylings[i].start : chooseEndIndexForNewMinimum;
-        }
-        let instruction = new Instruction(
-            true,
-            textSlice,
-            dotNotationStylings,
-        );
-        console.log(102102102, instruction, i)
-        extremelySpecificInstructions.push(instruction);
+            if (i === 0) {
+                const unstyledPartBeforeFirstStyling = inputText.slice(0, startOfCurrent);
+                slicesToDistribute.push(unstyledPartBeforeFirstStyling)
+                specialIndex++;
+            }
+            const specialStyledText = inputText.slice(startOfCurrent, endOfCurrent)
+            slicesToDistribute.push(specialStyledText)
+            specialSubstringIndexes.push(slicesToDistribute.length - 1) 
+            // fixme: might have to wrap this in [specialIndex, cleanedArrIndex]
 
-        if (areWeOnTheLastStyling) {
-            console.log(10666666666, extremelySpecificInstructions)
-            // special case. get (start, end) and then (end, contentLength)
-            let ordinaryTrailEndPart = inputText.slice(stylings[i].end + 1);
-            let trailEnd = new Instruction(false, ordinaryTrailEndPart);
-            console.log(107, trailEnd, stylings[i], i)
-            extremelySpecificInstructions.push(trailEnd);
-        } else {
-            // standard case. get (start, end), then (end + 1, nextStart)
-            let endOfCurrentStylingRange = stylings[i].end + 1;
-            let startOfNextStylingRange = stylings[i + 1].start
-            let normalTextInBetween = inputText.slice(
-                endOfCurrentStylingRange,
-                startOfNextStylingRange
-            );
-            let instruction = new Instruction(false, normalTextInBetween);
-            console.log(115, normalTextInBetween, i)
-            extremelySpecificInstructions.push(instruction);
+            // now handle trailing bit
+            const nextIndexGoesBeyondTheEnd = i + 1 === cleanedUpStylings.length
+            if (nextIndexGoesBeyondTheEnd) {
+                // vvvvvvv 
+                // GENERIC 
+                // ^^^^^^^ 
+                // we are handling the trailing bit like
+                // style 3: (29, 59)
+                // content.length: 73 <--- will have 14 remaining chars
+                let trailingEndPart = inputText.slice(endOfCurrent);
+                slicesToDistribute.push(trailingEndPart)
+
+            } else {
+                // vvvvvvv 
+                // GENERIC 
+                // ^^^^^^^
+                // we are handling the text between the end of styling[i] and the start of styling[i + 1]
+                const startOfNextStyling = cleanedUpStylings[i + 1].start;
+                let genericTextInMiddle = inputText.slice(endOfCurrent, startOfNextStyling)
+                slicesToDistribute.push(genericTextInMiddle)
+                specialIndex++;
+            }
         }
     }
+    console.log(cleanedUpStylings, slicesToDistribute, specialSubstringIndexes)
+    let extremelySpecificInstructions: Instruction[] = slicesToDistribute.map((slice, index) => {
+        if (specialSubstringIndexes.includes(index)) {
+            let dotNotationStyling = cleanedUpStylings.shift()?.stylings;
+            let removePeriodsFromClassNames: string[] = dotNotationStyling.map((element: string) => {
+                if (element.indexOf(".") > -1) {
+                    return element.slice(1)
+                } else {
+                    return element
+                }
+            });
+            
+            const specialInstruction = new Instruction(true, slice, removePeriodsFromClassNames);
+            return specialInstruction;
+        } else {
+            const genericInstruction = new Instruction(false, slice, "generic");
+            return genericInstruction;
+        }
+    })
+    
     console.log(extremelySpecificInstructions, 117); // INPUT: is messed up by this point
     return extremelySpecificInstructions;
 }

@@ -1,4 +1,4 @@
-import { wellMadeStylingIsPresent, joinClasses, getSubstringsWithInstructions } from "./utility"
+import { wellMadeStylingIsPresent, getSubstringsWithInstructions } from "./utility"
 
 import Styling from "./classes/Styling";
 import { Chunk } from "./chunk/Chunk";
@@ -11,11 +11,11 @@ function prettyText(inputText: string, stylings: Array<Styling>): any {
     // stylings: expecting 1 to 3 Stylings objects.
     // returns: chunks of JSX that (magically? how?) connect together in the browser
     */
-
-// TODO: until(oneStyleIsFinished) {
-    // ...handleJustOneStyling(the)
-// }
-    
+    // console.log("##############")
+    // console.log("##############")
+    console.log(stylings)
+    console.log("##############")
+    // console.log("##############")
     let isStylingsEmpty = stylings.length === 0;
     if (isStylingsEmpty) {
         // console.log(26, "yes, it was empty");
@@ -46,22 +46,11 @@ function prettyText(inputText: string, stylings: Array<Styling>): any {
     let chunks: any[] = instructions.map((instruction, index) => {
         // console.log(instruction, instruction.textValue, 44);
         if (instruction.special) {
-            let availableStylings = instruction.dotNotationStylings
-                return (
-                    <Chunk
-                        index={index}
-                        availableStylings={availableStylings}
-                        chunkValue={instruction.textValue}
-                    />
-                );
+            console.log(49, instruction.dotNotationStylings, instruction.textValue)
+            return instruction.getStyledChunk(index)
         } else {
-            return (
-                <Chunk
-                    index={index}
-                    availableStylings={""}
-                    chunkValue={instruction.textValue}
-                />
-            );
+            console.log(49, instruction.dotNotationStylings)
+            return instruction.getStyledChunk(index)
         }
     });
     console.log(chunks, 82, "end of prettyText");

@@ -1,0 +1,101 @@
+@import "../../../styles/colors";
+@import "../../../styles/breakpoints";
+
+.styling_choice-list {
+    width: 100%;
+    /* border: 3px solid green; */
+
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.styling_options-container {
+    width: 49%;
+}
+
+.styling_options-container div {
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.styling_label-container {
+    width: 50px;
+    // border: 3px solid palegreen;
+    background-color: lighten($uxui-dg, 9);
+    padding-left: 5px;
+}
+
+.styling_options-right-container {
+    width: 100%;
+    /* border: 2px solid red; */
+    margin: 3px;
+    /* note: margin is sus, could adjust it to make UXUI look better */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.styling_slider {
+    width: 160px;
+}
+
+.styling_start-end-text {
+    font-size: 14px;
+}
+
+.styling_styling-parent-container {
+    min-width: 100%;
+    // border: 3px solid yellow;
+    padding-bottom: 6px;
+    border-bottom: 3px solid #333;
+}
+
+.styling_options-right-container {
+    display: flex;
+}
+
+.styling_options-right-container-mobile {
+    border: 3px solid red;
+    display: none;
+}
+
+@media only screen and (max-width: $shrink-feed) {
+    .styling_options-right-container {
+        display: none;
+    }
+
+    .styling_options-right-container-mobile {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .styling_options-container {
+        width: 16%;
+    }
+
+    .styling_midsize-options-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+}
+
+@media only screen and (max-width: $mobile-sized) {
+    .styling_options-right-container {
+        display: none;
+    }
+
+    .styling_options-right-container {
+        display: flex;
+    }
+
+    .styling_options-container {
+        width: 80%;
+    }
+}

@@ -1,6 +1,6 @@
 {
-    "name": "postmassiv",
-    "version": "0.1.0",
+    "name": "postmassive",
+    "version": "0.2.0",
     "private": true,
     "prettier": {
         "tabWidth": 4
