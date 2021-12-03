@@ -228,6 +228,20 @@
     }
 }
 
+@media (min-width: $rightbar-shows) {
+    #chat-display_messages-outer-shell {
+        height: 94% !important;
+    }
+
+    #chat-display_messages-inner-shell {
+        height: 100% !important;
+    }
+
+    #chat-display_messages {
+        height: 75%;
+    }
+}
+
 @media (min-width: $thin-rightbar) and (max-width: $full-sidebar - 1) {
     #messages_page {
         width: 990px;
