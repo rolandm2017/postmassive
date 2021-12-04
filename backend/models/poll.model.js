@@ -2,16 +2,16 @@ const { number } = require("joi");
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
-const ObjectId = Schema.ObjectId;
+// const ObjectId = Schema.ObjectId;
 
-const massiveSchema = new Schema({
-    _id: { type: String }, // FIXME: Make all docs require id. 11/14/2021
+const pollSchema = new Schema({
+    _id: { type: String },
     postNumber: { type: Number, required: true },
     postIsAccessible: { type: Boolean, required: false }, // if this is ever False, its b/c a user 'deleted' their post.
     monetaryCost: { type: Number, required: true, default: 1 }, // postNumber, monetaryCost, postedByUser, text, date, replies, amps, likes,
     //
     postedByUser: { type: String, required: true },
-    displayName: { type: String, required: true },
+    // displayName: { type: String, required: true }, // this totally isnt needed
     text: { type: String, required: true },
     date: { type: String, required: true },
     // engagement
@@ -26,12 +26,7 @@ const massiveSchema = new Schema({
     quotesSomeone: { type: Boolean, required: true, default: false },
     quotedMassiveId: { type: String, required: false },
     // markings for highlighting
-    highlightRange: { type: Object },
-    underlineRange: { type: Object },
-    italicsRange: { type: Object },
-    boldRange: { type: Object },
-    fontSize: { type: Number },
-    upsizedFontRange: { type: Object },
+    stylings: { type: Array }, // this is better than like 5
     // flooring
     viewsFloor: { type: Number, required: true, default: 100 }, // default guaranteed engagement
     likesFloor: { type: Number, required: true, default: 3 }, // default guaranteed engagement
@@ -39,9 +34,9 @@ const massiveSchema = new Schema({
     emoji: {
         type: Object,
     },
-    possibilities: { type: Number, required: true },
-    options: { type: Array, required: true },
+    pollId: { type: String, required: true },
+    options: { type: Array }, // array of Poll objects
     // TODO: should really make these a "simplified" version for PM.
 });
 
-module.exports = mongoose.model("Massive", massiveSchema);
+module.exports = mongoose.model("Poll", pollSchema);

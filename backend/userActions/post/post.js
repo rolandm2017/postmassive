@@ -1,6 +1,7 @@
-// file for MAKING posts
+// file for making posts
 
 const db = require("../../_helpers/db");
+const mongoose = require("mongoose");
 const {
     BOLD,
     ITALIC,
@@ -11,6 +12,7 @@ const {
 const Massive = require("../../models/massive.model");
 
 const express = require("express");
+
 const router = express.Router();
 
 router.get("/post", (req, res) => {
@@ -30,11 +32,11 @@ router.get("/post", (req, res) => {
 
 router.post("/post", async (req, res) => {
     let username = req.body.username;
-    // let displayName = req.body.displayName;
     let content = req.body.content;
     console.log("Posting a massive...", content, req.body);
     // let priceIsAuthorizedByUser = req.body.authorization; // true/false // gonna need Stripe integration
     let datePosted = Date.now();
+    const stylings = req.body.stylings;
 
     let getCostOfPosting = createCostOfPosting(); // fixme: should be moved to the post screen
     // fixme: I try to Post and get a bug because I can't db.User.FindOne to match this post's request.
@@ -79,15 +81,6 @@ router.post("/post", async (req, res) => {
                 });
             });
     });
-
-    // console.log(70, currentHighestPostNumber);
-    // // throw Error("stop now");
-    // let newHighestPostNum = currentHighestPostNumber + 1;
-    // console.log(47, req.body);
-    // // ### *** ###
-    // // FIXME: MAJOR issue with Posting Massives and the postNumber.
-    // // ### *** ###
-    // let newMassive =
 });
 
 router.delete("/post", (req, res) => {

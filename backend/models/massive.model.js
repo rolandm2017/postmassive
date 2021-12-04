@@ -31,9 +31,7 @@ const massiveSchema = new Schema({
     emoji: {
         type: Object,
     },
-    stylings: {
-        type: Object,
-    },
+    stylings: { type: Object },
 });
 
 module.exports = mongoose.model("Massive", massiveSchema);

@@ -5,8 +5,6 @@ const bodyParser = require("body-parser");
 const production = require("./config.json").production;
 const postman = require("./config.json").postman;
 
-const { createProxyMiddleware } = require("http-proxy-middleware");
-
 let port;
 if (production) {
     port = 5007;
@@ -86,6 +84,7 @@ app.use(api + "/auth", require("./authentication/authentication"));
 // The Post Page
 
 app.use(api + "/post", require("./userActions/post/post"));
+app.use(api + "/poll", require("./userActions/poll/poll"));
 
 // CRUD for User profile info, their bio & user settings
 

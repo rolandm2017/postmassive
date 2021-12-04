@@ -11,10 +11,20 @@ module.exports = router;
 
 router.get("/introduce", (req, res) => {
     // magic; there is a promise in Introduce that works magic.
-    introduceWallForTheDay(req.body.username).then((massives) => {
-        console.log(13, 13, massives.length, "massives.length");
-        res.json(massives);
-    });
+    const getOnlyStylizedPosts = req.body.stylizedOnly;
+    if (getOnlyStylizedPosts) {
+        introduceWallForTheDay(req.body.username, getOnlyStylizedPosts).then(
+            (massives) => {
+                console.log(17, 17, massives.length, "massives.length");
+                res.json(massives);
+            }
+        );
+    } else {
+        introduceWallForTheDay(req.body.username).then((massives) => {
+            console.log(23, 23, massives.length, "massives.length");
+            res.json(massives);
+        });
+    }
 });
 
 router.get("/retrieve", (req, res) => {
