@@ -24,8 +24,16 @@ router.get("/get", (req, res) => {
     });
 });
 
+router.get("/getAllUsers", (req, res) => {
+    User.find({}).then((userDocs) => {
+        res.status(200).json(userDocs);
+    });
+});
+
 router.get("/profiles", (req, res) => {
     // 12/3 note: what even is this thing? it needed a docstring bad when I wrote it.
+    // it appears to get profiles based on
+    // either (1) the amount requested in body or (2) the usernames input as an array.
     let amount = req.body.amount;
     let usernames = req.body.usernames;
 
@@ -102,6 +110,7 @@ router.put("/init", (req, res) => {
     let url = req.body.url;
 
     let query = { username: username };
+    console.log(req.body, 105);
     User.findOneAndUpdate(query, {
         displayName: displayName,
         bio: bio,
@@ -112,11 +121,14 @@ router.put("/init", (req, res) => {
         DMsAreOpen: true,
         postCount: 0,
     }).then((updatedUser) => {
+        console.log(updatedUser, 115);
         if (updatedUser === null) {
             res.status(400).send("couldn't find user in db, try again");
         } else {
-            console.log(117, updatedUser);
-            res.status(200).json(updatedUser);
+            res.status(200).send(
+                "updated profile successfully for ",
+                +username
+            );
         }
     });
 });

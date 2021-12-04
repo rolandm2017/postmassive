@@ -5,6 +5,7 @@ import { getOptions } from "../../_helper/authHeader";
 import Button from "../../components/parts/Button";
 import Massive from "../../components/massive/Massive";
 
+import UpdateProfileModal from "./components/UpdateProfileModal";
 import Wrapper from "../_pageHelper/Wrapper";
 
 import BackButton from "../../images/icons8-back-arrow-48-wh.png";
@@ -45,6 +46,7 @@ class Profile extends Component {
                         // push popUpState = true
                         this.setState({ showUpdateProfileModal: true });
                     }
+                    console.log(profile, 49);
                     this.setState({ profile: profile });
                 })
                 .catch((err) => {
@@ -89,6 +91,17 @@ class Profile extends Component {
             // 1.0M to 9.99M
             return string[0] + "." + string.slice(1, 3) + "M";
         }
+    }
+
+    handleClose() {
+        this.setState({ showUpdateProfileModal: false });
+    }
+
+    handleSave(displayName, bio, location, url) {
+        console.log(this.state.profile, 101);
+        // const profile = {props.username, }
+        // this.setState({ profile: profile });
+        // this.setState({ showUpdateProfileModal: false });
     }
 
     render() {
@@ -140,6 +153,18 @@ class Profile extends Component {
                 onSearchPage={false}
                 breakpoints={this.props.breakpoints}
             >
+                {this.state.showUpdateProfileModal ? (
+                    <UpdateProfileModal
+                        showPage={this.state.showUpdateProfileModal}
+                        // username={this.props.username}
+                        // displayName={this.state.profile.displayName}
+                        // bio={this.state.profile.bio}
+                        // location={this.state.profile.location}
+                        // url={this.state.profile.url}
+                        handleClose={this.handleClose}
+                    />
+                ) : null}
+
                 <div
                     className={`${styles.profileGenericFlex} ${styles.changeHeaderToMobileView}`}
                 >
@@ -265,8 +290,13 @@ class Profile extends Component {
                                 text="Edit Profile"
                                 authed={true}
                                 wide={true}
+                                onClick={() => {
+                                    console.log(294);
+                                    this.setState({
+                                        showUpdateProfileModal: true,
+                                    });
+                                }}
                             />
-                            {/* // TODO: set options on Button */}
                         </div>
                     </div>
                     <div>
