@@ -12,6 +12,7 @@ function ValidationCodeModal({
     handlePageThree,
     error,
 }) {
+    
     return (
         <Modal show={showPage} onHide={handleClose} centered animation={false}>
             <div className="modal-container">

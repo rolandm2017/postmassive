@@ -81,18 +81,19 @@ app.use(api + "/signup/validate", require("./accountCreation/accountCreation"));
 app.use(api + "/auth", require("./accountCreation/accountCreation"));
 app.use(api + "/auth", require("./authentication/authentication"));
 
-// The Post Page
+// app.use(api + "/users", require("./userActions/"))
+app.use(api + "/profile", require("./userActions/profile/profile"));
 
+// The Post Page
 app.use(api + "/post", require("./userActions/post/post"));
 app.use(api + "/poll", require("./userActions/poll/poll"));
+app.use(api + "/wall", require("./wall/index"));
 
 // CRUD for User profile info, their bio & user settings
 
-app.use(api + "/profile", require("./userActions/profile/profile"));
 // app.use(api + "/settings", require("./userActions/settings/settings"));
 
 // Retrieve Wall updates
-app.use(api + "/wall", require("./wall/index"));
 
 app.use(api + "/massive", require("./massive/massive"));
 
@@ -101,21 +102,21 @@ app.use(api + "/massive", require("./massive/massive"));
 app.use(api + "/notifications", require("./notifications/notifications"));
 
 // *** *** ***
-// *** *** ***
 // CRUD for DMs
 
 app.use(api + "/messages", require("./userActions/message/message"));
 
-//
+// *** ### ***
+// Admin Tools
+if (postman) {
+    app.use(api + "/test", require("./modTools/test"));
+    app.use(api + "/users", require("./modTools/users"));
+}
 
 app.get(api + "/foo", (req, res) => {
     // so you can see if going to the https://147.182.152.13:${port}/api/test returns 'foo' to confirm server runs on that ip
     res.send("foo");
 });
-
-if (postman) {
-    app.use(api + "/test", require("./modTools/test"));
-}
 
 if (production) {
     app.listen(8080, () => {

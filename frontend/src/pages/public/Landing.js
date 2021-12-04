@@ -196,7 +196,7 @@ function Landing(props) {
                         auth
                     );
                     setTimeout(function () {
-                        history.push("/home");
+                        history.push("/profile");
                     }, 1400);
                 }}
                 error={error}
