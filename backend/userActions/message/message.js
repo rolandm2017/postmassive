@@ -53,6 +53,7 @@ router.get("/getMsgsBetweenUsers", (req, res) => {
 
 router.post("/send", (req, res) => {
     let users = req.body.users;
+    console.log(req.body.users, 56);
     let alphabetizedUsers = users.sort(function (a, b) {
         if (a < b) {
             return -1;

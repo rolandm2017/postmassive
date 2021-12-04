@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+
+import { tellTheServerAboutTheNewMsg } from "./SendNewMsg";
 
 import ChatBubble from "./ChatBubble";
 
@@ -11,7 +13,9 @@ function SelectedUserDisplay({
     conversationPartner,
     userIsSelected,
     profilePic,
+    changeParentMsgsState,
 }) {
+    const [messageToSend, setMessageToSend] = useState("");
     // if user is selected ...
 
     if (selectedMsg === "new") {
@@ -63,13 +67,31 @@ function SelectedUserDisplay({
                         <input
                             className="dark-mode-input inbox-search chat-display_inbox-adjust"
                             placeholder="say what?"
+                            onChange={(event) => {
+                                setMessageToSend(event.target.value);
+                            }}
                         />
+                        <button
+                            onClick={() => {
+                                changeParentMsgsState(
+                                    messageToSend,
+                                    conversationPartner
+                                );
+                                tellTheServerAboutTheNewMsg(
+                                    currentlyLoggedInUser,
+                                    conversationPartner,
+                                    messageToSend
+                                );
+                            }}
+                        >
+                            Send
+                        </button>
                     </div>
                 </div>
             </div>
         );
     } else {
-        console.log("55ss", userMsgs);
+        // console.log("55ss", messageToSend, userMsgs);
 
         return (
             <div
@@ -93,7 +115,7 @@ function SelectedUserDisplay({
                 <div id="chat-display_messages-outer-shell">
                     <div id="chat-display_messages">
                         <div id="chat-display_messages-inner-shell">
-                            {userMsgs.msgs
+                            {userMsgs.msgs // fixme: undefined
                                 .map((msg, index) => {
                                     if (msg.sender === currentlyLoggedInUser) {
                                         // right hand side
@@ -135,7 +157,25 @@ function SelectedUserDisplay({
                         <input
                             className="dark-mode-input inbox-search chat-display_inbox-adjust"
                             placeholder="say what?"
+                            onChange={(event) => {
+                                setMessageToSend(event.target.value);
+                            }}
                         />
+                        <button
+                            onClick={() => {
+                                changeParentMsgsState(
+                                    messageToSend,
+                                    conversationPartner
+                                );
+                                tellTheServerAboutTheNewMsg(
+                                    currentlyLoggedInUser,
+                                    conversationPartner,
+                                    messageToSend
+                                );
+                            }}
+                        >
+                            Send
+                        </button>
                     </div>
                 </div>
             </div>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+// import { useHistory } from "react-router-dom";
 
 import InboxHeader from "./components/InboxHeader";
 // import { processDateToString } from "./components/TimeLogic";
@@ -28,7 +29,7 @@ function Messages(props) {
     const [showSettings, setShowSettings] = useState(false);
 
     useEffect(() => {
-        setConversationPartner(null);
+        // setConversationPartner(null);
         console.log("RETRIGGERED", 32);
 
         const messagesUrl =
@@ -61,6 +62,29 @@ function Messages(props) {
         return () => window.removeEventListener("resize", handleResize);
     }, [setConversationPartner]);
 
+    function updateMsgsWithNewMsg(additionalMsg, conversationPartner) {
+        console.log(additionalMsg, conversationPartner, 67);
+        const oldMessages = [...messages];
+        const updatedSetOfMsgs = [];
+
+        let time = Date.now();
+        let newMessage = {
+            sender: props.username,
+            content: additionalMsg,
+            time: time,
+        };
+        console.log(oldMessages, 72);
+        oldMessages.forEach((msg) => {
+            if (msg.conversationPartner === conversationPartner) {
+                msg.msgs.push(newMessage);
+                console.log(msg);
+            }
+            updatedSetOfMsgs.push(msg);
+        });
+        // fixme: pushed additionalMsg to oldState array, wanted { sender: username, content: additionalMsg, time: time }
+        setMessages(updatedSetOfMsgs);
+    }
+
     function loadMessageSelect() {
         if (messages) {
             return (
@@ -84,8 +108,13 @@ function Messages(props) {
                                     message.conversationPartner
                                 }
                                 profilePic={bluePfp}
-                                content={message.msgs[0].content}
-                                deliveryDate={message.msgs[0].time}
+                                content={
+                                    message.msgs[message.msgs.length - 1]
+                                        .content
+                                }
+                                deliveryDate={
+                                    message.msgs[message.msgs.length - 1].time
+                                }
                             />
                         );
                     })}
@@ -154,6 +183,7 @@ function Messages(props) {
                                     conversationPartner={conversationPartner}
                                     userIsSelected={conversationPartner}
                                     profilePic={bluePfp}
+                                    changeParentMsgsState={updateMsgsWithNewMsg}
                                 />
                             </div>
                         ) : (
@@ -168,6 +198,7 @@ function Messages(props) {
                                     conversationPartner={conversationPartner}
                                     userIsSelected={conversationPartner}
                                     profilePic={bluePfp}
+                                    changeParentMsgsState={updateMsgsWithNewMsg}
                                 />
                             </div>
                             // this 1 handles after a user is selected.
@@ -187,6 +218,7 @@ function Messages(props) {
                             conversationPartner={conversationPartner}
                             userIsSelected={conversationPartner}
                             profilePic={bluePfp}
+                            changeParentMsgsState={updateMsgsWithNewMsg}
                         /> // this one handles when a msg is open but no user is selected. tis "new".
                     ) : (
                         <SelectedUserDisplay
@@ -196,6 +228,7 @@ function Messages(props) {
                             conversationPartner={conversationPartner}
                             userIsSelected={conversationPartner}
                             profilePic={bluePfp}
+                            changeParentMsgsState={updateMsgsWithNewMsg}
                         />
                         // this 1 handles after a user is selected.
                     )}
