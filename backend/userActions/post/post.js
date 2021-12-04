@@ -12,7 +12,7 @@ const {
 const Massive = require("../../models/massive.model");
 
 const express = require("express");
-
+//
 const router = express.Router();
 
 router.get("/post", (req, res) => {
@@ -81,15 +81,6 @@ router.post("/post", async (req, res) => {
                 });
             });
     });
-
-    // console.log(70, currentHighestPostNumber);
-    // // throw Error("stop now");
-    // let newHighestPostNum = currentHighestPostNumber + 1;
-    // console.log(47, req.body);
-    // // ### *** ###
-    // // FIXME: MAJOR issue with Posting Massives and the postNumber.
-    // // ### *** ###
-    // let newMassive =
 });
 
 router.delete("/post", (req, res) => {
