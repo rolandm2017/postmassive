@@ -13,17 +13,23 @@ router.get("/get", (req, res) => {
             console.log(171717, err);
         } else {
             console.log(userData, 15);
-            let publiclyViewableData = safeguard(userData); // total failures: 0 failures
-            console.log("successfully retrieved userData for " + username);
-            res.status(200).json(publiclyViewableData);
+            if (userData === null) {
+                res.status(200).send("no user profile for " + username);
+            } else {
+                let publiclyViewableData = safeguard(userData); // total failures: 0 failures
+                console.log("successfully retrieved userData for " + username);
+                res.status(200).json(publiclyViewableData);
+            }
         }
     });
 });
 
 router.get("/profiles", (req, res) => {
+    // 12/3 note: what even is this thing? it needed a docstring bad when I wrote it.
     let amount = req.body.amount;
     let usernames = req.body.usernames;
 
+    console.log(amount, usernames, 31, req.params, req.query);
     let lowercaseUsernames = [];
     usernames.forEach((u) => {
         lowercaseUsernames.push(u.toLowerCase());
@@ -86,7 +92,7 @@ function safeguard(privateData) {
     };
 }
 
-router.post("/init", (req, res) => {
+router.put("/init", (req, res) => {
     // e.g. http://127.0.0.1:8080/api/profile/init?username=crono
     // e.g. http://127.0.0.1:8080/api/profile/init?username=robo
     console.log("HERE", 59);
@@ -97,30 +103,24 @@ router.post("/init", (req, res) => {
     let url = req.body.url;
 
     let query = { username: username };
-    User.findOneAndUpdate(
-        query,
-        {
-            username: username,
-            displayName: displayName,
-            bio: bio,
-            location: location,
-            url: url,
-            followers: 0,
-            following: 0,
-            DMsAreOpen: true,
-            postCount: 0,
-        },
-        function (err, success) {
-            if (err) {
-                console.log(76, err);
-            } else if (success) {
-                let successMsg =
-                    "successfully created profile for " + displayName;
-                console.log(successMsg);
-                res.status(200).send(successMsg);
-            }
+    User.findOneAndUpdate(query, {
+        username: username,
+        displayName: displayName,
+        bio: bio,
+        location: location,
+        url: url,
+        followers: 0,
+        following: 0,
+        DMsAreOpen: true,
+        postCount: 0,
+    }).then((updatedUser) => {
+        if (updatedUser === null) {
+            res.status(400).send("couldn't find user in db, try again");
+        } else {
+            console.log(117, updatedUser);
+            res.status(200).json(updatedUser);
         }
-    );
+    });
 });
 
 router.patch("/:username", (req, res) => {

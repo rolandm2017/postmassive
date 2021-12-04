@@ -1,15 +1,20 @@
-// const User = require("../models/user.model");
-// const express = require("express");
-// const router = express.router;
+const Massive = require("../models/massive.model");
+const User = require("../models/user.model");
+
+const express = require("express");
+const router = express.Router();
 
 // // TODO: Make moderator routes require actual moderator permissions.
 // // BEFORE PRODUCTION!
 
-// module.exports = {
-//     getUser: router.get("/moderator/user", (req, res) => {
+router.get("/getAllUsers", (req, res) => {
+    User.find({}).then((userDocs) => {
+        res.status(200).json(userDocs);
+    });
+});
 
-//     })
-//     createUser: router.post("/moderator/user")
-//     updateUser: router.patch("/moderator/user")
-//     deleteUser: router.del("/moderator/user")
+// function filterOutBoringInfo(userDocs) {
+
 // }
+
+module.exports = router;
