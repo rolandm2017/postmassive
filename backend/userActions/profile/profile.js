@@ -95,7 +95,6 @@ function safeguard(privateData) {
 router.put("/init", (req, res) => {
     // e.g. http://127.0.0.1:8080/api/profile/init?username=crono
     // e.g. http://127.0.0.1:8080/api/profile/init?username=robo
-    console.log("HERE", 59);
     let username = req.query.username;
     let displayName = req.body.displayName;
     let bio = req.body.bio;
@@ -104,7 +103,6 @@ router.put("/init", (req, res) => {
 
     let query = { username: username };
     User.findOneAndUpdate(query, {
-        username: username,
         displayName: displayName,
         bio: bio,
         location: location,
