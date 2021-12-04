@@ -36,3 +36,6 @@
     width: 110px !important;
     font-size: 14px !important;
 }
+.wide-btn:hover {
+    background-color: lighten($uxui-dg, 11%) !important;
+}

@@ -1,0 +1,29 @@
+.profile_modal-input-style {
+    height: 40px;
+}
+.upm_label-width-adjust {
+    width: 110px;
+}
+
+.upm_label-width-adjust p {
+    margin: 0;
+}
+
+.upm_special-height-mod {
+    height: 80px !important;
+    /* border: 2px solid red; */
+}
+
+.upm_special-margin-mod {
+    margin-right: 15px;
+}
+
+.upm_text-aligner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.upm_top-two-inputs-resizer {
+    width: 350px !important;
+}
