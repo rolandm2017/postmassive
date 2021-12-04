@@ -75,7 +75,8 @@ function Profile(props) {
     }
 
     function handleSave(displayName, bio, location, url) {
-        console.log(this.state.profile, 101);
+        console.log(profile, 101);
+
         // const profile = {props.username, }
         // this.setState({ profile: profile });
         // this.setState({ showUpdateProfileModal: false });
@@ -97,7 +98,7 @@ function Profile(props) {
                 <span
                     className={`${styles.link} ${styles.genericFontWeight} ${styles.underlineCancel}`}
                 >
-                    <a href={this.state.profile.website}>{site}</a>
+                    <a href={profile.website}>{site}</a>
                 </span>
             </div>
         ) : null;
@@ -127,17 +128,18 @@ function Profile(props) {
             pageName="profile"
             sectionName="profile_page"
             onSearchPage={false}
-            breakpoints={this.props.breakpoints}
+            breakpoints={props.breakpoints}
         >
-            {this.state.showUpdateProfileModal ? (
+            {profile !== null ? (
                 <UpdateProfileModal
-                    showPage={this.state.showUpdateProfileModal}
-                    username={this.props.username}
-                    displayName={this.state.profile.displayName}
-                    bio={this.state.profile.bio}
-                    location={this.state.profile.location}
-                    url={this.state.profile.url}
-                    handleClose={this.handleClose}
+                    showPage={showUpdateProfile}
+                    username={props.username}
+                    displayName={profile.displayName}
+                    bio={profile.bio}
+                    location={profile.location}
+                    url={profile.url}
+                    handleClose={handleClose}
+                    handleSave={handleSave}
                 />
             ) : null}
 
@@ -164,14 +166,10 @@ function Profile(props) {
                     className="d-flex justify-content-center flex-column"
                 >
                     <h2 className={`${styles.username} my-1`}>
-                        {this.state.profile
-                            ? this.state.profile.displayName
-                            : null}
+                        {profile ? profile.displayName : null}
                     </h2>
                     <h3 id={`${styles.totalMassivs}`}>
-                        {this.state.profile
-                            ? `${this.state.profile.tweets} Massivs`
-                            : null}
+                        {profile ? `${profile.tweets} Massivs` : null}
                     </h3>
                 </div>
             </div>
@@ -201,14 +199,10 @@ function Profile(props) {
                         className="d-flex justify-content-center flex-column"
                     >
                         <h2 className={`${styles.username} my-1`}>
-                            {this.state.profile
-                                ? this.state.profile.displayName
-                                : null}
+                            {profile ? profile.displayName : null}
                         </h2>
                         <h3 id={`${styles.totalMassivs}`}>
-                            {this.state.profile
-                                ? `${this.state.profile.tweets} Massivs`
-                                : null}
+                            {profile ? `${profile.tweets} Massivs` : null}
                         </h3>
                     </div>
                     <div className={`${styles.pfpSideBox}`}>
@@ -272,17 +266,12 @@ function Profile(props) {
                 </div>
                 <div>
                     <h2 className={`${styles.username} my-0`}>
-                        {this.state.profile
-                            ? this.state.profile.displayName
-                            : null}
+                        {profile ? profile.displayName : null}
                     </h2>
                     <h3
                         className={`${styles.normalSizeFont} ${styles.greyText} ${styles.genericFontWeight} my-0`}
                     >
-                        @
-                        {this.state.profile
-                            ? this.state.profile.username
-                            : null}
+                        @{profile ? profile.username : null}
                     </h3>
                 </div>
                 <div>
@@ -290,41 +279,37 @@ function Profile(props) {
                         id={`${styles.biography}`}
                         className={`${styles.genericFontWeight} my-2`}
                     >
-                        {this.state.profile ? this.state.profile.bio : null}
+                        {profile ? profile.bio : null}
                     </h4>
                 </div>
                 <div id={`${styles.details}`} className="">
                     <div className="d-flex flex-row">
-                        {this.state.profile
-                            ? displayWebsite(this.state.profile.url)
-                            : null}
-                        {this.state.profile
-                            ? displayLocation(this.state.profile.location)
-                            : null}
+                        {profile ? displayWebsite(profile.url) : null}
+                        {profile ? displayLocation(profile.location) : null}
                     </div>
                     <div className="d-flex flex-row">
-                        {this.state.profile
-                            ? displayBirthday(this.state.profile.birthday)
-                            : null}
-                        {this.state.profile
-                            ? displayJoinDate(this.state.profile.joinDate)
-                            : null}
+                        {profile ? displayBirthday(profile.birthday) : null}
+                        {profile ? displayJoinDate(profile.joinDate) : null}
                     </div>
                 </div>
                 <div>
-                    {this.state.profile ? (
+                    {profile ? (
                         <h4 className={`${styles.underlineCancel}`}>
                             <Link
                                 to={{
-                                    pathname: `${this.state.profile.username}/following`,
+                                    pathname: `${profile.username}/following`,
                                 }}
                             >
                                 <span
                                     className={`${styles.boldText} ${styles.normalSizeFont}`}
                                 >
-                                    {this.convertToThreeDigits(
-                                        this.state.profile.following
-                                    )}
+                                    {profile !== null
+                                        ? profile.following > 0
+                                            ? convertToThreeDigits(
+                                                  profile.following
+                                              )
+                                            : null
+                                        : null}
                                 </span>
                                 <span
                                     className={`${styles.lightText} ${styles.normalSizeFont} ${styles.genericFontWeight} ${styles.greyText}`}
@@ -336,15 +321,19 @@ function Profile(props) {
                             {"   "}
                             <Link
                                 to={{
-                                    pathname: `${this.state.profile.username}/followers`,
+                                    pathname: `${profile.username}/followers`,
                                 }}
                             >
                                 <span
                                     className={`${styles.boldText} ${styles.normalSizeFont}`}
                                 >
-                                    {this.convertToThreeDigits(
-                                        this.state.profile.followers
-                                    )}
+                                    {profile !== null
+                                        ? profile.followers > 0
+                                            ? convertToThreeDigits(
+                                                  profile.followers
+                                              )
+                                            : null
+                                        : null}
                                 </span>
                                 <span
                                     className={`${styles.lightText} ${styles.normalSizeFont} ${styles.genericFontWeight} ${styles.greyText}`}
@@ -372,8 +361,8 @@ function Profile(props) {
                 </div>
             </div>
             <div id={`${styles.massivesContainer}`}>
-                {this.state.massives !== null
-                    ? this.state.massives.map((massive, index) => {
+                {massives !== null
+                    ? massives.map((massive, index) => {
                           return (
                               <Massive
                                   key={index}

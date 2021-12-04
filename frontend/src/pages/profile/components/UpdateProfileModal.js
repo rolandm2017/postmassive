@@ -52,7 +52,7 @@ function UpdateProfileModal({
                             </div>
                             <input
                                 className="profile_modal-input-style upm_top-two-inputs-resizer"
-                                placeholder={displayName}
+                                placeholder={bio}
                             />
                         </div>
                     </div>
@@ -61,14 +61,14 @@ function UpdateProfileModal({
                             <h6 className="lightmode-text">Location</h6>
                             <input
                                 className="profile_modal-input-style"
-                                placeholder={displayName}
+                                placeholder={location}
                             />
                         </div>
                         <div className="w-50 modal-input d-flex flex-column modal-input upm_special-height-mod">
                             <h6 className="lightmode-text">Website</h6>
                             <input
                                 className="profile_modal-input-style"
-                                placeholder={displayName}
+                                placeholder={url}
                             />
                         </div>
                     </div>
@@ -79,6 +79,7 @@ function UpdateProfileModal({
                             text="Save"
                             wide={true}
                             onClick={() => {
+                                console.log(82);
                                 handleSave(
                                     newDisplayName,
                                     newBio,

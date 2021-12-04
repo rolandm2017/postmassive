@@ -1,5 +1,5 @@
-export function convertToThreeDigits(integer) {
-    const string = integer.toString();
+export function convertToThreeDigits(integer, followers) {
+    let string = integer.toString();
     if (integer < 1000) {
         // e.g. 999
         return integer;
