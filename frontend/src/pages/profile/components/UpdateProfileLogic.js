@@ -1,3 +1,20 @@
+import { putOptions } from "../../../_helper/authHeader";
+
+export function updateProfileAPI(username, displayName, bio, location, url) {
+    const body = {
+        username: username,
+        displayName: displayName,
+        bio: bio,
+        location: location,
+        url: url,
+    };
+    const updateProfileUrl =
+        process.env.REACT_APP_API_URL + "/profile?username=" + username;
+    fetch(updateProfileUrl, putOptions(updateProfileUrl, body)).then((res) => {
+        console.log(res);
+    });
+}
+
 export function convertToThreeDigits(integer, followers) {
     let string = integer.toString();
     if (integer < 1000) {

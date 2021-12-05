@@ -3,10 +3,7 @@ import React, { useState } from "react";
 import { updateProfileLogic } from "./UpdateProfileLogic";
 
 import Button from "../../../components/parts/Button";
-import InputGroup from "react-bootstrap/InputGroup";
-import FormControl from "react-bootstrap/FormControl";
 import Modal from "react-bootstrap/Modal";
-import BootstrapButton from "react-bootstrap/Button";
 
 import "./UpdateProfileModal.css";
 
@@ -21,10 +18,10 @@ function UpdateProfileModal({
     handleSave,
 }) {
     console.log(23, displayName);
-    const [newDisplayName, setNewDisplayName] = useState("");
-    const [newBio, setNewBio] = useState("");
-    const [newLocation, setNewLocation] = useState("");
-    const [newUrl, setNewUrl] = useState("");
+    const [newDisplayName, setNewdisplayName] = useState(displayName);
+    const [newBio, setNewBio] = useState(bio);
+    const [newLocation, setNewLocation] = useState(location);
+    const [newUrl, setNewUrl] = useState(url);
     return (
         <Modal show={showPage} centered animation={false}>
             <div className="modal-container">
@@ -41,7 +38,10 @@ function UpdateProfileModal({
                             </div>
                             <input
                                 className="profile_modal-input-style upm_top-two-inputs-resizer "
-                                placeholder={displayName}
+                                defaultValue={displayName}
+                                onChange={(event) => {
+                                    setNewdisplayName(event.target.value);
+                                }}
                             />
                         </div>
                     </div>
@@ -52,7 +52,10 @@ function UpdateProfileModal({
                             </div>
                             <input
                                 className="profile_modal-input-style upm_top-two-inputs-resizer"
-                                placeholder={bio}
+                                defaultValue={bio}
+                                onChange={(event) => {
+                                    setNewBio(event.target.value);
+                                }}
                             />
                         </div>
                     </div>
@@ -61,14 +64,20 @@ function UpdateProfileModal({
                             <h6 className="lightmode-text">Location</h6>
                             <input
                                 className="profile_modal-input-style"
-                                placeholder={location}
+                                defaultValue={location}
+                                onChange={(event) => {
+                                    setNewLocation(event.target.value);
+                                }}
                             />
                         </div>
                         <div className="w-50 modal-input d-flex flex-column modal-input upm_special-height-mod">
                             <h6 className="lightmode-text">Website</h6>
                             <input
                                 className="profile_modal-input-style"
-                                placeholder={url}
+                                defaultValue={url}
+                                onChange={(event) => {
+                                    setNewUrl(event.target.value);
+                                }}
                             />
                         </div>
                     </div>
@@ -79,8 +88,10 @@ function UpdateProfileModal({
                             text="Save"
                             wide={true}
                             onClick={() => {
+                                // TODO: Send API to update dn, bio, loc, url
                                 console.log(82);
                                 handleSave(
+                                    username,
                                     newDisplayName,
                                     newBio,
                                     newLocation,

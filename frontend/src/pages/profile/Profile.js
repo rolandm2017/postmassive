@@ -4,7 +4,10 @@ import { Link } from "react-router-dom";
 import { getOptions } from "../../_helper/authHeader";
 import Button from "../../components/parts/Button";
 import Massive from "../../components/massive/Massive";
-import { convertToThreeDigits } from "./components/UpdateProfileLogic";
+import {
+    convertToThreeDigits,
+    updateProfileAPI,
+} from "./components/UpdateProfileLogic";
 
 import UpdateProfileModal from "./components/UpdateProfileModal";
 import Wrapper from "../_pageHelper/Wrapper";
@@ -44,10 +47,10 @@ function Profile(props) {
                     console.log(profile.bio, profile.displayName);
                     if (displayNameNeedsToBeChosen || bioNeedsTobeChosen) {
                         // push popUpState = true
-                        setShowUpdateProfile({ showUpdateProfileModal: true });
+                        setShowUpdateProfile(true);
                     }
                     console.log(profile, 49);
-                    setProfile({ profile: profile });
+                    setProfile(profile);
                 })
                 .catch((err) => {
                     console.log("????", err);
@@ -71,15 +74,20 @@ function Profile(props) {
     }, []);
 
     function handleClose() {
-        setShowUpdateProfile({ showUpdateProfileModal: false });
+        setShowUpdateProfile(false);
     }
 
-    function handleSave(displayName, bio, location, url) {
+    function handleSave(username, displayName, bio, location, url) {
         console.log(profile, 101);
-
-        // const profile = {props.username, }
-        // this.setState({ profile: profile });
-        // this.setState({ showUpdateProfileModal: false });
+        updateProfileAPI(username, displayName, bio, location, url);
+        const copyProfile = { ...profile };
+        copyProfile.displayName = displayName;
+        copyProfile.bio = bio;
+        copyProfile.location = location;
+        copyProfile.url = url;
+        console.log(copyProfile, 88);
+        setProfile(copyProfile);
+        setShowUpdateProfile(false);
     }
 
     const displayLocation = (loc) =>
@@ -257,9 +265,8 @@ function Profile(props) {
                             wide={true}
                             onClick={() => {
                                 console.log(294);
-                                this.setState({
-                                    showUpdateProfileModal: true,
-                                });
+
+                                setShowUpdateProfile(true);
                             }}
                         />
                     </div>
