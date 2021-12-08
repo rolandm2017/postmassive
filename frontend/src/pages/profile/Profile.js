@@ -57,6 +57,7 @@ function Profile(props) {
                 });
         });
         // TODO IMPORTANT: upgrade fetching "/feed" to fetching the user's actual massives. (as in "/feed/:username")
+        // TODO
         const userSpecificFeedUrl =
             process.env.REACT_APP_API_URL + "/feed/" + username;
         fetch(userSpecificFeedUrl, getOptions(userSpecificFeedUrl)).then(
