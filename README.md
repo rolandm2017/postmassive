@@ -1,142 +1,115 @@
-# CSS Guidelines
+<div align="center">
+  <h1>PostMassive</h1>
+</div>
 
-<i>If you aren't Canadian,</i> these guidelines do not apply and you can do your own thing.
+<div align="center">
+  <strong>A Twitter Clone With An Oddball Streak</strong>
+</div>
 
-### Guideline One
+<div align="center">
+  Will be less and less like Twitter until suddenly it's not Twitter at all.
+</div>
 
-<i>If you're Canadian,</i> write CSS id's & class names like this:
+<br>
 
-If the page is called "home" and the class would normally be called "foo", write:
+<br>
 
-.home_foo
+## Table of Contents
 
-If the page is called "home" and the id would normally be called "bar", write:
+- [What makes Saleor special?](#what-makes-saleor-special)
+- [Features](#features)
+- [Installation](#installation)
+- [Documentation](#documentation)
+- [Demo](#demo)
+- [Contributing](#contributing)
+- [Translations](#translations)
+- [Your feedback](#your-feedback)
+- [License](#license)
 
-#home_foo
+## What makes PostMassive special?
 
-This guideline applies to all of the Home, Inbox, Notifications, Post, Profile and Search pages.
+It is a flagship portfolio project. This project does not get put down permanently. It only rests while it gathers strength to come back for another round.
 
-This guideline was created to avoid CSS from the Home component overriding CSS from the Search component,
-as React apparently shares the CSS from Home while the Search page is loaded.
+PostMassive started in the pandemic's early days, 2019, when the author tried and failed at writing user authentication code from scratch. A lesson learned: Do not reinvent the wheel.
 
-So if Home has class "baz" and the Search page has a className "baz",
-Home.css's "baz" class will affect the Search page's "baz" class.
+User authentication continued to be a headscratcher until the author found Jason Watmore's boilerplate for setting up MERN stack authentication. Many thanks to Jason Watmore.
 
-Avoid this. It's confusing.
+Since implementing user auth, the work has been mostly uneventful and unchallenging. (Ask me how I know I need to install Redux.)
 
-### Guideline Two
+## Features
 
-When using selectors like ".className div" and ".className h1", put divs before h1 tags, and header tags before paragraphs.
+- **Colored posting text**: There's so much fun you can have styling text with CSS, why not get the user involved? This feature is fully functional and can be accessed via the Post button.
+- **User to user private messaging**: Messaging like any standard application.
+- **Editable profile bio**: Update your profile and see a demo loading of hypothetical posts.
+- **Excellent resizing**: Copied Twitter's breakpoints so that it resizes properly on all modern monitors.
 
-Just to be consistent.
+## Installation
 
-### Guideline Three
+Step by step installation instructions are as follows.
 
-Pages always have two main divs. One named "pageName" i.e. "home" "search" etc, the other named "pageName_main" as in "home_main"
+Note:
+The `12/03/allowUpdateProfile` branch is the latest functional branch. Its name reflects that the developer intends to come back and improve his product more in the future, with zany, wild features.
 
-Don't ask me why it's just how we do things.
+The current production-ready version is 0.1.0 (alpha) because no one is around to see that number change. So it's left unchanged but will be updated at the end of 2021.
 
-#### Notes On Breakpoints
+**To install:**
 
-When...
+(1) In your terminal, `git clone https://github.com/plutownium/postmassive.git .` in an empty folder.
 
-width = 1660, l = 475, m = 600, r = 585
-w = 1280, l = 275, m = 600, r = 405 ;; as w 1280 ->, l 275 -> ?, r 405 -> ?
-== non-smooth resizing ==
-w = 1279, l = 180, m = 600, r = 500
-w = 1100, l = 100, m = 600, r = 400 ;; as w from 1100-> 1279, l 100 -> 180, r 400 -> 500
-== non-smooth resizing == "thin-rightbar"
-w = 1099, l = 125, m = 600, r = 375
-w = 1000, l = 80, m = 600, r = 320 ;; as w from 1000-> 1099, l 80 -> 125, r 320 -> 375
-== non-smooth resizing == "rightbar-shows"
-w = 999, l = 200, m = 600, r = 200
-w = 700, l = 100, m = 600, r = 0 ;; as w from 700-> 999, l 100 -> 200, r 0 -> 200
-== rightbar is 0 width == "shrink-feed"
-w = 500, sidebar goes away, mobile top and bottom bar show
+(2) Type `git checkout 12/03/allowUpdateProfile` to change to that branch.
 
-Messages page breakpoints:
+(3) In the `frontend` folder, `npm install`.
 
-#messages_page is "m + p"
+(4) Go to the `backend` folder and `npm install`.
 
-#inbox is "m"
+(5) Write your own `config.json` for the NodeJS server to look at. You'll need to supply a MongoDB connection string and a few other values.
 
-#chat-display is "p"
+(6) Use `nodemon server.js` to run the backend in a terminal. You must be in the /backend folder to run the command.
 
-#message-aside is "r" instead of rightbar in /messages.
+(7) Write a .env file in the /frontend folder and input a REACT_APP_API_URL matching the backend's startup address.
 
-w = 1680, l = 475, m = 390, p = 600, r = 215
-w = 1280, l = 275, m = 390, p = 600, r = 15
-== $thin-rightbar to $full-sidebar == (actually thin leftbar below this threshold)
-w = 1279, l = 180, m = 390, p = 600, r = 110
-w = 1100, l = 100, m = 390, p = 600, r = 10 #messages_page = 990, #inbox = 390
-== $rightbar-shows to $thin-rightbar ==
-w = 1099, l = 125, m = 320, p = 600, r = 55
-w = 1000, l = 80, m = 320, p = 600, r = 0 #messages_page = 920, #inbox = 320, #c-d = 600
-== $shrink-feed to $rightbar-shows ==
-w = 999, l = 200, m & p = 600, r = 200
-w = 700, l = 100, m & p = 600, r = 0 #messages_page = 600
-== nsr == m & p start to shrink
-w = 699, l = 100, m & p = 600 or less
-w = 500, typical stuff
+(7) Use `npm run build` to build a production version of the frontend, or `npm start` to run the dev server.
 
-So... for the /messages route, the left sidebar keeps the same breakpoints.
+## Documentation
 
-### Notifications: Hierarchy and Conversion of "Author" func into usable data
+There is no documentation except what goes on on paper.
 
-Use this order for EVERY place where these things occur. That way you'll know eventually which way to scroll
-to look for xyz item.
+## Demo
 
-1. Reply
-2. Amplify
-3. Like
-4. Quote
-5. View
+Want to see PostMassive in action?
 
-re: converting data.js's "author" func into usable data...
+[Visit PostMassive](https://www.postmassive.com/) |
 
-Once coding on the backend starts in earnest, it would be good to decide when and where you'll separate out
-a user's display name from a user's username. So if the client needs a display name to make a notification, do I
-send both the display name and username and just use the display, or do I only request the display name and
-keep display + username separate in the db?
+Login credentials:
 
-I guess the deciding factor is that the db will keep displayName and username as separate fields.
+marle // ilovecronoa
 
-So if the frontend needs displayName only, it'll just get the displayName. And if it needs both, it'll get both.
+Alternatively:
 
-The thing is though...
+test // test
 
-I want to avoid rewriting code.
+## Contributing
 
-What caused me to think about this was, I finished ("finished") my mock server, and started plugging the data into
-Notifications. One of them needed author().display. So in that situation, should I write on the mock server, "author().display" to save myself writing it elsewhere? Maybe it doesn't matter.
+I cannot write this README.md honestly without thanking an Indian programmer named Nigel who helped me learn Bootstrap two years ago.
 
-#### JWT do's and don'ts
+## Your feedback
 
-- don't store JWTs in localstorage. localstorage is scriptable. it's best if they are kept in httpOnly cookies.
-- don't ever keep the secret that signs the token in the client. not ever. not even in development!
-- don't decode the token in the browser. OAuth never.
+Has someone actually read this README?
 
-- do use long, unguessable secrets. "256 bit"
-- do keep token payload small because of bandwidth constraints
-- do make sure you use HTTPS during production! HTTPS! for both client and server.
+Email me.
 
-### Misc stuff
+Did someone actually visit PostMassive and navigate around?
 
-Reserved names:
+Email me.
 
-1. anything with Admin or Postmassive.
-2. "home", "messages", "inbox", "explore", "search", "lists", "settings", "analytics", "i"
+Did someone _read the code_ as well?
 
-This is because these names are needed as routes.
+Email me.
 
-Rules for usernames (taken from verifyUsernameAndPassword()):
+If the answers to any above question was affirmative, I would love to hear your brutal and honest feedback via LinkedIn. Feel free to send an email or a LinkedIn connect. I have never heard of anyone reading this program's code so, any review on the code is cherished.
 
-1. Limit of 2 underscores.
-2. Must be between 1 and 16 characters. (TODO: What is n? Must figure out max length...)
-3. Cannot use "PostMassiv" or "Admin".
-4. No spaces.
+## License
 
-Rules for passwords:
+No license granted.
 
-1. Between 6 and 29 chars in length, inclusive.
-2. Supports A-Z, a-z, 0-9, and special chars !@#\$%^&\*()\_+-=
+#### Crafted with ❤️ by Roland Mackintosh
