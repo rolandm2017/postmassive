@@ -16,13 +16,10 @@
 
 ## Table of Contents
 
-- [What makes Saleor special?](#what-makes-saleor-special)
+- [What makes PostMassive special?](#what-makes-postmassive-special)
 - [Features](#features)
 - [Installation](#installation)
-- [Documentation](#documentation)
 - [Demo](#demo)
-- [Contributing](#contributing)
-- [Translations](#translations)
 - [Your feedback](#your-feedback)
 - [License](#license)
 
@@ -69,10 +66,6 @@ The current production-ready version is 0.1.0 (alpha) because no one is around t
 (7) Write a .env file in the /frontend folder and input a REACT_APP_API_URL matching the backend's startup address.
 
 (7) Use `npm run build` to build a production version of the frontend, or `npm start` to run the dev server.
-
-## Documentation
-
-There is no documentation except what goes on on paper.
 
 ## Demo
 
