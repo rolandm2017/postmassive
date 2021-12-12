@@ -4,6 +4,7 @@
 
 <div align="center">
   <strong>A Twitter Clone With An Oddball Streak</strong>
+  <p>Written as if no one will ever read the code, because I have no evidence that anyone does.
 </div>
 
 <div align="center">
