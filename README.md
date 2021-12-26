@@ -21,7 +21,6 @@
 - [Installation](#installation)
 - [Demo](#demo)
 - [Your feedback](#your-feedback)
-- [License](#license)
 
 ## What makes PostMassive special?
 
