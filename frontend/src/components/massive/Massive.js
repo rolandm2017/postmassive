@@ -44,6 +44,7 @@ function Massive(props) {
                         </p>
 
                         <EngagementContainer
+                            key={10}
                             replies={props.replies}
                             amps={props.amps}
                             likes={props.likes}

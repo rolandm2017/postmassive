@@ -19,7 +19,7 @@ function prettyText(inputText: string, stylings: Array<Styling>): any {
     let isStylingsEmpty = stylings.length === 0;
     if (isStylingsEmpty) {
         // console.log(26, "yes, it was empty");
-        let createNonspecialChunk: any = <Chunk index={0} availableStylings={""} chunkValue={inputText} />;
+        let createNonspecialChunk: any = <Chunk key={0} availableStylings={""} chunkValue={inputText} />;
         let nonspecialChunkArray: any[] = [createNonspecialChunk]
         return (
             nonspecialChunkArray
@@ -32,7 +32,7 @@ function prettyText(inputText: string, stylings: Array<Styling>): any {
         // zombie detected 11-27 // return <span className="stylized">{inputText}</span>; // return simply the text ??
         // let createNonspecialChunk: typeof Chunk = <Chunk index=  {0} availableStylings={null} chunkValue={inputText} />
         // let nonspecialChunkArray: typeof Chunk[] = [createNonspecialChunk]
-        let createNonspecialChunk: any = <Chunk index={0} availableStylings={""} chunkValue={inputText} />
+        let createNonspecialChunk: any = <Chunk key={0} availableStylings={""} chunkValue={inputText} />
         let nonspecialChunkArray: typeof Chunk[] = [createNonspecialChunk] 
         return (
             nonspecialChunkArray

@@ -20,6 +20,7 @@ function Massive(props) {
                 return res.json();
             })
             .then((data) => {
+                console.log(23, data)
                 setMassive(data);
             });
     }, [id]);

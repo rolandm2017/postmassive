@@ -18,7 +18,7 @@ class Instruction {
             if (this.dotNotationStylings.length === 1) {
                 return (
                     <Chunk
-                        index={index}
+                        key={index}
                         availableStylings={this.dotNotationStylings}
                         chunkValue={this.textValue}
                     />
@@ -31,7 +31,7 @@ class Instruction {
                 // );
                 return (
                     <Chunk
-                        index={index}
+                        key={index}
                         availableStylings={this.dotNotationStylings.join(" ")}
                         chunkValue={this.textValue}
                     />
@@ -40,7 +40,7 @@ class Instruction {
         } else {
             return (
                 <Chunk
-                    index={index}
+                    key={index}
                     availableStylings={null}
                     chunkValue={this.textValue}
                 />

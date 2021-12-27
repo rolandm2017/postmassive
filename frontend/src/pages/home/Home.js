@@ -50,6 +50,7 @@ function Home(props) {
             {massives.length > 0
                 ? massives.map((massive, index) => {
                       if (massive === "poll") {
+                          // hardcoded poll
                           return (
                               <div key={index}>
                                   <Poll
@@ -95,7 +96,7 @@ function Home(props) {
                               }}
                           >
                               <Massive
-                                  key={Math.floor(Math.random() * 10000)}
+                                  key={index}
                                   author={massive.postedByUser}
                                   displayName={massive.displayName}
                                   content={massive.text}
