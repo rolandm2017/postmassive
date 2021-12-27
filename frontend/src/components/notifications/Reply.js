@@ -1,4 +1,4 @@
-rimport React from "react";
+import React from "react";
 
 import EngagementContainer from "../engagementContainer/EngagementContainer";
 

@@ -4,7 +4,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import Styling from "../../utility/classes/Styling";
 // logic imports
 import {
-    FLOORS,
+    // FLOORS,
     EMPHASIS,
     BG_COLORS,
     FONT_SIZES,
@@ -40,11 +40,11 @@ import Emphasis from "./components/Emphasis";
 import BackgroundColor from "./components/BackgroundColor";
 import FontSizing from "./components/FontSizing";
 
-import Flooring from "./components/Flooring";
+// import Flooring from "./components/Flooring";
 
 import "./Post.scss";
 import "../../components/textStyling/TextStyling.css";
-import { first } from "rxjs";
+// import { first } from "rxjs";
 // import { current } from "@reduxjs/toolkit";
 
 // TODO: Make BackgroundColor & fontSize exclusive choices; they cna't be combined
@@ -61,7 +61,7 @@ function Post(props: any) {
     const [firstStyle, setFirstStyle] = useState(new Styling( 0, 0, []));
     const [secondStyle, setSecondStyle] = useState(new Styling( 0, 0, []));
     const [thirdStyle, setThirdStyle] = useState(new Styling( 0, 0, []));
-    const [previewTime, setPreviewTime] = useState(false);
+    // const [previewTime, setPreviewTime] = useState(false);
 
     let currentUrl = useLocation().pathname;
     let history = useHistory();
