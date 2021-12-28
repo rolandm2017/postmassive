@@ -41,11 +41,11 @@ function Profile(props) {
                 .then((profile) => {
                     console.log("setting profile,", profile);
                     // make popup if profile isn't filled in yet
-                    const displayNameNeedsToBeChosen =
+                    const displayNameIsFilledIn =
                         profile.displayName.length > 0;
-                    const bioNeedsTobeChosen = profile.bio.length > 0;
-                    console.log(profile.bio, profile.displayName);
-                    if (displayNameNeedsToBeChosen || bioNeedsTobeChosen) {
+                    const bioIsFilledIn = profile.bio.length > 0;
+                    console.log(47, profile.bio, profile.displayName);
+                    if (!displayNameIsFilledIn || !bioIsFilledIn) {
                         // push popUpState = true
                         setShowUpdateProfile(true);
                     }
@@ -59,13 +59,14 @@ function Profile(props) {
         // TODO IMPORTANT: upgrade fetching "/feed" to fetching the user's actual massives. (as in "/feed/:username")
         // TODO
         const userSpecificFeedUrl =
-            process.env.REACT_APP_API_URL + "/feed/" + username;
+            // process.env.REACT_APP_API_URL + "/feed/" + username;
+            process.env.REACT_APP_API_URL + "/wall/introduce";
         fetch(userSpecificFeedUrl, getOptions(userSpecificFeedUrl)).then(
             (res) => {
                 res.json()
                     .then((massives) => {
                         console.log(50, "setting massives", massives);
-                        setMassives({ massives: massives });
+                        setMassives(massives);
                     })
                     .catch((err) => {
                         console.log(err);
@@ -178,7 +179,7 @@ function Profile(props) {
                         {profile ? profile.displayName : null}
                     </h2>
                     <h3 id={`${styles.totalMassivs}`}>
-                        {profile ? `${profile.tweets} Massivs` : null}
+                        {profile ? `93,201 Massivs` : null}
                     </h3>
                 </div>
             </div>
@@ -374,9 +375,10 @@ function Profile(props) {
                           return (
                               <Massive
                                   key={index}
-                                  author={massive.author.username}
-                                  displayName={massive.author.displayName}
-                                  content={massive.content}
+                                  author={massive.postedByUser}
+                                  displayName={massive.displayName}
+                                  content={massive.text}
+                                  stylings={massive.stylings}
                                   replies={massive.replies}
                                   amps={massive.amplifies}
                                   likes={massive.likes}

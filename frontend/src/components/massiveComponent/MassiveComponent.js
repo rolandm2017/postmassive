@@ -11,6 +11,7 @@ import "./MassiveComponent.css";
 import "../textStyling/TextStyling.css"; // this file will be imported in many places
 
 function Massive(props) {
+    console.log(14, props);
     // let customStyling = "fontSizeWholeText"; // hardcode via this input
     const location = useLocation();
     // console.log(props, 13, location.pathname)
