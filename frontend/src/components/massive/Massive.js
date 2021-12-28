@@ -10,6 +10,7 @@ import "../textStyling/TextStyling.css"; // this file will be imported in many p
 
 function Massive(props) {
     // let customStyling = "fontSizeWholeText"; // hardcode via this input
+    console.log(props, 13)
     const stylings =
         props.stylings === undefined ? [{}, {}, {}] : props.stylings;
 

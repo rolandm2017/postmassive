@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 
 import { getOptions } from "../../_helper/authHeader";
 
+import MassiveContainer from "../../components/massive/Massive"
+
 import Wrapper from "../_pageHelper/Wrapper";
 
 // TODO: make each Massiv have a custom URL based on Poster Username + MassivID
@@ -20,10 +22,10 @@ function Massive(props) {
                 return res.json();
             })
             .then((data) => {
-                console.log(23, data)
-                setMassive(data);
+                console.log(232323, data)
+                setMassive(data[0]);
             });
-    }, [id]);
+    }, []);
 
     return (
         <Wrapper
@@ -33,16 +35,8 @@ function Massive(props) {
             onMessagePgae={false}
             breakpoints={props.breakpoints}
         >
-            <div>{massive.length !== 0 ? <div
-                              key={index}
-                              onClick={() => {
-                                  let pathToGoTo =
-                                      "/massive/" + massive._id;
-                                  history.push(pathToGoTo);
-                              }}
-                          >
-                              <Massive
-                                  key={index}
+            <div>{massive.length !== 0 ? 
+                              <MassiveContainer
                                   author={massive.postedByUser}
                                   displayName={massive.displayName}
                                   content={massive.text}
@@ -53,9 +47,10 @@ function Massive(props) {
                                   views={massive.viewsFloor}
                                   cap={massive.viewsFloor}
                               />
-                          </div> : null}</div>
+                          : null}</div>
         </Wrapper>
     );
 }
 
 export default Massive;
+
