@@ -4,10 +4,15 @@ import { useParams, useHistory } from "react-router-dom";
 import { getOptions } from "../../_helper/authHeader";
 
 import BackButton from "../../images/icons8-back-50.png";
+import BluePfp from "../../images/bluePfp.png";
 
-import MassiveComponent from "../../components/massiveComponent/MassiveComponent";
+import Reply from "../../images/Group 57 - reply.png";
+import Amplify from "../../images/Group 32 - retweet.png";
+import Fave from "../../images/Group 56 - like.png";
 
 import Wrapper from "../_pageHelper/Wrapper";
+
+import { REPLIES } from "../../_helper/consts";
 
 import "./Massive.css";
 
@@ -57,25 +62,70 @@ function Massive(props) {
             </div>
             <div>
                 {massive.length !== 0 ? (
-                    <div>
-                        <div id="msv_usernameDisplayName"></div>
-                        <div id="msv_content"></div>
-                        <div id="msv_date"></div>
-                        <div id="msv_engagement"></div>
-                        <div id="msv_buttons"></div>
-                        <div id="msv_addReply"></div>
-                        <div id="msv_replies"></div>
-                        {/* <MassiveComponent
-                            author={massive.postedByUser}
-                            displayName={massive.displayName}
-                            content={massive.text}
-                            stylings={massive.stylings}
-                            replies={massive.replies}
-                            amps={massive.amps}
-                            likes={massive.likes}
-                            views={massive.viewsFloor}
-                            cap={massive.viewsFloor}
-                        /> */}
+                    <div id="msv_mainContainer">
+                        <div
+                            id="msv_usernameDisplayName"
+                            className="d-flex msv_borderBottom"
+                        >
+                            <div>
+                                <img src={BluePfp} />
+                            </div>
+                            <div>
+                                <p>{massive.postedByUser}</p>
+                                <p>@{massive.displayName}</p>
+                            </div>
+                        </div>
+                        <div id="msv_content" className="">
+                            {massive.text}
+                        </div>
+                        <div id="msv_date" className="">
+                            {new Date(massive.date).toString()}
+                        </div>
+                        <div id="msv_engagement" className="">
+                            {massive.replies} {massive.amps} {massive.likes}{" "}
+                            {massive.views}
+                        </div>
+                        <div
+                            id="msv_buttons"
+                            className="d-flex justify-content-around align-items-center"
+                        >
+                            <div className="d-flex align-items-center">
+                                <button>
+                                    <img
+                                        className="massive-btn"
+                                        src={Reply}
+                                        alt="reply"
+                                    ></img>
+                                </button>
+                            </div>
+                            <div className="d-flex align-items-center">
+                                <button>
+                                    <img
+                                        className="massive-btn"
+                                        src={Amplify}
+                                        alt="amp"
+                                    />
+                                </button>
+                            </div>
+                            <div className="d-flex align-items-center">
+                                <button>
+                                    <img
+                                        className="massive-btn"
+                                        src={Fave}
+                                        alt="fave"
+                                    />
+                                </button>
+                            </div>
+                        </div>
+                        <div id="msv_addReply">
+                            <div></div>
+                        </div>
+                        <div id="msv_replies">
+                            {REPLIES.map((reply, index) => {
+                                // todo: make a reply component, prolly mostly the same as already writ code tho
+                                return <div>fooo</div>;
+                            })}
+                        </div>
                     </div>
                 ) : null}
             </div>

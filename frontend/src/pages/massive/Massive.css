@@ -1,3 +1,53 @@
+#msv_buttons {
+    border: 3px solid red;
+    height: 50px;
+}
+
+#msv_buttons > div {
+    width: 20%;
+    height: 70%;
+}
+
+#msv_buttons > div > button {
+    width: 100%;
+    height: 100%;
+    padding: 0 !important;
+    border-radius: 10px !important;
+    background-color: transparent;
+}
+
+#msv_buttons > div > button > image {
+    /* height: 20px !important; */
+}
+
+#msv_content {
+    margin: 6px 0;
+    padding-bottom: 6px;
+    padding-left: 6px;
+}
+
+#msv_date {
+}
+
+#msv_engagement {
+}
+
+#msv_mainContainer {
+    padding: 8px;
+    color: white;
+}
+
+#msv_mainContainer > div {
+    border-bottom: 1px solid #888;
+}
+
+#msv_usernameDisplayName {
+}
+
+#msv_usernameDisplayName p {
+    margin: 0 0 6px 5px;
+}
+
 #singularMsvBackBtn {
     margin: 0;
 }
@@ -5,11 +55,11 @@
 .singularMassiveBtn {
     height: 36px;
     width: 36px;
-    background-color: white; 
-    border-radius: 50%; 
+    background-color: white;
+    border-radius: 50%;
     padding: 5px 10px 5px 5px;
 }
 
 .singularMassiveBtnContainer {
-    margin: 10px
+    margin: 10px;
 }
