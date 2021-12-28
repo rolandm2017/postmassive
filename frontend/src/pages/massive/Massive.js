@@ -133,23 +133,25 @@ function Massive(props) {
                                 </button>
                             </div>
                         </div>
-                        <div id="msv_addReply">
+                        {/* <div id="msv_addReply">
                             <div></div>
-                        </div>
+                        </div> */}
                         <div id="msv_replies">
                             {REPLIES.map((reply, index) => {
                                 // todo: make a reply component, prolly mostly the same as already writ code tho
                                 // const stylings = reply.stylings
-                                <MassiveComponent
-                                    key={index}
-                                    postedByUser={reply.postedByUser}
-                                    displayName={reply.displayName}
-                                    text={reply.text}
-                                    replies={reply.replies}
-                                    amps={reply.amps}
-                                    likes={reply.likes}
-                                    views={reply.views}
-                                />;
+                                return (
+                                    <MassiveComponent
+                                        key={index}
+                                        author={reply.postedByUser}
+                                        displayName={reply.displayName}
+                                        text={reply.text}
+                                        replies={reply.replies}
+                                        amps={reply.amps}
+                                        likes={reply.likes}
+                                        views={reply.views}
+                                    />
+                                );
                             })}
                         </div>
                     </div>
