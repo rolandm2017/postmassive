@@ -8,9 +8,13 @@ module.exports = router;
 router.get("/:id", (req, res) => {
     let id = req.params.id;
     console.log(10, id);
-    Massive.find({ postNumber: id }, function (doc) {
-        console.log(doc)
-        res.status(200).json(doc)
+    Massive.find({ _id: id }, function (err, success) {
+        if (err) {
+            console.log(err)
+        } else {
+            console.log(success)
+            res.status(200).json(success)
+        }
     });
     // ### *** ###
     // FIXME: MAJOR issue with Posting Massives and the postNumber.

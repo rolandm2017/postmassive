@@ -110,7 +110,7 @@ app.use(api + "/messages", require("./userActions/message/message"));
 // Admin Tools
 if (postman) {
     app.use(api + "/test", require("./modTools/test"));
-    app.use(api + "/users", require("./modTools/users"));
+    // app.use(api + "/users", require("./modTools/users"));
 }
 
 app.get(api + "/foo", (req, res) => {

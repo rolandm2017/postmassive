@@ -14,7 +14,7 @@ function Massive(props) {
 
     useEffect(() => {
         let feedUrl = process.env.REACT_APP_API_URL + "/massive/" + id;
-        console.log(id);
+        console.log(id, feedUrl);
         fetch(feedUrl, getOptions(feedUrl))
             .then((res) => {
                 return res.json();
@@ -33,7 +33,27 @@ function Massive(props) {
             onMessagePgae={false}
             breakpoints={props.breakpoints}
         >
-            <div>{massive.length !== 0 ? massive.likes : null}</div>
+            <div>{massive.length !== 0 ? <div
+                              key={index}
+                              onClick={() => {
+                                  let pathToGoTo =
+                                      "/massive/" + massive._id;
+                                  history.push(pathToGoTo);
+                              }}
+                          >
+                              <Massive
+                                  key={index}
+                                  author={massive.postedByUser}
+                                  displayName={massive.displayName}
+                                  content={massive.text}
+                                  stylings={massive.stylings}
+                                  replies={massive.replies}
+                                  amps={massive.amps}
+                                  likes={massive.likes}
+                                  views={massive.viewsFloor}
+                                  cap={massive.viewsFloor}
+                              />
+                          </div> : null}</div>
         </Wrapper>
     );
 }

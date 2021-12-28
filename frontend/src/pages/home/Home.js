@@ -19,7 +19,6 @@ function Home(props) {
 
     useEffect(() => {
         let feedUrl = process.env.REACT_APP_API_URL + "/wall/introduce";
-        console.log(fetch(feedUrl, getOptions(feedUrl)));
         fetch(feedUrl, getOptions(feedUrl))
             .then((res) => {
                 return res.json();
@@ -36,6 +35,7 @@ function Home(props) {
 
                 // fixme: Error: Objects are not valid as a React child (found: object with keys {special, value, styling, numberOfStylings}). I
                 // setMassives(puttingSomePollsIntoIt.slice(0, 2));
+                console.log(data)
                 setMassives(data);
             });
     }, []);
@@ -91,7 +91,7 @@ function Home(props) {
                               key={index}
                               onClick={() => {
                                   let pathToGoTo =
-                                      "/massive/" + massive.postNumber;
+                                      "/massive/" + massive._id;
                                   history.push(pathToGoTo);
                               }}
                           >

@@ -182,4 +182,16 @@ router.put("/giveFollowers", (req, res) => {
     });
 });
 
+// route to take out all docs and reorder with a unique postnumber per massive
+// router.get("/reorder", async (req, res) => {
+//     console.log(187)
+//     let docs = await Massive.find({})
+//     for (let i = 0; i < docs.length; i++) {
+//         console.log(190, i)
+//         docs[i].postNumber = i;
+//         await docs[i].save()
+//     }
+//     res.status(200).send("reordered docs")
+// })
+
 module.exports = router;
