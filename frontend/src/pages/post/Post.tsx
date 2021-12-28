@@ -29,7 +29,7 @@ import Photo from "../../images/mountain-32.png";
 import Gif from "../../images/gif-48.png";
 import Poll from "../../images/poll-48.png";
 import Emoji from "../../images/happy-48.png";
-import Nicolai from "../../images/markZuckerberg.jpeg";
+// import Nicolai from "../../images/markZuckerberg.jpeg";
 // major imports
 import Wrapper from "../_pageHelper/Wrapper";
 import TextArea from "./components/TextArea";
@@ -39,6 +39,7 @@ import Emphasis from "./components/Emphasis";
 // import Special from "./components/Special"; // lighthouse
 import BackgroundColor from "./components/BackgroundColor";
 import FontSizing from "./components/FontSizing";
+import Button from "../../components/parts/Button";
 
 // import Flooring from "./components/Flooring";
 
@@ -181,7 +182,7 @@ function Post(props: any) {
                         id="post_profile-pic"
                         className="post_spacer post_generic-spacer post_generic-filler"
                     >
-                        <img src={Nicolai} alt="profile pic"></img>
+                        {/* <img src={Nicolai} alt="profile pic"></img> */}
                     </div>
                     <div className="post_middle px-2">
                         <TextArea setContent={setContent} />
@@ -431,8 +432,9 @@ function Post(props: any) {
                         
                         <div>
                             
-                            <div>
-                                <button
+                            <div className="mt-2 mb-5">
+                                <Button
+                                 
                                     onClick={() => {
                                         postPost(username,
                                             content,
@@ -441,14 +443,12 @@ function Post(props: any) {
                                             [firstStyle, secondStyle, thirdStyle],
                                             handleGoToHome)
                                     }}
+                                    text="Post"
+                                    blueBg={true}
+                                    wide={true}
                                 >
                                     Post
-                                </button>
-                        
-                                <button onClick={() => {
-                                    inspecter(content, firstStyle,secondStyle,thirdStyle);
-                                }}>Inspect</button>
-                             
+                                </Button>
                             </div>
                         </div>
                     </div>
