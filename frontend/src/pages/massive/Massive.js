@@ -57,7 +57,8 @@ function Massive(props) {
                         src={BackButton}
                         className="singularMassiveBtn"
                         onClick={() => {
-                            history.push("/home");
+                            // history.goBack("/home");
+                            history.goBack();
                         }}
                     />
                 </div>

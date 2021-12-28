@@ -11,7 +11,7 @@ import "./MassiveComponent.css";
 import "../textStyling/TextStyling.css"; // this file will be imported in many places
 
 function Massive(props) {
-    console.log(14, props);
+    // console.log(14, props);
     // let customStyling = "fontSizeWholeText"; // hardcode via this input
     const location = useLocation();
     // console.log(props, 13, location.pathname)
@@ -22,7 +22,7 @@ function Massive(props) {
     return (
         <div
             className={`${
-                location.pathname.slice(0, 6) === "/home"
+                location.pathname.slice(0, 9) !== "/massive"
                     ? "bg-blue-highlight"
                     : null
             } background-blue `}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import { getOptions } from "../../_helper/authHeader";
 import Button from "../../components/parts/Button";
@@ -27,6 +27,8 @@ function Profile(props) {
     const [profile, setProfile] = useState(null);
     const [massives, setMassives] = useState(null);
     const [showUpdateProfile, setShowUpdateProfile] = useState(null);
+
+    const history = useHistory();
 
     useEffect(() => {
         let username = window.location.pathname.slice(1);
@@ -373,18 +375,27 @@ function Profile(props) {
                 {massives !== null
                     ? massives.map((massive, index) => {
                           return (
-                              <Massive
+                              <div
                                   key={index}
-                                  author={massive.postedByUser}
-                                  displayName={massive.displayName}
-                                  content={massive.text}
-                                  stylings={massive.stylings}
-                                  replies={massive.replies}
-                                  amps={massive.amplifies}
-                                  likes={massive.likes}
-                                  views={massive.views}
-                                  cap={massive.cap}
-                              />
+                                  onClick={() => {
+                                      let pathToGoTo =
+                                          "/massive/" + massive._id;
+                                      history.push(pathToGoTo);
+                                  }}
+                              >
+                                  <Massive
+                                      key={index}
+                                      author={massive.postedByUser}
+                                      displayName={massive.displayName}
+                                      content={massive.text}
+                                      stylings={massive.stylings}
+                                      replies={massive.replies}
+                                      amps={massive.amplifies}
+                                      likes={massive.likes}
+                                      views={massive.views}
+                                      cap={massive.cap}
+                                  />
+                              </div>
                           );
                       })
                     : null}
