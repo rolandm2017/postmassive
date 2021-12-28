@@ -1,11 +1,11 @@
-import React, { useEffect, useState  } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 
 import { getOptions } from "../../_helper/authHeader";
 
-import BackButton from "../../images/icons8-back-50.png"
+import BackButton from "../../images/icons8-back-50.png";
 
-import MassiveComponent from "../../components/massiveComponent/MassiveComponent"
+import MassiveComponent from "../../components/massiveComponent/MassiveComponent";
 
 import Wrapper from "../_pageHelper/Wrapper";
 
@@ -16,9 +16,9 @@ import "./Massive.css";
 function Massive(props) {
     const { id } = useParams();
     const history = useHistory();
-    
 
     const [massive, setMassive] = useState([]);
+    const [replies, setReplies] = useState([]);
 
     useEffect(() => {
         let feedUrl = process.env.REACT_APP_API_URL + "/massive/" + id;
@@ -28,7 +28,7 @@ function Massive(props) {
                 return res.json();
             })
             .then((data) => {
-                console.log(232323, data)
+                console.log(232323, data);
                 setMassive(data[0]);
             });
     }, []);
@@ -43,30 +43,44 @@ function Massive(props) {
         >
             <div className="d-flex align-items-center">
                 <div className="singularMassiveBtnContainer">
-
-                <input type="image" src={BackButton} className="singularMassiveBtn" onClick={() => {
-                    history.push("/home")
-                }}/>
+                    <input
+                        type="image"
+                        src={BackButton}
+                        className="singularMassiveBtn"
+                        onClick={() => {
+                            history.push("/home");
+                        }}
+                    />
                 </div>
                 {/* // back btn */}
                 <p id="singularMsvBackBtn">Massives</p>
             </div>
-            <div>{massive.length !== 0 ? 
-                              <MassiveComponent
-                                  author={massive.postedByUser}
-                                  displayName={massive.displayName}
-                                  content={massive.text}
-                                  stylings={massive.stylings}
-                                  replies={massive.replies}
-                                  amps={massive.amps}
-                                  likes={massive.likes}
-                                  views={massive.viewsFloor}
-                                  cap={massive.viewsFloor}
-                              />
-                          : null}</div>
+            <div>
+                {massive.length !== 0 ? (
+                    <div>
+                        <div id="msv_usernameDisplayName"></div>
+                        <div id="msv_content"></div>
+                        <div id="msv_date"></div>
+                        <div id="msv_engagement"></div>
+                        <div id="msv_buttons"></div>
+                        <div id="msv_addReply"></div>
+                        <div id="msv_replies"></div>
+                        {/* <MassiveComponent
+                            author={massive.postedByUser}
+                            displayName={massive.displayName}
+                            content={massive.text}
+                            stylings={massive.stylings}
+                            replies={massive.replies}
+                            amps={massive.amps}
+                            likes={massive.likes}
+                            views={massive.viewsFloor}
+                            cap={massive.viewsFloor}
+                        /> */}
+                    </div>
+                ) : null}
+            </div>
         </Wrapper>
     );
 }
 
 export default Massive;
-
