@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-// import { useHistory } from "react-router-dom";
 
 import InboxHeader from "./components/InboxHeader";
-// import { processDateToString } from "./components/TimeLogic";
 import InboxItem from "./components/InboxItem";
 import SelectedUserDisplay from "./components/SelectedUserDisplay";
 

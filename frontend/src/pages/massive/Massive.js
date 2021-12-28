@@ -5,10 +5,13 @@ import { getOptions } from "../../_helper/authHeader";
 
 import BackButton from "../../images/icons8-back-50.png";
 import BluePfp from "../../images/bluePfp.png";
-
 import Reply from "../../images/Group 57 - reply.png";
 import Amplify from "../../images/Group 32 - retweet.png";
 import Fave from "../../images/Group 56 - like.png";
+
+import MassiveComponent from "../../components/massiveComponent/MassiveComponent";
+
+import { formatDateForRepliesSection } from "../../utility/TimeLogic";
 
 import Wrapper from "../_pageHelper/Wrapper";
 
@@ -77,7 +80,13 @@ function Massive(props) {
                         </div>
                         <div id="msv_content" className="msv_textFormat">
                             <div>{massive.text}</div>
-                            <div id="msv_date">{massive.date}</div>
+                            <div id="msv_date">
+                                {formatDateForRepliesSection(
+                                    new Date(
+                                        parseInt(massive.date, 10)
+                                    ).toString()
+                                )}
+                            </div>
                         </div>
                         <div
                             id="msv_engagement"
@@ -126,7 +135,16 @@ function Massive(props) {
                         <div id="msv_replies">
                             {REPLIES.map((reply, index) => {
                                 // todo: make a reply component, prolly mostly the same as already writ code tho
-                                return <div>fooo</div>;
+                                <MassiveComponent
+                                    key={index}
+                                    postedByUser={reply.postedByUser}
+                                    displayName={reply.displayName}
+                                    text={reply.text}
+                                    replies={reply.replies}
+                                    amps={reply.amps}
+                                    likes={reply.likes}
+                                    views={reply.views}
+                                />;
                             })}
                         </div>
                     </div>

@@ -43,3 +43,14 @@ const formatDate = (date) => {
 
     return [month, day].join("/");
 };
+
+export const formatDateForRepliesSection(date) {
+    var d = new Date(date),
+        month = "" + (d.getMonth() + 1),
+        day = "" + d.getDate();
+
+    if (month.length < 2) month = "0" + month;
+    if (day.length < 2) day = "0" + day;
+
+    return [month, day].join("/");
+}

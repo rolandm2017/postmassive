@@ -1,6 +1,6 @@
 import React from "react";
 
-import { processDateToString } from "./TimeLogic.js";
+import { processDateToString } from "../../../utility/TimeLogic";
 
 import styles from "./InboxItem.module.scss";
 
