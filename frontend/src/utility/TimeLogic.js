@@ -44,13 +44,28 @@ const formatDate = (date) => {
     return [month, day].join("/");
 };
 
-export const formatDateForRepliesSection(date) {
+export const formatDateForRepliesSection = (date) => {
     var d = new Date(date),
         month = "" + (d.getMonth() + 1),
-        day = "" + d.getDate();
+        day = "" + d.getDate(),
+        year = "" + d.getFullYear(),
+        hour = "" + d.getHours(),
+        minute = "" + d.getMinutes();
+    var ampm = hour >= 12 ? "pm" : "am";
 
     if (month.length < 2) month = "0" + month;
     if (day.length < 2) day = "0" + day;
+    if (year.length < 2) year = "0" + year;
+    if (hour.length < 2) hour = "0" + hour;
+    if (minute.length < 2) minute = "0" + minute;
 
-    return [month, day].join("/");
-}
+    let hoursAsInts = parseInt(hour, 10);
+    let hours = hoursAsInts % 12;
+    let hoursFinalized = hours ? hours : 12;
+    let minutes = minute < 10 ? "0" + minute : minute;
+    var strTime = hoursFinalized + ":" + minutes + " " + ampm;
+
+    const MMDDYYYY = [month, day, year].join("/");
+
+    return [MMDDYYYY, strTime].join(" ");
+};
