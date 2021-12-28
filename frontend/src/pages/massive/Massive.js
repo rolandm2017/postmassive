@@ -5,7 +5,7 @@ import { getOptions } from "../../_helper/authHeader";
 
 import BackButton from "../../images/icons8-back-50.png"
 
-import MassiveContainer from "../../components/massive/Massive"
+import MassiveComponent from "../../components/massiveComponent/MassiveComponent"
 
 import Wrapper from "../_pageHelper/Wrapper";
 
@@ -16,6 +16,7 @@ import "./Massive.css";
 function Massive(props) {
     const { id } = useParams();
     const history = useHistory();
+    
 
     const [massive, setMassive] = useState([]);
 
@@ -51,7 +52,7 @@ function Massive(props) {
                 <p id="singularMsvBackBtn">Massives</p>
             </div>
             <div>{massive.length !== 0 ? 
-                              <MassiveContainer
+                              <MassiveComponent
                                   author={massive.postedByUser}
                                   displayName={massive.displayName}
                                   content={massive.text}

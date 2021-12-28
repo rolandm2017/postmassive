@@ -4,7 +4,7 @@ import { getOptions } from "../../_helper/authHeader";
 import { useHistory } from "react-router-dom";
 
 import Wrapper from "../_pageHelper/Wrapper";
-import Massive from "../../components/massive/Massive";
+import MassiveComponent from "../../components/massiveComponent/MassiveComponent";
 import Poll from "../../components/poll/Poll";
 // import testMassives from "./testContent/testMassives";
 
@@ -95,7 +95,7 @@ function Home(props) {
                                   history.push(pathToGoTo);
                               }}
                           >
-                              <Massive
+                              <MassiveComponent
                                   key={index}
                                   author={massive.postedByUser}
                                   displayName={massive.displayName}

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { getOptions } from "../../_helper/authHeader";
 import Button from "../../components/parts/Button";
-import Massive from "../../components/massive/Massive";
+import Massive from "../../components/massiveComponent/MassiveComponent";
 import {
     convertToThreeDigits,
     updateProfileAPI,

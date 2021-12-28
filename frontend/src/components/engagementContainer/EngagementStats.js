@@ -2,7 +2,7 @@ import React from "react";
 
 import processAmount from "../ProcessAmount";
 
-import "./EngagementStats.css";
+import "./EngagementStats.scss";
 
 function EngagementStats(props) {
     

@@ -1,22 +1,25 @@
 import React from "react";
 
+import { useLocation } from 'react-router-dom'
+
 import EngagementContainer from "../engagementContainer/EngagementContainer";
 import Logo from "../../images/bluePfp.png";
 
 import prettyText from "../../utility/prettyText.tsx";
 
-import "./Massive.css";
+import "./MassiveComponent.css";
 import "../textStyling/TextStyling.css"; // this file will be imported in many places
 
 function Massive(props) {
     // let customStyling = "fontSizeWholeText"; // hardcode via this input
-    console.log(props, 13)
+    const location = useLocation();
+    console.log(props, 13, location.pathname)
     const stylings =
         props.stylings === undefined ? [{}, {}, {}] : props.stylings;
 
-    // console.log(props, 17);
+    // console.log(props, 17); // TODO: make bg-blue-highlight conditional on post not being singled out
     return (
-        <div className="background-blue bg-blue-highlight">
+        <div className={`${location.pathname.slice(0, 6) === "/home" ? "bg-blue-highlight" : null } background-blue `}>
             <div className="massive-container py-2 d-flex flex-column border-top ">
                 <div className="d-flex">
                     <div className="m-profile-pic-container">

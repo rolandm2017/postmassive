@@ -1,3 +1,5 @@
+@import "../../styles/colors";
+
 .m-engagement-txt {
     font-size: 13px;
 }
@@ -9,8 +11,14 @@
 }
 
 .statistic {
-    width: 80px;
+    // width: 80px;
+    padding: 3px 0px 3px 0px;
     /* border: 2px solid red; */
+    border-radius: 4px;
+}
+
+.statistic:hover {
+    background-color: lighten($uxui-lg, 15%);
 }
 
 @media (max-width: 440px) {
