@@ -12,6 +12,7 @@ import Fave from "../../images/Group 56 - like.png";
 import MassiveComponent from "../../components/massiveComponent/MassiveComponent";
 
 import { formatDateForRepliesSection } from "../../utility/TimeLogic";
+import prettyText from "../../utility/prettyText.tsx";
 
 import Wrapper from "../_pageHelper/Wrapper";
 
@@ -26,7 +27,7 @@ function Massive(props) {
     const history = useHistory();
 
     const [massive, setMassive] = useState([]);
-    const [replies, setReplies] = useState([]);
+    // const [replies, setReplies] = useState([]);
 
     useEffect(() => {
         let feedUrl = process.env.REACT_APP_API_URL + "/massive/" + id;
@@ -79,7 +80,9 @@ function Massive(props) {
                             </div>
                         </div>
                         <div id="msv_content" className="msv_textFormat">
-                            <div>{massive.text}</div>
+                            <div>
+                                {prettyText(massive.text, massive.stylings)}
+                            </div>
                             <div id="msv_date">
                                 {formatDateForRepliesSection(
                                     new Date(
@@ -135,6 +138,7 @@ function Massive(props) {
                         <div id="msv_replies">
                             {REPLIES.map((reply, index) => {
                                 // todo: make a reply component, prolly mostly the same as already writ code tho
+                                // const stylings = reply.stylings
                                 <MassiveComponent
                                     key={index}
                                     postedByUser={reply.postedByUser}
