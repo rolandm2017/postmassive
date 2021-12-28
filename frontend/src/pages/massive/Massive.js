@@ -75,15 +75,18 @@ function Massive(props) {
                                 <p>@{massive.displayName}</p>
                             </div>
                         </div>
-                        <div id="msv_content" className="">
-                            {massive.text}
+                        <div id="msv_content" className="msv_textFormat">
+                            <div>{massive.text}</div>
+                            <div id="msv_date">{massive.date}</div>
                         </div>
-                        <div id="msv_date" className="">
-                            {new Date(massive.date).toString()}
-                        </div>
-                        <div id="msv_engagement" className="">
-                            {massive.replies} {massive.amps} {massive.likes}{" "}
-                            {massive.views}
+                        <div
+                            id="msv_engagement"
+                            className="msv_textFormat d-flex justify-content-start"
+                        >
+                            <div>{massive.replies} replies</div>
+                            <div>{massive.amps} amps</div>
+                            <div>{massive.likes} likes</div>
+                            <div>{massive.views} views</div>
                         </div>
                         <div
                             id="msv_buttons"
