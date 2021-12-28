@@ -3,9 +3,13 @@ import { useParams } from "react-router-dom";
 
 import { getOptions } from "../../_helper/authHeader";
 
+import BackButton from "../../images/icons8-back-50.png"
+
 import MassiveContainer from "../../components/massive/Massive"
 
 import Wrapper from "../_pageHelper/Wrapper";
+
+import "./Massive.css";
 
 // TODO: make each Massiv have a custom URL based on Poster Username + MassivID
 
@@ -35,6 +39,14 @@ function Massive(props) {
             onMessagePgae={false}
             breakpoints={props.breakpoints}
         >
+            <div className="d-flex align-items-center">
+                <div className="singularMassiveBtnContainer">
+
+                <input type="image" src={BackButton} className="singularMassiveBtn"/>
+                </div>
+                {/* // back btn */}
+                <p id="singularMsvBackBtn">Massives</p>
+            </div>
             <div>{massive.length !== 0 ? 
                               <MassiveContainer
                                   author={massive.postedByUser}
