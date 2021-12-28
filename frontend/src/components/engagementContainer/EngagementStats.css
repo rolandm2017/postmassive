@@ -1,0 +1,20 @@
+.m-engagement-txt {
+    font-size: 13px;
+}
+
+.massive-btn {
+    background-color: white;
+    width: 15%;
+    height: auto;
+}
+
+.statistic {
+    width: 80px;
+    /* border: 2px solid red; */
+}
+
+@media (max-width: 440px) {
+    .statistic {
+        width: 70px;
+    }
+}

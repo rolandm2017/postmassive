@@ -1,28 +1,7 @@
-.m-engagement-txt {
-    font-size: 13px;
-}
-
-.massive-btn {
-    background-color: white;
-    width: 15%;
-    height: auto;
-}
-
 .massive-btn-container {
     height: 30px;
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-}
-
-.statistic {
-    width: 80px;
-    /* border: 2px solid red; */
-}
-
-@media (max-width: 440px) {
-    .statistic {
-        width: 70px;
-    }
 }
