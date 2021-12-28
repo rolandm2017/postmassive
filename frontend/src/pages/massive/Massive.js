@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState  } from "react";
+import { useParams, useHistory } from "react-router-dom";
 
 import { getOptions } from "../../_helper/authHeader";
 
@@ -15,6 +15,7 @@ import "./Massive.css";
 
 function Massive(props) {
     const { id } = useParams();
+    const history = useHistory();
 
     const [massive, setMassive] = useState([]);
 
@@ -42,7 +43,9 @@ function Massive(props) {
             <div className="d-flex align-items-center">
                 <div className="singularMassiveBtnContainer">
 
-                <input type="image" src={BackButton} className="singularMassiveBtn"/>
+                <input type="image" src={BackButton} className="singularMassiveBtn" onClick={() => {
+                    history.push("/home")
+                }}/>
                 </div>
                 {/* // back btn */}
                 <p id="singularMsvBackBtn">Massives</p>
