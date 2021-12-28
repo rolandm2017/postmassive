@@ -138,7 +138,7 @@ export function getSubstringsWithInstructions(inputText: string, stylings: Styli
     let slicesToDistribute: string[] = [];
     let specialSubstringIndexes: number[] = [];
     // split the inputText into its substrings. Assign the right substring to the right Instruction, via index.
-    let specialIndex = 0;
+    // let specialIndex = 0;
     for (let i = 0; i < cleanedUpStylings.length; i++) {
         const startOfCurrent = cleanedUpStylings[i].start
         const endOfCurrent = cleanedUpStylings[i].end

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import Reply from "../../components/notifications/Reply";// commented out 11-16
+import Reply from "../../components/notifications/Reply"; // commented out 11-16
 import Amplify from "../../components/notifications/Amplify";
 import Like from "../../components/notifications/Like";
 import Follow from "../../components/notifications/Follow";
@@ -21,8 +21,8 @@ function Notifications(props) {
     useEffect(() => {
         // TODO get username and link it where marle is hardcoded now
         const notificationsUrl =
-            process.env.REACT_APP_API_URL + "/notifications/marle"; // todo: get based on username instead of generis
-        console.log(notificationsUrl)
+            process.env.REACT_APP_API_URL + "/notifications/marle";
+        console.log(notificationsUrl);
         fetch(notificationsUrl, getOptions(notificationsUrl)).then((res) => {
             res.json().then((notifications) => {
                 // console.log(notifications);
