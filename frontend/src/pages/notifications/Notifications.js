@@ -19,7 +19,7 @@ function Notifications(props) {
     const [notifications, setNotifications] = useState(null);
 
     useEffect(() => {
-        // TODO get username and link it where marle is hardcoded now
+        // TODO get hardcoded notifications
         const notificationsUrl =
             process.env.REACT_APP_API_URL + "/notifications/marle";
         console.log(notificationsUrl);
@@ -49,17 +49,17 @@ function Notifications(props) {
             return (
                 // <div>Foo</div>
                 <Reply
-                    key={data.data.id}
-                    replier={data.data.replier}
+                    key={data._id}
+                    replier={data.byWho[0]}
                     replierProfilePic={profilePic}
-                    to={data.data.to}
-                    content={data.data.content}
+                    to={data.username}
+                    content={data.text}
                 />
             );
         } else if (data.type === "amplify") {
             return (
                 <Amplify
-                    key={data.data.id}
+                    key={data._id}
                     amplifier={data.data.author.displayName}
                     profilePics={profilePic}
                     others={data.data.others}
@@ -72,20 +72,20 @@ function Notifications(props) {
             return (
                 // <div>Foo</div>
                 <Like
-                    key={data.data.id}
-                    headliner={data.data.headliner}
+                    key={data._id}
+                    headliner={data.username}
                     profilePics={profilePic}
-                    likes={data.data.likes}
-                    text={data.data.content}
+                    likes={data.count}
+                    text={data.text}
                 />
             );
         } else if (data.type === "follow") {
             return (
                 <Follow
-                    key={data.data.id}
-                    user={data.data.user}
+                    key={data._id}
+                    user={data.username}
                     profilePic={profilePic}
-                    others={data.data.others}
+                    others={data.byWho}
                 />
                 // <div>Foo</div>
             );
@@ -93,7 +93,7 @@ function Notifications(props) {
             return (
                 // <div>Foo</div>
                 <Quote
-                    key={data.data.id}
+                    key={data._id}
                     quoter={data.data.quoter}
                     quoterProfilePic={profilePic}
                     content={data.data.content}

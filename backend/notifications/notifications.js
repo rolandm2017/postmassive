@@ -7,10 +7,10 @@ const Notification = require("../models/notification.model");
 module.exports = router;
 
 router.get("/:username", (req, res) => {
-    console.log(10, "notifications",req.params.username);
+    console.log(10, "notifications", req.params.username);
     let whichUsersNotifications = req.params.username;
     let numberToGet = req.body.amount;
-    Notification.find({ username: whichUsersNotifications })
+    Notification.find({ username: "crono" })
         .sort("-date")
         .limit(numberToGet)
         .exec((err, docs) => {
