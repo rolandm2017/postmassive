@@ -69,7 +69,9 @@ function ChoiceMaker({
                             adjustStart(menuOption, event.target.value); // prints the expected value!
                         }}
                     />
-                    <span className="color-white">Min: {currentMin}</span>
+                    <div className="styling_min-max-container">
+                        <span className="color-white">Min: {currentMin}</span>
+                    </div>
                 </div>
                 <div className="d-flex justify-content-start align-items-center">
                     <div className="styling_label-container">
@@ -88,7 +90,9 @@ function ChoiceMaker({
                             adjustEnd(menuOption, event.target.value); // prints the expected value!
                         }}
                     />
-                    <span className="color-white">Max: {currentMax}</span>
+                    <div className="styling_min-max-container">
+                        <span className="color-white">Max: {currentMax}</span>
+                    </div>
                 </div>
                 <div className="styling_options-right-container-mobile ">
                     <div className="color-white styling_choice-list">
