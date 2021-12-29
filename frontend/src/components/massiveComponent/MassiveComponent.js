@@ -11,14 +11,11 @@ import "./MassiveComponent.css";
 import "../textStyling/TextStyling.css"; // this file will be imported in many places
 
 function Massive(props) {
-    // console.log(14, props);
-    // let customStyling = "fontSizeWholeText"; // hardcode via this input
     const location = useLocation();
     // console.log(props, 13, location.pathname)
     const stylings =
         props.stylings === undefined ? [{}, {}, {}] : props.stylings;
 
-    // console.log(props, 17); // TODO: make bg-blue-highlight conditional on post not being singled out
     return (
         <div
             className={`${
