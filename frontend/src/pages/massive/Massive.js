@@ -145,7 +145,7 @@ function Massive(props) {
                                         key={index}
                                         author={reply.postedByUser}
                                         displayName={reply.displayName}
-                                        text={reply.text}
+                                        content={reply.text}
                                         replies={reply.replies}
                                         amps={reply.amps}
                                         likes={reply.likes}
