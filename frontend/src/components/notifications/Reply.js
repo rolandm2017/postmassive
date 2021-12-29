@@ -49,10 +49,9 @@ function Reply({ replier, replierProfilePic, to, content }) {
                 <div className="flex-basis-80 mr-4">
                     <div className="mt-3 mr-2">
                         {/* Todo: Make replier's display name bold */}
-                        <p className="m-0">
+                        {/* <p className="m-0">
                             From {replier.displayName} @{replier.username}
-                            {/* From @{replier} */}
-                        </p>
+                        </p> */}
                         <span>{replyingTo(to)}</span>
                     </div>
                     <p className="mid-line-height text-grey my-2">
@@ -62,7 +61,7 @@ function Reply({ replier, replierProfilePic, to, content }) {
                     </p>
                     <EngagementContainer
                         replies={26}
-                        amplifies={133}
+                        amps={133}
                         likes={2311}
                         views={110392}
                         cap={140000}

@@ -5,6 +5,7 @@ import processAmount from "../ProcessAmount";
 import "./EngagementStats.scss";
 
 function EngagementStats(props) {
+    console.log(props, 8);
     const [replies, setReplies] = useState(props.replies);
     const [amps, setAmps] = useState(props.amps);
     const [likes, setLikes] = useState(props.likes);

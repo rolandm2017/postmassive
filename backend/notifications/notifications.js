@@ -17,7 +17,16 @@ router.get("/:username", (req, res) => {
             if (err) {
                 console.log(18, err);
             }
-            res.json(docs);
+            // change the text from the broken text we have now to an acceptable lorem ipsum
+            let fixedDocs = [];
+            for (let i = 0; i < docs.length; i++) {
+                docs[i].text =
+                    "Nullam molestie, elit nec venenatis egestas, nisl nulla ullamcorper nulla, vel consequat nibh purus et nibh. Aenean tristique leo sed risus pulvinar egestas.";
+                fixedDocs.push(docs[i]);
+            }
+            let shuffled = shuffle(fixedDocs);
+            // TODO: remove duplicates so never 2 of the same notification in a row
+            res.json(shuffled);
         });
 });
 
@@ -90,3 +99,18 @@ router.patch("/:username/:id", (req, res) => {
         }
     );
 });
+
+/**
+ * Shuffles array in place.
+ * @param {Array} a items An array containing the items.
+ */
+function shuffle(a) {
+    var j, x, i;
+    for (i = a.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        x = a[i];
+        a[i] = a[j];
+        a[j] = x;
+    }
+    return a;
+}
