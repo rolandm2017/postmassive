@@ -45,7 +45,8 @@ function Follow({ user, profilePic, othersList }) {
         followText = (
             <span>
                 <strong>{user}</strong> and{" "}
-                {LargeNumberProcessor(othersList.length)} others followed you
+                {LargeNumberProcessor(othersList.length)}{" "}
+                {othersList.length === 1 ? "other" : "others"} followed you
             </span>
         );
     }
