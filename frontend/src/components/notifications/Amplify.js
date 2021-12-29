@@ -12,7 +12,7 @@ import "./Amplify.css";
 
 // TODO: Implement 4 line max for the content area
 
-function Amp(props) {
+function Amp({ headliner, profilePics, others, author, content }) {
     return (
         <div className="notification bg-blue-highlight pb-2 pr-2 d-flex flex-row">
             <LeftBox />
@@ -22,17 +22,17 @@ function Amp(props) {
                         {/* // TODO: Generate profile pics based on # of amplifiers (use func from Follow.js) */}
                         <img
                             className="notification-img-sml ml-0 mb-0"
-                            src={props.profilePics}
+                            src={profilePics}
                             alt="dummyPic"
                         ></img>
                         <img
                             className="notification-img-sml ml-0 mb-0"
-                            src={props.profilePics}
+                            src={profilePics}
                             alt="dummyPic"
                         ></img>
                         <img
                             className="notification-img-sml ml-0 mb-0"
-                            src={props.profilePics}
+                            src={profilePics}
                             alt="dummyPic"
                         ></img>
                     </div>
@@ -42,17 +42,16 @@ function Amp(props) {
                         <div className="">
                             {/* TODO: make the amplifier's name bold */}
                             <p className="my-1">
-                                {props.amplifier} and{" "}
-                                {LargeNumberProcessor(props.others)} others
-                                amplified your massive!
+                                {headliner} and {LargeNumberProcessor(others)}{" "}
+                                others amplified your massive!
                             </p>
                         </div>
                         <div className="">
                             {/* <div className="amplify_header">
-                    <span>{props.author[0]}</span>
-                    <span>@{props.author[1]}</span>
+                    <span>{author[0]}</span>
+                    <span>@{author[1]}</span>
                 </div> */}
-                            <p className="text-grey my-1">{props.content}</p>
+                            <p className="text-grey my-1">{content}</p>
                         </div>
                         <EngagementContainer
                             replies={26}

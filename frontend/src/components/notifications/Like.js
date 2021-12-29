@@ -8,7 +8,7 @@ import LargeNumberProcessor from "./LargeNumberProcessor";
 
 import "./Like.scss";
 
-function Like(props) {
+function Like({ headliner, profilePics, likes, text }) {
     // TODO: write it so the images and text are mt-2 away from the top of the notification, along with the image
     return (
         <div className="notification bg-blue-highlight pb-2 pr-2">
@@ -17,28 +17,27 @@ function Like(props) {
                 <div className="d-flex align-items-end">
                     <img
                         className="notification-img-sml ml-0 mb-0"
-                        src={props.profilePics}
+                        src={profilePics}
                         alt="dummyPic"
                     ></img>
                     <img
                         className="notification-img-sml ml-0 mb-0"
-                        src={props.profilePics}
+                        src={profilePics}
                         alt="dummyPic"
                     ></img>
                     <img
                         className="notification-img-sml ml-0 mb-0"
-                        src={props.profilePics}
+                        src={profilePics}
                         alt="dummyPic"
                     ></img>
                 </div>
             </div>
             <div className="like_text-container spacer">
                 <p className="mt-2 mb-1">
-                    <strong>{props.headliner}</strong> and{" "}
-                    {LargeNumberProcessor(props.likes)} others liked your
-                    Massive
+                    <strong>{headliner}</strong> and{" "}
+                    {LargeNumberProcessor(likes)} others liked your Massive
                 </p>
-                <p className="text-grey mid-line-height mt-2">{props.text}</p>
+                <p className="text-grey mid-line-height mt-2">{text}</p>
             </div>
         </div>
     );

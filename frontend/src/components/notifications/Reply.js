@@ -6,29 +6,40 @@ import LeftBox from "./components/LeftBox";
 
 import "./Reply.css";
 
-function Reply(props) {
+function Reply({ replier, replierProfilePic, to, content }) {
     function replyingTo(people) {
-        // console.log(people);
-        // unfortunately this component cannot be tested as it is unreachable by tests! bah, closures!
+        console.log(people);
         if (people.length === 1) {
-            return `Replying to @${people[0].username}`;
-        } else if (people.length === 2) {
-            return `Replying to @${people[0].username} and @${people[1].username}`;
-        } else if (people.length < 4) {
-            let statement = "Replying to ";
-            for (let i = 0; i < people.length; i++) {
-                if (i < people.length - 1) {
-                    statement += `@${people[i].username}, `;
-                } else {
-                    statement += `and @${people[i].username}`;
-                }
-            }
-            return statement;
+            return "Replying to @" + people[0];
         } else {
-            return `Replying to @${people[0].username} and ${
-                people.length - 1
-            } others`;
+            return (
+                "Replying to @" +
+                people[0] +
+                " and " +
+                people.length.toString() +
+                " others"
+            );
         }
+        // unfortunately this component cannot be tested as it is unreachable by tests! bah, closures!
+        // if (people.length === 1) {
+        //     return `Replying to @${people[0].username}`;
+        // } else if (people.length === 2) {
+        //     return `Replying to @${people[0].username} and @${people[1].username}`;
+        // } else if (people.length < 4) {
+        //     let statement = "Replying to ";
+        //     for (let i = 0; i < people.length; i++) {
+        //         if (i < people.length - 1) {
+        //             statement += `@${people[i].username}, `;
+        //         } else {
+        //             statement += `and @${people[i].username}`;
+        //         }
+        //     }
+        //     return statement;
+        // } else {
+        //     return `Replying to @${people[0].username} and ${
+        //         people.length - 1
+        //     } others`;
+        // }
     }
 
     return (
@@ -39,13 +50,13 @@ function Reply(props) {
                     <div className="mt-3 mr-2">
                         {/* Todo: Make replier's display name bold */}
                         <p className="m-0">
-                            From {props.replier.displayName} @
-                            {props.replier.username}
+                            From {replier.displayName} @{replier.username}
+                            {/* From @{replier} */}
                         </p>
-                        <span>{replyingTo(props.to)}</span>
+                        <span>{replyingTo(to)}</span>
                     </div>
                     <p className="mid-line-height text-grey my-2">
-                        {props.content}
+                        {content}
                         {/* TODO: implement 4 line max for content, 3 line max for
                         OPcontent */}
                     </p>

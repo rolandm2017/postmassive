@@ -8,19 +8,19 @@ import LargeNumberProcessor from "./LargeNumberProcessor";
 
 import "./Follow.css";
 
-function Follow(props) {
+function Follow({ user, profilePic, othersList }) {
     const baseImg = (key) => {
         return (
             <img
                 key={key}
                 className="notification-img-sml mb-0"
-                src={props.profilePic}
+                src={profilePic}
                 alt="follow"
             ></img>
         );
     };
     const others = [];
-    const numberOfProfilePicsToDisplay = props.others < 7 ? props.others : 7;
+    const numberOfProfilePicsToDisplay = othersList < 7 ? othersList : 7;
     for (let i = 0; i < numberOfProfilePicsToDisplay; i++) {
         others.push(baseImg(i));
     }
@@ -28,7 +28,7 @@ function Follow(props) {
         <div className="d-flex justify-content-center align-items-end">
             <img
                 className="notification-img-sml ml-0 mb-0"
-                src={props.profilePic}
+                src={profilePic}
                 alt="follow"
             ></img>
             {others}
@@ -37,15 +37,15 @@ function Follow(props) {
 
     let followText = (
         <span>
-            <strong>{props.user}</strong> followed you
+            <strong>{user}</strong> followed you
         </span>
     );
-    const moreThanOneFollow = props.others > 0;
+    const moreThanOneFollow = othersList.length > 0;
     if (moreThanOneFollow) {
         followText = (
             <span>
-                <strong>{props.user}</strong> and{" "}
-                {LargeNumberProcessor(props.others)} others followed you
+                <strong>{user}</strong> and{" "}
+                {LargeNumberProcessor(othersList.length)} others followed you
             </span>
         );
     }

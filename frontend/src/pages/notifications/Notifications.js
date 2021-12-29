@@ -52,7 +52,7 @@ function Notifications(props) {
                     key={data._id}
                     replier={data.byWho[0]}
                     replierProfilePic={profilePic}
-                    to={data.username}
+                    to={data.byWho}
                     content={data.text}
                 />
             );
@@ -60,7 +60,7 @@ function Notifications(props) {
             return (
                 <Amplify
                     key={data._id}
-                    amplifier={data.data.author.displayName}
+                    headliner={data.data.author.displayName}
                     profilePics={profilePic}
                     others={data.data.others}
                     author={data.data.author}
@@ -85,7 +85,7 @@ function Notifications(props) {
                     key={data._id}
                     user={data.username}
                     profilePic={profilePic}
-                    others={data.byWho}
+                    othersList={data.byWho}
                 />
                 // <div>Foo</div>
             );
