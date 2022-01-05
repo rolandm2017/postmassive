@@ -9,8 +9,32 @@ function Footer() {
             id="footer_general"
             className="footer_mobile-desktop-switch footer_mobile-hide-instead-of-flex footer_desktop-color"
         >
-            <div className="darkmode-text">About</div>
-            <div className="darkmode-text mobile-center">Help Center</div>
+            <div
+                onClick={() => {
+                    console.log("testingUrl");
+                    let testingURL = process.env.REACT_APP_API_URL + "/foo";
+                    fetch(testingURL).then((res) => {
+                        console.log(res);
+                        console.log("conclusion");
+                    });
+                }}
+                className="darkmode-text"
+            >
+                About
+            </div>
+            <div
+                onClick={() => {
+                    console.log("helpCenter");
+                    let testingURL = process.env.REACT_APP_API_URL + "/";
+                    fetch(testingURL).then((res) => {
+                        console.log(res);
+                        console.log("line 31");
+                    });
+                }}
+                className="darkmode-text mobile-center"
+            >
+                Help Center
+            </div>
             <div className="darkmode-text mobile-right">Terms</div>
             <div className="darkmode-text">Privacy Policy</div>
             <div className="darkmode-text mobile-center">Cookies</div>

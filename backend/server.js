@@ -12,10 +12,6 @@ if (production) {
     port = 8080;
 }
 
-// TODO: Make a list of code to keep from this server to use in the real dev server.
-// TODO: make a list of code to keep from the other server.js file to use in the real dev server.
-// TODO: copy this Mockserver.js file to a new server.js file and start fresh.
-
 const app = express();
 
 const whitelist = [
@@ -43,7 +39,7 @@ const corsOptions = {
 if (!postman) {
     app.use(cors(corsOptions)); // CORS OFF for Postman backend-only dev, ON for frontEnd dev
 }
-// app.use(cors());
+app.use(cors());
 // if (!production) {
 //     console.log("Proxy engaged, localhost:3000 -> 127.0.0.1");
 //     app.use(
@@ -116,6 +112,10 @@ if (postman) {
 app.get(api + "/foo", (req, res) => {
     // so you can see if going to the https://147.182.152.13:${port}/api/test returns 'foo' to confirm server runs on that ip
     res.send("foo");
+});
+
+app.get("/", (req, res) => {
+    res.send("bar");
 });
 
 if (production) {
