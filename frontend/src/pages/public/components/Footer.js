@@ -17,7 +17,9 @@ function Footer() {
                     let testingURL = process.env.REACT_APP_API_URL + "/foo";
                     fetch(testingURL, getOptions)
                         .then((res) => {
-                            console.log(res);
+                            res.text().then((resp) => {
+                                console.log(resp);
+                            });
                             console.log("conclusion");
                         })
                         .catch((err) => {
@@ -34,7 +36,9 @@ function Footer() {
                     let testingURL = process.env.REACT_APP_API_URL + "/";
                     fetch(testingURL, getOptions)
                         .then((res) => {
-                            console.log(res);
+                            res.text().then((resp) => {
+                                console.log(resp);
+                            });
                             console.log("line 31");
                         })
                         .catch((err) => {
