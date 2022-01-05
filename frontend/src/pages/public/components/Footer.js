@@ -1,5 +1,7 @@
 import React from "react";
 
+import { getOptions } from "../../../_helper/authHeader";
+
 import "./Footer.css";
 
 function Footer() {
@@ -13,10 +15,14 @@ function Footer() {
                 onClick={() => {
                     console.log("testingUrl");
                     let testingURL = process.env.REACT_APP_API_URL + "/foo";
-                    fetch(testingURL).then((res) => {
-                        console.log(res);
-                        console.log("conclusion");
-                    });
+                    fetch(testingURL, getOptions)
+                        .then((res) => {
+                            console.log(res);
+                            console.log("conclusion");
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        });
                 }}
                 className="darkmode-text"
             >
@@ -26,10 +32,14 @@ function Footer() {
                 onClick={() => {
                     console.log("helpCenter");
                     let testingURL = process.env.REACT_APP_API_URL + "/";
-                    fetch(testingURL).then((res) => {
-                        console.log(res);
-                        console.log("line 31");
-                    });
+                    fetch(testingURL, getOptions)
+                        .then((res) => {
+                            console.log(res);
+                            console.log("line 31");
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        });
                 }}
                 className="darkmode-text mobile-center"
             >
