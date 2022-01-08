@@ -98,13 +98,13 @@ if (postman) {
     // app.use(api + "/users", require("./modTools/users"));
 }
 
-app.get("/foo", (req, res) => {
+app.get("/api/foo", (req, res) => {
     // so you can see if going to the https://147.182.152.13:${port}/api/test returns 'foo' to confirm server runs on that ip
     console.log("server: foo");
     res.send("foo");
 });
 
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
     console.log("server: bar");
     res.send("bar");
 });

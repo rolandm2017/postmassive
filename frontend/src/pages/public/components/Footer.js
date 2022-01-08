@@ -13,8 +13,8 @@ function Footer() {
         >
             <div
                 onClick={() => {
-                    console.log("testingUrl");
                     let testingURL = process.env.REACT_APP_API_URL + "/foo";
+                    console.log("testingUrl:", testingURL);
                     fetch(testingURL, getOptions)
                         .then((res) => {
                             res.text().then((resp) => {
@@ -32,8 +32,8 @@ function Footer() {
             </div>
             <div
                 onClick={() => {
-                    console.log("helpCenter");
-                    let testingURL = process.env.REACT_APP_API_URL + "/";
+                    let testingURL = process.env.REACT_APP_API_URL + "/auth/";
+                    console.log("helpCenter, testingURL:", testingURL);
                     fetch(testingURL, getOptions)
                         .then((res) => {
                             res.text().then((resp) => {

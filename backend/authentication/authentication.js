@@ -19,6 +19,12 @@ const mockCode = "qwerty"; // this should technically be in its own file
 
 module.exports = router;
 
+console.log(22);
+
+router.get("/", (req, res) => {
+    res.send("zzz");
+});
+
 router.post("/signIn", (req, res, next) => {
     console.log(
         "RE-ceived in /signIn:",
