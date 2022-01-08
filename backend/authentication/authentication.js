@@ -25,6 +25,10 @@ router.get("/", (req, res) => {
     res.send("zzz");
 });
 
+router.get("/foo", (req, res) => {
+    res.send("some response");
+});
+
 router.post("/signIn", (req, res, next) => {
     console.log(
         "RE-ceived in /signIn:",

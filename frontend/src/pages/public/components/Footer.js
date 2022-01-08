@@ -15,7 +15,7 @@ function Footer() {
                 onClick={() => {
                     // http://127.0.0.1:8080/api/foo
                     let testingURL = process.env.REACT_APP_API_URL + "/foo";
-                    console.log("testingUrl:", testingURL);
+                    console.log("About, testingUrl:", testingURL);
                     fetch(testingURL, getOptions)
                         .then((res) => {
                             res.text().then((resp) => {
@@ -41,7 +41,7 @@ function Footer() {
                             res.text().then((resp) => {
                                 console.log(resp);
                             });
-                            console.log("line 31");
+                            console.log("line 44");
                         })
                         .catch((err) => {
                             console.log(err);
@@ -65,13 +65,13 @@ function Footer() {
                     // http://127.0.0.1:8080/api/auth/foo
                     let testingURL =
                         process.env.REACT_APP_API_URL + "/auth/foo";
-                    console.log("helpCenter, testingURL:", testingURL);
+                    console.log("Privacy Policy, testingURL:", testingURL);
                     fetch(testingURL, getOptions)
                         .then((res) => {
                             res.text().then((resp) => {
                                 console.log(resp);
                             });
-                            console.log("line 69");
+                            console.log("line 74");
                         })
                         .catch((err) => {
                             console.log(err);
@@ -85,7 +85,7 @@ function Footer() {
                 onClick={() => {
                     // http://127.0.0.1:8080/api/
                     let testingURL = process.env.REACT_APP_API_URL + "/";
-                    console.log("helpCenter, testingURL:", testingURL);
+                    console.log("Cookies, testingURL:", testingURL);
                     fetch(testingURL, getOptions)
                         .then((res) => {
                             res.text().then((resp) => {
