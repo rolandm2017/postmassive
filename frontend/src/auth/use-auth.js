@@ -66,29 +66,30 @@ export function useProvideAuth() {
             fetch(signInUrl, postOptions(signInUrl))
                 .then((res) => {
                     console.log("this again ", new Date().getSeconds());
-                    res.json()
-                        .then((userObject) => {
-                            userSubject.next(userObject);
-                            Cookies.set("jwt", userObject.jwtToken);
-                            console.log(
-                                "setting user object...\n****",
-                                userObject,
-                                JSON.stringify(userObject)
-                            );
-                            Cookies.set("user", JSON.stringify(userObject));
-                            startRefreshTokenTimer();
-                            // console.log("Pushing location to stack...");
-                            history.push(location);
-                            resolve(userObject);
-                        })
-                        .catch((err) => {
-                            console.log(err);
-                            // happens if there is no json in the response.
-                            reject("Error! Wrong username, email or password?");
-                            // FIXME: these errors often show up when the server has a problem.
-                            // this is a problem because "username email or pw?" has nothing to do w/ the src of err. Fix.
-                            // low priority tho
-                        });
+                    res.json().then((userObject) => {
+                        console.log("71, just fine");
+                        userSubject.next(userObject);
+                        console.log("73, also fine");
+                        Cookies.set("jwt", userObject.jwtToken);
+                        console.log(
+                            "setting user object...\n****",
+                            userObject,
+                            JSON.stringify(userObject)
+                        );
+                        Cookies.set("user", JSON.stringify(userObject));
+                        startRefreshTokenTimer();
+                        // console.log("Pushing location to stack...");
+                        history.push(location);
+                        resolve(userObject);
+                    });
+                    // .catch((err) => {
+                    //     console.log(err);
+                    //     // happens if there is no json in the response.
+                    //     reject("Error! Wrong username, email or password?");
+                    //     // FIXME: these errors often show up when the server has a problem.
+                    //     // this is a problem because "username email or pw?" has nothing to do w/ the src of err. Fix.
+                    //     // low priority tho
+                    // });
                 })
                 .catch((err) => {
                     console.log(err);

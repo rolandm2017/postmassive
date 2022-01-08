@@ -16,7 +16,7 @@ const app = express();
 
 const whitelist = [
     "http://www.postmassive.com",
-    "www.postmassive.com",
+    "https://www.postmassive.com",
     "http://localhost:3000",
     "https://www.postmassive.com",
 ];
@@ -39,7 +39,7 @@ const corsOptions = {
 if (!postman) {
     app.use(cors(corsOptions)); // CORS OFF for Postman backend-only dev, ON for frontEnd dev
 }
-app.use(cors());
+app.use(cors(corsOptions));
 // if (!production) {
 //     console.log("Proxy engaged, localhost:3000 -> 127.0.0.1");
 //     app.use(

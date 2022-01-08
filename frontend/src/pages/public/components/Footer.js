@@ -49,7 +49,14 @@ function Footer() {
             >
                 Help Center
             </div>
-            <div className="darkmode-text mobile-right">Terms</div>
+            <div
+                onClick={() => {
+                    console.log("bak");
+                }}
+                className="darkmode-text mobile-right"
+            >
+                Terms
+            </div>
             <div className="darkmode-text">Privacy Policy</div>
             <div className="darkmode-text mobile-center">Cookies</div>
             <div className="darkmode-text mobile-right">Ads Info</div>
