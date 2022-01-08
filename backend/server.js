@@ -24,6 +24,7 @@ const whitelist = [
 const corsOptions = {
     credentials: true, // This is important. // ugh, what does credentials: true do?
     origin: (origin, callback) => {
+        console.log(origin, "origin");
         if (whitelist.includes(origin)) {
             console.log("SERVER REQUEST ACCEPTED:", origin);
             return callback(null, true);
@@ -36,20 +37,8 @@ const corsOptions = {
         callback(new Error("Not allowed by CORS"));
     },
 };
-if (!postman) {
-    app.use(cors(corsOptions)); // CORS OFF for Postman backend-only dev, ON for frontEnd dev
-}
+
 app.use(cors(corsOptions));
-// if (!production) {
-//     console.log("Proxy engaged, localhost:3000 -> 127.0.0.1");
-//     app.use(
-//         "/api",
-//         createProxyMiddleware({
-//             target: "http://localhost:3000/",
-//             changeOrigin: true,
-//         })
-//     );
-// }
 
 // misc stuff
 app.use(cookieParser());
