@@ -41,6 +41,14 @@ Please post in English. I will ban you for making me work too hard to police my 
 
 Further, I trust zero non-english speakers well enough to let them volunteer to do the policing. English only.
 
+# rule 10
+
+If I show up to ask you for your username, you are not, in any way shape or form, required to surrender your username.
+
+If your username was available for taking when you got to the site, and you took your username, it's yours.
+
+Exception to the above rule: If Roly Poly's Twitter mutuals ask for their username, sorry, they're getting it.
+
 # Rule #9000
 
 The cybersecurity budget for this project is $0 as of Apr 29 2023. If you reuse an old password for your account, and the site gets hacked, your security compromise is your own fault.
