@@ -1,12 +1,13 @@
-# Rule #1
+# Rule #1.0.0
 
 If you don't self police your kingdom well, everyone in the kingdom will be banned.
 
-# Rule #2
+# Rule #2.0.0
 
 If you make me ban any singular person myself, I will demand you explain to me why you didn't banish him first.
 
 # Rule #3
+
 
 Do not make me build a vast array of tools to monitor my own product. I will use the platform myself, find out who is responsible, and
 
@@ -33,6 +34,12 @@ If you close your own account, you can't reopen it for a really long and somewha
 # Rule #8
 
 If you have to block somebody, do it, but don't say I didn't warn you about the consequences.
+
+# Rule #9.0.0
+
+Please post in English. I will ban you for making me work too hard to police my own site and I only speak English.
+
+Further, I trust zero non-english speakers well enough to let them volunteer to do the policing. English only.
 
 # Rule #9000
 
