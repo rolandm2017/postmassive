@@ -7,10 +7,6 @@
   <p>I have no evidence that anyone reads this.</p>
 </div>
 
-<div align="center">
-  Will be less and less like Twitter until suddenly it's not Twitter at all.
-</div>
-
 <br>
 
 <br>
